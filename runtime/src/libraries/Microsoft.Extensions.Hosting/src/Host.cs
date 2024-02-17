@@ -28,8 +28,7 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         /// <returns>The initialized <see cref="IHostBuilder"/>.</returns>
-        public static IHostBuilder CreateDefaultBuilder() =>
-            CreateDefaultBuilder(args: null);
+        public static IHostBuilder CreateDefaultBuilder() => CreateDefaultBuilder(args: null);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostBuilder"/> class with pre-configured defaults.
@@ -72,7 +71,8 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         /// <returns>The initialized <see cref="HostApplicationBuilder"/>.</returns>
-        public static HostApplicationBuilder CreateApplicationBuilder() => new HostApplicationBuilder();
+        public static HostApplicationBuilder CreateApplicationBuilder() =>
+            new HostApplicationBuilder();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with pre-configured defaults.
@@ -93,19 +93,22 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         /// <param name="args">The command line args.</param>
         /// <returns>The initialized <see cref="HostApplicationBuilder"/>.</returns>
-        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) => new HostApplicationBuilder(args);
+        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) =>
+            new HostApplicationBuilder(args);
 
         /// <inheritdoc cref="CreateApplicationBuilder()" />
         /// <param name="settings">Controls the initial configuration and other settings for constructing the <see cref="HostApplicationBuilder"/>.</param>
-        public static HostApplicationBuilder CreateApplicationBuilder(HostApplicationBuilderSettings? settings)
-            => new HostApplicationBuilder(settings);
+        public static HostApplicationBuilder CreateApplicationBuilder(
+            HostApplicationBuilderSettings? settings
+        ) => new HostApplicationBuilder(settings);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with no pre-configured defaults.
         /// </summary>
         /// <param name="settings">Controls the initial configuration and other settings for constructing the <see cref="HostApplicationBuilder"/>.</param>
         /// <returns>The initialized <see cref="HostApplicationBuilder"/>.</returns>
-        public static HostApplicationBuilder CreateEmptyApplicationBuilder(HostApplicationBuilderSettings? settings)
-            => new HostApplicationBuilder(settings, empty: true);
+        public static HostApplicationBuilder CreateEmptyApplicationBuilder(
+            HostApplicationBuilderSettings? settings
+        ) => new HostApplicationBuilder(settings, empty: true);
     }
 }

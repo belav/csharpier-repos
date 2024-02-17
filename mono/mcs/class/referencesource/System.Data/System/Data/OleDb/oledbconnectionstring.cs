@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
+namespace System.Data.OleDb
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -17,52 +17,58 @@ namespace System.Data.OleDb {
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using Microsoft.Win32;
-    using System.Runtime.Versioning;
 
-    internal struct SchemaSupport {
+    internal struct SchemaSupport
+    {
         internal Guid _schemaRowset;
-        internal int  _restrictions;
+        internal int _restrictions;
     }
 
-    internal sealed class OleDbConnectionString : DbConnectionOptions {
+    internal sealed class OleDbConnectionString : DbConnectionOptions
+    {
         // instances of this class are intended to be immutable, i.e readonly
         // used by pooling classes so it is much easier to verify correctness
         // when not worried about the class being modified during execution
 
-        internal static class KEY {
+        internal static class KEY
+        {
             internal const string Asynchronous_Processing = "asynchronous processing";
-            internal const string Connect_Timeout         = "connect timeout";
-            internal const string Data_Provider           = "data provider";
-            internal const string Data_Source             = "data source";
-            internal const string Extended_Properties     = "extended properties";
-            internal const string File_Name               = "file name";
-            internal const string Initial_Catalog         = "initial catalog";
-            internal const string Ole_DB_Services         = "ole db services";
-            internal const string Persist_Security_Info   = "persist security info";
-            internal const string Prompt                  = "prompt";
-            internal const string Provider                = "provider";
-            internal const string RemoteProvider          = "remote provider";
-            internal const string WindowHandle            = "window handle";
+            internal const string Connect_Timeout = "connect timeout";
+            internal const string Data_Provider = "data provider";
+            internal const string Data_Source = "data source";
+            internal const string Extended_Properties = "extended properties";
+            internal const string File_Name = "file name";
+            internal const string Initial_Catalog = "initial catalog";
+            internal const string Ole_DB_Services = "ole db services";
+            internal const string Persist_Security_Info = "persist security info";
+            internal const string Prompt = "prompt";
+            internal const string Provider = "provider";
+            internal const string RemoteProvider = "remote provider";
+            internal const string WindowHandle = "window handle";
         }
 
         // registry key and dword value entry for udl pooling
-        private static class UDL {
-            internal const string Header   = "\xfeff[oledb]\r\n; Everything after this line is an OLE DB initstring\r\n";
+        private static class UDL
+        {
+            internal const string Header =
+                "\xfeff[oledb]\r\n; Everything after this line is an OLE DB initstring\r\n";
             internal const string Location = "SOFTWARE\\Microsoft\\DataAccess\\Udl Pooling";
-            internal const string Pooling  = "Cache Size";
+            internal const string Pooling = "Cache Size";
 
-            static internal volatile bool      _PoolSizeInit;
-            static internal int                _PoolSize;
+            internal static volatile bool _PoolSizeInit;
+            internal static int _PoolSize;
 
-            static internal volatile Dictionary<string,string> _Pool;
-            static internal object             _PoolLock = new object();
+            internal static volatile Dictionary<string, string> _Pool;
+            internal static object _PoolLock = new object();
         }
 
-        private static class VALUES {
+        private static class VALUES
+        {
             internal const string NoPrompt = "noprompt";
         }
 
@@ -78,13 +84,14 @@ namespace System.Data.OleDb {
         internal bool _supportMultipleResults;
         internal bool _supportIRow;
         internal bool _hasSqlSupport;
-        internal bool _hasSupportMultipleResults, _hasSupportIRow;
+        internal bool _hasSupportMultipleResults,
+            _hasSupportIRow;
 
         private int _oledbServices;
 
         // these are cached delegates (per unique connectionstring)
-        internal UnsafeNativeMethods.IUnknownQueryInterface        DangerousDataSourceIUnknownQueryInterface;
-        internal UnsafeNativeMethods.IDBInitializeInitialize       DangerousIDBInitializeInitialize;
+        internal UnsafeNativeMethods.IUnknownQueryInterface DangerousDataSourceIUnknownQueryInterface;
+        internal UnsafeNativeMethods.IDBInitializeInitialize DangerousIDBInitializeInitialize;
         internal UnsafeNativeMethods.IDBCreateSessionCreateSession DangerousIDBCreateSessionCreateSession;
         internal UnsafeNativeMethods.IDBCreateCommandCreateCommand DangerousIDBCreateCommandCreateCommand;
 
@@ -96,92 +103,140 @@ namespace System.Data.OleDb {
         // from the UDL file. The UDL file is opened as FileMode.Open, FileAccess.Read, FileShare.Read, allowing concurrent access to it.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        internal OleDbConnectionString(string connectionString, bool validate) : base(connectionString) {
+        internal OleDbConnectionString(string connectionString, bool validate)
+            : base(connectionString)
+        {
             string prompt = this[KEY.Prompt];
-            PossiblePrompt = ((!ADP.IsEmpty(prompt) && (0 != String.Compare(prompt, VALUES.NoPrompt, StringComparison.OrdinalIgnoreCase)))
-                              || !ADP.IsEmpty(this[KEY.WindowHandle]));
+            PossiblePrompt = (
+                (
+                    !ADP.IsEmpty(prompt)
+                    && (
+                        0
+                        != String.Compare(
+                            prompt,
+                            VALUES.NoPrompt,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                ) || !ADP.IsEmpty(this[KEY.WindowHandle])
+            );
 
-            if (!IsEmpty) {
+            if (!IsEmpty)
+            {
                 string udlConnectionString = null;
-                if (!validate) {
+                if (!validate)
+                {
                     int position = 0;
                     string udlFileName = null;
-                    _expandedConnectionString = ExpandDataDirectories(ref udlFileName, ref position);
+                    _expandedConnectionString = ExpandDataDirectories(
+                        ref udlFileName,
+                        ref position
+                    );
 
-                    if (!ADP.IsEmpty(udlFileName)) { // fail via new FileStream vs. GetFullPath
+                    if (!ADP.IsEmpty(udlFileName))
+                    { // fail via new FileStream vs. GetFullPath
                         udlFileName = ADP.GetFullPath(udlFileName); // MDAC 82833
                     }
-                    if (null != udlFileName) {
+                    if (null != udlFileName)
+                    {
                         udlConnectionString = LoadStringFromStorage(udlFileName);
 
-                        if (!ADP.IsEmpty(udlConnectionString)) {
-                            _expandedConnectionString = _expandedConnectionString.Substring(0, position) + udlConnectionString + ';' + _expandedConnectionString.Substring(position);
+                        if (!ADP.IsEmpty(udlConnectionString))
+                        {
+                            _expandedConnectionString =
+                                _expandedConnectionString.Substring(0, position)
+                                + udlConnectionString
+                                + ';'
+                                + _expandedConnectionString.Substring(position);
                         }
                     }
                 }
-                if (validate || ADP.IsEmpty(udlConnectionString)) {
+                if (validate || ADP.IsEmpty(udlConnectionString))
+                {
                     ActualConnectionString = ValidateConnectionString(connectionString);
                 }
             }
         }
 
-        internal int ConnectTimeout {
-            get { return base.ConvertValueToInt32(KEY.Connect_Timeout, ADP.DefaultConnectionTimeout); }
+        internal int ConnectTimeout
+        {
+            get
+            {
+                return base.ConvertValueToInt32(KEY.Connect_Timeout, ADP.DefaultConnectionTimeout);
+            }
         }
 
-        internal string DataSource {
+        internal string DataSource
+        {
             get { return base.ConvertValueToString(KEY.Data_Source, ADP.StrEmpty); }
         }
 
-        internal string InitialCatalog {
+        internal string InitialCatalog
+        {
             get { return base.ConvertValueToString(KEY.Initial_Catalog, ADP.StrEmpty); }
         }
 
-        internal string Provider {
-            get {
+        internal string Provider
+        {
+            get
+            {
                 Debug.Assert(!ADP.IsEmpty(this[KEY.Provider]), "no Provider");
                 return this[KEY.Provider];
             }
         }
 
-        internal int OleDbServices {
-            get {
-                return _oledbServices;
-            }
+        internal int OleDbServices
+        {
+            get { return _oledbServices; }
         }
 
-        internal SchemaSupport[] SchemaSupport { // OleDbConnection.GetSchemaRowsetInformation
+        internal SchemaSupport[] SchemaSupport
+        { // OleDbConnection.GetSchemaRowsetInformation
             get { return _schemaSupport; }
             set { _schemaSupport = value; }
         }
 
-        protected internal override System.Security.PermissionSet CreatePermissionSet() {
+        protected internal override System.Security.PermissionSet CreatePermissionSet()
+        {
             System.Security.PermissionSet permissionSet;
-            if (PossiblePrompt) {
+            if (PossiblePrompt)
+            {
                 permissionSet = new NamedPermissionSet("FullTrust");
             }
-            else {
-                permissionSet = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.None);
+            else
+            {
+                permissionSet = new System.Security.PermissionSet(
+                    System.Security.Permissions.PermissionState.None
+                );
                 permissionSet.AddPermission(new OleDbPermission(this));
             }
             return permissionSet;
         }
 
-        protected internal override string Expand() {
-            if (null != _expandedConnectionString) {
+        protected internal override string Expand()
+        {
+            if (null != _expandedConnectionString)
+            {
                 return _expandedConnectionString;
             }
-            else {
+            else
+            {
                 return base.Expand();
             }
         }
 
-        internal int GetSqlSupport(OleDbConnection connection) {
+        internal int GetSqlSupport(OleDbConnection connection)
+        {
             int sqlSupport = _sqlSupport;
-            if (!_hasSqlSupport) {
-                object value = connection.GetDataSourcePropertyValue(OleDbPropertySetGuid.DataSourceInfo, ODB.DBPROP_SQLSUPPORT);
-                if (value is Int32) { // not OleDbPropertyStatus
-                    sqlSupport = (int) value;
+            if (!_hasSqlSupport)
+            {
+                object value = connection.GetDataSourcePropertyValue(
+                    OleDbPropertySetGuid.DataSourceInfo,
+                    ODB.DBPROP_SQLSUPPORT
+                );
+                if (value is Int32)
+                { // not OleDbPropertyStatus
+                    sqlSupport = (int)value;
                 }
                 _sqlSupport = sqlSupport;
                 _hasSqlSupport = true;
@@ -189,10 +244,15 @@ namespace System.Data.OleDb {
             return sqlSupport;
         }
 
-        internal bool GetSupportIRow(OleDbConnection connection, OleDbCommand command) {
+        internal bool GetSupportIRow(OleDbConnection connection, OleDbCommand command)
+        {
             bool supportIRow = _supportIRow;
-            if (!_hasSupportIRow) {
-                object value = command.GetPropertyValue(OleDbPropertySetGuid.Rowset, ODB.DBPROP_IRow);
+            if (!_hasSupportIRow)
+            {
+                object value = command.GetPropertyValue(
+                    OleDbPropertySetGuid.Rowset,
+                    ODB.DBPROP_IRow
+                );
 
                 // SQLOLEDB always returns VARIANT_FALSE for DBPROP_IROW, so base the answer on existence
                 supportIRow = !(value is OleDbPropertyStatus);
@@ -202,12 +262,18 @@ namespace System.Data.OleDb {
             return supportIRow;
         }
 
-        internal bool GetSupportMultipleResults(OleDbConnection connection) {
+        internal bool GetSupportMultipleResults(OleDbConnection connection)
+        {
             bool supportMultipleResults = _supportMultipleResults;
-            if (!_hasSupportMultipleResults) {
-                object value = connection.GetDataSourcePropertyValue(OleDbPropertySetGuid.DataSourceInfo, ODB.DBPROP_MULTIPLERESULTS);
-                if (value is Int32) {// not OleDbPropertyStatus
-                    supportMultipleResults = (ODB.DBPROPVAL_MR_NOTSUPPORTED != (int) value);
+            if (!_hasSupportMultipleResults)
+            {
+                object value = connection.GetDataSourcePropertyValue(
+                    OleDbPropertySetGuid.DataSourceInfo,
+                    ODB.DBPROP_MULTIPLERESULTS
+                );
+                if (value is Int32)
+                { // not OleDbPropertyStatus
+                    supportMultipleResults = (ODB.DBPROPVAL_MR_NOTSUPPORTED != (int)value);
                 }
                 _supportMultipleResults = supportMultipleResults;
                 _hasSupportMultipleResults = true;
@@ -215,16 +281,20 @@ namespace System.Data.OleDb {
             return supportMultipleResults;
         }
 
-        static private int UdlPoolSize { // MDAC 69925
+        private static int UdlPoolSize
+        { // MDAC 69925
             // SxS: UdpPoolSize reads registry value to get the pool size
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
+            get
+            {
                 int poolsize = UDL._PoolSize;
-                if (!UDL._PoolSizeInit) {
+                if (!UDL._PoolSizeInit)
+                {
                     object value = ADP.LocalMachineRegistryValue(UDL.Location, UDL.Pooling);
-                    if (value is Int32) {
-                        poolsize = (int) value;
+                    if (value is Int32)
+                    {
+                        poolsize = (int)value;
                         poolsize = ((0 < poolsize) ? poolsize : 0);
                         UDL._PoolSize = poolsize;
                     }
@@ -236,34 +306,47 @@ namespace System.Data.OleDb {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        static private string LoadStringFromStorage(string udlfilename) {
+        private static string LoadStringFromStorage(string udlfilename)
+        {
             string udlConnectionString = null;
-            Dictionary<string,string> udlcache = UDL._Pool;
+            Dictionary<string, string> udlcache = UDL._Pool;
 
-            if ((null == udlcache) || !udlcache.TryGetValue(udlfilename, out udlConnectionString)) {
+            if ((null == udlcache) || !udlcache.TryGetValue(udlfilename, out udlConnectionString))
+            {
                 udlConnectionString = LoadStringFromFileStorage(udlfilename);
-                if (null != udlConnectionString) {
+                if (null != udlConnectionString)
+                {
                     Debug.Assert(!ADP.IsEmpty(udlfilename), "empty filename didn't fail");
 
-                    if (0 < UdlPoolSize) {
-                        Debug.Assert(udlfilename == ADP.GetFullPath(udlfilename), "only cache full path filenames"); // MDAC 82833
+                    if (0 < UdlPoolSize)
+                    {
+                        Debug.Assert(
+                            udlfilename == ADP.GetFullPath(udlfilename),
+                            "only cache full path filenames"
+                        ); // MDAC 82833
 
-                        if (null == udlcache) {
-                            udlcache = new Dictionary<string,string>();
+                        if (null == udlcache)
+                        {
+                            udlcache = new Dictionary<string, string>();
                             udlcache[udlfilename] = udlConnectionString;
 
-                            lock(UDL._PoolLock) {
-                                if (null != UDL._Pool) {
+                            lock (UDL._PoolLock)
+                            {
+                                if (null != UDL._Pool)
+                                {
                                     udlcache = UDL._Pool;
                                 }
-                                else {
+                                else
+                                {
                                     UDL._Pool = udlcache;
                                     udlcache = null;
                                 }
                             }
                         }
-                        if (null != udlcache) {
-                            lock(udlcache) {
+                        if (null != udlcache)
+                        {
+                            lock (udlcache)
+                            {
                                 udlcache[udlfilename] = udlConnectionString;
                             }
                         }
@@ -275,7 +358,8 @@ namespace System.Data.OleDb {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        static private string LoadStringFromFileStorage(string udlfilename) {
+        private static string LoadStringFromFileStorage(string udlfilename)
+        {
             // Microsoft Data Link File Format
             // The first two lines of a .udl file must have exactly the following contents in order to work properly:
             //  [oledb]
@@ -283,39 +367,63 @@ namespace System.Data.OleDb {
             //
             string connectionString = null;
             Exception failure = null;
-            try {
-                int hdrlength = ADP.CharSize*UDL.Header.Length;
-                using(FileStream fstream = new FileStream(udlfilename, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+            try
+            {
+                int hdrlength = ADP.CharSize * UDL.Header.Length;
+                using (
+                    FileStream fstream = new FileStream(
+                        udlfilename,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
+                    )
+                )
+                {
                     long length = fstream.Length;
-                    if (length < hdrlength || (0 != length%ADP.CharSize)) {
+                    if (length < hdrlength || (0 != length % ADP.CharSize))
+                    {
                         failure = ADP.InvalidUDL();
                     }
-                    else {
+                    else
+                    {
                         byte[] bytes = new Byte[hdrlength];
                         int count = fstream.Read(bytes, 0, bytes.Length);
-                        if (count < hdrlength) {
+                        if (count < hdrlength)
+                        {
                             failure = ADP.InvalidUDL();
                         }
-                        else if (System.Text.Encoding.Unicode.GetString(bytes, 0, hdrlength) != UDL.Header) {
+                        else if (
+                            System.Text.Encoding.Unicode.GetString(bytes, 0, hdrlength)
+                            != UDL.Header
+                        )
+                        {
                             failure = ADP.InvalidUDL();
                         }
-                        else { // please verify header before allocating memory block for connection string
+                        else
+                        { // please verify header before allocating memory block for connection string
                             bytes = new Byte[length - hdrlength];
                             count = fstream.Read(bytes, 0, bytes.Length);
-                            connectionString = System.Text.Encoding.Unicode.GetString(bytes, 0, count);
+                            connectionString = System.Text.Encoding.Unicode.GetString(
+                                bytes,
+                                0,
+                                count
+                            );
                         }
                     }
                 }
             }
-            catch(Exception e) {
-                // 
-                if (!ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (!ADP.IsCatchableExceptionType(e))
+                {
                     throw;
                 }
 
                 throw ADP.UdlFileError(e);
             }
-            if (null != failure) {
+            if (null != failure)
+            {
                 throw failure;
             }
             return connectionString.Trim();
@@ -323,27 +431,34 @@ namespace System.Data.OleDb {
 
         [ResourceExposure(ResourceScope.None)] // reads OleDbServices value for the provider
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private string ValidateConnectionString(string connectionString) {
-            if (ConvertValueToBoolean(KEY.Asynchronous_Processing, false)) {
+        private string ValidateConnectionString(string connectionString)
+        {
+            if (ConvertValueToBoolean(KEY.Asynchronous_Processing, false))
+            {
                 throw ODB.AsynchronousNotSupported();
             }
 
             int connectTimeout = ConvertValueToInt32(KEY.Connect_Timeout, 0);
-            if (connectTimeout < 0) {
+            if (connectTimeout < 0)
+            {
                 throw ADP.InvalidConnectTimeoutValue();
             }
 
             string progid = ConvertValueToString(KEY.Data_Provider, null); // MDAC 71923
-            if (null != progid) {
+            if (null != progid)
+            {
                 progid = progid.Trim();
-                if (0 < progid.Length) { // don't fail on empty 'Data Provider' value
+                if (0 < progid.Length)
+                { // don't fail on empty 'Data Provider' value
                     ValidateProvider(progid);
                 }
             }
             progid = ConvertValueToString(KEY.RemoteProvider, null); // MDAC 71923
-            if (null != progid) {
+            if (null != progid)
+            {
                 progid = progid.Trim();
-                if (0 < progid.Length) { // don't fail on empty 'Data Provider' value
+                if (0 < progid.Length)
+                { // don't fail on empty 'Data Provider' value
                     ValidateProvider(progid);
                 }
             }
@@ -356,28 +471,43 @@ namespace System.Data.OleDb {
             // our default is -13, we turn off ODB.DBPROPVAL_OS_AGR_AFTERSESSION and ODB.DBPROPVAL_OS_CLIENTCURSOR flags
             _oledbServices = DbConnectionStringDefaults.OleDbServices;
 
-            bool hasOleDBServices = (base.ContainsKey(KEY.Ole_DB_Services) && !ADP.IsEmpty((string)base[KEY.Ole_DB_Services]));
-            if (!hasOleDBServices) { // don't touch registry if they have OLE DB Services
-                string classid = (string) ADP.ClassesRootRegistryValue(progid + "\\CLSID", String.Empty);
-                if ((null != classid) && (0 < classid.Length)) {
+            bool hasOleDBServices = (
+                base.ContainsKey(KEY.Ole_DB_Services)
+                && !ADP.IsEmpty((string)base[KEY.Ole_DB_Services])
+            );
+            if (!hasOleDBServices)
+            { // don't touch registry if they have OLE DB Services
+                string classid = (string)ADP.ClassesRootRegistryValue(progid + "\\CLSID", String.Empty);
+                if ((null != classid) && (0 < classid.Length))
+                {
                     // CLSID detection of 'Microsoft OLE DB Provider for ODBC Drivers'
                     Guid classidProvider = new Guid(classid);
-                    if (ODB.CLSID_MSDASQL == classidProvider) {
+                    if (ODB.CLSID_MSDASQL == classidProvider)
+                    {
                         throw ODB.MSDASQLNotSupported();
                     }
-                    object tmp = ADP.ClassesRootRegistryValue("CLSID\\{" + classidProvider.ToString("D", CultureInfo.InvariantCulture) + "}", ODB.OLEDB_SERVICES);
-                    if (null != tmp) {
-
+                    object tmp = ADP.ClassesRootRegistryValue(
+                        "CLSID\\{"
+                            + classidProvider.ToString("D", CultureInfo.InvariantCulture)
+                            + "}",
+                        ODB.OLEDB_SERVICES
+                    );
+                    if (null != tmp)
+                    {
                         // @devnote: some providers like MSDataShape don't have the OLEDB_SERVICES value
                         // the MSDataShape provider doesn't support the 'Ole Db Services' keyword
                         // hence, if the value doesn't exist - don't prepend to string
-                        try {
+                        try
+                        {
                             _oledbServices = (int)tmp;
                         }
-                        catch(InvalidCastException e) {
+                        catch (InvalidCastException e)
+                        {
                             ADP.TraceExceptionWithoutRethrow(e);
                         }
-                        _oledbServices &= ~(ODB.DBPROPVAL_OS_AGR_AFTERSESSION | ODB.DBPROPVAL_OS_CLIENTCURSOR); // NT 347436, MDAC 58606
+                        _oledbServices &= ~(
+                            ODB.DBPROPVAL_OS_AGR_AFTERSESSION | ODB.DBPROPVAL_OS_CLIENTCURSOR
+                        ); // NT 347436, MDAC 58606
 
                         StringBuilder builder = new StringBuilder();
                         builder.Append(KEY.Ole_DB_Services);
@@ -389,36 +519,49 @@ namespace System.Data.OleDb {
                     }
                 }
             }
-            else {
+            else
+            {
                 // SQLBU VSTS 59322: parse the Ole Db Services value from connection string
-                _oledbServices = ConvertValueToInt32(KEY.Ole_DB_Services, DbConnectionStringDefaults.OleDbServices);
+                _oledbServices = ConvertValueToInt32(
+                    KEY.Ole_DB_Services,
+                    DbConnectionStringDefaults.OleDbServices
+                );
             }
 
             return connectionString;
         }
 
-        internal static bool IsMSDASQL(string progid) {
-            return (("msdasql" == progid) || progid.StartsWith("msdasql.", StringComparison.Ordinal) || ("microsoft ole db provider for odbc drivers" == progid));
+        internal static bool IsMSDASQL(string progid)
+        {
+            return (
+                ("msdasql" == progid)
+                || progid.StartsWith("msdasql.", StringComparison.Ordinal)
+                || ("microsoft ole db provider for odbc drivers" == progid)
+            );
         }
 
-        static private void ValidateProvider(string progid) {
-            if (ADP.IsEmpty(progid)) {
+        private static void ValidateProvider(string progid)
+        {
+            if (ADP.IsEmpty(progid))
+            {
                 throw ODB.NoProviderSpecified();
             }
-            if (ODB.MaxProgIdLength <= progid.Length) { // MDAC 63151
+            if (ODB.MaxProgIdLength <= progid.Length)
+            { // MDAC 63151
                 throw ODB.InvalidProviderSpecified();
             }
             progid = progid.ToLower(CultureInfo.InvariantCulture);
-            if (IsMSDASQL(progid)) {
+            if (IsMSDASQL(progid))
+            {
                 // fail msdasql even if not on the machine.
                 throw ODB.MSDASQLNotSupported();
             }
         }
-        
-        static internal void ReleaseObjectPool() {
+
+        internal static void ReleaseObjectPool()
+        {
             UDL._PoolSizeInit = false;
             UDL._Pool = null;
         }
     }
 }
-

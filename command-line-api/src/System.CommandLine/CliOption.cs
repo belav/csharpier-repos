@@ -10,16 +10,17 @@ using System.Linq;
 namespace System.CommandLine
 {
     /// <summary>
-    /// A symbol defining a named parameter and a value for that parameter. 
+    /// A symbol defining a named parameter and a value for that parameter.
     /// </summary>
     public abstract class CliOption : CliSymbol
     {
         internal AliasSet? _aliases;
         private List<Action<OptionResult>>? _validators;
 
-        private protected CliOption(string name, string[] aliases) : base(name)
+        private protected CliOption(string name, string[] aliases)
+            : base(name)
         {
-            if (aliases is { Length: > 0 }) 
+            if (aliases is { Length: > 0 })
             {
                 _aliases = new(aliases);
             }
@@ -72,7 +73,8 @@ namespace System.CommandLine
         /// <summary>
         /// Gets the list of completion sources for the option.
         /// </summary>
-        public List<Func<CompletionContext, IEnumerable<CompletionItem>>> CompletionSources => Argument.CompletionSources;
+        public List<Func<CompletionContext, IEnumerable<CompletionItem>>> CompletionSources =>
+            Argument.CompletionSources;
 
         /// <summary>
         /// Gets a value that indicates whether multiple argument tokens are allowed for each option identifier token.
@@ -89,8 +91,8 @@ namespace System.CommandLine
         /// </example>
         public bool AllowMultipleArgumentsPerToken { get; set; }
 
-        internal virtual bool Greedy
-            => Argument.Arity.MinimumNumberOfValues > 0 && Argument.ValueType != typeof(bool);
+        internal virtual bool Greedy =>
+            Argument.Arity.MinimumNumberOfValues > 0 && Argument.ValueType != typeof(bool);
 
         /// <summary>
         /// Indicates whether the option is required when its parent command is invoked.
@@ -129,8 +131,8 @@ namespace System.CommandLine
             }
 
             return completions
-                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
-                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

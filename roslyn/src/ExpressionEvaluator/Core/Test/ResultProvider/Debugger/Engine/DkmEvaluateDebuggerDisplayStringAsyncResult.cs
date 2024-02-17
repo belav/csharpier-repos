@@ -26,6 +26,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             _result = result;
         }
 
-        public string Result { get { return _result; } }
+        public string Result
+        {
+            get { return _result; }
+        }
     }
 }

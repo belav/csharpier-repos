@@ -21,21 +21,30 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString;
 /// into:
 ///     $"{a + b} str {d}{e}".
 /// </summary>
-internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactoringProvider<TExpressionSyntax> : CodeRefactoringProvider
+internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactoringProvider<TExpressionSyntax>
+    : CodeRefactoringProvider
     where TExpressionSyntax : SyntaxNode
 {
     protected abstract bool SupportsInterpolatedStringHandler(Compilation compilation);
 
-    protected abstract string GetTextWithoutQuotes(string text, bool isVerbatimStringLiteral, bool isCharacterLiteral);
+    protected abstract string GetTextWithoutQuotes(
+        string text,
+        bool isVerbatimStringLiteral,
+        bool isCharacterLiteral
+    );
 
     public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
         var (document, textSpan, cancellationToken) = context;
-        var possibleExpressions = await context.GetRelevantNodesAsync<TExpressionSyntax>().ConfigureAwait(false);
+        var possibleExpressions = await context
+            .GetRelevantNodesAsync<TExpressionSyntax>()
+            .ConfigureAwait(false);
 
         var generator = SyntaxGenerator.GetGenerator(document);
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         // let's take the largest (last) StringConcat we can given current textSpan
         var top = possibleExpressions
@@ -54,12 +63,14 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         }
 
         // Currently we can concatenate only full subtrees. Therefore we can't support arbitrary selection. We could
-        // theoretically support selecting the selections that correspond to full sub-trees (e.g. prefixes of 
-        // correct length but from UX point of view that it would feel arbitrary). 
+        // theoretically support selecting the selections that correspond to full sub-trees (e.g. prefixes of
+        // correct length but from UX point of view that it would feel arbitrary).
         // Thus, we only support selection that takes the whole topmost expression. It breaks some leniency around under-selection
         // but it's the best solution so far.
-        if (CodeRefactoringHelpers.IsNodeUnderselected(top, textSpan) ||
-            IsStringConcat(syntaxFacts, top.Parent, semanticModel, cancellationToken))
+        if (
+            CodeRefactoringHelpers.IsNodeUnderselected(top, textSpan)
+            || IsStringConcat(syntaxFacts, top.Parent, semanticModel, cancellationToken)
+        )
         {
             return;
         }
@@ -70,7 +81,10 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         CollectPiecesDown(syntaxFacts, pieces, top, semanticModel, cancellationToken);
 
         var stringLiterals = pieces
-            .Where(x => syntaxFacts.IsStringLiteralExpression(x) || syntaxFacts.IsCharacterLiteralExpression(x))
+            .Where(x =>
+                syntaxFacts.IsStringLiteralExpression(x)
+                || syntaxFacts.IsCharacterLiteralExpression(x)
+            )
             .ToImmutableArray();
 
         // If the entire expression is just concatenated strings, then don't offer to
@@ -82,7 +96,6 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         var isVerbatimStringLiteral = false;
         if (stringLiterals.Length > 0)
         {
-
             // Make sure that all the string tokens we're concatenating are the same type
             // of string literal.  i.e. if we have an expression like: @" "" " + " \r\n "
             // then we don't merge this.  We don't want to be munging different types of
@@ -92,7 +105,10 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
             isVerbatimStringLiteral = syntaxFacts.IsVerbatimStringLiteral(firstStringToken);
             for (int i = 1, n = stringLiterals.Length; i < n; i++)
             {
-                if (isVerbatimStringLiteral != syntaxFacts.IsVerbatimStringLiteral(stringLiterals[i].GetFirstToken()))
+                if (
+                    isVerbatimStringLiteral
+                    != syntaxFacts.IsVerbatimStringLiteral(stringLiterals[i].GetFirstToken())
+                )
                     return;
             }
         }
@@ -101,26 +117,55 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         context.RegisterRefactoring(
             CodeAction.Create(
                 FeaturesResources.Convert_to_interpolated_string,
-                cancellationToken => UpdateDocumentAsync(document, top, isVerbatimStringLiteral, piecesArray, cancellationToken),
-                nameof(FeaturesResources.Convert_to_interpolated_string)),
-            top.Span);
+                cancellationToken =>
+                    UpdateDocumentAsync(
+                        document,
+                        top,
+                        isVerbatimStringLiteral,
+                        piecesArray,
+                        cancellationToken
+                    ),
+                nameof(FeaturesResources.Convert_to_interpolated_string)
+            ),
+            top.Span
+        );
     }
 
     private async Task<Document> UpdateDocumentAsync(
-        Document document, SyntaxNode top, bool isVerbatimStringLiteral, ImmutableArray<SyntaxNode> pieces, CancellationToken cancellationToken)
+        Document document,
+        SyntaxNode top,
+        bool isVerbatimStringLiteral,
+        ImmutableArray<SyntaxNode> pieces,
+        CancellationToken cancellationToken
+    )
     {
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
         var interpolatedString = await CreateInterpolatedStringAsync(
-            document, isVerbatimStringLiteral, pieces, cancellationToken).ConfigureAwait(false);
+                document,
+                isVerbatimStringLiteral,
+                pieces,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         return document.WithSyntaxRoot(root.ReplaceNode(top, interpolatedString));
     }
 
     protected async Task<SyntaxNode> CreateInterpolatedStringAsync(
-        Document document, bool isVerbatimStringLiteral, ImmutableArray<SyntaxNode> pieces, CancellationToken cancellationToken)
+        Document document,
+        bool isVerbatimStringLiteral,
+        ImmutableArray<SyntaxNode> pieces,
+        CancellationToken cancellationToken
+    )
     {
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        var supportsInterpolatedStringHandler = this.SupportsInterpolatedStringHandler(semanticModel.Compilation);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var supportsInterpolatedStringHandler = this.SupportsInterpolatedStringHandler(
+            semanticModel.Compilation
+        );
 
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
         var generator = SyntaxGenerator.GetGenerator(document);
@@ -136,14 +181,20 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         foreach (var piece in pieces)
         {
             var isCharacterLiteral = syntaxFacts.IsCharacterLiteralExpression(piece);
-            var currentContentIsStringOrCharacterLiteral = syntaxFacts.IsStringLiteralExpression(piece) || isCharacterLiteral;
+            var currentContentIsStringOrCharacterLiteral =
+                syntaxFacts.IsStringLiteralExpression(piece) || isCharacterLiteral;
             if (currentContentIsStringOrCharacterLiteral)
             {
                 var text = piece.GetFirstToken().Text;
-                var value = piece.GetFirstToken().Value?.ToString() ?? piece.GetFirstToken().ValueText;
+                var value =
+                    piece.GetFirstToken().Value?.ToString() ?? piece.GetFirstToken().ValueText;
                 var textWithEscapedBraces = text.Replace("{", "{{").Replace("}", "}}");
                 var valueTextWithEscapedBraces = value.Replace("{", "{{").Replace("}", "}}");
-                var textWithoutQuotes = GetTextWithoutQuotes(textWithEscapedBraces, isVerbatimStringLiteral, isCharacterLiteral);
+                var textWithoutQuotes = GetTextWithoutQuotes(
+                    textWithEscapedBraces,
+                    isVerbatimStringLiteral,
+                    isCharacterLiteral
+                );
                 if (previousContentWasStringLiteralExpression)
                 {
                     // Last part we added to the content list was also an interpolated-string-text-node.
@@ -154,33 +205,63 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                     // not:
                     //      {InterpolatedStringText}{Interpolation}{InterpolatedStringText}{InterpolatedStringText}
                     var existingInterpolatedStringTextNode = content.Last();
-                    var newText = ConcatenateTextToTextNode(generator, existingInterpolatedStringTextNode, textWithoutQuotes, valueTextWithEscapedBraces);
+                    var newText = ConcatenateTextToTextNode(
+                        generator,
+                        existingInterpolatedStringTextNode,
+                        textWithoutQuotes,
+                        valueTextWithEscapedBraces
+                    );
                     content[^1] = newText;
                 }
                 else
                 {
                     // This is either the first string literal we have encountered or it is the most recent one we've seen
                     // after adding an interpolation.  Add a new interpolated-string-text-node to the list.
-                    content.Add(generator.InterpolatedStringText(generator.InterpolatedStringTextToken(textWithoutQuotes, valueTextWithEscapedBraces)));
+                    content.Add(
+                        generator.InterpolatedStringText(
+                            generator.InterpolatedStringTextToken(
+                                textWithoutQuotes,
+                                valueTextWithEscapedBraces
+                            )
+                        )
+                    );
                 }
             }
-            else if (syntaxFacts.IsInterpolatedStringExpression(piece) &&
-                syntaxFacts.IsVerbatimInterpolatedStringExpression(piece) == isVerbatimStringLiteral)
+            else if (
+                syntaxFacts.IsInterpolatedStringExpression(piece)
+                && syntaxFacts.IsVerbatimInterpolatedStringExpression(piece)
+                    == isVerbatimStringLiteral
+            )
             {
                 // "piece" is itself an interpolated string (of the same "verbatimity" as the new interpolated string)
                 // "a" + $"{1+ 1}" -> instead of $"a{$"{1 + 1}"}" inline the interpolated part: $"a{1 + 1}"
-                syntaxFacts.GetPartsOfInterpolationExpression(piece, out var _, out var contentParts, out var _);
+                syntaxFacts.GetPartsOfInterpolationExpression(
+                    piece,
+                    out var _,
+                    out var contentParts,
+                    out var _
+                );
                 foreach (var contentPart in contentParts)
                 {
                     // Track the state of currentContentIsStringOrCharacterLiteral for the inlined parts
                     // so any text at the end of piece can be merge with the next string literal:
                     // $"{1 + 1}a" + "b" -> "a" and "b" get merged in the next "pieces" loop
-                    currentContentIsStringOrCharacterLiteral = syntaxFacts.IsInterpolatedStringText(contentPart);
-                    if (currentContentIsStringOrCharacterLiteral && previousContentWasStringLiteralExpression)
+                    currentContentIsStringOrCharacterLiteral = syntaxFacts.IsInterpolatedStringText(
+                        contentPart
+                    );
+                    if (
+                        currentContentIsStringOrCharacterLiteral
+                        && previousContentWasStringLiteralExpression
+                    )
                     {
                         // if piece starts with a text and the previous part was a string, merge the two parts (see also above)
                         // "a" + $"b{1 + 1}" -> "a" and "b" get merged
-                        var newText = ConcatenateTextToTextNode(generator, content.Last(), contentPart.GetFirstToken().Text, contentPart.GetFirstToken().ValueText);
+                        var newText = ConcatenateTextToTextNode(
+                            generator,
+                            content.Last(),
+                            contentPart.GetFirstToken().Text,
+                            contentPart.GetFirstToken().ValueText
+                        );
                         content[^1] = newText;
                     }
                     else
@@ -220,13 +301,26 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                 // it wants to do.
                 if (syntaxFacts.IsInvocationExpression(piece))
                 {
-                    syntaxFacts.GetPartsOfInvocationExpression(piece, out var memberAccess, out var argumentList);
+                    syntaxFacts.GetPartsOfInvocationExpression(
+                        piece,
+                        out var memberAccess,
+                        out var argumentList
+                    );
                     if (syntaxFacts.IsMemberAccessExpression(memberAccess))
                     {
-                        syntaxFacts.GetPartsOfMemberAccessExpression(memberAccess, out var expression, out var name);
-                        if (syntaxFacts.GetIdentifierOfSimpleName(name).ValueText == nameof(ToString))
+                        syntaxFacts.GetPartsOfMemberAccessExpression(
+                            memberAccess,
+                            out var expression,
+                            out var name
+                        );
+                        if (
+                            syntaxFacts.GetIdentifierOfSimpleName(name).ValueText
+                            == nameof(ToString)
+                        )
                         {
-                            var symbol = semanticModel.GetSymbolInfo(memberAccess, cancellationToken).Symbol as IMethodSymbol;
+                            var symbol =
+                                semanticModel.GetSymbolInfo(memberAccess, cancellationToken).Symbol
+                                as IMethodSymbol;
                             while (symbol?.OverriddenMethod != null)
                                 symbol = symbol.OverriddenMethod;
 
@@ -241,13 +335,20 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         }
     }
 
-    private static SyntaxNode ConcatenateTextToTextNode(SyntaxGenerator generator, SyntaxNode interpolatedStringTextNode, string textWithoutQuotes, string value)
+    private static SyntaxNode ConcatenateTextToTextNode(
+        SyntaxGenerator generator,
+        SyntaxNode interpolatedStringTextNode,
+        string textWithoutQuotes,
+        string value
+    )
     {
         var existingText = interpolatedStringTextNode.GetFirstToken().Text;
         var existingValue = interpolatedStringTextNode.GetFirstToken().ValueText;
         var newText = existingText + textWithoutQuotes;
         var newValue = existingValue + value;
-        return generator.InterpolatedStringText(generator.InterpolatedStringTextToken(newText, newValue));
+        return generator.InterpolatedStringText(
+            generator.InterpolatedStringTextToken(newText, newValue)
+        );
     }
 
     private static void CollectPiecesDown(
@@ -255,7 +356,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         ArrayBuilder<SyntaxNode> pieces,
         SyntaxNode node,
         SemanticModel semanticModel,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (!IsStringConcat(syntaxFacts, node, semanticModel, cancellationToken))
         {
@@ -270,17 +372,22 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
     }
 
     private static bool IsStringConcat(
-        ISyntaxFactsService syntaxFacts, SyntaxNode? expression,
-        SemanticModel semanticModel, CancellationToken cancellationToken)
+        ISyntaxFactsService syntaxFacts,
+        SyntaxNode? expression,
+        SemanticModel semanticModel,
+        CancellationToken cancellationToken
+    )
     {
         if (!syntaxFacts.IsBinaryExpression(expression))
             return false;
 
-        return semanticModel.GetSymbolInfo(expression, cancellationToken).Symbol is IMethodSymbol
-        {
-            MethodKind: MethodKind.BuiltinOperator,
-            ContainingType.SpecialType: SpecialType.System_String,
-            MetadataName: WellKnownMemberNames.AdditionOperatorName or WellKnownMemberNames.ConcatenateOperatorName,
-        };
+        return semanticModel.GetSymbolInfo(expression, cancellationToken).Symbol
+            is IMethodSymbol
+            {
+                MethodKind: MethodKind.BuiltinOperator,
+                ContainingType.SpecialType: SpecialType.System_String,
+                MetadataName: WellKnownMemberNames.AdditionOperatorName
+                    or WellKnownMemberNames.ConcatenateOperatorName,
+            };
     }
 }

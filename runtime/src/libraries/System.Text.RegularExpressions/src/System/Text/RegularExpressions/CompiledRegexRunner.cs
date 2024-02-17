@@ -21,14 +21,17 @@ namespace System.Text.RegularExpressions
 
         internal delegate void ScanDelegate(RegexRunner runner, ReadOnlySpan<char> text);
 
-        public CompiledRegexRunner(ScanDelegate scan, SearchValues<char>[]? searchValues, CultureInfo? culture)
+        public CompiledRegexRunner(
+            ScanDelegate scan,
+            SearchValues<char>[]? searchValues,
+            CultureInfo? culture
+        )
         {
             _scanMethod = scan;
             _searchValues = searchValues;
             _culture = culture;
         }
 
-        protected internal override void Scan(ReadOnlySpan<char> text)
-            => _scanMethod(this, text);
+        protected internal override void Scan(ReadOnlySpan<char> text) => _scanMethod(this, text);
     }
 }

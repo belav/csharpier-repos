@@ -43,31 +43,26 @@ namespace System.Xml
             this.buffer = buffer;
         }
 
-        static public XmlBufferReader Empty
+        public static XmlBufferReader Empty
         {
-            get
-            {
-                return empty;
-            }
+            get { return empty; }
         }
 
         public byte[] Buffer
         {
-            get
-            {
-                return buffer;
-            }
+            get { return buffer; }
         }
 
         public bool IsStreamed
         {
-            get
-            {
-                return stream != null;
-            }
+            get { return stream != null; }
         }
 
-        public void SetBuffer(Stream stream, IXmlDictionary dictionary, XmlBinaryReaderSession session)
+        public void SetBuffer(
+            Stream stream,
+            IXmlDictionary dictionary,
+            XmlBinaryReaderSession session
+        )
         {
             if (streamBuffer == null)
             {
@@ -78,12 +73,25 @@ namespace System.Xml
             this.windowOffsetMax = streamBuffer.Length;
         }
 
-        public void SetBuffer(byte[] buffer, int offset, int count, IXmlDictionary dictionary, XmlBinaryReaderSession session)
+        public void SetBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary dictionary,
+            XmlBinaryReaderSession session
+        )
         {
             SetBuffer(null, buffer, offset, count, dictionary, session);
         }
 
-        void SetBuffer(Stream stream, byte[] buffer, int offset, int count, IXmlDictionary dictionary, XmlBinaryReaderSession session)
+        void SetBuffer(
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary dictionary,
+            XmlBinaryReaderSession session
+        )
         {
             this.stream = stream;
             this.buffer = buffer;
@@ -116,10 +124,7 @@ namespace System.Xml
 
         public bool EndOfFile
         {
-            get
-            {
-                return offset == offsetMax && !TryEnsureByte();
-            }
+            get { return offset == offsetMax && !TryEnsureByte(); }
         }
 
         public byte GetByte()
@@ -190,7 +195,10 @@ namespace System.Xml
             if (stream == null)
                 return false;
             if (offsetMax >= windowOffsetMax)
-                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(reader, windowOffsetMax - windowOffset);
+                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(
+                    reader,
+                    windowOffsetMax - windowOffset
+                );
             if (offsetMax >= buffer.Length)
                 return TryEnsureBytes(1);
             int b = stream.ReadByte();
@@ -211,12 +219,18 @@ namespace System.Xml
             if (stream == null)
                 return false;
             if (offset > int.MaxValue - count)
-                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(reader, windowOffsetMax - windowOffset);
+                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(
+                    reader,
+                    windowOffsetMax - windowOffset
+                );
             int newOffsetMax = offset + count;
             if (newOffsetMax < offsetMax)
                 return true;
             if (newOffsetMax > windowOffsetMax)
-                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(reader, windowOffsetMax - windowOffset);
+                XmlExceptionHelper.ThrowMaxBytesPerReadExceeded(
+                    reader,
+                    windowOffsetMax - windowOffset
+                );
             if (newOffsetMax > buffer.Length)
             {
                 byte[] newBuffer = new byte[Math.Max(newOffsetMax, buffer.Length * 2)];
@@ -240,9 +254,14 @@ namespace System.Xml
         void ReadByte(byte b)
         {
             if (BufferReader.GetByte() != b)
-                XmlExceptionHelper.ThrowTokenExpected(this, ((char)b).ToString(), (char)BufferReader.GetByte());
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    ((char)b).ToString(),
+                    (char)BufferReader.GetByte()
+                );
         }
 #endif
+
         public void Advance(int count)
         {
             Fx.Assert(this.offset + count <= offsetMax, "");
@@ -259,7 +278,13 @@ namespace System.Xml
                 this.buffer = newBuffer;
                 this.streamBuffer = newBuffer;
             }
-            System.Buffer.BlockCopy(this.buffer, this.offset, this.buffer, this.offset + count, this.offsetMax - this.offset);
+            System.Buffer.BlockCopy(
+                this.buffer,
+                this.offset,
+                this.buffer,
+                this.offset + count,
+                this.offsetMax - this.offset
+            );
             offsetMax += count;
             System.Buffer.BlockCopy(buffer, offset, this.buffer, this.offset, count);
         }
@@ -286,10 +311,7 @@ namespace System.Xml
 
         public int Offset
         {
-            get
-            {
-                return offset;
-            }
+            get { return offset; }
             set
             {
                 Fx.Assert(value >= offsetMin && value <= offsetMax, "");
@@ -395,10 +417,12 @@ namespace System.Xml
             return (hi << 32) + lo;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public float ReadSingle()
+        public unsafe float ReadSingle()
         {
             int offset;
             byte[] buffer = GetBuffer(ValueHandleLength.Single, out offset);
@@ -413,10 +437,12 @@ namespace System.Xml
             return value;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public double ReadDouble()
+        public unsafe double ReadDouble()
         {
             int offset;
             byte[] buffer = GetBuffer(ValueHandleLength.Double, out offset);
@@ -435,10 +461,12 @@ namespace System.Xml
             return value;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public decimal ReadDecimal()
+        public unsafe decimal ReadDecimal()
         {
             const int SignMask = unchecked((int)0x80000000);
             const int ScaleMask = 0x00FF0000;
@@ -467,9 +495,11 @@ namespace System.Xml
                 XmlExceptionHelper.ThrowInvalidBinaryFormat(this.reader);
             }
 
-            //compiler doesn't know that XmlExceptionHelper.ThrowInvalidBinaryFormat always throws, 
+            //compiler doesn't know that XmlExceptionHelper.ThrowInvalidBinaryFormat always throws,
             //so we have to have a return statement here even though we shouldn't hit this code path...
-            Fx.Assert("A decimal value should have been returned or an exception should have been thrown.");
+            Fx.Assert(
+                "A decimal value should have been returned or an exception should have been thrown."
+            );
             return default(decimal);
         }
 
@@ -492,15 +522,33 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
         }
 
@@ -514,15 +562,33 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
         }
 
@@ -546,14 +612,18 @@ namespace System.Xml
             return value;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe public void UnsafeReadArray(byte* dst, byte* dstMax)
+        public unsafe void UnsafeReadArray(byte* dst, byte* dstMax)
         {
             UnsafeReadArray(dst, (int)(dstMax - dst));
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
         unsafe void UnsafeReadArray(byte* dst, int length)
         {
@@ -619,7 +689,14 @@ namespace System.Xml
             {
                 byte b = buffer[offset + i];
                 if (b >= 0x80)
-                    return i + XmlConverter.ToChars(buffer, offset + i, length - i, chars, charOffset + i);
+                    return i
+                        + XmlConverter.ToChars(
+                            buffer,
+                            offset + i,
+                            length - i,
+                            chars,
+                            charOffset + i
+                        );
                 chars[charOffset + i] = (char)b;
             }
             return length;
@@ -692,7 +769,6 @@ namespace System.Xml
 
                     textOffset = offset;
                 }
-
             }
             return charCount;
         }
@@ -729,9 +805,7 @@ namespace System.Xml
         int GetLessThanCharEntity(int offset, int length)
         {
             byte[] buffer = this.buffer;
-            if (length != 4 ||
-                buffer[offset + 1] != (byte)'l' ||
-                buffer[offset + 2] != (byte)'t')
+            if (length != 4 || buffer[offset + 1] != (byte)'l' || buffer[offset + 2] != (byte)'t')
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(reader);
             }
@@ -741,9 +815,7 @@ namespace System.Xml
         int GetGreaterThanCharEntity(int offset, int length)
         {
             byte[] buffer = this.buffer;
-            if (length != 4 ||
-                buffer[offset + 1] != (byte)'g' ||
-                buffer[offset + 2] != (byte)'t')
+            if (length != 4 || buffer[offset + 1] != (byte)'g' || buffer[offset + 2] != (byte)'t')
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(reader);
             }
@@ -753,11 +825,13 @@ namespace System.Xml
         int GetQuoteCharEntity(int offset, int length)
         {
             byte[] buffer = this.buffer;
-            if (length != 6 ||
-                buffer[offset + 1] != (byte)'q' ||
-                buffer[offset + 2] != (byte)'u' ||
-                buffer[offset + 3] != (byte)'o' ||
-                buffer[offset + 4] != (byte)'t')
+            if (
+                length != 6
+                || buffer[offset + 1] != (byte)'q'
+                || buffer[offset + 2] != (byte)'u'
+                || buffer[offset + 3] != (byte)'o'
+                || buffer[offset + 4] != (byte)'t'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(reader);
             }
@@ -767,10 +841,12 @@ namespace System.Xml
         int GetAmpersandCharEntity(int offset, int length)
         {
             byte[] buffer = this.buffer;
-            if (length != 5 ||
-                buffer[offset + 1] != (byte)'a' ||
-                buffer[offset + 2] != (byte)'m' ||
-                buffer[offset + 3] != (byte)'p')
+            if (
+                length != 5
+                || buffer[offset + 1] != (byte)'a'
+                || buffer[offset + 2] != (byte)'m'
+                || buffer[offset + 3] != (byte)'p'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(reader);
             }
@@ -780,11 +856,13 @@ namespace System.Xml
         int GetApostropheCharEntity(int offset, int length)
         {
             byte[] buffer = this.buffer;
-            if (length != 6 ||
-                buffer[offset + 1] != (byte)'a' ||
-                buffer[offset + 2] != (byte)'p' ||
-                buffer[offset + 3] != (byte)'o' ||
-                buffer[offset + 4] != (byte)'s')
+            if (
+                length != 6
+                || buffer[offset + 1] != (byte)'a'
+                || buffer[offset + 2] != (byte)'p'
+                || buffer[offset + 3] != (byte)'o'
+                || buffer[offset + 4] != (byte)'s'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(reader);
             }
@@ -909,7 +987,8 @@ namespace System.Xml
             if (key1 == key2)
                 return true;
             else
-                return GetDictionaryString(key1).Value == bufferReader2.GetDictionaryString(key2).Value;
+                return GetDictionaryString(key1).Value
+                    == bufferReader2.GetDictionaryString(key2).Value;
         }
 
         public bool Equals2(int key1, XmlDictionaryString xmlString2)
@@ -934,7 +1013,13 @@ namespace System.Xml
             return true;
         }
 
-        public bool Equals2(int offset1, int length1, XmlBufferReader bufferReader2, int offset2, int length2)
+        public bool Equals2(
+            int offset1,
+            int length1,
+            XmlBufferReader bufferReader2,
+            int offset2,
+            int length2
+        )
         {
             if (length1 != length2)
                 return false;
@@ -963,10 +1048,12 @@ namespace System.Xml
             return true;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public bool Equals2(int offset1, int length1, string s2)
+        public unsafe bool Equals2(int offset1, int length1, string s2)
         {
             int byteLength = length1;
             int charLength = s2.Length;
@@ -1065,7 +1152,10 @@ namespace System.Xml
         public long GetInt64(int offset)
         {
             byte[] buffer = this.buffer;
-            byte b1, b2, b3, b4;
+            byte b1,
+                b2,
+                b3,
+                b4;
             b1 = buffer[offset + 0];
             b2 = buffer[offset + 1];
             b3 = buffer[offset + 2];
@@ -1084,10 +1174,12 @@ namespace System.Xml
             return (ulong)GetInt64(offset);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public float GetSingle(int offset)
+        public unsafe float GetSingle(int offset)
         {
             byte[] buffer = this.buffer;
             float value;
@@ -1100,10 +1192,12 @@ namespace System.Xml
             return value;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public double GetDouble(int offset)
+        public unsafe double GetDouble(int offset)
         {
             byte[] buffer = this.buffer;
             double value;
@@ -1120,8 +1214,10 @@ namespace System.Xml
             return value;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
         public unsafe decimal GetDecimal(int offset)
         {
@@ -1149,9 +1245,11 @@ namespace System.Xml
                 XmlExceptionHelper.ThrowInvalidBinaryFormat(this.reader);
             }
 
-            //compiler doesn't know that XmlExceptionHelper.ThrowInvalidBinaryFormat always throws, 
+            //compiler doesn't know that XmlExceptionHelper.ThrowInvalidBinaryFormat always throws,
             //so we have to have a return statement here even though we shouldn't hit this code path...
-            Fx.Assert("A decimal value should have been returned or an exception should have been thrown.");
+            Fx.Assert(
+                "A decimal value should have been returned or an exception should have been thrown."
+            );
             return default(decimal);
         }
 
@@ -1234,9 +1332,15 @@ namespace System.Xml
                 XmlDictionaryString xmlString;
                 if (!session.TryLookup(sessionKey, out xmlString))
                 {
-                    if (sessionKey < XmlDictionaryString.MinKey || sessionKey > XmlDictionaryString.MaxKey)
+                    if (
+                        sessionKey < XmlDictionaryString.MinKey
+                        || sessionKey > XmlDictionaryString.MaxKey
+                    )
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(this.reader);
-                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedSession(this.reader, sessionKey);
+                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedSession(
+                        this.reader,
+                        sessionKey
+                    );
                 }
             }
             else
@@ -1247,9 +1351,15 @@ namespace System.Xml
                 XmlDictionaryString xmlString;
                 if (!dictionary.TryLookup(staticKey, out xmlString))
                 {
-                    if (staticKey < XmlDictionaryString.MinKey || staticKey > XmlDictionaryString.MaxKey)
+                    if (
+                        staticKey < XmlDictionaryString.MinKey
+                        || staticKey > XmlDictionaryString.MaxKey
+                    )
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(this.reader);
-                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedStatic(this.reader, staticKey);
+                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedStatic(
+                        this.reader,
+                        staticKey
+                    );
                 }
             }
 

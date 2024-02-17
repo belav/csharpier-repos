@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -427,9 +426,22 @@ namespace Moq.Tests
         {
             public IBar BarField;
             public IBar Bar { get; set; }
-            public IBar GetBar() { return null; }
-            public IBar GetBar(params int[] indices) { return null; }
-            public IBar this[int index] { get { return null; } set { } }
+
+            public IBar GetBar()
+            {
+                return null;
+            }
+
+            public IBar GetBar(params int[] indices)
+            {
+                return null;
+            }
+
+            public IBar this[int index]
+            {
+                get { return null; }
+                set { }
+            }
 
             public string Do(string command)
             {

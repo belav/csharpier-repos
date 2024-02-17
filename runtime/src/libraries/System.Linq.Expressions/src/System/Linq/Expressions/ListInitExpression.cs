@@ -21,7 +21,10 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(ListInitExpressionProxy))]
     public sealed class ListInitExpression : Expression
     {
-        internal ListInitExpression(NewExpression newExpression, ReadOnlyCollection<ElementInit> initializers)
+        internal ListInitExpression(
+            NewExpression newExpression,
+            ReadOnlyCollection<ElementInit> initializers
+        )
         {
             NewExpression = newExpression;
             Initializers = initializers;
@@ -71,7 +74,11 @@ namespace System.Linq.Expressions
         /// <returns>The reduced expression.</returns>
         public override Expression Reduce()
         {
-            return MemberInitExpression.ReduceListInit(NewExpression, Initializers, keepOnStack: true);
+            return MemberInitExpression.ReduceListInit(
+                NewExpression,
+                Initializers,
+                keepOnStack: true
+            );
         }
 
         /// <summary>
@@ -82,7 +89,10 @@ namespace System.Linq.Expressions
         /// <param name="newExpression">The <see cref="NewExpression"/> property of the result.</param>
         /// <param name="initializers">The <see cref="Initializers"/> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public ListInitExpression Update(NewExpression newExpression, IEnumerable<ElementInit> initializers)
+        public ListInitExpression Update(
+            NewExpression newExpression,
+            IEnumerable<ElementInit> initializers
+        )
         {
             if (newExpression == NewExpression && initializers != null)
             {
@@ -106,7 +116,10 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="ListInitExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.ListInit"/> and the <see cref="ListInitExpression.NewExpression"/> property set to the specified value.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
         [RequiresDynamicCode(GenericMethodRequiresDynamicCode)]
-        public static ListInitExpression ListInit(NewExpression newExpression, params Expression[] initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            params Expression[] initializers
+        )
         {
             return ListInit(newExpression, initializers as IEnumerable<Expression>);
         }
@@ -119,7 +132,10 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="ListInitExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.ListInit"/> and the <see cref="ListInitExpression.NewExpression"/> property set to the specified value.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
         [RequiresDynamicCode(GenericMethodRequiresDynamicCode)]
-        public static ListInitExpression ListInit(NewExpression newExpression, IEnumerable<Expression> initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            IEnumerable<Expression> initializers
+        )
         {
             ArgumentNullException.ThrowIfNull(newExpression);
             ArgumentNullException.ThrowIfNull(initializers);
@@ -130,7 +146,13 @@ namespace System.Linq.Expressions
                 return new ListInitExpression(newExpression, ReadOnlyCollection<ElementInit>.Empty);
             }
 
-            MethodInfo? addMethod = FindMethod(newExpression.Type, "Add", null, new Expression[] { initializerlist[0] }, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo? addMethod = FindMethod(
+                newExpression.Type,
+                "Add",
+                null,
+                new Expression[] { initializerlist[0] },
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
             return ListInit(newExpression, addMethod, initializerlist);
         }
 
@@ -143,7 +165,11 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="ListInitExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.ListInit"/> and the <see cref="ListInitExpression.NewExpression"/> property set to the specified value.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
         [RequiresDynamicCode(GenericMethodRequiresDynamicCode)]
-        public static ListInitExpression ListInit(NewExpression newExpression, MethodInfo? addMethod, params Expression[] initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            MethodInfo? addMethod,
+            params Expression[] initializers
+        )
         {
             return ListInit(newExpression, addMethod, initializers as IEnumerable<Expression>);
         }
@@ -157,7 +183,11 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="ListInitExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.ListInit"/> and the <see cref="ListInitExpression.NewExpression"/> property set to the specified value.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
         [RequiresDynamicCode(GenericMethodRequiresDynamicCode)]
-        public static ListInitExpression ListInit(NewExpression newExpression, MethodInfo? addMethod, IEnumerable<Expression> initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            MethodInfo? addMethod,
+            IEnumerable<Expression> initializers
+        )
         {
             if (addMethod == null)
             {
@@ -188,7 +218,10 @@ namespace System.Linq.Expressions
         /// The <see cref="Type"/> property of <paramref name="newExpression"/> must represent a type that implements <see cref="Collections.IEnumerable"/>.
         /// The <see cref="Type"/> property of the resulting <see cref="ListInitExpression"/> is equal to <paramref name="newExpression"/>.Type.
         /// </remarks>
-        public static ListInitExpression ListInit(NewExpression newExpression, params ElementInit[] initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            params ElementInit[] initializers
+        )
         {
             return ListInit(newExpression, (IEnumerable<ElementInit>)initializers);
         }
@@ -203,7 +236,10 @@ namespace System.Linq.Expressions
         /// The <see cref="Type"/> property of <paramref name="newExpression"/> must represent a type that implements <see cref="Collections.IEnumerable"/>.
         /// The <see cref="Type"/> property of the resulting <see cref="ListInitExpression"/> is equal to <paramref name="newExpression"/>.Type.
         /// </remarks>
-        public static ListInitExpression ListInit(NewExpression newExpression, IEnumerable<ElementInit> initializers)
+        public static ListInitExpression ListInit(
+            NewExpression newExpression,
+            IEnumerable<ElementInit> initializers
+        )
         {
             ArgumentNullException.ThrowIfNull(newExpression);
             ArgumentNullException.ThrowIfNull(initializers);

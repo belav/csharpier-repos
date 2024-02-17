@@ -8,7 +8,8 @@ namespace Wasm.Build.Tests;
 
 public class RunCommand : DotNetCommand
 {
-    public RunCommand(BuildEnvironment buildEnv, ITestOutputHelper _testOutput, string label="") : base(buildEnv, _testOutput, false, label)
+    public RunCommand(BuildEnvironment buildEnv, ITestOutputHelper _testOutput, string label = "")
+        : base(buildEnv, _testOutput, false, label)
     {
         WithEnvironmentVariables(buildEnv.EnvVars);
         WithEnvironmentVariable("DOTNET_ROOT", Path.GetDirectoryName(buildEnv.DotNet)!);

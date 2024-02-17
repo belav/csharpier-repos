@@ -29,15 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseCompoundCoalesceAssignmentDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId,
-                   EnforceOnBuildValues.UseCoalesceCompoundAssignment,
-                   CodeStyleOptions2.PreferCompoundAssignment,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_compound_assignment), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId,
+                EnforceOnBuildValues.UseCoalesceCompoundAssignment,
+                CodeStyleOptions2.PreferCompoundAssignment,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_compound_assignment),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -46,7 +50,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                 if (context.Compilation.LanguageVersion() < LanguageVersion.CSharp8)
                     return;
 
-                context.RegisterSyntaxNodeAction(AnalyzeCoalesceExpression, SyntaxKind.CoalesceExpression);
+                context.RegisterSyntaxNodeAction(
+                    AnalyzeCoalesceExpression,
+                    SyntaxKind.CoalesceExpression
+                );
                 context.RegisterSyntaxNodeAction(AnalyzeIfStatement, SyntaxKind.IfStatement);
             });
         }
@@ -85,31 +92,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             // Syntactically looks promising.  But we can only safely do this if 'expr'
             // is side-effect-free since we will be changing the number of times it is
             // executed from twice to once.
-            if (!UseCompoundAssignmentUtilities.IsSideEffectFree(
-                    syntaxFacts, coalesceLeft, semanticModel, cancellationToken))
+            if (
+                !UseCompoundAssignmentUtilities.IsSideEffectFree(
+                    syntaxFacts,
+                    coalesceLeft,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
             // Good match.
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                coalesceExpression.OperatorToken.GetLocation(),
-                option.Notification,
-                additionalLocations: ImmutableArray.Create(coalesceExpression.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    coalesceExpression.OperatorToken.GetLocation(),
+                    option.Notification,
+                    additionalLocations: ImmutableArray.Create(coalesceExpression.GetLocation()),
+                    properties: null
+                )
+            );
         }
 
         public static bool GetWhenTrueAssignment(
             IfStatementSyntax ifStatement,
             [NotNullWhen(true)] out StatementSyntax? whenTrue,
-            [NotNullWhen(true)] out AssignmentExpressionSyntax? assignment)
+            [NotNullWhen(true)] out AssignmentExpressionSyntax? assignment
+        )
         {
             whenTrue = ifStatement.Statement is BlockSyntax block
-                ? block.Statements.Count == 1 ? block.Statements[0] : null
+                ? block.Statements.Count == 1
+                    ? block.Statements[0]
+                    : null
                 : ifStatement.Statement;
 
-            assignment = whenTrue is ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax(SyntaxKind.SimpleAssignmentExpression) assignmentTemp }
+            assignment = whenTrue
+                is ExpressionStatementSyntax
+                {
+                    Expression: AssignmentExpressionSyntax
+                    (SyntaxKind.SimpleAssignmentExpression) assignmentTemp
+                }
                 ? assignmentTemp
                 : null;
 
@@ -135,7 +159,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             if (!GetWhenTrueAssignment(ifStatement, out var whenTrue, out var assignment))
                 return;
 
-            if (!IsReferenceEqualsNullCheck(semanticModel, ifStatement.Condition, cancellationToken, out var testedExpression))
+            if (
+                !IsReferenceEqualsNullCheck(
+                    semanticModel,
+                    ifStatement.Condition,
+                    cancellationToken,
+                    out var testedExpression
+                )
+            )
                 return;
 
             // have    if (x == null) x = y;
@@ -147,8 +178,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             // Syntactically looks promising.  But we can only safely do this if 'expr'
             // is side-effect-free since we will be changing the number of times it is
             // executed from twice to once.
-            if (!UseCompoundAssignmentUtilities.IsSideEffectFree(
-                    syntaxFacts, testedExpression, semanticModel, cancellationToken))
+            if (
+                !UseCompoundAssignmentUtilities.IsSideEffectFree(
+                    syntaxFacts,
+                    testedExpression,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
@@ -156,56 +193,98 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             // Don't want to offer anything if our if-statement body has any conditional directives in it.  That
             // means there's some other code that may run under some other conditions, that we do not want to now
             // run conditionally outside of the 'if' statement itself.
-            if (whenTrue.GetLeadingTrivia().Any(static t => t.GetStructure() is ConditionalDirectiveTriviaSyntax))
+            if (
+                whenTrue
+                    .GetLeadingTrivia()
+                    .Any(static t => t.GetStructure() is ConditionalDirectiveTriviaSyntax)
+            )
                 return;
 
             // pointers cannot use ??=
-            if (semanticModel.GetTypeInfo(testedExpression, cancellationToken).Type is IPointerTypeSymbol or IFunctionPointerTypeSymbol)
+            if (
+                semanticModel.GetTypeInfo(testedExpression, cancellationToken).Type
+                is IPointerTypeSymbol
+                    or IFunctionPointerTypeSymbol
+            )
                 return;
 
             // Good match.
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                ifStatement.IfKeyword.GetLocation(),
-                option.Notification,
-                additionalLocations: ImmutableArray.Create(ifStatement.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    ifStatement.IfKeyword.GetLocation(),
+                    option.Notification,
+                    additionalLocations: ImmutableArray.Create(ifStatement.GetLocation()),
+                    properties: null
+                )
+            );
         }
 
         private bool IsReferenceEqualsNullCheck(
             SemanticModel semanticModel,
             ExpressionSyntax condition,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out ExpressionSyntax? testedExpression)
+            [NotNullWhen(true)] out ExpressionSyntax? testedExpression
+        )
         {
             testedExpression = null;
-            if (condition is BinaryExpressionSyntax(SyntaxKind.EqualsExpression) { Right: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression) } binaryExpression)
+            if (
+                condition is BinaryExpressionSyntax
+                (SyntaxKind.EqualsExpression)
+                {
+                    Right: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
+                } binaryExpression
+            )
             {
                 // Ensure that if we are using `==` that it's not an overloaded operator.  One known exception is
                 // System.String.  Even though `==` is overloaded, it has the same semantics as ReferenceEquals(null) so
                 // it's safe to convert.
-                var symbol = semanticModel.GetSymbolInfo(binaryExpression, cancellationToken).Symbol;
-                if (symbol is null || !symbol.IsUserDefinedOperator() || symbol.ContainingType.SpecialType == SpecialType.System_String)
+                var symbol = semanticModel
+                    .GetSymbolInfo(binaryExpression, cancellationToken)
+                    .Symbol;
+                if (
+                    symbol is null
+                    || !symbol.IsUserDefinedOperator()
+                    || symbol.ContainingType.SpecialType == SpecialType.System_String
+                )
                     testedExpression = binaryExpression.Left;
             }
-            else if (condition is IsPatternExpressionSyntax { Pattern: ConstantPatternSyntax { Expression: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression) } } isPattern)
+            else if (
+                condition is IsPatternExpressionSyntax
+                {
+                    Pattern: ConstantPatternSyntax
+                    {
+                        Expression: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
+                    }
+                } isPattern
+            )
             {
                 // x is null.  always a valid null check.
                 testedExpression = isPattern.Expression;
             }
-            else if (condition is InvocationExpressionSyntax { ArgumentList.Arguments.Count: 2 } invocation)
+            else if (
+                condition is InvocationExpressionSyntax
+                {
+                    ArgumentList.Arguments.Count: 2
+                } invocation
+            )
             {
                 var arg0 = invocation.ArgumentList.Arguments[0].Expression;
                 var arg1 = invocation.ArgumentList.Arguments[1].Expression;
 
-                if (arg0.Kind() == SyntaxKind.NullLiteralExpression ||
-                    arg1.Kind() == SyntaxKind.NullLiteralExpression)
+                if (
+                    arg0.Kind() == SyntaxKind.NullLiteralExpression
+                    || arg1.Kind() == SyntaxKind.NullLiteralExpression
+                )
                 {
                     var symbol = semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol;
-                    if (symbol?.Name == nameof(ReferenceEquals) &&
-                        symbol.ContainingType?.SpecialType == SpecialType.System_Object)
+                    if (
+                        symbol?.Name == nameof(ReferenceEquals)
+                        && symbol.ContainingType?.SpecialType == SpecialType.System_Object
+                    )
                     {
-                        testedExpression = arg0.Kind() == SyntaxKind.NullLiteralExpression ? arg1 : arg0;
+                        testedExpression =
+                            arg0.Kind() == SyntaxKind.NullLiteralExpression ? arg1 : arg0;
                     }
                 }
             }

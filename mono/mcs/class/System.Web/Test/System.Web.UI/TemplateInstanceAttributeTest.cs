@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,29 +28,41 @@
 
 
 using System;
+using System.Collections;
 using System.IO;
 using System.Web.UI;
 using NUnit.Framework;
-using System.Collections;
 
 namespace MonoTests.System.Web.UI
 {
-	[TestFixture]
-	public class TemplateInstanceAttributeTest
-	{
-		[Test]
-		public void IsDefaultAttributeTest () {
-			Assert.IsTrue (TemplateInstanceAttribute.Multiple.IsDefaultAttribute (), "#01");
-			Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple).IsDefaultAttribute (), "#02");
-		}
+    [TestFixture]
+    public class TemplateInstanceAttributeTest
+    {
+        [Test]
+        public void IsDefaultAttributeTest()
+        {
+            Assert.IsTrue(TemplateInstanceAttribute.Multiple.IsDefaultAttribute(), "#01");
+            Assert.IsTrue(
+                new TemplateInstanceAttribute(TemplateInstance.Multiple).IsDefaultAttribute(),
+                "#02"
+            );
+        }
 
-		[Test]
-		public void EqualsTest () {
-			Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple)
-				.Equals (new TemplateInstanceAttribute (TemplateInstance.Multiple)), "#01");
-			Assert.IsFalse (new TemplateInstanceAttribute (TemplateInstance.Multiple)
-				.Equals (new TemplateInstanceAttribute (TemplateInstance.Single)), "#02");
-		}
-	}
+        [Test]
+        public void EqualsTest()
+        {
+            Assert.IsTrue(
+                new TemplateInstanceAttribute(TemplateInstance.Multiple).Equals(
+                    new TemplateInstanceAttribute(TemplateInstance.Multiple)
+                ),
+                "#01"
+            );
+            Assert.IsFalse(
+                new TemplateInstanceAttribute(TemplateInstance.Multiple).Equals(
+                    new TemplateInstanceAttribute(TemplateInstance.Single)
+                ),
+                "#02"
+            );
+        }
+    }
 }
-

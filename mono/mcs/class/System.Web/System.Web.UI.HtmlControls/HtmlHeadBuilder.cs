@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,26 +32,31 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class HtmlHeadBuilder : ControlBuilder
-	{
-		public override bool AllowWhitespaceLiterals ()
-		{
-			return false;
-		}
-		
-		public override Type GetChildControlType (string tagName, IDictionary attribs)
-		{
-			if (String.Compare (tagName, "title", StringComparison.OrdinalIgnoreCase) == 0)
-				return typeof (HtmlTitle);
-			if (String.Compare (tagName, "link", StringComparison.OrdinalIgnoreCase) == 0)
-				return typeof (HtmlLink);
-			if (String.Compare (tagName, "meta", StringComparison.OrdinalIgnoreCase) == 0)
-				return typeof (HtmlMeta);
-			return null;
-		}
-	}
-}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class HtmlHeadBuilder : ControlBuilder
+    {
+        public override bool AllowWhitespaceLiterals()
+        {
+            return false;
+        }
 
+        public override Type GetChildControlType(string tagName, IDictionary attribs)
+        {
+            if (String.Compare(tagName, "title", StringComparison.OrdinalIgnoreCase) == 0)
+                return typeof(HtmlTitle);
+            if (String.Compare(tagName, "link", StringComparison.OrdinalIgnoreCase) == 0)
+                return typeof(HtmlLink);
+            if (String.Compare(tagName, "meta", StringComparison.OrdinalIgnoreCase) == 0)
+                return typeof(HtmlMeta);
+            return null;
+        }
+    }
+}

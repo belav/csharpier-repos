@@ -7,92 +7,104 @@ using System.Web.Resources;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     [ToolboxBitmap(typeof(DynamicEntity), "DynamicEntity.bmp")]
-    public class DynamicEntity : Control {
+    public class DynamicEntity : Control
+    {
         private HttpContextBase _context;
 
         [
-        DefaultValue(DataBoundControlMode.ReadOnly),
-        Category("Behavior"),
-        ResourceDescription("DynamicEntity_Mode")
+            DefaultValue(DataBoundControlMode.ReadOnly),
+            Category("Behavior"),
+            ResourceDescription("DynamicEntity_Mode")
         ]
-        public DataBoundControlMode Mode {
-            get {
+        public DataBoundControlMode Mode
+        {
+            get
+            {
                 var value = ViewState["Mode"];
                 return value != null ? (DataBoundControlMode)value : DataBoundControlMode.ReadOnly;
             }
-            set {
-                ViewState["Mode"] = value;
-            }
+            set { ViewState["Mode"] = value; }
         }
 
         [
-        DefaultValue(""),
-        Category("Behavior"),
-        ResourceDescription("DynamicControlFieldCommon_UIHint")
+            DefaultValue(""),
+            Category("Behavior"),
+            ResourceDescription("DynamicControlFieldCommon_UIHint")
         ]
-        public string UIHint {
-            get {
-                return (string)ViewState["UIHint"] ?? String.Empty;
-            }
-            set {
-                ViewState["UIHint"] = value;
-            }
+        public string UIHint
+        {
+            get { return (string)ViewState["UIHint"] ?? String.Empty; }
+            set { ViewState["UIHint"] = value; }
         }
 
         [
-        Category("Behavior"),
-        DefaultValue(""),
-        Themeable(false),
-        ResourceDescription("DynamicControlFieldCommon_ValidationGroup")
+            Category("Behavior"),
+            DefaultValue(""),
+            Themeable(false),
+            ResourceDescription("DynamicControlFieldCommon_ValidationGroup")
         ]
-        public string ValidationGroup {
-            get {
-                return (string)ViewState["ValidationGroup"] ?? String.Empty;
-            }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+        public string ValidationGroup
+        {
+            get { return (string)ViewState["ValidationGroup"] ?? String.Empty; }
+            set { ViewState["ValidationGroup"] = value; }
         }
 
-        private new HttpContextBase Context {
-            get {
-                return _context ?? new HttpContextWrapper(HttpContext.Current);
-            }
+        private new HttpContextBase Context
+        {
+            get { return _context ?? new HttpContextWrapper(HttpContext.Current); }
         }
 
-        public DynamicEntity() {
-        }
+        public DynamicEntity() { }
 
         // for unit testing
         internal DynamicEntity(HttpContextBase context)
-            : this() {
+            : this()
+        {
             _context = context;
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected override void OnLoad(EventArgs e) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
+        protected override void OnLoad(EventArgs e)
+        {
             base.OnLoad(e);
 
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 return;
             }
 
             MetaTable table = MetaTableHelper.FindMetaTable(this, Context);
-            if (table == null) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    DynamicDataResources.DynamicEntity_ControlNeedsToExistInAContextSupportingDynamicData,
-                    this.ID));
+            if (table == null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.DynamicEntity_ControlNeedsToExistInAContextSupportingDynamicData,
+                        this.ID
+                    )
+                );
             }
 
             EntityTemplateFactory entityTemplateFactory = table.Model.EntityTemplateFactory;
-            EntityTemplateUserControl entityTemplateControl = entityTemplateFactory.CreateEntityTemplate(table, Mode, UIHint);
-            if (entityTemplateControl == null) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    DynamicDataResources.DynamicEntity_CantFindTemplate,
-                    table.Name,
-                    entityTemplateFactory.TemplateFolderVirtualPath));
+            EntityTemplateUserControl entityTemplateControl =
+                entityTemplateFactory.CreateEntityTemplate(table, Mode, UIHint);
+            if (entityTemplateControl == null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.DynamicEntity_CantFindTemplate,
+                        table.Name,
+                        entityTemplateFactory.TemplateFolderVirtualPath
+                    )
+                );
             }
 
             entityTemplateControl.Mode = Mode;
@@ -101,11 +113,14 @@ namespace System.Web.DynamicData {
             Controls.Add(entityTemplateControl);
         }
 
-        protected override void Render(HtmlTextWriter writer) {
-            if (DesignMode) {
+        protected override void Render(HtmlTextWriter writer)
+        {
+            if (DesignMode)
+            {
                 writer.Write("[" + GetType().Name + "]");
             }
-            else {
+            else
+            {
                 base.Render(writer);
             }
         }

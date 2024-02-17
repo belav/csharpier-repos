@@ -25,24 +25,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             public Span Span
             {
-                get
-                {
-                    return _span;
-                }
-
+                get { return _span; }
                 set
                 {
                     _span = value;
 
-                    TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(_textBuffer.CurrentSnapshot.GetFullSpan()));
+                    TagsChanged?.Invoke(
+                        this,
+                        new SnapshotSpanEventArgs(_textBuffer.CurrentSnapshot.GetFullSpan())
+                    );
                 }
             }
 
             public event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
-            public IEnumerable<ITagSpan<HighlightTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+            public IEnumerable<ITagSpan<HighlightTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            )
             {
-                var lines = _textBuffer.CurrentSnapshot.Lines.Where(line => line.Extent.OverlapsWith(_span));
+                var lines = _textBuffer.CurrentSnapshot.Lines.Where(line =>
+                    line.Extent.OverlapsWith(_span)
+                );
 
                 foreach (var line in lines)
                 {
@@ -51,7 +54,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
                     if (firstNonWhitespace.HasValue && lastNonWhitespace.HasValue)
                     {
-                        yield return new TagSpan<HighlightTag>(new SnapshotSpan(_textBuffer.CurrentSnapshot, Span.FromBounds(firstNonWhitespace.Value, lastNonWhitespace.Value + 1)), new HighlightTag());
+                        yield return new TagSpan<HighlightTag>(
+                            new SnapshotSpan(
+                                _textBuffer.CurrentSnapshot,
+                                Span.FromBounds(
+                                    firstNonWhitespace.Value,
+                                    lastNonWhitespace.Value + 1
+                                )
+                            ),
+                            new HighlightTag()
+                        );
                     }
                 }
             }

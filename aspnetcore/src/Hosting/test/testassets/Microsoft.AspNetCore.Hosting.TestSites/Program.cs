@@ -26,11 +26,13 @@ public static class Program
             .UseServer(new NoopServer())
             .UseConfiguration(config)
             .SuppressStatusMessages(true)
-            .ConfigureLogging((_, factory) =>
-            {
-                factory.AddConsole();
-                factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
-            })
+            .ConfigureLogging(
+                (_, factory) =>
+                {
+                    factory.AddConsole();
+                    factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
+                }
+            )
             .UseStartup("Microsoft.AspNetCore.Hosting.TestSites");
 
         if (config["STARTMECHANIC"] == "Run")
@@ -57,13 +59,14 @@ public static class Program
 
 public class NoopServer : IServer
 {
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public IFeatureCollection Features { get; } = new FeatureCollection();
 
-    public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+    public Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    )
     {
         return Task.CompletedTask;
     }

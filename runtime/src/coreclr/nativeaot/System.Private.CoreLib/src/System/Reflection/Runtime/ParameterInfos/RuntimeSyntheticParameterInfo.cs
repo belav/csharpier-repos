@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Reflection.Runtime.CustomAttributes;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 
@@ -17,7 +16,11 @@ namespace System.Reflection.Runtime.ParameterInfos
     // This class is used for the "Get/Set" methods on array types.
     internal sealed partial class RuntimeSyntheticParameterInfo : RuntimeParameterInfo
     {
-        private RuntimeSyntheticParameterInfo(MemberInfo memberInfo, int position, RuntimeTypeInfo parameterType)
+        private RuntimeSyntheticParameterInfo(
+            MemberInfo memberInfo,
+            int position,
+            RuntimeTypeInfo parameterType
+        )
             : base(memberInfo, position)
         {
             _parameterType = parameterType;
@@ -25,18 +28,12 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override ParameterAttributes Attributes
         {
-            get
-            {
-                return ParameterAttributes.None;
-            }
+            get { return ParameterAttributes.None; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Array.Empty<CustomAttributeData>();
-            }
+            get { return Array.Empty<CustomAttributeData>(); }
         }
 
         public sealed override object DefaultValue
@@ -78,10 +75,7 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override Type ParameterType
         {
-            get
-            {
-                return _parameterType.ToType();
-            }
+            get { return _parameterType.ToType(); }
         }
 
         public sealed override int MetadataToken

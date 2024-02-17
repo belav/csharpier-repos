@@ -25,7 +25,9 @@ public class RouteDataRequestCultureProvider : RequestCultureProvider
     public string UIRouteDataStringKey { get; set; } = "ui-culture";
 
     /// <inheritdoc />
-    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 

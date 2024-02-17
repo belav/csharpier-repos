@@ -22,7 +22,10 @@ internal sealed class BrowserFile : IBrowserFile
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(Size), $"Size must be a non-negative value. Value provided: {value}.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(Size),
+                    $"Size must be a non-negative value. Value provided: {value}."
+                );
             }
 
             _size = value;
@@ -33,11 +36,16 @@ internal sealed class BrowserFile : IBrowserFile
 
     public string? RelativePath { get; set; }
 
-    public Stream OpenReadStream(long maxAllowedSize = 512000, CancellationToken cancellationToken = default)
+    public Stream OpenReadStream(
+        long maxAllowedSize = 512000,
+        CancellationToken cancellationToken = default
+    )
     {
         if (Size > maxAllowedSize)
         {
-            throw new IOException($"Supplied file with size {Size} bytes exceeds the maximum of {maxAllowedSize} bytes.");
+            throw new IOException(
+                $"Supplied file with size {Size} bytes exceeds the maximum of {maxAllowedSize} bytes."
+            );
         }
 
         return Owner.OpenReadStream(this, maxAllowedSize, cancellationToken);

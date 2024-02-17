@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void DefaultOnlySwitch()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -40,7 +41,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
                 {
                   // Code size        8 (0x8)
                   .maxstack  2
@@ -48,14 +51,16 @@ public class Test
                   IL_0001:  dup
                   IL_0002:  call       ""void System.Console.Write(int)""
                   IL_0007:  ret
-                }");
+                }"
+            );
         }
 
         [WorkItem(542298, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542298")]
         [Fact]
         public void DefaultOnlySwitch_02()
         {
-            string text = @"using System;
+            string text =
+                @"using System;
 public class Test
 {
     public static void Main()
@@ -78,8 +83,9 @@ public class Test
 ";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main",
-@"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -97,7 +103,8 @@ public class Test
         [Fact]
         public void ConstantIntegerSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -116,7 +123,9 @@ public class Test
 }";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
                 {
                   // Code size        8 (0x8)
                   .maxstack  2
@@ -131,7 +140,8 @@ public class Test
         [Fact]
         public void ConstantNullSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -154,7 +164,9 @@ public class Test
 ";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
                 {
                   // Code size        8 (0x8)
                   .maxstack  2
@@ -169,7 +181,8 @@ public class Test
         [Fact]
         public void NonConstantSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -189,7 +202,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -212,7 +227,8 @@ public class Test
         [Fact]
         public void ConstantVariableInCaseLabel()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -238,7 +254,9 @@ public class Test
     const int kValue = 23;
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -264,7 +282,8 @@ public class Test
         [Fact]
         public void DefaultExpressionInLabel()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -281,7 +300,8 @@ class C
         [Fact]
         public void SwitchWith_NoMatchingCaseLabel_And_NoDefaultLabel()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -311,7 +331,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -342,7 +364,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch001()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -374,7 +397,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -395,7 +420,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch001_Debug()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -426,8 +452,14 @@ public class Test
     return 0;
   }
 }";
-            var compVerifier = CompileAndVerify(text, expectedOutput: "1", options: TestOptions.DebugExe);
-            compVerifier.VerifyIL("Test.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                expectedOutput: "1",
+                options: TestOptions.DebugExe
+            );
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -463,7 +495,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch002()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -491,7 +524,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  2
@@ -512,7 +547,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch003()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -541,7 +577,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -561,7 +599,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch004()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -588,7 +627,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -613,7 +654,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch005()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -639,7 +681,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -661,7 +705,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch006()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -703,7 +748,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "4");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -738,7 +785,8 @@ public class Test
         [Fact]
         public void NotDegenerateSwitch006()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -794,7 +842,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "4");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      206 (0xce)
   .maxstack  2
@@ -861,13 +911,15 @@ public class Test
   IL_00cb:  ret
   IL_00cc:  ldc.i4.0
   IL_00cd:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void DegenerateSwitch007()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -900,7 +952,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -927,7 +981,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch008()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -953,7 +1008,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -973,7 +1030,8 @@ public class Test
         [Fact]
         public void DegenerateSwitch009()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1001,7 +1059,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "1");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -1024,7 +1084,8 @@ public class Test
         [Fact]
         public void ByteTypeSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1065,8 +1126,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.DoByte",
-@"
+            compVerifier.VerifyIL(
+                "Test.DoByte",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -1110,7 +1172,8 @@ public class Test
         [Fact]
         public void LongTypeSwitchArgumentExpression()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Test
@@ -1152,8 +1215,9 @@ public class Test
 }
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "194");
-            compVerifier.VerifyIL("Test.DoLong",
-@"
+            compVerifier.VerifyIL(
+                "Test.DoLong",
+                @"
 {
   // Code size       62 (0x3e)
   .maxstack  3
@@ -1206,7 +1270,8 @@ public class Test
         [Fact]
         public void LongTypeSwitchArgumentExpressionOverflow()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Test
@@ -1241,8 +1306,9 @@ public class Test
 }
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "maxminonedefault");
-            compVerifier.VerifyIL("Test.DoLong",
-@"
+            compVerifier.VerifyIL(
+                "Test.DoLong",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  2
@@ -1271,7 +1337,8 @@ public class Test
         [Fact]
         public void ULongTypeSwitchArgumentExpression()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Test
@@ -1310,8 +1377,9 @@ public class Test
 }
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "42");
-            compVerifier.VerifyIL("Test.DoULong",
-@"
+            compVerifier.VerifyIL(
+                "Test.DoULong",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  3
@@ -1360,7 +1428,8 @@ public class Test
         [Fact]
         public void EnumTypeSwitchArgumentExpressionWithCasts()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1406,8 +1475,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.DoEnum",
-@"
+            compVerifier.VerifyIL(
+                "Test.DoEnum",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -1450,7 +1520,8 @@ public class Test
         [Fact]
         public void NullableEnumTypeSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1510,7 +1581,9 @@ public class Test
 }";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.DoEnum", @"
+            compVerifier.VerifyIL(
+                "Test.DoEnum",
+                @"
 {
   // Code size      109 (0x6d)
   .maxstack  2
@@ -1573,13 +1646,15 @@ public class Test
   IL_0066:  call       ""void System.Console.Write(int)""
   IL_006b:  ldloc.0
   IL_006c:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchSectionWithGotoNonSwitchLabel()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     public static int Main()
@@ -1603,8 +1678,9 @@ class Test
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
             compVerifier.VerifyDiagnostics();
-            compVerifier.VerifyIL("Test.Main",
-@"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -1626,7 +1702,8 @@ class Test
         [Fact]
         public void SwitchSectionWithGotoNonSwitchLabel_02()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     delegate void D();
 
@@ -1649,7 +1726,9 @@ class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -1672,7 +1751,8 @@ class Test
         [Fact]
         public void SwitchSectionWithReturnStatement()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1698,8 +1778,9 @@ public class Test
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.Main",
-@"{
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"{
   // Code size       40 (0x28)
   .maxstack  2
   .locals init (int V_0, //ret
@@ -1739,7 +1820,8 @@ public class Test
         [Fact]
         public void SwitchSectionWithReturnStatement_02()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1764,7 +1846,9 @@ public class Test
 }
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -1782,7 +1866,8 @@ public class Test
         [Fact]
         public void CaseLabelWithTypeCastToGoverningType()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1807,7 +1892,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -1825,7 +1912,8 @@ public class Test
         [Fact]
         public void SwitchSectionWithTryFinally()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Class1
 {
@@ -1861,7 +1949,9 @@ class Class1
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Class1.Main", @"
+            compVerifier.VerifyIL(
+                "Class1.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -1904,7 +1994,8 @@ class Class1
         [Fact]
         public void MultipleSwitchSectionsWithGotoCase()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -1963,7 +2054,8 @@ public class Test
         return(ret);
     }
 }";
-            string expectedOutput = @"case 5: 5
+            string expectedOutput =
+                @"case 5: 5
 case 2: 4
 case 0xff: 3
 case 0: 2
@@ -1971,8 +2063,9 @@ case 9999: 1
 Default: 0
 0";
             var compVerifier = CompileAndVerify(text, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Test.M",
-@"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      215 (0xd7)
   .maxstack  2
@@ -2072,7 +2165,8 @@ Default: 0
         [Fact]
         public void Switch_TestSwitchBuckets_01()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
   public static int Main(string [] args)
@@ -2108,7 +2202,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      107 (0x6b)
   .maxstack  2
@@ -2160,7 +2256,8 @@ public class Test
         [Fact]
         public void Switch_TestSwitchBuckets_02()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
   public static int Main(string [] args)
@@ -2195,7 +2292,9 @@ public class Test
   }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      101 (0x65)
   .maxstack  2
@@ -2250,7 +2349,8 @@ public class Test
         [Fact]
         public void MaxValueGotoCaseExpression()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2273,7 +2373,8 @@ class Program
         [Fact()]
         public void NullableAsSwitchExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class Program
 {
     static void Main()
@@ -2307,7 +2408,9 @@ class Program
 }
 ";
             var verifier = CompileAndVerify(text, expectedOutput: "null 1");
-            verifier.VerifyIL("Program.Main", @"
+            verifier.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -2332,14 +2435,16 @@ class Program
   IL_0035:  newobj     ""sbyte?..ctor(sbyte)""
   IL_003a:  call       ""void Program.Goo(sbyte?)""
   IL_003f:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(543967, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543967")]
         [Fact()]
         public void NullableAsSwitchExpression_02()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class Program
 {
     static void Main()
@@ -2430,7 +2535,9 @@ class Program
 }
 ";
             var verifier = CompileAndVerify(text, expectedOutput: "null default 100 default ");
-            verifier.VerifyIL("Program.Goo", @"
+            verifier.VerifyIL(
+                "Program.Goo",
+                @"
 {
   // Code size      367 (0x16f)
   .maxstack  2
@@ -2556,13 +2663,15 @@ class Program
   IL_0164:  ldstr      ""FAIL""
   IL_0169:  call       ""void System.Console.Write(string)""
   IL_016e:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(7625, "https://github.com/dotnet/roslyn/issues/7625")]
         public void SwitchOnNullableInt64WithInt32Label()
         {
-            var text = @"public static class C
+            var text =
+                @"public static class C
 {
     public static bool F(long? x)
     {
@@ -2580,8 +2689,9 @@ class Program
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "True");
-            compVerifier.VerifyIL("C.F(long?)",
-@"{
+            compVerifier.VerifyIL(
+                "C.F(long?)",
+                @"{
   // Code size       24 (0x18)
   .maxstack  2
   IL_0000:  ldarga.s   V_0
@@ -2603,7 +2713,8 @@ class Program
         [Fact, WorkItem(7625, "https://github.com/dotnet/roslyn/issues/7625")]
         public void SwitchOnNullableWithNonConstant()
         {
-            var text = @"public static class C
+            var text =
+                @"public static class C
 {
     public static bool F(int? x)
     {
@@ -2625,14 +2736,17 @@ class Program
             compilation.VerifyDiagnostics(
                 // (8,18): error CS9135: A constant value of type 'int' is expected
                 //             case i:
-                Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "i").WithArguments("int").WithLocation(8, 18)
+                Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "i")
+                    .WithArguments("int")
+                    .WithLocation(8, 18)
             );
         }
 
         [Fact, WorkItem(7625, "https://github.com/dotnet/roslyn/issues/7625")]
         public void SwitchOnNullableWithNonCompatibleType()
         {
-            var text = @"public static class C
+            var text =
+                @"public static class C
 {
     public static bool F(int? x)
     {
@@ -2653,7 +2767,8 @@ class Program
 
             // (7,18): error CS0029: Cannot implicitly convert type 'System.DateTime' to 'int?'
             //             case default(System.DateTime):
-            var expected = Diagnostic(ErrorCode.ERR_NoImplicitConv, "default(System.DateTime)").WithArguments("System.DateTime", "int?");
+            var expected = Diagnostic(ErrorCode.ERR_NoImplicitConv, "default(System.DateTime)")
+                .WithArguments("System.DateTime", "int?");
 
             compilation.VerifyDiagnostics(expected);
         }
@@ -2661,7 +2776,8 @@ class Program
         [Fact]
         public void SwitchOnNullableInt64WithInt32LabelWithEnum()
         {
-            var text = @"public static class C
+            var text =
+                @"public static class C
 {
     public static bool F(long? x)
     {
@@ -2682,8 +2798,9 @@ class Program
     }
 }";
             var compVerifier = CompileAndVerify(text, expectedOutput: "True");
-            compVerifier.VerifyIL("C.F(long?)",
-@"{
+            compVerifier.VerifyIL(
+                "C.F(long?)",
+                @"{
   // Code size       24 (0x18)
   .maxstack  2
   IL_0000:  ldarga.s   V_0
@@ -2709,7 +2826,8 @@ class Program
         [Fact]
         public void StringTypeSwitchArgumentExpression()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -2740,11 +2858,14 @@ public class Test
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
 
             compVerifier.VerifyDiagnostics(
-            // (25,5): warning CS0162: Unreachable code detected
-            //     return 1;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "return"));
+                // (25,5): warning CS0162: Unreachable code detected
+                //     return 1;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return")
+            );
 
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -2773,7 +2894,8 @@ public class Test
         [Fact]
         public void StringSwitch_SwitchOnNull()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -2800,7 +2922,9 @@ public class Test
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
 
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  2
@@ -2839,7 +2963,8 @@ public class Test
         [WorkItem(546632, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546632")]
         public void StringSwitch_HashTableSwitch_01()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Test
 {
@@ -2896,10 +3021,16 @@ class Test
         Console.WriteLine(success);
     }
 }";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
-                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(), expectedOutput: "True");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
+                expectedOutput: "True"
+            );
 
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      365 (0x16d)
   .maxstack  3
@@ -3037,15 +3168,40 @@ class Test
 
             // verify that hash method is internal:
             var reference = compVerifier.Compilation.EmitToImageReference();
-            var comp = CSharpCompilation.Create("Name", references: new[] { reference }, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var comp = CSharpCompilation.Create(
+                "Name",
+                references: new[] { reference },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
-            var pid = ((NamedTypeSymbol)comp.GlobalNamespace.GetMembers().Single(s => s.Name.StartsWith("<PrivateImplementationDetails>", StringComparison.Ordinal)));
-            var member = pid.GetMembers(PrivateImplementationDetails.SynthesizedStringHashFunctionName).Single();
+            var pid = (
+                (NamedTypeSymbol)
+                    comp
+                        .GlobalNamespace.GetMembers()
+                        .Single(s =>
+                            s.Name.StartsWith(
+                                "<PrivateImplementationDetails>",
+                                StringComparison.Ordinal
+                            )
+                        )
+            );
+            var member = pid.GetMembers(
+                    PrivateImplementationDetails.SynthesizedStringHashFunctionName
+                )
+                .Single();
             Assert.Equal(Accessibility.Internal, member.DeclaredAccessibility);
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"), expectedOutput: "True");
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
+                expectedOutput: "True"
+            );
 
-            compVerifier.VerifyIL("Test.M", """
+            compVerifier.VerifyIL(
+                "Test.M",
+                """
 {
   // Code size      181 (0xb5)
   .maxstack  3
@@ -3149,7 +3305,8 @@ class Test
         [Fact]
         public void StringSwitch_HashTableSwitch_02()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Text;
 
@@ -3345,10 +3502,16 @@ class Test
         Console.Write(status);
     }
 }";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
-                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(), expectedOutput: "PASS");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
+                expectedOutput: "PASS"
+            );
 
-            compVerifier.VerifyIL("Test.Switcheroo", @"
+            compVerifier.VerifyIL(
+                "Test.Switcheroo",
+                @"
 {
   // Code size     1115 (0x45b)
   .maxstack  3
@@ -3670,9 +3833,15 @@ class Test
             // Verify string hash synthesized method for hash table switch
             VerifySynthesizedStringHashMethod(compVerifier, expected: true);
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"), expectedOutput: "PASS");
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE"),
+                expectedOutput: "PASS"
+            );
 
-            compVerifier.VerifyIL("Test.Switcheroo", """
+            compVerifier.VerifyIL(
+                "Test.Switcheroo",
+                """
 {
   // Code size      997 (0x3e5)
   .maxstack  3
@@ -3969,7 +4138,8 @@ class Test
   IL_03df:  call       "bool string.op_Equality(string, string)"
   IL_03e4:  ret
 }
-""");
+"""
+            );
 
             VerifySynthesizedStringHashMethod(compVerifier, expected: false);
         }
@@ -3978,7 +4148,8 @@ class Test
         [Fact]
         public void StringSwitch_HashTableSwitch_03()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Goo
@@ -4029,7 +4200,11 @@ class Goo
   }
 }         
 ";
-            var compVerifier = CompileAndVerify(text, expectedOutput: "1", parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+            var compVerifier = CompileAndVerify(
+                text,
+                expectedOutput: "1",
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+            );
             // Verify string hash synthesized method for hash table switch
             VerifySynthesizedStringHashMethod(compVerifier, expected: true);
 
@@ -4037,13 +4212,23 @@ class Goo
             VerifySynthesizedStringHashMethod(compVerifier, expected: false);
         }
 
-        private static void VerifySynthesizedStringHashMethod(CompilationVerifier compVerifier, bool expected)
+        private static void VerifySynthesizedStringHashMethod(
+            CompilationVerifier compVerifier,
+            bool expected
+        )
         {
-            compVerifier.VerifyMemberInIL("<PrivateImplementationDetails>." + PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected);
+            compVerifier.VerifyMemberInIL(
+                "<PrivateImplementationDetails>."
+                    + PrivateImplementationDetails.SynthesizedStringHashFunctionName
+                    + "(string)",
+                expected
+            );
 
             if (expected)
             {
-                compVerifier.VerifyIL("<PrivateImplementationDetails>." + PrivateImplementationDetails.SynthesizedStringHashFunctionName,
+                compVerifier.VerifyIL(
+                    "<PrivateImplementationDetails>."
+                        + PrivateImplementationDetails.SynthesizedStringHashFunctionName,
                     @"
 {
   // Code size       44 (0x2c)
@@ -4076,7 +4261,8 @@ class Goo
   IL_002a:  ldloc.0
   IL_002b:  ret
 }
-");
+"
+                );
             }
         }
 
@@ -4089,12 +4275,13 @@ class Goo
         [Fact()]
         public void ImplicitUserDefinedConversionToSwitchGoverningType_01()
         {
-            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of 
+            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of
             // the switch expression to one of the following possible governing types: sbyte, byte, short,
-            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if 
+            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if
             // more than one such implicit conversion exists, a compile-time error occurs.
 
-            var source = @"using System;
+            var source =
+                @"using System;
 public class Test
 {
     public static implicit operator int(Test val)
@@ -4129,12 +4316,13 @@ public class Test
         [Fact()]
         public void ImplicitUserDefinedConversionToSwitchGoverningType_02()
         {
-            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of 
+            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of
             // the switch expression to one of the following possible governing types: sbyte, byte, short,
-            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if 
+            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if
             // more than one such implicit conversion exists, a compile-time error occurs.
 
-            var text = @"
+            var text =
+                @"
 class X {}
 class Conv
 {
@@ -4170,12 +4358,13 @@ class Conv
         [Fact()]
         public void ImplicitUserDefinedConversionToSwitchGoverningType_03()
         {
-            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of 
+            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of
             // the switch expression to one of the following possible governing types: sbyte, byte, short,
-            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if 
+            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if
             // more than one such implicit conversion exists, a compile-time error occurs.
 
-            var text = @"
+            var text =
+                @"
 enum X { F = 0 }
 class Conv
 {
@@ -4219,12 +4408,13 @@ class Conv
         [Fact()]
         public void ImplicitUserDefinedConversionToSwitchGoverningType_04()
         {
-            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of 
+            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of
             // the switch expression to one of the following possible governing types: sbyte, byte, short,
-            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if 
+            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if
             // more than one such implicit conversion exists, a compile-time error occurs.
 
-            var text = @"
+            var text =
+                @"
 struct Conv
 {
     public static implicit operator int (Conv C)
@@ -4261,12 +4451,13 @@ struct Conv
         [Fact()]
         public void ImplicitUserDefinedConversionToSwitchGoverningType_06()
         {
-            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of 
+            // Exactly ONE user-defined implicit conversion (6.4) must exist from the type of
             // the switch expression to one of the following possible governing types: sbyte, byte, short,
-            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if 
+            // ushort, int, uint, long, ulong, char, string. If no such implicit conversion exists, or if
             // more than one such implicit conversion exists, a compile-time error occurs.
 
-            var text = @"
+            var text =
+                @"
 struct Conv
 {
     public static implicit operator int (Conv C)
@@ -4305,7 +4496,7 @@ struct Conv
         public void ImplicitUserDefinedConversionToSwitchGoverningType_11564_2_3()
         {
             var text =
-@"using System;
+                @"using System;
  
 struct A
 {
@@ -4342,7 +4533,7 @@ struct A
         public void ImplicitUserDefinedConversionToSwitchGoverningType_11564_2_4()
         {
             var text =
-@"using System;
+                @"using System;
  
 struct A
 {
@@ -4379,7 +4570,7 @@ struct A
         public void ImplicitUserDefinedConversionToSwitchGoverningType_11564_3_1()
         {
             var text =
-@"using System;
+                @"using System;
  
 struct A
 {
@@ -4422,7 +4613,7 @@ struct A
         public void ImplicitUserDefinedConversionToSwitchGoverningType_11564_3_3()
         {
             var text =
-@"using System;
+                @"using System;
  
 struct A
 {
@@ -4466,7 +4657,8 @@ struct A
         [Fact()]
         public void MissingCharsProperty()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -4511,13 +4703,16 @@ class Program
 ";
             var comp = CreateEmptyCompilation(
                 source: new[] { Parse(text) },
-                references: new[] { AacorlibRef });
+                references: new[] { AacorlibRef }
+            );
 
             // PEVerify:
             // Error: Assembly name contains leading spaces or path or extension.
             // Type load failed.
             var verifier = CompileAndVerify(comp, verify: Verification.FailsPEVerify);
-            verifier.VerifyIL("Program.Main", @"
+            verifier.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size      223 (0xdf)
   .maxstack  2
@@ -4588,7 +4783,8 @@ class Program
   IL_00d4:  ldstr      "" wxy ""
   IL_00d9:  stsfld     ""string Program.d""
   IL_00de:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(642186, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/642186")]
@@ -4598,91 +4794,192 @@ class Program
             var cases = new[]
             {
                 "ErrorCode.WRN_InvalidMainSig",
-                "ErrorCode.WRN_UnreferencedEvent", "ErrorCode.WRN_LowercaseEllSuffix", "ErrorCode.WRN_DuplicateUsing",
-                "ErrorCode.WRN_NewRequired", "ErrorCode.WRN_NewNotRequired", "ErrorCode.WRN_NewOrOverrideExpected",
-                "ErrorCode.WRN_UnreachableCode", "ErrorCode.WRN_UnreferencedLabel", "ErrorCode.WRN_UnreferencedVar",
-                "ErrorCode.WRN_UnreferencedField", "ErrorCode.WRN_IsAlwaysTrue", "ErrorCode.WRN_IsAlwaysFalse",
-                "ErrorCode.WRN_ByRefNonAgileField", "ErrorCode.WRN_OldWarning_UnsafeProp",
-                "ErrorCode.WRN_UnreferencedVarAssg", "ErrorCode.WRN_NegativeArrayIndex",
-                "ErrorCode.WRN_BadRefCompareLeft", "ErrorCode.WRN_BadRefCompareRight",
-                "ErrorCode.WRN_PatternIsAmbiguous", "ErrorCode.WRN_PatternStaticOrInaccessible",
-                "ErrorCode.WRN_PatternBadSignature", "ErrorCode.WRN_SequentialOnPartialClass",
-                "ErrorCode.WRN_MainCantBeGeneric", "ErrorCode.WRN_UnreferencedFieldAssg",
-                "ErrorCode.WRN_AmbiguousXMLReference", "ErrorCode.WRN_VolatileByRef",
-                "ErrorCode.WRN_IncrSwitchObsolete", "ErrorCode.WRN_UnreachableExpr",
-                "ErrorCode.WRN_SameFullNameThisNsAgg", "ErrorCode.WRN_SameFullNameThisAggAgg",
-                "ErrorCode.WRN_SameFullNameThisAggNs", "ErrorCode.WRN_GlobalAliasDefn",
-                "ErrorCode.WRN_UnexpectedPredefTypeLoc", "ErrorCode.WRN_AlwaysNull", "ErrorCode.WRN_CmpAlwaysFalse",
-                "ErrorCode.WRN_FinalizeMethod", "ErrorCode.WRN_AmbigLookupMeth", "ErrorCode.WRN_GotoCaseShouldConvert",
-                "ErrorCode.WRN_NubExprIsConstBool", "ErrorCode.WRN_ExplicitImplCollision",
-                "ErrorCode.WRN_FeatureDeprecated", "ErrorCode.WRN_DeprecatedSymbol",
-                "ErrorCode.WRN_DeprecatedSymbolStr", "ErrorCode.WRN_ExternMethodNoImplementation",
-                "ErrorCode.WRN_ProtectedInSealed", "ErrorCode.WRN_PossibleMistakenNullStatement",
-                "ErrorCode.WRN_UnassignedInternalField", "ErrorCode.WRN_VacuousIntegralComp",
-                "ErrorCode.WRN_AttributeLocationOnBadDeclaration", "ErrorCode.WRN_InvalidAttributeLocation",
-                "ErrorCode.WRN_EqualsWithoutGetHashCode", "ErrorCode.WRN_EqualityOpWithoutEquals",
-                "ErrorCode.WRN_EqualityOpWithoutGetHashCode", "ErrorCode.WRN_IncorrectBooleanAssg",
-                "ErrorCode.WRN_NonObsoleteOverridingObsolete", "ErrorCode.WRN_BitwiseOrSignExtend",
-                "ErrorCode.WRN_OldWarning_ProtectedInternal", "ErrorCode.WRN_OldWarning_AccessibleReadonly",
-                "ErrorCode.WRN_CoClassWithoutComImport", "ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter",
-                "ErrorCode.WRN_AssignmentToLockOrDispose", "ErrorCode.WRN_ObsoleteOverridingNonObsolete",
-                "ErrorCode.WRN_DebugFullNameTooLong", "ErrorCode.WRN_ExternCtorNoImplementation",
-                "ErrorCode.WRN_WarningDirective", "ErrorCode.WRN_UnreachableGeneralCatch",
-                "ErrorCode.WRN_UninitializedField", "ErrorCode.WRN_DeprecatedCollectionInitAddStr",
-                "ErrorCode.WRN_DeprecatedCollectionInitAdd", "ErrorCode.WRN_DefaultValueForUnconsumedLocation",
-                "ErrorCode.WRN_FeatureDeprecated2", "ErrorCode.WRN_FeatureDeprecated3",
-                "ErrorCode.WRN_FeatureDeprecated4", "ErrorCode.WRN_FeatureDeprecated5",
-                "ErrorCode.WRN_OldWarning_FeatureDefaultDeprecated", "ErrorCode.WRN_EmptySwitch",
-                "ErrorCode.WRN_XMLParseError", "ErrorCode.WRN_DuplicateParamTag", "ErrorCode.WRN_UnmatchedParamTag",
-                "ErrorCode.WRN_MissingParamTag", "ErrorCode.WRN_BadXMLRef", "ErrorCode.WRN_BadXMLRefParamType",
-                "ErrorCode.WRN_BadXMLRefReturnType", "ErrorCode.WRN_BadXMLRefSyntax",
-                "ErrorCode.WRN_UnprocessedXMLComment", "ErrorCode.WRN_FailedInclude", "ErrorCode.WRN_InvalidInclude",
-                "ErrorCode.WRN_MissingXMLComment", "ErrorCode.WRN_XMLParseIncludeError",
-                "ErrorCode.WRN_OldWarning_MultipleTypeDefs", "ErrorCode.WRN_OldWarning_DocFileGenAndIncr",
-                "ErrorCode.WRN_XMLParserNotFound", "ErrorCode.WRN_ALinkWarn", "ErrorCode.WRN_DeleteAutoResFailed",
-                "ErrorCode.WRN_CmdOptionConflictsSource", "ErrorCode.WRN_IllegalPragma",
-                "ErrorCode.WRN_IllegalPPWarning", "ErrorCode.WRN_BadRestoreNumber", "ErrorCode.WRN_NonECMAFeature",
-                "ErrorCode.WRN_ErrorOverride", "ErrorCode.WRN_OldWarning_ReservedIdentifier",
-                "ErrorCode.WRN_InvalidSearchPathDir", "ErrorCode.WRN_MissingTypeNested",
-                "ErrorCode.WRN_MissingTypeInSource", "ErrorCode.WRN_MissingTypeInAssembly",
-                "ErrorCode.WRN_MultiplePredefTypes", "ErrorCode.WRN_TooManyLinesForDebugger",
-                "ErrorCode.WRN_CallOnNonAgileField", "ErrorCode.WRN_BadWarningNumber", "ErrorCode.WRN_InvalidNumber",
-                "ErrorCode.WRN_FileNameTooLong", "ErrorCode.WRN_IllegalPPChecksum", "ErrorCode.WRN_EndOfPPLineExpected",
-                "ErrorCode.WRN_ConflictingChecksum", "ErrorCode.WRN_AssumedMatchThis",
-                "ErrorCode.WRN_UseSwitchInsteadOfAttribute", "ErrorCode.WRN_InvalidAssemblyName",
-                "ErrorCode.WRN_UnifyReferenceMajMin", "ErrorCode.WRN_UnifyReferenceBldRev",
-                "ErrorCode.WRN_DelegateNewMethBind", "ErrorCode.WRN_EmptyFileName",
-                "ErrorCode.WRN_DuplicateTypeParamTag", "ErrorCode.WRN_UnmatchedTypeParamTag",
-                "ErrorCode.WRN_MissingTypeParamTag", "ErrorCode.WRN_AssignmentToSelf", "ErrorCode.WRN_ComparisonToSelf",
-                "ErrorCode.WRN_DotOnDefault", "ErrorCode.WRN_BadXMLRefTypeVar", "ErrorCode.WRN_UnmatchedParamRefTag",
-                "ErrorCode.WRN_UnmatchedTypeParamRefTag", "ErrorCode.WRN_ReferencedAssemblyReferencesLinkedPIA",
-                "ErrorCode.WRN_TypeNotFoundForNoPIAWarning", "ErrorCode.WRN_CantHaveManifestForModule",
-                "ErrorCode.WRN_MultipleRuntimeImplementationMatches", "ErrorCode.WRN_MultipleRuntimeOverrideMatches",
-                "ErrorCode.WRN_DynamicDispatchToConditionalMethod", "ErrorCode.WRN_IsDynamicIsConfusing",
-                "ErrorCode.WRN_AsyncLacksAwaits", "ErrorCode.WRN_FileAlreadyIncluded", "ErrorCode.WRN_NoSources",
-                "ErrorCode.WRN_UseNewSwitch", "ErrorCode.WRN_NoConfigNotOnCommandLine",
-                "ErrorCode.WRN_DefineIdentifierRequired", "ErrorCode.WRN_BadUILang", "ErrorCode.WRN_CLS_NoVarArgs",
-                "ErrorCode.WRN_CLS_BadArgType", "ErrorCode.WRN_CLS_BadReturnType", "ErrorCode.WRN_CLS_BadFieldPropType",
-                "ErrorCode.WRN_CLS_BadUnicode", "ErrorCode.WRN_CLS_BadIdentifierCase",
-                "ErrorCode.WRN_CLS_OverloadRefOut", "ErrorCode.WRN_CLS_OverloadUnnamed",
-                "ErrorCode.WRN_CLS_BadIdentifier", "ErrorCode.WRN_CLS_BadBase", "ErrorCode.WRN_CLS_BadInterfaceMember",
-                "ErrorCode.WRN_CLS_NoAbstractMembers", "ErrorCode.WRN_CLS_NotOnModules",
-                "ErrorCode.WRN_CLS_ModuleMissingCLS", "ErrorCode.WRN_CLS_AssemblyNotCLS",
-                "ErrorCode.WRN_CLS_BadAttributeType", "ErrorCode.WRN_CLS_ArrayArgumentToAttribute",
-                "ErrorCode.WRN_CLS_NotOnModules2", "ErrorCode.WRN_CLS_IllegalTrueInFalse",
-                "ErrorCode.WRN_CLS_MeaninglessOnPrivateType", "ErrorCode.WRN_CLS_AssemblyNotCLS2",
-                "ErrorCode.WRN_CLS_MeaninglessOnParam", "ErrorCode.WRN_CLS_MeaninglessOnReturn",
-                "ErrorCode.WRN_CLS_BadTypeVar", "ErrorCode.WRN_CLS_VolatileField", "ErrorCode.WRN_CLS_BadInterface",
+                "ErrorCode.WRN_UnreferencedEvent",
+                "ErrorCode.WRN_LowercaseEllSuffix",
+                "ErrorCode.WRN_DuplicateUsing",
+                "ErrorCode.WRN_NewRequired",
+                "ErrorCode.WRN_NewNotRequired",
+                "ErrorCode.WRN_NewOrOverrideExpected",
+                "ErrorCode.WRN_UnreachableCode",
+                "ErrorCode.WRN_UnreferencedLabel",
+                "ErrorCode.WRN_UnreferencedVar",
+                "ErrorCode.WRN_UnreferencedField",
+                "ErrorCode.WRN_IsAlwaysTrue",
+                "ErrorCode.WRN_IsAlwaysFalse",
+                "ErrorCode.WRN_ByRefNonAgileField",
+                "ErrorCode.WRN_OldWarning_UnsafeProp",
+                "ErrorCode.WRN_UnreferencedVarAssg",
+                "ErrorCode.WRN_NegativeArrayIndex",
+                "ErrorCode.WRN_BadRefCompareLeft",
+                "ErrorCode.WRN_BadRefCompareRight",
+                "ErrorCode.WRN_PatternIsAmbiguous",
+                "ErrorCode.WRN_PatternStaticOrInaccessible",
+                "ErrorCode.WRN_PatternBadSignature",
+                "ErrorCode.WRN_SequentialOnPartialClass",
+                "ErrorCode.WRN_MainCantBeGeneric",
+                "ErrorCode.WRN_UnreferencedFieldAssg",
+                "ErrorCode.WRN_AmbiguousXMLReference",
+                "ErrorCode.WRN_VolatileByRef",
+                "ErrorCode.WRN_IncrSwitchObsolete",
+                "ErrorCode.WRN_UnreachableExpr",
+                "ErrorCode.WRN_SameFullNameThisNsAgg",
+                "ErrorCode.WRN_SameFullNameThisAggAgg",
+                "ErrorCode.WRN_SameFullNameThisAggNs",
+                "ErrorCode.WRN_GlobalAliasDefn",
+                "ErrorCode.WRN_UnexpectedPredefTypeLoc",
+                "ErrorCode.WRN_AlwaysNull",
+                "ErrorCode.WRN_CmpAlwaysFalse",
+                "ErrorCode.WRN_FinalizeMethod",
+                "ErrorCode.WRN_AmbigLookupMeth",
+                "ErrorCode.WRN_GotoCaseShouldConvert",
+                "ErrorCode.WRN_NubExprIsConstBool",
+                "ErrorCode.WRN_ExplicitImplCollision",
+                "ErrorCode.WRN_FeatureDeprecated",
+                "ErrorCode.WRN_DeprecatedSymbol",
+                "ErrorCode.WRN_DeprecatedSymbolStr",
+                "ErrorCode.WRN_ExternMethodNoImplementation",
+                "ErrorCode.WRN_ProtectedInSealed",
+                "ErrorCode.WRN_PossibleMistakenNullStatement",
+                "ErrorCode.WRN_UnassignedInternalField",
+                "ErrorCode.WRN_VacuousIntegralComp",
+                "ErrorCode.WRN_AttributeLocationOnBadDeclaration",
+                "ErrorCode.WRN_InvalidAttributeLocation",
+                "ErrorCode.WRN_EqualsWithoutGetHashCode",
+                "ErrorCode.WRN_EqualityOpWithoutEquals",
+                "ErrorCode.WRN_EqualityOpWithoutGetHashCode",
+                "ErrorCode.WRN_IncorrectBooleanAssg",
+                "ErrorCode.WRN_NonObsoleteOverridingObsolete",
+                "ErrorCode.WRN_BitwiseOrSignExtend",
+                "ErrorCode.WRN_OldWarning_ProtectedInternal",
+                "ErrorCode.WRN_OldWarning_AccessibleReadonly",
+                "ErrorCode.WRN_CoClassWithoutComImport",
+                "ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter",
+                "ErrorCode.WRN_AssignmentToLockOrDispose",
+                "ErrorCode.WRN_ObsoleteOverridingNonObsolete",
+                "ErrorCode.WRN_DebugFullNameTooLong",
+                "ErrorCode.WRN_ExternCtorNoImplementation",
+                "ErrorCode.WRN_WarningDirective",
+                "ErrorCode.WRN_UnreachableGeneralCatch",
+                "ErrorCode.WRN_UninitializedField",
+                "ErrorCode.WRN_DeprecatedCollectionInitAddStr",
+                "ErrorCode.WRN_DeprecatedCollectionInitAdd",
+                "ErrorCode.WRN_DefaultValueForUnconsumedLocation",
+                "ErrorCode.WRN_FeatureDeprecated2",
+                "ErrorCode.WRN_FeatureDeprecated3",
+                "ErrorCode.WRN_FeatureDeprecated4",
+                "ErrorCode.WRN_FeatureDeprecated5",
+                "ErrorCode.WRN_OldWarning_FeatureDefaultDeprecated",
+                "ErrorCode.WRN_EmptySwitch",
+                "ErrorCode.WRN_XMLParseError",
+                "ErrorCode.WRN_DuplicateParamTag",
+                "ErrorCode.WRN_UnmatchedParamTag",
+                "ErrorCode.WRN_MissingParamTag",
+                "ErrorCode.WRN_BadXMLRef",
+                "ErrorCode.WRN_BadXMLRefParamType",
+                "ErrorCode.WRN_BadXMLRefReturnType",
+                "ErrorCode.WRN_BadXMLRefSyntax",
+                "ErrorCode.WRN_UnprocessedXMLComment",
+                "ErrorCode.WRN_FailedInclude",
+                "ErrorCode.WRN_InvalidInclude",
+                "ErrorCode.WRN_MissingXMLComment",
+                "ErrorCode.WRN_XMLParseIncludeError",
+                "ErrorCode.WRN_OldWarning_MultipleTypeDefs",
+                "ErrorCode.WRN_OldWarning_DocFileGenAndIncr",
+                "ErrorCode.WRN_XMLParserNotFound",
+                "ErrorCode.WRN_ALinkWarn",
+                "ErrorCode.WRN_DeleteAutoResFailed",
+                "ErrorCode.WRN_CmdOptionConflictsSource",
+                "ErrorCode.WRN_IllegalPragma",
+                "ErrorCode.WRN_IllegalPPWarning",
+                "ErrorCode.WRN_BadRestoreNumber",
+                "ErrorCode.WRN_NonECMAFeature",
+                "ErrorCode.WRN_ErrorOverride",
+                "ErrorCode.WRN_OldWarning_ReservedIdentifier",
+                "ErrorCode.WRN_InvalidSearchPathDir",
+                "ErrorCode.WRN_MissingTypeNested",
+                "ErrorCode.WRN_MissingTypeInSource",
+                "ErrorCode.WRN_MissingTypeInAssembly",
+                "ErrorCode.WRN_MultiplePredefTypes",
+                "ErrorCode.WRN_TooManyLinesForDebugger",
+                "ErrorCode.WRN_CallOnNonAgileField",
+                "ErrorCode.WRN_BadWarningNumber",
+                "ErrorCode.WRN_InvalidNumber",
+                "ErrorCode.WRN_FileNameTooLong",
+                "ErrorCode.WRN_IllegalPPChecksum",
+                "ErrorCode.WRN_EndOfPPLineExpected",
+                "ErrorCode.WRN_ConflictingChecksum",
+                "ErrorCode.WRN_AssumedMatchThis",
+                "ErrorCode.WRN_UseSwitchInsteadOfAttribute",
+                "ErrorCode.WRN_InvalidAssemblyName",
+                "ErrorCode.WRN_UnifyReferenceMajMin",
+                "ErrorCode.WRN_UnifyReferenceBldRev",
+                "ErrorCode.WRN_DelegateNewMethBind",
+                "ErrorCode.WRN_EmptyFileName",
+                "ErrorCode.WRN_DuplicateTypeParamTag",
+                "ErrorCode.WRN_UnmatchedTypeParamTag",
+                "ErrorCode.WRN_MissingTypeParamTag",
+                "ErrorCode.WRN_AssignmentToSelf",
+                "ErrorCode.WRN_ComparisonToSelf",
+                "ErrorCode.WRN_DotOnDefault",
+                "ErrorCode.WRN_BadXMLRefTypeVar",
+                "ErrorCode.WRN_UnmatchedParamRefTag",
+                "ErrorCode.WRN_UnmatchedTypeParamRefTag",
+                "ErrorCode.WRN_ReferencedAssemblyReferencesLinkedPIA",
+                "ErrorCode.WRN_TypeNotFoundForNoPIAWarning",
+                "ErrorCode.WRN_CantHaveManifestForModule",
+                "ErrorCode.WRN_MultipleRuntimeImplementationMatches",
+                "ErrorCode.WRN_MultipleRuntimeOverrideMatches",
+                "ErrorCode.WRN_DynamicDispatchToConditionalMethod",
+                "ErrorCode.WRN_IsDynamicIsConfusing",
+                "ErrorCode.WRN_AsyncLacksAwaits",
+                "ErrorCode.WRN_FileAlreadyIncluded",
+                "ErrorCode.WRN_NoSources",
+                "ErrorCode.WRN_UseNewSwitch",
+                "ErrorCode.WRN_NoConfigNotOnCommandLine",
+                "ErrorCode.WRN_DefineIdentifierRequired",
+                "ErrorCode.WRN_BadUILang",
+                "ErrorCode.WRN_CLS_NoVarArgs",
+                "ErrorCode.WRN_CLS_BadArgType",
+                "ErrorCode.WRN_CLS_BadReturnType",
+                "ErrorCode.WRN_CLS_BadFieldPropType",
+                "ErrorCode.WRN_CLS_BadUnicode",
+                "ErrorCode.WRN_CLS_BadIdentifierCase",
+                "ErrorCode.WRN_CLS_OverloadRefOut",
+                "ErrorCode.WRN_CLS_OverloadUnnamed",
+                "ErrorCode.WRN_CLS_BadIdentifier",
+                "ErrorCode.WRN_CLS_BadBase",
+                "ErrorCode.WRN_CLS_BadInterfaceMember",
+                "ErrorCode.WRN_CLS_NoAbstractMembers",
+                "ErrorCode.WRN_CLS_NotOnModules",
+                "ErrorCode.WRN_CLS_ModuleMissingCLS",
+                "ErrorCode.WRN_CLS_AssemblyNotCLS",
+                "ErrorCode.WRN_CLS_BadAttributeType",
+                "ErrorCode.WRN_CLS_ArrayArgumentToAttribute",
+                "ErrorCode.WRN_CLS_NotOnModules2",
+                "ErrorCode.WRN_CLS_IllegalTrueInFalse",
+                "ErrorCode.WRN_CLS_MeaninglessOnPrivateType",
+                "ErrorCode.WRN_CLS_AssemblyNotCLS2",
+                "ErrorCode.WRN_CLS_MeaninglessOnParam",
+                "ErrorCode.WRN_CLS_MeaninglessOnReturn",
+                "ErrorCode.WRN_CLS_BadTypeVar",
+                "ErrorCode.WRN_CLS_VolatileField",
+                "ErrorCode.WRN_CLS_BadInterface",
                 "ErrorCode.WRN_UnobservedAwaitableExpression",
                 "ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation",
                 "ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation",
-                "ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation", "ErrorCode.WRN_UnknownOption",
-                "ErrorCode.WRN_MetadataNameTooLong", "ErrorCode.WRN_MainIgnored", "ErrorCode.WRN_DelaySignButNoKey",
-                "ErrorCode.WRN_InvalidVersionFormat", "ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName",
+                "ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation",
+                "ErrorCode.WRN_UnknownOption",
+                "ErrorCode.WRN_MetadataNameTooLong",
+                "ErrorCode.WRN_MainIgnored",
+                "ErrorCode.WRN_DelaySignButNoKey",
+                "ErrorCode.WRN_InvalidVersionFormat",
+                "ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName",
                 "ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName",
                 "ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath",
-                "ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden", "ErrorCode.WRN_UnimplementedCommandLineSwitch",
-                "ErrorCode.WRN_RefCultureMismatch", "ErrorCode.WRN_ConflictingMachineAssembly",
+                "ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden",
+                "ErrorCode.WRN_UnimplementedCommandLineSwitch",
+                "ErrorCode.WRN_RefCultureMismatch",
+                "ErrorCode.WRN_ConflictingMachineAssembly",
                 "ErrorCode.WRN_CA2000_DisposeObjectsBeforeLosingScope1",
                 "ErrorCode.WRN_CA2000_DisposeObjectsBeforeLosingScope2",
                 "ErrorCode.WRN_CA2202_DoNotDisposeObjectsMultipleTimes",
@@ -5989,7 +6286,8 @@ namespace ConsoleApplication24
 }
 """;
             var compVerifier = CompileAndVerify(text);
-            var codeForExpression = @"
+            var codeForExpression =
+                @"
 {
   // Code size     1893 (0x765)
   .maxstack  2
@@ -6559,7 +6857,8 @@ namespace ConsoleApplication24
   IL_0764:  ret
 }
 ";
-            var codeForSwitchStatement = @"
+            var codeForSwitchStatement =
+                @"
 {
   // Code size     1889 (0x761)
   .maxstack  2
@@ -7125,14 +7424,21 @@ namespace ConsoleApplication24
   IL_0760:  ret
 }";
             compVerifier.VerifyIL("ConsoleApplication24.Program.IsWarning", codeForSwitchStatement);
-            compVerifier.VerifyIL("ConsoleApplication24.Program.IsWarning_IsExpression", codeForExpression);
-            compVerifier.VerifyIL("ConsoleApplication24.Program.IsWarning_SwitchExpression", codeForExpression);
+            compVerifier.VerifyIL(
+                "ConsoleApplication24.Program.IsWarning_IsExpression",
+                codeForExpression
+            );
+            compVerifier.VerifyIL(
+                "ConsoleApplication24.Program.IsWarning_SwitchExpression",
+                codeForExpression
+            );
         }
 
         [Fact]
         public void StringSwitch()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -7158,8 +7464,14 @@ public class Test
         }
     }
 }";
-            var compVerifier = CompileAndVerify(text, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(), expectedOutput: "3");
-            compVerifier.VerifyIL("Test.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
+                expectedOutput: "3"
+            );
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size      368 (0x170)
   .maxstack  2
@@ -7291,7 +7603,8 @@ public class Test
   IL_0169:  ldarg.0
   IL_016a:  newobj     ""System.ArgumentException..ctor(string)""
   IL_016f:  throw
-}");
+}"
+            );
         }
 
         #endregion
@@ -7301,7 +7614,8 @@ public class Test
         [Fact]
         public void DefiniteAssignmentOnAllControlPaths()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class SwitchTest
 {
     public static int Main()
@@ -7328,7 +7642,9 @@ class SwitchTest
 ";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("SwitchTest.Main", @"
+            compVerifier.VerifyIL(
+                "SwitchTest.Main",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -7361,7 +7677,8 @@ class SwitchTest
         [Fact]
         public void ComplexControlFlow_DefiniteAssignmentOnAllControlPaths()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class SwitchTest
 {
     public static int Main()
@@ -7414,8 +7731,9 @@ class SwitchTest
 ";
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
-            compVerifier.VerifyIL("SwitchTest.Main",
-@"{
+            compVerifier.VerifyIL(
+                "SwitchTest.Main",
+                @"{
   // Code size       78 (0x4e)
   .maxstack  2
   .locals init (int V_0, //n
@@ -7478,7 +7796,8 @@ class SwitchTest
         [Fact]
         public void ComplexControlFlow_NoAssignmentOnlyOnUnreachableControlPaths()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class SwitchTest
 {
     public static int Main()
@@ -7518,14 +7837,17 @@ class SwitchTest
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
 
             compVerifier.VerifyDiagnostics(
-            // (27,17): warning CS0162: Unreachable code detected
-            //                 break;
+                // (27,17): warning CS0162: Unreachable code detected
+                //                 break;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break"),
-            // (29,17): warning CS0162: Unreachable code detected
-            //                 break;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "break"));
+                // (29,17): warning CS0162: Unreachable code detected
+                //                 break;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "break")
+            );
 
-            compVerifier.VerifyIL("SwitchTest.Main", @"
+            compVerifier.VerifyIL(
+                "SwitchTest.Main",
+                @"
                 {
                     // Code size       20 (0x14)
                     .maxstack  1
@@ -7558,7 +7880,8 @@ class SwitchTest
         [Fact]
         public void CS0469_NoImplicitConversionWarning()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class A
 {
@@ -7578,11 +7901,15 @@ class A
             var compVerifier = CompileAndVerify(text);
 
             compVerifier.VerifyDiagnostics(
-            // (10,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'System.DayOfWeek'
-            //                 goto case 1; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'System.DayOfWeek'
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;").WithArguments("System.DayOfWeek"));
+                // (10,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'System.DayOfWeek'
+                //                 goto case 1; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'System.DayOfWeek'
+                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;")
+                    .WithArguments("System.DayOfWeek")
+            );
 
-            compVerifier.VerifyIL("A.Goo", @"
+            compVerifier.VerifyIL(
+                "A.Goo",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -7598,7 +7925,8 @@ class A
         [Fact]
         public void CS0162_UnreachableCodeInSwitchCase_01()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -7622,11 +7950,14 @@ public class Test
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
 
             compVerifier.VerifyDiagnostics(
-            // (14,8): warning CS0162: Unreachable code detected
-            // 			    ret = 1;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "ret"));
+                // (14,8): warning CS0162: Unreachable code detected
+                // 			    ret = 1;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "ret")
+            );
 
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -7647,7 +7978,8 @@ public class Test
         [Fact]
         public void CS0162_UnreachableCodeInSwitchCase_02()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -7674,9 +8006,11 @@ public class Test
                 // (11,17): warning CS0162: Unreachable code detected
                 //                 ret = 1;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "ret").WithLocation(11, 17)
-                );
+            );
 
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -7696,7 +8030,8 @@ public class Test
         [Fact]
         public void CS0162_UnreachableCodeInSwitchCase_03()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -7721,11 +8056,14 @@ public class Test
             var compVerifier = CompileAndVerify(text, expectedOutput: "0");
 
             compVerifier.VerifyDiagnostics(
-            // (19,5): warning CS0162: Unreachable code detected
-            //     return 1;       // unreachable code
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(19, 5));
+                // (19,5): warning CS0162: Unreachable code detected
+                //     return 1;       // unreachable code
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(19, 5)
+            );
 
-            compVerifier.VerifyIL("Test.M", @"
+            compVerifier.VerifyIL(
+                "Test.M",
+                @"
                 {
                     // Code size        2 (0x2)
                     .maxstack  1
@@ -7738,7 +8076,8 @@ public class Test
         [Fact]
         public void CS0162_UnreachableCodeInSwitchCase_04()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class Test
 {
@@ -7763,9 +8102,11 @@ public class Test
                 // (11,9): warning CS0162: Unreachable code detected
                 //         ret = 1;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "ret").WithLocation(11, 9)
-                );
+            );
 
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
                 {
                     // Code size       10 (0xa)
                     .maxstack  1
@@ -7783,7 +8124,8 @@ public class Test
         [Fact]
         public void CS1522_EmptySwitch()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
     public static int Main(string [] args)
@@ -7804,9 +8146,11 @@ public class Test
                 // (7,23): warning CS1522: Empty switch block
                 //         switch (true) {
                 Diagnostic(ErrorCode.WRN_EmptySwitch, "{").WithLocation(7, 23)
-                );
+            );
 
-            compVerifier.VerifyIL("Test.Main", @"
+            compVerifier.VerifyIL(
+                "Test.Main",
+                @"
                 {
                   // Code size        8 (0x8)
                   .maxstack  1
@@ -7822,7 +8166,8 @@ public class Test
         [Fact]
         public void DifferentStrategiesForDifferentSwitches()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Test
@@ -7849,9 +8194,15 @@ public class Test
     }
 }";
 
-            var comp = CreateCompilation(text, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
-                options: TestOptions.ReleaseExe.WithModuleName("MODULE"));
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            var comp = CreateCompilation(
+                text,
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE")
+            );
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      326 (0x146)
   .maxstack  2
@@ -7984,10 +8335,17 @@ public class Test
   IL_013e:  ldc.i4.s   10
   IL_0140:  call       ""void System.Console.Write(int)""
   IL_0145:  ret
-}");
+}"
+                );
 
-            comp = CreateCompilation(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"));
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            comp = CreateCompilation(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE")
+            );
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      161 (0xa1)
   .maxstack  2
@@ -8059,7 +8417,8 @@ public class Test
   IL_0099:  ldc.i4.s   10
   IL_009b:  call       ""void System.Console.Write(int)""
   IL_00a0:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(634404, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/634404")]
@@ -8067,7 +8426,8 @@ public class Test
         [Fact]
         public void LargeStringSwitchWithoutStringChars()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Test
@@ -8089,11 +8449,17 @@ public class Test
     }
 }";
 
-            var comp = CreateCompilation(text, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
-                options: TestOptions.ReleaseExe.WithModuleName("MODULE"));
+            var comp = CreateCompilation(
+                text,
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch(),
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE")
+            );
 
             // With special members available, we use a hashtable approach.
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      307 (0x133)
   .maxstack  2
@@ -8218,13 +8584,20 @@ public class Test
   IL_012b:  ldc.i4.s   9
   IL_012d:  call       ""void System.Console.Write(int)""
   IL_0132:  ret
-}");
+}"
+                );
 
-            comp = CreateCompilation(text, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+            comp = CreateCompilation(
+                text,
+                parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+            );
             comp.MakeMemberMissing(SpecialMember.System_String__Chars);
 
             // Can't use the hash version when String.Chars is unavailable.
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      186 (0xba)
   .maxstack  2
@@ -8297,11 +8670,18 @@ public class Test
   IL_00b2:  ldc.i4.s   9
   IL_00b4:  call       ""void System.Console.Write(int)""
   IL_00b9:  ret
-}");
+}"
+                );
 
-            comp = CreateCompilation(text, options: TestOptions.ReleaseExe.WithModuleName("MODULE"));
+            comp = CreateCompilation(
+                text,
+                options: TestOptions.ReleaseExe.WithModuleName("MODULE")
+            );
 
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      139 (0x8b)
   .maxstack  2
@@ -8365,13 +8745,17 @@ public class Test
   IL_0083:  ldc.i4.s   9
   IL_0085:  call       ""void System.Console.Write(int)""
   IL_008a:  ret
-}");
+}"
+                );
 
             comp = CreateCompilation(text);
             comp.MakeMemberMissing(SpecialMember.System_String__Chars);
 
             // Can't use the hash version or length-based version when String.Chars is unavailable.
-            CompileAndVerify(comp).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size      186 (0xba)
   .maxstack  2
@@ -8444,14 +8828,16 @@ public class Test
   IL_00b2:  ldc.i4.s   9
   IL_00b4:  call       ""void System.Console.Write(int)""
   IL_00b9:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(947580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/947580")]
         [Fact]
         public void Regress947580()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program {
@@ -8473,8 +8859,9 @@ class Program {
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "");
-            compVerifier.VerifyIL("Program.boo",
-@"{
+            compVerifier.VerifyIL(
+                "Program.boo",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  2
   .locals init (string V_0) //x
@@ -8499,7 +8886,8 @@ class Program {
         [Fact]
         public void Regress947580a()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program {
@@ -8521,8 +8909,9 @@ class Program {
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "");
-            compVerifier.VerifyIL("Program.boo",
-@"{
+            compVerifier.VerifyIL(
+                "Program.boo",
+                @"{
   // Code size       23 (0x17)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -8542,7 +8931,8 @@ class Program {
         [Fact]
         public void Regress1035228()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program {
@@ -8567,8 +8957,9 @@ class Program {
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "");
-            compVerifier.VerifyIL("Program.boo",
-@"{
+            compVerifier.VerifyIL(
+                "Program.boo",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -8592,7 +8983,8 @@ class Program {
         [Fact]
         public void Regress1035228a()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program {
@@ -8617,8 +9009,9 @@ class Program {
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "");
-            compVerifier.VerifyIL("Program.boo",
-@"{
+            compVerifier.VerifyIL(
+                "Program.boo",
+                @"{
   // Code size       26 (0x1a)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -8640,7 +9033,8 @@ class Program {
         [Fact]
         public void Regress4701()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace ConsoleApplication1
@@ -8675,8 +9069,9 @@ namespace ConsoleApplication1
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "In DEFAULT case");
-            compVerifier.VerifyIL("ConsoleApplication1.Program.SwtchTest",
-@"
+            compVerifier.VerifyIL(
+                "ConsoleApplication1.Program.SwtchTest",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  2
@@ -8721,7 +9116,8 @@ namespace ConsoleApplication1
         [Fact]
         public void Regress4701a()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace ConsoleApplication1
@@ -8754,8 +9150,9 @@ namespace ConsoleApplication1
 
 ";
             var compVerifier = CompileAndVerify(text, expectedOutput: "In DEFAULT case");
-            compVerifier.VerifyIL("ConsoleApplication1.Program.SwtchTest",
-@"
+            compVerifier.VerifyIL(
+                "ConsoleApplication1.Program.SwtchTest",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  1
@@ -8778,7 +9175,8 @@ namespace ConsoleApplication1
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void BoxInPatternSwitch_01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -8792,11 +9190,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "RemoveEmptyEntries");
-            compVerifier.VerifyIL("Program.Main",
-@"{
+                expectedOutput: "RemoveEmptyEntries"
+            );
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldc.i4.1
@@ -8805,11 +9206,14 @@ public class Program
   IL_000b:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "RemoveEmptyEntries");
-            compVerifier.VerifyIL("Program.Main",
-@"{
+                expectedOutput: "RemoveEmptyEntries"
+            );
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       26 (0x1a)
   .maxstack  1
   .locals init (object V_0, //o
@@ -8837,7 +9241,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void ExplicitNullablePatternSwitch_02()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -8859,11 +9264,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "null1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "null1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       33 (0x21)
   .maxstack  1
   IL_0000:  ldarga.s   V_0
@@ -8878,11 +9286,14 @@ public class Program
   IL_0020:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "null1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "null1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       49 (0x31)
   .maxstack  1
   .locals init (int V_0, //i
@@ -8917,7 +9328,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void BoxInPatternSwitch_04()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -8935,11 +9347,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -8948,11 +9363,14 @@ public class Program
   IL_000b:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       26 (0x1a)
   .maxstack  1
   .locals init (System.IComparable V_0, //i
@@ -8980,7 +9398,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void BoxInPatternSwitch_05()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -8999,11 +9418,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       17 (0x11)
   .maxstack  1
   .locals init (System.IComparable V_0) //i
@@ -9018,11 +9440,14 @@ public class Program
 }
 "
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       29 (0x1d)
   .maxstack  1
   .locals init (System.IComparable V_0, //i
@@ -9053,7 +9478,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void UnboxInPatternSwitch_06()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -9073,11 +9499,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       20 (0x14)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -9089,11 +9518,14 @@ public class Program
   IL_0013:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       34 (0x22)
   .maxstack  1
   .locals init (int V_0, //i
@@ -9124,7 +9556,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void UnboxInPatternSwitch_07()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -9146,11 +9579,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T>",
+                @"{
   // Code size       25 (0x19)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -9163,11 +9599,14 @@ public class Program
   IL_0018:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T>",
+                @"{
   // Code size       39 (0x27)
   .maxstack  1
   .locals init (T V_0, //i
@@ -9199,7 +9638,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void UnboxInPatternSwitch_08()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -9221,11 +9661,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T>",
+                @"{
   // Code size       25 (0x19)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -9238,11 +9681,14 @@ public class Program
   IL_0018:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T>",
+                @"{
   // Code size       39 (0x27)
   .maxstack  1
   .locals init (T V_0, //i
@@ -9274,7 +9720,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void UnoxInPatternSwitch_09()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -9296,11 +9743,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T, U>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T, U>",
+                @"{
   // Code size       35 (0x23)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -9315,11 +9765,14 @@ public class Program
   IL_0022:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "1");
-            compVerifier.VerifyIL("Program.M<T, U>",
-@"{
+                expectedOutput: "1"
+            );
+            compVerifier.VerifyIL(
+                "Program.M<T, U>",
+                @"{
   // Code size       49 (0x31)
   .maxstack  1
   .locals init (T V_0, //i
@@ -9353,7 +9806,8 @@ public class Program
         [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
         public void BoxInPatternIf_02()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Program
 {
@@ -9365,11 +9819,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "RemoveEmptyEntries");
-            compVerifier.VerifyIL("Program.Main",
-@"{
+                expectedOutput: "RemoveEmptyEntries"
+            );
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       14 (0xe)
   .maxstack  1
   .locals init (object V_0) //o
@@ -9381,11 +9838,14 @@ public class Program
   IL_000d:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "RemoveEmptyEntries");
-            compVerifier.VerifyIL("Program.Main",
-@"{
+                expectedOutput: "RemoveEmptyEntries"
+            );
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       23 (0x17)
   .maxstack  1
   .locals init (object V_0, //o
@@ -9412,7 +9872,7 @@ public class Program
         public void TestMatchWithTypeParameter_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9438,20 +9898,28 @@ class Program
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (13,21): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is T t ? t : default(T);
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("System.ValueType", "T", "7.0", "7.1").WithLocation(13, 21),
-                // (19,18): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //             case T t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("System.ValueType", "T", "7.0", "7.1").WithLocation(19, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (13,21): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is T t ? t : default(T);
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("System.ValueType", "T", "7.0", "7.1")
+                        .WithLocation(13, 21),
+                    // (19,18): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case T t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("System.ValueType", "T", "7.0", "7.1")
+                        .WithLocation(19, 18)
                 );
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "2300");
-            compVerifier.VerifyIL("Program.M1<T>",
-@"{
+                expectedOutput: "2300"
+            );
+            compVerifier.VerifyIL(
+                "Program.M1<T>",
+                @"{
   // Code size       34 (0x22)
   .maxstack  1
   .locals init (T V_0, //t
@@ -9472,12 +9940,15 @@ class Program
   IL_0021:  ret
 }"
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "2300");
-            compVerifier.VerifyIL("Program.M1<T>",
-@"{
+                expectedOutput: "2300"
+            );
+            compVerifier.VerifyIL(
+                "Program.M1<T>",
+                @"{
   // Code size       40 (0x28)
   .maxstack  1
   .locals init (T V_0, //t
@@ -9503,8 +9974,9 @@ class Program
   IL_0027:  ret
 }"
             );
-            compVerifier.VerifyIL("Program.M2<T>",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M2<T>",
+                @"{
   // Code size       48 (0x30)
   .maxstack  1
   .locals init (T V_0, //t
@@ -9544,7 +10016,7 @@ class Program
         public void TestMatchWithTypeParameter_02()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9569,20 +10041,28 @@ class Program
         }
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (13,21): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is int t ? t : default(int);
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int").WithArguments("T", "int", "7.0", "7.1").WithLocation(13, 21),
-                // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
-                //             case int t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int").WithArguments("T", "int", "7.0", "7.1").WithLocation(19, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (13,21): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is int t ? t : default(int);
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
+                        .WithArguments("T", "int", "7.0", "7.1")
+                        .WithLocation(13, 21),
+                    // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case int t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
+                        .WithArguments("T", "int", "7.0", "7.1")
+                        .WithLocation(19, 18)
                 );
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "2300");
-            compVerifier.VerifyIL("Program.M1<T>",
-@"{
+                expectedOutput: "2300"
+            );
+            compVerifier.VerifyIL(
+                "Program.M1<T>",
+                @"{
   // Code size       36 (0x24)
   .maxstack  1
   .locals init (int V_0) //t
@@ -9603,8 +10083,9 @@ class Program
 }
 "
             );
-            compVerifier.VerifyIL("Program.M2<T>",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M2<T>",
+                @"{
   // Code size       32 (0x20)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -9621,12 +10102,15 @@ class Program
 }
 "
             );
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "2300");
-            compVerifier.VerifyIL("Program.M1<T>",
-@"{
+                expectedOutput: "2300"
+            );
+            compVerifier.VerifyIL(
+                "Program.M1<T>",
+                @"{
   // Code size       42 (0x2a)
   .maxstack  1
   .locals init (int V_0, //t
@@ -9652,8 +10136,9 @@ class Program
 }
 "
             );
-            compVerifier.VerifyIL("Program.M2<T>",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M2<T>",
+                @"{
   // Code size       49 (0x31)
   .maxstack  1
   .locals init (int V_0, //t
@@ -9693,7 +10178,7 @@ class Program
         public void TestMatchWithTypeParameter_03()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9719,16 +10204,18 @@ class Program
     }
 }
 ";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "2300");
+                expectedOutput: "2300"
+            );
         }
 
         [Fact, WorkItem(16195, "https://github.com/dotnet/roslyn/issues/16195")]
         public void TestMatchWithTypeParameter_04()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9762,25 +10249,32 @@ class B : A
 }
 class X : B { }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is T t ? t : default(T);
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(14, 21),
-                // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //             case T t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(20, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is T t ? t : default(T);
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(14, 21),
+                    // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case T t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(20, 18)
                 );
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "XXBB");
+                expectedOutput: "XXBB"
+            );
         }
 
         [Fact, WorkItem(16195, "https://github.com/dotnet/roslyn/issues/16195")]
         public void TestMatchWithTypeParameter_05()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9817,25 +10311,32 @@ class B : A
 }
 class X : B { }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is T t ? t : default(T);
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(14, 21),
-                // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //             case T t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(20, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is T t ? t : default(T);
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(14, 21),
+                    // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case T t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(20, 18)
                 );
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.Regular7_1,
-                expectedOutput: "XXBB");
+                expectedOutput: "XXBB"
+            );
         }
 
         [Fact, WorkItem(16195, "https://github.com/dotnet/roslyn/issues/16195")]
         public void TestMatchWithTypeParameter_06()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9870,27 +10371,33 @@ struct B : I1
 {
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is T t;
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(13, 21),
-                // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //             case T t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(19, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is T t;
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(13, 21),
+                    // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case T t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(19, 18)
                 );
-            var compilation = CreateCompilation(source,
+            var compilation = CreateCompilation(
+                    source,
                     options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                    parseOptions: TestOptions.Regular7_1)
+                    parseOptions: TestOptions.Regular7_1
+                )
                 .VerifyDiagnostics();
-            var compVerifier = CompileAndVerify(compilation,
-                expectedOutput: "FalseFalseTrueTrue");
+            var compVerifier = CompileAndVerify(compilation, expectedOutput: "FalseFalseTrueTrue");
         }
 
         [Fact, WorkItem(16195, "https://github.com/dotnet/roslyn/issues/16195")]
         public void TestMatchWithTypeParameter_07()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -9922,20 +10429,26 @@ struct B
 {
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //         return o is T t;
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(13, 21),
-                // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                //             case T t:
-                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T").WithArguments("A", "T", "7.0", "7.1").WithLocation(19, 18)
+            CreateCompilation(source, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //         return o is T t;
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(13, 21),
+                    // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    //             case T t:
+                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                        .WithArguments("A", "T", "7.0", "7.1")
+                        .WithLocation(19, 18)
                 );
-            var compilation = CreateCompilation(source,
+            var compilation = CreateCompilation(
+                    source,
                     options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                    parseOptions: TestOptions.Regular7_1)
+                    parseOptions: TestOptions.Regular7_1
+                )
                 .VerifyDiagnostics();
-            var compVerifier = CompileAndVerify(compilation,
-                expectedOutput: "FalseFalseTrueTrue");
+            var compVerifier = CompileAndVerify(compilation, expectedOutput: "FalseFalseTrueTrue");
             compVerifier.VerifyDiagnostics();
         }
 
@@ -9944,7 +10457,7 @@ struct B
         public void TestIgnoreDynamicVsObjectAndTupleElementNames_01()
         {
             var source =
-@"public class Generic<T>
+                @"public class Generic<T>
 {
     public enum Color { Red=1, Blue=2 }
 }
@@ -9970,13 +10483,21 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (18,13): error CS0152: The switch statement contains multiple cases with the label value '1'
-                //             case Generic<dynamic>.Color.Red: // error: duplicate case
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case Generic<dynamic>.Color.Red:").WithArguments("1").WithLocation(18, 13),
-                // (19,13): error CS0152: The switch statement contains multiple cases with the label value '2'
-                //             case Generic<(int z, int w)>.Color.Blue: // error: duplicate case
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case Generic<(int z, int w)>.Color.Blue:").WithArguments("2").WithLocation(19, 13)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (18,13): error CS0152: The switch statement contains multiple cases with the label value '1'
+                    //             case Generic<dynamic>.Color.Red: // error: duplicate case
+                    Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case Generic<dynamic>.Color.Red:")
+                        .WithArguments("1")
+                        .WithLocation(18, 13),
+                    // (19,13): error CS0152: The switch statement contains multiple cases with the label value '2'
+                    //             case Generic<(int z, int w)>.Color.Blue: // error: duplicate case
+                    Diagnostic(
+                            ErrorCode.ERR_DuplicateCaseLabel,
+                            "case Generic<(int z, int w)>.Color.Blue:"
+                        )
+                        .WithArguments("2")
+                        .WithLocation(19, 13)
                 );
         }
 
@@ -9984,7 +10505,7 @@ class Program
         public void TestIgnoreDynamicVsObjectAndTupleElementNames_02()
         {
             var source =
-@"using System;
+                @"using System;
 public class Generic<T>
 {
     public enum Color { X0, X1, X2, Green, Blue, Red }
@@ -10023,10 +10544,13 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication))
+            var compilation = CreateCompilation(
+                    source,
+                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+                )
                 .VerifyDiagnostics();
-            var compVerifier = CompileAndVerify(compilation,
+            var compVerifier = CompileAndVerify(
+                compilation,
                 expectedOutput: @"False
 False
 True
@@ -10034,9 +10558,11 @@ True
 Generic<long>.Color.Red
 Generic<dynamic>.Color.Blue
 None
-Generic<object>.Color.Red");
-            compVerifier.VerifyIL("Program.M2",
-@"{
+Generic<object>.Color.Red"
+            );
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"{
   // Code size      108 (0x6c)
   .maxstack  2
   .locals init (Generic<long>.Color V_0, //c
@@ -10098,7 +10624,7 @@ Generic<object>.Color.Red");
         public void ExactPatternMatch()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -10115,13 +10641,15 @@ class C
         return (null, true);
     }
 }";
-            var compilation = CreateCompilation(source,
-                    options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication))
+            var compilation = CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication)
+                )
                 .VerifyDiagnostics();
-            var compVerifier = CompileAndVerify(compilation,
-                expectedOutput: @"True");
-            compVerifier.VerifyIL("C.Main",
-@"{
+            var compVerifier = CompileAndVerify(compilation, expectedOutput: @"True");
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"{
   // Code size       29 (0x1d)
   .maxstack  2
   .locals init (System.ValueTuple<string, bool> V_0) //v
@@ -10141,10 +10669,14 @@ class C
         }
 
         [WorkItem(19280, "https://github.com/dotnet/roslyn/issues/19280")]
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void ShareLikeKindedTemps_01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 public class Program
 {
     public static void Main()
@@ -10166,10 +10698,14 @@ public class Program
         }
     }
 }";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
-                expectedOutput: "");
-            compVerifier.VerifyIL("Program.M", @"
+                expectedOutput: ""
+            );
+            compVerifier.VerifyIL(
+                "Program.M",
+                @"
 {
   // Code size      120 (0x78)
   .maxstack  2
@@ -10240,10 +10776,14 @@ public class Program
 }"
             );
 
-            compVerifier = CompileAndVerify(source,
+            compVerifier = CompileAndVerify(
+                source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication).WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions
+                    .DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+                    .WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -10251,8 +10791,11 @@ public class Program
                 Assert.Null(type.GetMember(".cctor"));
             }
 
-            compVerifier.VerifyIL(qualifiedMethodName: "Program.M", sequencePoints: "Program.M", source: source,
-expectedIL: @"{
+            compVerifier.VerifyIL(
+                qualifiedMethodName: "Program.M",
+                sequencePoints: "Program.M",
+                source: source,
+                expectedIL: @"{
   // Code size      194 (0xc2)
   .maxstack  2
   .locals init (int V_0,
@@ -10397,7 +10940,7 @@ expectedIL: @"{
 }"
             );
             compVerifier.VerifyPdb(
-@"<symbols>
+                @"<symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
   </files>
@@ -10484,7 +11027,8 @@ expectedIL: @"{
       </scope>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
         }
 
         [Fact]
@@ -10492,7 +11036,7 @@ expectedIL: @"{
         public void TestSignificanceOfDynamicVersusObjectAndTupleNamesInUniquenessOfPatternMatchingTemps()
         {
             var source =
-@"using System;
+                @"using System;
 public class Generic<T,U>
 {
 }
@@ -10516,12 +11060,15 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication))
+            var compilation = CreateCompilation(
+                    source,
+                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+                )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "abc");
-            compVerifier.VerifyIL("Program.M2",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"{
   // Code size       98 (0x62)
   .maxstack  2
   .locals init (int V_0,
@@ -10589,7 +11136,7 @@ class Program
         public void OrderOfEvaluationOfTupleAsSwitchExpressionArgument()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -10607,7 +11154,9 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe)
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "Yep, all good!");
-            compVerifier.VerifyIL("Program.Main", @"
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"
     {
       // Code size      144 (0x90)
       .maxstack  4
@@ -10691,11 +11240,14 @@ class Program
       }
       IL_008f:  ret
     }
-");
+"
+            );
             compilation = CreateCompilation(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: "Yep, all good!");
-            compVerifier.VerifyIL("Program.Main", @"
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"
     {
       // Code size      122 (0x7a)
       .maxstack  4
@@ -10764,7 +11316,8 @@ class Program
       }
       IL_0079:  ret
     }
-");
+"
+            );
         }
 
         [Fact]
@@ -10772,7 +11325,7 @@ class Program
         public void PatternSwitchDagReduction_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -10799,10 +11352,16 @@ class Program
     };
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular9)
+            var compilation = CreateCompilation(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular9
+                )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "123333456");
-            compVerifier.VerifyIL("Program.M2", @"
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"
     {
       // Code size       76 (0x4c)
       .maxstack  2
@@ -10863,11 +11422,18 @@ class Program
       IL_004a:  ldloc.0
       IL_004b:  ret
     }
-");
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9)
+"
+            );
+            compilation = CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                )
                 .VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: "123333456");
-            compVerifier.VerifyIL("Program.M2", @"
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"
     {
       // Code size       64 (0x40)
       .maxstack  2
@@ -10920,7 +11486,8 @@ class Program
       IL_003e:  ldloc.0
       IL_003f:  ret
     }
-");
+"
+            );
         }
 
         #endregion "regression tests"
@@ -10930,7 +11497,8 @@ class Program
         [Fact]
         public void BalancedSwitchDispatch_Double()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     static void Main()
@@ -10995,7 +11563,7 @@ class C
 }
 ";
             var expectedOutput =
-@"1
+                @"1
 1
 2
 3
@@ -11024,11 +11592,15 @@ class C
 19
 20
 ";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseExe.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.RegularWithPatternCombinators,
-                expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M", @"
+                expectedOutput: expectedOutput
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
     {
       // Code size      478 (0x1de)
       .maxstack  2
@@ -11188,7 +11760,8 @@ class C
         [Fact]
         public void BalancedSwitchDispatch_Float()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     static void Main()
@@ -11253,7 +11826,7 @@ class C
 }
 ";
             var expectedOutput =
-@"1
+                @"1
 1
 2
 3
@@ -11282,11 +11855,15 @@ class C
 19
 20
 ";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseExe.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.RegularWithPatternCombinators,
-                expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M", @"
+                expectedOutput: expectedOutput
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
     {
       // Code size      374 (0x176)
       .maxstack  2
@@ -11446,7 +12023,8 @@ class C
         [Fact]
         public void BalancedSwitchDispatch_Decimal()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     static void Main()
@@ -11511,7 +12089,7 @@ class C
 }
 ";
             var expectedOutput =
-@"1
+                @"1
 1
 2
 3
@@ -11540,11 +12118,15 @@ class C
 19
 20
 ";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseExe.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.RegularWithPatternCombinators,
-                expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M", @"
+                expectedOutput: expectedOutput
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
     {
       // Code size      751 (0x2ef)
       .maxstack  6
@@ -11875,7 +12457,8 @@ class C
             // We do not currently detect that the set of values that we are dispatching on is a compact set,
             // which would enable us to use the IL switch instruction even though the input was expressed using
             // a set of relational comparisons.
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     static void Main()
@@ -11940,7 +12523,7 @@ class C
 }
 ";
             var expectedOutput =
-@"1
+                @"1
 1
 2
 3
@@ -11969,11 +12552,15 @@ class C
 19
 20
 ";
-            var compVerifier = CompileAndVerify(source,
+            var compVerifier = CompileAndVerify(
+                source,
                 options: TestOptions.ReleaseExe.WithOutputKind(OutputKind.ConsoleApplication),
                 parseOptions: TestOptions.RegularWithPatternCombinators,
-                expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M", @"
+                expectedOutput: expectedOutput
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
     {
       // Code size      243 (0xf3)
       .maxstack  2

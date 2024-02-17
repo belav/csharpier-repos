@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,113 +32,116 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestHyperLink : HyperLink
+    {
+        public string Tag
+        {
+            get { return base.TagName; }
+        }
 
-	public class TestHyperLink : HyperLink {
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		public string Tag {
-			get { return base.TagName; }
-		}
+        public string Render()
+        {
+            StringWriter sw = new StringWriter();
+            sw.NewLine = "\n";
+            HtmlTextWriter writer = new HtmlTextWriter(sw);
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
 
-		public StateBag StateBag {
-			get { return base.ViewState; }
-		}
+        public Style GetStyle()
+        {
+            return base.CreateControlStyle();
+        }
+    }
 
-		public string Render ()
-		{
-			StringWriter sw = new StringWriter ();
-			sw.NewLine = "\n";
-			HtmlTextWriter writer = new HtmlTextWriter (sw);
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
+    [TestFixture]
+    public class HyperLinkTest
+    {
+        private const string imageUrl = "http://www.mono-project.com/stylesheets/images.wiki.png";
 
-		public Style GetStyle ()
-		{
-			return base.CreateControlStyle ();
-		}
-	}
+        [Test]
+        public void Empty()
+        {
+            TestHyperLink hl = new TestHyperLink();
+            Assert.AreEqual(String.Empty, hl.ImageUrl, "ImageUrl");
+            Assert.AreEqual(String.Empty, hl.NavigateUrl, "NavigateUrl");
+            Assert.AreEqual(String.Empty, hl.Target, "Target");
+            Assert.AreEqual(String.Empty, hl.Text, "Text");
+            Assert.AreEqual("<a></a>", hl.Render(), "Empty");
+        }
 
-	[TestFixture]
-	public class HyperLinkTest {
+        [Test]
+        public void ImageUrlWithoutText()
+        {
+            string origHtml =
+                "<a><img src=\"http://www.mono-project.com/stylesheets/images.wiki.png\" alt=\"\" /></a>";
+            TestHyperLink hl = new TestHyperLink();
+            hl.ImageUrl = imageUrl;
+            Assert.AreEqual(imageUrl, hl.ImageUrl, "ImageUrl");
+            Assert.AreEqual(String.Empty, hl.NavigateUrl, "NavigateUrl");
+            Assert.AreEqual(String.Empty, hl.Target, "Target");
+            Assert.AreEqual(String.Empty, hl.Text, "Text");
+            // an empty alt attribute is begin added
 
-		private const string imageUrl = "http://www.mono-project.com/stylesheets/images.wiki.png";
+            string renderedHtml = hl.Render();
+            Assert.AreEqual(origHtml, renderedHtml, "Empty");
+        }
 
-		[Test]
-		public void Empty ()
-		{
-			TestHyperLink hl = new TestHyperLink ();
-			Assert.AreEqual (String.Empty, hl.ImageUrl, "ImageUrl");
-			Assert.AreEqual (String.Empty, hl.NavigateUrl, "NavigateUrl");
-			Assert.AreEqual (String.Empty, hl.Target, "Target");
-			Assert.AreEqual (String.Empty, hl.Text, "Text");
-			Assert.AreEqual ("<a></a>", hl.Render (), "Empty");
-		}
+        [Test]
+        public void ImageUrlWithoutText_ToolTip()
+        {
+            string origHtml =
+                "<a title=\"Some message\"><img title=\"Some message\" src=\"http://www.mono-project.com/stylesheets/images.wiki.png\" alt=\"\" /></a>";
+            TestHyperLink hl = new TestHyperLink();
+            hl.ImageUrl = imageUrl;
+            hl.ToolTip = "Some message";
 
-		[Test]
-		public void ImageUrlWithoutText ()
-		{
-			string origHtml = "<a><img src=\"http://www.mono-project.com/stylesheets/images.wiki.png\" alt=\"\" /></a>";
-			TestHyperLink hl = new TestHyperLink ();
-			hl.ImageUrl = imageUrl;
-			Assert.AreEqual (imageUrl, hl.ImageUrl, "ImageUrl");
-			Assert.AreEqual (String.Empty, hl.NavigateUrl, "NavigateUrl");
-			Assert.AreEqual (String.Empty, hl.Target, "Target");
-			Assert.AreEqual (String.Empty, hl.Text, "Text");
-			// an empty alt attribute is begin added
-			
-			string renderedHtml = hl.Render ();
-			Assert.AreEqual (origHtml, renderedHtml, "Empty");
-		}
+            Assert.AreEqual(imageUrl, hl.ImageUrl, "ImageUrl");
+            Assert.AreEqual(String.Empty, hl.NavigateUrl, "NavigateUrl");
+            Assert.AreEqual(String.Empty, hl.Target, "Target");
+            Assert.AreEqual(String.Empty, hl.Text, "Text");
+            // an empty alt attribute is begin added
 
-		[Test]
-		public void ImageUrlWithoutText_ToolTip ()
-		{
-			string origHtml = "<a title=\"Some message\"><img title=\"Some message\" src=\"http://www.mono-project.com/stylesheets/images.wiki.png\" alt=\"\" /></a>";
-			TestHyperLink hl = new TestHyperLink ();
-			hl.ImageUrl = imageUrl;
-			hl.ToolTip = "Some message";
+            string renderedHtml = hl.Render();
+            Assert.AreEqual(origHtml, renderedHtml, "Empty");
+        }
 
-			Assert.AreEqual (imageUrl, hl.ImageUrl, "ImageUrl");
-			Assert.AreEqual (String.Empty, hl.NavigateUrl, "NavigateUrl");
-			Assert.AreEqual (String.Empty, hl.Target, "Target");
-			Assert.AreEqual (String.Empty, hl.Text, "Text");
-			// an empty alt attribute is begin added
+        [Test]
+        public void NavigateUrl_NO_ResolveUrl()
+        {
+            TestHyperLink hl = new TestHyperLink();
+            hl.NavigateUrl = "~/index.html";
+            Assert.AreEqual(String.Empty, hl.ImageUrl, "ImageUrl");
+            Assert.AreEqual("~/index.html", hl.NavigateUrl, "NavigateUrl");
+            Assert.AreEqual(String.Empty, hl.Target, "Target");
+            Assert.AreEqual(String.Empty, hl.Text, "Text");
+            // Note: resolve only occurs inside a Page
+            Assert.AreEqual("<a href=\"~/index.html\"></a>", hl.Render(), "Resolve");
+        }
 
-			string renderedHtml = hl.Render ();
-			Assert.AreEqual (origHtml, renderedHtml, "Empty");
-		}
+        [Test]
+        public void ImageUrl_NO_ResolveUrl()
+        {
+            string origHtml = "<a><img src=\"~/ben.jpeg\" alt=\"\" /></a>";
+            TestHyperLink hl = new TestHyperLink();
+            hl.ImageUrl = "~/ben.jpeg";
+            Assert.AreEqual("~/ben.jpeg", hl.ImageUrl, "ImageUrl");
+            Assert.AreEqual(String.Empty, hl.NavigateUrl, "NavigateUrl");
+            Assert.AreEqual(String.Empty, hl.Target, "Target");
+            Assert.AreEqual(String.Empty, hl.Text, "Text");
+            // Note: resolve only occurs inside a Page
 
-		[Test]
-		public void NavigateUrl_NO_ResolveUrl ()
-		{
-			TestHyperLink hl = new TestHyperLink ();
-			hl.NavigateUrl = "~/index.html";
-			Assert.AreEqual (String.Empty, hl.ImageUrl, "ImageUrl");
-			Assert.AreEqual ("~/index.html", hl.NavigateUrl, "NavigateUrl");
-			Assert.AreEqual (String.Empty, hl.Target, "Target");
-			Assert.AreEqual (String.Empty, hl.Text, "Text");
-			// Note: resolve only occurs inside a Page
-			Assert.AreEqual ("<a href=\"~/index.html\"></a>", hl.Render (), "Resolve");
-		}
-
-		[Test]
-		public void ImageUrl_NO_ResolveUrl ()
-		{
-			string origHtml = "<a><img src=\"~/ben.jpeg\" alt=\"\" /></a>";
-			TestHyperLink hl = new TestHyperLink ();
-			hl.ImageUrl = "~/ben.jpeg";
-			Assert.AreEqual ("~/ben.jpeg", hl.ImageUrl, "ImageUrl");
-			Assert.AreEqual (String.Empty, hl.NavigateUrl, "NavigateUrl");
-			Assert.AreEqual (String.Empty, hl.Target, "Target");
-			Assert.AreEqual (String.Empty, hl.Text, "Text");
-			// Note: resolve only occurs inside a Page
-
-			string renderedHtml = hl.Render ();
-			Assert.AreEqual (origHtml, renderedHtml, "Resolve");
-		}
-	}
+            string renderedHtml = hl.Render();
+            Assert.AreEqual(origHtml, renderedHtml, "Resolve");
+        }
+    }
 }

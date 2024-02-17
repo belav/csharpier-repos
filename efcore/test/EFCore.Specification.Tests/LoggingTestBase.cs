@@ -9,53 +9,67 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class LoggingTestBase
 {
     [ConditionalFact]
-    public void Logs_context_initialization_default_options()
-        => Assert.Equal(ExpectedMessage(DefaultOptions), ActualMessage(CreateOptionsBuilder));
+    public void Logs_context_initialization_default_options() =>
+        Assert.Equal(ExpectedMessage(DefaultOptions), ActualMessage(CreateOptionsBuilder));
 
     [ConditionalFact]
-    public void Logs_context_initialization_no_tracking()
-        => Assert.Equal(
+    public void Logs_context_initialization_no_tracking() =>
+        Assert.Equal(
             ExpectedMessage("NoTracking " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)));
+            ActualMessage(s =>
+                CreateOptionsBuilder(s).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+            )
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_sensitive_data_logging()
-        => Assert.Equal(
+    public void Logs_context_initialization_sensitive_data_logging() =>
+        Assert.Equal(
             ExpectedMessage("SensitiveDataLoggingEnabled " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s).EnableSensitiveDataLogging()));
+            ActualMessage(s => CreateOptionsBuilder(s).EnableSensitiveDataLogging())
+        );
 
-    protected virtual string ExpectedMessage(string optionsFragment)
-        => CoreResources.LogContextInitialized(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-            ProductInfo.GetVersion(),
-            nameof(LoggingContext),
-            ProviderName,
-            ProviderVersion,
-            optionsFragment ?? "None").Trim();
+    protected virtual string ExpectedMessage(string optionsFragment) =>
+        CoreResources
+            .LogContextInitialized(new TestLogger<TestLoggingDefinitions>())
+            .GenerateMessage(
+                ProductInfo.GetVersion(),
+                nameof(LoggingContext),
+                ProviderName,
+                ProviderVersion,
+                optionsFragment ?? "None"
+            )
+            .Trim();
 
     [ConditionalFact]
     public virtual void InvalidIncludePathError_throws_by_default()
     {
-        using var context = new InvalidIncludePathErrorContext(CreateOptionsBuilder(new ServiceCollection()));
+        using var context = new InvalidIncludePathErrorContext(
+            CreateOptionsBuilder(new ServiceCollection())
+        );
 
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 CoreEventId.InvalidIncludePathError.ToString(),
-                CoreResources.LogInvalidIncludePath(CreateTestLogger())
+                CoreResources
+                    .LogInvalidIncludePath(CreateTestLogger())
                     .GenerateMessage("Wheels", "Wheels"),
-                "CoreEventId.InvalidIncludePathError"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Set<Animal>().Include("Wheels").Load()).Message);
+                "CoreEventId.InvalidIncludePathError"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Set<Animal>().Include("Wheels").Load()
+                )
+                .Message
+        );
     }
 
     protected class InvalidIncludePathErrorContext : DbContext
     {
         public InvalidIncludePathErrorContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options)
-        {
-        }
+            : base(optionsBuilder.Options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Animal>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Animal>();
     }
 
     protected class Animal
@@ -87,13 +101,16 @@ public abstract class LoggingTestBase
 
     protected abstract string ProviderVersion { get; }
 
-    protected virtual string DefaultOptions
-        => null;
+    protected virtual string DefaultOptions => null;
 
-    protected virtual string ActualMessage(Func<IServiceCollection, DbContextOptionsBuilder> optionsActions)
+    protected virtual string ActualMessage(
+        Func<IServiceCollection, DbContextOptionsBuilder> optionsActions
+    )
     {
         var loggerFactory = new ListLoggerFactory();
-        var optionsBuilder = optionsActions(new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory));
+        var optionsBuilder = optionsActions(
+            new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory)
+        );
 
         using (var context = new LoggingContext(optionsBuilder))
         {
@@ -106,8 +123,6 @@ public abstract class LoggingTestBase
     protected class LoggingContext : DbContext
     {
         public LoggingContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options)
-        {
-        }
+            : base(optionsBuilder.Options) { }
     }
 }

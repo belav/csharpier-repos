@@ -20,10 +20,13 @@ namespace System.IO.IsolatedStorage
             // Since we shipped that behavior as part of .NET 7 we can't change this now or upgraded apps wouldn't find their files anymore.
             // We need to look for an existing directory first before using the legacy Xamarin approach.
 
-            Environment.SpecialFolder specialFolder =
-            IsMachine(scope) ? Environment.SpecialFolder.CommonApplicationData : // e.g. /usr/share;
-            IsRoaming(scope) ? Environment.SpecialFolder.ApplicationData : // e.g. /data/user/0/{packageName}/files/.config;
-            Environment.SpecialFolder.LocalApplicationData; // e.g. /data/user/0/{packageName}/files;
+            Environment.SpecialFolder specialFolder = IsMachine(scope)
+                ? Environment.SpecialFolder.CommonApplicationData
+                : // e.g. /usr/share;
+                IsRoaming(scope)
+                    ? Environment.SpecialFolder.ApplicationData
+                    : // e.g. /data/user/0/{packageName}/files/.config;
+                    Environment.SpecialFolder.LocalApplicationData; // e.g. /data/user/0/{packageName}/files;
 
             string dataDirectory = Environment.GetFolderPath(specialFolder);
             dataDirectory = Path.Combine(dataDirectory, IsolatedStorageDirectoryName);
@@ -39,17 +42,23 @@ namespace System.IO.IsolatedStorage
                 // For Android we need to hardcode Xamarin path for compatibility with legacy Xamarin
                 if (OperatingSystem.IsAndroid() && IsRoaming(scope))
                 {
-                    dataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + ".local/share";
+                    dataDirectory =
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                        + ".local/share";
                     Directory.CreateDirectory(dataDirectory);
                 }
                 else
                 {
-                    specialFolder =
-                    IsMachine(scope) ? Environment.SpecialFolder.CommonApplicationData :
-                    IsRoaming(scope) ? Environment.SpecialFolder.LocalApplicationData :
-                    Environment.SpecialFolder.ApplicationData;
+                    specialFolder = IsMachine(scope)
+                        ? Environment.SpecialFolder.CommonApplicationData
+                        : IsRoaming(scope)
+                            ? Environment.SpecialFolder.LocalApplicationData
+                            : Environment.SpecialFolder.ApplicationData;
 
-                    dataDirectory = Environment.GetFolderPath(specialFolder, Environment.SpecialFolderOption.Create);
+                    dataDirectory = Environment.GetFolderPath(
+                        specialFolder,
+                        Environment.SpecialFolderOption.Create
+                    );
                 }
 
                 dataDirectory = Path.Combine(dataDirectory, IsolatedStorageDirectoryName);

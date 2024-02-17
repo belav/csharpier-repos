@@ -31,10 +31,10 @@ namespace System.Security.Cryptography
         private static void WriteKeyBlobHeader(int algId, BinaryWriter bw)
         {
             // Write out the BLOBHEADER.
-            bw.Write((byte)PLAINTEXTKEYBLOB);               // BLOBHEADER.bType
-            bw.Write((byte)BLOBHEADER_CURRENT_BVERSION);    // BLOBHEADER.bVersion
-            bw.Write((ushort)0);                            // BLOBHEADER.wReserved
-            bw.Write(algId);                                // BLOBHEADER.aiKeyAlg
+            bw.Write((byte)PLAINTEXTKEYBLOB); // BLOBHEADER.bType
+            bw.Write((byte)BLOBHEADER_CURRENT_BVERSION); // BLOBHEADER.bVersion
+            bw.Write((ushort)0); // BLOBHEADER.wReserved
+            bw.Write(algId); // BLOBHEADER.aiKeyAlg
         }
     }
 }

@@ -24,11 +24,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             readonly object? IEnumerator.Current => ((IEnumerator)_enumerator).Current;
 
-            public readonly void Dispose()
-                => _enumerator.Dispose();
+            public readonly void Dispose() => _enumerator.Dispose();
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             public void Reset()
             {

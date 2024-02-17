@@ -4,16 +4,16 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.CodeDom.Compiler;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -25,12 +25,11 @@ namespace System.ServiceModel.Channels
         CodeDomProvider codeProvider;
         string clrNamespace;
         WsdlNS.WebReferenceOptions webReferenceOptions;
-        static CodeGenerationOptions defaultCodeGenerationOptions = CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateOrder;
+        static CodeGenerationOptions defaultCodeGenerationOptions =
+            CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateOrder;
 
         public XmlSerializerImportOptions()
-            : this(new CodeCompileUnit())
-        {
-        }
+            : this(new CodeCompileUnit()) { }
 
         public XmlSerializerImportOptions(CodeCompileUnit codeCompileUnit)
         {

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,48 +26,50 @@
 using System;
 using System.Security;
 
-namespace System.Windows.Interop {
+namespace System.Windows.Interop
+{
+    public static class ComponentDispatcher
+    {
+        public static MSG CurrentKeyboardMessage
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+        }
 
-	public static class ComponentDispatcher
-	{
-		public static MSG CurrentKeyboardMessage {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-		}
+        public static bool IsThreadModal
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+        }
 
-		public static bool IsThreadModal {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-		}
+        public static event EventHandler EnterThreadModal;
+        public static event EventHandler LeaveThreadModal;
+        public static event ThreadMessageEventHandler ThreadFilterMessage;
+        public static event EventHandler ThreadIdle;
+        public static event ThreadMessageEventHandler ThreadPreprocessMessage;
 
-		public static event EventHandler EnterThreadModal;
-		public static event EventHandler LeaveThreadModal;
-		public static event ThreadMessageEventHandler ThreadFilterMessage;
-		public static event EventHandler ThreadIdle;
-		public static event ThreadMessageEventHandler ThreadPreprocessMessage;
+        [SecurityCritical]
+        public static void PopModal()
+        {
+            throw new NotImplementedException();
+        }
 
-		[SecurityCritical]
-		public static void PopModal()
-		{
-			throw new NotImplementedException ();
-		}
+        [SecurityCritical]
+        public static void PushModal()
+        {
+            throw new NotImplementedException();
+        }
 
-		[SecurityCritical]
-		public static void PushModal()
-		{
-			throw new NotImplementedException ();
-		}
+        [SecurityCritical]
+        public static void RaiseIdle()
+        {
+            throw new NotImplementedException();
+        }
 
-		[SecurityCritical]
-		public static void RaiseIdle()
-		{
-			throw new NotImplementedException ();
-		}
-
-		[SecurityCritical]
-		public static bool RaiseThreadMessage (ref MSG msg)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [SecurityCritical]
+        public static bool RaiseThreadMessage(ref MSG msg)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -5,8 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
 #if !SILVERLIGHT
 using Microsoft.Win32;
@@ -15,16 +16,15 @@ using System.Security;
 using System.Xml.Schema;
 using System.Xml.XmlConfiguration;
 #endif
-using System.Runtime.Versioning;
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     // XmlReaderSettings class specifies basic features of an XmlReader.
 #if !SILVERLIGHT && !MOBILE
     [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
 #endif
-    public sealed class XmlReaderSettings {
-
+    public sealed class XmlReaderSettings
+    {
         //
         // Fields
         //
@@ -32,7 +32,6 @@ namespace System.Xml {
 #if ASYNC || FEATURE_NETCORE
         bool useAsync;
 #endif
-
 
         // Nametable
         XmlNameTable nameTable;
@@ -76,16 +75,21 @@ namespace System.Xml {
         //
         // Constructor
         //
-        public XmlReaderSettings() {
+        public XmlReaderSettings()
+        {
             Initialize();
         }
 
 #if !FEATURE_LEGACYNETCF
         // introduced for supporting design-time loading of phone assemblies
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
 #endif
-        public XmlReaderSettings(XmlResolver resolver) {
+        public XmlReaderSettings(XmlResolver resolver)
+        {
             Initialize(resolver);
         }
 
@@ -94,11 +98,11 @@ namespace System.Xml {
         //
 
 #if ASYNC || FEATURE_NETCORE
-        public bool Async {
-            get {
-                return useAsync;
-            }
-            set {
+        public bool Async
+        {
+            get { return useAsync; }
+            set
+            {
                 CheckReadOnly("Async");
                 useAsync = value;
             }
@@ -106,11 +110,11 @@ namespace System.Xml {
 #endif
 
         // Nametable
-        public XmlNameTable NameTable {
-            get {
-                return nameTable;
-            }
-            set {
+        public XmlNameTable NameTable
+        {
+            get { return nameTable; }
+            set
+            {
                 CheckReadOnly("NameTable");
                 nameTable = value;
             }
@@ -118,14 +122,14 @@ namespace System.Xml {
 
 #if !SILVERLIGHT
         // XmlResolver
-        internal bool IsXmlResolverSet {
-            get;
-            set; // keep set internal as we need to call it from the schema validation code
+        internal bool IsXmlResolverSet { get; set; // keep set internal as we need to call it from the schema validation code
         }
 #endif
 
-        public XmlResolver XmlResolver {
-            set {
+        public XmlResolver XmlResolver
+        {
+            set
+            {
                 CheckReadOnly("XmlResolver");
                 xmlResolver = value;
 #if !SILVERLIGHT
@@ -134,7 +138,8 @@ namespace System.Xml {
             }
         }
 
-        internal XmlResolver GetXmlResolver() {
+        internal XmlResolver GetXmlResolver()
+        {
             return xmlResolver;
         }
 
@@ -142,8 +147,12 @@ namespace System.Xml {
         //This is used by get XmlResolver in Xsd.
         //Check if the config set to prohibit default resovler
         //notice we must keep GetXmlResolver() to avoid dead lock when init System.Config.ConfigurationManager
-        internal XmlResolver GetXmlResolver_CheckConfig() { 
-            if (System.Xml.XmlConfiguration.XmlReaderSection.ProhibitDefaultUrlResolver && !IsXmlResolverSet)
+        internal XmlResolver GetXmlResolver_CheckConfig()
+        {
+            if (
+                System.Xml.XmlConfiguration.XmlReaderSection.ProhibitDefaultUrlResolver
+                && !IsXmlResolverSet
+            )
                 return null;
             else
                 return xmlResolver;
@@ -151,71 +160,74 @@ namespace System.Xml {
 #endif
 
         // Text settings
-        public int LineNumberOffset {
-            get {
-                return lineNumberOffset;
-            }
-            set {
+        public int LineNumberOffset
+        {
+            get { return lineNumberOffset; }
+            set
+            {
                 CheckReadOnly("LineNumberOffset");
                 lineNumberOffset = value;
             }
         }
 
-        public int LinePositionOffset {
-            get {
-                return linePositionOffset;
-            }
-            set {
+        public int LinePositionOffset
+        {
+            get { return linePositionOffset; }
+            set
+            {
                 CheckReadOnly("LinePositionOffset");
                 linePositionOffset = value;
             }
         }
 
         // Conformance settings
-        public ConformanceLevel ConformanceLevel {
-            get {
-                return conformanceLevel;
-            }
-            set {
+        public ConformanceLevel ConformanceLevel
+        {
+            get { return conformanceLevel; }
+            set
+            {
                 CheckReadOnly("ConformanceLevel");
 
-                if ((uint)value > (uint)ConformanceLevel.Document) {
+                if ((uint)value > (uint)ConformanceLevel.Document)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 conformanceLevel = value;
             }
         }
 
-        public bool CheckCharacters {
-            get {
-                return checkCharacters;
-            }
-            set {
+        public bool CheckCharacters
+        {
+            get { return checkCharacters; }
+            set
+            {
                 CheckReadOnly("CheckCharacters");
                 checkCharacters = value;
             }
         }
 
-        public long MaxCharactersInDocument {
-            get {
-                return maxCharactersInDocument;
-            }
-            set {
+        public long MaxCharactersInDocument
+        {
+            get { return maxCharactersInDocument; }
+            set
+            {
                 CheckReadOnly("MaxCharactersInDocument");
-                if (value < 0) {
+                if (value < 0)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 maxCharactersInDocument = value;
             }
         }
 
-        public long MaxCharactersFromEntities {
-            get {
-                return maxCharactersFromEntities;
-            }
-            set {
+        public long MaxCharactersFromEntities
+        {
+            get { return maxCharactersFromEntities; }
+            set
+            {
                 CheckReadOnly("MaxCharactersFromEntities");
-                if (value < 0) {
+                if (value < 0)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 maxCharactersFromEntities = value;
@@ -223,31 +235,31 @@ namespace System.Xml {
         }
 
         // Filtering settings
-        public bool IgnoreWhitespace {
-            get {
-                return ignoreWhitespace;
-            }
-            set {
+        public bool IgnoreWhitespace
+        {
+            get { return ignoreWhitespace; }
+            set
+            {
                 CheckReadOnly("IgnoreWhitespace");
                 ignoreWhitespace = value;
             }
         }
 
-        public bool IgnoreProcessingInstructions {
-            get {
-                return ignorePIs;
-            }
-            set {
+        public bool IgnoreProcessingInstructions
+        {
+            get { return ignorePIs; }
+            set
+            {
                 CheckReadOnly("IgnoreProcessingInstructions");
                 ignorePIs = value;
             }
         }
 
-        public bool IgnoreComments {
-            get {
-                return ignoreComments;
-            }
-            set {
+        public bool IgnoreComments
+        {
+            get { return ignoreComments; }
+            set
+            {
                 CheckReadOnly("IgnoreComments");
                 ignoreComments = value;
             }
@@ -255,91 +267,108 @@ namespace System.Xml {
 
 #if !SILVERLIGHT
         [Obsolete("Use XmlReaderSettings.DtdProcessing property instead.")]
-        public bool ProhibitDtd {
-            get {
-                return dtdProcessing == DtdProcessing.Prohibit;
-            }
-            set {
+        public bool ProhibitDtd
+        {
+            get { return dtdProcessing == DtdProcessing.Prohibit; }
+            set
+            {
                 CheckReadOnly("ProhibitDtd");
                 dtdProcessing = value ? DtdProcessing.Prohibit : DtdProcessing.Parse;
             }
         }
 #endif
 
-        public DtdProcessing DtdProcessing {
-            get {
-                return dtdProcessing;
-            }
-            set {
+        public DtdProcessing DtdProcessing
+        {
+            get { return dtdProcessing; }
+            set
+            {
                 CheckReadOnly("DtdProcessing");
 
-                if ((uint)value > (uint)DtdProcessing.Parse) {
+                if ((uint)value > (uint)DtdProcessing.Parse)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 dtdProcessing = value;
             }
         }
 
-        public bool CloseInput {
-            get {
-                return closeInput;
-            }
-            set {
+        public bool CloseInput
+        {
+            get { return closeInput; }
+            set
+            {
                 CheckReadOnly("CloseInput");
                 closeInput = value;
             }
         }
 
 #if !SILVERLIGHT
-        public ValidationType ValidationType {
-            get {
-                return validationType;
-            }
-            set {
+        public ValidationType ValidationType
+        {
+            get { return validationType; }
+            set
+            {
                 CheckReadOnly("ValidationType");
 
-                if ((uint)value > (uint)ValidationType.Schema) {
+                if ((uint)value > (uint)ValidationType.Schema)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 validationType = value;
             }
         }
 
-        public XmlSchemaValidationFlags ValidationFlags {
-            get {
-                return validationFlags;
-            }
-            set {
+        public XmlSchemaValidationFlags ValidationFlags
+        {
+            get { return validationFlags; }
+            set
+            {
                 CheckReadOnly("ValidationFlags");
 
-                if ((uint)value > (uint)(XmlSchemaValidationFlags.ProcessInlineSchema | XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                           XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints |
-                                           XmlSchemaValidationFlags.AllowXmlAttributes)) {
+                if (
+                    (uint)value
+                    > (uint)(
+                        XmlSchemaValidationFlags.ProcessInlineSchema
+                        | XmlSchemaValidationFlags.ProcessSchemaLocation
+                        | XmlSchemaValidationFlags.ReportValidationWarnings
+                        | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                        | XmlSchemaValidationFlags.AllowXmlAttributes
+                    )
+                )
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 validationFlags = value;
             }
         }
 
-        public XmlSchemaSet Schemas {
-            get {
-                if (schemas == null) {
+        public XmlSchemaSet Schemas
+        {
+            get
+            {
+                if (schemas == null)
+                {
                     schemas = new XmlSchemaSet();
                 }
                 return schemas;
             }
-            set {
+            set
+            {
                 CheckReadOnly("Schemas");
                 schemas = value;
             }
         }
 
-        public event ValidationEventHandler ValidationEventHandler {
-            add {
+        public event ValidationEventHandler ValidationEventHandler
+        {
+            add
+            {
                 CheckReadOnly("ValidationEventHandler");
                 valEventHandler += value;
             }
-            remove {
+            remove
+            {
                 CheckReadOnly("ValidationEventHandler");
                 valEventHandler -= value;
             }
@@ -349,12 +378,14 @@ namespace System.Xml {
         //
         // Public methods
         //
-        public void Reset() {
+        public void Reset()
+        {
             CheckReadOnly("Reset");
             Initialize();
         }
 
-        public XmlReaderSettings Clone() {
+        public XmlReaderSettings Clone()
+        {
             XmlReaderSettings clonedSettings = this.MemberwiseClone() as XmlReaderSettings;
             clonedSettings.ReadOnly = false;
             return clonedSettings;
@@ -364,27 +395,31 @@ namespace System.Xml {
         // Internal methods
         //
 #if !SILVERLIGHT
-        internal ValidationEventHandler GetEventHandler() {
+        internal ValidationEventHandler GetEventHandler()
+        {
             return valEventHandler;
         }
 #endif
-
 
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
 #endif
-        internal XmlReader CreateReader(String inputUri, XmlParserContext inputContext) {
-            if (inputUri == null) {
+        internal XmlReader CreateReader(String inputUri, XmlParserContext inputContext)
+        {
+            if (inputUri == null)
+            {
                 throw new ArgumentNullException("inputUri");
             }
-            if (inputUri.Length == 0) {
+            if (inputUri.Length == 0)
+            {
                 throw new ArgumentException(Res.GetString(Res.XmlConvert_BadUri), "inputUri");
             }
 
             // resolve and open the url
             XmlResolver tmpResolver = this.GetXmlResolver();
-            if (tmpResolver == null) {
+            if (tmpResolver == null)
+            {
                 tmpResolver = CreateDefaultResolver();
             }
 
@@ -393,44 +428,67 @@ namespace System.Xml {
 
 #if !SILVERLIGHT
             // wrap with validating reader
-            if (this.ValidationType != ValidationType.None) {
+            if (this.ValidationType != ValidationType.None)
+            {
                 reader = AddValidation(reader);
             }
 #endif
 
 #if ASYNC
-            if (useAsync) {
+            if (useAsync)
+            {
                 reader = XmlAsyncCheckReader.CreateAsyncCheckWrapper(reader);
             }
 #endif
             return reader;
         }
 
-        internal XmlReader CreateReader(Stream input, Uri baseUri, string baseUriString, XmlParserContext inputContext) {
-            if (input == null) {
+        internal XmlReader CreateReader(
+            Stream input,
+            Uri baseUri,
+            string baseUriString,
+            XmlParserContext inputContext
+        )
+        {
+            if (input == null)
+            {
                 throw new ArgumentNullException("input");
             }
-            if (baseUriString == null) {
-                if (baseUri == null) {
+            if (baseUriString == null)
+            {
+                if (baseUri == null)
+                {
                     baseUriString = string.Empty;
                 }
-                else {
+                else
+                {
                     baseUriString = baseUri.ToString();
                 }
             }
 
             // create text XML reader
-            XmlReader reader = new XmlTextReaderImpl(input, null, 0, this, baseUri, baseUriString, inputContext, closeInput);
+            XmlReader reader = new XmlTextReaderImpl(
+                input,
+                null,
+                0,
+                this,
+                baseUri,
+                baseUriString,
+                inputContext,
+                closeInput
+            );
 
 #if !SILVERLIGHT
             // wrap with validating reader
-            if (this.ValidationType != ValidationType.None) {
+            if (this.ValidationType != ValidationType.None)
+            {
                 reader = AddValidation(reader);
             }
 #endif
 
 #if ASYNC
-            if (useAsync) {
+            if (useAsync)
+            {
                 reader = XmlAsyncCheckReader.CreateAsyncCheckWrapper(reader);
             }
 #endif
@@ -438,11 +496,18 @@ namespace System.Xml {
             return reader;
         }
 
-        internal XmlReader CreateReader(TextReader input, string baseUriString, XmlParserContext inputContext) {
-            if (input == null) {
+        internal XmlReader CreateReader(
+            TextReader input,
+            string baseUriString,
+            XmlParserContext inputContext
+        )
+        {
+            if (input == null)
+            {
                 throw new ArgumentNullException("input");
             }
-            if (baseUriString == null) {
+            if (baseUriString == null)
+            {
                 baseUriString = string.Empty;
             }
 
@@ -451,13 +516,15 @@ namespace System.Xml {
 
 #if !SILVERLIGHT
             // wrap with validating reader
-            if (this.ValidationType != ValidationType.None) {
+            if (this.ValidationType != ValidationType.None)
+            {
                 reader = AddValidation(reader);
             }
 #endif
 
 #if ASYNC
-            if (useAsync) {
+            if (useAsync)
+            {
                 reader = XmlAsyncCheckReader.CreateAsyncCheckWrapper(reader);
             }
 #endif
@@ -465,8 +532,10 @@ namespace System.Xml {
             return reader;
         }
 
-        internal XmlReader CreateReader(XmlReader reader) {
-            if (reader == null) {
+        internal XmlReader CreateReader(XmlReader reader)
+        {
+            if (reader == null)
+            {
                 throw new ArgumentNullException("reader");
             }
 #if !ASYNC || SILVERLIGHT || FEATURE_NETCORE
@@ -477,29 +546,33 @@ namespace System.Xml {
 #endif // !ASYNC || SILVERLIGHT || FEATURE_NETCORE
         }
 
-        internal bool ReadOnly {
-            get {
-                return isReadOnly;
-            }
-            set {
-                isReadOnly = value;
-            }
+        internal bool ReadOnly
+        {
+            get { return isReadOnly; }
+            set { isReadOnly = value; }
         }
 
-        void CheckReadOnly(string propertyName) {
-            if (isReadOnly) {
-                throw new XmlException(Res.Xml_ReadOnlyProperty, this.GetType().Name + '.' + propertyName);
+        void CheckReadOnly(string propertyName)
+        {
+            if (isReadOnly)
+            {
+                throw new XmlException(
+                    Res.Xml_ReadOnlyProperty,
+                    this.GetType().Name + '.' + propertyName
+                );
             }
         }
 
         //
         // Private methods
         //
-        void Initialize() {
+        void Initialize()
+        {
             Initialize(null);
         }
 
-        void Initialize(XmlResolver resolver) {
+        void Initialize(XmlResolver resolver)
+        {
             nameTable = null;
 #if !SILVERLIGHT && !MOBILE
             if (!EnableLegacyXmlSettings())
@@ -507,10 +580,10 @@ namespace System.Xml {
                 xmlResolver = resolver;
                 // limit the entity resolving to 10 million character. the caller can still
                 // override it to any other value or set it to zero for unlimiting it
-                maxCharactersFromEntities = (long) 1e7;
+                maxCharactersFromEntities = (long)1e7;
             }
             else
-#endif            
+#endif
             {
                 xmlResolver = (resolver == null ? CreateDefaultResolver() : resolver);
                 maxCharactersFromEntities = 0;
@@ -545,7 +618,8 @@ namespace System.Xml {
 #endif
         }
 
-        static XmlResolver CreateDefaultResolver() {
+        static XmlResolver CreateDefaultResolver()
+        {
 #if SILVERLIGHT
             if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5_1)
                 return new XmlSystemPathResolver();
@@ -556,45 +630,55 @@ namespace System.Xml {
         }
 
 #if !SILVERLIGHT
-        internal XmlReader AddValidation(XmlReader reader) {
-            if (this.validationType == ValidationType.Schema) {
+        internal XmlReader AddValidation(XmlReader reader)
+        {
+            if (this.validationType == ValidationType.Schema)
+            {
                 XmlResolver resolver = GetXmlResolver_CheckConfig();
 
-                if (resolver == null &&
-                    !this.IsXmlResolverSet &&
-                    !EnableLegacyXmlSettings())
+                if (resolver == null && !this.IsXmlResolverSet && !EnableLegacyXmlSettings())
                 {
                     resolver = new XmlUrlResolver();
                 }
                 reader = new XsdValidatingReader(reader, resolver, this);
             }
-            else if (this.validationType == ValidationType.DTD) {
+            else if (this.validationType == ValidationType.DTD)
+            {
                 reader = CreateDtdValidatingReader(reader);
             }
             return reader;
         }
 
-        private XmlReader AddValidationAndConformanceWrapper(XmlReader reader) {
+        private XmlReader AddValidationAndConformanceWrapper(XmlReader reader)
+        {
             // wrap with DTD validating reader
-            if (this.validationType == ValidationType.DTD) {
+            if (this.validationType == ValidationType.DTD)
+            {
                 reader = CreateDtdValidatingReader(reader);
             }
             // add conformance checking (must go after DTD validation because XmlValidatingReader works only on XmlTextReader),
             // but before XSD validation because of typed value access
             reader = AddConformanceWrapper(reader);
 
-            if (this.validationType == ValidationType.Schema) {
+            if (this.validationType == ValidationType.Schema)
+            {
                 reader = new XsdValidatingReader(reader, GetXmlResolver_CheckConfig(), this);
             }
             return reader;
         }
 
-        private XmlValidatingReaderImpl CreateDtdValidatingReader(XmlReader baseReader) {
-            return new XmlValidatingReaderImpl(baseReader, this.GetEventHandler(), (this.ValidationFlags & XmlSchemaValidationFlags.ProcessIdentityConstraints) != 0);
+        private XmlValidatingReaderImpl CreateDtdValidatingReader(XmlReader baseReader)
+        {
+            return new XmlValidatingReaderImpl(
+                baseReader,
+                this.GetEventHandler(),
+                (this.ValidationFlags & XmlSchemaValidationFlags.ProcessIdentityConstraints) != 0
+            );
         }
 #endif // !SILVERLIGHT
 
-        internal XmlReader AddConformanceWrapper(XmlReader baseReader) {
+        internal XmlReader AddConformanceWrapper(XmlReader baseReader)
+        {
             XmlReaderSettings baseReaderSettings = baseReader.Settings;
             bool checkChars = false;
             bool noWhitespace = false;
@@ -603,112 +687,197 @@ namespace System.Xml {
             DtdProcessing dtdProc = (DtdProcessing)(-1);
             bool needWrap = false;
 
-            if (baseReaderSettings == null) {
-
+            if (baseReaderSettings == null)
+            {
 #pragma warning disable 618
 
 #if SILVERLIGHT
-                // Starting from Windows phone 8.1 (TargetsAtLeast_Desktop_V4_5_1) we converge with the desktop behavior so we'll let the reader 
+                // Starting from Windows phone 8.1 (TargetsAtLeast_Desktop_V4_5_1) we converge with the desktop behavior so we'll let the reader
                 // not throw exception if has different conformance level than Auto.
-                if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5_1) {
-                    if (this.conformanceLevel != ConformanceLevel.Auto && this.conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)) {
-                        throw new InvalidOperationException(Res.GetString(Res.Xml_IncompatibleConformanceLevel, this.conformanceLevel.ToString()));
+                if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5_1)
+                {
+                    if (
+                        this.conformanceLevel != ConformanceLevel.Auto
+                        && this.conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)
+                    )
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(
+                                Res.Xml_IncompatibleConformanceLevel,
+                                this.conformanceLevel.ToString()
+                            )
+                        );
                     }
-                } else if (this.conformanceLevel != ConformanceLevel.Auto) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_IncompatibleConformanceLevel, this.conformanceLevel.ToString()));
+                }
+                else if (this.conformanceLevel != ConformanceLevel.Auto)
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.Xml_IncompatibleConformanceLevel,
+                            this.conformanceLevel.ToString()
+                        )
+                    );
                 }
 #else
-                                                if (this.conformanceLevel != ConformanceLevel.Auto && this.conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_IncompatibleConformanceLevel, this.conformanceLevel.ToString()));
+                if (
+                    this.conformanceLevel != ConformanceLevel.Auto
+                    && this.conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)
+                )
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.Xml_IncompatibleConformanceLevel,
+                            this.conformanceLevel.ToString()
+                        )
+                    );
                 }
 #endif
 
 #if !SILVERLIGHT
                 // get the V1 XmlTextReader ref
                 XmlTextReader v1XmlTextReader = baseReader as XmlTextReader;
-                if (v1XmlTextReader == null) {
+                if (v1XmlTextReader == null)
+                {
                     XmlValidatingReader vr = baseReader as XmlValidatingReader;
-                    if (vr != null) {
+                    if (vr != null)
+                    {
                         v1XmlTextReader = (XmlTextReader)vr.Reader;
                     }
                 }
 #endif
 
-                // assume the V1 readers already do all conformance checking; 
+                // assume the V1 readers already do all conformance checking;
                 // wrap only if IgnoreWhitespace, IgnoreComments, IgnoreProcessingInstructions or ProhibitDtd is true;
-                if (this.ignoreWhitespace) {
+                if (this.ignoreWhitespace)
+                {
                     WhitespaceHandling wh = WhitespaceHandling.All;
 #if !SILVERLIGHT
                     // special-case our V1 readers to see if whey already filter whitespaces
-                    if (v1XmlTextReader != null) {
+                    if (v1XmlTextReader != null)
+                    {
                         wh = v1XmlTextReader.WhitespaceHandling;
                     }
 #endif
-                    if (wh == WhitespaceHandling.All) {
+                    if (wh == WhitespaceHandling.All)
+                    {
                         noWhitespace = true;
                         needWrap = true;
                     }
                 }
-                if (this.ignoreComments) {
+                if (this.ignoreComments)
+                {
                     noComments = true;
                     needWrap = true;
                 }
-                if (this.ignorePIs) {
+                if (this.ignorePIs)
+                {
                     noPIs = true;
                     needWrap = true;
                 }
                 // DTD processing
                 DtdProcessing baseDtdProcessing = DtdProcessing.Parse;
 #if !SILVERLIGHT
-                if (v1XmlTextReader != null) {
+                if (v1XmlTextReader != null)
+                {
                     baseDtdProcessing = v1XmlTextReader.DtdProcessing;
                 }
 #endif
-                if ((this.dtdProcessing == DtdProcessing.Prohibit && baseDtdProcessing != DtdProcessing.Prohibit) ||
-                    (this.dtdProcessing == DtdProcessing.Ignore && baseDtdProcessing == DtdProcessing.Parse)) {
+                if (
+                    (
+                        this.dtdProcessing == DtdProcessing.Prohibit
+                        && baseDtdProcessing != DtdProcessing.Prohibit
+                    )
+                    || (
+                        this.dtdProcessing == DtdProcessing.Ignore
+                        && baseDtdProcessing == DtdProcessing.Parse
+                    )
+                )
+                {
                     dtdProc = this.dtdProcessing;
                     needWrap = true;
                 }
 #pragma warning restore 618
             }
-            else {
-                if (this.conformanceLevel != baseReaderSettings.ConformanceLevel && this.conformanceLevel != ConformanceLevel.Auto) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_IncompatibleConformanceLevel, this.conformanceLevel.ToString()));
+            else
+            {
+                if (
+                    this.conformanceLevel != baseReaderSettings.ConformanceLevel
+                    && this.conformanceLevel != ConformanceLevel.Auto
+                )
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.Xml_IncompatibleConformanceLevel,
+                            this.conformanceLevel.ToString()
+                        )
+                    );
                 }
-                if (this.checkCharacters && !baseReaderSettings.CheckCharacters) {
+                if (this.checkCharacters && !baseReaderSettings.CheckCharacters)
+                {
                     checkChars = true;
                     needWrap = true;
                 }
-                if (this.ignoreWhitespace && !baseReaderSettings.IgnoreWhitespace) {
+                if (this.ignoreWhitespace && !baseReaderSettings.IgnoreWhitespace)
+                {
                     noWhitespace = true;
                     needWrap = true;
                 }
-                if (this.ignoreComments && !baseReaderSettings.IgnoreComments) {
+                if (this.ignoreComments && !baseReaderSettings.IgnoreComments)
+                {
                     noComments = true;
                     needWrap = true;
                 }
-                if (this.ignorePIs && !baseReaderSettings.IgnoreProcessingInstructions) {
+                if (this.ignorePIs && !baseReaderSettings.IgnoreProcessingInstructions)
+                {
                     noPIs = true;
                     needWrap = true;
                 }
 
-                if ((this.dtdProcessing == DtdProcessing.Prohibit && baseReaderSettings.DtdProcessing != DtdProcessing.Prohibit) ||
-                    (this.dtdProcessing == DtdProcessing.Ignore && baseReaderSettings.DtdProcessing == DtdProcessing.Parse)) {
+                if (
+                    (
+                        this.dtdProcessing == DtdProcessing.Prohibit
+                        && baseReaderSettings.DtdProcessing != DtdProcessing.Prohibit
+                    )
+                    || (
+                        this.dtdProcessing == DtdProcessing.Ignore
+                        && baseReaderSettings.DtdProcessing == DtdProcessing.Parse
+                    )
+                )
+                {
                     dtdProc = this.dtdProcessing;
                     needWrap = true;
                 }
             }
 
-            if (needWrap) {
+            if (needWrap)
+            {
                 IXmlNamespaceResolver readerAsNSResolver = baseReader as IXmlNamespaceResolver;
-                if (readerAsNSResolver != null) {
-                    return new XmlCharCheckingReaderWithNS(baseReader, readerAsNSResolver, checkChars, noWhitespace, noComments, noPIs, dtdProc);
+                if (readerAsNSResolver != null)
+                {
+                    return new XmlCharCheckingReaderWithNS(
+                        baseReader,
+                        readerAsNSResolver,
+                        checkChars,
+                        noWhitespace,
+                        noComments,
+                        noPIs,
+                        dtdProc
+                    );
                 }
-                else {
-                    return new XmlCharCheckingReader(baseReader, checkChars, noWhitespace, noComments, noPIs, dtdProc);
+                else
+                {
+                    return new XmlCharCheckingReader(
+                        baseReader,
+                        checkChars,
+                        noWhitespace,
+                        noComments,
+                        noPIs,
+                        dtdProc
+                    );
                 }
             }
-            else {
+            else
+            {
                 return baseReader;
             }
         }
@@ -716,7 +885,7 @@ namespace System.Xml {
 #if !SILVERLIGHT
         private static bool? s_enableLegacyXmlSettings = null;
 
-        static internal bool EnableLegacyXmlSettings()
+        internal static bool EnableLegacyXmlSettings()
         {
             if (s_enableLegacyXmlSettings.HasValue)
             {

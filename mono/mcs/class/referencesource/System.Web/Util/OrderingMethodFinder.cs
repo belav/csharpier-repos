@@ -1,17 +1,17 @@
 ﻿using System.Linq.Expressions;
 
-namespace System.Web.Util {
-    internal sealed class OrderingMethodFinder : ExpressionVisitor {
-
+namespace System.Web.Util
+{
+    internal sealed class OrderingMethodFinder : ExpressionVisitor
+    {
         private bool isTopLevelMethodCall = true;
 
-        private bool OrderingMethodFound {
-            get;
-            set;
-        }
+        private bool OrderingMethodFound { get; set; }
 
-        protected override Expression VisitMethodCall(MethodCallExpression node) {
-            if (isTopLevelMethodCall && QueryableUtility.IsOrderingMethod(node)) {
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            if (isTopLevelMethodCall && QueryableUtility.IsOrderingMethod(node))
+            {
                 OrderingMethodFound = true;
             }
 
@@ -21,7 +21,8 @@ namespace System.Web.Util {
             return result;
         }
 
-        internal static bool OrderMethodExists(Expression expression) {
+        internal static bool OrderMethodExists(Expression expression)
+        {
             OrderingMethodFinder obj = new OrderingMethodFinder();
             obj.OrderingMethodFound = false;
             obj.Visit(expression);

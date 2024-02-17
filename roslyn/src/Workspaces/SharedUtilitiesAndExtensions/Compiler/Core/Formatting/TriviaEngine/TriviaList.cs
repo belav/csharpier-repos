@@ -11,11 +11,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         public int Count => _list1.Count + _list2.Count;
 
-        public SyntaxTrivia this[int index]
-            => index < _list1.Count ? _list1[index] : _list2[index - _list1.Count];
+        public SyntaxTrivia this[int index] =>
+            index < _list1.Count ? _list1[index] : _list2[index - _list1.Count];
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         public struct Enumerator
         {

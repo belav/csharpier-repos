@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.LanguageService
         /// <summary>
         /// Checks if the position is on the header of a type (from the start of the type up through it's name).
         /// </summary>
-        public static bool IsOnTypeHeader(this IHeaderFacts headerFacts, SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? typeDeclaration)
-            => headerFacts.IsOnTypeHeader(root, position, fullHeader: false, out typeDeclaration);
+        public static bool IsOnTypeHeader(
+            this IHeaderFacts headerFacts,
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        ) => headerFacts.IsOnTypeHeader(root, position, fullHeader: false, out typeDeclaration);
     }
 }

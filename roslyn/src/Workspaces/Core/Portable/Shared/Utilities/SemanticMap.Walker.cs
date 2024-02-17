@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal partial class SemanticMap
     {
-        private class Walker(SemanticModel semanticModel, SemanticMap map, CancellationToken cancellationToken)
+        private class Walker(
+            SemanticModel semanticModel,
+            SemanticMap map,
+            CancellationToken cancellationToken
+        )
         {
             public void Visit(SyntaxNode node)
             {
@@ -41,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 }
             }
 
-            private static bool IsNone(SymbolInfo info)
-                => info.Symbol == null && info.CandidateSymbols.Length == 0;
+            private static bool IsNone(SymbolInfo info) =>
+                info.Symbol == null && info.CandidateSymbols.Length == 0;
         }
     }
 }

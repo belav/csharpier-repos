@@ -12,7 +12,12 @@ namespace System.Runtime.InteropServices.ComTypes
     public interface IEnumConnectionPoints
     {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IConnectionPoint[] rgelt, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IConnectionPoint[] rgelt,
+            IntPtr pceltFetched
+        );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

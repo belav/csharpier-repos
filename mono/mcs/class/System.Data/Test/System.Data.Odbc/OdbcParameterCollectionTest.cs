@@ -33,52 +33,51 @@ using System;
 using System.Text;
 using System.Data;
 using System.Data.Odbc;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Odbc
 {
-
-        [TestFixture]
-        public class OdbcParameterCollectionTest
+    [TestFixture]
+    public class OdbcParameterCollectionTest
+    {
+        [Test]
+        public void OdbcParameterAddTest()
         {
-                [Test]
-                public void OdbcParameterAddTest ()
-                {
-                        AddTest (new OdbcCommand ());
-                }
-
-                /// <remarks>
-                /// Test for parameter length of various data types.
-                /// </remarks>
-                public void AddTest (OdbcCommand cmd)
-                {
-                        OdbcParameter param = cmd.Parameters.Add ("param1", (int) 1);
-                        param = cmd.Parameters.Add ("param1", (long) 1);
-                        Assert.AreEqual (0, param.Size, "#1");
-                        param = cmd.Parameters.Add ("param1", (float) 1.0);
-                        Assert.AreEqual (0, param.Size, "#2");
-                        param = cmd.Parameters.Add ("param1", (double) 1.0);
-                        Assert.AreEqual (0, param.Size, "#3");
-                        param = cmd.Parameters.Add ("param1", 
-                                                    ASCIIEncoding.ASCII.GetBytes("this is considerably long test"));
-                        Assert.AreEqual (30, param.Size, "#4");
-                        param = cmd.Parameters.Add ("param1", true);
-                        Assert.AreEqual (0, param.Size, "#5");
-                        param = cmd.Parameters.Add ("param1", "suresh");
-                        Assert.AreEqual (6, param.Size, "#6");
-                        param = cmd.Parameters.Add ("param1", DateTime.Now);
-                        Assert.AreEqual (0, param.Size, "#7");
-                        param = cmd.Parameters.Add ("param1", (object) DateTime.Now);
-                        Assert.AreEqual (0, param.Size, "#8");
-
-                        int [] arr = new int [] {1, 2, 3} ;
-                        param = cmd.Parameters.Add ("param1", arr);
-
-                        Assert.AreEqual (0, param.Size, "#8");
-       
-                }
+            AddTest(new OdbcCommand());
         }
+
+        /// <remarks>
+        /// Test for parameter length of various data types.
+        /// </remarks>
+        public void AddTest(OdbcCommand cmd)
+        {
+            OdbcParameter param = cmd.Parameters.Add("param1", (int)1);
+            param = cmd.Parameters.Add("param1", (long)1);
+            Assert.AreEqual(0, param.Size, "#1");
+            param = cmd.Parameters.Add("param1", (float)1.0);
+            Assert.AreEqual(0, param.Size, "#2");
+            param = cmd.Parameters.Add("param1", (double)1.0);
+            Assert.AreEqual(0, param.Size, "#3");
+            param = cmd.Parameters.Add(
+                "param1",
+                ASCIIEncoding.ASCII.GetBytes("this is considerably long test")
+            );
+            Assert.AreEqual(30, param.Size, "#4");
+            param = cmd.Parameters.Add("param1", true);
+            Assert.AreEqual(0, param.Size, "#5");
+            param = cmd.Parameters.Add("param1", "suresh");
+            Assert.AreEqual(6, param.Size, "#6");
+            param = cmd.Parameters.Add("param1", DateTime.Now);
+            Assert.AreEqual(0, param.Size, "#7");
+            param = cmd.Parameters.Add("param1", (object)DateTime.Now);
+            Assert.AreEqual(0, param.Size, "#8");
+
+            int[] arr = new int[] { 1, 2, 3 };
+            param = cmd.Parameters.Add("param1", arr);
+
+            Assert.AreEqual(0, param.Size, "#8");
+        }
+    }
 }
 
 #endif

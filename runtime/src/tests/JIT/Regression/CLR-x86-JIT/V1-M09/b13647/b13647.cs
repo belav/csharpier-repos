@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -18,5 +19,4 @@ namespace DefaultNamespace
             Console.WriteLine(DateTime.Now.ToString());
         }
     }
-
 }

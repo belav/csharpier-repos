@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultColumnMapping>, IStoredProcedureMapping
+public class StoredProcedureMapping
+    : TableMappingBase<IStoredProcedureResultColumnMapping>,
+        IStoredProcedureMapping
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -22,7 +24,8 @@ public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultCol
         StoreStoredProcedure storeStoredProcedure,
         IStoredProcedure storedProcedure,
         ITableMapping? tableMapping,
-        bool includesDerivedTypes)
+        bool includesDerivedTypes
+    )
         : base(entityType, storeStoredProcedure, includesDerivedTypes)
     {
         StoredProcedure = storedProcedure;
@@ -31,8 +34,7 @@ public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultCol
     }
 
     /// <inheritdoc />
-    public virtual IStoreStoredProcedure StoreStoredProcedure
-        => (StoreStoredProcedure)base.Table;
+    public virtual IStoreStoredProcedure StoreStoredProcedure => (StoreStoredProcedure)base.Table;
 
     /// <inheritdoc />
     public virtual IStoredProcedure StoredProcedure { get; }
@@ -49,8 +51,7 @@ public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultCol
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual List<IStoredProcedureParameterMapping> ParameterMappings { get; }
-        = new();
+    public virtual List<IStoredProcedureParameterMapping> ParameterMappings { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,8 +78,8 @@ public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultCol
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoredProcedureMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoredProcedureMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,10 +87,14 @@ public class StoredProcedureMapping : TableMappingBase<IStoredProcedureResultCol
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedureMapping)this).ToDebugString(),
-            () => ((IStoredProcedureMapping)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoredProcedureMapping)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IEnumerable<IStoredProcedureResultColumnMapping> IStoredProcedureMapping.ResultColumnMappings

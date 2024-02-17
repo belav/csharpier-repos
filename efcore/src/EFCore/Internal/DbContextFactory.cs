@@ -11,8 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class DbContextFactory<[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>
-    : IDbContextFactory<TContext>
+public class DbContextFactory<
+    [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+> : IDbContextFactory<TContext>
     where TContext : DbContext
 {
     private readonly IServiceProvider _serviceProvider;
@@ -28,7 +29,8 @@ public class DbContextFactory<[DynamicallyAccessedMembers(DbContext.DynamicallyA
     public DbContextFactory(
         IServiceProvider serviceProvider,
         DbContextOptions<TContext> options,
-        IDbContextFactorySource<TContext> factorySource)
+        IDbContextFactorySource<TContext> factorySource
+    )
     {
         _serviceProvider = serviceProvider;
         _options = options;
@@ -41,8 +43,7 @@ public class DbContextFactory<[DynamicallyAccessedMembers(DbContext.DynamicallyA
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TContext CreateDbContext()
-        => _factory(_serviceProvider, _options);
+    public virtual TContext CreateDbContext() => _factory(_serviceProvider, _options);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,6 +51,7 @@ public class DbContextFactory<[DynamicallyAccessedMembers(DbContext.DynamicallyA
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task<TContext> CreateDbContextAsync(CancellationToken cancellationToken = default)
-        => Task.FromResult(CreateDbContext());
+    public virtual Task<TContext> CreateDbContextAsync(
+        CancellationToken cancellationToken = default
+    ) => Task.FromResult(CreateDbContext());
 }

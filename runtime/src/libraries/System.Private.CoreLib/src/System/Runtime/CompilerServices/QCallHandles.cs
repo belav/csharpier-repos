@@ -28,7 +28,8 @@ namespace System.Runtime.CompilerServices
             _ptr = pObject;
         }
 
-        internal static ObjectHandleOnStack Create<T>(ref T o) where T : class?
+        internal static ObjectHandleOnStack Create<T>(ref T o)
+            where T : class?
         {
             return new ObjectHandleOnStack(Unsafe.AsPointer(ref o));
         }

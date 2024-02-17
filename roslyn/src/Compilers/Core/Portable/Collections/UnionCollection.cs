@@ -4,18 +4,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis.Text;
-using System.Diagnostics;
 using Roslyn.Utilities;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Implements a readonly collection over a set of existing collections. This can be used to
     /// prevent having to copy items from one collection over to another (thus bloating space).
-    /// 
+    ///
     /// Note: this is a *collection*, not a *set*.  There is no removal of duplicated elements. This
     /// allows us to be able to efficiently do operations like CopyTo, Count, etc. in O(c) time
     /// instead of O(n) (where 'c' is the number of collections and 'n' is the number of elements).
@@ -45,7 +45,10 @@ namespace Microsoft.CodeAnalysis
             return new UnionCollection<T>(ImmutableArray.Create(coll1, coll2));
         }
 
-        public static ICollection<T> Create<TOrig>(ImmutableArray<TOrig> collections, Func<TOrig, ICollection<T>> selector)
+        public static ICollection<T> Create<TOrig>(
+            ImmutableArray<TOrig> collections,
+            Func<TOrig, ICollection<T>> selector
+        )
         {
             Debug.Assert(collections.All(c => selector(c).IsReadOnly));
 
@@ -58,7 +61,9 @@ namespace Microsoft.CodeAnalysis
                     return selector(collections[0]);
 
                 default:
-                    return new UnionCollection<T>(ImmutableArray.CreateRange(collections, selector));
+                    return new UnionCollection<T>(
+                        ImmutableArray.CreateRange(collections, selector)
+                    );
             }
         }
 
@@ -118,10 +123,7 @@ namespace Microsoft.CodeAnalysis
 
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool Remove(T item)

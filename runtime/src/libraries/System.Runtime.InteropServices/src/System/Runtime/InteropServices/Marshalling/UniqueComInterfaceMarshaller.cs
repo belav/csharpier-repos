@@ -19,7 +19,11 @@ namespace System.Runtime.InteropServices.Marshalling
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
     [CLSCompliant(false)]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder), MarshalMode.Default, typeof(UniqueComInterfaceMarshaller<>))]
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder),
+        MarshalMode.Default,
+        typeof(UniqueComInterfaceMarshaller<>)
+    )]
     public static unsafe class UniqueComInterfaceMarshaller<T>
     {
         /// <summary>
@@ -35,11 +39,14 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             if (!ComWrappers.TryGetComInstance(managed, out nint unknown))
             {
-                unknown = StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None);
+                unknown =
+                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                        managed,
+                        CreateComInterfaceFlags.None
+                    );
             }
             return ComInterfaceMarshaller<T>.CastIUnknownToInterfaceType(unknown);
         }
-
 
         /// <summary>
         /// Convert a COM interface pointer to a managed object.
@@ -55,9 +62,12 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 return default;
             }
-            return (T)StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance((nint)unmanaged, CreateObjectFlags.UniqueInstance);
+            return (T)
+                StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
+                    (nint)unmanaged,
+                    CreateObjectFlags.UniqueInstance
+                );
         }
-
 
         /// <summary>
         /// Release a reference to the COM interface pointer.

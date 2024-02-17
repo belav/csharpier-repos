@@ -1,19 +1,24 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Xml;
 
     #region QueueSurrogate
     internal sealed class QueueSurrogate : ISerializationSurrogate
     {
         internal QueueSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
             object[] items = ((Queue)obj).ToArray();
             if (items.Length == 1)
@@ -23,7 +28,12 @@ namespace System.Workflow.ComponentModel.Serialization
             info.SetType(typeof(QRef));
         }
 
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -34,6 +44,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             [OptionalField]
             private IList items = null;
+
             [OptionalField]
             private object item = null;
 
@@ -48,6 +59,7 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
                 return this.queue;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.queue != null)

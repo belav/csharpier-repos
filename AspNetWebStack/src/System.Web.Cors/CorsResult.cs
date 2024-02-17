@@ -32,10 +32,7 @@ namespace System.Web.Cors
         /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return ErrorMessages.Count == 0;
-            }
+            get { return ErrorMessages.Count == 0; }
         }
 
         /// <summary>
@@ -73,15 +70,15 @@ namespace System.Web.Cors
         /// </summary>
         public long? PreflightMaxAge
         {
-            get
-            {
-                return _preflightMaxAge;
-            }
+            get { return _preflightMaxAge; }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("value", SRResources.PreflightMaxAgeOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SRResources.PreflightMaxAgeOutOfRange
+                    );
                 }
                 _preflightMaxAge = value;
             }
@@ -109,7 +106,8 @@ namespace System.Web.Cors
             {
                 // Filter out simple methods
                 IEnumerable<string> nonSimpleAllowMethods = AllowedMethods.Where(m =>
-                    !CorsConstants.SimpleMethods.Contains(m, StringComparer.OrdinalIgnoreCase));
+                    !CorsConstants.SimpleMethods.Contains(m, StringComparer.OrdinalIgnoreCase)
+                );
                 AddHeader(headers, CorsConstants.AccessControlAllowMethods, nonSimpleAllowMethods);
             }
 
@@ -117,16 +115,33 @@ namespace System.Web.Cors
             {
                 // Filter out simple request headers
                 IEnumerable<string> nonSimpleAllowRequestHeaders = AllowedHeaders.Where(header =>
-                    !CorsConstants.SimpleRequestHeaders.Contains(header, StringComparer.OrdinalIgnoreCase));
-                AddHeader(headers, CorsConstants.AccessControlAllowHeaders, nonSimpleAllowRequestHeaders);
+                    !CorsConstants.SimpleRequestHeaders.Contains(
+                        header,
+                        StringComparer.OrdinalIgnoreCase
+                    )
+                );
+                AddHeader(
+                    headers,
+                    CorsConstants.AccessControlAllowHeaders,
+                    nonSimpleAllowRequestHeaders
+                );
             }
 
             if (AllowedExposedHeaders.Count > 0)
             {
                 // Filter out simple response headers
-                IEnumerable<string> nonSimpleAllowResponseHeaders = AllowedExposedHeaders.Where(header =>
-                    !CorsConstants.SimpleResponseHeaders.Contains(header, StringComparer.OrdinalIgnoreCase));
-                AddHeader(headers, CorsConstants.AccessControlExposeHeaders, nonSimpleAllowResponseHeaders);
+                IEnumerable<string> nonSimpleAllowResponseHeaders = AllowedExposedHeaders.Where(
+                    header =>
+                        !CorsConstants.SimpleResponseHeaders.Contains(
+                            header,
+                            StringComparer.OrdinalIgnoreCase
+                        )
+                );
+                AddHeader(
+                    headers,
+                    CorsConstants.AccessControlExposeHeaders,
+                    nonSimpleAllowResponseHeaders
+                );
             }
 
             if (PreflightMaxAge.HasValue)
@@ -151,7 +166,11 @@ namespace System.Web.Cors
             builder.Append(", AllowCredentials: ");
             builder.Append(SupportsCredentials);
             builder.Append(", PreflightMaxAge: ");
-            builder.Append(PreflightMaxAge.HasValue ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture) : "null");
+            builder.Append(
+                PreflightMaxAge.HasValue
+                    ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture)
+                    : "null"
+            );
             builder.Append(", AllowOrigin: ");
             builder.Append(AllowedOrigin);
             builder.Append(", AllowExposedHeaders: {");
@@ -169,7 +188,11 @@ namespace System.Web.Cors
             return builder.ToString();
         }
 
-        private static void AddHeader(IDictionary<string, string> headers, string headerName, IEnumerable<string> headerValues)
+        private static void AddHeader(
+            IDictionary<string, string> headers,
+            string headerName,
+            IEnumerable<string> headerValues
+        )
         {
             string methods = String.Join(",", headerValues);
             if (!String.IsNullOrEmpty(methods))

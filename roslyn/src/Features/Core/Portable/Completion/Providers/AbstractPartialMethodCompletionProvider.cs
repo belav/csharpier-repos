@@ -14,28 +14,38 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractPartialMethodCompletionProvider : AbstractMemberInsertingCompletionProvider
+    internal abstract partial class AbstractPartialMethodCompletionProvider
+        : AbstractMemberInsertingCompletionProvider
     {
         protected static readonly SymbolDisplayFormat SignatureDisplayFormat =
-                new(
-                    genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                    memberOptions:
-                        SymbolDisplayMemberOptions.IncludeParameters,
-                    parameterOptions:
-                        SymbolDisplayParameterOptions.IncludeName |
-                        SymbolDisplayParameterOptions.IncludeType |
-                        SymbolDisplayParameterOptions.IncludeParamsRefOut,
-                    miscellaneousOptions:
-                        SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                        SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+            new(
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+                memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeName
+                    | SymbolDisplayParameterOptions.IncludeType
+                    | SymbolDisplayParameterOptions.IncludeParamsRefOut,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
-        protected AbstractPartialMethodCompletionProvider()
-        {
-        }
+        protected AbstractPartialMethodCompletionProvider() { }
 
-        protected abstract bool IncludeAccessibility(IMethodSymbol method, CancellationToken cancellationToken);
-        protected abstract bool IsPartialMethodCompletionContext(SyntaxTree tree, int position, CancellationToken cancellationToken, out DeclarationModifiers modifiers, out SyntaxToken token);
-        protected abstract string GetDisplayText(IMethodSymbol method, SemanticModel semanticModel, int position);
+        protected abstract bool IncludeAccessibility(
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        );
+        protected abstract bool IsPartialMethodCompletionContext(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken,
+            out DeclarationModifiers modifiers,
+            out SyntaxToken token
+        );
+        protected abstract string GetDisplayText(
+            IMethodSymbol method,
+            SemanticModel semanticModel,
+            int position
+        );
         protected abstract bool IsPartial(IMethodSymbol method);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
@@ -44,14 +54,31 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var position = context.Position;
             var cancellationToken = context.CancellationToken;
 
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            if (!IsPartialMethodCompletionContext(tree, position, cancellationToken, out var modifiers, out var token))
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                !IsPartialMethodCompletionContext(
+                    tree,
+                    position,
+                    cancellationToken,
+                    out var modifiers,
+                    out var token
+                )
+            )
             {
                 return;
             }
 
             var items = await CreatePartialItemsAsync(
-                document, position, context.CompletionListSpan, modifiers, token, cancellationToken).ConfigureAwait(false);
+                    document,
+                    position,
+                    context.CompletionListSpan,
+                    modifiers,
+                    token,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (items?.Any() == true)
             {
@@ -60,40 +87,73 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
         }
 
-        protected override async Task<ISymbol> GenerateMemberAsync(ISymbol member, INamedTypeSymbol containingType, Document document, CompletionItem item, CancellationToken cancellationToken)
+        protected override async Task<ISymbol> GenerateMemberAsync(
+            ISymbol member,
+            INamedTypeSymbol containingType,
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFactory = document.GetLanguageService<SyntaxGenerator>();
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var method = (IMethodSymbol)member;
             return CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: ImmutableArray<AttributeData>.Empty,
-                accessibility: IncludeAccessibility(method, cancellationToken) ? method.DeclaredAccessibility : Accessibility.NotApplicable,
+                accessibility: IncludeAccessibility(method, cancellationToken)
+                    ? method.DeclaredAccessibility
+                    : Accessibility.NotApplicable,
                 modifiers: MemberInsertionCompletionItem.GetModifiers(item),
                 returnType: method.ReturnType,
                 refKind: method.RefKind,
                 explicitInterfaceImplementations: default,
                 name: member.Name,
                 typeParameters: method.TypeParameters,
-                parameters: method.Parameters.SelectAsArray(p => CodeGenerationSymbolFactory.CreateParameterSymbol(p.GetAttributes(), p.RefKind, p.IsParams, p.Type, p.Name)),
-                statements: syntaxFactory.CreateThrowNotImplementedStatementBlock(semanticModel.Compilation));
+                parameters: method.Parameters.SelectAsArray(p =>
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        p.GetAttributes(),
+                        p.RefKind,
+                        p.IsParams,
+                        p.Type,
+                        p.Name
+                    )
+                ),
+                statements: syntaxFactory.CreateThrowNotImplementedStatementBlock(
+                    semanticModel.Compilation
+                )
+            );
         }
 
         protected async Task<IEnumerable<CompletionItem>?> CreatePartialItemsAsync(
-            Document document, int position, TextSpan span, DeclarationModifiers modifiers, SyntaxToken token, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            TextSpan span,
+            DeclarationModifiers modifiers,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Only inside classes and structs
-            if (semanticModel.GetEnclosingSymbol(position, cancellationToken) is not INamedTypeSymbol enclosingSymbol)
+            if (
+                semanticModel.GetEnclosingSymbol(position, cancellationToken)
+                is not INamedTypeSymbol enclosingSymbol
+            )
                 return null;
 
             if (enclosingSymbol.TypeKind is not (TypeKind.Struct or TypeKind.Class))
                 return null;
 
-            var symbols = semanticModel.LookupSymbols(position, container: enclosingSymbol)
-                                        .OfType<IMethodSymbol>()
-                                        .Where(m => IsPartial(m) && m.PartialImplementationPart == null);
+            var symbols = semanticModel
+                .LookupSymbols(position, container: enclosingSymbol)
+                .OfType<IMethodSymbol>()
+                .Where(m => IsPartial(m) && m.PartialImplementationPart == null);
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             var line = text.Lines.IndexOf(position);
@@ -101,9 +161,21 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return symbols.Select(s => CreateItem(s, line, span, semanticModel, modifiers, token));
         }
 
-        private CompletionItem CreateItem(IMethodSymbol method, int line, TextSpan span, SemanticModel semanticModel, DeclarationModifiers modifiers, SyntaxToken token)
+        private CompletionItem CreateItem(
+            IMethodSymbol method,
+            int line,
+            TextSpan span,
+            SemanticModel semanticModel,
+            DeclarationModifiers modifiers,
+            SyntaxToken token
+        )
         {
-            modifiers = new DeclarationModifiers(method.IsStatic, isUnsafe: method.RequiresUnsafeModifier(), isPartial: true, isAsync: modifiers.IsAsync);
+            modifiers = new DeclarationModifiers(
+                method.IsStatic,
+                isUnsafe: method.RequiresUnsafeModifier(),
+                isPartial: true,
+                isAsync: modifiers.IsAsync
+            );
             var displayText = GetDisplayText(method, semanticModel, span.Start);
 
             return MemberInsertionCompletionItem.Create(
@@ -114,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 method,
                 token,
                 span.Start,
-                rules: GetRules());
+                rules: GetRules()
+            );
         }
     }
 }

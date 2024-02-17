@@ -22,17 +22,9 @@ namespace System.Activities
             this.Properties = new ActivityPropertyCollection(this);
         }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public KeyedCollection<string, DynamicActivityProperty> Properties
-        {
-            get;
-            private set;
-        }
+        public KeyedCollection<string, DynamicActivityProperty> Properties { get; private set; }
 
         public AttributeCollection GetAttributes()
         {
@@ -107,8 +99,10 @@ namespace System.Activities
                 dynamicProperties = TypeDescriptor.GetProperties(this.owner, true);
             }
 
-            // initial capacity is Properties + Name + Body 
-            List<PropertyDescriptor> propertyDescriptors = new List<PropertyDescriptor>(this.Properties.Count + 2);
+            // initial capacity is Properties + Name + Body
+            List<PropertyDescriptor> propertyDescriptors = new List<PropertyDescriptor>(
+                this.Properties.Count + 2
+            );
             for (int i = 0; i < dynamicProperties.Count; i++)
             {
                 PropertyDescriptor dynamicProperty = dynamicProperties[i];
@@ -120,15 +114,25 @@ namespace System.Activities
 
             foreach (DynamicActivityProperty property in Properties)
             {
-                if (string.IsNullOrEmpty(property.Name)) 
+                if (string.IsNullOrEmpty(property.Name))
                 {
-                    throw FxTrace.Exception.AsError(new ValidationException(SR.ActivityPropertyRequiresName(this.owner.DisplayName)));
-                }            
-                if (property.Type == null)
-                {                
-                    throw FxTrace.Exception.AsError(new ValidationException(SR.ActivityPropertyRequiresType(this.owner.DisplayName)));
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.ActivityPropertyRequiresName(this.owner.DisplayName)
+                        )
+                    );
                 }
-                propertyDescriptors.Add(new DynamicActivityPropertyDescriptor(property, this.owner.GetType()));
+                if (property.Type == null)
+                {
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.ActivityPropertyRequiresType(this.owner.DisplayName)
+                        )
+                    );
+                }
+                propertyDescriptors.Add(
+                    new DynamicActivityPropertyDescriptor(property, this.owner.GetType())
+                );
             }
 
             result = new PropertyDescriptorCollection(propertyDescriptors.ToArray());
@@ -147,7 +151,10 @@ namespace System.Activities
             DynamicActivityProperty activityProperty;
             Type componentType;
 
-            public DynamicActivityPropertyDescriptor(DynamicActivityProperty activityProperty, Type componentType)
+            public DynamicActivityPropertyDescriptor(
+                DynamicActivityProperty activityProperty,
+                Type componentType
+            )
                 : base(activityProperty.Name, null)
             {
                 this.activityProperty = activityProperty;
@@ -156,10 +163,7 @@ namespace System.Activities
 
             public override Type ComponentType
             {
-                get
-                {
-                    return this.componentType;
-                }
+                get { return this.componentType; }
             }
 
             public override AttributeCollection Attributes
@@ -170,10 +174,15 @@ namespace System.Activities
                     {
                         AttributeCollection inheritedAttributes = base.Attributes;
                         Collection<Attribute> propertyAttributes = this.activityProperty.Attributes;
-                        Attribute[] totalAttributes = new Attribute[inheritedAttributes.Count + propertyAttributes.Count + 1];
+                        Attribute[] totalAttributes = new Attribute[
+                            inheritedAttributes.Count + propertyAttributes.Count + 1
+                        ];
                         inheritedAttributes.CopyTo(totalAttributes, 0);
                         propertyAttributes.CopyTo(totalAttributes, inheritedAttributes.Count);
-                        totalAttributes[inheritedAttributes.Count + propertyAttributes.Count] = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden);
+                        totalAttributes[inheritedAttributes.Count + propertyAttributes.Count] =
+                            new DesignerSerializationVisibilityAttribute(
+                                DesignerSerializationVisibility.Hidden
+                            );
                         this.attributes = new AttributeCollection(totalAttributes);
                     }
                     return this.attributes;
@@ -182,18 +191,12 @@ namespace System.Activities
 
             public override bool IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override Type PropertyType
             {
-                get
-                {
-                    return this.activityProperty.Type;
-                }
+                get { return this.activityProperty.Type; }
             }
 
             public override object GetValue(object component)
@@ -201,10 +204,12 @@ namespace System.Activities
                 IDynamicActivity owner = component as IDynamicActivity;
                 if (owner == null || !owner.Properties.Contains(this.activityProperty))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidDynamicActivityProperty(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.InvalidDynamicActivityProperty(this.Name))
+                    );
                 }
 
-                return this.activityProperty.Value;                    
+                return this.activityProperty.Value;
             }
 
             public override void SetValue(object component, object value)
@@ -212,7 +217,9 @@ namespace System.Activities
                 IDynamicActivity owner = component as IDynamicActivity;
                 if (owner == null || !owner.Properties.Contains(this.activityProperty))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidDynamicActivityProperty(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.InvalidDynamicActivityProperty(this.Name))
+                    );
                 }
 
                 this.activityProperty.Value = value;
@@ -223,9 +230,7 @@ namespace System.Activities
                 return false;
             }
 
-            public override void ResetValue(object component)
-            {
-            }
+            public override void ResetValue(object component) { }
 
             public override bool ShouldSerializeValue(object component)
             {
@@ -239,7 +244,11 @@ namespace System.Activities
                     throw FxTrace.Exception.ArgumentNull("attributeList");
                 }
 
-                attributeList.Add(new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden));
+                attributeList.Add(
+                    new DesignerSerializationVisibilityAttribute(
+                        DesignerSerializationVisibility.Hidden
+                    )
+                );
             }
         }
 
@@ -262,11 +271,16 @@ namespace System.Activities
 
                 if (this.Contains(item.Name))
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR.DynamicActivityDuplicatePropertyDetected(item.Name), "item"));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(
+                            SR.DynamicActivityDuplicatePropertyDetected(item.Name),
+                            "item"
+                        )
+                    );
                 }
 
                 InvalidateCache();
-                base.InsertItem(index, item);                
+                base.InsertItem(index, item);
             }
 
             protected override void SetItem(int index, DynamicActivityProperty item)
@@ -280,11 +294,16 @@ namespace System.Activities
                 // name as item, no other element in the collection can.
                 if (!this[index].Name.Equals(item.Name) && this.Contains(item.Name))
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR.DynamicActivityDuplicatePropertyDetected(item.Name), "item"));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(
+                            SR.DynamicActivityDuplicatePropertyDetected(item.Name),
+                            "item"
+                        )
+                    );
                 }
 
                 InvalidateCache();
-                base.SetItem(index, item);                
+                base.SetItem(index, item);
             }
 
             protected override void RemoveItem(int index)
@@ -311,5 +330,3 @@ namespace System.Activities
         }
     }
 }
-
-

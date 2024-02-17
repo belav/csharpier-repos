@@ -1,17 +1,17 @@
 ﻿#region Using directives
 
 using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
-using System.Runtime.Remoting.Messaging;
 using System.Xml;
-using System.Globalization;
 
 #endregion
 
@@ -19,11 +19,20 @@ namespace System.Workflow.Activities
 {
     internal interface ICorrelationProvider
     {
-        ICollection<CorrelationProperty> ResolveCorrelationPropertyValues(Type interfaceType, string memberName, object[] methodArgs, bool provideInitializerTokens);
+        ICollection<CorrelationProperty> ResolveCorrelationPropertyValues(
+            Type interfaceType,
+            string memberName,
+            object[] methodArgs,
+            bool provideInitializerTokens
+        );
         bool IsInitializingMember(Type interfaceType, string memberName, object[] methodArgs);
     }
 
-    [AttributeUsageAttribute(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    [AttributeUsageAttribute(
+        AttributeTargets.Interface | AttributeTargets.Class,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     internal sealed class CorrelationProviderAttribute : Attribute
     {
         private Type correlationProviderType;
@@ -35,16 +44,19 @@ namespace System.Workflow.Activities
 
         internal Type CorrelationProviderType
         {
-            get
-            {
-                return this.correlationProviderType;
-            }
+            get { return this.correlationProviderType; }
         }
     }
 
     internal static class CorrelationService
     {
-        internal static void Initialize(IServiceProvider context, Activity activity, Type interfaceType, string methodName, Guid instanceId)
+        internal static void Initialize(
+            IServiceProvider context,
+            Activity activity,
+            Type interfaceType,
+            string methodName,
+            Guid instanceId
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -57,7 +69,14 @@ namespace System.Workflow.Activities
             InitializeFollowers(context, interfaceType, methodName);
         }
 
-        internal static bool Subscribe(IServiceProvider context, Activity activity, Type interfaceType, string methodName, IActivityEventListener<QueueEventArgs> eventListener, Guid instanceId)
+        internal static bool Subscribe(
+            IServiceProvider context,
+            Activity activity,
+            Type interfaceType,
+            string methodName,
+            IActivityEventListener<QueueEventArgs> eventListener,
+            Guid instanceId
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -66,7 +85,8 @@ namespace System.Workflow.Activities
             if (methodName == null)
                 throw new ArgumentNullException("methodName");
 
-            WorkflowQueuingService queueService = (WorkflowQueuingService)context.GetService(typeof(WorkflowQueuingService));
+            WorkflowQueuingService queueService = (WorkflowQueuingService)
+                context.GetService(typeof(WorkflowQueuingService));
             IComparable queueName = ResolveQueueName(activity, interfaceType, methodName);
             if (queueName != null)
             {
@@ -85,17 +105,34 @@ namespace System.Workflow.Activities
                 if (eventListener != null)
                 {
                     queue.RegisterForQueueItemAvailable(eventListener, activity.QualifiedName);
-                    WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "CorrelationService: activity '{0}' subscribing to QueueItemAvailable", activity.QualifiedName);
+                    WorkflowActivityTrace.Activity.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "CorrelationService: activity '{0}' subscribing to QueueItemAvailable",
+                        activity.QualifiedName
+                    );
                     return true;
                 }
                 return false;
             }
 
-            SubscribeForCorrelationTokenInvalidation(activity, interfaceType, methodName, eventListener, instanceId);
+            SubscribeForCorrelationTokenInvalidation(
+                activity,
+                interfaceType,
+                methodName,
+                eventListener,
+                instanceId
+            );
             return false;
         }
 
-        internal static bool Unsubscribe(IServiceProvider context, Activity activity, Type interfaceType, string methodName, IActivityEventListener<QueueEventArgs> eventListener)
+        internal static bool Unsubscribe(
+            IServiceProvider context,
+            Activity activity,
+            Type interfaceType,
+            string methodName,
+            IActivityEventListener<QueueEventArgs> eventListener
+        )
         {
             if (activity == null)
                 throw new ArgumentException("activity");
@@ -104,20 +141,27 @@ namespace System.Workflow.Activities
             if (methodName == null)
                 throw new ArgumentNullException("methodName");
 
-            WorkflowQueuingService queueService = (WorkflowQueuingService)context.GetService(typeof(WorkflowQueuingService));
+            WorkflowQueuingService queueService = (WorkflowQueuingService)
+                context.GetService(typeof(WorkflowQueuingService));
             IComparable queueName = ResolveQueueName(activity, interfaceType, methodName);
             if (queueName != null)
             {
                 if (queueService.Exists(queueName))
                 {
-                    queueService.GetWorkflowQueue(queueName).UnregisterForQueueItemAvailable(eventListener);
+                    queueService
+                        .GetWorkflowQueue(queueName)
+                        .UnregisterForQueueItemAvailable(eventListener);
                     return true;
                 }
             }
             return false;
         }
 
-        internal static IComparable ResolveQueueName(Activity activity, Type interfaceType, string methodName)
+        internal static IComparable ResolveQueueName(
+            Activity activity,
+            Type interfaceType,
+            string methodName
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -126,12 +170,18 @@ namespace System.Workflow.Activities
             if (methodName == null)
                 throw new ArgumentNullException("methodName");
 
-            // resolver will check for an explicit correlation provider, 
+            // resolver will check for an explicit correlation provider,
             // if none present this will return an uncorrelated provider.
             // note, an uncorrelated methodName will always be an initializer
             if (CorrelationResolver.IsInitializingMember(interfaceType, methodName, null))
             {
-                ICollection<CorrelationProperty> corrvalues = CorrelationResolver.ResolveCorrelationValues(interfaceType, methodName, null, true);
+                ICollection<CorrelationProperty> corrvalues =
+                    CorrelationResolver.ResolveCorrelationValues(
+                        interfaceType,
+                        methodName,
+                        null,
+                        true
+                    );
                 return new EventQueueName(interfaceType, methodName, corrvalues);
             }
 
@@ -142,20 +192,42 @@ namespace System.Workflow.Activities
             return new EventQueueName(interfaceType, methodName, reference.Properties);
         }
 
-        internal static void InvalidateCorrelationToken(Activity activity, Type interfaceType, string methodName, object[] messageArgs)
+        internal static void InvalidateCorrelationToken(
+            Activity activity,
+            Type interfaceType,
+            string methodName,
+            object[] messageArgs
+        )
         {
             object correlationProvider = CorrelationResolver.GetCorrelationProvider(interfaceType);
             if (correlationProvider is NonCorrelatedProvider)
                 return;
 
             CorrelationToken reference = GetCorrelationToken(activity);
-            ICollection<CorrelationProperty> correlationvalues = CorrelationResolver.ResolveCorrelationValues(interfaceType, methodName, messageArgs, false);
+            ICollection<CorrelationProperty> correlationvalues =
+                CorrelationResolver.ResolveCorrelationValues(
+                    interfaceType,
+                    methodName,
+                    messageArgs,
+                    false
+                );
 
             if (!CorrelationResolver.IsInitializingMember(interfaceType, methodName, messageArgs))
             {
                 if (!reference.Initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationNotInitialized, reference.Name, activity.QualifiedName));
-                ValidateCorrelation(reference.Properties, correlationvalues, reference.Name, activity);
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_CorrelationNotInitialized,
+                            reference.Name,
+                            activity.QualifiedName
+                        )
+                    );
+                ValidateCorrelation(
+                    reference.Properties,
+                    correlationvalues,
+                    reference.Name,
+                    activity
+                );
                 return;
             }
 
@@ -165,32 +237,64 @@ namespace System.Workflow.Activities
 
         private static CorrelationToken GetCorrelationToken(Activity activity)
         {
-            DependencyProperty dependencyProperty = DependencyProperty.FromName("CorrelationToken", activity.GetType());
+            DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                "CorrelationToken",
+                activity.GetType()
+            );
             if (dependencyProperty == null)
-                dependencyProperty = DependencyProperty.FromName("CorrelationToken", activity.GetType().BaseType);
+                dependencyProperty = DependencyProperty.FromName(
+                    "CorrelationToken",
+                    activity.GetType().BaseType
+                );
             CorrelationToken reference = activity.GetValue(dependencyProperty) as CorrelationToken;
             if (reference == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationTokenMissing, activity.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_CorrelationTokenMissing, activity.Name)
+                );
 
-            CorrelationToken correlator = CorrelationTokenCollection.GetCorrelationToken(activity, reference.Name, reference.OwnerActivityName);
+            CorrelationToken correlator = CorrelationTokenCollection.GetCorrelationToken(
+                activity,
+                reference.Name,
+                reference.OwnerActivityName
+            );
             if (correlator == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationTokenMissing, activity.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_CorrelationTokenMissing, activity.Name)
+                );
 
             return correlator;
         }
 
-        private static void ValidateCorrelation(ICollection<CorrelationProperty> initializerProperties, ICollection<CorrelationProperty> followerProperties, string memberName, Activity activity)
+        private static void ValidateCorrelation(
+            ICollection<CorrelationProperty> initializerProperties,
+            ICollection<CorrelationProperty> followerProperties,
+            string memberName,
+            Activity activity
+        )
         {
             if (followerProperties == null && initializerProperties == null)
                 return;
 
             if (followerProperties == null || initializerProperties == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationViolationException, memberName, activity.QualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_CorrelationViolationException,
+                        memberName,
+                        activity.QualifiedName
+                    )
+                );
 
             if (initializerProperties.Count != followerProperties.Count)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationViolationException, memberName, activity.QualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_CorrelationViolationException,
+                        memberName,
+                        activity.QualifiedName
+                    )
+                );
 
-            IEnumerator<CorrelationProperty> initializerValues = initializerProperties.GetEnumerator();
+            IEnumerator<CorrelationProperty> initializerValues =
+                initializerProperties.GetEnumerator();
             IEnumerator<CorrelationProperty> followerValues = followerProperties.GetEnumerator();
             while (initializerValues.MoveNext() && followerValues.MoveNext())
             {
@@ -204,15 +308,26 @@ namespace System.Workflow.Activities
                 // The collections MIGHT be in the same order. Before searching the followerProperties collection for an element with a matching
                 // name, see if the current element in the initializerValues and followerValues enumerators have a matching name.
                 // If they do match, just fall thru because followerValue is already set to followerValues.Current.Value;
-                if (!initializerValues.Current.Name.Equals(followerValues.Current.Name, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !initializerValues.Current.Name.Equals(
+                        followerValues.Current.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     CorrelationProperty followerProperty = null;
-                    IEnumerator<CorrelationProperty> followerEnumerator = followerProperties.GetEnumerator();
+                    IEnumerator<CorrelationProperty> followerEnumerator =
+                        followerProperties.GetEnumerator();
                     while (followerEnumerator.MoveNext())
                     {
                         // We don't need to be concerned with culture here because the names we are comparing
                         // are parameter names on methods in an interface.
-                        if (initializerValues.Current.Name.Equals(followerEnumerator.Current.Name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            initializerValues.Current.Name.Equals(
+                                followerEnumerator.Current.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // We found a matching Name in the follower collection.
                             // Saving the followerProperty rather than followerEnumerator.Current.Value here
@@ -223,7 +338,7 @@ namespace System.Workflow.Activities
                             followerProperty = followerEnumerator.Current;
                             break;
                         }
-                        // If we get here, the name of the parameter doesn't match, so just move to the next element in the 
+                        // If we get here, the name of the parameter doesn't match, so just move to the next element in the
                         // followerEnumerator.
                     }
                     // If we found a followerProperty with a matching name, use it.
@@ -238,22 +353,57 @@ namespace System.Workflow.Activities
                 }
 
                 if (initializerValue != null && (initializerValue.CompareTo(followerValue) != 0))
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationViolationException, memberName, activity.QualifiedName));
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_CorrelationViolationException,
+                            memberName,
+                            activity.QualifiedName
+                        )
+                    );
                 else if (initializerValues.Current.Value == null && followerValue == null)
                     return;
-                else if (initializerValue == null && followerValue != null && !followerValue.Equals(initializerValues.Current.Value))
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationViolationException, memberName, activity.QualifiedName));
+                else if (
+                    initializerValue == null
+                    && followerValue != null
+                    && !followerValue.Equals(initializerValues.Current.Value)
+                )
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_CorrelationViolationException,
+                            memberName,
+                            activity.QualifiedName
+                        )
+                    );
             }
         }
 
-        private static void SubscribeForCorrelationTokenInvalidation(Activity activity, Type interfaceType, string followermethodName, IActivityEventListener<QueueEventArgs> eventListener, Guid instanceId)
+        private static void SubscribeForCorrelationTokenInvalidation(
+            Activity activity,
+            Type interfaceType,
+            string followermethodName,
+            IActivityEventListener<QueueEventArgs> eventListener,
+            Guid instanceId
+        )
         {
             CorrelationToken reference = GetCorrelationToken(activity);
-            CorrelationTokenInvalidatedHandler dataChangeEventListener = new CorrelationTokenInvalidatedHandler(interfaceType, followermethodName, eventListener, instanceId);
-            reference.SubscribeForCorrelationTokenInitializedEvent(activity, dataChangeEventListener);
+            CorrelationTokenInvalidatedHandler dataChangeEventListener =
+                new CorrelationTokenInvalidatedHandler(
+                    interfaceType,
+                    followermethodName,
+                    eventListener,
+                    instanceId
+                );
+            reference.SubscribeForCorrelationTokenInitializedEvent(
+                activity,
+                dataChangeEventListener
+            );
         }
 
-        private static void InitializeFollowers(IServiceProvider context, Type interfaceType, string followermethodName)
+        private static void InitializeFollowers(
+            IServiceProvider context,
+            Type interfaceType,
+            string followermethodName
+        )
         {
             if (CorrelationResolver.IsInitializingMember(interfaceType, followermethodName, null))
                 return;
@@ -265,17 +415,45 @@ namespace System.Workflow.Activities
             }
         }
 
-        private static void CreateFollowerEntry(IServiceProvider context, Type interfaceType, string followermethodName, string initializermethodName)
+        private static void CreateFollowerEntry(
+            IServiceProvider context,
+            Type interfaceType,
+            string followermethodName,
+            string initializermethodName
+        )
         {
-            if (!CorrelationResolver.IsInitializingMember(interfaceType, initializermethodName, null))
+            if (
+                !CorrelationResolver.IsInitializingMember(
+                    interfaceType,
+                    initializermethodName,
+                    null
+                )
+            )
                 return;
 
-            WorkflowQueuingService queueSvcs = (WorkflowQueuingService)context.GetService(typeof(WorkflowQueuingService));
+            WorkflowQueuingService queueSvcs = (WorkflowQueuingService)
+                context.GetService(typeof(WorkflowQueuingService));
             FollowerQueueCreator follower = new FollowerQueueCreator(followermethodName);
-            WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "Creating follower {0} on initializer {1}", interfaceType.Name + followermethodName, interfaceType.Name + initializermethodName);
+            WorkflowActivityTrace.Activity.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Creating follower {0} on initializer {1}",
+                interfaceType.Name + followermethodName,
+                interfaceType.Name + initializermethodName
+            );
 
-            ICollection<CorrelationProperty> corrValues = CorrelationResolver.ResolveCorrelationValues(interfaceType, initializermethodName, null, true);
-            EventQueueName key = new EventQueueName(interfaceType, initializermethodName, corrValues);
+            ICollection<CorrelationProperty> corrValues =
+                CorrelationResolver.ResolveCorrelationValues(
+                    interfaceType,
+                    initializermethodName,
+                    null,
+                    true
+                );
+            EventQueueName key = new EventQueueName(
+                interfaceType,
+                initializermethodName,
+                corrValues
+            );
             WorkflowQueue initializerQueue = null;
             if (queueSvcs.Exists(key))
             {
@@ -291,7 +469,11 @@ namespace System.Workflow.Activities
             initializerQueue.RegisterForQueueItemArrived(follower);
         }
 
-        internal static void UninitializeFollowers(Type interfaceType, string initializer, WorkflowQueue initializerQueue)
+        internal static void UninitializeFollowers(
+            Type interfaceType,
+            string initializer,
+            WorkflowQueue initializerQueue
+        )
         {
             if (!CorrelationResolver.IsInitializingMember(interfaceType, initializer, null))
                 return;
@@ -301,7 +483,9 @@ namespace System.Workflow.Activities
             {
                 string follower = e.Name;
                 if (!CorrelationResolver.IsInitializingMember(interfaceType, e.Name, null))
-                    initializerQueue.UnregisterForQueueItemArrived(new FollowerQueueCreator(follower));
+                    initializerQueue.UnregisterForQueueItemArrived(
+                        new FollowerQueueCreator(follower)
+                    );
             }
         }
     }

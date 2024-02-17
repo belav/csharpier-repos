@@ -8,19 +8,17 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
+using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     // This class represents the key of  constraint on values that a relation slot may have
     internal class ExtentKey : InternalBase
     {
-
         #region Constructors
         // effects: Creates a key object for an extent (present in each MemberPath)
         // with the fields corresponding to keyFields
@@ -47,7 +45,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // entityType) for entityType and returns a key. "prefix" gives the
         // path of the extent or end of a relationship in a relationship set
         // -- prefix is prepended to the entity's key fields to get the full memberpath
-        internal static List<ExtentKey> GetKeysForEntityType(MemberPath prefix, EntityType entityType)
+        internal static List<ExtentKey> GetKeysForEntityType(
+            MemberPath prefix,
+            EntityType entityType
+        )
         {
             // CHANGE_Microsoft_MULTIPLE_KEYS: currently there is a single key only. Need to support
             // keys inside complex types + unique keys
@@ -60,7 +61,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         // effects: Returns the key for entityType prefixed with prefix (for
         // its memberPath)
-        internal static ExtentKey GetPrimaryKeyForEntityType(MemberPath prefix, EntityType entityType)
+        internal static ExtentKey GetPrimaryKeyForEntityType(
+            MemberPath prefix,
+            EntityType entityType
+        )
         {
             List<MemberPath> keyFields = new List<MemberPath>();
             foreach (EdmMember keyMember in entityType.KeyMembers)
@@ -76,7 +80,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         // effects: Returns a key correspnding to all the fields in different
         // ends of relationtype prefixed with "prefix"
-        internal static ExtentKey GetKeyForRelationType(MemberPath prefix, AssociationType relationType)
+        internal static ExtentKey GetKeyForRelationType(
+            MemberPath prefix,
+            AssociationType relationType
+        )
         {
             List<MemberPath> keyFields = new List<MemberPath>();
 

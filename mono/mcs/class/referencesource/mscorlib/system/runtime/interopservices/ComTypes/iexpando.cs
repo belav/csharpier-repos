@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*==========================================================================
 **
 ** Interface:  IExpando
 **
 **
-** Purpose: 
-** This interface is redefined here since the original IExpando interface 
-** has all its methods marked as ecall's since it is a managed standard 
-** interface. This interface is used from within the runtime to make a call 
+** Purpose:
+** This interface is redefined here since the original IExpando interface
+** has all its methods marked as ecall's since it is a managed standard
+** interface. This interface is used from within the runtime to make a call
 ** on the COM server directly when it implements the IExpando interface.
 **
-** 
+**
 ==========================================================================*/
 
 #if !MOBILE
@@ -23,7 +23,7 @@ namespace System.Runtime.InteropServices.ComTypes
     using System;
     using System.Reflection;
 
-    [Guid("AFBF15E6-C37C-11d2-B88E-00A0C9B471B8")]    
+    [Guid("AFBF15E6-C37C-11d2-B88E-00A0C9B471B8")]
     internal interface IExpando : IReflect
     {
         FieldInfo AddField(String name);
