@@ -72,8 +72,8 @@ OFFSET 0 LIMIT 1
         await PartitionKeyTestAsync(
             ctx =>
                 ctx.Customers.Where(b =>
-                    (b.Id == 42 || b.Name == "John Snow") && b.PartitionKey == 1
-                )
+                        (b.Id == 42 || b.Name == "John Snow") && b.PartitionKey == 1
+                    )
                     .FirstAsync(),
             readSql,
             ctx => ctx.Customers.WithPartitionKey("2").LastAsync(),

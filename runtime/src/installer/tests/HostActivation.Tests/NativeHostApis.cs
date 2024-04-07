@@ -244,9 +244,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             );
 
             f.Dotnet.Exec(
-                f.AppDll,
-                new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
-            )
+                    f.AppDll,
+                    new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
@@ -281,9 +281,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             );
 
             f.Dotnet.Exec(
-                f.AppDll,
-                new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
-            )
+                    f.AppDll,
+                    new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
@@ -452,9 +452,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 // We pass f.WorkingDir so that we don't resolve dotnet_dir to the global installation
                 // in the native side.
                 f.Dotnet.Exec(
-                    f.AppDll,
-                    new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
-                )
+                        f.AppDll,
+                        new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
+                    )
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED", f.SelfRegistered)
                     .CaptureStdOut()
@@ -490,9 +490,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 // We pass f.WorkingDir so that we don't resolve dotnet_dir to the global installation
                 // in the native side.
                 f.Dotnet.Exec(
-                    f.AppDll,
-                    new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
-                )
+                        f.AppDll,
+                        new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
+                    )
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     // Test with a self-registered path the same as ProgramFiles, with a trailing slash.  Expect this to be de-duped
                     .EnvironmentVariable(
@@ -537,9 +537,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var f = new SdkResolutionFixture(sharedTestState);
 
             f.Dotnet.Exec(
-                f.AppDll,
-                new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_result_ptr" }
-            )
+                    f.AppDll,
+                    new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_result_ptr" }
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
@@ -557,9 +557,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var f = new SdkResolutionFixture(sharedTestState);
 
             f.Dotnet.Exec(
-                f.AppDll,
-                new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_reserved_ptr" }
-            )
+                    f.AppDll,
+                    new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_reserved_ptr" }
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()

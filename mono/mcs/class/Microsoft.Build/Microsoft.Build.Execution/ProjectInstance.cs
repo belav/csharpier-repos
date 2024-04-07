@@ -342,9 +342,9 @@ namespace Microsoft.Build.Execution
                             this,
                             p.ItemType,
                             p.Metadata.Select(m => new KeyValuePair<string, string>(
-                                m.Name,
-                                m.Value
-                            ))
+                                    m.Name,
+                                    m.Value
+                                ))
                                 .ToList(),
                             s
                         );

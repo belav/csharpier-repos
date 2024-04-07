@@ -1302,11 +1302,11 @@ namespace System.Threading.Tasks.Tests
         public static void RunSynchronouslyTest()
         {
             Task.Factory.StartNew(
-                delegate
-                {
-                    CoreRunSynchronouslyTest();
-                }
-            )
+                    delegate
+                    {
+                        CoreRunSynchronouslyTest();
+                    }
+                )
                 .Wait();
 
             // Executing RunSynchronously() on a task whose cancellationToken was previously signaled

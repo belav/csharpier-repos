@@ -2020,8 +2020,8 @@ public class CF1
                         Assert.Equal(
                             0,
                             m.ContainingAssembly.GetAttributes(
-                                AttributeDescription.TypeForwardedToAttribute
-                            )
+                                    AttributeDescription.TypeForwardedToAttribute
+                                )
                                 .Count()
                         );
                     }
@@ -2094,8 +2094,8 @@ public class CF1
                         Assert.Equal(
                             0,
                             m.ContainingAssembly.GetAttributes(
-                                AttributeDescription.TypeForwardedToAttribute
-                            )
+                                    AttributeDescription.TypeForwardedToAttribute
+                                )
                                 .Count()
                         );
                     }

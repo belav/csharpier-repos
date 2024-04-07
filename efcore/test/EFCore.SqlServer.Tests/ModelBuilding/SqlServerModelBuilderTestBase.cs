@@ -1157,8 +1157,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                                     .Ignore(l => l.BookLabel);
 
                                 ab.OwnedEntityType.FindNavigation(
-                                    nameof(BookLabel.SpecialBookLabel)
-                                )!
+                                        nameof(BookLabel.SpecialBookLabel)
+                                    )!
                                     .AddAnnotation("Foo", "Bar");
                             }
                         );

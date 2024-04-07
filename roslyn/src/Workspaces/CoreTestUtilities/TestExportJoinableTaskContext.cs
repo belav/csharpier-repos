@@ -122,9 +122,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     type.GetField("foregroundThread", BindingFlags.Static | BindingFlags.NonPublic)!
                         .SetValue(null, thread);
                     type.GetField(
-                            "ForegroundTaskScheduler",
-                            BindingFlags.Static | BindingFlags.NonPublic
-                        )!
+                                "ForegroundTaskScheduler",
+                                BindingFlags.Static | BindingFlags.NonPublic
+                            )!
                         .SetValue(null, taskScheduler);
 
                     break;

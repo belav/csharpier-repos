@@ -546,8 +546,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var expectedInterfaces = new HashSet<string>(
                 src.CustomAttributes.Where(w =>
-                    w.AttributeType.Name == nameof(KeptInterfaceAttribute)
-                )
+                        w.AttributeType.Name == nameof(KeptInterfaceAttribute)
+                    )
                     .Select(FormatBaseOrInterfaceAttributeValue)
             );
             if (expectedInterfaces.Count == 0)

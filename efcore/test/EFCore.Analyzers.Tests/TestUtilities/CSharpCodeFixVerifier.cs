@@ -50,10 +50,10 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
                 .ToList();
 
             var project = await base.CreateProjectImplAsync(
-                primaryProject,
-                additionalProjects,
-                cancellationToken
-            )
+                    primaryProject,
+                    additionalProjects,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
             return project.WithMetadataReferences(metadataReferences);
         }

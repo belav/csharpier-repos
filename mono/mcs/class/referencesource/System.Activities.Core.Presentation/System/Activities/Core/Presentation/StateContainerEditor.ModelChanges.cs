@@ -300,8 +300,8 @@ namespace System.Activities.Core.Presentation
                         )
                         {
                             this.StateMachineModelItem.Properties[
-                                StateMachineDesigner.InitialStatePropertyName
-                            ]
+                                    StateMachineDesigner.InitialStatePropertyName
+                                ]
                                 .SetValue(stateModelItem);
                             PointCollection connectorViewState = new PointCollection(
                                 ConnectorRouter.Route(

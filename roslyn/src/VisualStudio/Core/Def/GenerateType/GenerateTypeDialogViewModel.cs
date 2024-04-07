@@ -427,11 +427,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                         this.Folders != null
                         && this.FileName != null
                         && this.SelectedProject.Documents.Where(n =>
-                            n.Name != null
-                            && n.Folders.Count > 0
-                            && n.Name == this.FileName
-                            && this.Folders.SequenceEqual(n.Folders)
-                        )
+                                n.Name != null
+                                && n.Folders.Count > 0
+                                && n.Name == this.FileName
+                                && this.Folders.SequenceEqual(n.Folders)
+                            )
                             .Any()
                     )
                     || File.Exists(FullFilePath)

@@ -1311,8 +1311,8 @@ class A
                 {
                     diagnostics.AddRange(
                         e.Diagnostics.Where(d =>
-                            d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
-                        )
+                                d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
+                            )
                             .OrderBy(d => d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text))
                     );
                 }

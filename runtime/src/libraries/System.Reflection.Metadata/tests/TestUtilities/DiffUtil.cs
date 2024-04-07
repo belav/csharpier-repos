@@ -61,11 +61,11 @@ namespace System.Reflection.Metadata.Tests
             {
                 foreach (
                     var edit in base.GetEdits(
-                        sequenceA,
-                        sequenceA.Count,
-                        sequenceB,
-                        sequenceB.Count
-                    )
+                            sequenceA,
+                            sequenceA.Count,
+                            sequenceB,
+                            sequenceB.Count
+                        )
                         .Reverse()
                 )
                 {

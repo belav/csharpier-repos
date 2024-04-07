@@ -348,8 +348,8 @@ namespace Microsoft.Build.Construction
                 .Where(p =>
                     string.IsNullOrEmpty(p.Condition)
                     && p.Items.Where(s =>
-                        s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                    )
+                            s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                        )
                         .FirstOrDefault() != null
                 )
                 .FirstOrDefault();
@@ -364,8 +364,8 @@ namespace Microsoft.Build.Construction
                 .Where(p =>
                     string.IsNullOrEmpty(p.Condition)
                     && p.ItemDefinitions.Where(s =>
-                        s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                    )
+                            s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                        )
                         .FirstOrDefault() != null
                 )
                 .FirstOrDefault();

@@ -2194,9 +2194,9 @@ namespace System.Reflection.Tests
 
             // [return: NotNullIfNotNull(nameof(nullable))] public string? NullableNotNullIfNotNullReturn(string? nullable, [NotNull] ref string? readNotNull)
             ParameterInfo[] nullableNotNullIfNotNullReturn = type.GetMethod(
-                    "NullableNotNullIfNotNullReturn",
-                    flags
-                )!
+                        "NullableNotNullIfNotNullReturn",
+                        flags
+                    )!
                 .GetParameters();
             NullabilityInfo returnNotNullIfNotNull = nullabilityContext.Create(
                 type.GetMethod("NullableNotNullIfNotNullReturn", flags)!.ReturnParameter

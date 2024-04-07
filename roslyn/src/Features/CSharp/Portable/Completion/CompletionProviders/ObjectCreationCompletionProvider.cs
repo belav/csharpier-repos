@@ -92,12 +92,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         )
         {
             var result = await base.GetSymbolsAsync(
-                completionContext,
-                context,
-                position,
-                options,
-                cancellationToken
-            )
+                    completionContext,
+                    context,
+                    position,
+                    options,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
             if (result.Any())
             {

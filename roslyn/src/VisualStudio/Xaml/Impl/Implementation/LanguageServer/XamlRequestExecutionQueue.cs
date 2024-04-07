@@ -68,11 +68,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 try
                 {
                     return await base.ExecuteAsync<TRequestType, TResponseType>(
-                        request,
-                        methodName,
-                        lspServices,
-                        cancellationToken
-                    )
+                            request,
+                            methodName,
+                            lspServices,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 catch (Exception e) when (e is not OperationCanceledException)

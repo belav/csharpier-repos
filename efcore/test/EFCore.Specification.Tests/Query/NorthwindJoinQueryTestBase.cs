@@ -890,9 +890,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         c.CustomerID,
                         c.City,
                         c.Orders.SelectMany(o =>
-                            o.OrderDetails.Where(od => od.OrderID < 11000)
-                                .Select(od => new OrderDetailViewModel(od.OrderID, od.ProductID))
-                        )
+                                o.OrderDetails.Where(od => od.OrderID < 11000)
+                                    .Select(od => new OrderDetailViewModel(
+                                        od.OrderID,
+                                        od.ProductID
+                                    ))
+                            )
                             .ToArray()
                     )),
             assertOrder: true,

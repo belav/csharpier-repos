@@ -2874,8 +2874,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(l1 =>
                         l1.OneToMany_Optional1.Where(x =>
-                            ss.Set<Level1>().Count(xx => xx.Id != x.Id) > 1
-                        )
+                                ss.Set<Level1>().Count(xx => xx.Id != x.Id) > 1
+                            )
                             .OrderBy(x => x.Id)
                             .Take(3)
                     ),

@@ -84,11 +84,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             var newDocument = await base.AddEventAsync(
-                context,
-                destination,
-                @event,
-                cancellationToken
-            )
+                    context,
+                    destination,
+                    @event,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             var namedType = @event.Type as INamedTypeSymbol;

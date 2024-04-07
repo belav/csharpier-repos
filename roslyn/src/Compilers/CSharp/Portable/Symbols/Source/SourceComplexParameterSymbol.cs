@@ -1434,7 +1434,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             var paramList =
                 node // AttributeSyntax
-                .Parent // AttributeListSyntax
+                    .Parent // AttributeListSyntax
                     .Parent // ParameterSyntax
                     .Parent as ParameterListSyntax; // ParameterListSyntax
             if (paramList == null)

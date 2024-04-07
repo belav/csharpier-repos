@@ -58,14 +58,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
                             x.SeparatorDisplayParts,
                             x.SuffixDisplayParts,
                             x.Parameters.Select(y => new SignatureHelpParameter(
-                                y.Name,
-                                y.IsOptional,
-                                y.DocumentationFactory,
-                                y.DisplayParts,
-                                y.PrefixDisplayParts,
-                                y.SuffixDisplayParts,
-                                y.SelectedDisplayParts
-                            ))
+                                    y.Name,
+                                    y.IsOptional,
+                                    y.DocumentationFactory,
+                                    y.DisplayParts,
+                                    y.PrefixDisplayParts,
+                                    y.SuffixDisplayParts,
+                                    y.SelectedDisplayParts
+                                ))
                                 .ToList(),
                             x.DescriptionParts
                         ))

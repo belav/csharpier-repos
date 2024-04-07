@@ -20,11 +20,11 @@ namespace System.Threading.Tasks.Tests
             {
                 var asyncLocal = new AsyncLocal<int>();
                 Task.Factory.StartNew(
-                    () => asyncLocal.Value = 42,
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    new InlineTaskScheduler()
-                )
+                        () => asyncLocal.Value = 42,
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        new InlineTaskScheduler()
+                    )
                     .Wait();
                 Assert.Equal(suppressFlow ? 42 : 0, asyncLocal.Value);
             }
