@@ -22,13 +22,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         public ExtractInterfaceDialogViewModel ViewModel { get; }
 
         // Expose localized strings for binding
-        public string ExtractInterfaceDialogTitle { get { return ServicesVSResources.Extract_Interface; } }
-        public string NewInterfaceName { get { return ServicesVSResources.New_interface_name_colon; } }
-        public string SelectPublicMembersToFormInterface { get { return ServicesVSResources.Select_public_members_to_form_interface; } }
-        public string SelectAll { get { return ServicesVSResources.Select_All; } }
-        public string DeselectAll { get { return ServicesVSResources.Deselect_All; } }
-        public string OK { get { return ServicesVSResources.OK; } }
-        public string Cancel { get { return ServicesVSResources.Cancel; } }
+        public string ExtractInterfaceDialogTitle
+        {
+            get { return ServicesVSResources.Extract_Interface; }
+        }
+        public string NewInterfaceName
+        {
+            get { return ServicesVSResources.New_interface_name_colon; }
+        }
+        public string SelectPublicMembersToFormInterface
+        {
+            get { return ServicesVSResources.Select_public_members_to_form_interface; }
+        }
+        public string SelectAll
+        {
+            get { return ServicesVSResources.Select_All; }
+        }
+        public string DeselectAll
+        {
+            get { return ServicesVSResources.Deselect_All; }
+        }
+        public string OK
+        {
+            get { return ServicesVSResources.OK; }
+        }
+        public string Cancel
+        {
+            get { return ServicesVSResources.Cancel; }
+        }
 
         public MemberSelection MemberSelectionControl { get; }
 
@@ -53,18 +74,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly ExtractInterfaceDialog _dialog;
 
-            public TestAccessor(ExtractInterfaceDialog dialog)
-                => _dialog = dialog;
+            public TestAccessor(ExtractInterfaceDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;
 
@@ -74,9 +92,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
             public Button DeselectAllButton => _dialog.MemberSelectionControl.DeselectAllButton;
 
-            public RadioButton DestinationCurrentFileSelectionRadioButton => _dialog.DestinationControl.DestinationCurrentFileSelectionRadioButton;
+            public RadioButton DestinationCurrentFileSelectionRadioButton =>
+                _dialog.DestinationControl.DestinationCurrentFileSelectionRadioButton;
 
-            public RadioButton DestinationNewFileSelectionRadioButton => _dialog.DestinationControl.DestinationNewFileSelectionRadioButton;
+            public RadioButton DestinationNewFileSelectionRadioButton =>
+                _dialog.DestinationControl.DestinationNewFileSelectionRadioButton;
 
             public TextBox FileNameTextBox => _dialog.DestinationControl.fileNameTextBox;
 

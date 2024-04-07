@@ -8,7 +8,16 @@ namespace System.Runtime.CompilerServices
     /// build the attributed async method or to build the attributed type when used as the return type
     /// of an async method.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate
+            | AttributeTargets.Enum
+            | AttributeTargets.Method,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class AsyncMethodBuilderAttribute : Attribute
     {
         /// <summary>Initializes the <see cref="AsyncMethodBuilderAttribute"/>.</summary>

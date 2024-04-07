@@ -3,7 +3,6 @@
 
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace System
@@ -84,7 +83,12 @@ namespace System
         // needs to cause the process to exit. It is the classlib's opportunity to customize the
         // termination behavior in whatever way necessary.
         [RuntimeExport("RuntimeFailFast")]
-        internal static void RuntimeFailFast(RhFailFastReason reason, Exception exception, IntPtr pExAddress, IntPtr pExContext)
+        internal static void RuntimeFailFast(
+            RhFailFastReason reason,
+            Exception exception,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             RuntimeImports.RhpFallbackFailFast();
         }
@@ -103,13 +107,9 @@ namespace System
         }
 
         [RuntimeExport("OnFirstChanceException")]
-        internal static void OnFirstChanceException(object e)
-        {
-        }
+        internal static void OnFirstChanceException(object e) { }
 
         [RuntimeExport("OnUnhandledException")]
-        internal static void OnUnhandledException(object e)
-        {
-        }
+        internal static void OnUnhandledException(object e) { }
     }
 }

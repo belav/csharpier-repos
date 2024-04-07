@@ -12,9 +12,19 @@ namespace System.Xml
 
     internal class PositionInfo : IXmlLineInfo
     {
-        public virtual bool HasLineInfo() { return false; }
-        public virtual int LineNumber { get { return 0; } }
-        public virtual int LinePosition { get { return 0; } }
+        public virtual bool HasLineInfo()
+        {
+            return false;
+        }
+
+        public virtual int LineNumber
+        {
+            get { return 0; }
+        }
+        public virtual int LinePosition
+        {
+            get { return 0; }
+        }
 
         public static PositionInfo GetPositionInfo(object o)
         {
@@ -46,18 +56,12 @@ namespace System.Xml
 
         public override int LineNumber
         {
-            get
-            {
-                return _lineInfo.LineNumber;
-            }
+            get { return _lineInfo.LineNumber; }
         }
 
         public override int LinePosition
         {
-            get
-            {
-                return _lineInfo.LinePosition;
-            }
+            get { return _lineInfo.LinePosition; }
         }
     }
 }

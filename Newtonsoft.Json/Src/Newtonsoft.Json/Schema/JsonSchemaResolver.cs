@@ -44,7 +44,9 @@ namespace Newtonsoft.Json.Schema
     /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public class JsonSchemaResolver
     {
         /// <summary>
@@ -68,11 +70,15 @@ namespace Newtonsoft.Json.Schema
         /// <returns>A <see cref="JsonSchema"/> for the specified reference.</returns>
         public virtual JsonSchema GetSchema(string reference)
         {
-            JsonSchema schema = LoadedSchemas.SingleOrDefault(s => string.Equals(s.Id, reference, StringComparison.Ordinal));
+            JsonSchema schema = LoadedSchemas.SingleOrDefault(s =>
+                string.Equals(s.Id, reference, StringComparison.Ordinal)
+            );
 
             if (schema == null)
             {
-                schema = LoadedSchemas.SingleOrDefault(s => string.Equals(s.Location, reference, StringComparison.Ordinal));
+                schema = LoadedSchemas.SingleOrDefault(s =>
+                    string.Equals(s.Location, reference, StringComparison.Ordinal)
+                );
             }
 
             return schema;

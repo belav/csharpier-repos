@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract partial class ErrorTypeSymbol : NamedTypeSymbol
     {
-        internal static readonly ErrorTypeSymbol UnknownResultType = new UnsupportedMetadataTypeSymbol();
+        internal static readonly ErrorTypeSymbol UnknownResultType =
+            new UnsupportedMetadataTypeSymbol();
 
         private ImmutableArray<TypeParameterSymbol> _lazyTypeParameters;
 
@@ -30,7 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Summary of the reason why the type is bad.
         /// </summary>
-        internal virtual LookupResultKind ResultKind { get { return LookupResultKind.Empty; } }
+        internal virtual LookupResultKind ResultKind
+        {
+            get { return LookupResultKind.Empty; }
+        }
 
         /// <summary>
         /// Called by <see cref="AbstractTypeMap.SubstituteType(TypeSymbol)"/> to perform substitution
@@ -52,10 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual ImmutableArray<Symbol> CandidateSymbols
         {
-            get
-            {
-                return ImmutableArray<Symbol>.Empty;
-            }
+            get { return ImmutableArray<Symbol>.Empty; }
         }
 
         ///<summary>
@@ -68,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (!CandidateSymbols.IsEmpty)
                 {
-                    Debug.Assert(ResultKind != LookupResultKind.Viable, "Shouldn't have viable result kind on error symbol");
+                    Debug.Assert(
+                        ResultKind != LookupResultKind.Viable,
+                        "Shouldn't have viable result kind on error symbol"
+                    );
                     return ResultKind.ToCandidateReason();
                 }
                 else
@@ -106,18 +110,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override bool IsRefLikeType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -125,10 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override IEnumerable<string> MemberNames
         {
-            get
-            {
-                return SpecializedCollections.EmptyEnumerable<string>();
-            }
+            get { return SpecializedCollections.EmptyEnumerable<string>(); }
         }
 
         internal sealed override bool HasDeclaredRequiredMembers => false;
@@ -202,7 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>An ImmutableArray containing all the types that are members of this symbol with the given name and arity.
         /// If this symbol has no type members with this name and arity,
         /// returns an empty ImmutableArray. Never returns null.</returns>
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
@@ -212,10 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.ErrorType;
-            }
+            get { return SymbolKind.ErrorType; }
         }
 
         /// <summary>
@@ -223,10 +218,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override TypeKind TypeKind
         {
-            get
-            {
-                return TypeKind.Error;
-            }
+            get { return TypeKind.Error; }
         }
 
         internal sealed override bool IsInterface
@@ -235,14 +227,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Get the symbol that logically contains this symbol. 
+        /// Get the symbol that logically contains this symbol.
         /// </summary>
         public override Symbol? ContainingSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -252,18 +241,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         /// <summary>
@@ -272,10 +255,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override int Arity
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         /// <summary>
@@ -284,28 +264,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override string Name
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         /// <summary>
-        /// Returns the type arguments that have been substituted for the type parameters. 
+        /// Returns the type arguments that have been substituted for the type parameters.
         /// If nothing has been substituted for a given type parameter,
         /// then the type parameter itself is consider the type argument.
         /// </summary>
         internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
         {
-            get
-            {
-                return GetTypeParametersAsTypeArguments();
-            }
+            get { return GetTypeParametersAsTypeArguments(); }
         }
 
         /// <summary>
         /// Returns the type parameters that this type has. If this is a non-generic type,
-        /// returns an empty ImmutableArray.  
+        /// returns an empty ImmutableArray.
         /// </summary>
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
         {
@@ -313,9 +287,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyTypeParameters.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedCompareExchange(ref _lazyTypeParameters,
+                    ImmutableInterlocked.InterlockedCompareExchange(
+                        ref _lazyTypeParameters,
                         GetTypeParameters(),
-                        default(ImmutableArray<TypeParameterSymbol>));
+                        default(ImmutableArray<TypeParameterSymbol>)
+                    );
                 }
                 return _lazyTypeParameters;
             }
@@ -346,25 +322,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override NamedTypeSymbol ConstructedFrom
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         /// <summary>
         /// Implements visitor pattern.
         /// </summary>
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitErrorType(this, argument);
         }
 
         // Only the compiler should create error symbols.
         internal ErrorTypeSymbol(TupleExtraData? tupleData = null)
-            : base(tupleData)
-        {
-        }
+            : base(tupleData) { }
 
         /// <summary>
         /// Get this accessibility that was declared on this symbol. For symbols that do not have
@@ -372,10 +346,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -384,10 +355,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -397,10 +365,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -411,10 +376,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override bool HasSpecialName
@@ -424,10 +386,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override bool MightContainExtensionMethods
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override NamedTypeSymbol? BaseTypeNoUseSiteDiagnostics => null;
@@ -442,7 +401,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsInterpolatedStringHandlerType => false;
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol>? basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol>? basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
@@ -452,17 +413,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override NamedTypeSymbol? GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol? GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return null;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        protected override NamedTypeSymbol ConstructCore(ImmutableArray<TypeWithAnnotations> typeArguments, bool unbound)
+        protected override NamedTypeSymbol ConstructCore(
+            ImmutableArray<TypeWithAnnotations> typeArguments,
+            bool unbound
+        )
         {
             return new ConstructedErrorTypeSymbol(this, typeArguments);
         }
@@ -470,8 +438,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override NamedTypeSymbol AsMember(NamedTypeSymbol newOwner)
         {
             Debug.Assert(this.IsDefinition);
-            Debug.Assert(ReferenceEquals(newOwner.OriginalDefinition, this.ContainingSymbol?.OriginalDefinition));
-            return newOwner.IsDefinition ? this : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
+            Debug.Assert(
+                ReferenceEquals(
+                    newOwner.OriginalDefinition,
+                    this.ContainingSymbol?.OriginalDefinition
+                )
+            );
+            return newOwner.IsDefinition
+                ? this
+                : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
         }
 
         internal sealed override bool ShouldAddWinRTMembers
@@ -539,7 +514,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { throw ExceptionUtilities.Unreachable(); }
         }
 
-        internal override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+        internal override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable();
 
         internal override NamedTypeSymbol? NativeIntegerUnderlyingType => null;
 
@@ -548,7 +524,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return new PublicModel.ErrorTypeSymbol(this, DefaultNullableAnnotation);
         }
 
-        protected sealed override ITypeSymbol CreateITypeSymbol(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected sealed override ITypeSymbol CreateITypeSymbol(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.ErrorTypeSymbol(this, nullableAnnotation);
@@ -556,11 +534,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal sealed override bool HasPossibleWellKnownCloneMethod() => false;
 
-        internal sealed override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+        internal sealed override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls()
         {
-            return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+            return SpecializedCollections.EmptyEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )>();
         }
 
         internal sealed override bool HasInlineArrayAttribute(out int length)
@@ -569,14 +554,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal sealed override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+        internal sealed override bool HasCollectionBuilderAttribute(
+            out TypeSymbol? builderType,
+            out string? methodName
+        )
         {
             builderType = null;
             methodName = null;
             return false;
         }
 
-        internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+        internal sealed override bool HasAsyncMethodBuilderAttribute(
+            out TypeSymbol? builderArgument
+        )
         {
             builderArgument = null;
             return false;
@@ -588,7 +578,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ErrorTypeSymbol _originalDefinition;
         private int _hashCode;
 
-        protected SubstitutedErrorTypeSymbol(ErrorTypeSymbol originalDefinition, TupleExtraData? tupleData = null)
+        protected SubstitutedErrorTypeSymbol(
+            ErrorTypeSymbol originalDefinition,
+            TupleExtraData? tupleData = null
+        )
             : base(tupleData)
         {
             _originalDefinition = originalDefinition;
@@ -605,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal sealed override bool IsFileLocal => _originalDefinition.IsFileLocal;
-        internal sealed override FileIdentifier? AssociatedFileIdentifier => _originalDefinition.AssociatedFileIdentifier;
+        internal sealed override FileIdentifier? AssociatedFileIdentifier =>
+            _originalDefinition.AssociatedFileIdentifier;
 
         internal override DiagnosticInfo? ErrorInfo
         {
@@ -658,17 +652,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ImmutableArray<TypeWithAnnotations> _typeArgumentsWithAnnotations;
         private readonly TypeMap _map;
 
-        public ConstructedErrorTypeSymbol(ErrorTypeSymbol constructedFrom, ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations, TupleExtraData? tupleData = null) :
-            base((ErrorTypeSymbol)constructedFrom.OriginalDefinition, tupleData)
+        public ConstructedErrorTypeSymbol(
+            ErrorTypeSymbol constructedFrom,
+            ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations,
+            TupleExtraData? tupleData = null
+        )
+            : base((ErrorTypeSymbol)constructedFrom.OriginalDefinition, tupleData)
         {
             _constructedFrom = constructedFrom;
             _typeArgumentsWithAnnotations = typeArgumentsWithAnnotations;
-            _map = new TypeMap(constructedFrom.ContainingType, constructedFrom.OriginalDefinition.TypeParameters, typeArgumentsWithAnnotations);
+            _map = new TypeMap(
+                constructedFrom.ContainingType,
+                constructedFrom.OriginalDefinition.TypeParameters,
+                typeArgumentsWithAnnotations
+            );
         }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
-            return new ConstructedErrorTypeSymbol(_constructedFrom, _typeArgumentsWithAnnotations, tupleData: newData);
+            return new ConstructedErrorTypeSymbol(
+                _constructedFrom,
+                _typeArgumentsWithAnnotations,
+                tupleData: newData
+            );
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
@@ -703,11 +709,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ImmutableArray<TypeParameterSymbol> _typeParameters;
         private readonly TypeMap _map;
 
-        public SubstitutedNestedErrorTypeSymbol(NamedTypeSymbol containingSymbol, ErrorTypeSymbol originalDefinition) :
-            base(originalDefinition)
+        public SubstitutedNestedErrorTypeSymbol(
+            NamedTypeSymbol containingSymbol,
+            ErrorTypeSymbol originalDefinition
+        )
+            : base(originalDefinition)
         {
             _containingSymbol = containingSymbol;
-            _map = containingSymbol.TypeSubstitution.WithAlphaRename(originalDefinition, this, out _typeParameters);
+            _map = containingSymbol.TypeSubstitution.WithAlphaRename(
+                originalDefinition,
+                this,
+                out _typeParameters
+            );
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
@@ -735,7 +748,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _map; }
         }
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-            => throw ExceptionUtilities.Unreachable();
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw ExceptionUtilities.Unreachable();
     }
 }

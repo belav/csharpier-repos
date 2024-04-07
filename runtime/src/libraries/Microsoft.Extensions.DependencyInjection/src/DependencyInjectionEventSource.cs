@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.DependencyInjection
     [EventSource(Name = "Microsoft-Extensions-DependencyInjection")]
     internal sealed class DependencyInjectionEventSource : EventSource
     {
-        public static readonly DependencyInjectionEventSource Log = new DependencyInjectionEventSource();
+        public static readonly DependencyInjectionEventSource Log =
+            new DependencyInjectionEventSource();
 
         public static class Keywords
         {
@@ -27,9 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private readonly List<WeakReference<ServiceProvider>> _providers = new();
 
-        private DependencyInjectionEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
-        {
-        }
+        private DependencyInjectionEventSource()
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         // NOTE
         // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They
@@ -39,10 +39,19 @@ namespace Microsoft.Extensions.DependencyInjection
         // - A stop event's event id must be next one after its start event.
         // - Avoid renaming methods or parameters marked with EventAttribute. EventSource uses these to form the event object.
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe."
+        )]
         [Event(1, Level = EventLevel.Verbose)]
-        private void CallSiteBuilt(string serviceType, string callSite, int chunkIndex, int chunkCount, int serviceProviderHashCode)
+        private void CallSiteBuilt(
+            string serviceType,
+            string callSite,
+            int chunkIndex,
+            int chunkCount,
+            int serviceProviderHashCode
+        )
         {
             WriteEvent(1, serviceType, callSite, chunkIndex, chunkCount, serviceProviderHashCode);
         }
@@ -54,19 +63,31 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         [Event(3, Level = EventLevel.Verbose)]
-        public void ExpressionTreeGenerated(string serviceType, int nodeCount, int serviceProviderHashCode)
+        public void ExpressionTreeGenerated(
+            string serviceType,
+            int nodeCount,
+            int serviceProviderHashCode
+        )
         {
             WriteEvent(3, serviceType, nodeCount, serviceProviderHashCode);
         }
 
         [Event(4, Level = EventLevel.Verbose)]
-        public void DynamicMethodBuilt(string serviceType, int methodSize, int serviceProviderHashCode)
+        public void DynamicMethodBuilt(
+            string serviceType,
+            int methodSize,
+            int serviceProviderHashCode
+        )
         {
             WriteEvent(4, serviceType, methodSize, serviceProviderHashCode);
         }
 
         [Event(5, Level = EventLevel.Verbose)]
-        public void ScopeDisposed(int serviceProviderHashCode, int scopedServicesResolved, int disposableServices)
+        public void ScopeDisposed(
+            int serviceProviderHashCode,
+            int scopedServicesResolved,
+            int disposableServices
+        )
         {
             WriteEvent(5, serviceProviderHashCode, scopedServicesResolved, disposableServices);
         }
@@ -77,18 +98,44 @@ namespace Microsoft.Extensions.DependencyInjection
             WriteEvent(6, exceptionMessage, serviceProviderHashCode);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe."
+        )]
         [Event(7, Level = EventLevel.Informational, Keywords = Keywords.ServiceProviderInitialized)]
-        private void ServiceProviderBuilt(int serviceProviderHashCode, int singletonServices, int scopedServices, int transientServices, int closedGenericsServices, int openGenericsServices)
+        private void ServiceProviderBuilt(
+            int serviceProviderHashCode,
+            int singletonServices,
+            int scopedServices,
+            int transientServices,
+            int closedGenericsServices,
+            int openGenericsServices
+        )
         {
-            WriteEvent(7, serviceProviderHashCode, singletonServices, scopedServices, transientServices, closedGenericsServices, openGenericsServices);
+            WriteEvent(
+                7,
+                serviceProviderHashCode,
+                singletonServices,
+                scopedServices,
+                transientServices,
+                closedGenericsServices,
+                openGenericsServices
+            );
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe."
+        )]
         [Event(8, Level = EventLevel.Informational, Keywords = Keywords.ServiceProviderInitialized)]
-        private void ServiceProviderDescriptors(int serviceProviderHashCode, string descriptors, int chunkIndex, int chunkCount)
+        private void ServiceProviderDescriptors(
+            int serviceProviderHashCode,
+            string descriptors,
+            int chunkIndex,
+            int chunkCount
+        )
         {
             WriteEvent(8, serviceProviderHashCode, descriptors, chunkIndex, chunkCount);
         }
@@ -103,20 +150,31 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         [NonEvent]
-        public void CallSiteBuilt(ServiceProvider provider, Type serviceType, ServiceCallSite callSite)
+        public void CallSiteBuilt(
+            ServiceProvider provider,
+            Type serviceType,
+            ServiceCallSite callSite
+        )
         {
             if (IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
                 string format = CallSiteJsonFormatter.Instance.Format(callSite);
-                int chunkCount = format.Length / MaxChunkSize + (format.Length % MaxChunkSize > 0 ? 1 : 0);
+                int chunkCount =
+                    format.Length / MaxChunkSize + (format.Length % MaxChunkSize > 0 ? 1 : 0);
 
                 int providerHashCode = provider.GetHashCode();
                 for (int i = 0; i < chunkCount; i++)
                 {
                     CallSiteBuilt(
                         serviceType.ToString(),
-                        format.Substring(i * MaxChunkSize, Math.Min(MaxChunkSize, format.Length - i * MaxChunkSize)), i, chunkCount,
-                        providerHashCode);
+                        format.Substring(
+                            i * MaxChunkSize,
+                            Math.Min(MaxChunkSize, format.Length - i * MaxChunkSize)
+                        ),
+                        i,
+                        chunkCount,
+                        providerHashCode
+                    );
                 }
             }
         }
@@ -221,22 +279,40 @@ namespace Microsoft.Extensions.DependencyInjection
                 descriptorBuilder.Append(" ] }");
 
                 int providerHashCode = provider.GetHashCode();
-                ServiceProviderBuilt(providerHashCode, singletonServices, scopedServices, transientServices, closedGenericsServices, openGenericsServices);
+                ServiceProviderBuilt(
+                    providerHashCode,
+                    singletonServices,
+                    scopedServices,
+                    transientServices,
+                    closedGenericsServices,
+                    openGenericsServices
+                );
 
                 string descriptorString = descriptorBuilder.ToString();
-                int chunkCount = descriptorString.Length / MaxChunkSize + (descriptorString.Length % MaxChunkSize > 0 ? 1 : 0);
+                int chunkCount =
+                    descriptorString.Length / MaxChunkSize
+                    + (descriptorString.Length % MaxChunkSize > 0 ? 1 : 0);
 
                 for (int i = 0; i < chunkCount; i++)
                 {
                     ServiceProviderDescriptors(
                         providerHashCode,
-                        descriptorString.Substring(i * MaxChunkSize, Math.Min(MaxChunkSize, descriptorString.Length - i * MaxChunkSize)), i, chunkCount);
+                        descriptorString.Substring(
+                            i * MaxChunkSize,
+                            Math.Min(MaxChunkSize, descriptorString.Length - i * MaxChunkSize)
+                        ),
+                        i,
+                        chunkCount
+                    );
                 }
             }
         }
 
         [NonEvent]
-        private static void AppendServiceDescriptor(StringBuilder builder, ServiceDescriptor descriptor)
+        private static void AppendServiceDescriptor(
+            StringBuilder builder,
+            ServiceDescriptor descriptor
+        )
         {
             builder.Append("{ \"serviceType\": \"");
             builder.Append(descriptor.ServiceType);
@@ -302,13 +378,22 @@ namespace Microsoft.Extensions.DependencyInjection
         // This is an extension method because this assembly is trimmed at a "type granular" level in Blazor,
         // and the whole DependencyInjectionEventSource type can't be trimmed. So extracting this to a separate
         // type allows for the System.Linq.Expressions usage to be trimmed by the ILLinker.
-        public static void ExpressionTreeGenerated(this DependencyInjectionEventSource source, ServiceProvider provider, Type serviceType, Expression expression)
+        public static void ExpressionTreeGenerated(
+            this DependencyInjectionEventSource source,
+            ServiceProvider provider,
+            Type serviceType,
+            Expression expression
+        )
         {
             if (source.IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
                 var visitor = new NodeCountingVisitor();
                 visitor.Visit(expression);
-                source.ExpressionTreeGenerated(serviceType.ToString(), visitor.NodeCount, provider.GetHashCode());
+                source.ExpressionTreeGenerated(
+                    serviceType.ToString(),
+                    visitor.NodeCount,
+                    provider.GetHashCode()
+                );
             }
         }
 

@@ -22,27 +22,21 @@ namespace System.ComponentModel.Composition.Primitives
         /// </value>
         /// <remarks>
         ///     <note type="implementnotes">
-        ///         Implementors of this property should never return <see langword="null"/> or an empty 
+        ///         Implementors of this property should never return <see langword="null"/> or an empty
         ///         string ("").
         ///     </note>
         /// </remarks>
-        string DisplayName
-        {
-            get;
-        }
+        string DisplayName { get; }
 
         /// <summary>
         ///     Gets the composition element from which the current composition element
         ///     originated.
         /// </summary>
         /// <value>
-        ///     A <see cref="ICompositionElement"/> from which the current 
-        ///     <see cref="ICompositionElement"/> originated, or <see langword="null"/> 
+        ///     A <see cref="ICompositionElement"/> from which the current
+        ///     <see cref="ICompositionElement"/> originated, or <see langword="null"/>
         ///     if the <see cref="ICompositionElement"/> is the root composition element.
         /// </value>
-        ICompositionElement Origin
-        {
-            get;
-        }
+        ICompositionElement Origin { get; }
     }
 }

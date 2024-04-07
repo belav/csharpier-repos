@@ -16,7 +16,10 @@ public class FormFileValueProviderTest
         httpContext.Request.ContentType = "multipart/form-data";
         var formFiles = new FormFileCollection();
         formFiles.Add(new FormFile(Stream.Null, 0, 0, "file", fileName: null));
-        httpContext.Request.Form = new FormCollection(new Dictionary<string, StringValues>(), formFiles);
+        httpContext.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            formFiles
+        );
 
         var valueProvider = new FormFileValueProvider(formFiles);
 
@@ -35,7 +38,10 @@ public class FormFileValueProviderTest
         httpContext.Request.ContentType = "multipart/form-data";
         var formFiles = new FormFileCollection();
         formFiles.Add(new FormFile(Stream.Null, 0, 10, "file", "file"));
-        httpContext.Request.Form = new FormCollection(new Dictionary<string, StringValues>(), formFiles);
+        httpContext.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            formFiles
+        );
 
         var valueProvider = new FormFileValueProvider(formFiles);
 
@@ -54,7 +60,10 @@ public class FormFileValueProviderTest
         httpContext.Request.ContentType = "multipart/form-data";
         var formFiles = new FormFileCollection();
         formFiles.Add(new FormFile(Stream.Null, 0, 10, "file", "file"));
-        httpContext.Request.Form = new FormCollection(new Dictionary<string, StringValues>(), formFiles);
+        httpContext.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            formFiles
+        );
 
         var valueProvider = new FormFileValueProvider(formFiles);
 

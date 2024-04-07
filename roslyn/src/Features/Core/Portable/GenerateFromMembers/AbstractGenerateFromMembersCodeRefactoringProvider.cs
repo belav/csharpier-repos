@@ -18,32 +18,51 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateFromMembers
 {
-    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider : CodeRefactoringProvider
+    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider
+        : CodeRefactoringProvider
     {
-        protected AbstractGenerateFromMembersCodeRefactoringProvider()
-        {
-        }
+        protected AbstractGenerateFromMembersCodeRefactoringProvider() { }
 
         protected static async Task<SelectedMemberInfo?> GetSelectedMemberInfoAsync(
-            Document document, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var selectedDeclarations = await syntaxFacts.GetSelectedFieldsAndPropertiesAsync(
-                tree, textSpan, allowPartialSelection, cancellationToken).ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var selectedDeclarations = await syntaxFacts
+                .GetSelectedFieldsAndPropertiesAsync(
+                    tree,
+                    textSpan,
+                    allowPartialSelection,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (selectedDeclarations.Length > 0)
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var selectedMembers = selectedDeclarations.Select(
-                    d => semanticModel.GetDeclaredSymbol(d, cancellationToken)).WhereNotNull().ToImmutableArray();
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var selectedMembers = selectedDeclarations
+                    .Select(d => semanticModel.GetDeclaredSymbol(d, cancellationToken))
+                    .WhereNotNull()
+                    .ToImmutableArray();
                 if (selectedMembers.Length > 0)
                 {
                     var containingType = selectedMembers.First().ContainingType;
                     if (containingType != null)
                     {
-                        return new SelectedMemberInfo(containingType, selectedDeclarations, selectedMembers);
+                        return new SelectedMemberInfo(
+                            containingType,
+                            selectedDeclarations,
+                            selectedMembers
+                        );
                     }
                 }
             }
@@ -51,34 +70,34 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
             return null;
         }
 
-        protected static bool IsReadableInstanceFieldOrProperty(ISymbol symbol)
-            => !symbol.IsStatic && IsReadableFieldOrProperty(symbol);
+        protected static bool IsReadableInstanceFieldOrProperty(ISymbol symbol) =>
+            !symbol.IsStatic && IsReadableFieldOrProperty(symbol);
 
-        protected static bool IsWritableInstanceFieldOrProperty(ISymbol symbol)
-            => !symbol.IsStatic && IsWritableFieldOrProperty(symbol);
+        protected static bool IsWritableInstanceFieldOrProperty(ISymbol symbol) =>
+            !symbol.IsStatic && IsWritableFieldOrProperty(symbol);
 
-        private static bool IsReadableFieldOrProperty(ISymbol symbol)
-            => symbol switch
+        private static bool IsReadableFieldOrProperty(ISymbol symbol) =>
+            symbol switch
             {
                 IFieldSymbol field => IsViableField(field),
                 IPropertySymbol property => IsViableProperty(property) && !property.IsWriteOnly,
                 _ => false,
             };
 
-        private static bool IsWritableFieldOrProperty(ISymbol symbol)
-            => symbol switch
+        private static bool IsWritableFieldOrProperty(ISymbol symbol) =>
+            symbol switch
             {
                 // Can use non const fields and properties with setters in them.
                 IFieldSymbol field => IsViableField(field) && !field.IsConst,
-                IPropertySymbol property => IsViableProperty(property) && property.IsWritableInConstructor(),
+                IPropertySymbol property
+                    => IsViableProperty(property) && property.IsWritableInConstructor(),
                 _ => false,
             };
 
-        private static bool IsViableField(IFieldSymbol field)
-            => field.AssociatedSymbol == null;
+        private static bool IsViableField(IFieldSymbol field) => field.AssociatedSymbol == null;
 
-        private static bool IsViableProperty(IPropertySymbol property)
-            => property.Parameters.IsEmpty;
+        private static bool IsViableProperty(IPropertySymbol property) =>
+            property.Parameters.IsEmpty;
 
         /// <summary>
         /// Returns an array of parameter symbols that correspond to selected member symbols.
@@ -88,7 +107,9 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
         /// <param name="rules"></param>
         /// <returns></returns>
         protected static ImmutableArray<IParameterSymbol> DetermineParameters(
-            ImmutableArray<ISymbol> selectedMembers, ImmutableArray<NamingRule> rules)
+            ImmutableArray<ISymbol> selectedMembers,
+            ImmutableArray<NamingRule> rules
+        )
         {
             using var _ = ArrayBuilder<IParameterSymbol>.GetInstance(out var parameters);
 
@@ -98,21 +119,36 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                 if (type == null)
                     continue;
 
-                var identifierNameParts = IdentifierNameParts.CreateIdentifierNameParts(symbol, rules);
+                var identifierNameParts = IdentifierNameParts.CreateIdentifierNameParts(
+                    symbol,
+                    rules
+                );
                 if (identifierNameParts.BaseName == "")
                 {
                     continue;
                 }
 
-                var parameterNamingRule = rules.Where(rule => rule.SymbolSpecification.AppliesTo(SymbolKind.Parameter, Accessibility.NotApplicable)).First();
-                var parameterName = parameterNamingRule.NamingStyle.MakeCompliant(identifierNameParts.BaseName).First();
+                var parameterNamingRule = rules
+                    .Where(rule =>
+                        rule.SymbolSpecification.AppliesTo(
+                            SymbolKind.Parameter,
+                            Accessibility.NotApplicable
+                        )
+                    )
+                    .First();
+                var parameterName = parameterNamingRule
+                    .NamingStyle.MakeCompliant(identifierNameParts.BaseName)
+                    .First();
 
-                parameters.Add(CodeGenerationSymbolFactory.CreateParameterSymbol(
-                    attributes: default,
-                    refKind: RefKind.None,
-                    isParams: false,
-                    type: type,
-                    name: parameterName));
+                parameters.Add(
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        attributes: default,
+                        refKind: RefKind.None,
+                        isParams: false,
+                        type: type,
+                        name: parameterName
+                    )
+                );
             }
 
             return parameters.ToImmutable();
@@ -122,7 +158,9 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
             new(
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
                 genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut | SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
     }
 }

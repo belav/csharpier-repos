@@ -216,9 +216,17 @@ namespace System.Xml.Schema
         public abstract object ChangeType(decimal value, Type destinationType);
         public abstract object ChangeType(double value, Type destinationType);
         public abstract object ChangeType(DateTime value, Type destinationType);
-        public abstract object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver);
+        public abstract object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        );
         public abstract object ChangeType(object value, Type destinationType);
-        public abstract object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver);
+        public abstract object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        );
     }
 
     internal abstract class XmlBaseConverter : XmlValueConverter
@@ -232,14 +240,20 @@ namespace System.Xml.Schema
         {
             // XmlValueConverter is defined only on types with simple content
             XmlSchemaDatatype? datatype = schemaType.Datatype;
-            Debug.Assert(schemaType != null && datatype != null, "schemaType or schemaType.Datatype may not be null");
+            Debug.Assert(
+                schemaType != null && datatype != null,
+                "schemaType or schemaType.Datatype may not be null"
+            );
 
             while (schemaType != null && !(schemaType is XmlSchemaSimpleType))
             {
                 schemaType = schemaType.BaseXmlSchemaType!;
             }
             schemaType ??= XmlSchemaType.GetBuiltInSimpleType(datatype.TypeCode); //Did not find any simple type in the parent chain
-            Debug.Assert(schemaType.Datatype!.Variety != XmlSchemaDatatypeVariety.List, "schemaType must be list's item type, not list itself");
+            Debug.Assert(
+                schemaType.Datatype!.Variety != XmlSchemaDatatypeVariety.List,
+                "schemaType must be list's item type, not list itself"
+            );
 
             _schemaType = schemaType;
             _typeCode = schemaType.TypeCode;
@@ -284,7 +298,11 @@ namespace System.Xml.Schema
             _clrListTypeDefault = null;
         }
 
-        protected XmlBaseConverter(XmlBaseConverter converterAtomic, Type clrTypeDefault, Type clrListTypeDefault)
+        protected XmlBaseConverter(
+            XmlBaseConverter converterAtomic,
+            Type clrTypeDefault,
+            Type clrListTypeDefault
+        )
         {
             _schemaType = converterAtomic._schemaType;
             _typeCode = converterAtomic._typeCode;
@@ -326,69 +344,295 @@ namespace System.Xml.Schema
         protected static readonly Type UriType = typeof(Uri);
         protected static readonly Type TimeSpanType = typeof(TimeSpan);
         protected static readonly Type XPathNavigatorType = typeof(XPathNavigator);
-        public override bool ToBoolean(DateTime value) { return (bool)ChangeType((object)value, BooleanType, null); }
-        public override bool ToBoolean(double value) { return (bool)ChangeType((object)value, BooleanType, null); }
-        public override bool ToBoolean(int value) { return (bool)ChangeType((object)value, BooleanType, null); }
-        public override bool ToBoolean(long value) { return (bool)ChangeType((object)value, BooleanType, null); }
-        public override bool ToBoolean(string value) { return (bool)ChangeType((object)value, BooleanType, null); }
-        public override bool ToBoolean(object value) { return (bool)ChangeType((object)value, BooleanType, null); }
 
-        public override DateTime ToDateTime(bool value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(DateTimeOffset value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(double value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(int value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(long value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(string value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTime ToDateTime(object value) { return (DateTime)ChangeType((object)value, DateTimeType, null); }
-        public override DateTimeOffset ToDateTimeOffset(DateTime value) { return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null); }
-        public override DateTimeOffset ToDateTimeOffset(string value) { return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null); }
-        public override DateTimeOffset ToDateTimeOffset(object value) { return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null); }
-        public override decimal ToDecimal(string value) { return (decimal)ChangeType((object)value, DecimalType, null); }
-        public override decimal ToDecimal(object value) { return (decimal)ChangeType((object)value, DecimalType, null); }
+        public override bool ToBoolean(DateTime value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
 
-        public override double ToDouble(bool value) { return (double)ChangeType((object)value, DoubleType, null); }
-        public override double ToDouble(DateTime value) { return (double)ChangeType((object)value, DoubleType, null); }
-        public override double ToDouble(int value) { return (double)ChangeType((object)value, DoubleType, null); }
-        public override double ToDouble(long value) { return (double)ChangeType((object)value, DoubleType, null); }
-        public override double ToDouble(string value) { return (double)ChangeType((object)value, DoubleType, null); }
-        public override double ToDouble(object value) { return (double)ChangeType((object)value, DoubleType, null); }
+        public override bool ToBoolean(double value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
 
-        public override int ToInt32(bool value) { return (int)ChangeType((object)value, Int32Type, null); }
-        public override int ToInt32(DateTime value) { return (int)ChangeType((object)value, Int32Type, null); }
-        public override int ToInt32(double value) { return (int)ChangeType((object)value, Int32Type, null); }
-        public override int ToInt32(long value) { return (int)ChangeType((object)value, Int32Type, null); }
-        public override int ToInt32(string value) { return (int)ChangeType((object)value, Int32Type, null); }
-        public override int ToInt32(object value) { return (int)ChangeType((object)value, Int32Type, null); }
+        public override bool ToBoolean(int value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
 
-        public override long ToInt64(bool value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override long ToInt64(DateTime value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override long ToInt64(double value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override long ToInt64(int value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override long ToInt64(string value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override long ToInt64(object value) { return (long)ChangeType((object)value, Int64Type, null); }
-        public override float ToSingle(double value) { return (float)ChangeType((object)value, SingleType, null); }
-        public override float ToSingle(string value) { return (float)ChangeType((object)value, SingleType, null); }
-        public override float ToSingle(object value) { return (float)ChangeType((object)value, SingleType, null); }
+        public override bool ToBoolean(long value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
 
-        public override string ToString(bool value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(DateTime value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(DateTimeOffset value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(decimal value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(double value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(int value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(long value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(float value) { return (string)ChangeType((object)value, StringType, null); }
-        public override string ToString(object value, IXmlNamespaceResolver? nsResolver) { return (string)ChangeType((object)value, StringType, nsResolver); }
-        public override string ToString(object value) { return this.ToString(value, null); }
+        public override bool ToBoolean(string value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
 
-        public override object ChangeType(bool value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(DateTime value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(decimal value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(double value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(int value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(long value, Type destinationType) { return (object)ChangeType((object)value, destinationType, null); }
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver) { return (object)ChangeType((object)value, destinationType, nsResolver); }
-        public override object ChangeType(object value, Type destinationType) { return this.ChangeType(value, destinationType, null); }
+        public override bool ToBoolean(object value)
+        {
+            return (bool)ChangeType((object)value, BooleanType, null);
+        }
+
+        public override DateTime ToDateTime(bool value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(DateTimeOffset value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(double value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(int value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(long value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(string value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTime ToDateTime(object value)
+        {
+            return (DateTime)ChangeType((object)value, DateTimeType, null);
+        }
+
+        public override DateTimeOffset ToDateTimeOffset(DateTime value)
+        {
+            return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
+        }
+
+        public override DateTimeOffset ToDateTimeOffset(string value)
+        {
+            return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
+        }
+
+        public override DateTimeOffset ToDateTimeOffset(object value)
+        {
+            return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
+        }
+
+        public override decimal ToDecimal(string value)
+        {
+            return (decimal)ChangeType((object)value, DecimalType, null);
+        }
+
+        public override decimal ToDecimal(object value)
+        {
+            return (decimal)ChangeType((object)value, DecimalType, null);
+        }
+
+        public override double ToDouble(bool value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override double ToDouble(DateTime value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override double ToDouble(int value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override double ToDouble(long value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override double ToDouble(string value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override double ToDouble(object value)
+        {
+            return (double)ChangeType((object)value, DoubleType, null);
+        }
+
+        public override int ToInt32(bool value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override int ToInt32(DateTime value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override int ToInt32(double value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override int ToInt32(long value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override int ToInt32(string value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override int ToInt32(object value)
+        {
+            return (int)ChangeType((object)value, Int32Type, null);
+        }
+
+        public override long ToInt64(bool value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override long ToInt64(DateTime value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override long ToInt64(double value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override long ToInt64(int value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override long ToInt64(string value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override long ToInt64(object value)
+        {
+            return (long)ChangeType((object)value, Int64Type, null);
+        }
+
+        public override float ToSingle(double value)
+        {
+            return (float)ChangeType((object)value, SingleType, null);
+        }
+
+        public override float ToSingle(string value)
+        {
+            return (float)ChangeType((object)value, SingleType, null);
+        }
+
+        public override float ToSingle(object value)
+        {
+            return (float)ChangeType((object)value, SingleType, null);
+        }
+
+        public override string ToString(bool value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(DateTime value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(DateTimeOffset value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(decimal value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(double value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(int value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(long value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(float value)
+        {
+            return (string)ChangeType((object)value, StringType, null);
+        }
+
+        public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
+        {
+            return (string)ChangeType((object)value, StringType, nsResolver);
+        }
+
+        public override string ToString(object value)
+        {
+            return this.ToString(value, null);
+        }
+
+        public override object ChangeType(bool value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(DateTime value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(decimal value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(double value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(int value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(long value, Type destinationType)
+        {
+            return (object)ChangeType((object)value, destinationType, null);
+        }
+
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
+        {
+            return (object)ChangeType((object)value, destinationType, nsResolver);
+        }
+
+        public override object ChangeType(object value, Type destinationType)
+        {
+            return this.ChangeType(value, destinationType, null);
+        }
 
         #endregion
 
@@ -429,10 +673,15 @@ namespace System.Xml.Schema
                 }
 
                 // SchemaType is null in the case of item, node, and xdt:anyAtomicType
-                if (_typeCode == XmlTypeCode.Node) return "node";
-                if (_typeCode == XmlTypeCode.AnyAtomicType) return "xdt:anyAtomicType";
+                if (_typeCode == XmlTypeCode.Node)
+                    return "node";
+                if (_typeCode == XmlTypeCode.AnyAtomicType)
+                    return "xdt:anyAtomicType";
 
-                Debug.Assert(_typeCode == XmlTypeCode.Item, "If SchemaType is null, then TypeCode may only be Item, Node, or AnyAtomicType");
+                Debug.Assert(
+                    _typeCode == XmlTypeCode.Item,
+                    "If SchemaType is null, then TypeCode may only be Item, Node, or AnyAtomicType"
+                );
                 return "item";
             }
         }
@@ -475,9 +724,18 @@ namespace System.Xml.Schema
         protected Exception CreateInvalidClrMappingException(Type sourceType, Type destinationType)
         {
             if (sourceType == destinationType)
-                return new InvalidCastException(SR.Format(SR.XmlConvert_TypeBadMapping, XmlTypeName, sourceType.Name));
+                return new InvalidCastException(
+                    SR.Format(SR.XmlConvert_TypeBadMapping, XmlTypeName, sourceType.Name)
+                );
 
-            return new InvalidCastException(SR.Format(SR.XmlConvert_TypeBadMapping2, XmlTypeName, sourceType.Name, destinationType.Name));
+            return new InvalidCastException(
+                SR.Format(
+                    SR.XmlConvert_TypeBadMapping2,
+                    XmlTypeName,
+                    sourceType.Name,
+                    destinationType.Name
+                )
+            );
         }
 
         /// <summary>
@@ -509,11 +767,14 @@ namespace System.Xml.Schema
         /// This method is called when a valid conversion cannot be found.  By default, this method throws an error.  It can
         /// be overridden in derived classes to support list conversions.
         /// </summary>
-        protected virtual object ChangeListType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        protected virtual object ChangeListType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             throw CreateInvalidClrMappingException(value.GetType(), destinationType);
         }
-
 
         //------------------------------------------------------------------------
         // From String Conversion Helpers
@@ -537,12 +798,16 @@ namespace System.Xml.Schema
         protected static TimeSpan StringToDayTimeDuration(string value)
         {
             // Parse string as DayTimeDuration and convert it to a DayTimeDuration TimeSpan (it is an error to have year and month parts)
-            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToTimeSpan(XsdDuration.DurationType.DayTimeDuration);
+            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToTimeSpan(
+                XsdDuration.DurationType.DayTimeDuration
+            );
         }
 
         protected static TimeSpan StringToDuration(string value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToTimeSpan(XsdDuration.DurationType.Duration);
+            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToTimeSpan(
+                XsdDuration.DurationType.Duration
+            );
         }
 
         protected static DateTime StringToGDay(string value)
@@ -609,7 +874,10 @@ namespace System.Xml.Schema
         {
             try
             {
-                return XmlConvert.FromBinHexString(value.AsSpan().Trim(XmlConvert.WhitespaceChars), false);
+                return XmlConvert.FromBinHexString(
+                    value.AsSpan().Trim(XmlConvert.WhitespaceChars),
+                    false
+                );
             }
             catch (XmlException e)
             {
@@ -617,9 +885,13 @@ namespace System.Xml.Schema
             }
         }
 
-        protected static XmlQualifiedName StringToQName(string value, IXmlNamespaceResolver? nsResolver)
+        protected static XmlQualifiedName StringToQName(
+            string value,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
-            string prefix, localName;
+            string prefix,
+                localName;
             string? ns;
 
             value = value.Trim();
@@ -636,12 +908,16 @@ namespace System.Xml.Schema
 
             // Throw error if no namespaces are in scope
             if (nsResolver == null)
-                throw new InvalidCastException(SR.Format(SR.XmlConvert_TypeNoNamespace, value, prefix));
+                throw new InvalidCastException(
+                    SR.Format(SR.XmlConvert_TypeNoNamespace, value, prefix)
+                );
 
             // Lookup namespace
             ns = nsResolver.LookupNamespace(prefix);
             if (ns == null)
-                throw new InvalidCastException(SR.Format(SR.XmlConvert_TypeNoNamespace, value, prefix));
+                throw new InvalidCastException(
+                    SR.Format(SR.XmlConvert_TypeNoNamespace, value, prefix)
+                );
 
             // Create XmlQualfiedName
             return new XmlQualifiedName(localName, ns);
@@ -660,9 +936,10 @@ namespace System.Xml.Schema
         protected static TimeSpan StringToYearMonthDuration(string value)
         {
             // Parse string as YearMonthDuration and convert it to a YearMonthDuration TimeSpan (it is an error to have day and time parts)
-            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToTimeSpan(XsdDuration.DurationType.YearMonthDuration);
+            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToTimeSpan(
+                XsdDuration.DurationType.YearMonthDuration
+            );
         }
-
 
         //------------------------------------------------------------------------
         // To String Conversion Helpers
@@ -690,12 +967,16 @@ namespace System.Xml.Schema
 
         protected static string DayTimeDurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToString(XsdDuration.DurationType.DayTimeDuration);
+            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToString(
+                XsdDuration.DurationType.DayTimeDuration
+            );
         }
 
         protected static string DurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToString(XsdDuration.DurationType.Duration);
+            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToString(
+                XsdDuration.DurationType.Duration
+            );
         }
 
         protected static string GDayToString(DateTime value)
@@ -758,7 +1039,10 @@ namespace System.Xml.Schema
             return (new XsdDateTime(value, XsdDateTimeFlags.GYearMonth)).ToString();
         }
 
-        protected static string QNameToString(XmlQualifiedName qname, IXmlNamespaceResolver? nsResolver)
+        protected static string QNameToString(
+            XmlQualifiedName qname,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             string? prefix;
 
@@ -767,7 +1051,9 @@ namespace System.Xml.Schema
 
             prefix = nsResolver.LookupPrefix(qname.Namespace);
             if (prefix == null)
-                throw new InvalidCastException(SR.Format(SR.XmlConvert_TypeNoPrefix, qname, qname.Namespace));
+                throw new InvalidCastException(
+                    SR.Format(SR.XmlConvert_TypeNoPrefix, qname, qname.Namespace)
+                );
 
             return (prefix.Length != 0) ? $"{prefix}:{qname.Name}" : qname.Name;
         }
@@ -784,9 +1070,10 @@ namespace System.Xml.Schema
 
         protected static string YearMonthDurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToString(XsdDuration.DurationType.YearMonthDuration);
+            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToString(
+                XsdDuration.DurationType.YearMonthDuration
+            );
         }
-
 
         //------------------------------------------------------------------------
         // Other Conversion Helpers
@@ -800,7 +1087,12 @@ namespace System.Xml.Schema
         internal static int DecimalToInt32(decimal value)
         {
             if (value < (decimal)int.MinValue || value > (decimal)int.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "Int32" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "Int32" }
+                    )
+                );
 
             return (int)value;
         }
@@ -808,7 +1100,12 @@ namespace System.Xml.Schema
         protected static long DecimalToInt64(decimal value)
         {
             if (value < (decimal)long.MinValue || value > (decimal)long.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "Int64" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "Int64" }
+                    )
+                );
 
             return (long)value;
         }
@@ -816,7 +1113,12 @@ namespace System.Xml.Schema
         protected static ulong DecimalToUInt64(decimal value)
         {
             if (value < (decimal)ulong.MinValue || value > (decimal)ulong.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "UInt64" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "UInt64" }
+                    )
+                );
 
             return (ulong)value;
         }
@@ -824,7 +1126,12 @@ namespace System.Xml.Schema
         protected static byte Int32ToByte(int value)
         {
             if (value < (int)byte.MinValue || value > (int)byte.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "Byte" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "Byte" }
+                    )
+                );
 
             return (byte)value;
         }
@@ -832,7 +1139,12 @@ namespace System.Xml.Schema
         protected static short Int32ToInt16(int value)
         {
             if (value < (int)short.MinValue || value > (int)short.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "Int16" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "Int16" }
+                    )
+                );
 
             return (short)value;
         }
@@ -840,7 +1152,12 @@ namespace System.Xml.Schema
         protected static sbyte Int32ToSByte(int value)
         {
             if (value < (int)sbyte.MinValue || value > (int)sbyte.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "SByte" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "SByte" }
+                    )
+                );
 
             return (sbyte)value;
         }
@@ -848,7 +1165,12 @@ namespace System.Xml.Schema
         protected static ushort Int32ToUInt16(int value)
         {
             if (value < (int)ushort.MinValue || value > (int)ushort.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "UInt16" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "UInt16" }
+                    )
+                );
 
             return (ushort)value;
         }
@@ -856,7 +1178,12 @@ namespace System.Xml.Schema
         protected static int Int64ToInt32(long value)
         {
             if (value < (long)int.MinValue || value > (long)int.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "Int32" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "Int32" }
+                    )
+                );
 
             return (int)value;
         }
@@ -864,7 +1191,12 @@ namespace System.Xml.Schema
         protected static uint Int64ToUInt32(long value)
         {
             if (value < (long)uint.MinValue || value > (long)uint.MaxValue)
-                throw new OverflowException(SR.Format(SR.XmlConvert_Overflow, new string[] { XmlConvert.ToString(value), "UInt32" }));
+                throw new OverflowException(
+                    SR.Format(
+                        SR.XmlConvert_Overflow,
+                        new string[] { XmlConvert.ToString(value), "UInt32" }
+                    )
+                );
 
             return (uint)value;
         }
@@ -882,9 +1214,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlNumeric10Converter : XmlBaseConverter
     {
-        private XmlNumeric10Converter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlNumeric10Converter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -896,74 +1227,98 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(value);
 
-            if (TypeCode == XmlTypeCode.Decimal) return XmlConvert.ToDecimal((string)value);
+            if (TypeCode == XmlTypeCode.Decimal)
+                return XmlConvert.ToDecimal((string)value);
             return XmlConvert.ToInteger((string)value);
         }
+
         public override decimal ToDecimal(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DecimalType) return ((decimal)value);
-            if (sourceType == Int32Type) return ((decimal)(int)value);
-            if (sourceType == Int64Type) return ((decimal)(long)value);
-            if (sourceType == StringType) return this.ToDecimal((string)value);
-            if (sourceType == XmlAtomicValueType) return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
+            if (sourceType == DecimalType)
+                return ((decimal)value);
+            if (sourceType == Int32Type)
+                return ((decimal)(int)value);
+            if (sourceType == Int64Type)
+                return ((decimal)(long)value);
+            if (sourceType == StringType)
+                return this.ToDecimal((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
 
             return (decimal)ChangeTypeWildcardDestination(value, DecimalType, null);
         }
+
         public override int ToInt32(long value)
         {
             return Int64ToInt32((long)value);
         }
+
         public override int ToInt32(string value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
-            if (TypeCode == XmlTypeCode.Decimal) return DecimalToInt32(XmlConvert.ToDecimal((string)value));
+            if (TypeCode == XmlTypeCode.Decimal)
+                return DecimalToInt32(XmlConvert.ToDecimal((string)value));
             return XmlConvert.ToInt32((string)value);
         }
+
         public override int ToInt32(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DecimalType) return DecimalToInt32((decimal)value);
-            if (sourceType == Int32Type) return ((int)value);
-            if (sourceType == Int64Type) return Int64ToInt32((long)value);
-            if (sourceType == StringType) return this.ToInt32((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsInt;
+            if (sourceType == DecimalType)
+                return DecimalToInt32((decimal)value);
+            if (sourceType == Int32Type)
+                return ((int)value);
+            if (sourceType == Int64Type)
+                return Int64ToInt32((long)value);
+            if (sourceType == StringType)
+                return this.ToInt32((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsInt;
 
             return (int)ChangeTypeWildcardDestination(value, Int32Type, null);
         }
+
         public override long ToInt64(int value)
         {
             return ((long)(int)value);
         }
+
         public override long ToInt64(string value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
-            if (TypeCode == XmlTypeCode.Decimal) return DecimalToInt64(XmlConvert.ToDecimal((string)value));
+            if (TypeCode == XmlTypeCode.Decimal)
+                return DecimalToInt64(XmlConvert.ToDecimal((string)value));
             return XmlConvert.ToInt64((string)value);
         }
+
         public override long ToInt64(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DecimalType) return DecimalToInt64((decimal)value);
-            if (sourceType == Int32Type) return ((long)(int)value);
-            if (sourceType == Int64Type) return ((long)value);
-            if (sourceType == StringType) return this.ToInt64((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsLong;
+            if (sourceType == DecimalType)
+                return DecimalToInt64((decimal)value);
+            if (sourceType == Int32Type)
+                return ((long)(int)value);
+            if (sourceType == Int64Type)
+                return ((long)value);
+            if (sourceType == StringType)
+                return this.ToInt64((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsLong;
 
             return (long)ChangeTypeWildcardDestination(value, Int64Type, null);
         }
-
 
         //-----------------------------------------------
         // ToSingle
@@ -978,32 +1333,40 @@ namespace System.Xml.Schema
 
         public override string ToString(decimal value)
         {
-            if (TypeCode == XmlTypeCode.Decimal) return XmlConvert.ToString((decimal)value);
+            if (TypeCode == XmlTypeCode.Decimal)
+                return XmlConvert.ToString((decimal)value);
             return XmlConvert.ToString(decimal.Truncate((decimal)value));
         }
+
         public override string ToString(int value)
         {
             return XmlConvert.ToString((int)value);
         }
+
         public override string ToString(long value)
         {
             return XmlConvert.ToString((long)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DecimalType) return this.ToString((decimal)value);
-            if (sourceType == Int32Type) return XmlConvert.ToString((int)value);
-            if (sourceType == Int64Type) return XmlConvert.ToString((long)value);
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).Value;
+            if (sourceType == DecimalType)
+                return this.ToString((decimal)value);
+            if (sourceType == Int32Type)
+                return XmlConvert.ToString((int)value);
+            if (sourceType == Int64Type)
+                return XmlConvert.ToString((long)value);
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).Value;
 
             return (string)ChangeTypeWildcardDestination(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
@@ -1013,13 +1376,20 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DecimalType) return ((decimal)value);
-            if (destinationType == Int32Type) return DecimalToInt32((decimal)value);
-            if (destinationType == Int64Type) return DecimalToInt64((decimal)value);
-            if (destinationType == StringType) return this.ToString((decimal)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DecimalType)
+                return ((decimal)value);
+            if (destinationType == Int32Type)
+                return DecimalToInt32((decimal)value);
+            if (destinationType == Int64Type)
+                return DecimalToInt64((decimal)value);
+            if (destinationType == StringType)
+                return this.ToString((decimal)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, value));
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -1028,13 +1398,20 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DecimalType) return ((decimal)(int)value);
-            if (destinationType == Int32Type) return ((int)value);
-            if (destinationType == Int64Type) return ((long)(int)value);
-            if (destinationType == StringType) return XmlConvert.ToString((int)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (int)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (int)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DecimalType)
+                return ((decimal)(int)value);
+            if (destinationType == Int32Type)
+                return ((int)value);
+            if (destinationType == Int64Type)
+                return ((long)(int)value);
+            if (destinationType == StringType)
+                return XmlConvert.ToString((int)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (int)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (int)value));
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -1043,103 +1420,172 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DecimalType) return ((decimal)(long)value);
-            if (destinationType == Int32Type) return Int64ToInt32((long)value);
-            if (destinationType == Int64Type) return ((long)value);
-            if (destinationType == StringType) return XmlConvert.ToString((long)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (long)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (long)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DecimalType)
+                return ((decimal)(long)value);
+            if (destinationType == Int32Type)
+                return Int64ToInt32((long)value);
+            if (destinationType == Int64Type)
+                return ((long)value);
+            if (destinationType == StringType)
+                return XmlConvert.ToString((long)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (long)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (long)value));
 
             return ChangeTypeWildcardSource(value, destinationType!, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DecimalType) return this.ToDecimal((string)value);
-            if (destinationType == Int32Type) return this.ToInt32((string)value);
-            if (destinationType == Int64Type) return this.ToInt64((string)value);
-            if (destinationType == StringType) return ((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DecimalType)
+                return this.ToDecimal((string)value);
+            if (destinationType == Int32Type)
+                return this.ToInt32((string)value);
+            if (destinationType == Int64Type)
+                return this.ToInt64((string)value);
+            if (destinationType == StringType)
+                return ((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
 
             return ChangeTypeWildcardSource(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DecimalType) return this.ToDecimal(value);
-            if (destinationType == Int32Type) return this.ToInt32(value);
-            if (destinationType == Int64Type) return this.ToInt64(value);
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DecimalType)
+                return this.ToDecimal(value);
+            if (destinationType == Int32Type)
+                return this.ToInt32(value);
+            if (destinationType == Int64Type)
+                return this.ToInt64(value);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == DecimalType) return (new XmlAtomicValue(SchemaType!, value));
-                if (sourceType == Int32Type) return (new XmlAtomicValue(SchemaType!, (int)value));
-                if (sourceType == Int64Type) return (new XmlAtomicValue(SchemaType!, (long)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DecimalType)
+                    return (new XmlAtomicValue(SchemaType!, value));
+                if (sourceType == Int32Type)
+                    return (new XmlAtomicValue(SchemaType!, (int)value));
+                if (sourceType == Int64Type)
+                    return (new XmlAtomicValue(SchemaType!, (long)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == DecimalType) return (new XmlAtomicValue(SchemaType!, value));
-                if (sourceType == Int32Type) return (new XmlAtomicValue(SchemaType!, (int)value));
-                if (sourceType == Int64Type) return (new XmlAtomicValue(SchemaType!, (long)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DecimalType)
+                    return (new XmlAtomicValue(SchemaType!, value));
+                if (sourceType == Int32Type)
+                    return (new XmlAtomicValue(SchemaType!, (int)value));
+                if (sourceType == Int64Type)
+                    return (new XmlAtomicValue(SchemaType!, (long)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
-            if (destinationType == ByteType) return Int32ToByte(this.ToInt32(value));
-            if (destinationType == Int16Type) return Int32ToInt16(this.ToInt32(value));
-            if (destinationType == SByteType) return Int32ToSByte(this.ToInt32(value));
-            if (destinationType == UInt16Type) return Int32ToUInt16(this.ToInt32(value));
-            if (destinationType == UInt32Type) return Int64ToUInt32(this.ToInt64(value));
-            if (destinationType == UInt64Type) return DecimalToUInt64(this.ToDecimal(value));
-            if (sourceType == ByteType) return this.ChangeType((int)(byte)value, destinationType);
-            if (sourceType == Int16Type) return this.ChangeType((int)(short)value, destinationType);
-            if (sourceType == SByteType) return this.ChangeType((int)(sbyte)value, destinationType);
-            if (sourceType == UInt16Type) return this.ChangeType((int)(ushort)value, destinationType);
-            if (sourceType == UInt32Type) return this.ChangeType((long)(uint)value, destinationType);
-            if (sourceType == UInt64Type) return this.ChangeType((decimal)(ulong)value, destinationType);
+            if (destinationType == ByteType)
+                return Int32ToByte(this.ToInt32(value));
+            if (destinationType == Int16Type)
+                return Int32ToInt16(this.ToInt32(value));
+            if (destinationType == SByteType)
+                return Int32ToSByte(this.ToInt32(value));
+            if (destinationType == UInt16Type)
+                return Int32ToUInt16(this.ToInt32(value));
+            if (destinationType == UInt32Type)
+                return Int64ToUInt32(this.ToInt64(value));
+            if (destinationType == UInt64Type)
+                return DecimalToUInt64(this.ToDecimal(value));
+            if (sourceType == ByteType)
+                return this.ChangeType((int)(byte)value, destinationType);
+            if (sourceType == Int16Type)
+                return this.ChangeType((int)(short)value, destinationType);
+            if (sourceType == SByteType)
+                return this.ChangeType((int)(sbyte)value, destinationType);
+            if (sourceType == UInt16Type)
+                return this.ChangeType((int)(ushort)value, destinationType);
+            if (sourceType == UInt32Type)
+                return this.ChangeType((long)(uint)value, destinationType);
+            if (sourceType == UInt64Type)
+                return this.ChangeType((decimal)(ulong)value, destinationType);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // Helpers
         //-----------------------------------------------
 
-        private object ChangeTypeWildcardDestination(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        private object ChangeTypeWildcardDestination(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
-            if (sourceType == ByteType) return this.ChangeType((int)(byte)value, destinationType);
-            if (sourceType == Int16Type) return this.ChangeType((int)(short)value, destinationType);
-            if (sourceType == SByteType) return this.ChangeType((int)(sbyte)value, destinationType);
-            if (sourceType == UInt16Type) return this.ChangeType((int)(ushort)value, destinationType);
-            if (sourceType == UInt32Type) return this.ChangeType((long)(uint)value, destinationType);
-            if (sourceType == UInt64Type) return this.ChangeType((decimal)(ulong)value, destinationType);
+            if (sourceType == ByteType)
+                return this.ChangeType((int)(byte)value, destinationType);
+            if (sourceType == Int16Type)
+                return this.ChangeType((int)(short)value, destinationType);
+            if (sourceType == SByteType)
+                return this.ChangeType((int)(sbyte)value, destinationType);
+            if (sourceType == UInt16Type)
+                return this.ChangeType((int)(ushort)value, destinationType);
+            if (sourceType == UInt32Type)
+                return this.ChangeType((long)(uint)value, destinationType);
+            if (sourceType == UInt64Type)
+                return this.ChangeType((decimal)(ulong)value, destinationType);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-        private object ChangeTypeWildcardSource(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+
+        private object ChangeTypeWildcardSource(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
-            if (destinationType == ByteType) return Int32ToByte(this.ToInt32(value));
-            if (destinationType == Int16Type) return Int32ToInt16(this.ToInt32(value));
-            if (destinationType == SByteType) return Int32ToSByte(this.ToInt32(value));
-            if (destinationType == UInt16Type) return Int32ToUInt16(this.ToInt32(value));
-            if (destinationType == UInt32Type) return Int64ToUInt32(this.ToInt64(value));
-            if (destinationType == UInt64Type) return DecimalToUInt64(this.ToDecimal(value));
+            if (destinationType == ByteType)
+                return Int32ToByte(this.ToInt32(value));
+            if (destinationType == Int16Type)
+                return Int32ToInt16(this.ToInt32(value));
+            if (destinationType == SByteType)
+                return Int32ToSByte(this.ToInt32(value));
+            if (destinationType == UInt16Type)
+                return Int32ToUInt16(this.ToInt32(value));
+            if (destinationType == UInt32Type)
+                return Int64ToUInt32(this.ToInt64(value));
+            if (destinationType == UInt64Type)
+                return DecimalToUInt64(this.ToDecimal(value));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
@@ -1148,9 +1594,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlNumeric2Converter : XmlBaseConverter
     {
-        private XmlNumeric2Converter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlNumeric2Converter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1162,23 +1607,28 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(value);
 
-            if (TypeCode == XmlTypeCode.Float) return ((double)XmlConvert.ToSingle((string)value));
+            if (TypeCode == XmlTypeCode.Float)
+                return ((double)XmlConvert.ToSingle((string)value));
             return XmlConvert.ToDouble((string)value);
         }
+
         public override double ToDouble(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DoubleType) return ((double)value);
-            if (sourceType == SingleType) return ((double)(float)value);
-            if (sourceType == StringType) return this.ToDouble((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDouble;
+            if (sourceType == DoubleType)
+                return ((double)value);
+            if (sourceType == SingleType)
+                return ((double)(float)value);
+            if (sourceType == StringType)
+                return this.ToDouble((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsDouble;
 
             return (double)ChangeListType(value, DoubleType, null);
         }
-
 
         //-----------------------------------------------
         // ToInt32
@@ -1202,27 +1652,33 @@ namespace System.Xml.Schema
         {
             return ((float)(double)value);
         }
+
         public override float ToSingle(string value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
-            if (TypeCode == XmlTypeCode.Float) return XmlConvert.ToSingle((string)value);
+            if (TypeCode == XmlTypeCode.Float)
+                return XmlConvert.ToSingle((string)value);
             return ((float)XmlConvert.ToDouble((string)value));
         }
+
         public override float ToSingle(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DoubleType) return ((float)(double)value);
-            if (sourceType == SingleType) return ((float)value);
-            if (sourceType == StringType) return this.ToSingle((string)value);
-            if (sourceType == XmlAtomicValueType) return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
+            if (sourceType == DoubleType)
+                return ((float)(double)value);
+            if (sourceType == SingleType)
+                return ((float)value);
+            if (sourceType == StringType)
+                return this.ToSingle((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
 
             return (float)ChangeListType(value, SingleType, null);
         }
-
 
         //-----------------------------------------------
         // ToString
@@ -1230,28 +1686,35 @@ namespace System.Xml.Schema
 
         public override string ToString(double value)
         {
-            if (TypeCode == XmlTypeCode.Float) return XmlConvert.ToString(ToSingle((double)value));
+            if (TypeCode == XmlTypeCode.Float)
+                return XmlConvert.ToString(ToSingle((double)value));
             return XmlConvert.ToString((double)value);
         }
+
         public override string ToString(float value)
         {
-            if (TypeCode == XmlTypeCode.Float) return XmlConvert.ToString((float)value);
+            if (TypeCode == XmlTypeCode.Float)
+                return XmlConvert.ToString((float)value);
             return XmlConvert.ToString((double)(float)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DoubleType) return this.ToString((double)value);
-            if (sourceType == SingleType) return this.ToString((float)value);
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).Value;
+            if (sourceType == DoubleType)
+                return this.ToString((double)value);
+            if (sourceType == SingleType)
+                return this.ToString((float)value);
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).Value;
 
             return (string)ChangeListType(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
@@ -1261,55 +1724,87 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DoubleType) return ((double)value);
-            if (destinationType == SingleType) return ((float)(double)value);
-            if (destinationType == StringType) return this.ToString((double)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (double)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (double)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DoubleType)
+                return ((double)value);
+            if (destinationType == SingleType)
+                return ((float)(double)value);
+            if (destinationType == StringType)
+                return this.ToString((double)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (double)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (double)value));
 
             return ChangeListType(value, destinationType, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DoubleType) return this.ToDouble((string)value);
-            if (destinationType == SingleType) return this.ToSingle((string)value);
-            if (destinationType == StringType) return ((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DoubleType)
+                return this.ToDouble((string)value);
+            if (destinationType == SingleType)
+                return this.ToSingle((string)value);
+            if (destinationType == StringType)
+                return ((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DoubleType) return this.ToDouble(value);
-            if (destinationType == SingleType) return this.ToSingle(value);
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DoubleType)
+                return this.ToDouble(value);
+            if (destinationType == SingleType)
+                return this.ToSingle(value);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == DoubleType) return (new XmlAtomicValue(SchemaType!, (double)value));
-                if (sourceType == SingleType) return (new XmlAtomicValue(SchemaType!, value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DoubleType)
+                    return (new XmlAtomicValue(SchemaType!, (double)value));
+                if (sourceType == SingleType)
+                    return (new XmlAtomicValue(SchemaType!, value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == DoubleType) return (new XmlAtomicValue(SchemaType!, (double)value));
-                if (sourceType == SingleType) return (new XmlAtomicValue(SchemaType!, value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DoubleType)
+                    return (new XmlAtomicValue(SchemaType!, (double)value));
+                if (sourceType == SingleType)
+                    return (new XmlAtomicValue(SchemaType!, value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
 
             return ChangeListType(value, destinationType, nsResolver);
@@ -1319,9 +1814,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlDateTimeConverter : XmlBaseConverter
     {
-        private XmlDateTimeConverter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlDateTimeConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1351,16 +1845,21 @@ namespace System.Xml.Schema
                 _ => StringToDateTime((string)value),
             };
         }
+
         public override DateTime ToDateTime(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DateTimeType) return ((DateTime)value);
-            if (sourceType == DateTimeOffsetType) return this.ToDateTime((DateTimeOffset)value);
-            if (sourceType == StringType) return this.ToDateTime((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDateTime;
+            if (sourceType == DateTimeType)
+                return ((DateTime)value);
+            if (sourceType == DateTimeOffsetType)
+                return this.ToDateTime((DateTimeOffset)value);
+            if (sourceType == StringType)
+                return this.ToDateTime((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsDateTime;
 
             return (DateTime)ChangeListType(value, DateTimeType, null);
         }
@@ -1397,10 +1896,14 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DateTimeType) return ToDateTimeOffset((DateTime)value);
-            if (sourceType == DateTimeOffsetType) return ((DateTimeOffset)value);
-            if (sourceType == StringType) return this.ToDateTimeOffset((string)value);
-            if (sourceType == XmlAtomicValueType) return (DateTimeOffset)((XmlAtomicValue)value).ValueAsDateTime;
+            if (sourceType == DateTimeType)
+                return ToDateTimeOffset((DateTime)value);
+            if (sourceType == DateTimeOffsetType)
+                return ((DateTimeOffset)value);
+            if (sourceType == StringType)
+                return this.ToDateTimeOffset((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return (DateTimeOffset)((XmlAtomicValue)value).ValueAsDateTime;
 
             return (DateTimeOffset)ChangeListType(value, DateTimeOffsetType, null);
         }
@@ -1476,14 +1979,17 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == DateTimeType) return this.ToString((DateTime)value);
-            if (sourceType == DateTimeOffsetType) return this.ToString((DateTimeOffset)value);
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).Value;
+            if (sourceType == DateTimeType)
+                return this.ToString((DateTime)value);
+            if (sourceType == DateTimeOffsetType)
+                return this.ToString((DateTimeOffset)value);
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).Value;
 
             return (string)ChangeListType(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
@@ -1493,55 +1999,87 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DateTimeType) return ((DateTime)value);
-            if (destinationType == DateTimeOffsetType) return this.ToDateTimeOffset((DateTime)value);
-            if (destinationType == StringType) return this.ToString((DateTime)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (DateTime)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (DateTime)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DateTimeType)
+                return ((DateTime)value);
+            if (destinationType == DateTimeOffsetType)
+                return this.ToDateTimeOffset((DateTime)value);
+            if (destinationType == StringType)
+                return this.ToString((DateTime)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (DateTime)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (DateTime)value));
 
             return ChangeListType(value, destinationType, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DateTimeType) return this.ToDateTime((string)value);
-            if (destinationType == DateTimeOffsetType) return this.ToDateTimeOffset((string)value);
-            if (destinationType == StringType) return ((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DateTimeType)
+                return this.ToDateTime((string)value);
+            if (destinationType == DateTimeOffsetType)
+                return this.ToDateTimeOffset((string)value);
+            if (destinationType == StringType)
+                return ((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == DateTimeType) return this.ToDateTime(value);
-            if (destinationType == DateTimeOffsetType) return this.ToDateTimeOffset(value);
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == DateTimeType)
+                return this.ToDateTime(value);
+            if (destinationType == DateTimeOffsetType)
+                return this.ToDateTimeOffset(value);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == DateTimeType) return (new XmlAtomicValue(SchemaType!, (DateTime)value));
-                if (sourceType == DateTimeOffsetType) return (new XmlAtomicValue(SchemaType!, (DateTimeOffset)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DateTimeType)
+                    return (new XmlAtomicValue(SchemaType!, (DateTime)value));
+                if (sourceType == DateTimeOffsetType)
+                    return (new XmlAtomicValue(SchemaType!, (DateTimeOffset)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == DateTimeType) return (new XmlAtomicValue(SchemaType!, (DateTime)value));
-                if (sourceType == DateTimeOffsetType) return (new XmlAtomicValue(SchemaType!, (DateTimeOffset)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == DateTimeType)
+                    return (new XmlAtomicValue(SchemaType!, (DateTime)value));
+                if (sourceType == DateTimeOffsetType)
+                    return (new XmlAtomicValue(SchemaType!, (DateTimeOffset)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
 
             return ChangeListType(value, destinationType, nsResolver);
@@ -1551,9 +2089,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlBooleanConverter : XmlBaseConverter
     {
-        private XmlBooleanConverter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlBooleanConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1567,19 +2104,22 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToBoolean((string)value);
         }
+
         public override bool ToBoolean(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == BooleanType) return ((bool)value);
-            if (sourceType == StringType) return XmlConvert.ToBoolean((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsBoolean;
+            if (sourceType == BooleanType)
+                return ((bool)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToBoolean((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsBoolean;
 
             return (bool)ChangeListType(value, BooleanType, null);
         }
-
 
         //-----------------------------------------------
         // ToDateTime
@@ -1631,19 +2171,22 @@ namespace System.Xml.Schema
         {
             return XmlConvert.ToString((bool)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == BooleanType) return XmlConvert.ToString((bool)value);
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).Value;
+            if (sourceType == BooleanType)
+                return XmlConvert.ToString((bool)value);
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).Value;
 
             return (string)ChangeListType(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
@@ -1653,50 +2196,77 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == BooleanType) return ((bool)value);
-            if (destinationType == StringType) return XmlConvert.ToString((bool)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (bool)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (bool)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == BooleanType)
+                return ((bool)value);
+            if (destinationType == StringType)
+                return XmlConvert.ToString((bool)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (bool)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (bool)value));
 
             return ChangeListType(value, destinationType, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == BooleanType) return XmlConvert.ToBoolean((string)value);
-            if (destinationType == StringType) return ((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == BooleanType)
+                return XmlConvert.ToBoolean((string)value);
+            if (destinationType == StringType)
+                return ((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == BooleanType) return this.ToBoolean(value);
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == BooleanType)
+                return this.ToBoolean(value);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == BooleanType) return (new XmlAtomicValue(SchemaType!, (bool)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == BooleanType)
+                    return (new XmlAtomicValue(SchemaType!, (bool)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == BooleanType) return (new XmlAtomicValue(SchemaType!, (bool)value));
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == BooleanType)
+                    return (new XmlAtomicValue(SchemaType!, (bool)value));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
 
             return ChangeListType(value, destinationType, nsResolver);
@@ -1706,9 +2276,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlMiscConverter : XmlBaseConverter
     {
-        private XmlMiscConverter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlMiscConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1726,100 +2295,134 @@ namespace System.Xml.Schema
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.Base64Binary: return Base64BinaryToString((byte[])value);
-                    case XmlTypeCode.HexBinary: return XmlConvert.ToBinHexString((byte[])value);
+                    case XmlTypeCode.Base64Binary:
+                        return Base64BinaryToString((byte[])value);
+                    case XmlTypeCode.HexBinary:
+                        return XmlConvert.ToBinHexString((byte[])value);
                 }
             }
-            if (sourceType == StringType) return (string)value;
-            if (IsDerivedFrom(sourceType, UriType)) if (TypeCode == XmlTypeCode.AnyUri) return AnyUriToString((Uri)value);
+            if (sourceType == StringType)
+                return (string)value;
+            if (IsDerivedFrom(sourceType, UriType))
+                if (TypeCode == XmlTypeCode.AnyUri)
+                    return AnyUriToString((Uri)value);
             if (sourceType == TimeSpanType)
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.DayTimeDuration: return DayTimeDurationToString((TimeSpan)value);
-                    case XmlTypeCode.Duration: return DurationToString((TimeSpan)value);
-                    case XmlTypeCode.YearMonthDuration: return YearMonthDurationToString((TimeSpan)value);
+                    case XmlTypeCode.DayTimeDuration:
+                        return DayTimeDurationToString((TimeSpan)value);
+                    case XmlTypeCode.Duration:
+                        return DurationToString((TimeSpan)value);
+                    case XmlTypeCode.YearMonthDuration:
+                        return YearMonthDurationToString((TimeSpan)value);
                 }
             }
             if (IsDerivedFrom(sourceType, XmlQualifiedNameType))
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.Notation: return QNameToString((XmlQualifiedName)value, nsResolver);
-                    case XmlTypeCode.QName: return QNameToString((XmlQualifiedName)value, nsResolver);
+                    case XmlTypeCode.Notation:
+                        return QNameToString((XmlQualifiedName)value, nsResolver);
+                    case XmlTypeCode.QName:
+                        return QNameToString((XmlQualifiedName)value, nsResolver);
                 }
             }
 
             return (string)ChangeTypeWildcardDestination(value, StringType, nsResolver);
         }
 
-
         //-----------------------------------------------
         // ChangeType
         //-----------------------------------------------
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
             if (destinationType == ByteArrayType)
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.Base64Binary: return StringToBase64Binary((string)value);
-                    case XmlTypeCode.HexBinary: return StringToHexBinary((string)value);
+                    case XmlTypeCode.Base64Binary:
+                        return StringToBase64Binary((string)value);
+                    case XmlTypeCode.HexBinary:
+                        return StringToHexBinary((string)value);
                 }
             }
             if (destinationType == XmlQualifiedNameType)
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.Notation: return StringToQName((string)value, nsResolver);
-                    case XmlTypeCode.QName: return StringToQName((string)value, nsResolver);
+                    case XmlTypeCode.Notation:
+                        return StringToQName((string)value, nsResolver);
+                    case XmlTypeCode.QName:
+                        return StringToQName((string)value, nsResolver);
                 }
             }
-            if (destinationType == StringType) return (string)value;
+            if (destinationType == StringType)
+                return (string)value;
             if (destinationType == TimeSpanType)
             {
                 switch (TypeCode)
                 {
-                    case XmlTypeCode.DayTimeDuration: return StringToDayTimeDuration((string)value);
-                    case XmlTypeCode.Duration: return StringToDuration((string)value);
-                    case XmlTypeCode.YearMonthDuration: return StringToYearMonthDuration((string)value);
+                    case XmlTypeCode.DayTimeDuration:
+                        return StringToDayTimeDuration((string)value);
+                    case XmlTypeCode.Duration:
+                        return StringToDuration((string)value);
+                    case XmlTypeCode.YearMonthDuration:
+                        return StringToYearMonthDuration((string)value);
                 }
             }
-            if (destinationType == UriType) if (TypeCode == XmlTypeCode.AnyUri) return XmlConvert.ToUri((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value, nsResolver));
+            if (destinationType == UriType)
+                if (TypeCode == XmlTypeCode.AnyUri)
+                    return XmlConvert.ToUri((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value, nsResolver));
 
             return ChangeTypeWildcardSource(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
             if (destinationType == ByteArrayType)
             {
                 if (sourceType == ByteArrayType)
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Base64Binary: return ((byte[])value);
-                        case XmlTypeCode.HexBinary: return ((byte[])value);
+                        case XmlTypeCode.Base64Binary:
+                            return ((byte[])value);
+                        case XmlTypeCode.HexBinary:
+                            return ((byte[])value);
                     }
                 }
                 if (sourceType == StringType)
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Base64Binary: return StringToBase64Binary((string)value);
-                        case XmlTypeCode.HexBinary: return StringToHexBinary((string)value);
+                        case XmlTypeCode.Base64Binary:
+                            return StringToBase64Binary((string)value);
+                        case XmlTypeCode.HexBinary:
+                            return StringToHexBinary((string)value);
                     }
                 }
             }
@@ -1829,45 +2432,60 @@ namespace System.Xml.Schema
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Notation: return StringToQName((string)value, nsResolver);
-                        case XmlTypeCode.QName: return StringToQName((string)value, nsResolver);
+                        case XmlTypeCode.Notation:
+                            return StringToQName((string)value, nsResolver);
+                        case XmlTypeCode.QName:
+                            return StringToQName((string)value, nsResolver);
                     }
                 }
                 if (IsDerivedFrom(sourceType, XmlQualifiedNameType))
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Notation: return ((XmlQualifiedName)value);
-                        case XmlTypeCode.QName: return ((XmlQualifiedName)value);
+                        case XmlTypeCode.Notation:
+                            return ((XmlQualifiedName)value);
+                        case XmlTypeCode.QName:
+                            return ((XmlQualifiedName)value);
                     }
                 }
             }
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == TimeSpanType)
             {
                 if (sourceType == StringType)
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.DayTimeDuration: return StringToDayTimeDuration((string)value);
-                        case XmlTypeCode.Duration: return StringToDuration((string)value);
-                        case XmlTypeCode.YearMonthDuration: return StringToYearMonthDuration((string)value);
+                        case XmlTypeCode.DayTimeDuration:
+                            return StringToDayTimeDuration((string)value);
+                        case XmlTypeCode.Duration:
+                            return StringToDuration((string)value);
+                        case XmlTypeCode.YearMonthDuration:
+                            return StringToYearMonthDuration((string)value);
                     }
                 }
                 if (sourceType == TimeSpanType)
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.DayTimeDuration: return ((TimeSpan)value);
-                        case XmlTypeCode.Duration: return ((TimeSpan)value);
-                        case XmlTypeCode.YearMonthDuration: return ((TimeSpan)value);
+                        case XmlTypeCode.DayTimeDuration:
+                            return ((TimeSpan)value);
+                        case XmlTypeCode.Duration:
+                            return ((TimeSpan)value);
+                        case XmlTypeCode.YearMonthDuration:
+                            return ((TimeSpan)value);
                     }
                 }
             }
             if (destinationType == UriType)
             {
-                if (sourceType == StringType) if (TypeCode == XmlTypeCode.AnyUri) return XmlConvert.ToUri((string)value);
-                if (IsDerivedFrom(sourceType, UriType)) if (TypeCode == XmlTypeCode.AnyUri) return ((Uri)value);
+                if (sourceType == StringType)
+                    if (TypeCode == XmlTypeCode.AnyUri)
+                        return XmlConvert.ToUri((string)value);
+                if (IsDerivedFrom(sourceType, UriType))
+                    if (TypeCode == XmlTypeCode.AnyUri)
+                        return ((Uri)value);
             }
             if (destinationType == XmlAtomicValueType)
             {
@@ -1875,58 +2493,81 @@ namespace System.Xml.Schema
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Base64Binary: return (new XmlAtomicValue(SchemaType!, value));
-                        case XmlTypeCode.HexBinary: return (new XmlAtomicValue(SchemaType!, value));
+                        case XmlTypeCode.Base64Binary:
+                            return (new XmlAtomicValue(SchemaType!, value));
+                        case XmlTypeCode.HexBinary:
+                            return (new XmlAtomicValue(SchemaType!, value));
                     }
                 }
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value, nsResolver));
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value, nsResolver));
                 if (sourceType == TimeSpanType)
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.DayTimeDuration: return (new XmlAtomicValue(SchemaType!, value));
-                        case XmlTypeCode.Duration: return (new XmlAtomicValue(SchemaType!, value));
-                        case XmlTypeCode.YearMonthDuration: return (new XmlAtomicValue(SchemaType!, value));
+                        case XmlTypeCode.DayTimeDuration:
+                            return (new XmlAtomicValue(SchemaType!, value));
+                        case XmlTypeCode.Duration:
+                            return (new XmlAtomicValue(SchemaType!, value));
+                        case XmlTypeCode.YearMonthDuration:
+                            return (new XmlAtomicValue(SchemaType!, value));
                     }
                 }
-                if (IsDerivedFrom(sourceType, UriType)) if (TypeCode == XmlTypeCode.AnyUri) return (new XmlAtomicValue(SchemaType!, value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (IsDerivedFrom(sourceType, UriType))
+                    if (TypeCode == XmlTypeCode.AnyUri)
+                        return (new XmlAtomicValue(SchemaType!, value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
                 if (IsDerivedFrom(sourceType, XmlQualifiedNameType))
                 {
                     switch (TypeCode)
                     {
-                        case XmlTypeCode.Notation: return (new XmlAtomicValue(SchemaType!, value, nsResolver));
-                        case XmlTypeCode.QName: return (new XmlAtomicValue(SchemaType!, value, nsResolver));
+                        case XmlTypeCode.Notation:
+                            return (new XmlAtomicValue(SchemaType!, value, nsResolver));
+                        case XmlTypeCode.QName:
+                            return (new XmlAtomicValue(SchemaType!, value, nsResolver));
                     }
                 }
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
-            if (destinationType == XPathItemType) return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (destinationType == XPathItemType)
+                return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // Helpers
         //-----------------------------------------------
 
-        private object ChangeTypeWildcardDestination(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        private object ChangeTypeWildcardDestination(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-        private object ChangeTypeWildcardSource(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        private object ChangeTypeWildcardSource(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
-            if (destinationType == XPathItemType) return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
+            if (destinationType == XPathItemType)
+                return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
@@ -1935,9 +2576,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlStringConverter : XmlBaseConverter
     {
-        private XmlStringConverter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        private XmlStringConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1951,48 +2591,67 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).Value;
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).Value;
 
             return (string)ChangeListType(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
         //-----------------------------------------------
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return ((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return ((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
 
             return ChangeListType(value, destinationType, nsResolver);
@@ -2004,18 +2663,27 @@ namespace System.Xml.Schema
     {
         private readonly bool _allowListToList;
 
-        private XmlUntypedConverter() : base(DatatypeImplementation.UntypedAtomicType)
-        {
-        }
+        private XmlUntypedConverter()
+            : base(DatatypeImplementation.UntypedAtomicType) { }
 
         private XmlUntypedConverter(XmlUntypedConverter atomicConverter, bool allowListToList)
-            : base(atomicConverter, allowListToList ? StringArrayType : StringType, allowListToList ? StringArrayArrayType : StringArrayType)
+            : base(
+                atomicConverter,
+                allowListToList ? StringArrayType : StringType,
+                allowListToList ? StringArrayArrayType : StringArrayType
+            )
         {
             _allowListToList = allowListToList;
         }
 
-        public static readonly XmlValueConverter Untyped = new XmlUntypedConverter(new XmlUntypedConverter(), false);
-        public static readonly XmlValueConverter UntypedList = new XmlUntypedConverter(new XmlUntypedConverter(), true);
+        public static readonly XmlValueConverter Untyped = new XmlUntypedConverter(
+            new XmlUntypedConverter(),
+            false
+        );
+        public static readonly XmlValueConverter UntypedList = new XmlUntypedConverter(
+            new XmlUntypedConverter(),
+            true
+        );
 
         #region AUTOGENERATED_XMLUNTYPEDCONVERTER
 
@@ -2029,17 +2697,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToBoolean((string)value);
         }
+
         public override bool ToBoolean(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToBoolean((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToBoolean((string)value);
 
             return (bool)ChangeTypeWildcardDestination(value, BooleanType, null);
         }
-
 
         //-----------------------------------------------
         // ToDateTime
@@ -2051,13 +2720,15 @@ namespace System.Xml.Schema
 
             return UntypedAtomicToDateTime((string)value);
         }
+
         public override DateTime ToDateTime(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return UntypedAtomicToDateTime((string)value);
+            if (sourceType == StringType)
+                return UntypedAtomicToDateTime((string)value);
 
             return (DateTime)ChangeTypeWildcardDestination(value, DateTimeType, null);
         }
@@ -2079,7 +2750,8 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return UntypedAtomicToDateTimeOffset((string)value);
+            if (sourceType == StringType)
+                return UntypedAtomicToDateTimeOffset((string)value);
 
             return (DateTimeOffset)ChangeTypeWildcardDestination(value, DateTimeOffsetType, null);
         }
@@ -2094,17 +2766,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToDecimal((string)value);
         }
+
         public override decimal ToDecimal(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToDecimal((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToDecimal((string)value);
 
             return (decimal)ChangeTypeWildcardDestination(value, DecimalType, null);
         }
-
 
         //-----------------------------------------------
         // ToDouble
@@ -2116,17 +2789,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToDouble((string)value);
         }
+
         public override double ToDouble(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToDouble((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToDouble((string)value);
 
             return (double)ChangeTypeWildcardDestination(value, DoubleType, null);
         }
-
 
         //-----------------------------------------------
         // ToInt32
@@ -2138,17 +2812,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToInt32((string)value);
         }
+
         public override int ToInt32(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToInt32((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToInt32((string)value);
 
             return (int)ChangeTypeWildcardDestination(value, Int32Type, null);
         }
-
 
         //-----------------------------------------------
         // ToInt64
@@ -2160,17 +2835,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToInt64((string)value);
         }
+
         public override long ToInt64(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToInt64((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToInt64((string)value);
 
             return (long)ChangeTypeWildcardDestination(value, Int64Type, null);
         }
-
 
         //-----------------------------------------------
         // ToSingle
@@ -2182,17 +2858,18 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToSingle((string)value);
         }
+
         public override float ToSingle(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == StringType) return XmlConvert.ToSingle((string)value);
+            if (sourceType == StringType)
+                return XmlConvert.ToSingle((string)value);
 
             return (float)ChangeTypeWildcardDestination(value, SingleType, null);
         }
-
 
         //-----------------------------------------------
         // ToString
@@ -2202,64 +2879,91 @@ namespace System.Xml.Schema
         {
             return XmlConvert.ToString((bool)value);
         }
+
         public override string ToString(DateTime value)
         {
             return DateTimeToString((DateTime)value);
         }
+
         public override string ToString(DateTimeOffset value)
         {
             return DateTimeOffsetToString((DateTimeOffset)value);
         }
+
         public override string ToString(decimal value)
         {
             return XmlConvert.ToString((decimal)value);
         }
+
         public override string ToString(double value)
         {
             return XmlConvert.ToString((double)value);
         }
+
         public override string ToString(int value)
         {
             return XmlConvert.ToString((int)value);
         }
+
         public override string ToString(long value)
         {
             return XmlConvert.ToString((long)value);
         }
+
         public override string ToString(float value)
         {
             return XmlConvert.ToString((float)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             ArgumentNullException.ThrowIfNull(value);
 
             Type sourceType = value.GetType();
 
-            if (sourceType == BooleanType) return XmlConvert.ToString((bool)value);
-            if (sourceType == ByteType) return XmlConvert.ToString((byte)value);
-            if (sourceType == ByteArrayType) return Base64BinaryToString((byte[])value);
-            if (sourceType == DateTimeType) return DateTimeToString((DateTime)value);
-            if (sourceType == DateTimeOffsetType) return DateTimeOffsetToString((DateTimeOffset)value);
-            if (sourceType == DecimalType) return XmlConvert.ToString((decimal)value);
-            if (sourceType == DoubleType) return XmlConvert.ToString((double)value);
-            if (sourceType == Int16Type) return XmlConvert.ToString((short)value);
-            if (sourceType == Int32Type) return XmlConvert.ToString((int)value);
-            if (sourceType == Int64Type) return XmlConvert.ToString((long)value);
-            if (sourceType == SByteType) return XmlConvert.ToString((sbyte)value);
-            if (sourceType == SingleType) return XmlConvert.ToString((float)value);
-            if (sourceType == StringType) return ((string)value);
-            if (sourceType == TimeSpanType) return DurationToString((TimeSpan)value);
-            if (sourceType == UInt16Type) return XmlConvert.ToString((ushort)value);
-            if (sourceType == UInt32Type) return XmlConvert.ToString((uint)value);
-            if (sourceType == UInt64Type) return XmlConvert.ToString((ulong)value);
-            if (IsDerivedFrom(sourceType, UriType)) return AnyUriToString((Uri)value);
-            if (sourceType == XmlAtomicValueType) return ((string)((XmlAtomicValue)value).ValueAs(StringType, nsResolver));
-            if (IsDerivedFrom(sourceType, XmlQualifiedNameType)) return QNameToString((XmlQualifiedName)value, nsResolver);
+            if (sourceType == BooleanType)
+                return XmlConvert.ToString((bool)value);
+            if (sourceType == ByteType)
+                return XmlConvert.ToString((byte)value);
+            if (sourceType == ByteArrayType)
+                return Base64BinaryToString((byte[])value);
+            if (sourceType == DateTimeType)
+                return DateTimeToString((DateTime)value);
+            if (sourceType == DateTimeOffsetType)
+                return DateTimeOffsetToString((DateTimeOffset)value);
+            if (sourceType == DecimalType)
+                return XmlConvert.ToString((decimal)value);
+            if (sourceType == DoubleType)
+                return XmlConvert.ToString((double)value);
+            if (sourceType == Int16Type)
+                return XmlConvert.ToString((short)value);
+            if (sourceType == Int32Type)
+                return XmlConvert.ToString((int)value);
+            if (sourceType == Int64Type)
+                return XmlConvert.ToString((long)value);
+            if (sourceType == SByteType)
+                return XmlConvert.ToString((sbyte)value);
+            if (sourceType == SingleType)
+                return XmlConvert.ToString((float)value);
+            if (sourceType == StringType)
+                return ((string)value);
+            if (sourceType == TimeSpanType)
+                return DurationToString((TimeSpan)value);
+            if (sourceType == UInt16Type)
+                return XmlConvert.ToString((ushort)value);
+            if (sourceType == UInt32Type)
+                return XmlConvert.ToString((uint)value);
+            if (sourceType == UInt64Type)
+                return XmlConvert.ToString((ulong)value);
+            if (IsDerivedFrom(sourceType, UriType))
+                return AnyUriToString((Uri)value);
+            if (sourceType == XmlAtomicValueType)
+                return ((string)((XmlAtomicValue)value).ValueAs(StringType, nsResolver));
+            if (IsDerivedFrom(sourceType, XmlQualifiedNameType))
+                return QNameToString((XmlQualifiedName)value, nsResolver);
 
             return (string)ChangeTypeWildcardDestination(value, StringType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // ChangeType
@@ -2269,8 +2973,10 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return XmlConvert.ToString((bool)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return XmlConvert.ToString((bool)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2279,8 +2985,10 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return DateTimeToString((DateTime)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return DateTimeToString((DateTime)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2289,8 +2997,10 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return XmlConvert.ToString((decimal)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return XmlConvert.ToString((decimal)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2299,8 +3009,10 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return XmlConvert.ToString((double)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return XmlConvert.ToString((double)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2309,8 +3021,10 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return XmlConvert.ToString((int)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return XmlConvert.ToString((int)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2319,158 +3033,228 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == StringType) return XmlConvert.ToString((long)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == StringType)
+                return XmlConvert.ToString((long)value);
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == BooleanType) return XmlConvert.ToBoolean((string)value);
-            if (destinationType == ByteType) return Int32ToByte(XmlConvert.ToInt32((string)value));
-            if (destinationType == ByteArrayType) return StringToBase64Binary((string)value);
-            if (destinationType == DateTimeType) return UntypedAtomicToDateTime((string)value);
-            if (destinationType == DateTimeOffsetType) return UntypedAtomicToDateTimeOffset((string)value);
-            if (destinationType == DecimalType) return XmlConvert.ToDecimal((string)value);
-            if (destinationType == DoubleType) return XmlConvert.ToDouble((string)value);
-            if (destinationType == Int16Type) return Int32ToInt16(XmlConvert.ToInt32((string)value));
-            if (destinationType == Int32Type) return XmlConvert.ToInt32((string)value);
-            if (destinationType == Int64Type) return XmlConvert.ToInt64((string)value);
-            if (destinationType == SByteType) return Int32ToSByte(XmlConvert.ToInt32((string)value));
-            if (destinationType == SingleType) return XmlConvert.ToSingle((string)value);
-            if (destinationType == TimeSpanType) return StringToDuration((string)value);
-            if (destinationType == UInt16Type) return Int32ToUInt16(XmlConvert.ToInt32((string)value));
-            if (destinationType == UInt32Type) return Int64ToUInt32(XmlConvert.ToInt64((string)value));
-            if (destinationType == UInt64Type) return DecimalToUInt64(XmlConvert.ToDecimal((string)value));
-            if (destinationType == UriType) return XmlConvert.ToUri((string)value);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == XmlQualifiedNameType) return StringToQName((string)value, nsResolver);
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, (string)value));
-            if (destinationType == StringType) return ((string)value);
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == BooleanType)
+                return XmlConvert.ToBoolean((string)value);
+            if (destinationType == ByteType)
+                return Int32ToByte(XmlConvert.ToInt32((string)value));
+            if (destinationType == ByteArrayType)
+                return StringToBase64Binary((string)value);
+            if (destinationType == DateTimeType)
+                return UntypedAtomicToDateTime((string)value);
+            if (destinationType == DateTimeOffsetType)
+                return UntypedAtomicToDateTimeOffset((string)value);
+            if (destinationType == DecimalType)
+                return XmlConvert.ToDecimal((string)value);
+            if (destinationType == DoubleType)
+                return XmlConvert.ToDouble((string)value);
+            if (destinationType == Int16Type)
+                return Int32ToInt16(XmlConvert.ToInt32((string)value));
+            if (destinationType == Int32Type)
+                return XmlConvert.ToInt32((string)value);
+            if (destinationType == Int64Type)
+                return XmlConvert.ToInt64((string)value);
+            if (destinationType == SByteType)
+                return Int32ToSByte(XmlConvert.ToInt32((string)value));
+            if (destinationType == SingleType)
+                return XmlConvert.ToSingle((string)value);
+            if (destinationType == TimeSpanType)
+                return StringToDuration((string)value);
+            if (destinationType == UInt16Type)
+                return Int32ToUInt16(XmlConvert.ToInt32((string)value));
+            if (destinationType == UInt32Type)
+                return Int64ToUInt32(XmlConvert.ToInt64((string)value));
+            if (destinationType == UInt64Type)
+                return DecimalToUInt64(XmlConvert.ToDecimal((string)value));
+            if (destinationType == UriType)
+                return XmlConvert.ToUri((string)value);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == XmlQualifiedNameType)
+                return StringToQName((string)value, nsResolver);
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, (string)value));
+            if (destinationType == StringType)
+                return ((string)value);
 
             return ChangeTypeWildcardSource(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
             if (destinationType == BooleanType)
             {
-                if (sourceType == StringType) return XmlConvert.ToBoolean((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToBoolean((string)value);
             }
             if (destinationType == ByteType)
             {
-                if (sourceType == StringType) return Int32ToByte(XmlConvert.ToInt32((string)value));
+                if (sourceType == StringType)
+                    return Int32ToByte(XmlConvert.ToInt32((string)value));
             }
             if (destinationType == ByteArrayType)
             {
-                if (sourceType == StringType) return StringToBase64Binary((string)value);
+                if (sourceType == StringType)
+                    return StringToBase64Binary((string)value);
             }
             if (destinationType == DateTimeType)
             {
-                if (sourceType == StringType) return UntypedAtomicToDateTime((string)value);
+                if (sourceType == StringType)
+                    return UntypedAtomicToDateTime((string)value);
             }
             if (destinationType == DateTimeOffsetType)
             {
-                if (sourceType == StringType) return UntypedAtomicToDateTimeOffset((string)value);
+                if (sourceType == StringType)
+                    return UntypedAtomicToDateTimeOffset((string)value);
             }
             if (destinationType == DecimalType)
             {
-                if (sourceType == StringType) return XmlConvert.ToDecimal((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToDecimal((string)value);
             }
             if (destinationType == DoubleType)
             {
-                if (sourceType == StringType) return XmlConvert.ToDouble((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToDouble((string)value);
             }
             if (destinationType == Int16Type)
             {
-                if (sourceType == StringType) return Int32ToInt16(XmlConvert.ToInt32((string)value));
+                if (sourceType == StringType)
+                    return Int32ToInt16(XmlConvert.ToInt32((string)value));
             }
             if (destinationType == Int32Type)
             {
-                if (sourceType == StringType) return XmlConvert.ToInt32((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToInt32((string)value);
             }
             if (destinationType == Int64Type)
             {
-                if (sourceType == StringType) return XmlConvert.ToInt64((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToInt64((string)value);
             }
             if (destinationType == SByteType)
             {
-                if (sourceType == StringType) return Int32ToSByte(XmlConvert.ToInt32((string)value));
+                if (sourceType == StringType)
+                    return Int32ToSByte(XmlConvert.ToInt32((string)value));
             }
             if (destinationType == SingleType)
             {
-                if (sourceType == StringType) return XmlConvert.ToSingle((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToSingle((string)value);
             }
             if (destinationType == TimeSpanType)
             {
-                if (sourceType == StringType) return StringToDuration((string)value);
+                if (sourceType == StringType)
+                    return StringToDuration((string)value);
             }
             if (destinationType == UInt16Type)
             {
-                if (sourceType == StringType) return Int32ToUInt16(XmlConvert.ToInt32((string)value));
+                if (sourceType == StringType)
+                    return Int32ToUInt16(XmlConvert.ToInt32((string)value));
             }
             if (destinationType == UInt32Type)
             {
-                if (sourceType == StringType) return Int64ToUInt32(XmlConvert.ToInt64((string)value));
+                if (sourceType == StringType)
+                    return Int64ToUInt32(XmlConvert.ToInt64((string)value));
             }
             if (destinationType == UInt64Type)
             {
-                if (sourceType == StringType) return DecimalToUInt64(XmlConvert.ToDecimal((string)value));
+                if (sourceType == StringType)
+                    return DecimalToUInt64(XmlConvert.ToDecimal((string)value));
             }
             if (destinationType == UriType)
             {
-                if (sourceType == StringType) return XmlConvert.ToUri((string)value);
+                if (sourceType == StringType)
+                    return XmlConvert.ToUri((string)value);
             }
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
             if (destinationType == XmlQualifiedNameType)
             {
-                if (sourceType == StringType) return StringToQName((string)value, nsResolver);
+                if (sourceType == StringType)
+                    return StringToQName((string)value, nsResolver);
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == StringType) return (new XmlAtomicValue(SchemaType!, (string)value));
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
+                if (sourceType == StringType)
+                    return (new XmlAtomicValue(SchemaType!, (string)value));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
             }
-            if (destinationType == StringType) return this.ToString(value, nsResolver);
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (destinationType == StringType)
+                return this.ToString(value, nsResolver);
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // Helpers
         //-----------------------------------------------
 
-        private object ChangeTypeWildcardDestination(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        private object ChangeTypeWildcardDestination(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-        private object ChangeTypeWildcardSource(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+
+        private object ChangeTypeWildcardSource(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
-            if (destinationType == XPathItemType) return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
+            if (destinationType == XmlAtomicValueType)
+                return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
+            if (destinationType == XPathItemType)
+                return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
@@ -2481,19 +3265,30 @@ namespace System.Xml.Schema
         // Helpers
         //-----------------------------------------------
 
-        protected override object ChangeListType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        protected override object ChangeListType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
             // 1. If there is no nested atomic converter, then do not support lists at all
             // 2. If list to list conversions are not allowed, only allow string => list and list => string
-            if ((this.atomicConverter == null) || (!_allowListToList && sourceType != StringType && destinationType != StringType))
+            if (
+                (this.atomicConverter == null)
+                || (!_allowListToList && sourceType != StringType && destinationType != StringType)
+            )
             {
                 if (SupportsType(sourceType))
-                    throw new InvalidCastException(SR.Format(SR.XmlConvert_TypeToString, XmlTypeName, sourceType.Name));
+                    throw new InvalidCastException(
+                        SR.Format(SR.XmlConvert_TypeToString, XmlTypeName, sourceType.Name)
+                    );
 
                 if (SupportsType(destinationType))
-                    throw new InvalidCastException(SR.Format(SR.XmlConvert_TypeFromString, XmlTypeName, destinationType.Name));
+                    throw new InvalidCastException(
+                        SR.Format(SR.XmlConvert_TypeFromString, XmlTypeName, destinationType.Name)
+                    );
 
                 throw CreateInvalidClrMappingException(sourceType, destinationType);
             }
@@ -2503,24 +3298,42 @@ namespace System.Xml.Schema
 
         private static bool SupportsType(Type clrType)
         {
-            if (clrType == BooleanType) return true;
-            if (clrType == ByteType) return true;
-            if (clrType == ByteArrayType) return true;
-            if (clrType == DateTimeType) return true;
-            if (clrType == DateTimeOffsetType) return true;
-            if (clrType == DecimalType) return true;
-            if (clrType == DoubleType) return true;
-            if (clrType == Int16Type) return true;
-            if (clrType == Int32Type) return true;
-            if (clrType == Int64Type) return true;
-            if (clrType == SByteType) return true;
-            if (clrType == SingleType) return true;
-            if (clrType == TimeSpanType) return true;
-            if (clrType == UInt16Type) return true;
-            if (clrType == UInt32Type) return true;
-            if (clrType == UInt64Type) return true;
-            if (clrType == UriType) return true;
-            if (clrType == XmlQualifiedNameType) return true;
+            if (clrType == BooleanType)
+                return true;
+            if (clrType == ByteType)
+                return true;
+            if (clrType == ByteArrayType)
+                return true;
+            if (clrType == DateTimeType)
+                return true;
+            if (clrType == DateTimeOffsetType)
+                return true;
+            if (clrType == DecimalType)
+                return true;
+            if (clrType == DoubleType)
+                return true;
+            if (clrType == Int16Type)
+                return true;
+            if (clrType == Int32Type)
+                return true;
+            if (clrType == Int64Type)
+                return true;
+            if (clrType == SByteType)
+                return true;
+            if (clrType == SingleType)
+                return true;
+            if (clrType == TimeSpanType)
+                return true;
+            if (clrType == UInt16Type)
+                return true;
+            if (clrType == UInt32Type)
+                return true;
+            if (clrType == UInt64Type)
+                return true;
+            if (clrType == UriType)
+                return true;
+            if (clrType == XmlQualifiedNameType)
+                return true;
 
             return false;
         }
@@ -2528,12 +3341,13 @@ namespace System.Xml.Schema
 
     internal sealed class XmlAnyConverter : XmlBaseConverter
     {
-        private XmlAnyConverter(XmlTypeCode typeCode) : base(typeCode)
-        {
-        }
+        private XmlAnyConverter(XmlTypeCode typeCode)
+            : base(typeCode) { }
 
         public static readonly XmlValueConverter Item = new XmlAnyConverter(XmlTypeCode.Item);
-        public static readonly XmlValueConverter AnyAtomic = new XmlAnyConverter(XmlTypeCode.AnyAtomicType);
+        public static readonly XmlValueConverter AnyAtomic = new XmlAnyConverter(
+            XmlTypeCode.AnyAtomicType
+        );
 
         #region AUTOGENERATED_XMLANYCONVERTER
 
@@ -2547,11 +3361,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsBoolean;
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsBoolean;
 
             return (bool)ChangeTypeWildcardDestination(value, BooleanType, null);
         }
-
 
         //-----------------------------------------------
         // ToDateTime
@@ -2563,7 +3377,8 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDateTime;
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsDateTime;
 
             return (DateTime)ChangeTypeWildcardDestination(value, DateTimeType, null);
         }
@@ -2578,11 +3393,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return (DateTimeOffset)((XmlAtomicValue)value).ValueAs(DateTimeOffsetType);
+            if (sourceType == XmlAtomicValueType)
+                return (DateTimeOffset)((XmlAtomicValue)value).ValueAs(DateTimeOffsetType);
 
             return (DateTimeOffset)ChangeTypeWildcardDestination(value, DateTimeOffsetType, null);
         }
-
 
         //-----------------------------------------------
         // ToDecimal
@@ -2594,11 +3409,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
+            if (sourceType == XmlAtomicValueType)
+                return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
 
             return (decimal)ChangeTypeWildcardDestination(value, DecimalType, null);
         }
-
 
         //-----------------------------------------------
         // ToDouble
@@ -2610,11 +3425,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDouble;
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsDouble;
 
             return (double)ChangeTypeWildcardDestination(value, DoubleType, null);
         }
-
 
         //-----------------------------------------------
         // ToInt32
@@ -2626,11 +3441,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsInt;
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsInt;
 
             return (int)ChangeTypeWildcardDestination(value, Int32Type, null);
         }
-
 
         //-----------------------------------------------
         // ToInt64
@@ -2642,11 +3457,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsLong;
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAsLong;
 
             return (long)ChangeTypeWildcardDestination(value, Int64Type, null);
         }
-
 
         //-----------------------------------------------
         // ToSingle
@@ -2658,11 +3473,11 @@ namespace System.Xml.Schema
 
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
+            if (sourceType == XmlAtomicValueType)
+                return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
 
             return (float)ChangeTypeWildcardDestination(value, SingleType, null);
         }
-
 
         //-----------------------------------------------
         // ToString
@@ -2679,8 +3494,15 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Boolean), (bool)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Boolean),
+                        (bool)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2689,8 +3511,15 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime), (DateTime)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime),
+                        (DateTime)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2699,8 +3528,15 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Decimal), value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Decimal),
+                        value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2709,8 +3545,15 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double), (double)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double),
+                        (double)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2719,8 +3562,15 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Int), (int)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Int),
+                        (int)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
@@ -2729,117 +3579,279 @@ namespace System.Xml.Schema
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Long), (long)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Long),
+                        (long)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, null);
         }
 
-        public override object ChangeType(string value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            string value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
-            if (destinationType == XmlAtomicValueType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), (string)value));
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
+            if (destinationType == XmlAtomicValueType)
+                return (
+                    new XmlAtomicValue(
+                        XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                        (string)value
+                    )
+                );
 
             return ChangeTypeWildcardSource(value, destinationType, nsResolver);
         }
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
             if (destinationType == BooleanType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsBoolean;
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAsBoolean;
             }
             if (destinationType == DateTimeType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDateTime;
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAsDateTime;
             }
             if (destinationType == DateTimeOffsetType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(DateTimeOffsetType);
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAs(DateTimeOffsetType);
             }
             if (destinationType == DecimalType)
             {
-                if (sourceType == XmlAtomicValueType) return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
+                if (sourceType == XmlAtomicValueType)
+                    return ((decimal)((XmlAtomicValue)value).ValueAs(DecimalType));
             }
             if (destinationType == DoubleType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsDouble;
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAsDouble;
             }
             if (destinationType == Int32Type)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsInt;
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAsInt;
             }
             if (destinationType == Int64Type)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAsLong;
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value).ValueAsLong;
             }
             if (destinationType == SingleType)
             {
-                if (sourceType == XmlAtomicValueType) return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
+                if (sourceType == XmlAtomicValueType)
+                    return ((float)((XmlAtomicValue)value).ValueAs(SingleType));
             }
             if (destinationType == XmlAtomicValueType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
-                if (sourceType == BooleanType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Boolean), (bool)value));
-                if (sourceType == ByteType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedByte), value));
-                if (sourceType == ByteArrayType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Base64Binary), value));
-                if (sourceType == DateTimeType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime), (DateTime)value));
-                if (sourceType == DateTimeOffsetType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime), (DateTimeOffset)value));
-                if (sourceType == DecimalType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Decimal), value));
-                if (sourceType == DoubleType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double), (double)value));
-                if (sourceType == Int16Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Short), value));
-                if (sourceType == Int32Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Int), (int)value));
-                if (sourceType == Int64Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Long), (long)value));
-                if (sourceType == SByteType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Byte), value));
-                if (sourceType == SingleType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Float), value));
-                if (sourceType == StringType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), (string)value));
-                if (sourceType == TimeSpanType) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Duration), value));
-                if (sourceType == UInt16Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedShort), value));
-                if (sourceType == UInt32Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedInt), value));
-                if (sourceType == UInt64Type) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedLong), value));
-                if (IsDerivedFrom(sourceType, UriType)) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.AnyUri), value));
-                if (IsDerivedFrom(sourceType, XmlQualifiedNameType)) return (new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.QName), value, nsResolver));
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
+                if (sourceType == BooleanType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Boolean),
+                            (bool)value
+                        )
+                    );
+                if (sourceType == ByteType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedByte),
+                            value
+                        )
+                    );
+                if (sourceType == ByteArrayType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Base64Binary),
+                            value
+                        )
+                    );
+                if (sourceType == DateTimeType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime),
+                            (DateTime)value
+                        )
+                    );
+                if (sourceType == DateTimeOffsetType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.DateTime),
+                            (DateTimeOffset)value
+                        )
+                    );
+                if (sourceType == DecimalType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Decimal),
+                            value
+                        )
+                    );
+                if (sourceType == DoubleType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double),
+                            (double)value
+                        )
+                    );
+                if (sourceType == Int16Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Short),
+                            value
+                        )
+                    );
+                if (sourceType == Int32Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Int),
+                            (int)value
+                        )
+                    );
+                if (sourceType == Int64Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Long),
+                            (long)value
+                        )
+                    );
+                if (sourceType == SByteType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Byte),
+                            value
+                        )
+                    );
+                if (sourceType == SingleType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Float),
+                            value
+                        )
+                    );
+                if (sourceType == StringType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                            (string)value
+                        )
+                    );
+                if (sourceType == TimeSpanType)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Duration),
+                            value
+                        )
+                    );
+                if (sourceType == UInt16Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedShort),
+                            value
+                        )
+                    );
+                if (sourceType == UInt32Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedInt),
+                            value
+                        )
+                    );
+                if (sourceType == UInt64Type)
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.UnsignedLong),
+                            value
+                        )
+                    );
+                if (IsDerivedFrom(sourceType, UriType))
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.AnyUri),
+                            value
+                        )
+                    );
+                if (IsDerivedFrom(sourceType, XmlQualifiedNameType))
+                    return (
+                        new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.QName),
+                            value,
+                            nsResolver
+                        )
+                    );
             }
             if (destinationType == XPathItemType)
             {
-                if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value);
-                if (IsDerivedFrom(sourceType, XPathNavigatorType)) return ((XPathNavigator)value);
+                if (sourceType == XmlAtomicValueType)
+                    return ((XmlAtomicValue)value);
+                if (IsDerivedFrom(sourceType, XPathNavigatorType))
+                    return ((XPathNavigator)value);
             }
             if (destinationType == XPathNavigatorType)
             {
-                if (IsDerivedFrom(sourceType, XPathNavigatorType)) return ToNavigator((XPathNavigator)value);
+                if (IsDerivedFrom(sourceType, XPathNavigatorType))
+                    return ToNavigator((XPathNavigator)value);
             }
-            if (destinationType == XPathItemType) return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (destinationType == XPathItemType)
+                return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
 
         //-----------------------------------------------
         // Helpers
         //-----------------------------------------------
 
-        private object ChangeTypeWildcardDestination(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        private object ChangeTypeWildcardDestination(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
-            if (sourceType == XmlAtomicValueType) return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
+            if (sourceType == XmlAtomicValueType)
+                return ((XmlAtomicValue)value).ValueAs(destinationType, nsResolver);
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-        private object ChangeTypeWildcardSource(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+
+        private object ChangeTypeWildcardSource(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
-            if (destinationType == XPathItemType) return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
+            if (destinationType == XPathItemType)
+                return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
 
             return ChangeListType(value, destinationType, nsResolver);
         }
@@ -2859,25 +3871,35 @@ namespace System.Xml.Schema
 
     internal sealed class XmlAnyListConverter : XmlListConverter
     {
-        private XmlAnyListConverter(XmlBaseConverter atomicConverter) : base(atomicConverter)
-        {
-        }
+        private XmlAnyListConverter(XmlBaseConverter atomicConverter)
+            : base(atomicConverter) { }
 
-        public static readonly XmlValueConverter ItemList = new XmlAnyListConverter((XmlBaseConverter)XmlAnyConverter.Item);
-        public static readonly XmlValueConverter AnyAtomicList = new XmlAnyListConverter((XmlBaseConverter)XmlAnyConverter.AnyAtomic);
-
+        public static readonly XmlValueConverter ItemList = new XmlAnyListConverter(
+            (XmlBaseConverter)XmlAnyConverter.Item
+        );
+        public static readonly XmlValueConverter AnyAtomicList = new XmlAnyListConverter(
+            (XmlBaseConverter)XmlAnyConverter.AnyAtomic
+        );
 
         //-----------------------------------------------
         // ChangeType
         //-----------------------------------------------
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
 
             // If source value does not implement IEnumerable, or it is a string or byte[],
-            if (!(value is IEnumerable) || value.GetType() == StringType || value.GetType() == ByteArrayType)
+            if (
+                !(value is IEnumerable)
+                || value.GetType() == StringType
+                || value.GetType() == ByteArrayType
+            )
             {
                 // Then create a list from it
                 value = new object[] { value };
@@ -2891,19 +3913,24 @@ namespace System.Xml.Schema
     {
         protected XmlValueConverter? atomicConverter;
 
-        protected XmlListConverter(XmlBaseConverter atomicConverter) : base(atomicConverter)
+        protected XmlListConverter(XmlBaseConverter atomicConverter)
+            : base(atomicConverter)
         {
             this.atomicConverter = atomicConverter;
         }
 
-        protected XmlListConverter(XmlBaseConverter atomicConverter, Type clrTypeDefault, Type clrListTypeDefault) : base(atomicConverter, clrTypeDefault, clrListTypeDefault)
+        protected XmlListConverter(
+            XmlBaseConverter atomicConverter,
+            Type clrTypeDefault,
+            Type clrListTypeDefault
+        )
+            : base(atomicConverter, clrTypeDefault, clrListTypeDefault)
         {
             this.atomicConverter = atomicConverter;
         }
 
-        protected XmlListConverter(XmlSchemaType schemaType) : base(schemaType)
-        {
-        }
+        protected XmlListConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlValueConverter atomicConverter)
         {
@@ -2916,18 +3943,24 @@ namespace System.Xml.Schema
             if (atomicConverter == XmlAnyConverter.AnyAtomic)
                 return XmlAnyListConverter.AnyAtomicList;
 
-            Debug.Assert(!(atomicConverter is XmlListConverter) || ((XmlListConverter)atomicConverter).atomicConverter == null,
-                         "List converters should not be nested within one another.");
+            Debug.Assert(
+                !(atomicConverter is XmlListConverter)
+                    || ((XmlListConverter)atomicConverter).atomicConverter == null,
+                "List converters should not be nested within one another."
+            );
 
             return new XmlListConverter((XmlBaseConverter)atomicConverter);
         }
-
 
         //-----------------------------------------------
         // ChangeType
         //-----------------------------------------------
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
@@ -2935,16 +3968,20 @@ namespace System.Xml.Schema
             return ChangeListType(value, destinationType, nsResolver);
         }
 
-
         //------------------------------------------------------------------------
         // Helpers
         //------------------------------------------------------------------------
 
-        protected override object ChangeListType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        protected override object ChangeListType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             Type sourceType = value.GetType();
 
-            if (destinationType == ObjectType) destinationType = DefaultClrType!;
+            if (destinationType == ObjectType)
+                destinationType = DefaultClrType!;
 
             // Input value must support IEnumerable and destination type should be IEnumerable, ICollection, IList, Type[], or String
             if (!(value is IEnumerable) || !IsListType(destinationType))
@@ -2973,34 +4010,58 @@ namespace System.Xml.Schema
 
                 // Converting from object[] to object[] is not necessarily a no-op (i.e. xs:int* stored as an object[]
                 // containing String values will need to be converted to an object[] containing Int32 values).
-                if (itemTypeDst == ObjectType) return ToArray<object>(value, nsResolver);
+                if (itemTypeDst == ObjectType)
+                    return ToArray<object>(value, nsResolver);
 
                 // For all types except object[], sourceType = destinationType is a no-op conversion
-                if (sourceType == destinationType) return value;
+                if (sourceType == destinationType)
+                    return value;
 
                 // Otherwise, iterate over values in source list, convert them to output item type, and store them in result array
-                if (itemTypeDst == BooleanType) return ToArray<bool>(value, nsResolver);
-                if (itemTypeDst == ByteType) return ToArray<byte>(value, nsResolver);
-                if (itemTypeDst == ByteArrayType) return ToArray<byte[]>(value, nsResolver);
-                if (itemTypeDst == DateTimeType) return ToArray<DateTime>(value, nsResolver);
-                if (itemTypeDst == DateTimeOffsetType) return ToArray<DateTimeOffset>(value, nsResolver);
-                if (itemTypeDst == DecimalType) return ToArray<decimal>(value, nsResolver);
-                if (itemTypeDst == DoubleType) return ToArray<double>(value, nsResolver);
-                if (itemTypeDst == Int16Type) return ToArray<short>(value, nsResolver);
-                if (itemTypeDst == Int32Type) return ToArray<int>(value, nsResolver);
-                if (itemTypeDst == Int64Type) return ToArray<long>(value, nsResolver);
-                if (itemTypeDst == SByteType) return ToArray<sbyte>(value, nsResolver);
-                if (itemTypeDst == SingleType) return ToArray<float>(value, nsResolver);
-                if (itemTypeDst == StringType) return ToArray<string>(value, nsResolver);
-                if (itemTypeDst == TimeSpanType) return ToArray<TimeSpan>(value, nsResolver);
-                if (itemTypeDst == UInt16Type) return ToArray<ushort>(value, nsResolver);
-                if (itemTypeDst == UInt32Type) return ToArray<uint>(value, nsResolver);
-                if (itemTypeDst == UInt64Type) return ToArray<ulong>(value, nsResolver);
-                if (itemTypeDst == UriType) return ToArray<Uri>(value, nsResolver);
-                if (itemTypeDst == XmlAtomicValueType) return ToArray<XmlAtomicValue>(value, nsResolver);
-                if (itemTypeDst == XmlQualifiedNameType) return ToArray<XmlQualifiedName>(value, nsResolver);
-                if (itemTypeDst == XPathItemType) return ToArray<XPathItem>(value, nsResolver);
-                if (itemTypeDst == XPathNavigatorType) return ToArray<XPathNavigator>(value, nsResolver);
+                if (itemTypeDst == BooleanType)
+                    return ToArray<bool>(value, nsResolver);
+                if (itemTypeDst == ByteType)
+                    return ToArray<byte>(value, nsResolver);
+                if (itemTypeDst == ByteArrayType)
+                    return ToArray<byte[]>(value, nsResolver);
+                if (itemTypeDst == DateTimeType)
+                    return ToArray<DateTime>(value, nsResolver);
+                if (itemTypeDst == DateTimeOffsetType)
+                    return ToArray<DateTimeOffset>(value, nsResolver);
+                if (itemTypeDst == DecimalType)
+                    return ToArray<decimal>(value, nsResolver);
+                if (itemTypeDst == DoubleType)
+                    return ToArray<double>(value, nsResolver);
+                if (itemTypeDst == Int16Type)
+                    return ToArray<short>(value, nsResolver);
+                if (itemTypeDst == Int32Type)
+                    return ToArray<int>(value, nsResolver);
+                if (itemTypeDst == Int64Type)
+                    return ToArray<long>(value, nsResolver);
+                if (itemTypeDst == SByteType)
+                    return ToArray<sbyte>(value, nsResolver);
+                if (itemTypeDst == SingleType)
+                    return ToArray<float>(value, nsResolver);
+                if (itemTypeDst == StringType)
+                    return ToArray<string>(value, nsResolver);
+                if (itemTypeDst == TimeSpanType)
+                    return ToArray<TimeSpan>(value, nsResolver);
+                if (itemTypeDst == UInt16Type)
+                    return ToArray<ushort>(value, nsResolver);
+                if (itemTypeDst == UInt32Type)
+                    return ToArray<uint>(value, nsResolver);
+                if (itemTypeDst == UInt64Type)
+                    return ToArray<ulong>(value, nsResolver);
+                if (itemTypeDst == UriType)
+                    return ToArray<Uri>(value, nsResolver);
+                if (itemTypeDst == XmlAtomicValueType)
+                    return ToArray<XmlAtomicValue>(value, nsResolver);
+                if (itemTypeDst == XmlQualifiedNameType)
+                    return ToArray<XmlQualifiedName>(value, nsResolver);
+                if (itemTypeDst == XPathItemType)
+                    return ToArray<XPathItem>(value, nsResolver);
+                if (itemTypeDst == XPathNavigatorType)
+                    return ToArray<XPathNavigator>(value, nsResolver);
 
                 throw CreateInvalidClrMappingException(sourceType, destinationType);
             }
@@ -3022,7 +4083,12 @@ namespace System.Xml.Schema
         private static bool IsListType(Type type)
         {
             // IsClrListType returns true if "type" is one of the list interfaces
-            if (type == IListType || type == ICollectionType || type == IEnumerableType || type == StringType)
+            if (
+                type == IListType
+                || type == ICollectionType
+                || type == IEnumerableType
+                || type == StringType
+            )
                 return true;
 
             return type.IsArray;
@@ -3041,7 +4107,8 @@ namespace System.Xml.Schema
                 T[] arrDst = new T[listSrc.Count];
 
                 for (int i = 0; i < listSrc.Count; i++)
-                    arrDst[i] = (T)this.atomicConverter!.ChangeType(listSrc[i]!, typeof(T), nsResolver);
+                    arrDst[i] = (T)
+                        this.atomicConverter!.ChangeType(listSrc[i]!, typeof(T), nsResolver);
 
                 return arrDst;
             }
@@ -3069,7 +4136,11 @@ namespace System.Xml.Schema
                 object[] arrDst = new object[listSrc.Count];
 
                 for (int i = 0; i < listSrc.Count; i++)
-                    arrDst[i] = this.atomicConverter!.ChangeType(listSrc[i]!, ObjectType, nsResolver);
+                    arrDst[i] = this.atomicConverter!.ChangeType(
+                        listSrc[i]!,
+                        ObjectType,
+                        nsResolver
+                    );
 
                 return arrDst;
             }
@@ -3122,21 +4193,35 @@ namespace System.Xml.Schema
         /// Create an InvalidCastException for cases where either "destinationType" or "sourceType" is not a supported CLR representation
         /// for this Xml type.
         /// </summary>
-        private new InvalidCastException CreateInvalidClrMappingException(Type sourceType, Type destinationType)
+        private new InvalidCastException CreateInvalidClrMappingException(
+            Type sourceType,
+            Type destinationType
+        )
         {
             if (sourceType == destinationType)
-                return new InvalidCastException(SR.Format(SR.XmlConvert_TypeListBadMapping, XmlTypeName, sourceType.Name));
+                return new InvalidCastException(
+                    SR.Format(SR.XmlConvert_TypeListBadMapping, XmlTypeName, sourceType.Name)
+                );
 
-            return new InvalidCastException(SR.Format(SR.XmlConvert_TypeListBadMapping2, XmlTypeName, sourceType.Name, destinationType.Name));
+            return new InvalidCastException(
+                SR.Format(
+                    SR.XmlConvert_TypeListBadMapping2,
+                    XmlTypeName,
+                    sourceType.Name,
+                    destinationType.Name
+                )
+            );
         }
     }
 
     internal sealed class XmlUnionConverter : XmlBaseConverter
     {
         private readonly XmlValueConverter[] _converters;
-        private readonly bool _hasAtomicMember, _hasListMember;
+        private readonly bool _hasAtomicMember,
+            _hasListMember;
 
-        private XmlUnionConverter(XmlSchemaType schemaType) : base(schemaType)
+        private XmlUnionConverter(XmlSchemaType schemaType)
+            : base(schemaType)
         {
             // Skip restrictions. It is safe to do that because this is a union, so it's not a built-in type
             while (schemaType.DerivedBy == XmlSchemaDerivationMethod.Restriction)
@@ -3144,7 +4229,9 @@ namespace System.Xml.Schema
 
             // Get a converter for each member type in the union
             Debug.Assert(schemaType.DerivedBy == XmlSchemaDerivationMethod.Union);
-            XmlSchemaSimpleType[] memberTypes = ((XmlSchemaSimpleTypeUnion)((XmlSchemaSimpleType)schemaType).Content!).BaseMemberTypes!;
+            XmlSchemaSimpleType[] memberTypes = (
+                (XmlSchemaSimpleTypeUnion)((XmlSchemaSimpleType)schemaType).Content!
+            ).BaseMemberTypes!;
 
             _converters = new XmlValueConverter[memberTypes.Length];
             for (int i = 0; i < memberTypes.Length; i++)
@@ -3164,12 +4251,15 @@ namespace System.Xml.Schema
             return new XmlUnionConverter(schemaType);
         }
 
-
         //-----------------------------------------------
         // ChangeType
         //-----------------------------------------------
 
-        public override object ChangeType(object value, Type destinationType, IXmlNamespaceResolver? nsResolver)
+        public override object ChangeType(
+            object value,
+            Type destinationType,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentNullException.ThrowIfNull(destinationType);
@@ -3187,12 +4277,23 @@ namespace System.Xml.Schema
             // If source value is a string, then validate the string in order to determine the member type
             if (sourceType == StringType)
             {
-                if (destinationType == StringType) return value;
+                if (destinationType == StringType)
+                    return value;
 
-                XsdSimpleValue simpleValue = (XsdSimpleValue)SchemaType!.Datatype!.ParseValue((string)value, new NameTable(), nsResolver, true);
+                XsdSimpleValue simpleValue = (XsdSimpleValue)
+                    SchemaType!.Datatype!.ParseValue(
+                        (string)value,
+                        new NameTable(),
+                        nsResolver,
+                        true
+                    );
 
                 // Allow the member type to perform the conversion
-                return simpleValue.XmlType.ValueConverter.ChangeType((string)value, destinationType, nsResolver);
+                return simpleValue.XmlType.ValueConverter.ChangeType(
+                    (string)value,
+                    destinationType,
+                    nsResolver
+                );
             }
 
             throw CreateInvalidClrMappingException(sourceType, destinationType);

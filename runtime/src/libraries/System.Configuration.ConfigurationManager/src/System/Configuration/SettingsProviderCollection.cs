@@ -16,7 +16,10 @@ namespace System.Configuration
 
             if (!(provider is SettingsProvider))
             {
-                throw new ArgumentException(SR.Format(SR.Config_provider_must_implement_type, typeof(SettingsProvider)), nameof(provider));
+                throw new ArgumentException(
+                    SR.Format(SR.Config_provider_must_implement_type, typeof(SettingsProvider)),
+                    nameof(provider)
+                );
             }
 
             base.Add(provider);
@@ -24,11 +27,7 @@ namespace System.Configuration
 
         public new SettingsProvider this[string name]
         {
-            get
-            {
-                return (SettingsProvider)base[name];
-            }
+            get { return (SettingsProvider)base[name]; }
         }
     }
-
 }

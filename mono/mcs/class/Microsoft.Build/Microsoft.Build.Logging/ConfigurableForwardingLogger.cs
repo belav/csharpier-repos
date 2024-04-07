@@ -3,41 +3,41 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Logging
 {
-	public class ConfigurableForwardingLogger : IForwardingLogger
-	{
-		#region INodeLogger implementation
+    public class ConfigurableForwardingLogger : IForwardingLogger
+    {
+        #region INodeLogger implementation
 
-		public void Initialize (IEventSource eventSource, int nodeCount)
-		{
-			Initialize (eventSource);
-		}
+        public void Initialize(IEventSource eventSource, int nodeCount)
+        {
+            Initialize(eventSource);
+        }
 
-		#endregion
+        #endregion
 
-		#region ILogger implementation
+        #region ILogger implementation
 
-		public void Initialize (IEventSource eventSource)
-		{
-			throw new NotImplementedException ();
-		}
+        public void Initialize(IEventSource eventSource)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Shutdown ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void Shutdown()
+        {
+            throw new NotImplementedException();
+        }
 
-		public string Parameters { get; set; }
+        public string Parameters { get; set; }
 
-		public LoggerVerbosity Verbosity { get; set; }
+        public LoggerVerbosity Verbosity { get; set; }
 
-		#endregion
+        #endregion
 
-		#region IForwardingLogger implementation
+        #region IForwardingLogger implementation
 
-		public IEventRedirector BuildEventRedirector { get; set; }
+        public IEventRedirector BuildEventRedirector { get; set; }
 
-		public int NodeId { get; set; }
+        public int NodeId { get; set; }
 
-		#endregion
-	}
+        #endregion
+    }
 }

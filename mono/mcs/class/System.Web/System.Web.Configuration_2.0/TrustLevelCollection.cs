@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,90 +31,94 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(typeof(TrustLevel), AddItemName = "trustLevel")]
+    public sealed class TrustLevelCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static TrustLevelCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-	[ConfigurationCollection (typeof (TrustLevel), AddItemName = "trustLevel")]
-	public sealed class TrustLevelCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+        public void Add(TrustLevel trustLevel)
+        {
+            BaseAdd(trustLevel);
+        }
 
-		static TrustLevelCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public void Add (TrustLevel trustLevel)
-		{
-			BaseAdd (trustLevel);
-		}
+        public TrustLevel Get(int index)
+        {
+            return (TrustLevel)BaseGet(index);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Remove(TrustLevel trustLevel)
+        {
+            BaseRemove(trustLevel.Name);
+        }
 
-		public TrustLevel Get (int index)
-		{
-			return (TrustLevel) BaseGet (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public void Remove (TrustLevel trustLevel)
-		{
-			BaseRemove (trustLevel.Name);
-		}
+        public void Set(int index, TrustLevel trustLevel)
+        {
+            if (BaseGet(index) != null)
+                BaseRemoveAt(index);
+            BaseAdd(index, trustLevel);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new TrustLevel();
+        }
 
-		public void Set (int index, TrustLevel trustLevel)
-		{
-			if (BaseGet (index) != null)
-				BaseRemoveAt (index);
-			BaseAdd (index, trustLevel);
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((TrustLevel)element).Name;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new TrustLevel ();
-		}
+        protected override bool IsElementName(string elementname)
+        {
+            return elementname == "trustlevel";
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((TrustLevel)element).Name;
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get { return ConfigurationElementCollectionType.BasicMap; }
+        }
 
-		protected override bool IsElementName (string elementname)
-		{
-			return elementname == "trustlevel";
-		}
+        protected override string ElementName
+        {
+            get { return "trustLevel"; }
+        }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.BasicMap; }
-		}
+        public new TrustLevel this[string key]
+        {
+            get { return (TrustLevel)BaseGet(key); }
+        }
 
-		protected override string ElementName {
-			get { return "trustLevel"; }
-		}
+        public TrustLevel this[int index]
+        {
+            get { return (TrustLevel)BaseGet(index); }
+            set { Set(index, value); }
+        }
 
-		public new TrustLevel this [string key] {
-			get { return (TrustLevel) BaseGet (key); }
-		}
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
+        }
 
-		public TrustLevel this [int index] {
-			get { return (TrustLevel) BaseGet (index); }
-			set { Set (index, value); }
-		}
-
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

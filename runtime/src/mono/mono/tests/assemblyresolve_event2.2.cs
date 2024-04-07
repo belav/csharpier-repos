@@ -3,37 +3,42 @@ using System.Reflection;
 
 public class App
 {
-	static bool[] expected_results = {false, false};
-	static bool handler_fired;
-	
-	public static int Main ()
-	{
-		AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(MyReflectionResolveEventHandler);
+    static bool[] expected_results = { false, false };
+    static bool handler_fired;
 
-		int i = 0;
-		handler_fired = false;
+    public static int Main()
+    {
+        AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
+            MyReflectionResolveEventHandler
+        );
 
-		try {
-			Assembly.ReflectionOnlyLoad ("SomeAssembly");
-		} catch (Exception) {
-		}
-		if (expected_results [i] != handler_fired)
-			return 1;
+        int i = 0;
+        handler_fired = false;
 
-		i++;
-		handler_fired = false;
-		try {
-			Assembly.ReflectionOnlyLoadFrom ("SomeAssembly");
-		} catch (Exception) {
-		}
-		if (expected_results [i] != handler_fired)
-			return 2;
+        try
+        {
+            Assembly.ReflectionOnlyLoad("SomeAssembly");
+        }
+        catch (Exception) { }
+        if (expected_results[i] != handler_fired)
+            return 1;
 
-		return 0;
-	}
+        i++;
+        handler_fired = false;
+        try
+        {
+            Assembly.ReflectionOnlyLoadFrom("SomeAssembly");
+        }
+        catch (Exception) { }
+        if (expected_results[i] != handler_fired)
+            return 2;
 
-	static Assembly MyReflectionResolveEventHandler(object sender, ResolveEventArgs args) {
-		handler_fired = true;
-		return null;
-	}
+        return 0;
+    }
+
+    static Assembly MyReflectionResolveEventHandler(object sender, ResolveEventArgs args)
+    {
+        handler_fired = true;
+        return null;
+    }
 }

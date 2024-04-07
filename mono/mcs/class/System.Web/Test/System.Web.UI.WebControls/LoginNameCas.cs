@@ -1,5 +1,5 @@
 //
-// LoginNameCas.cs 
+// LoginNameCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.LoginName
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,64 +28,62 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class LoginNameCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            LoginNameTest unit = new LoginNameTest();
+            unit.DefaultProperties();
+            unit.SetOriginalProperties();
+            unit.CleanProperties();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class LoginNameCas : AspNetHostingMinimal {
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPrincipal = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_ControlPrincipal()
+        {
+            LoginNameTest unit = new LoginNameTest();
+            unit.CacheIdentity();
+            // other unit tests fails for the same reason, i.e.
+            // setting the Page.Context.User property
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			LoginNameTest unit = new LoginNameTest ();
-			unit.DefaultProperties ();
-			unit.SetOriginalProperties ();
-			unit.CleanProperties ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, ControlPrincipal = true)]
+        public void PermitOnly_ControlPrincipal()
+        {
+            LoginNameTest unit = new LoginNameTest();
+            unit.CacheIdentity();
+            unit.Render_Anonymous_NoPrincipal();
+            unit.Render_Anonymous_IPrincipal();
+            unit.Render_User();
+            unit.Render_UnauthenticatedUser();
+            unit.Render_NoPage();
+            unit.Render_StringFormat();
+            unit.Render_StringFormat_Empty();
+            unit.Render_StringFormat_NoVar();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_ControlPrincipal ()
-		{
-			LoginNameTest unit = new LoginNameTest ();
-			unit.CacheIdentity ();
-			// other unit tests fails for the same reason, i.e.
-			// setting the Page.Context.User property
-		}
+        // LinkDemand
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPrincipal = true)]
-		public void PermitOnly_ControlPrincipal ()
-		{
-			LoginNameTest unit = new LoginNameTest ();
-			unit.CacheIdentity ();
-			unit.Render_Anonymous_NoPrincipal ();
-			unit.Render_Anonymous_IPrincipal ();
-			unit.Render_User ();
-			unit.Render_UnauthenticatedUser ();
-			unit.Render_NoPage ();
-			unit.Render_StringFormat ();
-			unit.Render_StringFormat_Empty ();
-			unit.Render_StringFormat_NoVar ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (LoginName); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(LoginName); }
+        }
+    }
 }
-

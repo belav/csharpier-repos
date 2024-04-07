@@ -3,28 +3,34 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of EmptyStructGen<int> using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((EmptyStructGen<int>)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>)(object)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((EmptyStructGen<int>?)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>?)(object)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
     [Fact]
@@ -38,5 +44,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

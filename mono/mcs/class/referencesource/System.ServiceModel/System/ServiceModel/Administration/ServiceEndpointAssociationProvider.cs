@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Administration
 {
     using System;
-    using System.ServiceModel.Description;
     using System.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Globalization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     internal class ServiceEndpointAssociationProvider : ProviderBase, IWmiProvider
     {
@@ -22,7 +22,10 @@ namespace System.ServiceModel.Administration
                 {
                     IWmiInstance instance = instances.NewInstance(null);
 
-                    string endpointRef = EndpointInstanceProvider.EndpointReference(endpointInfo.ListenUri, endpointInfo.Contract.Name);
+                    string endpointRef = EndpointInstanceProvider.EndpointReference(
+                        endpointInfo.ListenUri,
+                        endpointInfo.Contract.Name
+                    );
                     instance.SetProperty(AdministrationStrings.Endpoint, endpointRef);
                     instance.SetProperty(AdministrationStrings.Service, serviceRef);
 

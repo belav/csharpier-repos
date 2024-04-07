@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             private partial class IncrementalAnalyzerProcessor
             {
-                private static readonly Func<int, object, bool, string> s_enqueueLogger = EnqueueLogger;
+                private static readonly Func<int, object, bool, string> s_enqueueLogger =
+                    EnqueueLogger;
 
                 private readonly Registration _registration;
                 private readonly IAsynchronousOperationListener _listener;
@@ -46,13 +47,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 public IncrementalAnalyzerProcessor(
                     IAsynchronousOperationListener listener,
-                    IEnumerable<Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>> analyzerProviders,
+                    IEnumerable<
+                        Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
+                    > analyzerProviders,
                     bool initializeLazily,
                     Registration registration,
                     TimeSpan highBackOffTimeSpan,
                     TimeSpan normalBackOffTimeSpan,
                     TimeSpan lowBackOffTimeSpan,
-                    CancellationToken shutdownToken)
+                    CancellationToken shutdownToken
+                )
                 {
                     _listener = listener;
                     _registration = registration;
@@ -60,8 +64,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var analyzersGetter = new AnalyzersGetter(analyzerProviders);
 
                     // create analyzers lazily.
-                    var lazyActiveFileAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() => GetIncrementalAnalyzers(_registration, analyzersGetter, onlyHighPriorityAnalyzer: true));
-                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() => GetIncrementalAnalyzers(_registration, analyzersGetter, onlyHighPriorityAnalyzer: false));
+                    var lazyActiveFileAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                        () =>
+                            GetIncrementalAnalyzers(
+                                _registration,
+                                analyzersGetter,
+                                onlyHighPriorityAnalyzer: true
+                            )
+                    );
+                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                        () =>
+                            GetIncrementalAnalyzers(
+                                _registration,
+                                analyzersGetter,
+                                onlyHighPriorityAnalyzer: false
+                            )
+                    );
 
                     if (!initializeLazily)
                     {
@@ -71,21 +89,56 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
 
                     // event and worker queues
-                    _documentTracker = _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                    _documentTracker =
+                        _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
-                    var globalNotificationService = _registration.Workspace.Services.SolutionServices.ExportProvider
-                        .GetExports<IGlobalOperationNotificationService>().FirstOrDefault()?.Value;
+                    var globalNotificationService = _registration
+                        .Workspace.Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                        .FirstOrDefault()
+                        ?.Value;
 
-                    _highPriorityProcessor = new HighPriorityProcessor(listener, this, lazyActiveFileAnalyzers, highBackOffTimeSpan, shutdownToken);
-                    _normalPriorityProcessor = new NormalPriorityProcessor(listener, this, lazyAllAnalyzers, globalNotificationService, normalBackOffTimeSpan, shutdownToken);
-                    _lowPriorityProcessor = new LowPriorityProcessor(listener, this, lazyAllAnalyzers, globalNotificationService, lowBackOffTimeSpan, shutdownToken);
+                    _highPriorityProcessor = new HighPriorityProcessor(
+                        listener,
+                        this,
+                        lazyActiveFileAnalyzers,
+                        highBackOffTimeSpan,
+                        shutdownToken
+                    );
+                    _normalPriorityProcessor = new NormalPriorityProcessor(
+                        listener,
+                        this,
+                        lazyAllAnalyzers,
+                        globalNotificationService,
+                        normalBackOffTimeSpan,
+                        shutdownToken
+                    );
+                    _lowPriorityProcessor = new LowPriorityProcessor(
+                        listener,
+                        this,
+                        lazyAllAnalyzers,
+                        globalNotificationService,
+                        lowBackOffTimeSpan,
+                        shutdownToken
+                    );
                 }
 
-                private static ImmutableArray<IIncrementalAnalyzer> GetIncrementalAnalyzers(Registration registration, AnalyzersGetter analyzersGetter, bool onlyHighPriorityAnalyzer)
+                private static ImmutableArray<IIncrementalAnalyzer> GetIncrementalAnalyzers(
+                    Registration registration,
+                    AnalyzersGetter analyzersGetter,
+                    bool onlyHighPriorityAnalyzer
+                )
                 {
-                    var orderedAnalyzers = analyzersGetter.GetOrderedAnalyzers(registration.Workspace, onlyHighPriorityAnalyzer);
+                    var orderedAnalyzers = analyzersGetter.GetOrderedAnalyzers(
+                        registration.Workspace,
+                        onlyHighPriorityAnalyzer
+                    );
 
-                    SolutionCrawlerLogger.LogAnalyzers(registration.CorrelationId, registration.Workspace, orderedAnalyzers, onlyHighPriorityAnalyzer);
+                    SolutionCrawlerLogger.LogAnalyzers(
+                        registration.CorrelationId,
+                        registration.Workspace,
+                        orderedAnalyzers,
+                        onlyHighPriorityAnalyzer
+                    );
                     return orderedAnalyzers;
                 }
 
@@ -100,7 +153,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ReportPendingWorkItemCount();
                 }
 
-                public void AddAnalyzer(IIncrementalAnalyzer analyzer, bool highPriorityForActiveFile)
+                public void AddAnalyzer(
+                    IIncrementalAnalyzer analyzer,
+                    bool highPriorityForActiveFile
+                )
                 {
                     if (highPriorityForActiveFile)
                     {
@@ -118,9 +174,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     _lowPriorityProcessor.Shutdown();
                 }
 
-                public ImmutableArray<IIncrementalAnalyzer> Analyzers => _normalPriorityProcessor.Analyzers;
+                public ImmutableArray<IIncrementalAnalyzer> Analyzers =>
+                    _normalPriorityProcessor.Analyzers;
 
-                private ProjectDependencyGraph DependencyGraph => _registration.GetSolutionToAnalyze().GetProjectDependencyGraph();
+                private ProjectDependencyGraph DependencyGraph =>
+                    _registration.GetSolutionToAnalyze().GetProjectDependencyGraph();
 
                 public Task AsyncProcessorTask
                 {
@@ -129,37 +187,68 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return Task.WhenAll(
                             _highPriorityProcessor.AsyncProcessorTask,
                             _normalPriorityProcessor.AsyncProcessorTask,
-                            _lowPriorityProcessor.AsyncProcessorTask);
+                            _lowPriorityProcessor.AsyncProcessorTask
+                        );
                     }
                 }
 
-                private IEnumerable<DocumentId> GetOpenDocumentIds()
-                    => _registration.Workspace.GetOpenDocumentIds();
+                private IEnumerable<DocumentId> GetOpenDocumentIds() =>
+                    _registration.Workspace.GetOpenDocumentIds();
 
-                private void ResetLogAggregator()
-                    => _logAggregator = new CountLogAggregator<object>();
+                private void ResetLogAggregator() =>
+                    _logAggregator = new CountLogAggregator<object>();
 
                 private void ReportPendingWorkItemCount()
                 {
-                    var pendingItemCount = _highPriorityProcessor.WorkItemCount + _normalPriorityProcessor.WorkItemCount + _lowPriorityProcessor.WorkItemCount;
+                    var pendingItemCount =
+                        _highPriorityProcessor.WorkItemCount
+                        + _normalPriorityProcessor.WorkItemCount
+                        + _lowPriorityProcessor.WorkItemCount;
                     _registration.ProgressReporter.UpdatePendingItemCount(pendingItemCount);
                 }
 
                 private async Task ProcessDocumentAnalyzersAsync(
-                    TextDocument textDocument, ImmutableArray<IIncrementalAnalyzer> analyzers, WorkItem workItem, CancellationToken cancellationToken)
+                    TextDocument textDocument,
+                    ImmutableArray<IIncrementalAnalyzer> analyzers,
+                    WorkItem workItem,
+                    CancellationToken cancellationToken
+                )
                 {
                     // process special active document switched request, if any.
-                    if (await ProcessActiveDocumentSwitchedAsync(analyzers, workItem, textDocument, cancellationToken).ConfigureAwait(false))
+                    if (
+                        await ProcessActiveDocumentSwitchedAsync(
+                                analyzers,
+                                workItem,
+                                textDocument,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
                         return;
                     }
 
                     // process all analyzers for each categories in this order - syntax, body, document
                     var reasons = workItem.InvocationReasons;
-                    if (workItem.MustRefresh || reasons.Contains(PredefinedInvocationReasons.SyntaxChanged))
+                    if (
+                        workItem.MustRefresh
+                        || reasons.Contains(PredefinedInvocationReasons.SyntaxChanged)
+                    )
                     {
-                        await RunAnalyzersAsync(analyzers, textDocument, workItem, (analyzer, document, cancellationToken) =>
-                            AnalyzeSyntaxAsync(analyzer, document, reasons, cancellationToken), cancellationToken).ConfigureAwait(false);
+                        await RunAnalyzersAsync(
+                                analyzers,
+                                textDocument,
+                                workItem,
+                                (analyzer, document, cancellationToken) =>
+                                    AnalyzeSyntaxAsync(
+                                        analyzer,
+                                        document,
+                                        reasons,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     if (textDocument is not Document document)
@@ -168,45 +257,99 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return;
                     }
 
-                    if (workItem.MustRefresh || reasons.Contains(PredefinedInvocationReasons.SemanticChanged))
+                    if (
+                        workItem.MustRefresh
+                        || reasons.Contains(PredefinedInvocationReasons.SemanticChanged)
+                    )
                     {
-                        await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                            analyzer.AnalyzeDocumentAsync(document, null, reasons, cancellationToken), cancellationToken).ConfigureAwait(false);
+                        await RunAnalyzersAsync(
+                                analyzers,
+                                document,
+                                workItem,
+                                (analyzer, document, cancellationToken) =>
+                                    analyzer.AnalyzeDocumentAsync(
+                                        document,
+                                        null,
+                                        reasons,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                     else
                     {
                         // if we don't need to re-analyze whole body, see whether we need to at least re-analyze one method.
-                        await RunBodyAnalyzersAsync(analyzers, workItem, document, cancellationToken).ConfigureAwait(false);
+                        await RunBodyAnalyzersAsync(
+                                analyzers,
+                                workItem,
+                                document,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     return;
 
-                    static async Task AnalyzeSyntaxAsync(IIncrementalAnalyzer analyzer, TextDocument textDocument, InvocationReasons reasons, CancellationToken cancellationToken)
+                    static async Task AnalyzeSyntaxAsync(
+                        IIncrementalAnalyzer analyzer,
+                        TextDocument textDocument,
+                        InvocationReasons reasons,
+                        CancellationToken cancellationToken
+                    )
                     {
                         if (textDocument is Document document)
                         {
-                            await analyzer.AnalyzeSyntaxAsync(document, reasons, cancellationToken).ConfigureAwait(false);
+                            await analyzer
+                                .AnalyzeSyntaxAsync(document, reasons, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         else
                         {
-                            await analyzer.AnalyzeNonSourceDocumentAsync(textDocument, reasons, cancellationToken).ConfigureAwait(false);
+                            await analyzer
+                                .AnalyzeNonSourceDocumentAsync(
+                                    textDocument,
+                                    reasons,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                         }
                     }
 
-                    async Task<bool> ProcessActiveDocumentSwitchedAsync(ImmutableArray<IIncrementalAnalyzer> analyzers, WorkItem workItem, TextDocument document, CancellationToken cancellationToken)
+                    async Task<bool> ProcessActiveDocumentSwitchedAsync(
+                        ImmutableArray<IIncrementalAnalyzer> analyzers,
+                        WorkItem workItem,
+                        TextDocument document,
+                        CancellationToken cancellationToken
+                    )
                     {
                         try
                         {
-                            if (!workItem.InvocationReasons.Contains(PredefinedInvocationReasons.ActiveDocumentSwitched))
+                            if (
+                                !workItem.InvocationReasons.Contains(
+                                    PredefinedInvocationReasons.ActiveDocumentSwitched
+                                )
+                            )
                             {
                                 return false;
                             }
 
-                            await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                                analyzer.ActiveDocumentSwitchedAsync(document, cancellationToken), cancellationToken).ConfigureAwait(false);
+                            await RunAnalyzersAsync(
+                                    analyzers,
+                                    document,
+                                    workItem,
+                                    (analyzer, document, cancellationToken) =>
+                                        analyzer.ActiveDocumentSwitchedAsync(
+                                            document,
+                                            cancellationToken
+                                        ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             return true;
                         }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                        catch (Exception e)
+                            when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                         {
                             throw ExceptionUtilities.Unreachable();
                         }
@@ -218,14 +361,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     T value,
                     WorkItem workItem,
                     Func<IIncrementalAnalyzer, T, CancellationToken, Task> runnerAsync,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     using var evaluating = _registration.ProgressReporter.GetEvaluatingScope();
 
                     ReportPendingWorkItemCount();
 
                     // Check if the work item is specific to some incremental analyzer(s).
-                    var analyzersToExecute = workItem.GetApplicableAnalyzers(analyzers) ?? analyzers;
+                    var analyzersToExecute =
+                        workItem.GetApplicableAnalyzers(analyzers) ?? analyzers;
                     foreach (var analyzer in analyzersToExecute)
                     {
                         if (cancellationToken.IsCancellationRequested)
@@ -239,52 +384,112 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             return;
                         }
 
-                        await GetOrDefaultAsync(value, async (v, c) =>
-                        {
-                            await runnerAsync(local, v, c).ConfigureAwait(false);
-                            return (object?)null;
-                        }, cancellationToken).ConfigureAwait(false);
+                        await GetOrDefaultAsync(
+                                value,
+                                async (v, c) =>
+                                {
+                                    await runnerAsync(local, v, c).ConfigureAwait(false);
+                                    return (object?)null;
+                                },
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
 
-                private async Task RunBodyAnalyzersAsync(ImmutableArray<IIncrementalAnalyzer> analyzers, WorkItem workItem, Document document, CancellationToken cancellationToken)
+                private async Task RunBodyAnalyzersAsync(
+                    ImmutableArray<IIncrementalAnalyzer> analyzers,
+                    WorkItem workItem,
+                    Document document,
+                    CancellationToken cancellationToken
+                )
                 {
                     try
                     {
-                        var root = await GetOrDefaultAsync(document, (d, c) => d.GetSyntaxRootAsync(c), cancellationToken).ConfigureAwait(false);
+                        var root = await GetOrDefaultAsync(
+                                document,
+                                (d, c) => d.GetSyntaxRootAsync(c),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
                         var reasons = workItem.InvocationReasons;
                         if (root == null || syntaxFactsService == null)
                         {
                             // as a fallback mechanism, if we can't run one method body due to some missing service, run whole document analyzer.
-                            await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                                analyzer.AnalyzeDocumentAsync(document, null, reasons, cancellationToken), cancellationToken).ConfigureAwait(false);
+                            await RunAnalyzersAsync(
+                                    analyzers,
+                                    document,
+                                    workItem,
+                                    (analyzer, document, cancellationToken) =>
+                                        analyzer.AnalyzeDocumentAsync(
+                                            document,
+                                            null,
+                                            reasons,
+                                            cancellationToken
+                                        ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             return;
                         }
 
                         // check whether we know what body has changed. currently, this is an optimization toward typing case. if there are more than one body changes
                         // it will be considered as semantic change and whole document analyzer will take care of that case.
-                        var activeMember = GetMemberNode(syntaxFactsService, root, workItem.ActiveMember);
+                        var activeMember = GetMemberNode(
+                            syntaxFactsService,
+                            root,
+                            workItem.ActiveMember
+                        );
                         if (activeMember == null)
                         {
                             // no active member means, change is out side of a method body, but it didn't affect semantics (such as change in comment)
                             // in that case, we update whole document (just this document) so that we can have updated locations.
-                            await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                                analyzer.AnalyzeDocumentAsync(document, null, reasons, cancellationToken), cancellationToken).ConfigureAwait(false);
+                            await RunAnalyzersAsync(
+                                    analyzers,
+                                    document,
+                                    workItem,
+                                    (analyzer, document, cancellationToken) =>
+                                        analyzer.AnalyzeDocumentAsync(
+                                            document,
+                                            null,
+                                            reasons,
+                                            cancellationToken
+                                        ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             return;
                         }
 
                         // re-run just the body
-                        await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                            analyzer.AnalyzeDocumentAsync(document, activeMember, reasons, cancellationToken), cancellationToken).ConfigureAwait(false);
+                        await RunAnalyzersAsync(
+                                analyzers,
+                                document,
+                                workItem,
+                                (analyzer, document, cancellationToken) =>
+                                    analyzer.AnalyzeDocumentAsync(
+                                        document,
+                                        activeMember,
+                                        reasons,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
-                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                    catch (Exception e)
+                        when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                     {
                         throw ExceptionUtilities.Unreachable();
                     }
                 }
 
-                private static async Task<TResult?> GetOrDefaultAsync<TData, TResult>(TData value, Func<TData, CancellationToken, Task<TResult?>> funcAsync, CancellationToken cancellationToken)
+                private static async Task<TResult?> GetOrDefaultAsync<TData, TResult>(
+                    TData value,
+                    Func<TData, CancellationToken, Task<TResult?>> funcAsync,
+                    CancellationToken cancellationToken
+                )
                     where TResult : class
                 {
                     try
@@ -295,7 +500,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         return null;
                     }
-                    catch (AggregateException e) when (ReportWithoutCrashUnlessAllCanceledAndPropagate(e))
+                    catch (AggregateException e)
+                        when (ReportWithoutCrashUnlessAllCanceledAndPropagate(e))
                     {
                         return null;
                     }
@@ -305,7 +511,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         throw ExceptionUtilities.Unreachable();
                     }
 
-                    static bool ReportWithoutCrashUnlessAllCanceledAndPropagate(AggregateException aggregate)
+                    static bool ReportWithoutCrashUnlessAllCanceledAndPropagate(
+                        AggregateException aggregate
+                    )
                     {
                         var flattened = aggregate.Flatten();
                         if (flattened.InnerExceptions.All(e => e is OperationCanceledException))
@@ -317,7 +525,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                private static SyntaxNode? GetMemberNode(ISyntaxFactsService service, SyntaxNode? root, SyntaxPath? memberPath)
+                private static SyntaxNode? GetMemberNode(
+                    ISyntaxFactsService service,
+                    SyntaxNode? root,
+                    SyntaxPath? memberPath
+                )
                 {
                     if (root == null || memberPath == null)
                     {
@@ -332,7 +544,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     return service.IsMethodLevelMember(memberNode) ? memberNode : null;
                 }
 
-                private static string EnqueueLogger(int tick, object documentOrProjectId, bool replaced)
+                private static string EnqueueLogger(
+                    int tick,
+                    object documentOrProjectId,
+                    bool replaced
+                )
                 {
                     if (documentOrProjectId is DocumentId documentId)
                     {
@@ -356,37 +572,71 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         _incrementalAnalyzerProcessor = incrementalAnalyzerProcessor;
                     }
 
-                    internal void WaitUntilCompletion(ImmutableArray<IIncrementalAnalyzer> analyzers, List<WorkItem> items)
+                    internal void WaitUntilCompletion(
+                        ImmutableArray<IIncrementalAnalyzer> analyzers,
+                        List<WorkItem> items
+                    )
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor().WaitUntilCompletion(analyzers, items);
+                        _incrementalAnalyzerProcessor
+                            ._normalPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion(analyzers, items);
 
-                        var projectItems = items.Select(i => i.ToProjectWorkItem(EmptyAsyncToken.Instance));
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor().WaitUntilCompletion(analyzers, items);
+                        var projectItems = items.Select(i =>
+                            i.ToProjectWorkItem(EmptyAsyncToken.Instance)
+                        );
+                        _incrementalAnalyzerProcessor
+                            ._lowPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor().WaitUntilCompletion();
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor().WaitUntilCompletion();
+                        _incrementalAnalyzerProcessor
+                            ._normalPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion();
+                        _incrementalAnalyzerProcessor
+                            ._lowPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion();
                     }
                 }
 
-                private class AnalyzersGetter(IEnumerable<Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>> analyzerProviders)
+                private class AnalyzersGetter(
+                    IEnumerable<
+                        Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
+                    > analyzerProviders
+                )
                 {
-                    private readonly List<Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>> _analyzerProviders = analyzerProviders.ToList();
-                    private readonly Dictionary<Workspace, ImmutableArray<(IIncrementalAnalyzer analyzer, bool highPriorityForActiveFile)>> _analyzerMap = new();
+                    private readonly List<
+                        Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
+                    > _analyzerProviders = analyzerProviders.ToList();
+                    private readonly Dictionary<
+                        Workspace,
+                        ImmutableArray<(
+                            IIncrementalAnalyzer analyzer,
+                            bool highPriorityForActiveFile
+                        )>
+                    > _analyzerMap = new();
 
-                    public ImmutableArray<IIncrementalAnalyzer> GetOrderedAnalyzers(Workspace workspace, bool onlyHighPriorityAnalyzer)
+                    public ImmutableArray<IIncrementalAnalyzer> GetOrderedAnalyzers(
+                        Workspace workspace,
+                        bool onlyHighPriorityAnalyzer
+                    )
                     {
                         lock (_analyzerMap)
                         {
                             if (!_analyzerMap.TryGetValue(workspace, out var analyzers))
                             {
                                 // Sort list so DiagnosticIncrementalAnalyzers (if any) come first.
-                                analyzers = _analyzerProviders.Select(p => (analyzer: p.Value.CreateIncrementalAnalyzer(workspace), highPriorityForActiveFile: p.Metadata.HighPriorityForActiveFile))
-                                                .Where(t => t.analyzer != null)
-                                                .OrderBy(t => t.analyzer!.Priority)
-                                                .ToImmutableArray()!;
+                                analyzers = _analyzerProviders
+                                    .Select(p =>
+                                        (
+                                            analyzer: p.Value.CreateIncrementalAnalyzer(workspace),
+                                            highPriorityForActiveFile: p.Metadata.HighPriorityForActiveFile
+                                        )
+                                    )
+                                    .Where(t => t.analyzer != null)
+                                    .OrderBy(t => t.analyzer!.Priority)
+                                    .ToImmutableArray()!;
 
                                 _analyzerMap[workspace] = analyzers;
                             }
@@ -394,7 +644,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             if (onlyHighPriorityAnalyzer)
                             {
                                 // include only high priority analyzer for active file
-                                return analyzers.SelectAsArray(t => t.highPriorityForActiveFile, t => t.analyzer);
+                                return analyzers.SelectAsArray(
+                                    t => t.highPriorityForActiveFile,
+                                    t => t.analyzer
+                                );
                             }
 
                             // return all analyzers

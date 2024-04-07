@@ -4,7 +4,11 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public enum IsolatedStorageContainment
     {
@@ -19,6 +23,7 @@ namespace System.Security.Permissions
         AssemblyIsolationByRoamingUser = 0x60,
         ApplicationIsolationByRoamingUser = 0x65,
         AdministerIsolatedStorageByUser = 0x70,
+
         //AdministerIsolatedStorageByMachine    = 0x80,
         UnrestrictedIsolatedStorage = 0xF0
     }

@@ -22,7 +22,10 @@ namespace System.Collections.Specialized
     ///    and <see cref='object' qualify='true'/> values that can be accessed either with the hash code of
     ///    the key or with the index.</para>
     /// </devdoc>
-    public abstract class NameObjectCollectionBase : ICollection, ISerializable, IDeserializationCallback
+    public abstract class NameObjectCollectionBase
+        : ICollection,
+            ISerializable,
+            IDeserializationCallback
     {
         private bool _readOnly;
         private ArrayList _entriesArray;
@@ -32,15 +35,15 @@ namespace System.Collections.Specialized
         private KeysCollection? _keys;
         private int _version;
 
-        private static readonly StringComparer s_defaultComparer = CultureInfo.InvariantCulture.CompareInfo.GetStringComparer(CompareOptions.IgnoreCase);
+        private static readonly StringComparer s_defaultComparer =
+            CultureInfo.InvariantCulture.CompareInfo.GetStringComparer(CompareOptions.IgnoreCase);
 
         /// <devdoc>
         /// <para> Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance with the default initial capacity and using the default case-insensitive hash
         ///    code provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        protected NameObjectCollectionBase() : this(s_defaultComparer)
-        {
-        }
+        protected NameObjectCollectionBase()
+            : this(s_defaultComparer) { }
 
         protected NameObjectCollectionBase(IEqualityComparer? equalityComparer)
         {
@@ -48,20 +51,29 @@ namespace System.Collections.Specialized
             Reset();
         }
 
-        protected NameObjectCollectionBase(int capacity, IEqualityComparer? equalityComparer) : this(equalityComparer)
+        protected NameObjectCollectionBase(int capacity, IEqualityComparer? equalityComparer)
+            : this(equalityComparer)
         {
             Reset(capacity);
         }
 
-        [Obsolete("This constructor has been deprecated. Use NameObjectCollectionBase(IEqualityComparer) instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use NameObjectCollectionBase(IEqualityComparer) instead."
+        )]
         protected NameObjectCollectionBase(IHashCodeProvider? hashProvider, IComparer? comparer)
         {
             _keyComparer = new CompatibleComparer(hashProvider, comparer);
             Reset();
         }
 
-        [Obsolete("This constructor has been deprecated. Use NameObjectCollectionBase(Int32, IEqualityComparer) instead.")]
-        protected NameObjectCollectionBase(int capacity, IHashCodeProvider? hashProvider, IComparer? comparer)
+        [Obsolete(
+            "This constructor has been deprecated. Use NameObjectCollectionBase(Int32, IEqualityComparer) instead."
+        )]
+        protected NameObjectCollectionBase(
+            int capacity,
+            IHashCodeProvider? hashProvider,
+            IComparer? comparer
+        )
         {
             _keyComparer = new CompatibleComparer(hashProvider, comparer);
             Reset(capacity);
@@ -78,14 +90,22 @@ namespace System.Collections.Specialized
             Reset(capacity);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected NameObjectCollectionBase(SerializationInfo info, StreamingContext context)
         {
             throw new PlatformNotSupportedException();
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -131,16 +151,9 @@ namespace System.Collections.Specialized
 
         internal IEqualityComparer Comparer
         {
-            get
-            {
-                return _keyComparer;
-            }
-            set
-            {
-                _keyComparer = value;
-            }
+            get { return _keyComparer; }
+            set { _keyComparer = value; }
         }
-
 
         /// <devdoc>
         /// <para>Gets or sets a value indicating whether the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance is read-only.</para>
@@ -157,7 +170,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         protected bool BaseHasKeys()
         {
-            return (_entriesTable.Count > 0);  // any entries with keys?
+            return (_entriesTable.Count > 0); // any entries with keys?
         }
 
         //
@@ -294,7 +307,7 @@ namespace System.Collections.Specialized
             if (_readOnly)
                 throw new NotSupportedException(SR.CollectionReadOnly);
 
-            NameObjectEntry?  entry = FindEntry(name);
+            NameObjectEntry? entry = FindEntry(name);
             if (entry != null)
             {
                 entry.Value = value;
@@ -316,7 +329,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         protected object? BaseGet(int index)
         {
-            NameObjectEntry entry = (NameObjectEntry)_entriesArray[index]!;   // no null entry added to the array
+            NameObjectEntry entry = (NameObjectEntry)_entriesArray[index]!; // no null entry added to the array
             return entry.Value;
         }
 
@@ -362,10 +375,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public virtual int Count
         {
-            get
-            {
-                return _entriesArray.Count;
-            }
+            get { return _entriesArray.Count; }
         }
 
         void ICollection.CopyTo(Array array, int index)
@@ -384,7 +394,7 @@ namespace System.Collections.Specialized
                 throw new ArgumentException(SR.Arg_InsufficientSpace);
             }
 
-            for (IEnumerator e = this.GetEnumerator(); e.MoveNext();)
+            for (IEnumerator e = this.GetEnumerator(); e.MoveNext(); )
                 array.SetValue(e.Current, index++);
         }
 
@@ -433,8 +443,11 @@ namespace System.Collections.Specialized
         ///    <para>Returns an array of the specified type containing
         ///       all the values in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
         /// </devdoc>
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "The API only works for reference type arguments and code for reference typed arrays is shareable.")]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "The API only works for reference type arguments and code for reference typed arrays is shareable."
+        )]
         protected object?[] BaseGetAllValues(Type type)
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -564,10 +577,7 @@ namespace System.Collections.Specialized
             /// </devdoc>
             public string? this[int index]
             {
-                get
-                {
-                    return Get(index);
-                }
+                get { return Get(index); }
             }
 
             // ICollection implementation
@@ -586,10 +596,7 @@ namespace System.Collections.Specialized
             /// </devdoc>
             public int Count
             {
-                get
-                {
-                    return _coll.Count;
-                }
+                get { return _coll.Count; }
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -608,7 +615,7 @@ namespace System.Collections.Specialized
                     throw new ArgumentException(SR.Arg_InsufficientSpace);
                 }
 
-                for (IEnumerator e = this.GetEnumerator(); e.MoveNext();)
+                for (IEnumerator e = this.GetEnumerator(); e.MoveNext(); )
                     array.SetValue(e.Current, index++);
             }
 
@@ -616,7 +623,6 @@ namespace System.Collections.Specialized
             {
                 get { return ((ICollection)_coll).SyncRoot; }
             }
-
 
             bool ICollection.IsSynchronized
             {

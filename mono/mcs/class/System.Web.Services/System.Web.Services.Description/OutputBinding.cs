@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OutputBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,34 @@
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class OutputBinding : MessageBinding {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class OutputBinding : MessageBinding
+    {
+        #region Fields
 
-		#region Fields
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		ServiceDescriptionFormatExtensionCollection extensions;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public OutputBinding ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        public OutputBinding()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions { 	
-			get { return extensions; }
-		}
-	
-		#endregion // Properties
-	}
+        #region Properties
+
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
+
+        #endregion // Properties
+    }
 }

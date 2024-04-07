@@ -250,7 +250,10 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 if (rsa is RSACng && PlatformDetection.IsNetFramework)
-                    AssertExtensions.Throws<ArgumentException>(null, () => rsa.ImportParameters(imported));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => rsa.ImportParameters(imported)
+                    );
                 else
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ImportParameters(imported));
             }
@@ -267,7 +270,10 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 if (rsa is RSACng && PlatformDetection.IsNetFramework)
-                    AssertExtensions.Throws<ArgumentException>(null, () => rsa.ImportParameters(imported));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => rsa.ImportParameters(imported)
+                    );
                 else
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ImportParameters(imported));
             }
@@ -275,7 +281,10 @@ namespace System.Security.Cryptography.Rsa.Tests
 
         [Fact]
 #if TESTING_CNG_IMPLEMENTATION
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21341", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21341",
+            TargetFrameworkMonikers.NetFramework
+        )]
 #endif
         public static void ImportNoDP()
         {
@@ -295,7 +304,9 @@ namespace System.Security.Cryptography.Rsa.Tests
         [InlineData(false)]
         public static void ExportAfterDispose(bool importKey)
         {
-            RSA rsa = importKey ? RSAFactory.Create(TestData.RSA2048Params) : RSAFactory.Create(1024);
+            RSA rsa = importKey
+                ? RSAFactory.Create(TestData.RSA2048Params)
+                : RSAFactory.Create(1024);
 
             // Ensure that the key got created, and then Dispose it.
             using (rsa)
@@ -308,7 +319,9 @@ namespace System.Security.Cryptography.Rsa.Tests
 
             if (!(PlatformDetection.IsNetFramework && rsa.GetType().Name.EndsWith("Cng")))
             {
-                Assert.Throws<ObjectDisposedException>(() => rsa.ImportParameters(TestData.RSA1024Params));
+                Assert.Throws<ObjectDisposedException>(
+                    () => rsa.ImportParameters(TestData.RSA1024Params)
+                );
             }
         }
 
@@ -437,7 +450,6 @@ namespace System.Security.Cryptography.Rsa.Tests
             else
             {
                 littleEndianBytes = (byte[])bigEndianBytes.Clone();
-
             }
 
             Array.Reverse(littleEndianBytes);

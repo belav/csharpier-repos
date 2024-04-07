@@ -7,19 +7,19 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Pipes;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Moq;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using static Microsoft.CodeAnalysis.CommandLine.BuildResponse;
 using Xunit.Abstractions;
+using static Microsoft.CodeAnalysis.CommandLine.BuildResponse;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
@@ -39,9 +39,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
 
             bool holdsMutex;
-            using (var mutex = BuildServerConnection.OpenOrCreateMutex(
-                                         name: mutexName,
-                                         createdNew: out holdsMutex))
+            using (
+                var mutex = BuildServerConnection.OpenOrCreateMutex(
+                    name: mutexName,
+                    createdNew: out holdsMutex
+                )
+            )
             {
                 Assert.True(holdsMutex);
                 try
@@ -50,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     var result = BuildServerController.CreateAndRunServer(
                         pipeName,
                         clientConnectionHost: host.Object,
-                        keepAlive: null);
+                        keepAlive: null
+                    );
                     Assert.Equal(CommonCompiler.Failed, result);
                 }
                 finally
@@ -70,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             host.Add(() =>
             {
                 // Use a thread instead of Task to guarantee this code runs on a different
-                // thread and we can validate the mutex state. 
+                // thread and we can validate the mutex state.
                 var tcs = new TaskCompletionSource<IClientConnection>();
                 var thread = new Thread(_ =>
                 {
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
                     var client = new TestableClientConnection()
                     {
-                        ReadBuildRequestFunc = _ => Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
+                        ReadBuildRequestFunc = _ =>
+                            Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
                         WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
                     };
                     tcs.SetResult(client);
@@ -101,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var result = BuildServerController.CreateAndRunServer(
                 pipeName,
                 clientConnectionHost: host,
-                keepAlive: TimeSpan.FromMilliseconds(-1));
+                keepAlive: TimeSpan.FromMilliseconds(-1)
+            );
             Assert.Equal(CommonCompiler.Succeeded, result);
             Assert.True(wasServerMutexOpen);
         }
@@ -112,7 +118,14 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         {
             using var temp = new TempRoot();
             using var serverData = await ServerUtil.CreateServer(Logger);
-            var request = BuildRequest.Create(RequestLanguage.CSharpCompile, workingDirectory: temp.CreateDirectory().Path, tempDirectory: null, compilerHash: BuildProtocolConstants.GetCommitHash(), libDirectory: null, args: Array.Empty<string>());
+            var request = BuildRequest.Create(
+                RequestLanguage.CSharpCompile,
+                workingDirectory: temp.CreateDirectory().Path,
+                tempDirectory: null,
+                compilerHash: BuildProtocolConstants.GetCommitHash(),
+                libDirectory: null,
+                args: Array.Empty<string>()
+            );
             var response = await serverData.SendAsync(request);
             Assert.Equal(ResponseType.Rejected, response.Type);
         }
@@ -121,7 +134,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public async Task IncorrectServerHashReturnsIncorrectHashResponse()
         {
             using var serverData = await ServerUtil.CreateServer(Logger);
-            var buildResponse = await serverData.SendAsync(new BuildRequest(RequestLanguage.CSharpCompile, "abc", new List<BuildRequest.Argument> { }));
+            var buildResponse = await serverData.SendAsync(
+                new BuildRequest(
+                    RequestLanguage.CSharpCompile,
+                    "abc",
+                    new List<BuildRequest.Argument> { }
+                )
+            );
             Assert.Equal(BuildResponse.ResponseType.IncorrectHash, buildResponse.Type);
         }
 
@@ -129,7 +148,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         [WorkItem(33452, "https://github.com/dotnet/roslyn/issues/33452")]
         public void QuotePipeName_Desktop()
         {
-            var serverInfo = BuildServerConnection.GetServerProcessInfo(@"q:\tools", "name with space");
+            var serverInfo = BuildServerConnection.GetServerProcessInfo(
+                @"q:\tools",
+                "name with space"
+            );
             Assert.Equal(@"q:\tools\VBCSCompiler.exe", serverInfo.processFilePath);
             Assert.Equal(@"q:\tools\VBCSCompiler.exe", serverInfo.toolFilePath);
             Assert.Equal(@"""-pipename:name with space""", serverInfo.commandLineArguments);
@@ -139,24 +161,38 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         [WorkItem(33452, "https://github.com/dotnet/roslyn/issues/33452")]
         public void QuotePipeName_CoreClr()
         {
-            var toolDir = ExecutionConditionUtil.IsWindows
-                ? @"q:\tools"
-                : "/tools";
+            var toolDir = ExecutionConditionUtil.IsWindows ? @"q:\tools" : "/tools";
             var serverInfo = BuildServerConnection.GetServerProcessInfo(toolDir, "name with space");
             var vbcsFilePath = Path.Combine(toolDir, "VBCSCompiler.dll");
             Assert.Equal(vbcsFilePath, serverInfo.toolFilePath);
-            Assert.Equal($@"exec ""{vbcsFilePath}"" ""-pipename:name with space""", serverInfo.commandLineArguments);
+            Assert.Equal(
+                $@"exec ""{vbcsFilePath}"" ""-pipename:name with space""",
+                serverInfo.commandLineArguments
+            );
         }
 
         [Theory]
-        [InlineData(@"OLqrNgkgZRf14qL91MdaUn8coiKckUIZCIEkpy0Lt18", "name with space", true, "basename")]
+        [InlineData(
+            @"OLqrNgkgZRf14qL91MdaUn8coiKckUIZCIEkpy0Lt18",
+            "name with space",
+            true,
+            "basename"
+        )]
         [InlineData(@"8VDiJptv892LtWpeN86z76_YI0Yg0BV6j0SOv8CjQVA", @"ha""ha", true, "basename")]
         [InlineData(@"wKSU9psJMbkw+5+TFKLEf94aeslpEb3dDRpAw+9j4nw", @"jared", true, @"ha""ha")]
         [InlineData(@"0BDP4_GPWYQh9J_BknwhS9uAZAF_64PK4_VnNsddGZE", @"jared", false, @"ha""ha")]
         [InlineData(@"XroHfrjD1FTk7PcXcif2hZdmlVH_L0Pg+RUX01d_uQc", @"jared", false, @"ha\ha")]
-        public void GetPipeNameCore(string expectedName, string userName, bool isAdmin, string compilerExeDir)
+        public void GetPipeNameCore(
+            string expectedName,
+            string userName,
+            bool isAdmin,
+            string compilerExeDir
+        )
         {
-            Assert.Equal(expectedName, BuildServerConnection.GetPipeName(userName, isAdmin, compilerExeDir));
+            Assert.Equal(
+                expectedName,
+                BuildServerConnection.GetPipeName(userName, isAdmin, compilerExeDir)
+            );
         }
     }
 }

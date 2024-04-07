@@ -56,7 +56,8 @@ public class HtmlHelperOptions
     /// <summary>
     /// Gets or sets the way hidden inputs are rendered for checkbox tag helpers and html helpers.
     /// </summary>
-    public CheckBoxHiddenInputRenderMode CheckBoxHiddenInputRenderMode { get; set; } = CheckBoxHiddenInputRenderMode.EndOfForm;
+    public CheckBoxHiddenInputRenderMode CheckBoxHiddenInputRenderMode { get; set; } =
+        CheckBoxHiddenInputRenderMode.EndOfForm;
 
     /// <summary>
     /// Gets or sets a value that determines how form &lt;input/&gt; elements are rendered.

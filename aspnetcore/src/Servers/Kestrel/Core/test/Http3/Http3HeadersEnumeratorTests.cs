@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 using Microsoft.Extensions.Primitives;
-
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
@@ -36,19 +35,22 @@ public class Http3HeadersEnumeratorTests
 
         var headers = GetNormalizedHeaders(e);
 
-        Assert.Equal(new[]
-        {
-            CreateHeaderResult(6, "Date", "Date!"),
-            CreateHeaderResult(32, "Accept-Ranges", "AcceptRanges!"),
-            CreateHeaderResult(2, "Age", "1"),
-            CreateHeaderResult(2, "Age", "2"),
-            CreateHeaderResult(-1, "Grpc-Encoding", "Identity!"),
-            CreateHeaderResult(4, "Content-Length", "9"),
-            CreateHeaderResult(-1, "Name1", "Value1"),
-            CreateHeaderResult(-1, "Name2", "Value2-1"),
-            CreateHeaderResult(-1, "Name2", "Value2-2"),
-            CreateHeaderResult(-1, "Name3", "Value3"),
-        }, headers);
+        Assert.Equal(
+            new[]
+            {
+                CreateHeaderResult(6, "Date", "Date!"),
+                CreateHeaderResult(32, "Accept-Ranges", "AcceptRanges!"),
+                CreateHeaderResult(2, "Age", "1"),
+                CreateHeaderResult(2, "Age", "2"),
+                CreateHeaderResult(-1, "Grpc-Encoding", "Identity!"),
+                CreateHeaderResult(4, "Content-Length", "9"),
+                CreateHeaderResult(-1, "Name1", "Value1"),
+                CreateHeaderResult(-1, "Name2", "Value2-1"),
+                CreateHeaderResult(-1, "Name2", "Value2-2"),
+                CreateHeaderResult(-1, "Name3", "Value3"),
+            },
+            headers
+        );
     }
 
     [Fact]
@@ -69,14 +71,17 @@ public class Http3HeadersEnumeratorTests
 
         var headers = GetNormalizedHeaders(e);
 
-        Assert.Equal(new[]
-        {
-            CreateHeaderResult(7, "ETag", "ETag!"),
-            CreateHeaderResult(-1, "Name1", "Value1"),
-            CreateHeaderResult(-1, "Name2", "Value2-1"),
-            CreateHeaderResult(-1, "Name2", "Value2-2"),
-            CreateHeaderResult(-1, "Name3", "Value3"),
-        }, headers);
+        Assert.Equal(
+            new[]
+            {
+                CreateHeaderResult(7, "ETag", "ETag!"),
+                CreateHeaderResult(-1, "Name1", "Value1"),
+                CreateHeaderResult(-1, "Name2", "Value2-1"),
+                CreateHeaderResult(-1, "Name2", "Value2-2"),
+                CreateHeaderResult(-1, "Name3", "Value3"),
+            },
+            headers
+        );
     }
 
     [Fact]
@@ -145,17 +150,29 @@ public class Http3HeadersEnumeratorTests
         Assert.False(e.MoveNext());
     }
 
-    private (int QPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(Http3HeadersEnumerator enumerator)
+    private (int QPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(
+        Http3HeadersEnumerator enumerator
+    )
     {
         var headers = new List<(int HPackStaticTableId, string Name, string Value)>();
         while (enumerator.MoveNext())
         {
-            headers.Add(CreateHeaderResult(enumerator.GetQPackStaticTableId().index, enumerator.Current.Key, enumerator.Current.Value));
+            headers.Add(
+                CreateHeaderResult(
+                    enumerator.GetQPackStaticTableId().index,
+                    enumerator.Current.Key,
+                    enumerator.Current.Value
+                )
+            );
         }
         return headers.ToArray();
     }
 
-    private static (int QPackStaticTableId, string Key, string Value) CreateHeaderResult(int hPackStaticTableId, string key, string value)
+    private static (int QPackStaticTableId, string Key, string Value) CreateHeaderResult(
+        int hPackStaticTableId,
+        string key,
+        string value
+    )
     {
         return (hPackStaticTableId, key, value);
     }

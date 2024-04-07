@@ -6,14 +6,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.FunkyDataModel;
 public class FunkyDataContext : PoolableDbContext
 {
     public FunkyDataContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<FunkyCustomer> FunkyCustomers { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => modelBuilder.Entity<FunkyCustomer>().Property(e => e.Id).ValueGeneratedNever();
+    protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+        modelBuilder.Entity<FunkyCustomer>().Property(e => e.Id).ValueGeneratedNever();
 
     public static void Seed(FunkyDataContext context)
     {

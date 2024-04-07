@@ -21,7 +21,8 @@ namespace Roslyn.Utilities
     /// </summary>
     internal readonly partial struct BKTree
     {
-        public static readonly BKTree Empty = new([], ImmutableArray<Node>.Empty, ImmutableArray<Edge>.Empty);
+        public static readonly BKTree Empty =
+            new([], ImmutableArray<Node>.Empty, ImmutableArray<Edge>.Empty);
 
         /// <summary>
         /// We have three completely flat arrays of structs.  These arrays fully represent the BK tree.  The structure
@@ -43,12 +44,16 @@ namespace Roslyn.Utilities
         /// create slices, and they need to work on top of an ArraySlice (which needs a char[]).  The edit distance code
         /// also wants to work on top of raw char[]s (both for speed, and so it can pool arrays to prevent lots of
         /// garbage).  Because of that we just keep this as a char[].
-        /// </summary> 
+        /// </summary>
         private readonly char[] _concatenatedLowerCaseWords;
         private readonly ImmutableArray<Node> _nodes;
         private readonly ImmutableArray<Edge> _edges;
 
-        private BKTree(char[] concatenatedLowerCaseWords, ImmutableArray<Node> nodes, ImmutableArray<Edge> edges)
+        private BKTree(
+            char[] concatenatedLowerCaseWords,
+            ImmutableArray<Node> nodes,
+            ImmutableArray<Edge> edges
+        )
         {
             Contract.ThrowIfNull(concatenatedLowerCaseWords, nameof(_concatenatedLowerCaseWords));
             Contract.ThrowIfTrue(nodes.IsDefault, $"{nameof(nodes)}.{nameof(nodes.IsDefault)}");
@@ -58,8 +63,7 @@ namespace Roslyn.Utilities
             _edges = edges;
         }
 
-        public static BKTree Create(IEnumerable<string> values)
-            => new Builder(values).Create();
+        public static BKTree Create(IEnumerable<string> values) => new Builder(values).Create();
 
         public void Find(ref TemporaryArray<string> result, string value, int? threshold = null)
         {
@@ -77,7 +81,14 @@ namespace Roslyn.Utilities
                     lowerCaseCharacters[i] = CaseInsensitiveComparison.ToLower(value[i]);
 
                 threshold ??= WordSimilarityChecker.GetThreshold(value);
-                Lookup(_nodes[0], lowerCaseCharacters, value.Length, threshold.Value, ref result, recursionCount: 0);
+                Lookup(
+                    _nodes[0],
+                    lowerCaseCharacters,
+                    value.Length,
+                    threshold.Value,
+                    ref result,
+                    recursionCount: 0
+                );
             }
             finally
             {
@@ -91,7 +102,8 @@ namespace Roslyn.Utilities
             int queryLength,
             int threshold,
             ref TemporaryArray<string> result,
-            int recursionCount)
+            int recursionCount
+        )
         {
             // Don't bother recursing too deeply in the case of pathological trees.
             // This really only happens when the actual code is strange (like
@@ -108,7 +120,7 @@ namespace Roslyn.Utilities
             }
 
             // We may need to compute the real edit distance (ignoring any thresholds) in the case
-            // where edges exist as we need that edit distance to appropriately determine which edges to walk 
+            // where edges exist as we need that edit distance to appropriately determine which edges to walk
             // in the tree.
             var characterSpan = currentNode.WordSpan;
 
@@ -123,13 +135,20 @@ namespace Roslyn.Utilities
             var editDistance = EditDistance.GetEditDistance(
                 _concatenatedLowerCaseWords.AsSpan(characterSpan.Start, characterSpan.Length),
                 queryCharacters.AsSpan(0, queryLength),
-                edgesExist ? int.MaxValue : threshold);
+                edgesExist ? int.MaxValue : threshold
+            );
 
             // Case 1
             if (editDistance <= threshold)
             {
                 // Found a match.
-                result.Add(new string(_concatenatedLowerCaseWords, characterSpan.Start, characterSpan.Length));
+                result.Add(
+                    new string(
+                        _concatenatedLowerCaseWords,
+                        characterSpan.Start,
+                        characterSpan.Length
+                    )
+                );
             }
 
             // Case 2
@@ -145,9 +164,14 @@ namespace Roslyn.Utilities
                     var childEditDistance = _edges[i].EditDistance;
                     if (min <= childEditDistance && childEditDistance <= max)
                     {
-                        Lookup(_nodes[_edges[i].ChildNodeIndex],
-                            queryCharacters, queryLength, threshold, ref result,
-                            recursionCount + 1);
+                        Lookup(
+                            _nodes[_edges[i].ChildNodeIndex],
+                            queryCharacters,
+                            queryLength,
+                            threshold,
+                            ref result,
+                            recursionCount + 1
+                        );
                     }
                 }
             }

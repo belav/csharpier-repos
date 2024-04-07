@@ -5,7 +5,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for RC2, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for RC2, not consuming it."
+    )]
     internal sealed partial class RC2Implementation : RC2
     {
 #pragma warning disable IDE0060
@@ -17,9 +21,12 @@ namespace System.Security.Cryptography
             int blockSize,
             int feedbackSizeInBytes,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2))
+            );
         }
 
         private static ILiteSymmetricCipher CreateLiteCipher(
@@ -28,9 +35,12 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             int blockSize,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2))
+            );
         }
 #pragma warning restore IDE0060
     }

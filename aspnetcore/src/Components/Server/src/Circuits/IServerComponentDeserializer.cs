@@ -9,6 +9,10 @@ internal interface IServerComponentDeserializer
 {
     bool TryDeserializeComponentDescriptorCollection(
         string serializedComponentRecords,
-        out List<ComponentDescriptor> descriptors);
-    bool TryDeserializeRootComponentOperations(string serializedComponentOperations, [NotNullWhen(true)] out RootComponentOperationBatch? operationBatch);
+        out List<ComponentDescriptor> descriptors
+    );
+    bool TryDeserializeRootComponentOperations(
+        string serializedComponentOperations,
+        [NotNullWhen(true)] out RootComponentOperationBatch? operationBatch
+    );
 }

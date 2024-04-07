@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="PersonalizationScope.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     /// <devdoc>
     /// Represents the personalization scope of an object or some data.
     /// </devdoc>
-    public enum PersonalizationScope {
-
+    public enum PersonalizationScope
+    {
         /// <devdoc>
         /// Indicates that the personalized data applies to a specific user.
         /// </devdoc>
@@ -24,4 +24,3 @@ namespace System.Web.UI.WebControls.WebParts {
         Shared = 1
     }
 }
-

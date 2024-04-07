@@ -28,81 +28,82 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BoundColumn_InitializeCell_TIL
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-			this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
-		}
-		#endregion
+    public class BoundColumn_InitializeCell_TIL : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-		private void Page_Load(object sender, EventArgs e)
-		{
-			HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
-			this.GHTTestBegin(form1);
-			base.GHTActiveSubTest = this.GHTSubTest1;
-			try
-			{
-				this.DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
-				BoundColumn column2 = new BoundColumn();
-				BoundColumn column3 = new BoundColumn();
-				BoundColumn column1 = new BoundColumn();
-				column2.DataField = "ID";
-				column3.DataField = "Name";
-				column1.DataField = "Company";
-				this.DataGrid1.Columns.Add(column2);
-				this.DataGrid1.Columns.Add(column3);
-				this.DataGrid1.Columns.Add(column1);
-				this.DataGrid1.DataBind();
-			}
-			catch (Exception exception2)
-			{
-				// ProjectData.SetProjectError(exception2);
-				Exception exception1 = exception2;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTTestEnd();
-		}
- 
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void DataGrid1_ItemDataBound(object sender, DataGridItemEventArgs e)
-		{
-			ListItemType type1 = e.Item.ItemType;
-			if (((type1 != ListItemType.Header) && (type1 != ListItemType.Footer)) && (type1 != ListItemType.Separator))
-			{
-				TableCell cell1 = (TableCell) e.Item.Controls[0];
-				this.DataGrid1.Columns[1].InitializeCell(cell1, 1, ListItemType.Item);
-				cell1.Attributes.Add("Index", e.Item.ItemIndex.ToString());
-			}
-		}
- 
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+            this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(form1);
+            base.GHTActiveSubTest = this.GHTSubTest1;
+            try
+            {
+                this.DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
+                BoundColumn column2 = new BoundColumn();
+                BoundColumn column3 = new BoundColumn();
+                BoundColumn column1 = new BoundColumn();
+                column2.DataField = "ID";
+                column3.DataField = "Name";
+                column1.DataField = "Company";
+                this.DataGrid1.Columns.Add(column2);
+                this.DataGrid1.Columns.Add(column3);
+                this.DataGrid1.Columns.Add(column1);
+                this.DataGrid1.DataBind();
+            }
+            catch (Exception exception2)
+            {
+                // ProjectData.SetProjectError(exception2);
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTTestEnd();
+        }
+
+        private void DataGrid1_ItemDataBound(object sender, DataGridItemEventArgs e)
+        {
+            ListItemType type1 = e.Item.ItemType;
+            if (
+                ((type1 != ListItemType.Header) && (type1 != ListItemType.Footer))
+                && (type1 != ListItemType.Separator)
+            )
+            {
+                TableCell cell1 = (TableCell)e.Item.Controls[0];
+                this.DataGrid1.Columns[1].InitializeCell(cell1, 1, ListItemType.Item);
+                cell1.Attributes.Add("Index", e.Item.ItemIndex.ToString());
+            }
+        }
+    }
 }

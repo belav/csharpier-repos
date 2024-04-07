@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// <summary>
 /// Used for authenticator code verification.
 /// </summary>
-public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser> where TUser : class
+public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Checks if a two-factor authentication token can be generated for the specified <paramref name="user"/>.
@@ -18,7 +19,10 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref name="user"/> from.</param>
     /// <param name="user">The <typeparamref name="TUser"/> to check for the possibility of generating a two-factor authentication token.</param>
     /// <returns>True if the user has an authenticator key set, otherwise false.</returns>
-    public virtual async Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user)
+    public virtual async Task<bool> CanGenerateTwoFactorTokenAsync(
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         var key = await manager.GetAuthenticatorKeyAsync(user).ConfigureAwait(false);
 
@@ -32,7 +36,11 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref name="user"/> from.</param>
     /// <param name="user">The <typeparamref name="TUser"/>.</param>
     /// <returns>string.Empty.</returns>
-    public virtual Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
+    public virtual Task<string> GenerateAsync(
+        string purpose,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         return Task.FromResult(string.Empty);
     }
@@ -45,7 +53,12 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <param name="manager"></param>
     /// <param name="user"></param>
     /// <returns></returns>
-    public virtual async Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
+    public virtual async Task<bool> ValidateAsync(
+        string purpose,
+        string token,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         var key = await manager.GetAuthenticatorKeyAsync(user).ConfigureAwait(false);
         int code;
@@ -60,7 +73,9 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
         var unixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 #else
         using var hash = new HMACSHA1(keyBytes);
-        var unixTimestamp = Convert.ToInt64(Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds));
+        var unixTimestamp = Convert.ToInt64(
+            Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
+        );
 #endif
 
         var timestep = Convert.ToInt64(unixTimestamp / 30);
@@ -68,9 +83,17 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
         for (int i = -2; i <= 2; i++)
         {
 #if NET6_0_OR_GREATER
-            var expectedCode = Rfc6238AuthenticationService.ComputeTotp(keyBytes, (ulong)(timestep + i), modifierBytes: null);
+            var expectedCode = Rfc6238AuthenticationService.ComputeTotp(
+                keyBytes,
+                (ulong)(timestep + i),
+                modifierBytes: null
+            );
 #else
-            var expectedCode = Rfc6238AuthenticationService.ComputeTotp(hash, (ulong)(timestep + i), modifierBytes: null);
+            var expectedCode = Rfc6238AuthenticationService.ComputeTotp(
+                hash,
+                (ulong)(timestep + i),
+                modifierBytes: null
+            );
 #endif
             if (expectedCode == code)
             {

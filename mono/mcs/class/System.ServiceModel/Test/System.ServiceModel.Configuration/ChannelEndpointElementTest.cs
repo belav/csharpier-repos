@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,22 +36,22 @@ using System.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class ChannelEndpointElementTest
-	{
-		[Test]
-		public void TestEmptyProps ()
-		{
-			ChannelEndpointElement empty = new ChannelEndpointElement ();
-			Assert.AreEqual ("", empty.Name, "#01");
-			Assert.AreEqual (null, empty.Contract, "#02");
-			Assert.AreEqual (null, empty.Binding, "#03");
-			Assert.AreEqual (null, empty.Address, "#04");
-			Assert.AreEqual ("", empty.BindingConfiguration, "#05");
-			Assert.AreEqual ("", empty.BehaviorConfiguration, "#06");
-			Assert.IsNotNull (empty.Headers, "#07");
-			Assert.IsNotNull (empty.Identity, "#08");
-		}
-	}
+    [TestFixture]
+    public class ChannelEndpointElementTest
+    {
+        [Test]
+        public void TestEmptyProps()
+        {
+            ChannelEndpointElement empty = new ChannelEndpointElement();
+            Assert.AreEqual("", empty.Name, "#01");
+            Assert.AreEqual(null, empty.Contract, "#02");
+            Assert.AreEqual(null, empty.Binding, "#03");
+            Assert.AreEqual(null, empty.Address, "#04");
+            Assert.AreEqual("", empty.BindingConfiguration, "#05");
+            Assert.AreEqual("", empty.BehaviorConfiguration, "#06");
+            Assert.IsNotNull(empty.Headers, "#07");
+            Assert.IsNotNull(empty.Identity, "#08");
+        }
+    }
 }
 #endif

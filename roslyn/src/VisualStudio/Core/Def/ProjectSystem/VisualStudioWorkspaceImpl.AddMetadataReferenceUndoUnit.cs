@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public AddMetadataReferenceUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 ProjectId fromProjectId,
-                string filePath)
+                string filePath
+            )
                 : base(workspace, fromProjectId)
             {
                 _filePath = filePath;
@@ -32,15 +33,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var fromProject = currentSolution.GetProject(FromProjectId);
                 if (fromProject != null)
                 {
-                    var reference = fromProject.MetadataReferences.OfType<PortableExecutableReference>()
-                                               .FirstOrDefault(p => StringComparer.OrdinalIgnoreCase.Equals(p.FilePath, _filePath));
+                    var reference = fromProject
+                        .MetadataReferences.OfType<PortableExecutableReference>()
+                        .FirstOrDefault(p =>
+                            StringComparer.OrdinalIgnoreCase.Equals(p.FilePath, _filePath)
+                        );
 
                     if (reference == null)
                     {
-                        var documentationProvider = Workspace.Services.GetRequiredService<IDocumentationProviderService>();
+                        var documentationProvider =
+                            Workspace.Services.GetRequiredService<IDocumentationProviderService>();
                         try
                         {
-                            reference = MetadataReference.CreateFromFile(_filePath, documentation: documentationProvider.GetDocumentationProvider(_filePath));
+                            reference = MetadataReference.CreateFromFile(
+                                _filePath,
+                                documentation: documentationProvider.GetDocumentationProvider(
+                                    _filePath
+                                )
+                            );
                         }
                         catch (IOException)
                         {
@@ -55,8 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             public override void GetDescription(out string pBstr)
             {
-                pBstr = string.Format(FeaturesResources.Add_reference_to_0,
-                    Path.GetFileName(_filePath));
+                pBstr = string.Format(
+                    FeaturesResources.Add_reference_to_0,
+                    Path.GetFileName(_filePath)
+                );
             }
         }
     }

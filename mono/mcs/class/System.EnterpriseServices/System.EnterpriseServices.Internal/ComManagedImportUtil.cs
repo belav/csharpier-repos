@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,25 +31,29 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices.Internal
 {
-	[Guid("3b0398c9-7812-4007-85cb-18c771f2206f")]
-	public class ComManagedImportUtil : IComManagedImportUtil {
+    [Guid("3b0398c9-7812-4007-85cb-18c771f2206f")]
+    public class ComManagedImportUtil : IComManagedImportUtil
+    {
+        [MonoTODO]
+        public ComManagedImportUtil()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public ComManagedImportUtil ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void GetComponentInfo(
+            string assemblyPath,
+            out string numComponents,
+            out string componentInfo
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void GetComponentInfo (string assemblyPath, out string numComponents, out string componentInfo)
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO]
-		public void InstallAssembly (string asmpath, string parname, string appname)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void InstallAssembly(string asmpath, string parname, string appname)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

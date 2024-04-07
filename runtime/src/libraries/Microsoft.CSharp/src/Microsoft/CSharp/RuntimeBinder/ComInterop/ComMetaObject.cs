@@ -12,11 +12,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal ComMetaObject(Expression expression, BindingRestrictions restrictions, object arg)
-            : base(expression, restrictions, arg)
-        {
-        }
+            : base(expression, restrictions, arg) { }
 
-        public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
+        public override DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             Requires.NotNull(binder);
             return binder.Defer(args.AddFirst(WrapSelf()));
@@ -34,33 +35,50 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return binder.Defer(WrapSelf());
         }
 
-        public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
             return binder.Defer(WrapSelf(), value);
         }
 
-        public override DynamicMetaObject BindGetIndex(GetIndexBinder binder, DynamicMetaObject[] indexes)
+        public override DynamicMetaObject BindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             Requires.NotNull(binder);
             return binder.Defer(WrapSelf(), indexes);
         }
 
-        public override DynamicMetaObject BindSetIndex(SetIndexBinder binder, DynamicMetaObject[] indexes, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
             return binder.Defer(WrapSelf(), indexes.AddLast(value));
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         private DynamicMetaObject WrapSelf()
         {
             return new DynamicMetaObject(
                 ComObject.RcwToComObject(Expression),
                 BindingRestrictions.GetExpressionRestriction(
                     Expression.Call(
-                        typeof(ComBinder).GetMethod(nameof(ComBinder.IsComObject), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public),
+                        typeof(ComBinder).GetMethod(
+                            nameof(ComBinder.IsComObject),
+                            System.Reflection.BindingFlags.Static
+                                | System.Reflection.BindingFlags.Public
+                        ),
                         Helpers.Convert(Expression, typeof(object))
                     )
                 )

@@ -1,14 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="ExpandableObjectConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    using Microsoft.Win32;
+namespace System.ComponentModel
+{
     using System.Collections;
     using System.ComponentModel.Design;
     using System.Diagnostics;
+    using Microsoft.Win32;
 #if MONO_FEATURE_CAS
     using System.Security.Permissions;
 #endif
@@ -21,16 +22,14 @@ namespace System.ComponentModel {
 #if MONO_FEATURE_CAS
     [HostProtection(SharedState = true)]
 #endif
-    public class ExpandableObjectConverter : TypeConverter {
-    
+    public class ExpandableObjectConverter : TypeConverter
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the System.ComponentModel.ExpandableObjectConverter class.
         ///    </para>
         /// </devdoc>
-        public ExpandableObjectConverter() {
-        }
-
+        public ExpandableObjectConverter() { }
 
         /// <internalonly/>
         /// <devdoc>
@@ -38,19 +37,24 @@ namespace System.ComponentModel {
         ///       specified by the value
         ///       parameter.</para>
         /// </devdoc>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) {
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
+        {
             return TypeDescriptor.GetProperties(value, attributes);
         }
-        
+
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Gets a value indicating
         ///       whether this object supports properties using the
         ///       specified context.</para>
         /// </devdoc>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
+        {
             return true;
         }
     }
 }
-

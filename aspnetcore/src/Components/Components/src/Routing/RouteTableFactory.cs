@@ -6,8 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.AspNetCore.Routing.Patterns;
+using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.AspNetCore.Routing.Tree;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,11 +22,20 @@ namespace Microsoft.AspNetCore.Components;
 internal class RouteTableFactory
 {
     public static readonly RouteTableFactory Instance = new();
-    public static readonly IComparer<InboundRouteEntry> RouteOrder = Comparer<InboundRouteEntry>.Create((x, y) =>
-    {
-        var result = RouteComparison(x, y);
-        return result != 0 ? result : string.Compare(x.RoutePattern.RawText, y.RoutePattern.RawText, StringComparison.OrdinalIgnoreCase);
-    });
+    public static readonly IComparer<InboundRouteEntry> RouteOrder =
+        Comparer<InboundRouteEntry>.Create(
+            (x, y) =>
+            {
+                var result = RouteComparison(x, y);
+                return result != 0
+                    ? result
+                    : string.Compare(
+                        x.RoutePattern.RawText,
+                        y.RoutePattern.RawText,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+            }
+        );
 
     private readonly ConcurrentDictionary<RouteKey, RouteTable> _cache = new();
 
@@ -45,7 +54,11 @@ internal class RouteTableFactory
 
     public void ClearCaches() => _cache.Clear();
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Application code does not get trimmed, and the framework does not define routable components.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Application code does not get trimmed, and the framework does not define routable components."
+    )]
     private static List<Type> GetRouteableComponents(RouteKey routeKey)
     {
         var routeableComponents = new List<Type>();
@@ -72,7 +85,10 @@ internal class RouteTableFactory
         {
             foreach (var type in assembly.ExportedTypes)
             {
-                if (typeof(IComponent).IsAssignableFrom(type) && type.IsDefined(typeof(RouteAttribute)))
+                if (
+                    typeof(IComponent).IsAssignableFrom(type)
+                    && type.IsDefined(typeof(RouteAttribute))
+                )
                 {
                     routeableComponents.Add(type);
                 }
@@ -98,7 +114,10 @@ internal class RouteTableFactory
 
     private static string[] GetTemplates(Type componentType)
     {
-        var routeAttributes = componentType.GetCustomAttributes(typeof(RouteAttribute), inherit: false);
+        var routeAttributes = componentType.GetCustomAttributes(
+            typeof(RouteAttribute),
+            inherit: false
+        );
         var templates = new string[routeAttributes.Length];
         for (var i = 0; i < routeAttributes.Length; i++)
         {
@@ -109,12 +128,20 @@ internal class RouteTableFactory
         return templates;
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Application code does not get trimmed, and the framework does not define routable components.")]
-    internal static RouteTable Create(Dictionary<Type, string[]> templatesByHandler, IServiceProvider serviceProvider)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2067",
+        Justification = "Application code does not get trimmed, and the framework does not define routable components."
+    )]
+    internal static RouteTable Create(
+        Dictionary<Type, string[]> templatesByHandler,
+        IServiceProvider serviceProvider
+    )
     {
         var builder = new TreeRouteBuilder(
             serviceProvider.GetRequiredService<ILoggerFactory>(),
-            new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), serviceProvider));
+            new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), serviceProvider)
+        );
 
         foreach (var (type, templates) in templatesByHandler)
         {
@@ -125,7 +152,10 @@ internal class RouteTableFactory
 
             foreach (var (parsedTemplate, routeParameterNames) in parsedTemplates)
             {
-                var unusedRouteParameterNames = GetUnusedParameterNames(allRouteParameterNames!, routeParameterNames!);
+                var unusedRouteParameterNames = GetUnusedParameterNames(
+                    allRouteParameterNames!,
+                    routeParameterNames!
+                );
                 builder.MapInbound(type, parsedTemplate, unusedRouteParameterNames);
             }
         }
@@ -155,11 +185,16 @@ internal class RouteTableFactory
 
     private struct TemplateGroupInfo(string[] templates)
     {
-        public HashSet<string> AllRouteParameterNames { get; set; } = new(StringComparer.OrdinalIgnoreCase);
-        public (RoutePattern, HashSet<string>)[] ParsedTemplates { get; set; } = new (RoutePattern, HashSet<string>)[templates.Length];
+        public HashSet<string> AllRouteParameterNames { get; set; } =
+            new(StringComparer.OrdinalIgnoreCase);
+        public (RoutePattern, HashSet<string>)[] ParsedTemplates { get; set; } =
+            new (RoutePattern, HashSet<string>)[templates.Length];
     }
 
-    internal static InboundRouteEntry CreateEntry([DynamicallyAccessedMembers(Component)] Type pageType, string template)
+    internal static InboundRouteEntry CreateEntry(
+        [DynamicallyAccessedMembers(Component)] Type pageType,
+        string template
+    )
     {
         var templates = GetTemplates(pageType);
         var result = ComputeTemplateGroupInfo(templates);
@@ -179,14 +214,19 @@ internal class RouteTableFactory
 
         if (parsedTemplate == null)
         {
-            throw new InvalidOperationException($"Unable to find the provided template '{template}'");
+            throw new InvalidOperationException(
+                $"Unable to find the provided template '{template}'"
+            );
         }
 
         return new InboundRouteEntry()
         {
             Handler = pageType,
             RoutePattern = parsedTemplate,
-            UnusedRouteParameterNames = GetUnusedParameterNames(result.AllRouteParameterNames, routeParameterNames!),
+            UnusedRouteParameterNames = GetUnusedParameterNames(
+                result.AllRouteParameterNames,
+                routeParameterNames!
+            ),
         };
     }
 
@@ -208,10 +248,12 @@ internal class RouteTableFactory
                 var ambiguous = CompareSegments(left, right);
                 if (ambiguous)
                 {
-                    throw new InvalidOperationException($@"The following routes are ambiguous:
+                    throw new InvalidOperationException(
+                        $@"The following routes are ambiguous:
 '{leftText}' in '{left.Handler.FullName}'
 '{rightText}' in '{right.Handler.FullName}'
-");
+"
+                    );
                 }
             }
         }
@@ -234,9 +276,15 @@ internal class RouteTableFactory
             {
                 var leftPart = leftSegment.Parts[l];
                 var rightPart = rightSegment.Parts[l];
-                if (leftPart is RoutePatternLiteralPart leftLiteral &&
-                    rightPart is RoutePatternLiteralPart rightLiteral &&
-                    !string.Equals(leftLiteral.Content, rightLiteral.Content, StringComparison.OrdinalIgnoreCase))
+                if (
+                    leftPart is RoutePatternLiteralPart leftLiteral
+                    && rightPart is RoutePatternLiteralPart rightLiteral
+                    && !string.Equals(
+                        leftLiteral.Content,
+                        rightLiteral.Content,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     ambiguous = false;
                     break;
@@ -262,7 +310,10 @@ internal class RouteTableFactory
         return parameterNames;
     }
 
-    private static List<string>? GetUnusedParameterNames(HashSet<string> allRouteParameterNames, HashSet<string> routeParameterNames)
+    private static List<string>? GetUnusedParameterNames(
+        HashSet<string> allRouteParameterNames,
+        HashSet<string> routeParameterNames
+    )
     {
         List<string>? unusedParameters = null;
         foreach (var item in allRouteParameterNames)

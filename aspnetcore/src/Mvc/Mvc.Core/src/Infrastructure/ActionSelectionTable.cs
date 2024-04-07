@@ -40,7 +40,8 @@ internal sealed class ActionSelectionTable<TItem>
         int version,
         string[] routeKeys,
         Dictionary<string[], List<TItem>> ordinalEntries,
-        Dictionary<string[], List<TItem>> ordinalIgnoreCaseEntries)
+        Dictionary<string[], List<TItem>> ordinalIgnoreCaseEntries
+    )
     {
         Version = version;
         RouteKeys = routeKeys;
@@ -59,53 +60,53 @@ internal sealed class ActionSelectionTable<TItem>
     public static ActionSelectionTable<ActionDescriptor> Create(ActionDescriptorCollection actions)
     {
         return CreateCore<ActionDescriptor>(
-
             // We need to store the version so the cache can be invalidated if the actions change.
             version: actions.Version,
-
             // For action selection, ignore attribute routed actions
             items: actions.Items.Where(a => a.AttributeRouteInfo == null),
-
             getRouteKeys: a => a.RouteValues?.Keys,
             getRouteValue: (a, key) =>
             {
                 string? value = null;
                 a.RouteValues?.TryGetValue(key, out value);
                 return value ?? string.Empty;
-            });
+            }
+        );
     }
 
     public static ActionSelectionTable<Endpoint> Create(IEnumerable<Endpoint> endpoints)
     {
         return CreateCore<Endpoint>(
-
             // we don't use version for endpoints
             version: 0,
-
             // Exclude RouteEndpoints - we only process inert endpoints here.
             items: endpoints.Where(e =>
             {
                 return e.GetType() == typeof(Endpoint);
             }),
-
             getRouteKeys: e => e.Metadata.GetMetadata<ActionDescriptor>()?.RouteValues?.Keys,
             getRouteValue: (e, key) =>
             {
                 string? value = null;
-                e.Metadata.GetMetadata<ActionDescriptor>()?.RouteValues?.TryGetValue(key, out value);
+                e.Metadata.GetMetadata<ActionDescriptor>()
+                    ?.RouteValues?.TryGetValue(key, out value);
                 return Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
-            });
+            }
+        );
     }
 
     private static ActionSelectionTable<T> CreateCore<T>(
         int version,
         IEnumerable<T> items,
         Func<T, IEnumerable<string>?> getRouteKeys,
-        Func<T, string, string> getRouteValue)
+        Func<T, string, string> getRouteValue
+    )
     {
         // We need to build two maps for all of the route values.
         var ordinalEntries = new Dictionary<string[], List<T>>(StringArrayComparer.Ordinal);
-        var ordinalIgnoreCaseEntries = new Dictionary<string[], List<T>>(StringArrayComparer.OrdinalIgnoreCase);
+        var ordinalIgnoreCaseEntries = new Dictionary<string[], List<T>>(
+            StringArrayComparer.OrdinalIgnoreCase
+        );
 
         // We need to hold on to an ordered set of keys for the route values. We'll use these later to
         // extract the set of route values from an incoming request to compare against our maps of known
@@ -156,7 +157,12 @@ internal sealed class ActionSelectionTable<TItem>
             }
         }
 
-        return new ActionSelectionTable<T>(version, routeKeys.ToArray(), ordinalEntries, ordinalIgnoreCaseEntries);
+        return new ActionSelectionTable<T>(
+            version,
+            routeKeys.ToArray(),
+            ordinalEntries,
+            ordinalIgnoreCaseEntries
+        );
     }
 
     public IReadOnlyList<TItem> Select(RouteValueDictionary values)
@@ -168,12 +174,17 @@ internal sealed class ActionSelectionTable<TItem>
         for (var i = 0; i < routeKeys.Length; i++)
         {
             values.TryGetValue(routeKeys[i], out var value);
-            routeValues[i] = value as string ?? Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
+            routeValues[i] =
+                value as string
+                ?? Convert.ToString(value, CultureInfo.InvariantCulture)
+                ?? string.Empty;
         }
 
         // Now look up, first case-sensitive, then case-insensitive.
-        if (OrdinalEntries.TryGetValue(routeValues, out var matches) ||
-            OrdinalIgnoreCaseEntries.TryGetValue(routeValues, out matches))
+        if (
+            OrdinalEntries.TryGetValue(routeValues, out var matches)
+            || OrdinalIgnoreCaseEntries.TryGetValue(routeValues, out matches)
+        )
         {
             Debug.Assert(matches != null);
             Debug.Assert(matches.Count >= 0);

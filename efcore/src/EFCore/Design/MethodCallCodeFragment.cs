@@ -30,12 +30,19 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
             parameterLength--;
         }
 
-        if (arguments.Length > parameterLength
-            && !parameters[^1].IsDefined(typeof(ParamArrayAttribute)))
+        if (
+            arguments.Length > parameterLength
+            && !parameters[^1].IsDefined(typeof(ParamArrayAttribute))
+        )
         {
             throw new ArgumentException(
-                CoreStrings.IncorrectNumberOfArguments(methodInfo.Name, arguments.Length, parameterLength),
-                nameof(arguments));
+                CoreStrings.IncorrectNumberOfArguments(
+                    methodInfo.Name,
+                    arguments.Length,
+                    parameterLength
+                ),
+                nameof(arguments)
+            );
         }
 
         MethodInfo = methodInfo;
@@ -62,7 +69,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     private MethodCallCodeFragment(
         MethodInfo methodInfo,
         object?[] arguments,
-        MethodCallCodeFragment chainedCall)
+        MethodCallCodeFragment chainedCall
+    )
         : this(methodInfo, arguments)
     {
         ChainedCall = chainedCall;
@@ -71,7 +79,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     private MethodCallCodeFragment(
         string method,
         object?[] arguments,
-        MethodCallCodeFragment chainedCall)
+        MethodCallCodeFragment chainedCall
+    )
         : this(method, arguments)
     {
         ChainedCall = chainedCall;
@@ -101,18 +110,15 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     /// <value> The method's name. </value>
     public virtual string Method { get; }
 
-    IEnumerable<string> IMethodCallCodeFragment.TypeArguments
-        => Enumerable.Empty<string>();
+    IEnumerable<string> IMethodCallCodeFragment.TypeArguments => Enumerable.Empty<string>();
 
     /// <summary>
     ///     Gets the method call's arguments.
     /// </summary>
     /// <value> The method call's arguments. </value>
-    public virtual IReadOnlyList<object?> Arguments
-        => _arguments;
+    public virtual IReadOnlyList<object?> Arguments => _arguments;
 
-    IEnumerable<object?> IMethodCallCodeFragment.Arguments
-        => Arguments;
+    IEnumerable<object?> IMethodCallCodeFragment.Arguments => Arguments;
 
     /// <summary>
     ///     Gets the next method call to chain after this.
@@ -120,8 +126,7 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     /// <value> The next method call. </value>
     public virtual MethodCallCodeFragment? ChainedCall { get; }
 
-    IMethodCallCodeFragment? IMethodCallCodeFragment.ChainedCall
-        => ChainedCall;
+    IMethodCallCodeFragment? IMethodCallCodeFragment.ChainedCall => ChainedCall;
 
     /// <summary>
     ///     Creates a method chain from this method to another.
@@ -129,8 +134,10 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     /// <param name="methodInfo">The method's <see cref="MethodInfo" />.</param>
     /// <param name="arguments">The next method call's arguments.</param>
     /// <returns>A new fragment representing the method chain.</returns>
-    public virtual MethodCallCodeFragment Chain(MethodInfo methodInfo, params object?[] arguments)
-        => Chain(new MethodCallCodeFragment(methodInfo, arguments));
+    public virtual MethodCallCodeFragment Chain(
+        MethodInfo methodInfo,
+        params object?[] arguments
+    ) => Chain(new MethodCallCodeFragment(methodInfo, arguments));
 
     /// <summary>
     ///     Creates a method chain from this method to another.
@@ -138,16 +145,24 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     /// <param name="method">The next method's name.</param>
     /// <param name="arguments">The next method call's arguments.</param>
     /// <returns>A new fragment representing the method chain.</returns>
-    public virtual MethodCallCodeFragment Chain(string method, params object?[] arguments)
-        => Chain(new MethodCallCodeFragment(method, arguments));
+    public virtual MethodCallCodeFragment Chain(string method, params object?[] arguments) =>
+        Chain(new MethodCallCodeFragment(method, arguments));
 
     /// <summary>
     ///     Creates a method chain from this method to another.
     /// </summary>
     /// <param name="call">The next method.</param>
     /// <returns>A new fragment representing the method chain.</returns>
-    public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call)
-        => MethodInfo is not null
-            ? new MethodCallCodeFragment(MethodInfo, _arguments.ToArray(), ChainedCall?.Chain(call) ?? call)
-            : new MethodCallCodeFragment(Method, _arguments.ToArray(), ChainedCall?.Chain(call) ?? call);
+    public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call) =>
+        MethodInfo is not null
+            ? new MethodCallCodeFragment(
+                MethodInfo,
+                _arguments.ToArray(),
+                ChainedCall?.Chain(call) ?? call
+            )
+            : new MethodCallCodeFragment(
+                Method,
+                _arguments.ToArray(),
+                ChainedCall?.Chain(call) ?? call
+            );
 }

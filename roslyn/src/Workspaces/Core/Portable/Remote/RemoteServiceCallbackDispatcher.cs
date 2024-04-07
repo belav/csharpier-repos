@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
     internal class RemoteServiceCallbackDispatcher : IRemoteServiceCallbackDispatcher
     {
-        internal readonly struct Handle(ConcurrentDictionary<RemoteServiceCallbackId, object> callbackInstances, RemoteServiceCallbackId callbackId) : IDisposable
+        internal readonly struct Handle(
+            ConcurrentDictionary<RemoteServiceCallbackId, object> callbackInstances,
+            RemoteServiceCallbackId callbackId
+        ) : IDisposable
         {
             public readonly RemoteServiceCallbackId Id = callbackId;
 
@@ -27,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         private int _callbackId = 1;
-        private readonly ConcurrentDictionary<RemoteServiceCallbackId, object> _callbackInstances = new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<RemoteServiceCallbackId, object> _callbackInstances =
+            new(concurrencyLevel: 2, capacity: 10);
 
         public Handle CreateHandle(object? instance)
         {

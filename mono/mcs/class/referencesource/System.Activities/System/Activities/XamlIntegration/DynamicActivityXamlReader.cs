@@ -22,7 +22,9 @@ namespace System.Activities.XamlIntegration
     {
         internal static readonly XamlMember xPropertyType = XamlLanguage.Property.GetMember("Type");
         internal static readonly XamlMember xPropertyName = XamlLanguage.Property.GetMember("Name");
-        internal static readonly XamlMember xPropertyAttributes = XamlLanguage.Property.GetMember("Attributes");
+        internal static readonly XamlMember xPropertyAttributes = XamlLanguage.Property.GetMember(
+            "Attributes"
+        );
 
         // These may be a closed generic types in the Activity<T> case, so we compute them dynamically
         XamlType activityReplacementXamlType;
@@ -62,28 +64,28 @@ namespace System.Activities.XamlIntegration
         XamlReader nodeReader;
 
         // Properties are tricky since they support default values, and those values
-        // can appear anywhere in the XAML document. So we need to buffer their XAML 
-        // nodes and present them only at the end of the document (right before the 
+        // can appear anywhere in the XAML document. So we need to buffer their XAML
+        // nodes and present them only at the end of the document (right before the
         // document end tag), when we have both the declaration and the value realized.
         BufferedPropertyList bufferedProperties;
 
-        // in the ActivityBuilder case we need to jump through some extra hoops to 
+        // in the ActivityBuilder case we need to jump through some extra hoops to
         // support PropertyReferenceExtension, since in the ActivityBuilder case
         // Implementation isn't a template (Func<Activity>), so we need to map
         // such members into attached properties on their parent object
         BuilderStack builderStack;
 
         public DynamicActivityXamlReader(XamlReader innerReader)
-            : this(innerReader, null)
-        {
-        }
+            : this(innerReader, null) { }
 
         public DynamicActivityXamlReader(XamlReader innerReader, XamlSchemaContext schemaContext)
-            : this(false, innerReader, schemaContext)
-        {
-        }
+            : this(false, innerReader, schemaContext) { }
 
-        public DynamicActivityXamlReader(bool isBuilder, XamlReader innerReader, XamlSchemaContext schemaContext)
+        public DynamicActivityXamlReader(
+            bool isBuilder,
+            XamlReader innerReader,
+            XamlSchemaContext schemaContext
+        )
             : base()
         {
             this.isBuilder = isBuilder;
@@ -94,7 +96,9 @@ namespace System.Activities.XamlIntegration
             this.typeXamlType = this.schemaContext.GetXamlType(typeof(Type));
 
             this.baseActivityXamlType = this.schemaContext.GetXamlType(typeof(Activity));
-            this.activityPropertyXamlType = this.schemaContext.GetXamlType(typeof(DynamicActivityProperty));
+            this.activityPropertyXamlType = this.schemaContext.GetXamlType(
+                typeof(DynamicActivityProperty)
+            );
             this.activityPropertyType = this.activityPropertyXamlType.GetMember("Type");
             this.activityPropertyName = this.activityPropertyXamlType.GetMember("Name");
             this.activityPropertyValue = this.activityPropertyXamlType.GetMember("Value");
@@ -117,66 +121,42 @@ namespace System.Activities.XamlIntegration
 
         public override XamlType Type
         {
-            get
-            {
-                return this.nodeReader.Type;
-            }
+            get { return this.nodeReader.Type; }
         }
 
         public override NamespaceDeclaration Namespace
         {
-            get
-            {
-                return this.nodeReader.Namespace;
-            }
+            get { return this.nodeReader.Namespace; }
         }
 
         public override object Value
         {
-            get
-            {
-                return this.nodeReader.Value;
-            }
+            get { return this.nodeReader.Value; }
         }
 
         public override bool IsEof
         {
-            get
-            {
-                return this.nodeReader.IsEof;
-            }
+            get { return this.nodeReader.IsEof; }
         }
 
         public override XamlMember Member
         {
-            get
-            {
-                return this.nodeReader.Member;
-            }
+            get { return this.nodeReader.Member; }
         }
 
         public override XamlSchemaContext SchemaContext
         {
-            get
-            {
-                return this.schemaContext;
-            }
+            get { return this.schemaContext; }
         }
 
         public override XamlNodeType NodeType
         {
-            get
-            {
-                return this.nodeReader.NodeType;
-            }
+            get { return this.nodeReader.NodeType; }
         }
 
         public bool HasLineInfo
         {
-            get
-            {
-                return this.hasLineInfo;
-            }
+            get { return this.hasLineInfo; }
         }
 
         public int LineNumber
@@ -248,7 +228,10 @@ namespace System.Activities.XamlIntegration
         {
             if (this.notRewriting)
             {
-                Fx.Assert(object.ReferenceEquals(this.innerReader, this.nodeReader), "readers must match at this point");
+                Fx.Assert(
+                    object.ReferenceEquals(this.innerReader, this.nodeReader),
+                    "readers must match at this point"
+                );
                 return this.nodeReader.Read();
             }
 
@@ -288,7 +271,7 @@ namespace System.Activities.XamlIntegration
                     // find out if the member is a default value for one of
                     // our declared properties. If it is, then we have a complex case
                     // where we need to:
-                    // 1) read the nodes into a side list 
+                    // 1) read the nodes into a side list
                     // 2) interleave these nodes with the DynamicActivityProperty nodes
                     //    since they need to appear as DynamicActivityProperty.Value
                     // 3) right before we hit the last node, we'll dump the side node-lists
@@ -299,10 +282,18 @@ namespace System.Activities.XamlIntegration
                         {
                             this.bufferedProperties = new BufferedPropertyList(this);
                         }
-                        this.bufferedProperties.BufferDefaultValue(currentMember.Name, this.activityPropertyValue, this.innerReader, this.innerReaderLineInfo);
+                        this.bufferedProperties.BufferDefaultValue(
+                            currentMember.Name,
+                            this.activityPropertyValue,
+                            this.innerReader,
+                            this.innerReaderLineInfo
+                        );
                         return true; // output cursor didn't move forward
                     }
-                    else if (this.frontLoadedDirectives && currentMember == XamlLanguage.FactoryMethod)
+                    else if (
+                        this.frontLoadedDirectives
+                        && currentMember == XamlLanguage.FactoryMethod
+                    )
                     {
                         DisableRewrite();
                         return false;
@@ -312,16 +303,31 @@ namespace System.Activities.XamlIntegration
                         this.depth++;
                         if (this.depth == 2)
                         {
-                            if (currentMember.DeclaringType == this.activityXamlType || currentMember.DeclaringType == this.baseActivityXamlType)
+                            if (
+                                currentMember.DeclaringType == this.activityXamlType
+                                || currentMember.DeclaringType == this.baseActivityXamlType
+                            )
                             {
                                 // Rewrite "<Activity.XXX>" to "<DynamicActivity.XXX>"
-                                XamlMember member = this.activityReplacementXamlType.GetMember(currentMember.Name);
+                                XamlMember member = this.activityReplacementXamlType.GetMember(
+                                    currentMember.Name
+                                );
                                 if (member == null)
                                 {
-                                    throw FxTrace.Exception.AsError(CreateXamlException(SR.MemberNotSupportedByActivityXamlServices(currentMember.Name), this.innerReaderLineInfo));
+                                    throw FxTrace.Exception.AsError(
+                                        CreateXamlException(
+                                            SR.MemberNotSupportedByActivityXamlServices(
+                                                currentMember.Name
+                                            ),
+                                            this.innerReaderLineInfo
+                                        )
+                                    );
                                 }
 
-                                this.nodeQueue.Writer.WriteStartMember(member, this.innerReaderLineInfo);
+                                this.nodeQueue.Writer.WriteStartMember(
+                                    member,
+                                    this.innerReaderLineInfo
+                                );
 
                                 if (member.Name == "Constraints")
                                 {
@@ -343,7 +349,10 @@ namespace System.Activities.XamlIntegration
                                 this.inXClassDepth = this.depth;
 
                                 // Rewrite x:Class to DynamicActivity.Name
-                                this.nodeQueue.Writer.WriteStartMember(this.activityReplacementXamlType.GetMember("Name"), this.innerReaderLineInfo);
+                                this.nodeQueue.Writer.WriteStartMember(
+                                    this.activityReplacementXamlType.GetMember("Name"),
+                                    this.innerReaderLineInfo
+                                );
                                 processedNode = true;
                             }
                             else if (currentMember == XamlLanguage.Members)
@@ -360,7 +369,10 @@ namespace System.Activities.XamlIntegration
                             else if (currentMember == XamlLanguage.ClassAttributes)
                             {
                                 // Rewrite x:ClassAttributes to DynamicActivity.Attributes
-                                this.nodeQueue.Writer.WriteStartMember(this.activityReplacementXamlType.GetMember("Attributes"), this.innerReaderLineInfo);
+                                this.nodeQueue.Writer.WriteStartMember(
+                                    this.activityReplacementXamlType.GetMember("Attributes"),
+                                    this.innerReaderLineInfo
+                                );
                                 // x:ClassAttributes directive has no following GetObject, but Attributes does since it's not a directive
                                 WriteWrappedMember(false);
                                 processedNode = true;
@@ -382,32 +394,47 @@ namespace System.Activities.XamlIntegration
                                 this.activityXamlType = this.innerReader.Type;
                                 if (this.isBuilder)
                                 {
-                                    this.activityReplacementXamlType = SchemaContext.GetXamlType(typeof(ActivityBuilder));
+                                    this.activityReplacementXamlType = SchemaContext.GetXamlType(
+                                        typeof(ActivityBuilder)
+                                    );
                                 }
                                 else
                                 {
-                                    this.activityReplacementXamlType = SchemaContext.GetXamlType(typeof(DynamicActivity));
+                                    this.activityReplacementXamlType = SchemaContext.GetXamlType(
+                                        typeof(DynamicActivity)
+                                    );
                                 }
                             }
                             // or an Activity<TResult>
-                            else if (this.innerReader.Type.IsGeneric && this.innerReader.Type.UnderlyingType != null
-                                && this.innerReader.Type.UnderlyingType.GetGenericTypeDefinition() == typeof(Activity<>))
+                            else if (
+                                this.innerReader.Type.IsGeneric
+                                && this.innerReader.Type.UnderlyingType != null
+                                && this.innerReader.Type.UnderlyingType.GetGenericTypeDefinition()
+                                    == typeof(Activity<>)
+                            )
                             {
-                                // Rewrite "<Activity typeArgument=T>" to "<DynamicActivity typeArgument=T>" 
+                                // Rewrite "<Activity typeArgument=T>" to "<DynamicActivity typeArgument=T>"
                                 this.activityXamlType = this.innerReader.Type;
 
-                                Type activityType = this.innerReader.Type.TypeArguments[0].UnderlyingType;
+                                Type activityType = this.innerReader
+                                    .Type
+                                    .TypeArguments[0]
+                                    .UnderlyingType;
                                 Type activityReplacementGenericType;
                                 if (this.isBuilder)
                                 {
-                                    activityReplacementGenericType = typeof(ActivityBuilder<>).MakeGenericType(activityType);
+                                    activityReplacementGenericType =
+                                        typeof(ActivityBuilder<>).MakeGenericType(activityType);
                                 }
                                 else
                                 {
-                                    activityReplacementGenericType = typeof(DynamicActivity<>).MakeGenericType(activityType);
+                                    activityReplacementGenericType =
+                                        typeof(DynamicActivity<>).MakeGenericType(activityType);
                                 }
 
-                                this.activityReplacementXamlType = SchemaContext.GetXamlType(activityReplacementGenericType);
+                                this.activityReplacementXamlType = SchemaContext.GetXamlType(
+                                    activityReplacementGenericType
+                                );
                             }
                             // otherwise disable rewriting so that we're a pass through
                             else
@@ -416,10 +443,12 @@ namespace System.Activities.XamlIntegration
                                 return false;
                             }
 
-                            this.nodeQueue.Writer.WriteStartObject(this.activityReplacementXamlType, this.innerReaderLineInfo);
+                            this.nodeQueue.Writer.WriteStartObject(
+                                this.activityReplacementXamlType,
+                                this.innerReaderLineInfo
+                            );
                             processedNode = true;
                         }
-
                     }
                     break;
 
@@ -456,7 +485,12 @@ namespace System.Activities.XamlIntegration
                 if (this.builderStack != null)
                 {
                     bool writeNode = true;
-                    this.builderStack.ProcessNode(this.innerReader, this.innerReaderLineInfo, this.nodeQueue.Writer, out writeNode);
+                    this.builderStack.ProcessNode(
+                        this.innerReader,
+                        this.innerReaderLineInfo,
+                        this.nodeQueue.Writer,
+                        out writeNode
+                    );
                     if (!writeNode)
                     {
                         this.innerReader.Read();
@@ -499,12 +533,16 @@ namespace System.Activities.XamlIntegration
                 }
                 else
                 {
-                    XamlWriterExtensions.Transform(subReader.ReadSubtree(), this.nodeQueue.Writer, this.innerReaderLineInfo, false);
+                    XamlWriterExtensions.Transform(
+                        subReader.ReadSubtree(),
+                        this.nodeQueue.Writer,
+                        this.innerReaderLineInfo,
+                        false
+                    );
                 }
             }
 
-
-            // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember) 
+            // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember)
             // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are interchangable from a state perspective
             this.nodeQueue.Writer.WriteEndObject(this.innerReaderLineInfo);
             this.nodeQueue.Writer.WriteEndMember(this.innerReaderLineInfo);
@@ -542,8 +580,8 @@ namespace System.Activities.XamlIntegration
             }
             else if (this.depth == 0)
             {
-                // we're about to write out the last tag. Dump our accrued properties 
-                // as no more property values are forthcoming. 
+                // we're about to write out the last tag. Dump our accrued properties
+                // as no more property values are forthcoming.
                 if (this.bufferedProperties != null)
                 {
                     this.bufferedProperties.FlushTo(this.nodeQueue, this);
@@ -553,7 +591,11 @@ namespace System.Activities.XamlIntegration
 
         bool IsXClassName(XamlType xamlType)
         {
-            if (xamlType == null || this.xClassName == null || xamlType.Name != this.xClassName.Name)
+            if (
+                xamlType == null
+                || this.xClassName == null
+                || xamlType.Name != this.xClassName.Name
+            )
             {
                 return false;
             }
@@ -627,11 +669,18 @@ namespace System.Activities.XamlIntegration
             {
                 this.parent = parent;
                 this.stack = new Stack<Frame>();
-                this.activityPropertyReferenceXamlType = parent.schemaContext.GetXamlType(typeof(ActivityPropertyReference));
-                this.activityPropertyReferenceSourceProperty = this.activityPropertyReferenceXamlType.GetMember("SourceProperty");
-                this.activityPropertyReferenceTargetProperty = this.activityPropertyReferenceXamlType.GetMember("TargetProperty");
-                XamlType typeOfActivityBuilder = parent.schemaContext.GetXamlType(typeof(ActivityBuilder));
-                this.activityBuilderPropertyReferencesMember = typeOfActivityBuilder.GetAttachableMember("PropertyReferences");
+                this.activityPropertyReferenceXamlType = parent.schemaContext.GetXamlType(
+                    typeof(ActivityPropertyReference)
+                );
+                this.activityPropertyReferenceSourceProperty =
+                    this.activityPropertyReferenceXamlType.GetMember("SourceProperty");
+                this.activityPropertyReferenceTargetProperty =
+                    this.activityPropertyReferenceXamlType.GetMember("TargetProperty");
+                XamlType typeOfActivityBuilder = parent.schemaContext.GetXamlType(
+                    typeof(ActivityBuilder)
+                );
+                this.activityBuilderPropertyReferencesMember =
+                    typeOfActivityBuilder.GetAttachableMember("PropertyReferences");
             }
 
             string ReadPropertyReferenceExtensionPropertyName(XamlReader reader)
@@ -666,7 +715,12 @@ namespace System.Activities.XamlIntegration
             // in the parent object's ActivityBuilder.PropertyReference collection, and dont' write out the member.
             // If the content is not a PropertyReferenceExtension, or there's no content (i.e. we hit an EM),
             // we flush the buffered SM + NS*, and continue as normal.
-            public void ProcessNode(XamlReader reader, IXamlLineInfo lineInfo, XamlWriter targetWriter, out bool writeNodeToOutput)
+            public void ProcessNode(
+                XamlReader reader,
+                IXamlLineInfo lineInfo,
+                XamlWriter targetWriter,
+                out bool writeNodeToOutput
+            )
             {
                 writeNodeToOutput = true;
 
@@ -693,12 +747,17 @@ namespace System.Activities.XamlIntegration
                     case XamlNodeType.StartObject:
                         Frame newFrame;
                         if (IsPropertyReferenceExtension(reader.Type) && this.bufferedMember.IsSet)
-                        {                            
+                        {
                             MemberInformation targetMember = this.bufferedMember;
-                            this.bufferedMember = MemberInformation.None;                            
-                            WritePropertyReferenceFrameToParent(targetMember, ReadPropertyReferenceExtensionPropertyName(reader), this.stack.Peek(), lineInfo);
+                            this.bufferedMember = MemberInformation.None;
+                            WritePropertyReferenceFrameToParent(
+                                targetMember,
+                                ReadPropertyReferenceExtensionPropertyName(reader),
+                                this.stack.Peek(),
+                                lineInfo
+                            );
                             writeNodeToOutput = false;
-                            break;                            
+                            break;
                         }
                         else
                         {
@@ -717,7 +776,11 @@ namespace System.Activities.XamlIntegration
                         Frame frame = this.stack.Pop();
                         if (frame.PropertyReferences != null)
                         {
-                            WritePropertyReferenceCollection(frame.PropertyReferences, targetWriter, lineInfo);
+                            WritePropertyReferenceCollection(
+                                frame.PropertyReferences,
+                                targetWriter,
+                                lineInfo
+                            );
                         }
                         break;
 
@@ -730,9 +793,14 @@ namespace System.Activities.XamlIntegration
                         {
                             if (this.bufferedMember.FollowingNamespaces == null)
                             {
-                                this.bufferedMember.FollowingNamespaces = new XamlNodeQueue(this.parent.schemaContext);
+                                this.bufferedMember.FollowingNamespaces = new XamlNodeQueue(
+                                    this.parent.schemaContext
+                                );
                             }
-                            this.bufferedMember.FollowingNamespaces.Writer.WriteNode(reader, lineInfo);
+                            this.bufferedMember.FollowingNamespaces.Writer.WriteNode(
+                                reader,
+                                lineInfo
+                            );
                             writeNodeToOutput = false;
                         }
                         break;
@@ -750,13 +818,19 @@ namespace System.Activities.XamlIntegration
 
             bool IsPropertyReferenceExtension(XamlType type)
             {
-                return type != null && type.IsGeneric && type.UnderlyingType != null && type.Name == "PropertyReferenceExtension"
-                    && type.UnderlyingType.GetGenericTypeDefinition() == typeof(PropertyReferenceExtension<>);
+                return type != null
+                    && type.IsGeneric
+                    && type.UnderlyingType != null
+                    && type.Name == "PropertyReferenceExtension"
+                    && type.UnderlyingType.GetGenericTypeDefinition()
+                        == typeof(PropertyReferenceExtension<>);
             }
 
             bool IsExpectedPropertyReferenceMember(XamlReader reader)
             {
-                return reader.NodeType == XamlNodeType.StartMember && IsPropertyReferenceExtension(reader.Member.DeclaringType) && reader.Member.Name == "PropertyName";
+                return reader.NodeType == XamlNodeType.StartMember
+                    && IsPropertyReferenceExtension(reader.Member.DeclaringType)
+                    && reader.Member.Name == "PropertyName";
             }
 
             string ReadPropertyName(XamlReader reader)
@@ -784,9 +858,16 @@ namespace System.Activities.XamlIntegration
                 return result;
             }
 
-            void WritePropertyReferenceCollection(XamlNodeQueue serializedReferences, XamlWriter targetWriter, IXamlLineInfo lineInfo)
+            void WritePropertyReferenceCollection(
+                XamlNodeQueue serializedReferences,
+                XamlWriter targetWriter,
+                IXamlLineInfo lineInfo
+            )
             {
-                targetWriter.WriteStartMember(this.activityBuilderPropertyReferencesMember, lineInfo);
+                targetWriter.WriteStartMember(
+                    this.activityBuilderPropertyReferencesMember,
+                    lineInfo
+                );
                 targetWriter.WriteGetObject(lineInfo);
                 targetWriter.WriteStartMember(XamlLanguage.Items, lineInfo);
                 XamlServices.Transform(serializedReferences.Reader, targetWriter, false);
@@ -795,30 +876,51 @@ namespace System.Activities.XamlIntegration
                 targetWriter.WriteEndMember(lineInfo);
             }
 
-            void WritePropertyReferenceFrameToParent(MemberInformation targetMember, string sourceProperty, Frame parentFrame, IXamlLineInfo lineInfo)
+            void WritePropertyReferenceFrameToParent(
+                MemberInformation targetMember,
+                string sourceProperty,
+                Frame parentFrame,
+                IXamlLineInfo lineInfo
+            )
             {
                 if (parentFrame.PropertyReferences == null)
                 {
                     parentFrame.PropertyReferences = new XamlNodeQueue(this.parent.schemaContext);
                 }
-                WriteSerializedPropertyReference(parentFrame.PropertyReferences.Writer, lineInfo, targetMember.Member.Name, sourceProperty);
-                
+                WriteSerializedPropertyReference(
+                    parentFrame.PropertyReferences.Writer,
+                    lineInfo,
+                    targetMember.Member.Name,
+                    sourceProperty
+                );
+
                 // we didn't write out the target
                 // StartMember, so suppress the EndMember
                 parentFrame.SuppressNextEndMember = true;
             }
 
-            void WriteSerializedPropertyReference(XamlWriter targetWriter, IXamlLineInfo lineInfo, string targetName, string sourceName)
+            void WriteSerializedPropertyReference(
+                XamlWriter targetWriter,
+                IXamlLineInfo lineInfo,
+                string targetName,
+                string sourceName
+            )
             {
-                // Line Info for the entire <ActivityPropertyReference> element 
+                // Line Info for the entire <ActivityPropertyReference> element
                 // comes from the end of the <PropertyReference> tag
                 targetWriter.WriteStartObject(this.activityPropertyReferenceXamlType, lineInfo);
-                targetWriter.WriteStartMember(this.activityPropertyReferenceTargetProperty, lineInfo);
+                targetWriter.WriteStartMember(
+                    this.activityPropertyReferenceTargetProperty,
+                    lineInfo
+                );
                 targetWriter.WriteValue(targetName, lineInfo);
                 targetWriter.WriteEndMember(lineInfo);
                 if (sourceName != null)
                 {
-                    targetWriter.WriteStartMember(this.activityPropertyReferenceSourceProperty, lineInfo);
+                    targetWriter.WriteStartMember(
+                        this.activityPropertyReferenceSourceProperty,
+                        lineInfo
+                    );
                     targetWriter.WriteValue(sourceName, lineInfo);
                     targetWriter.WriteEndMember(lineInfo);
                 }
@@ -894,9 +996,15 @@ namespace System.Activities.XamlIntegration
 
                 // 1) swap out the start member with <DynamicActivity.Properties>
                 subReader.Read();
-                Fx.Assert(subReader.NodeType == XamlNodeType.StartMember && subReader.Member == XamlLanguage.Members,
-                    "Should be inside of x:Members before calling BufferDefinitions");
-                this.outerNodes.Writer.WriteStartMember(parent.activityReplacementXamlType.GetMember("Properties"), readerLineInfo);
+                Fx.Assert(
+                    subReader.NodeType == XamlNodeType.StartMember
+                        && subReader.Member == XamlLanguage.Members,
+                    "Should be inside of x:Members before calling BufferDefinitions"
+                );
+                this.outerNodes.Writer.WriteStartMember(
+                    parent.activityReplacementXamlType.GetMember("Properties"),
+                    readerLineInfo
+                );
 
                 // x:Members directive has no following GetObject, but Properties does since it's not a directive
                 this.outerNodes.Writer.WriteGetObject(readerLineInfo);
@@ -907,11 +1015,16 @@ namespace System.Activities.XamlIntegration
                 bool continueReading = subReader.Read();
                 while (continueReading)
                 {
-                    if (subReader.NodeType == XamlNodeType.StartObject
-                        && subReader.Type == XamlLanguage.Property)
+                    if (
+                        subReader.NodeType == XamlNodeType.StartObject
+                        && subReader.Type == XamlLanguage.Property
+                    )
                     {
                         // we found an x:Property. Store it in an ActivityPropertyHolder
-                        ActivityPropertyHolder newProperty = new ActivityPropertyHolder(parent, subReader.ReadSubtree());
+                        ActivityPropertyHolder newProperty = new ActivityPropertyHolder(
+                            parent,
+                            subReader.ReadSubtree()
+                        );
                         this.PropertyHolders.Add(newProperty.Name, newProperty);
 
                         // and stash away a proxy node to map later
@@ -927,7 +1040,7 @@ namespace System.Activities.XamlIntegration
                     }
                 }
 
-                // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember) 
+                // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember)
                 // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are interchangable from a state perspective
                 this.outerNodes.Writer.WriteEndObject(readerLineInfo);
                 this.outerNodes.Writer.WriteEndMember(readerLineInfo);
@@ -941,13 +1054,20 @@ namespace System.Activities.XamlIntegration
             {
                 // We've seen all the property definitions we're going to see. Write out any values already accumulated.
 
-                // If we have picked up any values already before definitions, process them immediately 
+                // If we have picked up any values already before definitions, process them immediately
                 // (and throw as usual if corresponding definition doesn't exist)
                 if (this.valueHolders != null)
                 {
-                    foreach (KeyValuePair<string, ValueHolder> propertyNameAndValue in this.valueHolders)
+                    foreach (
+                        KeyValuePair<string, ValueHolder> propertyNameAndValue in this.valueHolders
+                    )
                     {
-                        ProcessDefaultValue(propertyNameAndValue.Key, propertyNameAndValue.Value.PropertyValue, propertyNameAndValue.Value.ValueReader, propertyNameAndValue.Value.ValueReader as IXamlLineInfo);
+                        ProcessDefaultValue(
+                            propertyNameAndValue.Key,
+                            propertyNameAndValue.Value.PropertyValue,
+                            propertyNameAndValue.Value.ValueReader,
+                            propertyNameAndValue.Value.ValueReader as IXamlLineInfo
+                        );
                     }
                     this.valueHolders = null; // So we don't flush it again at close
                 }
@@ -966,11 +1086,21 @@ namespace System.Activities.XamlIntegration
                 }
             }
 
-            public void BufferDefaultValue(string propertyName, XamlMember propertyValue, XamlReader reader, IXamlLineInfo lineInfo)
+            public void BufferDefaultValue(
+                string propertyName,
+                XamlMember propertyValue,
+                XamlReader reader,
+                IXamlLineInfo lineInfo
+            )
             {
                 if (this.alreadyBufferedDefinitions)
                 {
-                    ProcessDefaultValue(propertyName, propertyValue, reader.ReadSubtree(), lineInfo);
+                    ProcessDefaultValue(
+                        propertyName,
+                        propertyValue,
+                        reader.ReadSubtree(),
+                        lineInfo
+                    );
                 }
                 else
                 {
@@ -978,17 +1108,29 @@ namespace System.Activities.XamlIntegration
                     {
                         this.valueHolders = new Dictionary<string, ValueHolder>();
                     }
-                    ValueHolder savedValue = new ValueHolder(this.parent.SchemaContext, propertyValue, reader, lineInfo);
+                    ValueHolder savedValue = new ValueHolder(
+                        this.parent.SchemaContext,
+                        propertyValue,
+                        reader,
+                        lineInfo
+                    );
                     valueHolders[propertyName] = savedValue;
                 }
             }
 
-            public void ProcessDefaultValue(string propertyName, XamlMember propertyValue, XamlReader reader, IXamlLineInfo lineInfo)
+            public void ProcessDefaultValue(
+                string propertyName,
+                XamlMember propertyValue,
+                XamlReader reader,
+                IXamlLineInfo lineInfo
+            )
             {
                 ActivityPropertyHolder propertyHolder;
                 if (!this.PropertyHolders.TryGetValue(propertyName, out propertyHolder))
                 {
-                    throw FxTrace.Exception.AsError(CreateXamlException(SR.InvalidProperty(propertyName), lineInfo));
+                    throw FxTrace.Exception.AsError(
+                        CreateXamlException(SR.InvalidProperty(propertyName), lineInfo)
+                    );
                 }
 
                 propertyHolder.ProcessDefaultValue(propertyValue, reader, lineInfo);
@@ -999,12 +1141,15 @@ namespace System.Activities.XamlIntegration
                 FlushValueHolders();
 
                 XamlReader sourceReader = this.outerNodes.Reader;
-                IXamlLineInfo sourceReaderLineInfo = parent.hasLineInfo ? sourceReader as IXamlLineInfo : null;
+                IXamlLineInfo sourceReaderLineInfo = parent.hasLineInfo
+                    ? sourceReader as IXamlLineInfo
+                    : null;
                 while (sourceReader.Read())
                 {
                     if (sourceReader.NodeType == XamlNodeType.Value)
                     {
-                        ActivityPropertyHolder propertyHolder = sourceReader.Value as ActivityPropertyHolder;
+                        ActivityPropertyHolder propertyHolder =
+                            sourceReader.Value as ActivityPropertyHolder;
                         if (propertyHolder != null)
                         {
                             // replace ActivityPropertyHolder with its constituent nodes
@@ -1022,21 +1167,28 @@ namespace System.Activities.XamlIntegration
             {
                 XamlNodeQueue nodes;
 
-                public ValueHolder(XamlSchemaContext schemaContext, XamlMember propertyValue, XamlReader reader, IXamlLineInfo lineInfo)
+                public ValueHolder(
+                    XamlSchemaContext schemaContext,
+                    XamlMember propertyValue,
+                    XamlReader reader,
+                    IXamlLineInfo lineInfo
+                )
                 {
                     this.nodes = new XamlNodeQueue(schemaContext);
                     this.PropertyValue = propertyValue;
-                    XamlWriterExtensions.Transform(reader.ReadSubtree(), this.nodes.Writer, lineInfo, true);
+                    XamlWriterExtensions.Transform(
+                        reader.ReadSubtree(),
+                        this.nodes.Writer,
+                        lineInfo,
+                        true
+                    );
                 }
 
                 public XamlMember PropertyValue { get; private set; }
 
                 public XamlReader ValueReader
                 {
-                    get
-                    {
-                        return this.nodes.Reader;
-                    }
+                    get { return this.nodes.Reader; }
                 }
             }
 
@@ -1053,12 +1205,15 @@ namespace System.Activities.XamlIntegration
                     IXamlLineInfo readerLineInfo = parent.innerReaderLineInfo;
 
                     // parse the subtree, and extract out the Name and Type for now.
-                    // keep the node-list open for now, just in case a default value appears 
+                    // keep the node-list open for now, just in case a default value appears
                     // later in the document
 
                     // Rewrite "<x:Property>" to "<DynamicActivityProperty>"
                     reader.Read();
-                    this.nodes.Writer.WriteStartObject(parent.activityPropertyXamlType, readerLineInfo);
+                    this.nodes.Writer.WriteStartObject(
+                        parent.activityPropertyXamlType,
+                        readerLineInfo
+                    );
                     int depth = 1;
                     int nameDepth = 0;
                     int typeDepth = 0;
@@ -1095,9 +1250,19 @@ namespace System.Activities.XamlIntegration
                                     }
                                     else
                                     {
-                                        throw FxTrace.Exception.AsError(CreateXamlException(SR.PropertyMemberNotSupportedByActivityXamlServices(mappedMember.Name), readerLineInfo));
+                                        throw FxTrace.Exception.AsError(
+                                            CreateXamlException(
+                                                SR.PropertyMemberNotSupportedByActivityXamlServices(
+                                                    mappedMember.Name
+                                                ),
+                                                readerLineInfo
+                                            )
+                                        );
                                     }
-                                    this.nodes.Writer.WriteStartMember(mappedMember, readerLineInfo);
+                                    this.nodes.Writer.WriteStartMember(
+                                        mappedMember,
+                                        readerLineInfo
+                                    );
                                     continueReading = reader.Read();
                                     continue;
                                 }
@@ -1112,11 +1277,24 @@ namespace System.Activities.XamlIntegration
                                 else if (typeDepth == 1)
                                 {
                                     // We only support property type as an attribute (typeDepth == 1)
-                                    XamlTypeName xamlTypeName = XamlTypeName.Parse(reader.Value as string, parent.namespaceTable);
-                                    XamlType xamlType = parent.SchemaContext.GetXamlType(xamlTypeName);
+                                    XamlTypeName xamlTypeName = XamlTypeName.Parse(
+                                        reader.Value as string,
+                                        parent.namespaceTable
+                                    );
+                                    XamlType xamlType = parent.SchemaContext.GetXamlType(
+                                        xamlTypeName
+                                    );
                                     if (xamlType == null)
                                     {
-                                        throw FxTrace.Exception.AsError(CreateXamlException(SR.InvalidPropertyType(reader.Value as string, this.Name), readerLineInfo));
+                                        throw FxTrace.Exception.AsError(
+                                            CreateXamlException(
+                                                SR.InvalidPropertyType(
+                                                    reader.Value as string,
+                                                    this.Name
+                                                ),
+                                                readerLineInfo
+                                            )
+                                        );
                                     }
                                     this.Type = xamlType;
                                 }
@@ -1129,7 +1307,10 @@ namespace System.Activities.XamlIntegration
                                 IncrementIfPositive(ref typeDepth);
                                 if (typeDepth > 0 && reader.Type == parent.xamlTypeXamlType)
                                 {
-                                    this.nodes.Writer.WriteStartObject(parent.typeXamlType, readerLineInfo);
+                                    this.nodes.Writer.WriteStartObject(
+                                        parent.typeXamlType,
+                                        readerLineInfo
+                                    );
                                     continueReading = reader.Read();
                                     continue;
                                 }
@@ -1160,17 +1341,9 @@ namespace System.Activities.XamlIntegration
                     reader.Close();
                 }
 
-                public string Name
-                {
-                    get;
-                    private set;
-                }
+                public string Name { get; private set; }
 
-                public XamlType Type
-                {
-                    get;
-                    private set;
-                }
+                public XamlType Type { get; private set; }
 
                 // called when we've reached the end of the activity and need
                 // to extract out the resulting data into our activity-wide node list
@@ -1183,7 +1356,11 @@ namespace System.Activities.XamlIntegration
                     targetNodeQueue.Writer.WriteEndObject(readerInfo);
                 }
 
-                public void ProcessDefaultValue(XamlMember propertyValue, XamlReader subReader, IXamlLineInfo lineInfo)
+                public void ProcessDefaultValue(
+                    XamlMember propertyValue,
+                    XamlReader subReader,
+                    IXamlLineInfo lineInfo
+                )
                 {
                     bool addedStartObject = false;
 
@@ -1191,12 +1368,17 @@ namespace System.Activities.XamlIntegration
                     subReader.Read();
                     if (!subReader.Member.IsNameValid)
                     {
-                        throw FxTrace.Exception.AsError(CreateXamlException(SR.InvalidXamlMember(subReader.Member.Name), lineInfo));
+                        throw FxTrace.Exception.AsError(
+                            CreateXamlException(
+                                SR.InvalidXamlMember(subReader.Member.Name),
+                                lineInfo
+                            )
+                        );
                     }
 
                     this.nodes.Writer.WriteStartMember(propertyValue, lineInfo);
 
-                    // temporary hack: read past GetObject/StartMember nodes that are added by 
+                    // temporary hack: read past GetObject/StartMember nodes that are added by
                     // the XAML stack. This has been fixed in the WPF branch, but we haven't FI'ed that yet
                     XamlReader valueReader;
                     subReader.Read();
@@ -1213,7 +1395,10 @@ namespace System.Activities.XamlIntegration
                     }
 
                     // Add SO tag if necessary UNLESS there's no value to wrap (which means we're already at EO)
-                    if (valueReader.NodeType != XamlNodeType.EndMember && valueReader.NodeType != XamlNodeType.StartObject)
+                    if (
+                        valueReader.NodeType != XamlNodeType.EndMember
+                        && valueReader.NodeType != XamlNodeType.StartObject
+                    )
                     {
                         addedStartObject = true;
                         // Add <TypeOfProperty> nodes so that type converters work correctly
@@ -1221,7 +1406,7 @@ namespace System.Activities.XamlIntegration
                         this.nodes.Writer.WriteStartMember(XamlLanguage.Initialization, lineInfo);
                     }
 
-                    // 3) copy over the value 
+                    // 3) copy over the value
                     while (!valueReader.IsEof)
                     {
                         this.nodes.Writer.WriteNode(valueReader, lineInfo);
@@ -1230,7 +1415,7 @@ namespace System.Activities.XamlIntegration
 
                     valueReader.Close();
 
-                    // 4) close up the extra nodes 
+                    // 4) close up the extra nodes
                     if (!object.ReferenceEquals(valueReader, subReader))
                     {
                         subReader.Read();
@@ -1238,7 +1423,6 @@ namespace System.Activities.XamlIntegration
                         {
                             this.nodes.Writer.WriteNode(subReader, lineInfo);
                         }
-
                     }
 
                     if (addedStartObject)

@@ -3,7 +3,7 @@
 //------------------------------------------------------------
 
 namespace System.Runtime.Diagnostics
-{ 
+{
     // When adding an EventLogEventId, an entry must also be added to src\ndp\cdf\src\WCF\EventLog\EventLog.mc.
     // The hexadecimal representation of each EventId ('0xabbbcccc') can be broken down into 3 parts:
     //     Hex digit  1   ('a')    : Severity : a=0 for Success, a=4 for Informational, a=8 for Warning, a=c for Error
@@ -64,12 +64,15 @@ namespace System.Runtime.Diagnostics
         ComPlusInvokingMethodFailed,
         ComPlusInstanceCreationError,
         ComPlusInvokingMethodFailedMismatchedTransactions,
+
         // Assigning code 0x001c to this EventId because it is the 28th (0x001c) EventId with Facility = ServiceModel.
-        WebHostNotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval = EventSeverity.Warning | EventFacility.ServiceModel | 0x001c,
+        WebHostNotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval =
+            EventSeverity.Warning | EventFacility.ServiceModel | 0x001c,
 
         // TransactionBridge
         // All EventId's beneath 'UnhandledStateMachineExceptionRecordDescription', until the next explicitly assigned one, inherit its severity and facility, via the enum's auto-incrememt
-        UnhandledStateMachineExceptionRecordDescription = EventSeverity.Error | EventFacility.TransactionBridge | 0x0001,
+        UnhandledStateMachineExceptionRecordDescription =
+            EventSeverity.Error | EventFacility.TransactionBridge | 0x0001,
         FatalUnexpectedStateMachineEvent,
         ParticipantRecoveryLogEntryCorrupt,
         CoordinatorRecoveryLogEntryCorrupt,
@@ -106,13 +109,17 @@ namespace System.Runtime.Diagnostics
         SharingUnhandledException,
 
         // SecurityAudit
-        ServiceAuthorizationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0001,
+        ServiceAuthorizationSuccess =
+            EventSeverity.Informational | EventFacility.SecurityAudit | 0x0001,
         ServiceAuthorizationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x0002,
-        MessageAuthenticationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0003,
+        MessageAuthenticationSuccess =
+            EventSeverity.Informational | EventFacility.SecurityAudit | 0x0003,
         MessageAuthenticationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x0004,
-        SecurityNegotiationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0005,
+        SecurityNegotiationSuccess =
+            EventSeverity.Informational | EventFacility.SecurityAudit | 0x0005,
         SecurityNegotiationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x0006,
-        TransportAuthenticationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0007,
+        TransportAuthenticationSuccess =
+            EventSeverity.Informational | EventFacility.SecurityAudit | 0x0007,
         TransportAuthenticationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x0008,
         ImpersonationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0009,
         ImpersonationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x000a
@@ -125,7 +132,7 @@ namespace System.Runtime.Diagnostics
         Warning = 0x80000000,
         Error = 0xc0000000
     }
-    
+
     enum EventFacility : uint
     {
         Tracing = 0x00010000,

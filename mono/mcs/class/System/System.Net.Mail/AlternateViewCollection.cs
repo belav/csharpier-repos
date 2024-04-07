@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,52 +31,48 @@
 using System.Collections.ObjectModel;
 using System.Net.Mime;
 
-namespace System.Net.Mail {
-	public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
-	{
-		#region Fields
-		
-		#endregion // Fields
+namespace System.Net.Mail
+{
+    public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
+    {
+        #region Fields
 
-		#region Constructors
+        #endregion // Fields
 
-		internal AlternateViewCollection ()
-		{
-		}
+        #region Constructors
 
-		#endregion // Constructors
+        internal AlternateViewCollection() { }
 
-		#region Properties
+        #endregion // Constructors
 
-		#endregion // Properties
+        #region Properties
 
-		#region Methods
+        #endregion // Properties
 
-		public void Dispose ()
-		{
-		}
+        #region Methods
 
-		protected override void ClearItems ()
-		{
-			base.ClearItems ();
-		}
+        public void Dispose() { }
 
-		protected override void InsertItem (int index, AlternateView item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void ClearItems()
+        {
+            base.ClearItems();
+        }
 
-		protected override void RemoveItem (int index)
-		{
-			base.RemoveItem (index);
-		}
+        protected override void InsertItem(int index, AlternateView item)
+        {
+            base.InsertItem(index, item);
+        }
 
-		protected override void SetItem (int index, AlternateView item)
-		{
-			base.SetItem (index, item);
-		}
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
+        }
 
-		#endregion // Methods
-	}
+        protected override void SetItem(int index, AlternateView item)
+        {
+            base.SetItem(index, item);
+        }
+
+        #endregion // Methods
+    }
 }
-

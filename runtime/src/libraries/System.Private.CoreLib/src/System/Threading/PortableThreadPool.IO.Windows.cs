@@ -16,7 +16,8 @@ namespace System.Threading
         // those threads to become stalled due to blocking. Sometimes, setting this config value may yield better latency. The
         // config value is named for consistency with SocketAsyncEngine.Unix.cs.
         private static readonly bool UnsafeInlineIOCompletionCallbacks =
-            Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS") == "1";
+            Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS")
+            == "1";
 
         private static readonly int IOCompletionPollerCount = GetIOCompletionPollerCount();
 
@@ -26,7 +27,12 @@ namespace System.Threading
             // number of IO completion poller threads to use. See the comment in SocketAsyncEngine.Unix.cs about its potential
             // uses. For this implementation, the ProcessorsPerIOPollerThread config option below may be preferable as it may be
             // less machine-specific.
-            if (uint.TryParse(Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_THREAD_COUNT"), out uint count))
+            if (
+                uint.TryParse(
+                    Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_THREAD_COUNT"),
+                    out uint count
+                )
+            )
             {
                 return Math.Min((int)count, MaxPossibleThreadCount);
             }
@@ -38,15 +44,22 @@ namespace System.Threading
                 return Environment.ProcessorCount;
             }
 
-            int processorsPerPoller =
-                AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.ProcessorsPerIOPollerThread", 12, false);
+            int processorsPerPoller = AppContextConfigHelper.GetInt32Config(
+                "System.Threading.ThreadPool.ProcessorsPerIOPollerThread",
+                12,
+                false
+            );
             return (Environment.ProcessorCount - 1) / processorsPerPoller + 1;
         }
 
         private static nint CreateIOCompletionPort()
         {
-            nint port =
-                Interop.Kernel32.CreateIoCompletionPort(new IntPtr(-1), IntPtr.Zero, UIntPtr.Zero, IOCompletionPollerCount);
+            nint port = Interop.Kernel32.CreateIoCompletionPort(
+                new IntPtr(-1),
+                IntPtr.Zero,
+                UIntPtr.Zero,
+                IOCompletionPollerCount
+            );
             if (port == 0)
             {
                 int hr = Marshal.GetHRForLastWin32Error();
@@ -89,7 +102,14 @@ namespace System.Threading
                 NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(nativeOverlapped);
             }
 
-            if (!Interop.Kernel32.PostQueuedCompletionStatus(_ioPort, 0, UIntPtr.Zero, (IntPtr)nativeOverlapped))
+            if (
+                !Interop.Kernel32.PostQueuedCompletionStatus(
+                    _ioPort,
+                    0,
+                    UIntPtr.Zero,
+                    (IntPtr)nativeOverlapped
+                )
+            )
             {
                 ThrowHelper.ThrowApplicationException(Marshal.GetHRForLastWin32Error());
             }
@@ -145,9 +165,11 @@ namespace System.Threading
 
                 if (!UnsafeInlineIOCompletionCallbacks)
                 {
-                    _nativeEvents =
-                        (Interop.Kernel32.OVERLAPPED_ENTRY*)
-                        NativeMemory.Alloc(NativeEventCapacity, (nuint)sizeof(Interop.Kernel32.OVERLAPPED_ENTRY));
+                    _nativeEvents = (Interop.Kernel32.OVERLAPPED_ENTRY*)
+                        NativeMemory.Alloc(
+                            NativeEventCapacity,
+                            (nuint)sizeof(Interop.Kernel32.OVERLAPPED_ENTRY)
+                        );
                     _events = new ThreadPoolTypedWorkItemQueue<Event, Callback>();
 
                     // These threads don't run user code, use a smaller stack size
@@ -192,7 +214,9 @@ namespace System.Threading
                         NativeEventCapacity,
                         out int nativeEventCount,
                         Timeout.Infinite,
-                        false))
+                        false
+                    )
+                )
                 {
                     Debug.Assert(nativeEventCount > 0);
                     Debug.Assert(nativeEventCount <= NativeEventCapacity);
@@ -202,7 +226,12 @@ namespace System.Threading
                         Interop.Kernel32.OVERLAPPED_ENTRY* nativeEvent = &_nativeEvents[i];
                         if (nativeEvent->lpOverlapped != null) // shouldn't be null since null is not posted
                         {
-                            _events.BatchEnqueue(new Event(nativeEvent->lpOverlapped, nativeEvent->dwNumberOfBytesTransferred));
+                            _events.BatchEnqueue(
+                                new Event(
+                                    nativeEvent->lpOverlapped,
+                                    nativeEvent->dwNumberOfBytesTransferred
+                                )
+                            );
                         }
                     }
 
@@ -220,12 +249,15 @@ namespace System.Threading
                 while (true)
                 {
                     uint errorCode = Interop.Errors.ERROR_SUCCESS;
-                    if (!Interop.Kernel32.GetQueuedCompletionStatus(
+                    if (
+                        !Interop.Kernel32.GetQueuedCompletionStatus(
                             _port,
                             out uint bytesTransferred,
                             out _,
                             out nint nativeOverlappedPtr,
-                            Timeout.Infinite))
+                            Timeout.Infinite
+                        )
+                    )
                     {
                         errorCode = (uint)Marshal.GetLastPInvokeError();
                     }
@@ -241,7 +273,11 @@ namespace System.Threading
                         NativeRuntimeEventSource.Log.ThreadPoolIODequeue(nativeOverlapped);
                     }
 
-                    IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(errorCode, bytesTransferred, nativeOverlapped);
+                    IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(
+                        errorCode,
+                        bytesTransferred,
+                        nativeOverlapped
+                    );
                 }
             }
 
@@ -262,7 +298,11 @@ namespace System.Threading
                         errorCode = Interop.NtDll.RtlNtStatusToDosError((int)ntStatus);
                     }
 
-                    IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(errorCode, e.bytesTransferred, e.nativeOverlapped);
+                    IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(
+                        errorCode,
+                        e.bytesTransferred,
+                        e.nativeOverlapped
+                    );
                 }
             }
 

@@ -22,13 +22,19 @@ internal sealed class SocketConnectionListener : IConnectionListener
     internal SocketConnectionListener(
         EndPoint endpoint,
         SocketTransportOptions options,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         EndPoint = endpoint;
         _options = options;
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+        );
         _logger = logger;
-        _factory = new SocketConnectionContextFactory(new SocketConnectionFactoryOptions(options), logger);
+        _factory = new SocketConnectionContextFactory(
+            new SocketConnectionFactoryOptions(options),
+            logger
+        );
     }
 
     internal void Bind()
@@ -56,7 +62,9 @@ internal sealed class SocketConnectionListener : IConnectionListener
         _listenSocket = listenSocket;
     }
 
-    public async ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
+    public async ValueTask<ConnectionContext?> AcceptAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         while (true)
         {

@@ -4,7 +4,8 @@
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal partial struct SyntaxList<TNode> where TNode : GreenNode
+    internal partial struct SyntaxList<TNode>
+        where TNode : GreenNode
     {
         internal struct Enumerator
         {
@@ -31,10 +32,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
             public TNode Current
             {
-                get
-                {
-                    return _list[_index]!;
-                }
+                get { return _list[_index]!; }
             }
         }
     }
