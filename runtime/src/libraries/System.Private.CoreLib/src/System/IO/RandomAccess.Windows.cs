@@ -77,8 +77,7 @@ namespace System.IO
                     // https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile#synchronization-and-file-position:
                     // "If lpOverlapped is not NULL, then when a synchronous read operation reaches the end of a file,
                     // ReadFile returns FALSE and GetLastError returns ERROR_HANDLE_EOF"
-                    Interop.Errors.ERROR_HANDLE_EOF
-                        => numBytesRead,
+                    Interop.Errors.ERROR_HANDLE_EOF => numBytesRead,
                     _ when IsEndOfFile(errorCode, handle, fileOffset) => 0,
                     _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, handle.Path)
                 };

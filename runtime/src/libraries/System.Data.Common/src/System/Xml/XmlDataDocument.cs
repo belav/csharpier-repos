@@ -1141,16 +1141,14 @@ namespace System.Xml
             dp.NodeType switch
             {
                 //for the nodes without value and have no children
-                XmlNodeType.DocumentFragment
-                    => CreateDocumentFragment(),
+                XmlNodeType.DocumentFragment => CreateDocumentFragment(),
                 XmlNodeType.DocumentType
                     => CreateDocumentType(dp.Name, dp.PublicId, dp.SystemId, dp.InternalSubset),
                 XmlNodeType.XmlDeclaration
                     => CreateXmlDeclaration(dp.Version!, dp.Encoding, dp.Standalone),
 
                 //for the nodes with value but no children
-                XmlNodeType.Text
-                    => CreateTextNode(dp.Value),
+                XmlNodeType.Text => CreateTextNode(dp.Value),
                 XmlNodeType.CDATA => CreateCDataSection(dp.Value),
                 XmlNodeType.ProcessingInstruction
                     => CreateProcessingInstruction(dp.Name, dp.Value!),
@@ -1159,8 +1157,7 @@ namespace System.Xml
                 XmlNodeType.SignificantWhitespace => CreateSignificantWhitespace(dp.Value),
 
                 //for the nodes that don't have values, but might have children -- only clone the node and leave the children untouched
-                XmlNodeType.Element
-                    => CreateElement(dp.Prefix, dp.LocalName, dp.NamespaceURI),
+                XmlNodeType.Element => CreateElement(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.Attribute => CreateAttribute(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.EntityReference => CreateEntityReference(dp.Name),
 

@@ -358,8 +358,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             ExpressionType.LeftShift => SyntaxKind.LeftShiftExpression,
             ExpressionType.RightShift => SyntaxKind.RightShiftExpression,
             // TODO UnsignedRightShiftExpression
-            ExpressionType.ExclusiveOrAssign
-                => SyntaxKind.ExclusiveOrAssignmentExpression,
+            ExpressionType.ExclusiveOrAssign => SyntaxKind.ExclusiveOrAssignmentExpression,
             ExpressionType.LeftShiftAssign => SyntaxKind.LeftShiftAssignmentExpression,
             ExpressionType.RightShiftAssign => SyntaxKind.RightShiftAssignmentExpression,
 

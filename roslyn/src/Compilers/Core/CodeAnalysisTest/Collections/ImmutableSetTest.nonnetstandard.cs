@@ -74,8 +74,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return set switch
             {
                 // Unordered collections
-                ImmutableSegmentedHashSet<T>
-                    => null,
+                ImmutableSegmentedHashSet<T> => null,
                 System.Collections.Immutable.ImmutableHashSet<T> => null,
 
                 // Ordered collections
@@ -93,8 +92,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return set switch
             {
                 // Unordered collections
-                ImmutableSegmentedHashSet<T> s
-                    => s.KeyComparer,
+                ImmutableSegmentedHashSet<T> s => s.KeyComparer,
                 System.Collections.Immutable.ImmutableHashSet<T> s => s.KeyComparer,
 
                 // Ordered collections

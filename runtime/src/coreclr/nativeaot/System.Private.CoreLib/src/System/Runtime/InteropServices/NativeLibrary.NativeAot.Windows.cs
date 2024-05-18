@@ -117,8 +117,7 @@ namespace System.Runtime.InteropServices
                     // If we can't access a location, we can't know if the dll's there or if it's good.
                     // Still, this is probably more unusual (and thus of more interest) than a dll-not-found
                     // so give it an intermediate priority.
-                    Interop.Errors.ERROR_ACCESS_DENIED
-                        => PriorityAccessDenied,
+                    Interop.Errors.ERROR_ACCESS_DENIED => PriorityAccessDenied,
 
                     // Assume all others are "dll found but couldn't load."
                     _ => PriorityCouldNotLoad,

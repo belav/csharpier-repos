@@ -469,8 +469,7 @@ internal unsafe class NativeRequestContext : IDisposable
             HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeBasic => "Basic",
             HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeNTLM => "NTLM",
             // case HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeDigest => "Digest";
-            HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeNegotiate
-                => "Negotiate",
+            HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeNegotiate => "Negotiate",
             HTTP_REQUEST_AUTH_TYPE.HttpRequestAuthTypeKerberos => "Kerberos",
             _ => throw new NotImplementedException(input.ToString()),
         };

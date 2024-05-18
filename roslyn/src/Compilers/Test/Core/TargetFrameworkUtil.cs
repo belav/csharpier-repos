@@ -293,8 +293,7 @@ namespace Roslyn.Test.Utilities
             {
                 // Primary
                 // Note: NetCoreApp should behave like latest Core TFM
-                TargetFramework.Empty
-                    => ImmutableArray<MetadataReference>.Empty,
+                TargetFramework.Empty => ImmutableArray<MetadataReference>.Empty,
                 TargetFramework.NetStandard20 => NetStandard20References,
                 TargetFramework.Net50
                     => ImmutableArray.CreateRange<MetadataReference>(
@@ -316,8 +315,7 @@ namespace Roslyn.Test.Utilities
                 TargetFramework.Standard => StandardReferences,
 
                 // Legacy we should be phasing out
-                TargetFramework.Mscorlib40
-                    => Mscorlib40References,
+                TargetFramework.Mscorlib40 => Mscorlib40References,
                 TargetFramework.Mscorlib40Extended => Mscorlib40ExtendedReferences,
                 TargetFramework.Mscorlib40AndSystemCore => Mscorlib40andSystemCoreReferences,
                 TargetFramework.Mscorlib40AndVBRuntime => Mscorlib40andVBRuntimeReferences,

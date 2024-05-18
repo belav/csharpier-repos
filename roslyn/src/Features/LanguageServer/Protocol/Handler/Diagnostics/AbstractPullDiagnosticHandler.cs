@@ -675,8 +675,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             {
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.
-                DiagnosticSeverity.Hidden
-                    => LSP.DiagnosticSeverity.Hint,
+                DiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
                 // VSCode shows information diagnostics as blue squiggles, and hint diagnostics as 3 dots.  We prefer the latter rendering so we return hint diagnostics in vscode.
                 DiagnosticSeverity.Info
                     => clientCapabilities.HasVisualStudioLspCapability()

@@ -961,8 +961,7 @@ namespace MS.Internal.Xml.Cache
                     => int.MinValue + 1 + XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
 
                 // Attribute nodes come next (location is always positive)
-                XPathNodeType.Attribute
-                    => XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
+                XPathNodeType.Attribute => XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
 
                 // Collapsed text nodes are always last
                 _ => int.MaxValue,

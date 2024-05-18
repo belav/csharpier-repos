@@ -321,8 +321,7 @@ namespace Moq
                 After:
                         enum Kind
                 */
-                Kind.Exactly
-                    => $"Exactly({this.from})",
+                Kind.Exactly => $"Exactly({this.from})",
                 Kind.Once => "Once",
                 Kind.Never => "Never",
                 _ => throw new InvalidOperationException(),

@@ -1781,8 +1781,7 @@ namespace System
             return InternalGetCorElementType() switch
             {
                 // Inlined for the most common base types
-                CorElementType.ELEMENT_TYPE_I1
-                    => ToString<sbyte, byte>(enumType, ref rawData),
+                CorElementType.ELEMENT_TYPE_I1 => ToString<sbyte, byte>(enumType, ref rawData),
                 CorElementType.ELEMENT_TYPE_U1
                     => ToStringInlined<byte, byte>(enumType, ref rawData),
                 CorElementType.ELEMENT_TYPE_I2 => ToString<short, ushort>(enumType, ref rawData),

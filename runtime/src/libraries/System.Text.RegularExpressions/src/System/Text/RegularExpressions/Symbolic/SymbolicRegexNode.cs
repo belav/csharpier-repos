@@ -1487,8 +1487,7 @@ namespace System.Text.RegularExpressions.Symbolic
                                     )
                             ),
                         // Loops have various cases that are handled uniformly for concatenations and standalone loops.
-                        SymbolicRegexNodeKind.Loop
-                            => PruneLoop(builder, context, _left, _right),
+                        SymbolicRegexNodeKind.Loop => PruneLoop(builder, context, _left, _right),
                         // The previous cases handle all the ways that the left side of the concatenation could
                         // contain branching. Thus if we get here it is safe to only prune the right side.
                         _

@@ -122,21 +122,17 @@ namespace System.Text.RegularExpressions
                                 => true,
 
                             // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also atomic.
-                            RegexNodeKind.Capture
-                                => true,
+                            RegexNodeKind.Capture => true,
 
                             // If the parent is a concatenation and this is the last node, any atomicity
                             // applying to the concatenation applies to this node, too.
-                            RegexNodeKind.Concatenate
-                                => i == childCount - 1,
+                            RegexNodeKind.Concatenate => i == childCount - 1,
 
                             // For loops with a max iteration count of 1, they themselves can be considered
                             // atomic as can whatever they wrap, as they won't ever iterate more than once
                             // and thus we don't need to worry about one iteration consuming input destined
                             // for a subsequent iteration.
-                            RegexNodeKind.Loop
-                            or RegexNodeKind.Lazyloop when node.N == 1
-                                => true,
+                            RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.N == 1 => true,
 
                             // For any other parent type, give up on trying to prove atomicity.
                             _ => false,

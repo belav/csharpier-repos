@@ -525,8 +525,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     // Handle cases where SymbolKind.Method was persisted as SymbolCategory.Other by automatically
                     // converting them to MethodKind.Ordinary.
                     // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1861733
-                    CodeAnalysis.SymbolKind.Method
-                        => new(CodeAnalysis.MethodKind.Ordinary),
+                    CodeAnalysis.SymbolKind.Method => new(CodeAnalysis.MethodKind.Ordinary),
                     _ => new(symbolKind),
                 };
             }

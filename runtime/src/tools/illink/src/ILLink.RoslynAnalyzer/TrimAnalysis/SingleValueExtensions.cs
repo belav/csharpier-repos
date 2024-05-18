@@ -24,8 +24,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                             new GenericParameterValue((ITypeParameterSymbol)underlyingType)
                         ),
                     // typeof(Nullable<>)
-                    TypeKind.Error
-                        => new SystemTypeValue(new TypeProxy(type)),
+                    TypeKind.Error => new SystemTypeValue(new TypeProxy(type)),
                     TypeKind.Class
                     or TypeKind.Struct
                     or TypeKind.Interface
@@ -41,8 +40,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 SymbolKind.TypeParameter => new GenericParameterValue((ITypeParameterSymbol)type),
                 SymbolKind.NamedType => new SystemTypeValue(new TypeProxy(type)),
                 // If the symbol is an Array type, the BaseType is System.Array
-                SymbolKind.ArrayType
-                    => new SystemTypeValue(new TypeProxy(type.BaseType!)),
+                SymbolKind.ArrayType => new SystemTypeValue(new TypeProxy(type.BaseType!)),
                 SymbolKind.ErrorType => UnknownValue.Instance,
                 _ => null
             };

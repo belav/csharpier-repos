@@ -49,8 +49,7 @@ namespace Internal.TypeSystem
                 // is only accessible through a MemberDef, not a MemberRef.
                 // As a result, it's only accessible within the current assembly, which is effectively the same rules as
                 // Family for our case.
-                MethodAttributes.PrivateScope
-                    => EffectiveVisibility.Assembly,
+                MethodAttributes.PrivateScope => EffectiveVisibility.Assembly,
                 MethodAttributes.Public => EffectiveVisibility.Public,
                 MethodAttributes.Private => EffectiveVisibility.Private,
                 MethodAttributes.Assembly => EffectiveVisibility.Assembly,
@@ -75,8 +74,7 @@ namespace Internal.TypeSystem
                 // is only accessible through a MemberDef, not a MemberRef.
                 // As a result, it's only accessible within the current assembly, which is effectively the same rules as
                 // Family for our case.
-                FieldAttributes.PrivateScope
-                    => EffectiveVisibility.Assembly,
+                FieldAttributes.PrivateScope => EffectiveVisibility.Assembly,
                 FieldAttributes.Public => EffectiveVisibility.Public,
                 FieldAttributes.Private => EffectiveVisibility.Private,
                 FieldAttributes.Assembly => EffectiveVisibility.Assembly,

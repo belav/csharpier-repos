@@ -34,8 +34,7 @@ namespace System.Formats.Tar
             {
                 // Hard links are treated as regular files.
                 // Unix socket files do not get added to tar files.
-                Interop.Sys.FileTypes.S_IFBLK
-                    => TarEntryType.BlockDevice,
+                Interop.Sys.FileTypes.S_IFBLK => TarEntryType.BlockDevice,
                 Interop.Sys.FileTypes.S_IFCHR => TarEntryType.CharacterDevice,
                 Interop.Sys.FileTypes.S_IFIFO => TarEntryType.Fifo,
                 Interop.Sys.FileTypes.S_IFLNK => TarEntryType.SymbolicLink,
