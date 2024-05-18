@@ -18,17 +18,16 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngKey Key
         {
-            get
-            {
-                return GetKey();
-            }
-
+            get { return GetKey(); }
             private set
             {
                 ArgumentNullException.ThrowIfNull(value);
 
                 if (!IsEccAlgorithmGroup(value.AlgorithmGroup))
-                    throw new ArgumentException(SR.Cryptography_ArgECDsaRequiresECDsaKey, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_ArgECDsaRequiresECDsaKey,
+                        nameof(value)
+                    );
                 _core.SetKey(value);
 
                 // LegalKeySizes stores the values for either the current named curve or for the three
@@ -45,7 +44,9 @@ namespace System.Security.Cryptography
             if (curve.IsNamed)
             {
                 if (string.IsNullOrEmpty(curve.Oid.FriendlyName))
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value)
+                    );
 
                 // Map curve name to algorithm to support pre-Win10 curves
                 CngAlgorithm alg = CngKey.EcdsaCurveNameToAlgorithm(curve.Oid.FriendlyName);
@@ -80,7 +81,9 @@ namespace System.Security.Cryptography
             }
             else
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
         }
 
@@ -101,9 +104,15 @@ namespace System.Security.Cryptography
                 int keySize = KeySize;
                 switch (keySize)
                 {
-                    case 256: algorithm = CngAlgorithm.ECDsaP256; break;
-                    case 384: algorithm = CngAlgorithm.ECDsaP384; break;
-                    case 521: algorithm = CngAlgorithm.ECDsaP521; break;
+                    case 256:
+                        algorithm = CngAlgorithm.ECDsaP256;
+                        break;
+                    case 384:
+                        algorithm = CngAlgorithm.ECDsaP384;
+                        break;
+                    case 521:
+                        algorithm = CngAlgorithm.ECDsaP521;
+                        break;
                     default:
                         Debug.Fail("Should not have invalid key size");
                         throw new ArgumentException(SR.Cryptography_InvalidKeySize);

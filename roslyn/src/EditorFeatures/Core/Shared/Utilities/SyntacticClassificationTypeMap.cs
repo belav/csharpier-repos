@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     [Export]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal class SyntacticClassificationTypeMap(IClassificationTypeRegistryService registryService) : AbstractClassificationTypeMap(registryService, ClassificationLayer.Syntactic)
-    {
-    }
+    internal class SyntacticClassificationTypeMap(
+        IClassificationTypeRegistryService registryService
+    ) : AbstractClassificationTypeMap(registryService, ClassificationLayer.Syntactic) { }
 }

@@ -3,20 +3,18 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MusicStoreInMemoryTest : MusicStoreTestBase<MusicStoreInMemoryTest.MusicStoreInMemoryFixture>
+public class MusicStoreInMemoryTest
+    : MusicStoreTestBase<MusicStoreInMemoryTest.MusicStoreInMemoryFixture>
 {
     public MusicStoreInMemoryTest(MusicStoreInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class MusicStoreInMemoryFixture : MusicStoreFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-        public override IDisposable BeginTransaction(DbContext context)
-            => new InMemoryCleaner(context);
+        public override IDisposable BeginTransaction(DbContext context) =>
+            new InMemoryCleaner(context);
 
         private class InMemoryCleaner : IDisposable
         {
@@ -27,8 +25,7 @@ public class MusicStoreInMemoryTest : MusicStoreTestBase<MusicStoreInMemoryTest.
                 _context = context;
             }
 
-            public void Dispose()
-                => _context.Database.EnsureDeleted();
+            public void Dispose() => _context.Database.EnsureDeleted();
         }
     }
 }

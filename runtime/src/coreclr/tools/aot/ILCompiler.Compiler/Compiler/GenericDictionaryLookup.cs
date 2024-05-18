@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.TypeSystem;
 using ILCompiler.DependencyAnalysis;
-
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -60,18 +58,12 @@ namespace ILCompiler
         /// </summary>
         public bool UseHelper
         {
-            get
-            {
-                return _offset1 == UseHelperOffset;
-            }
+            get { return _offset1 == UseHelperOffset; }
         }
 
         public bool UseNull
         {
-            get
-            {
-                return _offset1 == UseNullOffset;
-            }
+            get { return _offset1 == UseNullOffset; }
         }
 
         /// <summary>
@@ -105,7 +97,12 @@ namespace ILCompiler
             }
         }
 
-        private GenericDictionaryLookup(GenericContextSource contextSource, int offset1, int offset2, object helperObject)
+        private GenericDictionaryLookup(
+            GenericContextSource contextSource,
+            int offset1,
+            int offset2,
+            object helperObject
+        )
         {
             ContextSource = contextSource;
             _offset1 = checked((short)offset1);
@@ -113,15 +110,28 @@ namespace ILCompiler
             _helperObject = helperObject;
         }
 
-        public static GenericDictionaryLookup CreateFixedLookup(GenericContextSource contextSource, int offset1, int offset2 = UseHelperOffset)
+        public static GenericDictionaryLookup CreateFixedLookup(
+            GenericContextSource contextSource,
+            int offset1,
+            int offset2 = UseHelperOffset
+        )
         {
             Debug.Assert(offset1 != UseHelperOffset);
             return new GenericDictionaryLookup(contextSource, offset1, offset2, null);
         }
 
-        public static GenericDictionaryLookup CreateHelperLookup(GenericContextSource contextSource, ReadyToRunHelperId helperId, object helperObject)
+        public static GenericDictionaryLookup CreateHelperLookup(
+            GenericContextSource contextSource,
+            ReadyToRunHelperId helperId,
+            object helperObject
+        )
         {
-            return new GenericDictionaryLookup(contextSource, UseHelperOffset, checked((short)helperId), helperObject);
+            return new GenericDictionaryLookup(
+                contextSource,
+                UseHelperOffset,
+                checked((short)helperId),
+                helperObject
+            );
         }
 
         public static GenericDictionaryLookup CreateNullLookup(GenericContextSource contextSource)

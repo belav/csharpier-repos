@@ -1,17 +1,18 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // SHA1CryptoServiceProvider.cs
 //
 
-namespace System.Security.Cryptography {
-[System.Runtime.InteropServices.ComVisible(true)]
+namespace System.Security.Cryptography
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SHA1CryptoServiceProvider : SHA1
     {
         [System.Security.SecurityCritical] // auto-generated
@@ -20,9 +21,10 @@ namespace System.Security.Cryptography {
         //
         // public constructors
         //
-      
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public SHA1CryptoServiceProvider() {
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public SHA1CryptoServiceProvider()
+        {
             // _CreateHash will check for failures and throw the appropriate exception
             _safeHashHandle = Utils.CreateHash(Utils.StaticProvHandle, Constants.CALG_SHA1);
         }
@@ -40,11 +42,12 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public override void Initialize() {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public override void Initialize()
+        {
             if (_safeHashHandle != null && !_safeHashHandle.IsClosed)
                 _safeHashHandle.Dispose();
-            
+
             // _CreateHash will check for failures and throw the appropriate exception
             _safeHashHandle = Utils.CreateHash(Utils.StaticProvHandle, Constants.CALG_SHA1);
         }

@@ -136,7 +136,8 @@ namespace System.Text.Json.Nodes
         ///   The number of elements in the source ICollection is greater than the available space from <paramref name="index"/>
         ///   to the end of the destination <paramref name="array"/>.
         /// </exception>
-        void ICollection<JsonNode?>.CopyTo(JsonNode?[] array, int index) => List.CopyTo(array, index);
+        void ICollection<JsonNode?>.CopyTo(JsonNode?[] array, int index) =>
+            List.CopyTo(array, index);
 
         /// <summary>
         ///   Returns an enumerator that iterates through the <see cref="JsonArray"/>.

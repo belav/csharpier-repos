@@ -14,8 +14,9 @@ namespace System.Web.Http.WebHost
 {
     public class WebHostHttpRequestContextTests
     {
-        private const string Base64Certificate = "MIFRMIFHAgEAMAIGADAJMQcwBQYAEwFhMB4XDTEzMDkxMDE5NTQ0OVoXDTM5MTIzMT" +
-            "IzNTk1OVowCTEHMAUGABMBYTCBBzACBgADgQAwAgYAA4EA";
+        private const string Base64Certificate =
+            "MIFRMIFHAgEAMAIGADAJMQcwBQYAEwFhMB4XDTEzMDkxMDE5NTQ0OVoXDTM5MTIzMT"
+            + "IzNTk1OVowCTEHMAUGABMBYTCBBzACBgADgQAwAgYAA4EA";
 
         [Fact]
         public void ContextGet_ReturnsProvidedInstance()
@@ -26,7 +27,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                WebHostHttpRequestContext context = CreateProductUnderTest(expectedWebContext, webRequest, request);
+                WebHostHttpRequestContext context = CreateProductUnderTest(
+                    expectedWebContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 HttpContextBase webContext = context.Context;
@@ -45,7 +50,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                WebHostHttpRequestContext context = CreateProductUnderTest(webContext, expectedWebRequest, request);
+                WebHostHttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    expectedWebRequest,
+                    request
+                );
 
                 // Act
                 HttpRequestBase webRequest = context.WebRequest;
@@ -64,7 +73,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                WebHostHttpRequestContext context = CreateProductUnderTest(webContext, webRequest, expectedRequest);
+                WebHostHttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = context.Request;
@@ -85,7 +98,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -105,7 +122,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -125,7 +146,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -141,12 +166,18 @@ namespace System.Web.Http.WebHost
             // Arrange
             byte[] expectedCertificateBytes = Convert.FromBase64String(Base64Certificate);
             HttpContextBase webContext = CreateDummyWebContext();
-            HttpClientCertificate clientCertificate = CreateHttpClientCertificate(expectedCertificateBytes);
+            HttpClientCertificate clientCertificate = CreateHttpClientCertificate(
+                expectedCertificateBytes
+            );
             HttpRequestBase webRequest = CreateStubWebRequest(clientCertificate);
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -166,7 +197,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 X509Certificate2 expectedCertificate = CreateCertificate();
 
                 // Act
@@ -187,7 +222,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.ClientCertificate = null;
@@ -207,7 +246,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 HttpConfiguration configuration = context.Configuration;
@@ -227,7 +270,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration expectedConfiguration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.Configuration = expectedConfiguration;
@@ -247,7 +294,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.Configuration = null;
@@ -261,7 +312,9 @@ namespace System.Web.Http.WebHost
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_WhenUnconfigured(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_WhenUnconfigured(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
@@ -271,7 +324,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = null;
 
                 // Act
@@ -285,7 +342,9 @@ namespace System.Web.Http.WebHost
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_ForDefaultPolicy(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_ForDefaultPolicy(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
@@ -296,7 +355,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Default;
 
@@ -311,7 +374,9 @@ namespace System.Web.Http.WebHost
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_ReturnsIsLocal_ForLocalOnlyPolicy(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailGet_ReturnsIsLocal_ForLocalOnlyPolicy(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             HttpContextBase webContext = CreateDummyWebContext();
@@ -320,7 +385,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
                 context.IsLocal = expectedIncludeErrorDetail;
@@ -343,7 +412,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
@@ -365,7 +438,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Never;
 
@@ -388,7 +465,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.IncludeErrorDetail = expectedIncludeErrorDetail;
@@ -402,7 +483,10 @@ namespace System.Web.Http.WebHost
         [Theory]
         [InlineData(true, IncludeErrorDetailPolicy.Never)]
         [InlineData(false, IncludeErrorDetailPolicy.Always)]
-        public void IncludeErrorDetailSet_OverridesPolicy(bool expected, IncludeErrorDetailPolicy policy)
+        public void IncludeErrorDetailSet_OverridesPolicy(
+            bool expected,
+            IncludeErrorDetailPolicy policy
+        )
         {
             // Arrange
             HttpContextBase webContext = CreateDummyWebContext();
@@ -411,7 +495,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = policy;
 
@@ -436,13 +524,19 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 configuration.IncludeErrorDetailPolicy = expectedIncludeErrorDetail
-                    ? IncludeErrorDetailPolicy.Always : IncludeErrorDetailPolicy.Never;
+                    ? IncludeErrorDetailPolicy.Always
+                    : IncludeErrorDetailPolicy.Never;
                 bool ignore = context.IncludeErrorDetail;
                 configuration.IncludeErrorDetailPolicy = expectedIncludeErrorDetail
-                    ? IncludeErrorDetailPolicy.Never : IncludeErrorDetailPolicy.Always;
+                    ? IncludeErrorDetailPolicy.Never
+                    : IncludeErrorDetailPolicy.Always;
 
                 // Act
                 bool includeErrorDetail = context.IncludeErrorDetail;
@@ -461,7 +555,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;
@@ -484,7 +582,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;
@@ -505,7 +607,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.IsLocal = expectedIsLocal;
@@ -530,7 +636,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 bool ignore = context.IsLocal;
                 currentWebRequestIsLocal = !expectedIsLocal;
 
@@ -554,7 +664,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 IPrincipal principal = context.Principal;
@@ -571,14 +685,22 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
             IPrincipal principal = null;
-            webContextMock.SetupSet(r => r.User = It.IsAny<IPrincipal>()).Callback<IPrincipal>(
-                value => { principal = value; });
+            webContextMock
+                .SetupSet(r => r.User = It.IsAny<IPrincipal>())
+                .Callback<IPrincipal>(value =>
+                {
+                    principal = value;
+                });
             HttpContextBase webContext = webContextMock.Object;
             HttpRequestBase webRequest = CreateDummyWebRequest();
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 IPrincipal expectedPrincipal = CreateDummyPrincipal();
 
                 // Act
@@ -599,7 +721,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 IPrincipal expectedPrincipal = CreateDummyPrincipal();
 
                 // Act
@@ -620,7 +746,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, expectedRequest);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    expectedRequest
+                );
 
                 // Act
                 UrlHelper url = context.Url;
@@ -640,7 +770,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 UrlHelper firstUrl = context.Url;
 
                 // Act
@@ -660,7 +794,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 UrlHelper expectedUrl = CreateDummyUrlHelper();
 
                 // Act
@@ -681,7 +819,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 context.Url = null;
@@ -701,7 +843,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
 
                 // Act
                 string virtualPathRoot = context.VirtualPathRoot;
@@ -720,7 +866,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = null;
 
                 // Act
@@ -742,7 +892,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration(expectedVirtualPathRoot))
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
 
                 // Act
@@ -757,7 +911,9 @@ namespace System.Web.Http.WebHost
         [InlineData("a b")]
         [InlineData("/a b")]
         [InlineData("/a%20b")]
-        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(string configurationVirtualPathRoot)
+        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
+            string configurationVirtualPathRoot
+        )
         {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
@@ -787,7 +943,11 @@ namespace System.Web.Http.WebHost
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 string expectedVirtualPathRoot = "foo";
 
                 // Act
@@ -809,7 +969,11 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration("/other"))
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
 
                 // Act
@@ -833,7 +997,11 @@ namespace System.Web.Http.WebHost
             using (HttpConfiguration configuration = CreateConfiguration(expectedVirtualPathRoot))
             using (HttpConfiguration otherConfiguration = CreateConfiguration("/other"))
             {
-                HttpRequestContext context = CreateProductUnderTest(webContext, webRequest, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    webContext,
+                    webRequest,
+                    request
+                );
                 context.Configuration = configuration;
                 string ignore = context.VirtualPathRoot;
                 context.Configuration = otherConfiguration;
@@ -891,8 +1059,11 @@ namespace System.Web.Http.WebHost
             return context.Request.ClientCertificate;
         }
 
-        private static WebHostHttpRequestContext CreateProductUnderTest(HttpContextBase contextBase,
-            HttpRequestBase requestBase, HttpRequestMessage request)
+        private static WebHostHttpRequestContext CreateProductUnderTest(
+            HttpContextBase contextBase,
+            HttpRequestBase requestBase,
+            HttpRequestMessage request
+        )
         {
             return new WebHostHttpRequestContext(contextBase, requestBase, request);
         }

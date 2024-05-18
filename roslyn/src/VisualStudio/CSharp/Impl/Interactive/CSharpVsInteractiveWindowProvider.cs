@@ -45,8 +45,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             [ImportMany] IInteractiveWindowCommand[] commands,
             ITextDocumentFactoryService textDocumentFactoryService,
             EditorOptionsService editorOptionsService,
-            VisualStudioWorkspace workspace)
-            : base(serviceProvider, interactiveWindowFactory, classifierAggregator, contentTypeRegistry, commandsFactory, commands, workspace)
+            VisualStudioWorkspace workspace
+        )
+            : base(
+                serviceProvider,
+                interactiveWindowFactory,
+                classifierAggregator,
+                contentTypeRegistry,
+                commandsFactory,
+                commands,
+                workspace
+            )
         {
             _threadingContext = threadingContext;
             _listener = listenerProvider.GetListener(FeatureAttribute.InteractiveEvaluator);
@@ -60,13 +69,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
 
         protected override string Title => CSharpVSResources.CSharp_Interactive;
 
-        protected override FunctionId InteractiveWindowFunctionId => FunctionId.CSharp_Interactive_Window;
+        protected override FunctionId InteractiveWindowFunctionId =>
+            FunctionId.CSharp_Interactive_Window;
 
         protected override CSharpInteractiveEvaluator CreateInteractiveEvaluator(
             SVsServiceProvider serviceProvider,
             IViewClassifierAggregatorService classifierAggregator,
             IContentTypeRegistryService contentTypeRegistry,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
         {
             return new CSharpInteractiveEvaluator(
                 _threadingContext,
@@ -79,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
                 _textDocumentFactoryService,
                 _editorOptionsService,
                 CSharpInteractiveEvaluatorLanguageInfoProvider.Instance,
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+            );
         }
     }
 }

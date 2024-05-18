@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "bagIdValue",
-                () => new TestSafeBag(null));
+                () => new TestSafeBag(null)
+            );
         }
 
         [Fact]
@@ -41,7 +42,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             byte[] buf = new byte[encoded.Length + 4];
             buf.AsSpan().Fill(0xCA);
 
-            Assert.False(safeBag.TryEncode(buf.AsSpan(0, encoded.Length - 1), out int bytesWritten));
+            Assert.False(
+                safeBag.TryEncode(buf.AsSpan(0, encoded.Length - 1), out int bytesWritten)
+            );
             Assert.Equal(0, bytesWritten);
             Assert.True(buf.All(b => b == 0xCA));
 
@@ -145,14 +148,15 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             private static readonly ReadOnlyMemory<byte> s_derNull = new byte[] { 0x05, 0x00 };
 
-            public TestSafeBag(string bagIdValue) : base(bagIdValue, s_derNull, skipCopy: true)
-            {
-            }
+            public TestSafeBag(string bagIdValue)
+                : base(bagIdValue, s_derNull, skipCopy: true) { }
 
-            public TestSafeBag(string bagIdValue, ReadOnlyMemory<byte> encodedValue, bool skipCopy = true)
-                : base(bagIdValue, encodedValue, skipCopy)
-            {
-            }
+            public TestSafeBag(
+                string bagIdValue,
+                ReadOnlyMemory<byte> encodedValue,
+                bool skipCopy = true
+            )
+                : base(bagIdValue, encodedValue, skipCopy) { }
         }
     }
 }

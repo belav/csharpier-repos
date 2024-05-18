@@ -17,7 +17,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         [Fact]
         //[Variation(Desc = "v1 - Contains with null")]

@@ -23,13 +23,21 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceResultSelector()
         {
-            Assert.Empty(Enumerable.Empty<StringWithIntArray>().SelectMany(e => e.total, (e, f) => f.ToString()));
+            Assert.Empty(
+                Enumerable
+                    .Empty<StringWithIntArray>()
+                    .SelectMany(e => e.total, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
         public void EmptySourceResultSelectorIndexedSelector()
         {
-            Assert.Empty(Enumerable.Empty<StringWithIntArray>().SelectMany((e, i) => e.total, (e, f) => f.ToString()));
+            Assert.Empty(
+                Enumerable
+                    .Empty<StringWithIntArray>()
+                    .SelectMany((e, i) => e.total, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
@@ -48,11 +56,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[0] },
-                new StringWithIntArray { name="Bob", total=new int?[0] },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[0] },
-                new StringWithIntArray { name="Prakash", total=new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
+                new StringWithIntArray { name = "Bob", total = new int?[0] },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[0] },
+                new StringWithIntArray { name = "Prakash", total = new int?[0] }
             };
 
             Assert.Empty(source.SelectMany(e => e.total));
@@ -63,11 +71,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[0] },
-                new StringWithIntArray { name="Bob", total=new int?[0] },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[0] },
-                new StringWithIntArray { name="Prakash", total=new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
+                new StringWithIntArray { name = "Bob", total = new int?[0] },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[0] },
+                new StringWithIntArray { name = "Prakash", total = new int?[0] }
             };
 
             Assert.Empty(source.SelectMany((e, i) => e.total));
@@ -78,11 +86,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[0] },
-                new StringWithIntArray { name="Bob", total=new int?[0] },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[0] },
-                new StringWithIntArray { name="Prakash", total=new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
+                new StringWithIntArray { name = "Bob", total = new int?[0] },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[0] },
+                new StringWithIntArray { name = "Prakash", total = new int?[0] }
             };
 
             Assert.Empty(source.SelectMany(e => e.total, (e, f) => f.ToString()));
@@ -93,11 +101,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[0] },
-                new StringWithIntArray { name="Bob", total=new int?[0] },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[0] },
-                new StringWithIntArray { name="Prakash", total=new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
+                new StringWithIntArray { name = "Bob", total = new int?[0] },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[0] },
+                new StringWithIntArray { name = "Prakash", total = new int?[0] }
             };
 
             Assert.Empty(source.SelectMany((e, i) => e.total, (e, f) => f.ToString()));
@@ -108,11 +116,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.SelectMany(e => e.total));
@@ -123,11 +131,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.RunOnce().SelectMany(e => e.total.RunOnce()));
@@ -155,11 +163,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total= new int?[0] },
-                new StringWithIntArray { name="Bob", total=new int?[0] },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[0] },
-                new StringWithIntArray { name="Prakash", total=new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
+                new StringWithIntArray { name = "Bob", total = new int?[0] },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[0] },
+                new StringWithIntArray { name = "Prakash", total = new int?[0] }
             };
             Assert.Empty(source.SelectMany((e, index) => e.total));
         }
@@ -169,11 +177,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.SelectMany((e, index) => e.total));
@@ -184,14 +192,17 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
 
-            Assert.Equal(source.First().total, source.SelectMany((e, i) => i == 0 ? e.total : Enumerable.Empty<int?>()));
+            Assert.Equal(
+                source.First().total,
+                source.SelectMany((e, i) => i == 0 ? e.total : Enumerable.Empty<int?>())
+            );
         }
 
         [Fact]
@@ -199,26 +210,29 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Robert", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } }
             };
 
-            Assert.Equal(source.Last().total, source.SelectMany((e, i) => i == 4 ? e.total : Enumerable.Empty<int?>()));
+            Assert.Equal(
+                source.Last().total,
+                source.SelectMany((e, i) => i == 4 ? e.total : Enumerable.Empty<int?>())
+            );
         }
 
         [ConditionalFact(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         public void IndexOverflow()
         {
-            var selected = new FastInfiniteEnumerator<int>().SelectMany((e, i) => Enumerable.Empty<int>());
+            var selected = new FastInfiniteEnumerator<int>().SelectMany(
+                (e, i) => Enumerable.Empty<int>()
+            );
             using (var en = selected.GetEnumerator())
                 Assert.Throws<OverflowException>(() =>
                 {
-                    while(en.MoveNext())
-                    {
-                    }
+                    while (en.MoveNext()) { }
                 });
         }
 
@@ -227,11 +241,11 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
             string[] expected = { "1", "2", "3", "4", "5", "6", "8", "9", "-10", "100" };
 
@@ -242,70 +256,110 @@ namespace System.Linq.Tests
         public void NullResultSelector()
         {
             Func<StringWithIntArray, int?, string> resultSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () => Enumerable.Empty<StringWithIntArray>().SelectMany(e => e.total, resultSelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "resultSelector",
+                () =>
+                    Enumerable.Empty<StringWithIntArray>().SelectMany(e => e.total, resultSelector)
+            );
         }
 
         [Fact]
         public void NullResultSelectorIndexedSelector()
         {
             Func<StringWithIntArray, int?, string> resultSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () => Enumerable.Empty<StringWithIntArray>().SelectMany((e, i) => e.total, resultSelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "resultSelector",
+                () =>
+                    Enumerable
+                        .Empty<StringWithIntArray>()
+                        .SelectMany((e, i) => e.total, resultSelector)
+            );
         }
 
         [Fact]
         public void NullSourceWithResultSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SelectMany(e => e.total, (e, f) => f.ToString()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SelectMany(e => e.total, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
         public void NullCollectionSelector()
         {
             Func<StringWithIntArray, IEnumerable<int?>> collectionSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () => Enumerable.Empty<StringWithIntArray>().SelectMany(collectionSelector, (e, f) => f.ToString()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collectionSelector",
+                () =>
+                    Enumerable
+                        .Empty<StringWithIntArray>()
+                        .SelectMany(collectionSelector, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
         public void NullIndexedCollectionSelector()
         {
             Func<StringWithIntArray, int, IEnumerable<int?>> collectionSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () => Enumerable.Empty<StringWithIntArray>().SelectMany(collectionSelector, (e, f) => f.ToString()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collectionSelector",
+                () =>
+                    Enumerable
+                        .Empty<StringWithIntArray>()
+                        .SelectMany(collectionSelector, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
         public void NullSource()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SelectMany(e => e.total));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SelectMany(e => e.total)
+            );
         }
 
         [Fact]
         public void NullSourceIndexedSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SelectMany((e, i) => e.total));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SelectMany((e, i) => e.total)
+            );
         }
 
         [Fact]
         public void NullSourceIndexedSelectorWithResultSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SelectMany((e, i) => e.total, (e, f) => f.ToString()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SelectMany((e, i) => e.total, (e, f) => f.ToString())
+            );
         }
 
         [Fact]
         public void NullSelector()
         {
             Func<StringWithIntArray, int[]> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => new StringWithIntArray[0].SelectMany(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => new StringWithIntArray[0].SelectMany(selector)
+            );
         }
 
         [Fact]
         public void NullIndexedSelector()
         {
             Func<StringWithIntArray, int, int[]> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => new StringWithIntArray[0].SelectMany(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => new StringWithIntArray[0].SelectMany(selector)
+            );
         }
 
         [Fact]
@@ -313,14 +367,20 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Prakash", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
             };
             string[] expected = { "1", "2", "3", "4" };
-            Assert.Equal(expected, source.SelectMany((e, i) => i == 0 ? e.total : Enumerable.Empty<int?>(), (e, f) => f.ToString()));
+            Assert.Equal(
+                expected,
+                source.SelectMany(
+                    (e, i) => i == 0 ? e.total : Enumerable.Empty<int?>(),
+                    (e, f) => f.ToString()
+                )
+            );
         }
 
         [Fact]
@@ -328,15 +388,21 @@ namespace System.Linq.Tests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name="Prakash", total=new int?[]{1, 2, 3, 4} },
-                new StringWithIntArray { name="Bob", total=new int?[]{5, 6} },
-                new StringWithIntArray { name="Chris", total=new int?[0] },
-                new StringWithIntArray { name=null, total=new int?[]{8, 9} },
-                new StringWithIntArray { name="Robert", total=new int?[]{-10, 100} }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
+                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
+                new StringWithIntArray { name = "Chris", total = new int?[0] },
+                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
+                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } }
             };
 
             string[] expected = { "-10", "100" };
-            Assert.Equal(expected, source.SelectMany((e, i) => i == 4 ? e.total : Enumerable.Empty<int?>(), (e, f) => f.ToString()));
+            Assert.Equal(
+                expected,
+                source.SelectMany(
+                    (e, i) => i == 4 ? e.total : Enumerable.Empty<int?>(),
+                    (e, f) => f.ToString()
+                )
+            );
         }
 
         [Fact]
@@ -351,7 +417,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateIndexed()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).SelectMany((e, i) => new int[0]);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .SelectMany((e, i) => new int[0]);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
@@ -359,7 +426,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateResultSel()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).SelectMany(i => new int[0], (e, i) => e);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .SelectMany(i => new int[0], (e, i) => e);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
@@ -367,14 +435,18 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateIndexedResultSel()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).SelectMany((e, i) => new int[0], (e, i) => e);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .SelectMany((e, i) => new int[0], (e, i) => e);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
 
         [Theory]
         [MemberData(nameof(ParameterizedTestsData))]
-        public void ParameterizedTests(IEnumerable<int> source, Func<int, IEnumerable<int>> selector)
+        public void ParameterizedTests(
+            IEnumerable<int> source,
+            Func<int, IEnumerable<int>> selector
+        )
         {
             var expected = source.Select(i => selector(i)).Aggregate((l, r) => l.Concat(r));
             var actual = source.SelectMany(selector);
@@ -408,12 +480,14 @@ namespace System.Linq.Tests
             var source = new DelegateIterator<int>(
                 moveNext: () => ++sourceState <= sourceLength,
                 current: () => 0,
-                dispose: () => sourceDisposed = true);
+                dispose: () => sourceDisposed = true
+            );
 
             var subCollection = new DelegateIterator<int>(
                 moveNext: () => ++subState[subIndex] <= subLength, // Return true `subLength` times.
                 current: () => subState[subIndex],
-                dispose: () => subCollectionDisposed[subIndex++] = true); // Record that Dispose was called, and move on to the next index.
+                dispose: () => subCollectionDisposed[subIndex++] = true
+            ); // Record that Dispose was called, and move on to the next index.
 
             var iterator = source.SelectMany(_ => subCollection);
 
@@ -505,7 +579,10 @@ namespace System.Linq.Tests
             foreach (int index in iterator)
             {
                 Assert.Equal(Enumerable.Repeat(1, index + 1), timesCalledMap.Take(index + 1));
-                Assert.Equal(Enumerable.Repeat(0, timesCalledMap.Length - index - 1), timesCalledMap.Skip(index + 1));
+                Assert.Equal(
+                    Enumerable.Repeat(0, timesCalledMap.Length - index - 1),
+                    timesCalledMap.Skip(index + 1)
+                );
             }
 
             Array.Clear(timesCalledMap);

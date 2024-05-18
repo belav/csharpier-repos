@@ -17,27 +17,117 @@ namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 // Instead of creating a hierachy with virtual members, we are using generics and virtual interface dispatch to achieve the same result.
 // This allows us to avoid virtual dispatch at runtime, and enables us to easily adapt to different types of collections.
 
-internal abstract class CollectionConverter<TCollection> : FormDataConverter<TCollection>
-{
-}
+internal abstract class CollectionConverter<TCollection> : FormDataConverter<TCollection> { }
 
-internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TElement> : CollectionConverter<TCollection>
+internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TElement>
+    : CollectionConverter<TCollection>
     where TCollectionPolicy : ICollectionBufferAdapter<TCollection, TBuffer, TElement>
 {
     private static readonly Type _elementType = typeof(TElement);
 
     // Indexes up to 100 are pre-allocated to avoid allocations for common cases.
-    private static readonly string[] Indexes = new string[] {
-        "[0]", "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]",
-        "[10]", "[11]", "[12]", "[13]", "[14]", "[15]", "[16]", "[17]", "[18]", "[19]",
-        "[20]", "[21]", "[22]", "[23]", "[24]", "[25]", "[26]", "[27]", "[28]", "[29]",
-        "[30]", "[31]", "[32]", "[33]", "[34]", "[35]", "[36]", "[37]", "[38]", "[39]",
-        "[40]", "[41]", "[42]", "[43]", "[44]", "[45]", "[46]", "[47]", "[48]", "[49]",
-        "[50]", "[51]", "[52]", "[53]", "[54]", "[55]", "[56]", "[57]", "[58]", "[59]",
-        "[60]", "[61]", "[62]", "[63]", "[64]", "[65]", "[66]", "[67]", "[68]", "[69]",
-        "[70]", "[71]", "[72]", "[73]", "[74]", "[75]", "[76]", "[77]", "[78]", "[79]",
-        "[80]", "[81]", "[82]", "[83]", "[84]", "[85]", "[86]", "[87]", "[88]", "[89]",
-        "[90]", "[91]", "[92]", "[93]", "[94]", "[95]", "[96]", "[97]", "[98]", "[99]",
+    private static readonly string[] Indexes = new string[]
+    {
+        "[0]",
+        "[1]",
+        "[2]",
+        "[3]",
+        "[4]",
+        "[5]",
+        "[6]",
+        "[7]",
+        "[8]",
+        "[9]",
+        "[10]",
+        "[11]",
+        "[12]",
+        "[13]",
+        "[14]",
+        "[15]",
+        "[16]",
+        "[17]",
+        "[18]",
+        "[19]",
+        "[20]",
+        "[21]",
+        "[22]",
+        "[23]",
+        "[24]",
+        "[25]",
+        "[26]",
+        "[27]",
+        "[28]",
+        "[29]",
+        "[30]",
+        "[31]",
+        "[32]",
+        "[33]",
+        "[34]",
+        "[35]",
+        "[36]",
+        "[37]",
+        "[38]",
+        "[39]",
+        "[40]",
+        "[41]",
+        "[42]",
+        "[43]",
+        "[44]",
+        "[45]",
+        "[46]",
+        "[47]",
+        "[48]",
+        "[49]",
+        "[50]",
+        "[51]",
+        "[52]",
+        "[53]",
+        "[54]",
+        "[55]",
+        "[56]",
+        "[57]",
+        "[58]",
+        "[59]",
+        "[60]",
+        "[61]",
+        "[62]",
+        "[63]",
+        "[64]",
+        "[65]",
+        "[66]",
+        "[67]",
+        "[68]",
+        "[69]",
+        "[70]",
+        "[71]",
+        "[72]",
+        "[73]",
+        "[74]",
+        "[75]",
+        "[76]",
+        "[77]",
+        "[78]",
+        "[79]",
+        "[80]",
+        "[81]",
+        "[82]",
+        "[83]",
+        "[84]",
+        "[85]",
+        "[86]",
+        "[87]",
+        "[88]",
+        "[89]",
+        "[90]",
+        "[91]",
+        "[92]",
+        "[93]",
+        "[94]",
+        "[95]",
+        "[96]",
+        "[97]",
+        "[98]",
+        "[99]",
     };
 
     private readonly FormDataConverter<TElement> _elementConverter;
@@ -55,7 +145,8 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         Type type,
         FormDataMapperOptions options,
         [NotNullWhen(true)] out TCollection? result,
-        out bool found)
+        out bool found
+    )
     {
         TElement currentElement;
         TBuffer? buffer = default;
@@ -67,7 +158,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         try
         {
             context.PushPrefix("[0]");
-            succeded = _elementConverter.TryRead(ref context, _elementType, options, out currentElement!, out found);
+            succeded = _elementConverter.TryRead(
+                ref context,
+                _elementType,
+                options,
+                out currentElement!,
+                out found
+            );
         }
         finally
         {
@@ -76,7 +173,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
 
         if (!found)
         {
-            return TryReadSingleValueCollection(ref context, out result, ref found, ref buffer, ref succeded);
+            return TryReadSingleValueCollection(
+                ref context,
+                out result,
+                ref found,
+                ref buffer,
+                ref succeded
+            );
         }
 
         // We already know we found an element;
@@ -89,7 +192,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         try
         {
             context.PushPrefix("[1]");
-            currentElementSuccess = _elementConverter.TryRead(ref context, _elementType, options, out currentElement!, out foundCurrentElement);
+            currentElementSuccess = _elementConverter.TryRead(
+                ref context,
+                _elementType,
+                options,
+                out currentElement!,
+                out foundCurrentElement
+            );
             succeded = succeded && currentElementSuccess;
         }
         catch
@@ -126,7 +235,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
             try
             {
                 context.PushPrefix(prefix);
-                currentElementSuccess = _elementConverter.TryRead(ref context, _elementType, options, out currentElement!, out foundCurrentElement);
+                currentElementSuccess = _elementConverter.TryRead(
+                    ref context,
+                    _elementType,
+                    options,
+                    out currentElement!,
+                    out foundCurrentElement
+                );
                 succeded = succeded && currentElementSuccess;
             }
             catch
@@ -168,7 +283,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
             buffer = TCollectionPolicy.Add(ref buffer, currentElement!);
 
             // We need to compute the prefix for the index, since it's not precomputed.
-            if (!index.TryFormat(computedPrefix[1..], out var charsWritten, provider: CultureInfo.InvariantCulture))
+            if (
+                !index.TryFormat(
+                    computedPrefix[1..],
+                    out var charsWritten,
+                    provider: CultureInfo.InvariantCulture
+                )
+            )
             {
                 succeded = false;
                 break;
@@ -178,7 +299,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
             {
                 computedPrefix[charsWritten + 1] = ']';
                 context.PushPrefix(computedPrefix[..(charsWritten + 2)]);
-                currentElementSuccess = _elementConverter.TryRead(ref context, _elementType, options, out currentElement!, out foundCurrentElement);
+                currentElementSuccess = _elementConverter.TryRead(
+                    ref context,
+                    _elementType,
+                    options,
+                    out currentElement!,
+                    out foundCurrentElement
+                );
                 succeded = succeded && currentElementSuccess;
             }
             catch
@@ -201,8 +328,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         {
             // Signal failure because we have stopped binding.
             context.AddMappingError(
-                FormattableStringFactory.Create(FormDataResources.MaxCollectionSizeReached, "collection", maxCollectionSize),
-                null);
+                FormattableStringFactory.Create(
+                    FormDataResources.MaxCollectionSizeReached,
+                    "collection",
+                    maxCollectionSize
+                ),
+                null
+            );
 
             context.AttachInstanceToErrors(result!);
             return false;
@@ -217,11 +349,19 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         }
     }
 
-    private bool TryReadSingleValueCollection(ref FormDataReader context, out TCollection? result, ref bool found, ref TBuffer? buffer, ref bool succeded)
+    private bool TryReadSingleValueCollection(
+        ref FormDataReader context,
+        out TCollection? result,
+        ref bool found,
+        ref TBuffer? buffer,
+        ref bool succeded
+    )
     {
-        if (_elementConverter is ISingleValueConverter<TElement> singleValueConverter &&
-            singleValueConverter.CanConvertSingleValue() &&
-            context.TryGetValues(out var values))
+        if (
+            _elementConverter is ISingleValueConverter<TElement> singleValueConverter
+            && singleValueConverter.CanConvertSingleValue()
+            && context.TryGetValues(out var values)
+        )
         {
             found = true;
             buffer = TCollectionPolicy.CreateBuffer();
@@ -231,7 +371,13 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
                 var value = values[i];
                 try
                 {
-                    if (!singleValueConverter.TryConvertValue(ref context, value!, out var elementValue))
+                    if (
+                        !singleValueConverter.TryConvertValue(
+                            ref context,
+                            value!,
+                            out var elementValue
+                        )
+                    )
                     {
                         succeded = false;
                     }
@@ -245,7 +391,8 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
                     succeded = false;
                     context.AddMappingError(ex, value);
                 }
-            };
+            }
+            ;
 
             result = TCollectionPolicy.ToResult(buffer);
         }

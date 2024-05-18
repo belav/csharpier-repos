@@ -5,7 +5,8 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class KeyedServicesTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class KeyedServicesTests
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     public KeyedServicesTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {

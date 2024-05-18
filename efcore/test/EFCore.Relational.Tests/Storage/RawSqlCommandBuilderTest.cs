@@ -18,21 +18,24 @@ public class RawSqlCommandBuilderTest
         Assert.Equal(0, command.Parameters.Count);
     }
 
-    private static RawSqlCommandBuilder CreateBuilder()
-        => new(
+    private static RawSqlCommandBuilder CreateBuilder() =>
+        new(
             new RelationalCommandBuilderFactory(
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),
-                    new ExceptionDetector())),
-            new RelationalSqlGenerationHelper(
-                new RelationalSqlGenerationHelperDependencies()),
-            new ParameterNameGeneratorFactory(
-                new ParameterNameGeneratorDependencies()),
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    ),
+                    new ExceptionDetector()
+                )
+            ),
+            new RelationalSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
+            new ParameterNameGeneratorFactory(new ParameterNameGeneratorDependencies()),
             new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()));
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            )
+        );
 
     [ConditionalFact]
     public virtual void Builds_RelationalCommand_with_empty_parameter_list()
@@ -51,7 +54,10 @@ public class RawSqlCommandBuilderTest
     {
         var builder = CreateBuilder();
 
-        var rawSqlCommand = builder.Build("SQL COMMAND TEXT {0} {1} {2}", new object[] { 1, 2L, "three" });
+        var rawSqlCommand = builder.Build(
+            "SQL COMMAND TEXT {0} {1} {2}",
+            new object[] { 1, 2L, "three" }
+        );
 
         Assert.Equal("SQL COMMAND TEXT @p0 @p1 @p2", rawSqlCommand.RelationalCommand.CommandText);
         Assert.Equal(3, rawSqlCommand.RelationalCommand.Parameters.Count);

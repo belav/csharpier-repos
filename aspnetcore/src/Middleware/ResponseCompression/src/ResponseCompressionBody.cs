@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.ResponseCompression;
 /// <summary>
 /// Stream wrapper that create specific compression stream only if necessary.
 /// </summary>
-internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature, IHttpsCompressionFeature
+internal sealed class ResponseCompressionBody
+    : Stream,
+        IHttpResponseBodyFeature,
+        IHttpsCompressionFeature
 {
     private readonly HttpContext _context;
     private readonly IResponseCompressionProvider _provider;
@@ -27,8 +30,11 @@ internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature
     private bool _autoFlush;
     private bool _complete;
 
-    internal ResponseCompressionBody(HttpContext context, IResponseCompressionProvider provider,
-        IHttpResponseBodyFeature innerBodyFeature)
+    internal ResponseCompressionBody(
+        HttpContext context,
+        IResponseCompressionProvider provider,
+        IHttpResponseBodyFeature innerBodyFeature
+    )
     {
         _context = context;
         _provider = provider;
@@ -89,7 +95,10 @@ internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature
         {
             if (_pipeAdapter == null)
             {
-                _pipeAdapter = PipeWriter.Create(Stream, new StreamPipeWriterOptions(leaveOpen: true));
+                _pipeAdapter = PipeWriter.Create(
+                    Stream,
+                    new StreamPipeWriterOptions(leaveOpen: true)
+                );
             }
 
             return _pipeAdapter;
@@ -168,16 +177,28 @@ internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature
         }
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        => TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    ) =>
+        TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
 
-    public override void EndWrite(IAsyncResult asyncResult)
-        => TaskToApm.End(asyncResult);
+    public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
-    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
+    public override async Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
 
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override async ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         OnWrite();
 
@@ -210,7 +231,13 @@ internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature
 
             for (var i = 0; i < varyValues.Length; i++)
             {
-                if (string.Equals(varyValues[i], HeaderNames.AcceptEncoding, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        varyValues[i],
+                        HeaderNames.AcceptEncoding,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     varyByAcceptEncoding = true;
                     break;
@@ -229,7 +256,10 @@ internal sealed class ResponseCompressionBody : Stream, IHttpResponseBodyFeature
             {
                 // Can't use += as StringValues does not override operator+
                 // and the implict conversions will cause an incorrect string concat https://github.com/dotnet/runtime/issues/52507
-                headers.ContentEncoding = StringValues.Concat(headers.ContentEncoding, compressionProvider.EncodingName);
+                headers.ContentEncoding = StringValues.Concat(
+                    headers.ContentEncoding,
+                    compressionProvider.EncodingName
+                );
                 headers.ContentMD5 = default; // Reset the MD5 because the content changed.
                 headers.ContentLength = default;
             }

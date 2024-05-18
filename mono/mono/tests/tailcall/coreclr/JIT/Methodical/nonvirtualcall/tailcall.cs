@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 
 class ApplicationException : Exception
 {
-    public ApplicationException(string message) : base(message) { }
+    public ApplicationException(string message)
+        : base(message) { }
 }
 
 namespace Test
@@ -34,18 +35,22 @@ namespace Test
         {
             return "Base.VirtualOverrideFinal";
         }
+
         public virtual string VirtualNilOverride()
         {
             return "Base.VirtualNilOverride";
         }
+
         public virtual string VirtualNilNil()
         {
             return "Base.VirtualNilNil";
         }
+
         public virtual string VirtualOverrideOverride()
         {
             return "Base.VirtualOverrideOverride";
         }
+
         public virtual string VirtualOverrideNil()
         {
             return "Base.VirtualOverrideNil";
@@ -58,46 +63,57 @@ namespace Test
         {
             return "Child.AbstractFinal";
         }
+
         public string CallAbstractFinal()
         {
             return AbstractFinal();
         }
+
         public override string AbstractOverrideFinal()
         {
             return "Child.AbstractOverrideFinal";
         }
+
         public override string AbstractOverrideOverride()
         {
             return "Child.AbstractOverrideOverride";
         }
+
         public override string AbstractOverrideNil()
         {
             return "Child.AbstractOverrideNil";
         }
+
         public string CallAbstractOverrideNil()
         {
             return AbstractOverrideNil();
         }
+
         public sealed override string VirtualFinal()
         {
             return "Child.VirtualFinal";
         }
+
         public string CallVirtualFinal()
         {
             return VirtualFinal();
         }
+
         public override string VirtualOverrideFinal()
         {
             return "Child.VirtualOverrideFinal";
         }
+
         public override string VirtualOverrideOverride()
         {
             return "Child.VirtualOverrideOverride";
         }
+
         public override string VirtualOverrideNil()
         {
             return "Child.VirtualOverrideNil";
         }
+
         public string CallVirtualOverrideNil()
         {
             return VirtualOverrideNil();

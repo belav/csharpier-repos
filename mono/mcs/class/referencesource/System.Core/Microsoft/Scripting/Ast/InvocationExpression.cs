@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -19,15 +19,16 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
     /// <summary>
     /// Represents an expression that applies a delegate or lambda expression to a list of argument expressions.
@@ -35,12 +36,18 @@ namespace System.Linq.Expressions {
 #if !SILVERLIGHT
     [DebuggerTypeProxy(typeof(Expression.InvocationExpressionProxy))]
 #endif
-    public sealed class InvocationExpression : Expression, IArgumentProvider {
+    public sealed class InvocationExpression : Expression, IArgumentProvider
+    {
         private IList<Expression> _arguments;
         private readonly Expression _lambda;
         private readonly Type _returnType;
 
-        internal InvocationExpression(Expression lambda, IList<Expression> arguments, Type returnType) {
+        internal InvocationExpression(
+            Expression lambda,
+            IList<Expression> arguments,
+            Type returnType
+        )
+        {
             _lambda = lambda;
             _arguments = arguments;
             _returnType = returnType;
@@ -50,7 +57,8 @@ namespace System.Linq.Expressions {
         /// Gets the static type of the expression that this <see cref="Expression" /> represents.
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
-        public sealed override Type Type {
+        public sealed override Type Type
+        {
             get { return _returnType; }
         }
 
@@ -59,21 +67,24 @@ namespace System.Linq.Expressions {
         /// ExpressionType.Extension when overriding this method.
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> of the expression.</returns>
-        public sealed override ExpressionType NodeType {
+        public sealed override ExpressionType NodeType
+        {
             get { return ExpressionType.Invoke; }
         }
 
         /// <summary>
         /// Gets the delegate or lambda expression to be applied.
         /// </summary>
-        public Expression Expression {
+        public Expression Expression
+        {
             get { return _lambda; }
         }
 
         /// <summary>
         /// Gets the arguments that the delegate or lambda expression is applied to.
         /// </summary>
-        public ReadOnlyCollection<Expression> Arguments {
+        public ReadOnlyCollection<Expression> Arguments
+        {
             get { return ReturnReadOnly(ref _arguments); }
         }
 
@@ -85,40 +96,46 @@ namespace System.Linq.Expressions {
         /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
         /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public InvocationExpression Update(Expression expression, IEnumerable<Expression> arguments) {
-            if (expression == Expression && arguments == Arguments) {
+        public InvocationExpression Update(Expression expression, IEnumerable<Expression> arguments)
+        {
+            if (expression == Expression && arguments == Arguments)
+            {
                 return this;
             }
 
             return Expression.Invoke(expression, arguments);
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
+        Expression IArgumentProvider.GetArgument(int index)
+        {
             return _arguments[index];
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return _arguments.Count;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return _arguments.Count; }
         }
 
         /// <summary>
         /// Dispatches to the specific visit method for this node type.
         /// </summary>
-        protected internal override Expression Accept(ExpressionVisitor visitor) {
+        protected internal override Expression Accept(ExpressionVisitor visitor)
+        {
             return visitor.VisitInvocation(this);
         }
 
-        internal InvocationExpression Rewrite(Expression lambda, Expression[] arguments) {
+        internal InvocationExpression Rewrite(Expression lambda, Expression[] arguments)
+        {
             Debug.Assert(lambda != null);
             Debug.Assert(arguments == null || arguments.Length == _arguments.Count);
 
             return Expression.Invoke(lambda, arguments ?? _arguments);
         }
 
-        internal LambdaExpression LambdaOperand {
-            get {
+        internal LambdaExpression LambdaOperand
+        {
+            get
+            {
                 return (_lambda.NodeType == ExpressionType.Quote)
                     ? (LambdaExpression)((UnaryExpression)_lambda).Operand
                     : (_lambda as LambdaExpression);
@@ -126,14 +143,14 @@ namespace System.Linq.Expressions {
         }
     }
 
-    public partial class Expression {
-
+    public partial class Expression
+    {
         ///<summary>
-        ///Creates an <see cref="T:System.Linq.Expressions.InvocationExpression" /> that 
+        ///Creates an <see cref="T:System.Linq.Expressions.InvocationExpression" /> that
         ///applies a delegate or lambda expression to a list of argument expressions.
         ///</summary>
         ///<returns>
-        ///An <see cref="T:System.Linq.Expressions.InvocationExpression" /> that 
+        ///An <see cref="T:System.Linq.Expressions.InvocationExpression" /> that
         ///applies the specified delegate or lambda expression to the provided arguments.
         ///</returns>
         ///<param name="expression">
@@ -150,16 +167,20 @@ namespace System.Linq.Expressions {
         ///<paramref name="expression" />.Type does not represent a delegate type or an <see cref="T:System.Linq.Expressions.Expression`1" />.-or-The <see cref="P:System.Linq.Expressions.Expression.Type" /> property of an element of <paramref name="arguments" /> is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression" />.</exception>
         ///<exception cref="T:System.InvalidOperationException">
         ///<paramref name="arguments" /> does not contain the same number of elements as the list of parameters for the delegate represented by <paramref name="expression" />.</exception>
-        public static InvocationExpression Invoke(Expression expression, params Expression[] arguments) {
+        public static InvocationExpression Invoke(
+            Expression expression,
+            params Expression[] arguments
+        )
+        {
             return Invoke(expression, (IEnumerable<Expression>)arguments);
         }
 
         ///<summary>
-        ///Creates an <see cref="T:System.Linq.Expressions.InvocationExpression" /> that 
+        ///Creates an <see cref="T:System.Linq.Expressions.InvocationExpression" /> that
         ///applies a delegate or lambda expression to a list of argument expressions.
         ///</summary>
         ///<returns>
-        ///An <see cref="T:System.Linq.Expressions.InvocationExpression" /> that 
+        ///An <see cref="T:System.Linq.Expressions.InvocationExpression" /> that
         ///applies the specified delegate or lambda expression to the provided arguments.
         ///</returns>
         ///<param name="expression">
@@ -176,7 +197,11 @@ namespace System.Linq.Expressions {
         ///<paramref name="expression" />.Type does not represent a delegate type or an <see cref="T:System.Linq.Expressions.Expression`1" />.-or-The <see cref="P:System.Linq.Expressions.Expression.Type" /> property of an element of <paramref name="arguments" /> is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression" />.</exception>
         ///<exception cref="T:System.InvalidOperationException">
         ///<paramref name="arguments" /> does not contain the same number of elements as the list of parameters for the delegate represented by <paramref name="expression" />.</exception>
-        public static InvocationExpression Invoke(Expression expression, IEnumerable<Expression> arguments) {
+        public static InvocationExpression Invoke(
+            Expression expression,
+            IEnumerable<Expression> arguments
+        )
+        {
             RequiresCanRead(expression, "expression");
 
             var args = arguments.ToReadOnly();
@@ -189,11 +214,14 @@ namespace System.Linq.Expressions {
         /// Gets the delegate's Invoke method; used by InvocationExpression.
         /// </summary>
         /// <param name="expression">The expression to be invoked.</param>
-        internal static MethodInfo GetInvokeMethod(Expression expression) {
+        internal static MethodInfo GetInvokeMethod(Expression expression)
+        {
             Type delegateType = expression.Type;
-            if (!expression.Type.IsSubclassOf(typeof(MulticastDelegate))) {
+            if (!expression.Type.IsSubclassOf(typeof(MulticastDelegate)))
+            {
                 Type exprType = TypeUtils.FindGenericType(typeof(Expression<>), expression.Type);
-                if (exprType == null) {
+                if (exprType == null)
+                {
                     throw Error.ExpressionTypeNotInvocable(expression.Type);
                 }
                 delegateType = exprType.GetGenericArguments()[0];

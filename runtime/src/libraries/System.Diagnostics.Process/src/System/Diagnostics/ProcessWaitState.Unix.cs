@@ -144,7 +144,12 @@ namespace System.Diagnostics
                         }
                         if (pws == null)
                         {
-                            pws = new ProcessWaitState(processId, isChild: false, usesTerminal: false, exitTime);
+                            pws = new ProcessWaitState(
+                                processId,
+                                isChild: false,
+                                usesTerminal: false,
+                                exitTime
+                            );
                             s_processWaitStates.Add(processId, pws);
                         }
                         pws._outstandingRefCount++;
@@ -161,7 +166,9 @@ namespace System.Diagnostics
         internal void ReleaseRef()
         {
             ProcessWaitState? pws;
-            Dictionary<int, ProcessWaitState> waitStates = _isChild ? s_childProcessWaitStates : s_processWaitStates;
+            Dictionary<int, ProcessWaitState> waitStates = _isChild
+                ? s_childProcessWaitStates
+                : s_processWaitStates;
             lock (waitStates)
             {
                 bool foundState = waitStates.TryGetValue(_processId, out pws);
@@ -193,28 +200,35 @@ namespace System.Diagnostics
         /// instance concurrently.
         /// </summary>
         private readonly object _gate = new object();
+
         /// <summary>ID of the associated process.</summary>
         private readonly int _processId;
+
         /// <summary>Associated process is a child process.</summary>
         private readonly bool _isChild;
+
         /// <summary>Associated process is a child that can use the terminal.</summary>
         private readonly bool _usesTerminal;
 
         /// <summary>An in-progress or completed wait operation.</summary>
         /// <remarks>A completed task does not mean the process has exited.</remarks>
         private Task _waitInProgress = Task.CompletedTask;
+
         /// <summary>The number of alive users of this object.</summary>
         private int _outstandingRefCount;
 
         /// <summary>Whether the associated process exited.</summary>
         private bool _exited;
+
         /// <summary>If the process exited, it's exit code, or null if we were unable to determine one.</summary>
         private int? _exitCode;
+
         /// <summary>
         /// The approximate time the process exited.  We do not have the ability to know exact time a process
         /// exited, so we approximate it by storing the time that we discovered it exited.
         /// </summary>
         private DateTime _exitTime;
+
         /// <summary>A lazily-initialized event set when the process exits.</summary>
         private ManualResetEvent? _exitedEvent;
 
@@ -223,7 +237,12 @@ namespace System.Diagnostics
         /// <param name="isChild">Whether the target process is a child of the current process.</param>
         /// <param name="usesTerminal">Whether the target process is expected to use the terminal.</param>
         /// <param name="exitTime">The approximate time the process exited.</param>
-        private ProcessWaitState(int processId, bool isChild, bool usesTerminal, DateTime exitTime = default)
+        private ProcessWaitState(
+            int processId,
+            bool isChild,
+            bool usesTerminal,
+            DateTime exitTime = default
+        )
         {
             Debug.Assert(processId >= 0);
             _processId = processId;
@@ -304,10 +323,7 @@ namespace System.Diagnostics
 
         internal bool HasExited
         {
-            get
-            {
-                return GetExited(out _, refresh: true);
-            }
+            get { return GetExited(out _, refresh: true); }
         }
 
         internal bool GetExited(out int? exitCode, bool refresh)
@@ -422,9 +438,15 @@ namespace System.Diagnostics
                     Task? waitTask;
 
                     // We're in a polling loop... determine how much time remains
-                    int remainingTimeout = millisecondsTimeout == Timeout.Infinite ?
-                        Timeout.Infinite :
-                        (int)Math.Max(millisecondsTimeout - Stopwatch.GetElapsedTime(startTime).TotalMilliseconds, 0);
+                    int remainingTimeout =
+                        millisecondsTimeout == Timeout.Infinite
+                            ? Timeout.Infinite
+                            : (int)
+                                Math.Max(
+                                    millisecondsTimeout
+                                        - Stopwatch.GetElapsedTime(startTime).TotalMilliseconds,
+                                    0
+                                );
 
                     lock (_gate)
                     {
@@ -461,9 +483,10 @@ namespace System.Diagnostics
                         if (waitTask.IsCompleted)
                         {
                             createdTask = true;
-                            CancellationToken token = remainingTimeout == Timeout.Infinite ?
-                                CancellationToken.None :
-                                (cts = new CancellationTokenSource(remainingTimeout)).Token;
+                            CancellationToken token =
+                                remainingTimeout == Timeout.Infinite
+                                    ? CancellationToken.None
+                                    : (cts = new CancellationTokenSource(remainingTimeout)).Token;
                             _waitInProgress = waitTask = WaitForExitAsync(token);
                         }
                     } // lock(_gate)
@@ -509,12 +532,15 @@ namespace System.Diagnostics
             // Wait for the previous waiting task to complete. We need to ensure that this call completes asynchronously,
             // in order to escape the caller's lock and avoid blocking the caller by any work in the below loop, so
             // we use ForceYielding.
-            await _waitInProgress.ConfigureAwait(ConfigureAwaitOptions.ForceYielding | ConfigureAwaitOptions.SuppressThrowing);
+            await _waitInProgress.ConfigureAwait(
+                ConfigureAwaitOptions.ForceYielding | ConfigureAwaitOptions.SuppressThrowing
+            );
 
             // Arbitrary values chosen to balance delays with polling overhead.  Start with fast polling
             // to handle quickly completing processes, but fall back to longer polling to minimize
             // overhead for those that take longer to complete.
-            const int StartingPollingIntervalMs = 1, MaxPollingIntervalMs = 100;
+            const int StartingPollingIntervalMs = 1,
+                MaxPollingIntervalMs = 100;
             int pollingIntervalMs = StartingPollingIntervalMs;
 
             // Poll until either cancellation is requested or the process exits.
@@ -534,7 +560,8 @@ namespace System.Diagnostics
                 }
 
                 // Pause asynchronously to avoid spinning too fast and tying up a thread.
-                await Task.Delay(pollingIntervalMs, cancellationToken).ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
+                await Task.Delay(pollingIntervalMs, cancellationToken)
+                    .ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
                 pollingIntervalMs = Math.Min(pollingIntervalMs * 2, MaxPollingIntervalMs);
             }
         }
@@ -629,7 +656,9 @@ namespace System.Diagnostics
                     {
                         // Unexpected.
                         int errorCode = Marshal.GetLastWin32Error();
-                        Environment.FailFast("Error while checking for terminated children. errno = " + errorCode);
+                        Environment.FailFast(
+                            "Error while checking for terminated children. errno = " + errorCode
+                        );
                     }
                 } while (pid > 0);
 

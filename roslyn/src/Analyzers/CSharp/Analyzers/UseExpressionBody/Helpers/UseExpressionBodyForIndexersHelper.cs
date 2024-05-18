@@ -15,43 +15,62 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 {
-    internal class UseExpressionBodyForIndexersHelper :
-        UseExpressionBodyHelper<IndexerDeclarationSyntax>
+    internal class UseExpressionBodyForIndexersHelper
+        : UseExpressionBodyHelper<IndexerDeclarationSyntax>
     {
         public static readonly UseExpressionBodyForIndexersHelper Instance = new();
 
         private UseExpressionBodyForIndexersHelper()
-            : base(IDEDiagnosticIds.UseExpressionBodyForIndexersDiagnosticId,
-                   EnforceOnBuildValues.UseExpressionBodyForIndexers,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_expression_body_for_indexer), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_block_body_for_indexer), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
-                   ImmutableArray.Create(SyntaxKind.IndexerDeclaration))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseExpressionBodyForIndexersDiagnosticId,
+                EnforceOnBuildValues.UseExpressionBodyForIndexers,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_expression_body_for_indexer),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_block_body_for_indexer),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                ImmutableArray.Create(SyntaxKind.IndexerDeclaration)
+            ) { }
 
-        public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(CSharpCodeGenerationOptions options)
-            => options.PreferExpressionBodiedIndexers;
+        public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
+            CSharpCodeGenerationOptions options
+        ) => options.PreferExpressionBodiedIndexers;
 
-        protected override BlockSyntax GetBody(IndexerDeclarationSyntax declaration)
-            => GetBodyFromSingleGetAccessor(declaration.AccessorList);
+        protected override BlockSyntax GetBody(IndexerDeclarationSyntax declaration) =>
+            GetBodyFromSingleGetAccessor(declaration.AccessorList);
 
-        protected override ArrowExpressionClauseSyntax GetExpressionBody(IndexerDeclarationSyntax declaration)
-            => declaration.ExpressionBody;
+        protected override ArrowExpressionClauseSyntax GetExpressionBody(
+            IndexerDeclarationSyntax declaration
+        ) => declaration.ExpressionBody;
 
-        protected override SyntaxToken GetSemicolonToken(IndexerDeclarationSyntax declaration)
-            => declaration.SemicolonToken;
+        protected override SyntaxToken GetSemicolonToken(IndexerDeclarationSyntax declaration) =>
+            declaration.SemicolonToken;
 
-        protected override IndexerDeclarationSyntax WithSemicolonToken(IndexerDeclarationSyntax declaration, SyntaxToken token)
-            => declaration.WithSemicolonToken(token);
+        protected override IndexerDeclarationSyntax WithSemicolonToken(
+            IndexerDeclarationSyntax declaration,
+            SyntaxToken token
+        ) => declaration.WithSemicolonToken(token);
 
-        protected override IndexerDeclarationSyntax WithExpressionBody(IndexerDeclarationSyntax declaration, ArrowExpressionClauseSyntax expressionBody)
-            => declaration.WithExpressionBody(expressionBody);
+        protected override IndexerDeclarationSyntax WithExpressionBody(
+            IndexerDeclarationSyntax declaration,
+            ArrowExpressionClauseSyntax expressionBody
+        ) => declaration.WithExpressionBody(expressionBody);
 
-        protected override IndexerDeclarationSyntax WithAccessorList(IndexerDeclarationSyntax declaration, AccessorListSyntax accessorList)
-            => declaration.WithAccessorList(accessorList);
+        protected override IndexerDeclarationSyntax WithAccessorList(
+            IndexerDeclarationSyntax declaration,
+            AccessorListSyntax accessorList
+        ) => declaration.WithAccessorList(accessorList);
 
-        protected override IndexerDeclarationSyntax WithBody(IndexerDeclarationSyntax declaration, BlockSyntax body)
+        protected override IndexerDeclarationSyntax WithBody(
+            IndexerDeclarationSyntax declaration,
+            BlockSyntax body
+        )
         {
             if (body == null)
             {
@@ -61,19 +80,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             throw new InvalidOperationException();
         }
 
-        protected override IndexerDeclarationSyntax WithGenerateBody(SemanticModel semanticModel, IndexerDeclarationSyntax declaration)
-            => WithAccessorList(semanticModel, declaration);
+        protected override IndexerDeclarationSyntax WithGenerateBody(
+            SemanticModel semanticModel,
+            IndexerDeclarationSyntax declaration
+        ) => WithAccessorList(semanticModel, declaration);
 
-        protected override bool CreateReturnStatementForExpression(SemanticModel semanticModel, IndexerDeclarationSyntax declaration) => true;
+        protected override bool CreateReturnStatementForExpression(
+            SemanticModel semanticModel,
+            IndexerDeclarationSyntax declaration
+        ) => true;
 
         protected override bool TryConvertToExpressionBody(
             IndexerDeclarationSyntax declaration,
             ExpressionBodyPreference conversionPreference,
             CancellationToken cancellationToken,
             out ArrowExpressionClauseSyntax arrowExpression,
-            out SyntaxToken semicolonToken)
+            out SyntaxToken semicolonToken
+        )
         {
-            return TryConvertToExpressionBodyForBaseProperty(declaration, conversionPreference, cancellationToken, out arrowExpression, out semicolonToken);
+            return TryConvertToExpressionBodyForBaseProperty(
+                declaration,
+                conversionPreference,
+                cancellationToken,
+                out arrowExpression,
+                out semicolonToken
+            );
         }
 
         protected override Location GetDiagnosticLocation(IndexerDeclarationSyntax declaration)

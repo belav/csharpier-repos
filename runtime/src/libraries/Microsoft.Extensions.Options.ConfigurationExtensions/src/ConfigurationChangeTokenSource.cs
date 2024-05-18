@@ -20,9 +20,8 @@ namespace Microsoft.Extensions.Options
         /// Constructor taking the <see cref="IConfiguration"/> instance to watch.
         /// </summary>
         /// <param name="config">The configuration instance.</param>
-        public ConfigurationChangeTokenSource(IConfiguration config) : this(Options.DefaultName, config)
-        {
-        }
+        public ConfigurationChangeTokenSource(IConfiguration config)
+            : this(Options.DefaultName, config) { }
 
         /// <summary>
         /// Constructor taking the <see cref="IConfiguration"/> instance to watch.

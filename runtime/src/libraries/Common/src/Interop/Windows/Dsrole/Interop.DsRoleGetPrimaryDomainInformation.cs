@@ -20,6 +20,7 @@ internal static partial class Interop
         internal static partial int DsRoleGetPrimaryDomainInformation(
             [MarshalAs(UnmanagedType.LPTStr)] string lpServer,
             DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-            out IntPtr Buffer);
+            out IntPtr Buffer
+        );
     }
 }

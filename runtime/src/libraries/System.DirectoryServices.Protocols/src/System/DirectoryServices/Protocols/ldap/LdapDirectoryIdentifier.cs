@@ -7,23 +7,41 @@ namespace System.DirectoryServices.Protocols
     {
         private readonly string[] _servers;
 
-        public LdapDirectoryIdentifier(string server) : this(server != null ? new string[] { server } : null, false, false)
-        {
-        }
+        public LdapDirectoryIdentifier(string server)
+            : this(server != null ? new string[] { server } : null, false, false) { }
 
-        public LdapDirectoryIdentifier(string server, int portNumber) : this(server != null ? new string[] { server } : null, portNumber, false, false)
-        {
-        }
+        public LdapDirectoryIdentifier(string server, int portNumber)
+            : this(server != null ? new string[] { server } : null, portNumber, false, false) { }
 
-        public LdapDirectoryIdentifier(string server, bool fullyQualifiedDnsHostName, bool connectionless) : this(server != null ? new string[] { server } : null, fullyQualifiedDnsHostName, connectionless)
-        {
-        }
+        public LdapDirectoryIdentifier(
+            string server,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless
+        )
+            : this(
+                server != null ? new string[] { server } : null,
+                fullyQualifiedDnsHostName,
+                connectionless
+            ) { }
 
-        public LdapDirectoryIdentifier(string server, int portNumber, bool fullyQualifiedDnsHostName, bool connectionless) : this(server != null ? new string[] { server } : null, portNumber, fullyQualifiedDnsHostName, connectionless)
-        {
-        }
+        public LdapDirectoryIdentifier(
+            string server,
+            int portNumber,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless
+        )
+            : this(
+                server != null ? new string[] { server } : null,
+                portNumber,
+                fullyQualifiedDnsHostName,
+                connectionless
+            ) { }
 
-        public LdapDirectoryIdentifier(string[] servers, bool fullyQualifiedDnsHostName, bool connectionless)
+        public LdapDirectoryIdentifier(
+            string[] servers,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless
+        )
         {
             // validate the servers, we don't allow space in the server name
             if (servers != null)
@@ -49,12 +67,19 @@ namespace System.DirectoryServices.Protocols
             Connectionless = connectionless;
         }
 
-        public LdapDirectoryIdentifier(string[] servers, int portNumber, bool fullyQualifiedDnsHostName, bool connectionless) : this(servers, fullyQualifiedDnsHostName, connectionless)
+        public LdapDirectoryIdentifier(
+            string[] servers,
+            int portNumber,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless
+        )
+            : this(servers, fullyQualifiedDnsHostName, connectionless)
         {
             PortNumber = portNumber;
         }
 
-        public string[] Servers => (_servers == null) ? Array.Empty<string>() : (string[])_servers.Clone();
+        public string[] Servers =>
+            (_servers == null) ? Array.Empty<string>() : (string[])_servers.Clone();
 
         public bool Connectionless { get; }
 

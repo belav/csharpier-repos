@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,25 +31,27 @@
 
 namespace System.Web.UI.WebControls
 {
-	public class SendMailErrorEventArgs : EventArgs
-	{
-		Exception exception;
-		bool exceptionHandled;
-		
-		public SendMailErrorEventArgs (Exception e)
-		{
-			this.exception = e;
-			this.exceptionHandled = true;
-		}
-		
-		public Exception Exception {
-			get { return exception; }
-			set { exception = value;}
-		}
+    public class SendMailErrorEventArgs : EventArgs
+    {
+        Exception exception;
+        bool exceptionHandled;
 
-		public bool Handled {
-			get { return exceptionHandled; }
-			set { exceptionHandled = value; }
-		}
-	}
+        public SendMailErrorEventArgs(Exception e)
+        {
+            this.exception = e;
+            this.exceptionHandled = true;
+        }
+
+        public Exception Exception
+        {
+            get { return exception; }
+            set { exception = value; }
+        }
+
+        public bool Handled
+        {
+            get { return exceptionHandled; }
+            set { exceptionHandled = value; }
+        }
+    }
 }

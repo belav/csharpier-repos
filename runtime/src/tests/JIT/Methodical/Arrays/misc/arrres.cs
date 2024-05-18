@@ -13,7 +13,10 @@ namespace GCTest_arrres_cs
         public bool m_die;
         private static Test[] s_arr = new Test[50];
 
-        public Test(int indx) { _indx = indx; }
+        public Test(int indx)
+        {
+            _indx = indx;
+        }
 
         internal virtual void CheckValid()
         {
@@ -67,7 +70,8 @@ namespace GCTest_arrres_cs
         {
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
@@ -79,7 +83,8 @@ namespace GCTest_arrres_cs
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
@@ -91,7 +96,8 @@ namespace GCTest_arrres_cs
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
@@ -103,7 +109,8 @@ namespace GCTest_arrres_cs
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
@@ -115,7 +122,8 @@ namespace GCTest_arrres_cs
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i].m_die = true;
                 s_arr[i] = null;

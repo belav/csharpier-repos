@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly SynthesizedSimpleProgramEntryPointSymbol _entryPoint;
 
-        public SimpleProgramBinder(Binder enclosing, SynthesizedSimpleProgramEntryPointSymbol entryPoint)
+        public SimpleProgramBinder(
+            Binder enclosing,
+            SynthesizedSimpleProgramEntryPointSymbol entryPoint
+        )
             : base(enclosing, enclosing.Flags)
         {
             _entryPoint = entryPoint;
@@ -25,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ImmutableArray<LocalSymbol> BuildLocals()
         {
-            ArrayBuilder<LocalSymbol> locals = ArrayBuilder<LocalSymbol>.GetInstance(DefaultLocalSymbolArrayCapacity);
+            ArrayBuilder<LocalSymbol> locals = ArrayBuilder<LocalSymbol>.GetInstance(
+                DefaultLocalSymbolArrayCapacity
+            );
 
             foreach (var statement in _entryPoint.CompilationUnit.Members)
             {
@@ -55,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLocalFunctionsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override ImmutableArray<LabelSymbol> BuildLabels()
@@ -78,13 +80,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLabelsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {
@@ -96,13 +97,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _entryPoint.SyntaxNode;
-            }
+            get { return _entryPoint.SyntaxNode; }
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {

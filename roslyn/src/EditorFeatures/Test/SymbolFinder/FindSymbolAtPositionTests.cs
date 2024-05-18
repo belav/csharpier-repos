@@ -18,8 +18,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
     {
         private static Task<ISymbol> FindSymbolAtPositionAsync(TestWorkspace workspace)
         {
-            var position = workspace.Documents.Single(d => d.CursorPosition.HasValue).CursorPosition!.Value;
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.Single().Id);
+            var position = workspace
+                .Documents.Single(d => d.CursorPosition.HasValue)
+                .CursorPosition!.Value;
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.Single().Id
+            );
             return SymbolFinder.FindSymbolAtPositionAsync(document, position);
         }
 
@@ -36,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                         Goo();
                         #pragma warning restore 612
                     }
-                }");
+                }"
+            );
             var symbol = await FindSymbolAtPositionAsync(workspace);
             Assert.Null(symbol);
         }
@@ -57,9 +62,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                             case E.$$A: break;
                         }
                     }
-                }");
+                }"
+            );
 
-            var fieldSymbol = Assert.IsAssignableFrom<IFieldSymbol>(await FindSymbolAtPositionAsync(workspace));
+            var fieldSymbol = Assert.IsAssignableFrom<IFieldSymbol>(
+                await FindSymbolAtPositionAsync(workspace)
+            );
             Assert.Equal(TypeKind.Enum, fieldSymbol.ContainingType.TypeKind);
         }
     }

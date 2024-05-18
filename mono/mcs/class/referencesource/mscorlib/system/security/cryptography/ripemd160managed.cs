@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // RIPEMD160Managed.cs
@@ -13,25 +13,29 @@
 // http://www.esat.kuleuven.ac.be/~cosicart/ps/AB-9601/.
 //
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     using System;
     using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class RIPEMD160Managed : RIPEMD160
     {
-        private byte[]      _buffer;
-        private long        _count; // Number of bytes in the hashed message
-        private uint[]      _stateMD160;
-        private uint[]      _blockDWords;
+        private byte[] _buffer;
+        private long _count; // Number of bytes in the hashed message
+        private uint[] _stateMD160;
+        private uint[] _blockDWords;
 
         //
         // public constructors
         //
 
-        public RIPEMD160Managed() {
+        public RIPEMD160Managed()
+        {
             if (CryptoConfig.AllowOnlyFipsAlgorithms)
-                throw new InvalidOperationException(Environment.GetResourceString("Cryptography_NonCompliantFIPSAlgorithm"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("Cryptography_NonCompliantFIPSAlgorithm")
+                );
             Contract.EndContractBlock();
 
             _stateMD160 = new uint[5];
@@ -45,7 +49,8 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        public override void Initialize() {
+        public override void Initialize()
+        {
             InitializeState();
 
             // Zeroize potentially sensitive information.
@@ -53,13 +58,15 @@ namespace System.Security.Cryptography {
             Array.Clear(_buffer, 0, _buffer.Length);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected override void HashCore(byte[] rgb, int ibStart, int cbSize) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected override void HashCore(byte[] rgb, int ibStart, int cbSize)
+        {
             _HashData(rgb, ibStart, cbSize);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected override byte[] HashFinal() {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected override byte[] HashFinal()
+        {
             return _EndHash();
         }
 
@@ -67,35 +74,47 @@ namespace System.Security.Cryptography {
         // private methods
         //
 
-        private void InitializeState() {
+        private void InitializeState()
+        {
             _count = 0;
 
-            // Use the same chaining values (IVs) as in SHA1, 
+            // Use the same chaining values (IVs) as in SHA1,
             // The convention is little endian however (same as MD4)
-            _stateMD160[0] =  0x67452301;
-            _stateMD160[1] =  0xefcdab89;
-            _stateMD160[2] =  0x98badcfe;
-            _stateMD160[3] =  0x10325476;
-            _stateMD160[4] =  0xc3d2e1f0;
+            _stateMD160[0] = 0x67452301;
+            _stateMD160[1] = 0xefcdab89;
+            _stateMD160[2] = 0x98badcfe;
+            _stateMD160[3] = 0x10325476;
+            _stateMD160[4] = 0xc3d2e1f0;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe void _HashData(byte[] partIn, int ibStart, int cbSize) {
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe void _HashData(byte[] partIn, int ibStart, int cbSize)
+        {
             int bufferLen;
             int partInLen = cbSize;
             int partInBase = ibStart;
 
             /* Compute length of buffer */
-            bufferLen = (int) (_count & 0x3f);
+            bufferLen = (int)(_count & 0x3f);
 
             /* Update number of bytes */
             _count += partInLen;
 
-            fixed (uint* stateMD160 = _stateMD160) {
-                fixed (byte* buffer = _buffer) {
-                    fixed (uint* blockDWords = _blockDWords) {
-                        if ((bufferLen > 0) && (bufferLen + partInLen >= 64)) {
-                            Buffer.InternalBlockCopy(partIn, partInBase, _buffer, bufferLen, 64 - bufferLen);
+            fixed (uint* stateMD160 = _stateMD160)
+            {
+                fixed (byte* buffer = _buffer)
+                {
+                    fixed (uint* blockDWords = _blockDWords)
+                    {
+                        if ((bufferLen > 0) && (bufferLen + partInLen >= 64))
+                        {
+                            Buffer.InternalBlockCopy(
+                                partIn,
+                                partInBase,
+                                _buffer,
+                                bufferLen,
+                                64 - bufferLen
+                            );
                             partInBase += (64 - bufferLen);
                             partInLen -= (64 - bufferLen);
                             MDTransform(blockDWords, stateMD160, buffer);
@@ -103,27 +122,36 @@ namespace System.Security.Cryptography {
                         }
 
                         /* Copy input to temporary buffer and hash */
-                        while (partInLen >= 64) {
+                        while (partInLen >= 64)
+                        {
                             Buffer.InternalBlockCopy(partIn, partInBase, _buffer, 0, 64);
                             partInBase += 64;
                             partInLen -= 64;
                             MDTransform(blockDWords, stateMD160, buffer);
                         }
 
-                        if (partInLen > 0) {
-                            Buffer.InternalBlockCopy(partIn, partInBase, _buffer, bufferLen, partInLen);
+                        if (partInLen > 0)
+                        {
+                            Buffer.InternalBlockCopy(
+                                partIn,
+                                partInBase,
+                                _buffer,
+                                bufferLen,
+                                partInLen
+                            );
                         }
                     }
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private byte[] _EndHash() {
-            byte[]          pad;
-            int             padLen;
-            long            bitCount;
-            byte[]          hash = new byte[20];
+        [System.Security.SecurityCritical] // auto-generated
+        private byte[] _EndHash()
+        {
+            byte[] pad;
+            int padLen;
+            long bitCount;
+            byte[] hash = new byte[20];
 
             /* Compute padding: 80 00 00 ... 00 00 <bit count>
              */
@@ -139,27 +167,27 @@ namespace System.Security.Cryptography {
             bitCount = _count * 8;
 
             // The convention for RIPEMD is little endian (the same as MD4)
-            pad[padLen-1] = (byte) ((bitCount >> 56) & 0xff);
-            pad[padLen-2] = (byte) ((bitCount >> 48) & 0xff);
-            pad[padLen-3] = (byte) ((bitCount >> 40) & 0xff);
-            pad[padLen-4] = (byte) ((bitCount >> 32) & 0xff);
-            pad[padLen-5] = (byte) ((bitCount >> 24) & 0xff);
-            pad[padLen-6] = (byte) ((bitCount >> 16) & 0xff);
-            pad[padLen-7] = (byte) ((bitCount >> 8) & 0xff);
-            pad[padLen-8] = (byte) ((bitCount >> 0) & 0xff);
+            pad[padLen - 1] = (byte)((bitCount >> 56) & 0xff);
+            pad[padLen - 2] = (byte)((bitCount >> 48) & 0xff);
+            pad[padLen - 3] = (byte)((bitCount >> 40) & 0xff);
+            pad[padLen - 4] = (byte)((bitCount >> 32) & 0xff);
+            pad[padLen - 5] = (byte)((bitCount >> 24) & 0xff);
+            pad[padLen - 6] = (byte)((bitCount >> 16) & 0xff);
+            pad[padLen - 7] = (byte)((bitCount >> 8) & 0xff);
+            pad[padLen - 8] = (byte)((bitCount >> 0) & 0xff);
 
             /* Digest padding */
             _HashData(pad, 0, pad.Length);
 
             /* Store digest */
-            Utils.DWORDToLittleEndian (hash, _stateMD160, 5);
+            Utils.DWORDToLittleEndian(hash, _stateMD160, 5);
 
             HashValue = hash;
             return hash;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private static unsafe void MDTransform (uint* blockDWords, uint* state, byte* block)
+        [System.Security.SecurityCritical] // auto-generated
+        private static unsafe void MDTransform(uint* blockDWords, uint* state, byte* block)
         {
             uint aa = state[0];
             uint bb = state[1];
@@ -173,16 +201,16 @@ namespace System.Security.Cryptography {
             uint ddd = dd;
             uint eee = ee;
 
-            Utils.DWORDFromLittleEndian (blockDWords, 16, block);
+            Utils.DWORDFromLittleEndian(blockDWords, 16, block);
 
             /*
                 As we don't have macros in C# and we don't want to pay the cost of a function call
-                (which BTW is quite important here as we would have to pass 5 args by ref in 
+                (which BTW is quite important here as we would have to pass 5 args by ref in
                 16 * 10 = 160 function calls)
                 we'll prefer a less compact code to a less performant code
             */
 
-            // Left Round 1 
+            // Left Round 1
             // FF(ref aa, ref bb, ref cc, ref dd, ref ee, blockDWords[0], 11);
             aa += blockDWords[0] + F(bb, cc, dd);
             aa = (aa << 11 | aa >> (32 - 11)) + ee;
@@ -263,7 +291,7 @@ namespace System.Security.Cryptography {
             aa = (aa << 8 | aa >> (32 - 8)) + ee;
             cc = (cc << 10 | cc >> (32 - 10));
 
-            // Left Round 2 
+            // Left Round 2
             // GG(ref ee, ref aa, ref bb, ref cc, ref dd, blockDWords[7], 7);
             ee += G(aa, bb, cc) + blockDWords[7] + 0x5a827999;
             ee = (ee << 7 | ee >> (32 - 7)) + dd;
@@ -344,7 +372,7 @@ namespace System.Security.Cryptography {
             ee = (ee << 12 | ee >> (32 - 12)) + dd;
             bb = (bb << 10 | bb >> (32 - 10));
 
-            // Left Round 3 
+            // Left Round 3
             // HH(ref dd, ref ee, ref aa, ref bb, ref cc, blockDWords[3], 11);
             dd += H(ee, aa, bb) + blockDWords[3] + 0x6ed9eba1;
             dd = (dd << 11 | dd >> (32 - 11)) + cc;
@@ -425,7 +453,7 @@ namespace System.Security.Cryptography {
             dd = (dd << 5 | dd >> (32 - 5)) + cc;
             aa = (aa << 10 | aa >> (32 - 10));
 
-            // Left Round 4 
+            // Left Round 4
             // II(ref cc, ref dd, ref ee, ref aa, ref bb, blockDWords[1], 11);
             cc += I(dd, ee, aa) + blockDWords[1] + 0x8f1bbcdc;
             cc = (cc << 11 | cc >> (32 - 11)) + bb;
@@ -506,7 +534,7 @@ namespace System.Security.Cryptography {
             cc = (cc << 12 | cc >> (32 - 12)) + bb;
             ee = (ee << 10 | ee >> (32 - 10));
 
-            // Left Round 5 
+            // Left Round 5
             // JJ(ref bb, ref cc, ref dd, ref ee, ref aa, blockDWords[4], 9);
             bb += J(cc, dd, ee) + blockDWords[4] + 0xa953fd4e;
             bb = (bb << 9 | bb >> (32 - 9)) + aa;
@@ -587,7 +615,7 @@ namespace System.Security.Cryptography {
             bb = (bb << 6 | bb >> (32 - 6)) + aa;
             dd = (dd << 10 | dd >> (32 - 10));
 
-            // Parallel Right Round 1 
+            // Parallel Right Round 1
             // JJJ(ref aaa, ref bbb, ref ccc, ref ddd, ref eee, blockDWords[5], 8);
             aaa += J(bbb, ccc, ddd) + blockDWords[5] + 0x50a28be6;
             aaa = (aaa << 8 | aaa >> (32 - 8)) + eee;
@@ -668,8 +696,8 @@ namespace System.Security.Cryptography {
             aaa = (aaa << 6 | aaa >> (32 - 6)) + eee;
             ccc = (ccc << 10 | ccc >> (32 - 10));
 
-            // Parallel Right Round 2 
-            // III(ref eee, ref aaa, ref bbb, ref ccc, ref ddd, blockDWords[6], 9); 
+            // Parallel Right Round 2
+            // III(ref eee, ref aaa, ref bbb, ref ccc, ref ddd, blockDWords[6], 9);
             eee += I(aaa, bbb, ccc) + blockDWords[6] + 0x5c4dd124;
             eee = (eee << 9 | eee >> (32 - 9)) + ddd;
             bbb = (bbb << 10 | bbb >> (32 - 10));
@@ -911,7 +939,7 @@ namespace System.Security.Cryptography {
             ccc = (ccc << 8 | ccc >> (32 - 8)) + bbb;
             eee = (eee << 10 | eee >> (32 - 10));
 
-            // Parallel Right Round 5 
+            // Parallel Right Round 5
             // FFF(ref bbb, ref ccc, ref ddd, ref eee, ref aaa, blockDWords[12], 8);
             bbb += F(ccc, ddd, eee) + blockDWords[12];
             bbb = (bbb << 8 | bbb >> (32 - 8)) + aaa;
@@ -1002,23 +1030,28 @@ namespace System.Security.Cryptography {
         }
 
         // The five basic functions
-        private static uint F (uint x, uint y, uint z) {
+        private static uint F(uint x, uint y, uint z)
+        {
             return (x ^ y ^ z);
         }
 
-        private static uint G (uint x, uint y, uint z) {
+        private static uint G(uint x, uint y, uint z)
+        {
             return ((x & y) | (~x & z));
         }
 
-        private static uint H (uint x, uint y, uint z) {
+        private static uint H(uint x, uint y, uint z)
+        {
             return ((x | ~y) ^ z);
         }
 
-        private static uint I (uint x, uint y, uint z) {
+        private static uint I(uint x, uint y, uint z)
+        {
             return ((x & z) | (y & ~z));
         }
 
-        private static uint J (uint x, uint y, uint z) {
+        private static uint J(uint x, uint y, uint z)
+        {
             return (x ^ (y | ~z));
         }
     }

@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-
 using Moq.Language;
 using Moq.Language.Flow;
 
@@ -38,7 +37,6 @@ namespace Moq.Protected
         /// <param name="expression">Lambda expression that specifies the expected method invocation.</param>
         /// <seealso cref="Mock{T}.Setup{TResult}(Expression{Func{T, TResult}})"/>
         ISetup<T, TResult> Setup<TResult>(Expression<Func<TAnalog, TResult>> expression);
-
 
         /// <summary>
         ///   Specifies a setup on the mocked type for a call to a property setter.
@@ -79,7 +77,9 @@ namespace Moq.Protected
         /// </summary>
         /// <typeparam name="TProperty">Type of the property. Typically omitted as it can be inferred from the expression.</typeparam>
         /// <param name="expression">Lambda expression that specifies the property getter.</param>
-        ISetupGetter<T, TProperty> SetupGet<TProperty>(Expression<Func<TAnalog, TProperty>> expression);
+        ISetupGetter<T, TProperty> SetupGet<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression
+        );
 
         /// <summary>
         /// Specifies that the given property should have "property behavior",
@@ -89,14 +89,19 @@ namespace Moq.Protected
         /// <typeparam name="TProperty">Type of the property. Typically omitted as it can be inferred from the expression.</typeparam>
         /// <param name="expression">Lambda expression that specifies the property.</param>
         /// <param name="initialValue">Initial value for the property.</param>
-        Mock<T> SetupProperty<TProperty>(Expression<Func<TAnalog, TProperty>> expression, TProperty initialValue = default(TProperty));
+        Mock<T> SetupProperty<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression,
+            TProperty initialValue = default(TProperty)
+        );
 
         /// <summary>
         /// Return a sequence of values, once per call.
         /// </summary>
         /// <typeparam name="TResult">Type of the return value. Typically omitted as it can be inferred from the expression.</typeparam>
         /// <param name="expression">Lambda expression that specifies the expected method invocation.</param>
-        ISetupSequentialResult<TResult> SetupSequence<TResult>(Expression<Func<TAnalog, TResult>> expression);
+        ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            Expression<Func<TAnalog, TResult>> expression
+        );
 
         /// <summary>
         /// Performs a sequence of actions, one per call.
@@ -115,7 +120,11 @@ namespace Moq.Protected
         /// </param>
         /// <param name="failMessage">Message to include in the thrown <see cref="MockException"/> if verification fails.</param>
         /// <exception cref="MockException">The specified invocation did not occur (or did not occur the specified number of times).</exception>
-        void Verify(Expression<Action<TAnalog>> expression, Times? times = null, string failMessage = null);
+        void Verify(
+            Expression<Action<TAnalog>> expression,
+            Times? times = null,
+            string failMessage = null
+        );
 
         /// <summary>
         /// Verifies that a specific invocation matching the given expression was performed on the mock.
@@ -129,7 +138,11 @@ namespace Moq.Protected
         /// </param>
         /// <param name="failMessage">Message to include in the thrown <see cref="MockException"/> if verification fails.</param>
         /// <exception cref="MockException">The specified invocation did not occur (or did not occur the specified number of times).</exception>
-        void Verify<TResult>(Expression<Func<TAnalog, TResult>> expression, Times? times = null, string failMessage = null);
+        void Verify<TResult>(
+            Expression<Func<TAnalog, TResult>> expression,
+            Times? times = null,
+            string failMessage = null
+        );
 
         /// <summary>
         ///   Verifies that a property was set on the mock.
@@ -143,7 +156,11 @@ namespace Moq.Protected
         /// <exception cref="MockException">
         ///   The invocation was not called the number of times specified by <paramref name="times"/>.
         /// </exception>
-        void VerifySet(Action<TAnalog> setterExpression, Times? times = null, string failMessage = null);
+        void VerifySet(
+            Action<TAnalog> setterExpression,
+            Times? times = null,
+            string failMessage = null
+        );
 
         /// <summary>
         /// Verifies that a property was read on the mock.
@@ -156,6 +173,10 @@ namespace Moq.Protected
         /// </param>
         /// <param name="failMessage">Message to include in the thrown <see cref="MockException"/> if verification fails.</param>
         /// <exception cref="MockException">The specified invocation did not occur (or did not occur the specified number of times).</exception>
-        void VerifyGet<TProperty>(Expression<Func<TAnalog, TProperty>> expression, Times? times = null, string failMessage = null);
+        void VerifyGet<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression,
+            Times? times = null,
+            string failMessage = null
+        );
     }
 }

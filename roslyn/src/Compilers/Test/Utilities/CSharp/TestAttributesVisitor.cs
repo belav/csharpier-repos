@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             foreach (var member in type.GetMembers())
             {
                 // Skip accessors since those are covered by associated symbol.
-                if (member.IsAccessor()) continue;
+                if (member.IsAccessor())
+                    continue;
                 Visit(member);
             }
         }
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ReportSymbol(typeParameter);
         }
 
-        private void VisitList<TSymbol>(ImmutableArray<TSymbol> symbols) where TSymbol : Symbol
+        private void VisitList<TSymbol>(ImmutableArray<TSymbol> symbols)
+            where TSymbol : Symbol
         {
             foreach (var symbol in symbols)
             {
@@ -138,7 +140,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         protected virtual void ReportSymbol(Symbol symbol)
         {
             var type = (symbol as TypeSymbol) ?? symbol.GetTypeOrReturnType().Type;
-            var attribute = GetTargetAttribute((symbol is MethodSymbol method) ? method.GetReturnTypeAttributes() : symbol.GetAttributes());
+            var attribute = GetTargetAttribute(
+                (symbol is MethodSymbol method)
+                    ? method.GetReturnTypeAttributes()
+                    : symbol.GetAttributes()
+            );
             Debug.Assert((!TypeRequiresAttribute(type)) || (attribute != null));
             if (attribute == null)
             {
@@ -158,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 
             Assert.NotNull(attribute.AttributeClass);
             var name = attribute.AttributeClass!.Name;
-            if (name.EndsWith("Attribute")) name = name.Substring(0, name.Length - 9);
+            if (name.EndsWith("Attribute"))
+                name = name.Substring(0, name.Length - 9);
             builder.Append(name);
 
             var arguments = attribute.ConstructorArguments.ToImmutableArray();
@@ -201,15 +208,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 
         protected abstract bool TypeRequiresAttribute(TypeSymbol? type);
 
-        protected abstract CSharpAttributeData? GetTargetAttribute(ImmutableArray<CSharpAttributeData> attributes);
+        protected abstract CSharpAttributeData? GetTargetAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        );
 
-        protected static CSharpAttributeData? GetAttribute(ImmutableArray<CSharpAttributeData> attributes, string namespaceName, string name)
+        protected static CSharpAttributeData? GetAttribute(
+            ImmutableArray<CSharpAttributeData> attributes,
+            string namespaceName,
+            string name
+        )
         {
             foreach (var attribute in attributes)
             {
                 Assert.NotNull(attribute.AttributeConstructor);
                 var containingType = attribute.AttributeConstructor!.ContainingType;
-                if (containingType.Name == name && containingType.ContainingNamespace.QualifiedName == namespaceName)
+                if (
+                    containingType.Name == name
+                    && containingType.ContainingNamespace.QualifiedName == namespaceName
+                )
                 {
                     return attribute;
                 }

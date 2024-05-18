@@ -10,22 +10,33 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForDynamic>>
+public class RoutingDynamicOrderTest
+    : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForDynamic>>
 {
     public RoutingDynamicOrderTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupForDynamicOrder>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<RoutingWebSite.StartupForDynamicOrder>();
 
     public WebApplicationFactory<StartupForDynamic> Factory { get; }
 
     [Fact]
     public async Task PrefersAttributeRoutesOverDynamicControllerRoutes()
     {
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.AttributeRouteDynamicRoute));
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite
+                    .StartupForDynamicOrder
+                    .DynamicOrderScenarios
+                    .AttributeRouteDynamicRoute
+            )
+        );
 
         var client = factory.CreateClient();
 
@@ -45,9 +56,16 @@ public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSi
     [Fact]
     public async Task DynamicRoutesAreMatchedInDefinitionOrderOverPrecedence()
     {
-        AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", isEnabled: true);
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.MultipleDynamicRoute));
+        AppContext.SetSwitch(
+            "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
+            isEnabled: true
+        );
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.MultipleDynamicRoute
+            )
+        );
 
         var client = factory.CreateClient();
 
@@ -68,9 +86,19 @@ public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSi
     [Fact]
     public async Task ConventionalRoutesDefinedEarlierWinOverDynamicControllerRoutes()
     {
-        AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", isEnabled: true);
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.ConventionalRouteDynamicRoute));
+        AppContext.SetSwitch(
+            "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
+            isEnabled: true
+        );
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite
+                    .StartupForDynamicOrder
+                    .DynamicOrderScenarios
+                    .ConventionalRouteDynamicRoute
+            )
+        );
 
         var client = factory.CreateClient();
 
@@ -90,9 +118,19 @@ public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSi
     [Fact]
     public async Task ConventionalRoutesDefinedLaterLooseToDynamicControllerRoutes()
     {
-        AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", isEnabled: true);
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.ConventionalRouteDynamicRoute));
+        AppContext.SetSwitch(
+            "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
+            isEnabled: true
+        );
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite
+                    .StartupForDynamicOrder
+                    .DynamicOrderScenarios
+                    .ConventionalRouteDynamicRoute
+            )
+        );
 
         var client = factory.CreateClient();
 
@@ -113,9 +151,19 @@ public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSi
     [Fact]
     public async Task DynamicPagesDefinedEarlierWinOverDynamicControllers()
     {
-        AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", isEnabled: true);
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.DynamicControllerAndPages));
+        AppContext.SetSwitch(
+            "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
+            isEnabled: true
+        );
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite
+                    .StartupForDynamicOrder
+                    .DynamicOrderScenarios
+                    .DynamicControllerAndPages
+            )
+        );
 
         var client = factory.CreateClient();
         // Arrange
@@ -134,9 +182,19 @@ public class RoutingDynamicOrderTest : IClassFixture<MvcTestFixture<RoutingWebSi
     [Fact]
     public async Task DynamicPagesDefinedLaterLooseOverDynamicControllers()
     {
-        AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", isEnabled: true);
-        var factory = Factory
-            .WithWebHostBuilder(b => b.UseSetting("Scenario", RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.DynamicControllerAndPages));
+        AppContext.SetSwitch(
+            "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
+            isEnabled: true
+        );
+        var factory = Factory.WithWebHostBuilder(b =>
+            b.UseSetting(
+                "Scenario",
+                RoutingWebSite
+                    .StartupForDynamicOrder
+                    .DynamicOrderScenarios
+                    .DynamicControllerAndPages
+            )
+        );
 
         var client = factory.CreateClient();
 

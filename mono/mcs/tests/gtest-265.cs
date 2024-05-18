@@ -2,9 +2,9 @@
 
 class Test
 {
-        public static void Main ()
-        {
-                A x = new A ();
-                x.Whoa<int> (null);
-        }
+    public static void Main()
+    {
+        A x = new A();
+        x.Whoa<int>(null);
+    }
 }

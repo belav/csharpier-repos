@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IStoreStoredProcedureReturnValue
+public class StoreStoredProcedureReturnValue
+    : ColumnBase<ColumnMappingBase>,
+        IStoreStoredProcedureReturnValue
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,10 +23,9 @@ public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IS
         string name,
         string type,
         StoreStoredProcedure storedProcedure,
-        RelationalTypeMapping? storeTypeMapping = null)
-        : base(name, type, storedProcedure, storeTypeMapping)
-    {
-    }
+        RelationalTypeMapping? storeTypeMapping = null
+    )
+        : base(name, type, storedProcedure, storeTypeMapping) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +33,7 @@ public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IS
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual StoreStoredProcedure StoredProcedure
-        => (StoreStoredProcedure)Table;
+    public virtual StoreStoredProcedure StoredProcedure => (StoreStoredProcedure)Table;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,10 +41,13 @@ public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IS
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping GetDefaultStoreTypeMapping()
-        => PropertyMappings.Count != 0
+    protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
+        PropertyMappings.Count != 0
             ? PropertyMappings[0].TypeMapping
-            : (RelationalTypeMapping)Table.Model.Model.GetModelDependencies().TypeMappingSource.FindMapping(typeof(int))!;
+            : (RelationalTypeMapping)
+                Table
+                    .Model.Model.GetModelDependencies()
+                    .TypeMappingSource.FindMapping(typeof(int))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +55,10 @@ public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IS
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoreStoredProcedureReturnValue)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoreStoredProcedureReturnValue)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,10 +66,14 @@ public class StoreStoredProcedureReturnValue : ColumnBase<ColumnMappingBase>, IS
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoreStoredProcedureReturnValue)this).ToDebugString(),
-            () => ((IStoreStoredProcedureReturnValue)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoreStoredProcedureReturnValue)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IStoreStoredProcedure IStoreStoredProcedureReturnValue.StoredProcedure

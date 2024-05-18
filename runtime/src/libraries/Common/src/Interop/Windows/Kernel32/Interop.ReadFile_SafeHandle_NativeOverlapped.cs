@@ -15,7 +15,8 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToRead,
             IntPtr numBytesRead_mustBeZero,
-            NativeOverlapped* overlapped);
+            NativeOverlapped* overlapped
+        );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         internal static unsafe partial int ReadFile(
@@ -23,6 +24,7 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToRead,
             out int numBytesRead,
-            NativeOverlapped* overlapped);
+            NativeOverlapped* overlapped
+        );
     }
 }

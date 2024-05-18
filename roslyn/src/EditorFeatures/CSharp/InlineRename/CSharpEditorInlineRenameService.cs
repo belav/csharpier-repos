@@ -16,7 +16,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class CSharpEditorInlineRenameService(
         [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
-        IGlobalOptionService globalOptions) : AbstractEditorInlineRenameService(refactorNotifyServices, globalOptions)
-    {
-    }
+        IGlobalOptionService globalOptions
+    ) : AbstractEditorInlineRenameService(refactorNotifyServices, globalOptions) { }
 }

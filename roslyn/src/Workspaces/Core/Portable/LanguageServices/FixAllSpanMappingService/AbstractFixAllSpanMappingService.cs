@@ -16,33 +16,71 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
     internal abstract class AbstractFixAllSpanMappingService : IFixAllSpanMappingService
     {
-        protected abstract Task<ImmutableDictionary<Document, ImmutableArray<TextSpan>>> GetFixAllSpansIfWithinGlobalStatementAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken);
+        protected abstract Task<
+            ImmutableDictionary<Document, ImmutableArray<TextSpan>>
+        > GetFixAllSpansIfWithinGlobalStatementAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        );
 
         public Task<ImmutableDictionary<Document, ImmutableArray<TextSpan>>> GetFixAllSpansAsync(
-            Document document, TextSpan triggerSpan, FixAllScope fixAllScope, CancellationToken cancellationToken)
+            Document document,
+            TextSpan triggerSpan,
+            FixAllScope fixAllScope,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfFalse(fixAllScope is FixAllScope.ContainingMember or FixAllScope.ContainingType);
+            Contract.ThrowIfFalse(
+                fixAllScope is FixAllScope.ContainingMember or FixAllScope.ContainingType
+            );
 
             var fixAllInContainingMember = fixAllScope == FixAllScope.ContainingMember;
-            return GetFixAllSpansAsync(document, triggerSpan, fixAllInContainingMember, cancellationToken);
+            return GetFixAllSpansAsync(
+                document,
+                triggerSpan,
+                fixAllInContainingMember,
+                cancellationToken
+            );
         }
 
-        private async Task<ImmutableDictionary<Document, ImmutableArray<TextSpan>>> GetFixAllSpansAsync(
-            Document document, TextSpan span, bool fixAllInContainingMember, CancellationToken cancellationToken)
+        private async Task<
+            ImmutableDictionary<Document, ImmutableArray<TextSpan>>
+        > GetFixAllSpansAsync(
+            Document document,
+            TextSpan span,
+            bool fixAllInContainingMember,
+            CancellationToken cancellationToken
+        )
         {
-            var decl = await GetContainingMemberOrTypeDeclarationAsync(document, fixAllInContainingMember, span, cancellationToken).ConfigureAwait(false);
+            var decl = await GetContainingMemberOrTypeDeclarationAsync(
+                    document,
+                    fixAllInContainingMember,
+                    span,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (decl == null)
-                return await GetFixAllSpansIfWithinGlobalStatementAsync(document, span, cancellationToken).ConfigureAwait(false);
+                return await GetFixAllSpansIfWithinGlobalStatementAsync(
+                        document,
+                        span,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             if (fixAllInContainingMember)
             {
-                return ImmutableDictionary.CreateRange(SpecializedCollections.SingletonEnumerable(
-                    KeyValuePairUtil.Create(document, ImmutableArray.Create(decl.FullSpan))));
+                return ImmutableDictionary.CreateRange(
+                    SpecializedCollections.SingletonEnumerable(
+                        KeyValuePairUtil.Create(document, ImmutableArray.Create(decl.FullSpan))
+                    )
+                );
             }
             else
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var symbol = semanticModel.GetDeclaredSymbol(decl, cancellationToken);
                 if (symbol?.DeclaringSyntaxReferences.Length > 1)
                 {
@@ -50,10 +88,16 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                     var builder = PooledDictionary<Document, ArrayBuilder<TextSpan>>.GetInstance();
                     foreach (var syntaxRef in symbol.DeclaringSyntaxReferences)
                     {
-                        var documentForLocation = document.Project.GetDocument(syntaxRef.SyntaxTree);
+                        var documentForLocation = document.Project.GetDocument(
+                            syntaxRef.SyntaxTree
+                        );
                         Contract.ThrowIfNull(documentForLocation);
-                        var root = await syntaxRef.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-                        var partialDeclSpan = syntaxFacts.GetContainingTypeDeclaration(root, syntaxRef.Span.Start)?.FullSpan;
+                        var root = await syntaxRef
+                            .SyntaxTree.GetRootAsync(cancellationToken)
+                            .ConfigureAwait(false);
+                        var partialDeclSpan = syntaxFacts
+                            .GetContainingTypeDeclaration(root, syntaxRef.Span.Start)
+                            ?.FullSpan;
                         if (partialDeclSpan != null)
                         {
                             builder.MultiAdd(documentForLocation, partialDeclSpan.Value);
@@ -64,8 +108,11 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 }
                 else
                 {
-                    return ImmutableDictionary.CreateRange(SpecializedCollections.SingletonEnumerable(
-                        KeyValuePairUtil.Create(document, ImmutableArray.Create(decl.FullSpan))));
+                    return ImmutableDictionary.CreateRange(
+                        SpecializedCollections.SingletonEnumerable(
+                            KeyValuePairUtil.Create(document, ImmutableArray.Create(decl.FullSpan))
+                        )
+                    );
                 }
             }
         }
@@ -74,9 +121,12 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             Document document,
             bool fixAllInContainingMember,
             TextSpan span,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var startContainer = fixAllInContainingMember

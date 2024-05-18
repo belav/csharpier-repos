@@ -4,9 +4,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
@@ -22,11 +22,16 @@ public class RequestHeaderLimitsTests : LoggedTest
     [InlineData(5, 0)]
     [InlineData(5, 1)]
     [InlineData(5, 1337)]
-    public async Task ServerAcceptsRequestWithHeaderTotalSizeWithinLimit(int headerCount, int extraLimit)
+    public async Task ServerAcceptsRequestWithHeaderTotalSizeWithinLimit(
+        int headerCount,
+        int extraLimit
+    )
     {
         var headers = MakeHeaders(headerCount);
 
-        await using (var server = CreateServer(maxRequestHeadersTotalSize: headers.Length + extraLimit))
+        await using (
+            var server = CreateServer(maxRequestHeadersTotalSize: headers.Length + extraLimit)
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -40,7 +45,8 @@ public class RequestHeaderLimitsTests : LoggedTest
                     "hello, world",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -54,7 +60,10 @@ public class RequestHeaderLimitsTests : LoggedTest
     [InlineData(5, 5)]
     [InlineData(5, 6)]
     [InlineData(5, 1337)]
-    public async Task ServerAcceptsRequestWithHeaderCountWithinLimit(int headerCount, int maxHeaderCount)
+    public async Task ServerAcceptsRequestWithHeaderCountWithinLimit(
+        int headerCount,
+        int maxHeaderCount
+    )
     {
         var headers = MakeHeaders(headerCount);
 
@@ -72,7 +81,8 @@ public class RequestHeaderLimitsTests : LoggedTest
                     "hello, world",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -95,7 +105,8 @@ public class RequestHeaderLimitsTests : LoggedTest
                     "Connection: close",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -104,7 +115,10 @@ public class RequestHeaderLimitsTests : LoggedTest
     [InlineData(2, 1)]
     [InlineData(5, 1)]
     [InlineData(5, 4)]
-    public async Task ServerRejectsRequestWithHeaderCountOverLimit(int headerCount, int maxHeaderCount)
+    public async Task ServerRejectsRequestWithHeaderCountOverLimit(
+        int headerCount,
+        int maxHeaderCount
+    )
     {
         var headers = MakeHeaders(headerCount);
 
@@ -119,7 +133,8 @@ public class RequestHeaderLimitsTests : LoggedTest
                     "Connection: close",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -132,13 +147,18 @@ public class RequestHeaderLimitsTests : LoggedTest
             return host;
         }
 
-        return string.Join("", new[] { host }
-            .Concat(Enumerable
-            .Range(0, count - 1)
-            .Select(i => $"Header-{i}: value{i}\r\n")));
+        return string.Join(
+            "",
+            new[] { host }.Concat(
+                Enumerable.Range(0, count - 1).Select(i => $"Header-{i}: value{i}\r\n")
+            )
+        );
     }
 
-    private TestServer CreateServer(int? maxRequestHeaderCount = null, int? maxRequestHeadersTotalSize = null)
+    private TestServer CreateServer(
+        int? maxRequestHeaderCount = null,
+        int? maxRequestHeadersTotalSize = null
+    )
     {
         var options = new KestrelServerOptions { AddServerHeader = false };
 
@@ -152,9 +172,9 @@ public class RequestHeaderLimitsTests : LoggedTest
             options.Limits.MaxRequestHeadersTotalSize = maxRequestHeadersTotalSize.Value;
         }
 
-        return new TestServer(async httpContext => await httpContext.Response.WriteAsync("hello, world"), new TestServiceContext(LoggerFactory)
-        {
-            ServerOptions = options
-        });
+        return new TestServer(
+            async httpContext => await httpContext.Response.WriteAsync("hello, world"),
+            new TestServiceContext(LoggerFactory) { ServerOptions = options }
+        );
     }
 }

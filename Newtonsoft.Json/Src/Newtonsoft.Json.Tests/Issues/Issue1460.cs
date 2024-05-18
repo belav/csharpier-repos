@@ -31,14 +31,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities;
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 using System.Threading.Tasks;
 #endif
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Xml;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
+
 #if !NET20
 using System.Xml.Linq;
 #endif
@@ -71,7 +72,12 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw);
-            await JsonWriter.WriteValueAsync(writer, PrimitiveTypeCode.Object, null, CancellationToken.None);
+            await JsonWriter.WriteValueAsync(
+                writer,
+                PrimitiveTypeCode.Object,
+                null,
+                CancellationToken.None
+            );
 
             Assert.AreEqual("null", sw.ToString());
         }

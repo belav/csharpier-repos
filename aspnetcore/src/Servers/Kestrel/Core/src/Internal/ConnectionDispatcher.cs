@@ -7,14 +7,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal sealed class ConnectionDispatcher<T> where T : BaseConnectionContext
+internal sealed class ConnectionDispatcher<T>
+    where T : BaseConnectionContext
 {
     private readonly ServiceContext _serviceContext;
     private readonly Func<T, Task> _connectionDelegate;
     private readonly TransportConnectionManager _transportConnectionManager;
-    private readonly TaskCompletionSource _acceptLoopTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _acceptLoopTcs = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
-    public ConnectionDispatcher(ServiceContext serviceContext, Func<T, Task> connectionDelegate, TransportConnectionManager transportConnectionManager)
+    public ConnectionDispatcher(
+        ServiceContext serviceContext,
+        Func<T, Task> connectionDelegate,
+        TransportConnectionManager transportConnectionManager
+    )
     {
         _serviceContext = serviceContext;
         _connectionDelegate = connectionDelegate;
@@ -26,7 +33,11 @@ internal sealed class ConnectionDispatcher<T> where T : BaseConnectionContext
 
     public Task StartAcceptingConnections(IConnectionListener<T> listener)
     {
-        ThreadPool.UnsafeQueueUserWorkItem(StartAcceptingConnectionsCore, listener, preferLocal: false);
+        ThreadPool.UnsafeQueueUserWorkItem(
+            StartAcceptingConnectionsCore,
+            listener,
+            preferLocal: false
+        );
         return _acceptLoopTcs.Task;
     }
 
@@ -57,7 +68,14 @@ internal sealed class ConnectionDispatcher<T> where T : BaseConnectionContext
                     var metricsContext = Metrics.CreateContext(connection);
 
                     var kestrelConnection = new KestrelConnection<T>(
-                        id, _serviceContext, _transportConnectionManager, _connectionDelegate, connection, Log, metricsContext);
+                        id,
+                        _serviceContext,
+                        _transportConnectionManager,
+                        _connectionDelegate,
+                        connection,
+                        Log,
+                        metricsContext
+                    );
 
                     _transportConnectionManager.AddConnection(id, kestrelConnection);
 
@@ -71,7 +89,11 @@ internal sealed class ConnectionDispatcher<T> where T : BaseConnectionContext
             catch (Exception ex)
             {
                 // REVIEW: If the accept loop ends should this trigger a server shutdown? It will manifest as a hang
-                Log.LogCritical(0, ex, "The connection listener failed to accept any new connections.");
+                Log.LogCritical(
+                    0,
+                    ex,
+                    "The connection listener failed to accept any new connections."
+                );
             }
             finally
             {

@@ -31,11 +31,12 @@
                 }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                });
 
             [Fact]
             public async Task Should_transform_value()
@@ -49,7 +50,8 @@
             }
         }
 
-        public class StackingTransformers : IntegrationTest<StackingTransformers.DatabaseInitializer>
+        public class StackingTransformers
+            : IntegrationTest<StackingTransformers.DatabaseInitializer>
         {
             public class Source
             {
@@ -78,12 +80,13 @@
                 }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                });
 
             [Fact]
             public async Task Should_stack_transformers_in_order()
@@ -111,12 +114,16 @@
                 public string Value { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateProjection<Source, Dest>();
-                cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                cfg.CreateProfile("Other", p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!"));
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.CreateProfile(
+                        "Other",
+                        p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
+                    );
+                });
 
             public class Context : LocalDbContext
             {
@@ -145,7 +152,8 @@
             }
         }
 
-        public class StackingRootConfigAndProfileTransform : IntegrationTest<StackingRootConfigAndProfileTransform.DatabaseInitializer>
+        public class StackingRootConfigAndProfileTransform
+            : IntegrationTest<StackingRootConfigAndProfileTransform.DatabaseInitializer>
         {
             public class Source
             {
@@ -173,15 +181,20 @@
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
+
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
                 {
-                    p.CreateProjection<Source, Dest>();
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>();
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
                 });
-            });
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -195,7 +208,8 @@
             }
         }
 
-        public class TransformingValueTypes : IntegrationTest<TransformingValueTypes.DatabaseInitializer>
+        public class TransformingValueTypes
+            : IntegrationTest<TransformingValueTypes.DatabaseInitializer>
         {
             public class Source
             {
@@ -223,15 +237,20 @@
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.ValueTransformers.Add<int>(dest => dest * 2);
-                cfg.CreateProfile("Other", p =>
+
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
                 {
-                    p.CreateProjection<Source, Dest>();
-                    p.ValueTransformers.Add<int>(dest => dest + 3);
+                    cfg.ValueTransformers.Add<int>(dest => dest * 2);
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>();
+                            p.ValueTransformers.Add<int>(dest => dest + 3);
+                        }
+                    );
                 });
-            });
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -245,7 +264,8 @@
             }
         }
 
-        public class StackingRootAndProfileAndMemberConfig : IntegrationTest<StackingRootAndProfileAndMemberConfig.DatabaseInitializer>
+        public class StackingRootAndProfileAndMemberConfig
+            : IntegrationTest<StackingRootAndProfileAndMemberConfig.DatabaseInitializer>
         {
             public class Source
             {
@@ -274,16 +294,20 @@
                 }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
                 {
-                    p.CreateProjection<Source, Dest>()
-                        .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>()
+                                .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
                 });
-            });
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()
@@ -297,7 +321,8 @@
             }
         }
 
-        public class StackingTypeMapAndRootAndProfileAndMemberConfig : IntegrationTest<StackingTypeMapAndRootAndProfileAndMemberConfig.DatabaseInitializer>
+        public class StackingTypeMapAndRootAndProfileAndMemberConfig
+            : IntegrationTest<StackingTypeMapAndRootAndProfileAndMemberConfig.DatabaseInitializer>
         {
             public class Source
             {
@@ -325,17 +350,25 @@
                     base.Seed(context);
                 }
             }
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                cfg.CreateProfile("Other", p =>
+
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
                 {
-                    p.CreateProjection<Source, Dest>()
-                        .AddTransform<string>(dest => dest + ", for real,")
-                        .ForMember(d => d.Value, opt => opt.AddTransform(d => d + ", seriously"));
-                    p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>()
+                                .AddTransform<string>(dest => dest + ", for real,")
+                                .ForMember(
+                                    d => d.Value,
+                                    opt => opt.AddTransform(d => d + ", seriously")
+                                );
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
                 });
-            });
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()
@@ -344,7 +377,9 @@
                 {
                     var dest = await ProjectTo<Dest>(context.Sources).SingleAsync();
 
-                    dest.Value.ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
+                    dest.Value.ShouldBe(
+                        "Jimmy, seriously, for real, is straight up dope! No joke!"
+                    );
                 }
             }
         }

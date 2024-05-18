@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -29,9 +28,14 @@ namespace Moq.Tests
 
         [Theory]
         [InlineData(typeof(int), 42)]
-        public void Falls_back_to_default_generation_strategy_when_no_handler_available(Type type, object fallbackValue)
+        public void Falls_back_to_default_generation_strategy_when_no_handler_available(
+            Type type,
+            object fallbackValue
+        )
         {
-            var provider = new Provider((t, _) => t == type ? fallbackValue : throw new NotSupportedException());
+            var provider = new Provider(
+                (t, _) => t == type ? fallbackValue : throw new NotSupportedException()
+            );
             provider.Deregister(type);
 
             var actual = provider.GetDefaultValue(type);
@@ -55,11 +59,14 @@ namespace Moq.Tests
         public void Can_register_factory_for_generic_type()
         {
             var provider = new Provider();
-            provider.Register(typeof(IEnumerable<>), (type, __) =>
-            {
-                var elementType = type.GetGenericArguments()[0];
-                return Array.CreateInstance(elementType, 0);
-            });
+            provider.Register(
+                typeof(IEnumerable<>),
+                (type, __) =>
+                {
+                    var elementType = type.GetGenericArguments()[0];
+                    return Array.CreateInstance(elementType, 0);
+                }
+            );
 
             var actual = provider.GetDefaultValue(typeof(IEnumerable<int>));
 
@@ -71,11 +78,14 @@ namespace Moq.Tests
         public void Can_register_factory_for_array_type()
         {
             var provider = new Provider();
-            provider.Register(typeof(Array), (type, __) =>
-            {
-                var elementType = type.GetElementType();
-                return Array.CreateInstance(elementType, 0);
-            });
+            provider.Register(
+                typeof(Array),
+                (type, __) =>
+                {
+                    var elementType = type.GetElementType();
+                    return Array.CreateInstance(elementType, 0);
+                }
+            );
 
             var actual = provider.GetDefaultValue(typeof(int[]));
 
@@ -189,7 +199,8 @@ namespace Moq.Tests
             provider.Register(typeof(float), (_, __) => expectedFloatResult);
             provider.Register(typeof(string), (_, __) => expectedStringResult);
 
-            var actual = ((int, float, string))provider.GetDefaultValue(typeof(ValueTuple<int, float, string>));
+            var actual = ((int, float, string))
+                provider.GetDefaultValue(typeof(ValueTuple<int, float, string>));
 
             Assert.Equal(expectedIntResult, actual.Item1);
             Assert.Equal(expectedFloatResult, actual.Item2);
@@ -225,7 +236,6 @@ namespace Moq.Tests
         /// Subclass of <see cref="LookupOrFallbackDefaultValueProvider"/> used as a test surrogate.
         /// </summary>
         sealed class Provider : LookupOrFallbackDefaultValueProvider
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private Mock<object> mock;
@@ -249,12 +259,12 @@ namespace Moq.Tests
                 return base.GetDefaultValue(type, mock);
             }
 
-            new public void Deregister(Type factoryKey)
+            public new void Deregister(Type factoryKey)
             {
                 base.Deregister(factoryKey);
             }
 
-            new public void Register(Type factoryKey, Func<Type, Mock, object> factory)
+            public new void Register(Type factoryKey, Func<Type, Mock, object> factory)
             {
                 base.Register(factoryKey, factory);
             }

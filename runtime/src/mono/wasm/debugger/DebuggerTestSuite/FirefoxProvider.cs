@@ -21,46 +21,56 @@ internal class FirefoxProvider : WasmHostProvider
 {
     private WebSocket? _ideWebSocket;
     private FirefoxDebuggerProxy? _firefoxDebuggerProxy;
-    private static readonly Lazy<string> s_browserPath = new(() =>
-    {
-        string artifactsBinDir = Path.Combine(Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!, "..", "..", "..");
-        return BrowserLocator.FindFirefox(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
-    });
+    private static readonly Lazy<string> s_browserPath =
+        new(() =>
+        {
+            string artifactsBinDir = Path.Combine(
+                Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!,
+                "..",
+                "..",
+                ".."
+            );
+            return BrowserLocator.FindFirefox(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
+        });
 
-    public FirefoxProvider(string id, ILogger logger) : base(id, logger)
-    {
-    }
+    public FirefoxProvider(string id, ILogger logger)
+        : base(id, logger) { }
 
-    public async Task StartBrowserAndProxyAsync(HttpContext context,
-                                                string targetUrl,
-                                                int remoteDebuggingPort,
-                                                int proxyPort,
-                                                string messagePrefix,
-                                                ILoggerFactory loggerFactory,
-                                                CancellationTokenSource cts,
-                                                int browserReadyTimeoutMs = 20000,
-                                                string locale = "en-US")
+    public async Task StartBrowserAndProxyAsync(
+        HttpContext context,
+        string targetUrl,
+        int remoteDebuggingPort,
+        int proxyPort,
+        string messagePrefix,
+        ILoggerFactory loggerFactory,
+        CancellationTokenSource cts,
+        int browserReadyTimeoutMs = 20000,
+        string locale = "en-US"
+    )
     {
         if (_isDisposed)
             throw new ObjectDisposedException(nameof(FirefoxProvider));
 
         try
         {
-            string args = $"-profile {GetProfilePath(Id)} -headless -new-instance -private -start-debugger-server {remoteDebuggingPort} -UILocale {locale}";
+            string args =
+                $"-profile {GetProfilePath(Id)} -headless -new-instance -private -start-debugger-server {remoteDebuggingPort} -UILocale {locale}";
             ProcessStartInfo? psi = GetProcessStartInfo(s_browserPath.Value, args, targetUrl);
             string? line = await LaunchHostAsync(
-                                    psi,
-                                    context,
-                                    str =>
-                                    {
-                                        if (str?.Contains("Started devtools server on ") == true)
-                                            return $"http://localhost:{remoteDebuggingPort}";
+                    psi,
+                    context,
+                    str =>
+                    {
+                        if (str?.Contains("Started devtools server on ") == true)
+                            return $"http://localhost:{remoteDebuggingPort}";
 
-                                        return null;
-                                    },
-                                    messagePrefix,
-                                    browserReadyTimeoutMs,
-                                    cts.Token).ConfigureAwait(false);
+                        return null;
+                    },
+                    messagePrefix,
+                    browserReadyTimeoutMs,
+                    cts.Token
+                )
+                .ConfigureAwait(false);
 
             if (_process is null || line is null)
                 throw new Exception($"Failed to launch firefox");
@@ -84,21 +94,26 @@ internal class FirefoxProvider : WasmHostProvider
         _ideWebSocket = await context.WebSockets.AcceptWebSocketAsync();
 
         ArraySegment<byte> buff = new(new byte[10]);
-        _ = _ideWebSocket.ReceiveAsync(buff, cts.Token)
-                    .ContinueWith(t =>
-                    {
-                        // client has closed the webserver connection, Or
-                        // it has been cancelled.
-                        // so, we should kill the proxy, and firefox
-                        Dispose();
-                    }, TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.RunContinuationsAsynchronously)
-                    .ConfigureAwait(false);
+        _ = _ideWebSocket
+            .ReceiveAsync(buff, cts.Token)
+            .ContinueWith(
+                t =>
+                {
+                    // client has closed the webserver connection, Or
+                    // it has been cancelled.
+                    // so, we should kill the proxy, and firefox
+                    Dispose();
+                },
+                TaskContinuationOptions.NotOnRanToCompletion
+                    | TaskContinuationOptions.RunContinuationsAsynchronously
+            )
+            .ConfigureAwait(false);
 
         _firefoxDebuggerProxy = new FirefoxDebuggerProxy();
         TestHarnessProxy.RegisterNewProxy(Id, _firefoxDebuggerProxy);
         await _firefoxDebuggerProxy
-                .RunForTests(remoteDebuggingPort, proxyPort, Id, loggerFactory, _logger, cts)
-                .ConfigureAwait(false);
+            .RunForTests(remoteDebuggingPort, proxyPort, Id, loggerFactory, _logger, cts)
+            .ConfigureAwait(false);
     }
 
     public override void Dispose()
@@ -108,7 +123,9 @@ internal class FirefoxProvider : WasmHostProvider
 
         _isDisposing = true;
         if (_process?.HasExited == true)
-            _firefoxDebuggerProxy?.Fail(new Exception($"Firefox unexpectedly exited with code {_process.ExitCode}"));
+            _firefoxDebuggerProxy?.Fail(
+                new Exception($"Firefox unexpectedly exited with code {_process.ExitCode}")
+            );
         else
             _firefoxDebuggerProxy?.Shutdown();
 
@@ -138,7 +155,9 @@ internal class FirefoxProvider : WasmHostProvider
             user_pref("browser.dom.window.dump.enabled", true);
             """;
 
-        string profilePath = Path.GetFullPath(Path.Combine(DebuggerTestBase.DebuggerTestAppPath, $"test-profile-{Id}"));
+        string profilePath = Path.GetFullPath(
+            Path.Combine(DebuggerTestBase.DebuggerTestAppPath, $"test-profile-{Id}")
+        );
         if (Directory.Exists(profilePath))
             Directory.Delete(profilePath, recursive: true);
 

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,42 +36,58 @@ using System.Web.UI;
 
 namespace System.Web.Script.Services
 {
-	sealed class ScriptHandlerFactory : IHttpHandlerFactory
-	{
-		readonly WebServiceHandlerFactory _wsFactory;
-		public ScriptHandlerFactory () {
-			_wsFactory = new WebServiceHandlerFactory ();
-		}
-		#region IHttpHandlerFactory Members
+    sealed class ScriptHandlerFactory : IHttpHandlerFactory
+    {
+        readonly WebServiceHandlerFactory _wsFactory;
 
-		public IHttpHandler GetHandler (HttpContext context, string requestType, string url, string pathTranslated) {
-			HttpRequest request = context.Request;
-			string contentType = request.ContentType;
-			if (!String.IsNullOrEmpty (contentType) && contentType.StartsWith ("application/json", StringComparison.OrdinalIgnoreCase)) {
-				Type handlerType = null;
-				if (url.EndsWith (ProfileService.DefaultWebServicePath, StringComparison.Ordinal))
-					handlerType = typeof (ProfileService);
-				else
-				if (url.EndsWith (AuthenticationService.DefaultWebServicePath, StringComparison.Ordinal))
-					handlerType = typeof(AuthenticationService);
-				else {
-					handlerType = BuildManager.GetCompiledType (url);
-					if (handlerType == null)
-						handlerType = WebServiceParser.GetCompiledType (url, context);
-				}
+        public ScriptHandlerFactory()
+        {
+            _wsFactory = new WebServiceHandlerFactory();
+        }
 
-				return RestHandler.GetHandler (context, handlerType, url);
-			}
-			if (request.PathInfo.StartsWith ("/js", StringComparison.OrdinalIgnoreCase))
-				return new ClientProxyHandler (WebServiceParser.GetCompiledType (url, context), url);
+        #region IHttpHandlerFactory Members
 
-			return _wsFactory.GetHandler (context, requestType, url, pathTranslated);
-		}
+        public IHttpHandler GetHandler(
+            HttpContext context,
+            string requestType,
+            string url,
+            string pathTranslated
+        )
+        {
+            HttpRequest request = context.Request;
+            string contentType = request.ContentType;
+            if (
+                !String.IsNullOrEmpty(contentType)
+                && contentType.StartsWith("application/json", StringComparison.OrdinalIgnoreCase)
+            )
+            {
+                Type handlerType = null;
+                if (url.EndsWith(ProfileService.DefaultWebServicePath, StringComparison.Ordinal))
+                    handlerType = typeof(ProfileService);
+                else if (
+                    url.EndsWith(
+                        AuthenticationService.DefaultWebServicePath,
+                        StringComparison.Ordinal
+                    )
+                )
+                    handlerType = typeof(AuthenticationService);
+                else
+                {
+                    handlerType = BuildManager.GetCompiledType(url);
+                    if (handlerType == null)
+                        handlerType = WebServiceParser.GetCompiledType(url, context);
+                }
 
-		public void ReleaseHandler (IHttpHandler handler) {
+                return RestHandler.GetHandler(context, handlerType, url);
+            }
+            if (request.PathInfo.StartsWith("/js", StringComparison.OrdinalIgnoreCase))
+                return new ClientProxyHandler(WebServiceParser.GetCompiledType(url, context), url);
 
-		}
+            return _wsFactory.GetHandler(context, requestType, url, pathTranslated);
+        }
 
-		#endregion
-	}
+        public void ReleaseHandler(IHttpHandler handler) { }
+
+        #endregion
+    }
 }

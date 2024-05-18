@@ -14,8 +14,8 @@ using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Internal;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -25,26 +25,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Tests;
 public class WebHostTests : LoggedTest
 {
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "Test expects not supported error. Skip Windows because named pipes supports Windows.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "Test expects not supported error. Skip Windows because named pipes supports Windows."
+    )]
     public async Task ListenNamedPipeEndpoint_NonWindowsOperatingSystem_ErrorAsync()
     {
         // Arrange
-        var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
+        var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseKestrel(o =>
+                {
+                    o.ListenNamedPipe("Pipename");
+                })
+                .Configure(app =>
+                {
+                    app.Run(async context =>
                     {
-                        o.ListenNamedPipe("Pipename");
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
+                        await context.Response.WriteAsync("hello, world");
                     });
-            });
+                });
+        });
 
         using var host = builder.Build();
 
@@ -61,26 +63,25 @@ public class WebHostTests : LoggedTest
         // Arrange
         var transport = new TestConnectionListenerFactory();
 
-        var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
+        var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseKestrel(o =>
+                {
+                    o.ListenNamedPipe("Pipename");
+                })
+                .Configure(app =>
+                {
+                    app.Run(async context =>
                     {
-                        o.ListenNamedPipe("Pipename");
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
+                        await context.Response.WriteAsync("hello, world");
                     });
-                webHostBuilder.ConfigureServices(services =>
-                 {
-                     services.AddSingleton<IConnectionListenerFactory>(transport);
-                 });
+                });
+            webHostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton<IConnectionListenerFactory>(transport);
             });
+        });
 
         using var host = builder.Build();
 
@@ -92,11 +93,16 @@ public class WebHostTests : LoggedTest
         Assert.Equal("Pipename", transport.BoundEndPoint.PipeName);
     }
 
-    private sealed class TestConnectionListenerFactory : IConnectionListenerFactory, IConnectionListenerFactorySelector
+    private sealed class TestConnectionListenerFactory
+        : IConnectionListenerFactory,
+            IConnectionListenerFactorySelector
     {
         public NamedPipeEndPoint BoundEndPoint { get; private set; }
 
-        public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+        public ValueTask<IConnectionListener> BindAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        )
         {
             return ValueTask.FromResult<IConnectionListener>(new TestConnectionListener());
         }
@@ -115,7 +121,9 @@ public class WebHostTests : LoggedTest
         {
             public EndPoint EndPoint { get; }
 
-            public ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
+            public ValueTask<ConnectionContext> AcceptAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 return ValueTask.FromResult<ConnectionContext>(null);
             }
@@ -198,15 +206,24 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(pipeName, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http1;
-                        });
+                        o.ListenNamedPipe(
+                            pipeName,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = HttpProtocols.Http1;
+                            }
+                        );
                     })
                     .UseNamedPipes(options =>
                     {
                         var ps = new PipeSecurity();
-                        ps.AddAccessRule(new PipeAccessRule("Users", PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance, AccessControlType.Allow));
+                        ps.AddAccessRule(
+                            new PipeAccessRule(
+                                "Users",
+                                PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance,
+                                AccessControlType.Allow
+                            )
+                        );
 
                         options.PipeSecurity = ps;
                         options.CurrentUserOnly = false;
@@ -217,17 +234,19 @@ public class WebHostTests : LoggedTest
                         {
                             var serverName = Thread.CurrentPrincipal.Identity.Name;
 
-                            var namedPipeStream = context.Features.Get<IConnectionNamedPipeFeature>().NamedPipe;
+                            var namedPipeStream = context
+                                .Features.Get<IConnectionNamedPipeFeature>()
+                                .NamedPipe;
                             var impersonatedName = namedPipeStream.GetImpersonationUserName();
 
                             context.Response.Headers.Add("X-Server-Identity", serverName);
-                            context.Response.Headers.Add("X-Impersonated-Identity", impersonatedName);
+                            context.Response.Headers.Add(
+                                "X-Impersonated-Identity",
+                                impersonatedName
+                            );
 
                             var buffer = new byte[1024];
-                            while (await context.Request.Body.ReadAsync(buffer) != 0)
-                            {
-
-                            }
+                            while (await context.Request.Body.ReadAsync(buffer) != 0) { }
 
                             await context.Response.WriteAsync("hello, world");
                         });
@@ -260,7 +279,10 @@ public class WebHostTests : LoggedTest
             Assert.Equal("hello, world", responseText);
 
             var serverIdentity = string.Join(",", response.Headers.GetValues("X-Server-Identity"));
-            var impersonatedIdentity = string.Join(",", response.Headers.GetValues("X-Impersonated-Identity"));
+            var impersonatedIdentity = string.Join(
+                ",",
+                response.Headers.GetValues("X-Impersonated-Identity")
+            );
 
             Assert.Equal(serverIdentity.Split('\\')[1], impersonatedIdentity);
 
@@ -285,10 +307,13 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(pipeName, options =>
-                        {
-                            options.Protocols = protocols;
-                        });
+                        o.ListenNamedPipe(
+                            pipeName,
+                            options =>
+                            {
+                                options.Protocols = protocols;
+                            }
+                        );
                     })
                     .Configure(app =>
                     {
@@ -352,11 +377,14 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(pipeName, options =>
-                        {
-                            options.Protocols = protocols;
-                            options.UseHttps(TestResources.GetTestCertificate());
-                        });
+                        o.ListenNamedPipe(
+                            pipeName,
+                            options =>
+                            {
+                                options.Protocols = protocols;
+                                options.UseHttps(TestResources.GetTestCertificate());
+                            }
+                        );
                     })
                     .Configure(app =>
                     {
@@ -444,7 +472,10 @@ public class WebHostTests : LoggedTest
         Assert.Equal($"Now listening on: {url}", listeningOn.Message);
     }
 
-    private static HttpClient CreateClient(string pipeName, TokenImpersonationLevel? impersonationLevel = null)
+    private static HttpClient CreateClient(
+        string pipeName,
+        TokenImpersonationLevel? impersonationLevel = null
+    )
     {
         var httpHandler = new SocketsHttpHandler
         {
@@ -465,21 +496,27 @@ public class WebHostTests : LoggedTest
         private readonly string _pipeName;
         private readonly TokenImpersonationLevel? _impersonationLevel;
 
-        public NamedPipesConnectionFactory(string pipeName, TokenImpersonationLevel? impersonationLevel = null)
+        public NamedPipesConnectionFactory(
+            string pipeName,
+            TokenImpersonationLevel? impersonationLevel = null
+        )
         {
             _pipeName = pipeName;
             _impersonationLevel = impersonationLevel;
         }
 
-        public async ValueTask<Stream> ConnectAsync(SocketsHttpConnectionContext _,
-            CancellationToken cancellationToken = default)
+        public async ValueTask<Stream> ConnectAsync(
+            SocketsHttpConnectionContext _,
+            CancellationToken cancellationToken = default
+        )
         {
             var clientStream = new NamedPipeClientStream(
                 serverName: ".",
                 pipeName: _pipeName,
                 direction: PipeDirection.InOut,
                 options: PipeOptions.WriteThrough | PipeOptions.Asynchronous,
-                impersonationLevel: _impersonationLevel ?? TokenImpersonationLevel.Anonymous);
+                impersonationLevel: _impersonationLevel ?? TokenImpersonationLevel.Anonymous
+            );
 
             try
             {

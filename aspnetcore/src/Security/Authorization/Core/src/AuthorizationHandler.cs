@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Authorization;
 /// </summary>
 /// <typeparam name="TRequirement">The type of the requirement to handle.</typeparam>
 public abstract class AuthorizationHandler<TRequirement> : IAuthorizationHandler
-        where TRequirement : IAuthorizationRequirement
+    where TRequirement : IAuthorizationRequirement
 {
     /// <summary>
     /// Makes a decision if authorization is allowed.
@@ -30,7 +30,10 @@ public abstract class AuthorizationHandler<TRequirement> : IAuthorizationHandler
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected abstract Task HandleRequirementAsync(AuthorizationHandlerContext context, TRequirement requirement);
+    protected abstract Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        TRequirement requirement
+    );
 }
 
 /// <summary>
@@ -63,5 +66,9 @@ public abstract class AuthorizationHandler<TRequirement, TResource> : IAuthoriza
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
     /// <param name="resource">The resource to evaluate.</param>
-    protected abstract Task HandleRequirementAsync(AuthorizationHandlerContext context, TRequirement requirement, TResource resource);
+    protected abstract Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        TRequirement requirement,
+        TResource resource
+    );
 }

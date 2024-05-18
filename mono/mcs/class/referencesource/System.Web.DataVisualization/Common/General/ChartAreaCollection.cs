@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,7 +11,7 @@
 //
 //	Classes:	ChartAreaCollection
 //
-//  Purpose:	ChartAreaCollection class represents a strongly 
+//  Purpose:	ChartAreaCollection class represents a strongly
 //              typed collection of ChartArea objects.
 //
 //	Reviewed:	GS - Aug 8, 2002
@@ -25,40 +25,42 @@
 
 using System;
 using System.Collections;
-using System.Drawing;
 using System.ComponentModel;
-
+using System.Drawing;
 
 #endregion
 
 #if Microsoft_CONTROL
-	namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
-	/// <summary>
-    /// The ChartAreaCollection class represents a strongly typed collection of 
+    /// <summary>
+    /// The ChartAreaCollection class represents a strongly typed collection of
     /// ChartArea objects. Each chart area has a unique name in the collection
     /// and can be retrieved by name or by index.
-	/// </summary>
+    /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ChartAreaCollection : ChartNamedElementCollection<ChartArea>
-	{
-
-		#region Constructors
+    {
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaCollection"/> class.
         /// </summary>
         /// <param name="chartPicture">Parent chart picture.</param>
-		internal ChartAreaCollection(ChartPicture chartPicture) : base(chartPicture)
-		{
-		}
+        internal ChartAreaCollection(ChartPicture chartPicture)
+            : base(chartPicture) { }
 
         #endregion
 
@@ -66,7 +68,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the default chart area name.
         /// </summary>
-        internal string DefaultNameReference 
+        internal string DefaultNameReference
         {
             get { return this.Count > 0 ? this[0].Name : String.Empty; }
         }
@@ -79,7 +81,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="name">The new chart area name.</param>
         /// <returns></returns>
-        public ChartArea Add(string name) 
+        public ChartArea Add(string name)
         {
             ChartArea area = new ChartArea(name);
             this.Add(area);
@@ -102,6 +104,5 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-
     }
 }

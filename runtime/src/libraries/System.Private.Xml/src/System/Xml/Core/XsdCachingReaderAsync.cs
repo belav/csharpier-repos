@@ -49,7 +49,12 @@ namespace System.Xml
 
                             case XmlNodeType.EndElement:
                                 recordedNode = AddContent(_coreReader.NodeType);
-                                recordedNode.SetItemData(_coreReader.LocalName, _coreReader.Prefix, _coreReader.NamespaceURI, _coreReader.Depth);  //Only created for element node type
+                                recordedNode.SetItemData(
+                                    _coreReader.LocalName,
+                                    _coreReader.Prefix,
+                                    _coreReader.NamespaceURI,
+                                    _coreReader.Depth
+                                ); //Only created for element node type
                                 recordedNode.SetLineInfo(_lineInfo);
                                 break;
 
@@ -60,7 +65,9 @@ namespace System.Xml
                             case XmlNodeType.Whitespace:
                             case XmlNodeType.SignificantWhitespace:
                                 recordedNode = AddContent(_coreReader.NodeType);
-                                recordedNode.SetItemData(await _coreReader.GetValueAsync().ConfigureAwait(false));
+                                recordedNode.SetItemData(
+                                    await _coreReader.GetValueAsync().ConfigureAwait(false)
+                                );
                                 recordedNode.SetLineInfo(_lineInfo);
                                 recordedNode.Depth = _coreReader.Depth;
                                 break;
@@ -111,7 +118,10 @@ namespace System.Xml
                     if (_coreReader.NodeType != XmlNodeType.EndElement && !_readAhead)
                     { //will be true for IsDefault cases where we peek only one node ahead
                         int startDepth = _coreReader.Depth - 1;
-                        while (await _coreReader.ReadAsync().ConfigureAwait(false) && _coreReader.Depth > startDepth)
+                        while (
+                            await _coreReader.ReadAsync().ConfigureAwait(false)
+                            && _coreReader.Depth > startDepth
+                        )
                             ;
                     }
                     await _coreReader.ReadAsync().ConfigureAwait(false);

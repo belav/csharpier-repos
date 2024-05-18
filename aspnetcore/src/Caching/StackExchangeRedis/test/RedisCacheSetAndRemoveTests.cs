@@ -12,9 +12,10 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
 public class RedisCacheSetAndRemoveTests
 {
-    private const string SkipReason = "TODO: Disabled due to CI failure. " +
-        "These tests require Redis server to be started on the machine. Make sure to change the value of" +
-        "\"RedisTestConfig.RedisPort\" accordingly.";
+    private const string SkipReason =
+        "TODO: Disabled due to CI failure. "
+        + "These tests require Redis server to be started on the machine. Make sure to change the value of"
+        + "\"RedisTestConfig.RedisPort\" accordingly.";
 
     [Fact(Skip = SkipReason)]
     public void GetMissingKeyReturnsNull()
@@ -173,6 +174,7 @@ public class RedisCacheSetAndRemoveTests
     }
 
     static string Hex(byte[] value) => BitConverter.ToString(value);
+
     static string Hex(string value) => Hex(Encoding.UTF8.GetBytes(value));
 
     private static string Me([CallerMemberName] string caller = "") => caller;

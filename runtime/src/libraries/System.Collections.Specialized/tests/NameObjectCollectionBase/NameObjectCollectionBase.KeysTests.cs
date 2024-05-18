@@ -53,7 +53,8 @@ namespace System.Collections.Specialized.Tests
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Has finished enumerating
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Has reset enumerating
@@ -120,7 +121,10 @@ namespace System.Collections.Specialized.Tests
             Keys_CopyTo_Helper(nameObjectCollection, 0);
         }
 
-        private static void Keys_CopyTo_Helper(MyNameObjectCollection nameObjectCollection, int index)
+        private static void Keys_CopyTo_Helper(
+            MyNameObjectCollection nameObjectCollection,
+            int index
+        )
         {
             ICollection keys = nameObjectCollection.Keys;
             string[] keysArray = new string[index + keys.Count + index];
@@ -154,20 +158,42 @@ namespace System.Collections.Specialized.Tests
             NameObjectCollectionBase.KeysCollection keys = nameObjectCollection.Keys;
             ICollection keysCollection = keys;
 
-            AssertExtensions.Throws<ArgumentNullException>("array", () => keysCollection.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentException>("array", null, () => keysCollection.CopyTo(new string[count, count], 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => keysCollection.CopyTo(null, 0)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                null,
+                () => keysCollection.CopyTo(new string[count, count], 0)
+            );
 
             if (count > 0)
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => keysCollection.CopyTo(new string[0], 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => keysCollection.CopyTo(new string[count - 1], 0));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => keysCollection.CopyTo(new string[0], 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => keysCollection.CopyTo(new string[count - 1], 0)
+                );
 
                 Assert.Throws<InvalidCastException>(() => keysCollection.CopyTo(new Foo[count], 0));
             }
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => keysCollection.CopyTo(new string[count], -1));
-            AssertExtensions.Throws<ArgumentException>(null, () => keysCollection.CopyTo(new string[count], 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => keysCollection.CopyTo(new string[count], count + 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => keysCollection.CopyTo(new string[count], -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => keysCollection.CopyTo(new string[count], 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => keysCollection.CopyTo(new string[count], count + 1)
+            );
         }
     }
 }

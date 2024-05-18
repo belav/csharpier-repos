@@ -25,15 +25,22 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly ActiveDirectorySiteCollection _sites = new ActiveDirectorySiteCollection();
         private bool _siteRetrieved;
 
-        public ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName) : this(context, siteLinkName, ActiveDirectoryTransportType.Rpc, null)
-        {
-        }
+        public ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName)
+            : this(context, siteLinkName, ActiveDirectoryTransportType.Rpc, null) { }
 
-        public ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName, ActiveDirectoryTransportType transport) : this(context, siteLinkName, transport, null)
-        {
-        }
+        public ActiveDirectorySiteLink(
+            DirectoryContext context,
+            string siteLinkName,
+            ActiveDirectoryTransportType transport
+        )
+            : this(context, siteLinkName, transport, null) { }
 
-        public ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName, ActiveDirectoryTransportType transport, ActiveDirectorySchedule? schedule)
+        public ActiveDirectorySiteLink(
+            DirectoryContext context,
+            string siteLinkName,
+            ActiveDirectoryTransportType transport,
+            ActiveDirectorySchedule? schedule
+        )
         {
             ValidateArgument(context, siteLinkName, transport);
 
@@ -50,7 +57,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
 
                 string parentDN;
                 if (transport == ActiveDirectoryTransportType.Rpc)
@@ -67,7 +79,9 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
 
             try
@@ -78,15 +92,22 @@ namespace System.DirectoryServices.ActiveDirectory
                 cachedEntry.Properties["cost"].Value = appDefaultCost;
                 cachedEntry.Properties["replInterval"].Value = appDefaultInterval;
                 if (schedule != null)
-                    cachedEntry.Properties[nameof(schedule)].Value = schedule.GetUnmanagedSchedule();
+                    cachedEntry.Properties[nameof(schedule)].Value =
+                        schedule.GetUnmanagedSchedule();
             }
             catch (COMException e)
             {
                 if (e.ErrorCode == unchecked((int)0x80072030))
                 {
                     // if it is ADAM and transport type is SMTP, throw NotSupportedException.
-                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                    if (Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode) && transport == ActiveDirectoryTransportType.Smtp)
+                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        WellKnownDN.RootDSE
+                    );
+                    if (
+                        Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
+                        && transport == ActiveDirectoryTransportType.Smtp
+                    )
                     {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
@@ -100,7 +121,13 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName, ActiveDirectoryTransportType transport, bool existing, DirectoryEntry entry)
+        internal ActiveDirectorySiteLink(
+            DirectoryContext context,
+            string siteLinkName,
+            ActiveDirectoryTransportType transport,
+            bool existing,
+            DirectoryEntry entry
+        )
         {
             this.context = context;
             _name = siteLinkName;
@@ -109,12 +136,19 @@ namespace System.DirectoryServices.ActiveDirectory
             this.cachedEntry = entry;
         }
 
-        public static ActiveDirectorySiteLink FindByName(DirectoryContext context, string siteLinkName)
+        public static ActiveDirectorySiteLink FindByName(
+            DirectoryContext context,
+            string siteLinkName
+        )
         {
             return FindByName(context, siteLinkName, ActiveDirectoryTransportType.Rpc);
         }
 
-        public static ActiveDirectorySiteLink FindByName(DirectoryContext context, string siteLinkName, ActiveDirectoryTransportType transport)
+        public static ActiveDirectorySiteLink FindByName(
+            DirectoryContext context,
+            string siteLinkName,
+            ActiveDirectoryTransportType transport
+        )
         {
             ValidateArgument(context, siteLinkName, transport);
 
@@ -127,7 +161,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                 string containerDN = "CN=Inter-Site Transports,CN=Sites," + config;
                 if (transport == ActiveDirectoryTransportType.Rpc)
                     containerDN = "CN=IP," + containerDN;
@@ -142,30 +181,45 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
 
             try
             {
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                      "(&(objectClass=siteLink)(objectCategory=SiteLink)(name=" + Utils.GetEscapedFilterValue(siteLinkName) + "))",
-                                                      ActiveDirectorySite.s_distinguishedName,
-                                                      SearchScope.OneLevel,
-                                                      false, /* don't need paged search */
-                                                      false /* don't need to cache result */
-                                                      );
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=siteLink)(objectCategory=SiteLink)(name="
+                        + Utils.GetEscapedFilterValue(siteLinkName)
+                        + "))",
+                    ActiveDirectorySite.s_distinguishedName,
+                    SearchScope.OneLevel,
+                    false, /* don't need paged search */
+                    false /* don't need to cache result */
+                );
                 SearchResult? srchResult = adSearcher.FindOne();
                 if (srchResult == null)
                 {
                     // no such sitelink object
-                    Exception e = new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySiteLink), siteLinkName);
+                    Exception e = new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ActiveDirectorySiteLink),
+                        siteLinkName
+                    );
                     throw e;
                 }
                 else
                 {
                     DirectoryEntry connectionEntry = srchResult.GetDirectoryEntry();
                     // it is an existing site object
-                    ActiveDirectorySiteLink link = new ActiveDirectorySiteLink(context, siteLinkName, transport, true, connectionEntry);
+                    ActiveDirectorySiteLink link = new ActiveDirectorySiteLink(
+                        context,
+                        siteLinkName,
+                        transport,
+                        true,
+                        connectionEntry
+                    );
                     return link;
                 }
             }
@@ -174,15 +228,25 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (e.ErrorCode == unchecked((int)0x80072030))
                 {
                     // if it is ADAM and transport type is SMTP, throw NotSupportedException.
-                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                    if (Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode) && transport == ActiveDirectoryTransportType.Smtp)
+                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        WellKnownDN.RootDSE
+                    );
+                    if (
+                        Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
+                        && transport == ActiveDirectoryTransportType.Smtp
+                    )
                     {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
                     else
                     {
                         // object is not found since we cannot even find the container in which to search
-                        throw new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySiteLink), siteLinkName);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.DSNotFound,
+                            typeof(ActiveDirectorySiteLink),
+                            siteLinkName
+                        );
                     }
                 }
 
@@ -662,7 +726,11 @@ namespace System.DirectoryServices.ActiveDirectory
             _disposed = true;
         }
 
-        private static void ValidateArgument(DirectoryContext context, string siteLinkName, ActiveDirectoryTransportType transport)
+        private static void ValidateArgument(
+            DirectoryContext context,
+            string siteLinkName,
+            ActiveDirectoryTransportType transport
+        )
         {
             // basic validation first
             if (context == null)
@@ -687,8 +755,15 @@ namespace System.DirectoryServices.ActiveDirectory
             if (siteLinkName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(siteLinkName));
 
-            if (transport < ActiveDirectoryTransportType.Rpc || transport > ActiveDirectoryTransportType.Smtp)
-                throw new InvalidEnumArgumentException("value", (int)transport, typeof(ActiveDirectoryTransportType));
+            if (
+                transport < ActiveDirectoryTransportType.Rpc
+                || transport > ActiveDirectoryTransportType.Smtp
+            )
+                throw new InvalidEnumArgumentException(
+                    "value",
+                    (int)transport,
+                    typeof(ActiveDirectoryTransportType)
+                );
         }
 
         private void GetSites()
@@ -701,7 +776,12 @@ namespace System.DirectoryServices.ActiveDirectory
             string propertyName = "siteList";
 
             propertyList.Add(propertyName);
-            Hashtable values = Utils.GetValuesWithRangeRetrieval(cachedEntry, "(objectClass=*)", propertyList, SearchScope.Base);
+            Hashtable values = Utils.GetValuesWithRangeRetrieval(
+                cachedEntry,
+                "(objectClass=*)",
+                propertyList,
+                SearchScope.Base
+            );
             ArrayList? siteLists = (ArrayList?)values[propertyName.ToLowerInvariant()];
 
             // somehow no site list

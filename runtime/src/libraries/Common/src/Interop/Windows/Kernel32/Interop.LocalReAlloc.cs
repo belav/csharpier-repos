@@ -16,7 +16,8 @@ internal static partial class Interop
             // [NativeTypeName("HLOCAL")]
             nint hMem,
             nuint uBytes,
-            uint uFlags);
+            uint uFlags
+        );
 
         internal static unsafe void* LocalReAlloc(void* ptr, nuint byteCount) =>
             (void*)LocalReAlloc((nint)ptr, byteCount, LMEM_MOVEABLE);

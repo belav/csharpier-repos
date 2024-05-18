@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
             {
                 var initialList = new List<SyntaxToken>(modifiers);
                 var leadingTrivia = initialList.First().LeadingTrivia;
-                initialList[0] = initialList[0].WithLeadingTrivia(SpecializedCollections.EmptyEnumerable<SyntaxTrivia>());
+                initialList[0] = initialList[0]
+                    .WithLeadingTrivia(SpecializedCollections.EmptyEnumerable<SyntaxTrivia>());
 
                 var finalList = initialList.OrderBy(new Comparer()).ToList();
                 if (!initialList.SequenceEqual(finalList))

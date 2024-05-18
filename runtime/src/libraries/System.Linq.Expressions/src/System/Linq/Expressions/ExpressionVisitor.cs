@@ -21,9 +21,7 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Initializes a new instance of <see cref="ExpressionVisitor"/>.
         /// </summary>
-        protected ExpressionVisitor()
-        {
-        }
+        protected ExpressionVisitor() { }
 
         /// <summary>
         /// Dispatches the expression to one of the more specialized visit methods in this class.
@@ -88,7 +86,10 @@ namespace System.Linq.Expressions
         /// optionally replacing it with a new element.</param>
         /// <returns>The modified node list, if any of the elements were modified;
         /// otherwise, returns the original node list.</returns>
-        public static ReadOnlyCollection<T> Visit<T>(ReadOnlyCollection<T> nodes, Func<T, T> elementVisitor)
+        public static ReadOnlyCollection<T> Visit<T>(
+            ReadOnlyCollection<T> nodes,
+            Func<T, T> elementVisitor
+        )
         {
             ArgumentNullException.ThrowIfNull(nodes);
             ArgumentNullException.ThrowIfNull(elementVisitor);
@@ -127,7 +128,8 @@ namespace System.Linq.Expressions
         /// otherwise, returns the original expression.</returns>
         /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
         [return: NotNullIfNotNull(nameof(node))]
-        public T? VisitAndConvert<T>(T? node, string? callerName) where T : Expression
+        public T? VisitAndConvert<T>(T? node, string? callerName)
+            where T : Expression
         {
             if (node == null)
             {
@@ -150,7 +152,11 @@ namespace System.Linq.Expressions
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
         /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
-        public ReadOnlyCollection<T> VisitAndConvert<T>(ReadOnlyCollection<T> nodes, string? callerName) where T : Expression
+        public ReadOnlyCollection<T> VisitAndConvert<T>(
+            ReadOnlyCollection<T> nodes,
+            string? callerName
+        )
+            where T : Expression
         {
             ArgumentNullException.ThrowIfNull(nodes);
             T[]? newNodes = null;
@@ -211,7 +217,10 @@ namespace System.Linq.Expressions
         protected internal virtual Expression VisitBlock(BlockExpression node)
         {
             Expression[]? nodes = ExpressionVisitorUtils.VisitBlockExpressions(this, node);
-            ReadOnlyCollection<ParameterExpression> v = VisitAndConvert(node.Variables, "VisitBlock");
+            ReadOnlyCollection<ParameterExpression> v = VisitAndConvert(
+                node.Variables,
+                "VisitBlock"
+            );
 
             if (v == node.Variables && nodes == null)
             {
@@ -362,7 +371,11 @@ namespace System.Linq.Expressions
         /// otherwise, returns the original expression.</returns>
         protected internal virtual Expression VisitLoop(LoopExpression node)
         {
-            return node.Update(VisitLabelTarget(node.BreakLabel), VisitLabelTarget(node.ContinueLabel), Visit(node.Body));
+            return node.Update(
+                VisitLabelTarget(node.BreakLabel),
+                VisitLabelTarget(node.ContinueLabel),
+                Visit(node.Body)
+            );
         }
 
         /// <summary>
@@ -499,7 +512,11 @@ namespace System.Linq.Expressions
         /// otherwise, returns the original expression.</returns>
         protected virtual CatchBlock VisitCatchBlock(CatchBlock node)
         {
-            return node.Update(VisitAndConvert(node.Variable, nameof(VisitCatchBlock)), Visit(node.Filter), Visit(node.Body));
+            return node.Update(
+                VisitAndConvert(node.Variable, nameof(VisitCatchBlock)),
+                Visit(node.Filter),
+                Visit(node.Body)
+            );
         }
 
         /// <summary>
@@ -589,7 +606,8 @@ namespace System.Linq.Expressions
             node.BindingType switch
             {
                 MemberBindingType.Assignment => VisitMemberAssignment((MemberAssignment)node),
-                MemberBindingType.MemberBinding => VisitMemberMemberBinding((MemberMemberBinding)node),
+                MemberBindingType.MemberBinding
+                    => VisitMemberMemberBinding((MemberMemberBinding)node),
                 MemberBindingType.ListBinding => VisitMemberListBinding((MemberListBinding)node),
                 _ => throw Error.UnhandledBindingType(node.BindingType),
             };
@@ -627,7 +645,6 @@ namespace System.Linq.Expressions
             return node.Update(Visit(node.Initializers, VisitElementInit));
         }
 
-
         //
         // Prevent some common cases of invalid rewrites.
         //
@@ -654,7 +671,10 @@ namespace System.Linq.Expressions
             return after;
         }
 
-        private static BinaryExpression ValidateBinary(BinaryExpression before, BinaryExpression after)
+        private static BinaryExpression ValidateBinary(
+            BinaryExpression before,
+            BinaryExpression after
+        )
         {
             if (before != after && before.Method == null)
             {
@@ -670,7 +690,10 @@ namespace System.Linq.Expressions
         }
 
         // We wouldn't need this if switch didn't infer the method.
-        private static SwitchExpression ValidateSwitch(SwitchExpression before, SwitchExpression after)
+        private static SwitchExpression ValidateSwitch(
+            SwitchExpression before,
+            SwitchExpression after
+        )
         {
             // If we did not have a method, we don't want to bind to one,
             // it might not be the right thing.

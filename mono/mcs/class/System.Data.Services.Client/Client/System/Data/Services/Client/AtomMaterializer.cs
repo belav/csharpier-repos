@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -34,20 +34,41 @@ namespace System.Data.Services.Client
             return AtomMaterializer.EnumerateAsElementType<T>(source);
         }
 
-        internal static List<TTarget> ListAsElementType<T, TTarget>(object materializer, IEnumerable<T> source) where T : TTarget
+        internal static List<TTarget> ListAsElementType<T, TTarget>(
+            object materializer,
+            IEnumerable<T> source
+        )
+            where T : TTarget
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            return AtomMaterializer.ListAsElementType<T, TTarget>((AtomMaterializer)materializer, source);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            return AtomMaterializer.ListAsElementType<T, TTarget>(
+                (AtomMaterializer)materializer,
+                source
+            );
         }
 
         internal static bool ProjectionCheckValueForPathIsNull(
             object entry,
             Type expectedType,
-            object path)
+            object path
+        )
         {
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            Debug.Assert(path.GetType() == typeof(ProjectionPath), "path.GetType() == typeof(ProjectionPath)");
-            return AtomMaterializer.ProjectionCheckValueForPathIsNull((AtomEntry)entry, expectedType, (ProjectionPath)path);
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            Debug.Assert(
+                path.GetType() == typeof(ProjectionPath),
+                "path.GetType() == typeof(ProjectionPath)"
+            );
+            return AtomMaterializer.ProjectionCheckValueForPathIsNull(
+                (AtomEntry)entry,
+                expectedType,
+                (ProjectionPath)path
+            );
         }
 
         internal static IEnumerable ProjectionSelect(
@@ -56,17 +77,37 @@ namespace System.Data.Services.Client
             Type expectedType,
             Type resultType,
             object path,
-            Func<object, object, Type, object> selector)
+            Func<object, object, Type, object> selector
+        )
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            Debug.Assert(path.GetType() == typeof(ProjectionPath), "path.GetType() == typeof(ProjectionPath)");
-            return AtomMaterializer.ProjectionSelect((AtomMaterializer)materializer, (AtomEntry)entry, expectedType, resultType, (ProjectionPath)path, selector);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            Debug.Assert(
+                path.GetType() == typeof(ProjectionPath),
+                "path.GetType() == typeof(ProjectionPath)"
+            );
+            return AtomMaterializer.ProjectionSelect(
+                (AtomMaterializer)materializer,
+                (AtomEntry)entry,
+                expectedType,
+                resultType,
+                (ProjectionPath)path,
+                selector
+            );
         }
 
         internal static AtomEntry ProjectionGetEntry(object entry, string name)
         {
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
             return AtomMaterializer.ProjectionGetEntry((AtomEntry)entry, name);
         }
 
@@ -76,33 +117,94 @@ namespace System.Data.Services.Client
             Type expectedType,
             Type resultType,
             string[] properties,
-            Func<object, object, Type, object>[] propertyValues)
+            Func<object, object, Type, object>[] propertyValues
+        )
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            return AtomMaterializer.ProjectionInitializeEntity((AtomMaterializer)materializer, (AtomEntry)entry, expectedType, resultType, properties, propertyValues);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            return AtomMaterializer.ProjectionInitializeEntity(
+                (AtomMaterializer)materializer,
+                (AtomEntry)entry,
+                expectedType,
+                resultType,
+                properties,
+                propertyValues
+            );
         }
 
-        internal static object ProjectionValueForPath(object materializer, object entry, Type expectedType, object path)
+        internal static object ProjectionValueForPath(
+            object materializer,
+            object entry,
+            Type expectedType,
+            object path
+        )
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            Debug.Assert(path.GetType() == typeof(ProjectionPath), "path.GetType() == typeof(ProjectionPath)");
-            return AtomMaterializer.ProjectionValueForPath((AtomMaterializer)materializer, (AtomEntry)entry, expectedType, (ProjectionPath)path);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            Debug.Assert(
+                path.GetType() == typeof(ProjectionPath),
+                "path.GetType() == typeof(ProjectionPath)"
+            );
+            return AtomMaterializer.ProjectionValueForPath(
+                (AtomMaterializer)materializer,
+                (AtomEntry)entry,
+                expectedType,
+                (ProjectionPath)path
+            );
         }
 
-        internal static object DirectMaterializePlan(object materializer, object entry, Type expectedEntryType)
+        internal static object DirectMaterializePlan(
+            object materializer,
+            object entry,
+            Type expectedEntryType
+        )
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            return AtomMaterializer.DirectMaterializePlan((AtomMaterializer)materializer, (AtomEntry)entry, expectedEntryType);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            return AtomMaterializer.DirectMaterializePlan(
+                (AtomMaterializer)materializer,
+                (AtomEntry)entry,
+                expectedEntryType
+            );
         }
 
-        internal static object ShallowMaterializePlan(object materializer, object entry, Type expectedEntryType)
+        internal static object ShallowMaterializePlan(
+            object materializer,
+            object entry,
+            Type expectedEntryType
+        )
         {
-            Debug.Assert(materializer.GetType() == typeof(AtomMaterializer), "materializer.GetType() == typeof(AtomMaterializer)");
-            Debug.Assert(entry.GetType() == typeof(AtomEntry), "entry.GetType() == typeof(AtomEntry)");
-            return AtomMaterializer.ShallowMaterializePlan((AtomMaterializer)materializer, (AtomEntry)entry, expectedEntryType);
+            Debug.Assert(
+                materializer.GetType() == typeof(AtomMaterializer),
+                "materializer.GetType() == typeof(AtomMaterializer)"
+            );
+            Debug.Assert(
+                entry.GetType() == typeof(AtomEntry),
+                "entry.GetType() == typeof(AtomEntry)"
+            );
+            return AtomMaterializer.ShallowMaterializePlan(
+                (AtomMaterializer)materializer,
+                (AtomEntry)entry,
+                expectedEntryType
+            );
         }
     }
 
@@ -114,7 +216,6 @@ namespace System.Data.Services.Client
         private readonly DataServiceContext context;
 
         private readonly Type expectedType;
-
 
         private readonly AtomMaterializerLog log;
 
@@ -139,15 +240,16 @@ namespace System.Data.Services.Client
         #region Constructors.
 
         internal AtomMaterializer(
-            AtomParser parser, 
-            DataServiceContext context, 
-            Type expectedType, 
-            bool ignoreMissingProperties, 
-            MergeOption mergeOption, 
-            AtomMaterializerLog log, 
+            AtomParser parser,
+            DataServiceContext context,
+            Type expectedType,
+            bool ignoreMissingProperties,
+            MergeOption mergeOption,
+            AtomMaterializerLog log,
             Action<object, object> materializedObjectCallback,
             QueryComponents queryComponents,
-            ProjectionPlan plan)
+            ProjectionPlan plan
+        )
         {
             Debug.Assert(context != null, "context != null");
             Debug.Assert(parser != null, "parser != null");
@@ -160,7 +262,9 @@ namespace System.Data.Services.Client
             this.mergeOption = mergeOption;
             this.log = log;
             this.materializedObjectCallback = materializedObjectCallback;
-            this.nextLinkTable = new Dictionary<IEnumerable, DataServiceQueryContinuation>(ReferenceEqualityComparer<IEnumerable>.Instance);
+            this.nextLinkTable = new Dictionary<IEnumerable, DataServiceQueryContinuation>(
+                ReferenceEqualityComparer<IEnumerable>.Instance
+            );
             this.materializeEntryPlan = plan ?? CreatePlan(queryComponents);
         }
 
@@ -180,40 +284,30 @@ namespace System.Data.Services.Client
 
         internal object TargetInstance
         {
-            get 
-            { 
-                return this.targetInstance;
-            }
-
+            get { return this.targetInstance; }
             set
             {
-                Debug.Assert(value != null, "value != null -- otherwise we have no instance target.");
+                Debug.Assert(
+                    value != null,
+                    "value != null -- otherwise we have no instance target."
+                );
                 this.targetInstance = value;
             }
         }
 
         internal AtomFeed CurrentFeed
         {
-            get
-            {
-                return this.parser.CurrentFeed;
-            }
+            get { return this.parser.CurrentFeed; }
         }
 
         internal AtomEntry CurrentEntry
         {
-            get
-            {
-                return this.parser.CurrentEntry;
-            }
+            get { return this.parser.CurrentEntry; }
         }
 
         internal object CurrentValue
         {
-            get
-            {
-                return this.currentValue;
-            }
+            get { return this.currentValue; }
         }
 
         internal AtomMaterializerLog Log
@@ -264,7 +358,10 @@ namespace System.Data.Services.Client
         {
             while (type != null)
             {
-                if (type.IsGenericType && WebUtil.IsDataServiceCollectionType(type.GetGenericTypeDefinition()))
+                if (
+                    type.IsGenericType
+                    && WebUtil.IsDataServiceCollectionType(type.GetGenericTypeDefinition())
+                )
                 {
                     return true;
                 }
@@ -275,7 +372,11 @@ namespace System.Data.Services.Client
             return false;
         }
 
-        internal static List<TTarget> ListAsElementType<T, TTarget>(AtomMaterializer materializer, IEnumerable<T> source) where T : TTarget
+        internal static List<TTarget> ListAsElementType<T, TTarget>(
+            AtomMaterializer materializer,
+            IEnumerable<T> source
+        )
+            where T : TTarget
         {
             Debug.Assert(materializer != null, "materializer != null");
             Debug.Assert(source != null, "source != null");
@@ -314,7 +415,8 @@ namespace System.Data.Services.Client
         internal static bool ProjectionCheckValueForPathIsNull(
             AtomEntry entry,
             Type expectedType,
-            ProjectionPath path)
+            ProjectionPath path
+        )
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(path != null, "path != null");
@@ -337,19 +439,25 @@ namespace System.Data.Services.Client
 
                 bool segmentIsLeaf = i == path.Count - 1;
                 string propertyName = segment.Member;
-                ClientType.ClientProperty property = ClientType.Create(expectedType).GetProperty(propertyName, false);
+                ClientType.ClientProperty property = ClientType
+                    .Create(expectedType)
+                    .GetProperty(propertyName, false);
                 atomProperty = GetPropertyOrThrow(properties, propertyName);
                 ValidatePropertyMatch(property, atomProperty);
                 if (atomProperty.Feed != null)
                 {
-                    Debug.Assert(segmentIsLeaf, "segmentIsLeaf -- otherwise the path generated traverses a feed, which should be disallowed");
+                    Debug.Assert(
+                        segmentIsLeaf,
+                        "segmentIsLeaf -- otherwise the path generated traverses a feed, which should be disallowed"
+                    );
                     result = false;
                 }
                 else
                 {
                     Debug.Assert(
                         atomProperty.Entry != null,
-                        "atomProperty.Entry != null -- otherwise a primitive property / complex type is being rewritte with a null check; this is only supported for entities and collection");
+                        "atomProperty.Entry != null -- otherwise a primitive property / complex type is being rewritte with a null check; this is only supported for entities and collection"
+                    );
                     if (segmentIsLeaf)
                     {
                         result = atomProperty.Entry.IsNull;
@@ -371,10 +479,12 @@ namespace System.Data.Services.Client
             Type expectedType,
             Type resultType,
             ProjectionPath path,
-            Func<object, object, Type, object> selector)
+            Func<object, object, Type, object> selector
+        )
         {
             ClientType entryType = entry.ActualType ?? ClientType.Create(expectedType);
-            IEnumerable list = (IEnumerable)Util.ActivatorCreateInstance(typeof(List<>).MakeGenericType(resultType));
+            IEnumerable list = (IEnumerable)
+                Util.ActivatorCreateInstance(typeof(List<>).MakeGenericType(resultType));
             AtomContentProperty atomProperty = null;
             ClientType.ClientProperty property = null;
             for (int i = 0; i < path.Count; i++)
@@ -393,19 +503,20 @@ namespace System.Data.Services.Client
                 {
                     entry = atomProperty.Entry;
                     entryType = ClientType.Create(property.NullablePropertyType, false);
-                } 
+                }
             }
 
             ValidatePropertyMatch(property, atomProperty);
             AtomFeed sourceFeed = atomProperty.Feed;
             Debug.Assert(
-                sourceFeed != null, 
-                "sourceFeed != null -- otherwise ValidatePropertyMatch should have thrown or property isn't a collection (and should be part of this plan)");
+                sourceFeed != null,
+                "sourceFeed != null -- otherwise ValidatePropertyMatch should have thrown or property isn't a collection (and should be part of this plan)"
+            );
 
             Action<object, object> addMethod = GetAddToCollectionDelegate(list.GetType());
             foreach (var paramEntry in sourceFeed.Entries)
             {
-                object projected = selector(materializer, paramEntry, property.CollectionType );
+                object projected = selector(materializer, paramEntry, property.CollectionType);
                 addMethod(list, projected);
             }
 
@@ -418,15 +529,20 @@ namespace System.Data.Services.Client
 
             return list;
         }
-        
-                internal static AtomEntry ProjectionGetEntry(AtomEntry entry, string name)
+
+        internal static AtomEntry ProjectionGetEntry(AtomEntry entry, string name)
         {
-            Debug.Assert(entry != null, "entry != null -- ProjectionGetEntry never returns a null entry, and top-level materialization shouldn't pass one in");
+            Debug.Assert(
+                entry != null,
+                "entry != null -- ProjectionGetEntry never returns a null entry, and top-level materialization shouldn't pass one in"
+            );
 
             AtomContentProperty property = GetPropertyOrThrow(entry, name);
             if (property.Entry == null)
             {
-                throw new InvalidOperationException(Strings.AtomMaterializer_PropertyNotExpectedEntry(name, entry.Identity));
+                throw new InvalidOperationException(
+                    Strings.AtomMaterializer_PropertyNotExpectedEntry(name, entry.Identity)
+                );
             }
 
             CheckEntryToAccessNotNull(property.Entry, name);
@@ -440,39 +556,55 @@ namespace System.Data.Services.Client
             Type expectedType,
             Type resultType,
             string[] properties,
-            Func<object, object, Type, object>[] propertyValues)
+            Func<object, object, Type, object>[] propertyValues
+        )
         {
             if (entry == null || entry.IsNull)
             {
-                throw new NullReferenceException(Strings.AtomMaterializer_EntryToInitializeIsNull(resultType.FullName));
+                throw new NullReferenceException(
+                    Strings.AtomMaterializer_EntryToInitializeIsNull(resultType.FullName)
+                );
             }
 
             object result;
             if (!entry.EntityHasBeenResolved)
             {
-                AtomMaterializer.ProjectionEnsureEntryAvailableOfType(materializer, entry, resultType);
+                AtomMaterializer.ProjectionEnsureEntryAvailableOfType(
+                    materializer,
+                    entry,
+                    resultType
+                );
             }
             else if (!resultType.IsAssignableFrom(entry.ActualType.ElementType))
             {
                 string message = Strings.AtomMaterializer_ProjectEntityTypeMismatch(
                     resultType.FullName,
                     entry.ActualType.ElementType.FullName,
-                    entry.Identity);
+                    entry.Identity
+                );
                 throw new InvalidOperationException(message);
             }
 
             result = entry.ResolvedObject;
-            
+
             for (int i = 0; i < properties.Length; i++)
             {
-                var property = entry.ActualType.GetProperty(properties[i], materializer.ignoreMissingProperties);
+                var property = entry.ActualType.GetProperty(
+                    properties[i],
+                    materializer.ignoreMissingProperties
+                );
                 object value = propertyValues[i](materializer, entry, expectedType);
-                if (entry.ShouldUpdateFromPayload && ClientType.Create(property.NullablePropertyType, false).IsEntityType)
+                if (
+                    entry.ShouldUpdateFromPayload
+                    && ClientType.Create(property.NullablePropertyType, false).IsEntityType
+                )
                 {
                     materializer.Log.SetLink(entry, property.PropertyName, value);
                 }
 
-                bool isEntity = property.CollectionType == null || !ClientType.CheckElementTypeIsEntity(property.CollectionType);
+                bool isEntity =
+                    property.CollectionType == null
+                    || !ClientType.CheckElementTypeIsEntity(property.CollectionType);
                 if (entry.ShouldUpdateFromPayload)
                 {
                     if (isEntity)
@@ -482,22 +614,37 @@ namespace System.Data.Services.Client
                     else
                     {
                         IEnumerable valueAsEnumerable = (IEnumerable)value;
-                        DataServiceQueryContinuation continuation = materializer.nextLinkTable[valueAsEnumerable];
+                        DataServiceQueryContinuation continuation = materializer.nextLinkTable[
+                            valueAsEnumerable
+                        ];
                         Uri nextLinkUri = continuation == null ? null : continuation.NextLinkUri;
                         ProjectionPlan plan = continuation == null ? null : continuation.Plan;
-                        materializer.MergeLists(entry, property, valueAsEnumerable, nextLinkUri, plan);
+                        materializer.MergeLists(
+                            entry,
+                            property,
+                            valueAsEnumerable,
+                            nextLinkUri,
+                            plan
+                        );
                     }
                 }
                 else if (!isEntity)
                 {
-                    materializer.FoundNextLinkForUnmodifiedCollection(property.GetValue(entry.ResolvedObject) as IEnumerable);
+                    materializer.FoundNextLinkForUnmodifiedCollection(
+                        property.GetValue(entry.ResolvedObject) as IEnumerable
+                    );
                 }
             }
 
             return result;
         }
 
-        internal static object ProjectionValueForPath(AtomMaterializer materializer, AtomEntry entry, Type expectedType, ProjectionPath path)
+        internal static object ProjectionValueForPath(
+            AtomMaterializer materializer,
+            AtomEntry entry,
+            Type expectedType,
+            ProjectionPath path
+        )
         {
             Debug.Assert(materializer != null, "materializer != null");
             Debug.Assert(entry != null, "entry != null");
@@ -532,12 +679,19 @@ namespace System.Data.Services.Client
                     CheckEntryToAccessNotNull(entry, propertyName);
                     if (!entry.EntityPropertyMappingsApplied)
                     {
-                        ClientType attributeSourceType = MaterializeAtom.GetEntryClientType(entry.TypeName, materializer.context, expectedType, false);
+                        ClientType attributeSourceType = MaterializeAtom.GetEntryClientType(
+                            entry.TypeName,
+                            materializer.context,
+                            expectedType,
+                            false
+                        );
                         ApplyEntityPropertyMappings(entry, attributeSourceType);
                     }
                 }
 
-                ClientType.ClientProperty property = ClientType.Create(expectedType).GetProperty(propertyName, false);
+                ClientType.ClientProperty property = ClientType
+                    .Create(expectedType)
+                    .GetProperty(propertyName, false);
                 atomProperty = GetPropertyOrThrow(properties, propertyName);
 
                 ValidatePropertyMatch(property, atomProperty);
@@ -545,23 +699,36 @@ namespace System.Data.Services.Client
                 AtomFeed feedValue = atomProperty.Feed;
                 if (feedValue != null)
                 {
-                    Debug.Assert(segmentIsLeaf, "segmentIsLeaf -- otherwise the path generated traverses a feed, which should be disallowed");
+                    Debug.Assert(
+                        segmentIsLeaf,
+                        "segmentIsLeaf -- otherwise the path generated traverses a feed, which should be disallowed"
+                    );
 
-                    Type collectionType = ClientType.GetImplementationType(segment.ProjectionType, typeof(ICollection<>));
+                    Type collectionType = ClientType.GetImplementationType(
+                        segment.ProjectionType,
+                        typeof(ICollection<>)
+                    );
                     if (collectionType == null)
                     {
-                        collectionType = ClientType.GetImplementationType(segment.ProjectionType, typeof(IEnumerable<>));
+                        collectionType = ClientType.GetImplementationType(
+                            segment.ProjectionType,
+                            typeof(IEnumerable<>)
+                        );
                     }
 
                     Debug.Assert(
-                        collectionType != null, 
-                        "collectionType != null -- otherwise the property should never have been recognized as a collection");
-                    
+                        collectionType != null,
+                        "collectionType != null -- otherwise the property should never have been recognized as a collection"
+                    );
+
                     Type nestedExpectedType = collectionType.GetGenericArguments()[0];
                     Type feedType = segment.ProjectionType;
                     if (feedType.IsInterface || IsDataServiceCollection(feedType))
                     {
-                        feedType = typeof(System.Collections.ObjectModel.Collection<>).MakeGenericType(nestedExpectedType);
+                        feedType =
+                            typeof(System.Collections.ObjectModel.Collection<>).MakeGenericType(
+                                nestedExpectedType
+                            );
                     }
 
                     IEnumerable list = (IEnumerable)Util.ActivatorCreateInstance(feedType);
@@ -569,11 +736,16 @@ namespace System.Data.Services.Client
 
                     if (IsDataServiceCollection(segment.ProjectionType))
                     {
-                        Type dataServiceCollectionType = WebUtil.GetDataServiceCollectionOfT(nestedExpectedType);
-                        list = (IEnumerable)Util.ActivatorCreateInstance(
-                            dataServiceCollectionType,
-                            list,                            
-                            TrackingMode.None);                    }
+                        Type dataServiceCollectionType = WebUtil.GetDataServiceCollectionOfT(
+                            nestedExpectedType
+                        );
+                        list = (IEnumerable)
+                            Util.ActivatorCreateInstance(
+                                dataServiceCollectionType,
+                                list,
+                                TrackingMode.None
+                            );
+                    }
 
                     ProjectionPlan plan = CreatePlanForShallowMaterialization(nestedExpectedType);
                     materializer.FoundNextLinkForCollection(list, feedValue.NextLink, plan);
@@ -581,7 +753,11 @@ namespace System.Data.Services.Client
                 }
                 else if (atomProperty.Entry != null)
                 {
-                    if (segmentIsLeaf && !atomProperty.Entry.EntityHasBeenResolved && !atomProperty.IsNull)
+                    if (
+                        segmentIsLeaf
+                        && !atomProperty.Entry.EntityHasBeenResolved
+                        && !atomProperty.IsNull
+                    )
                     {
                         materializer.Materialize(atomProperty.Entry, property.PropertyType, false);
                     }
@@ -597,15 +773,32 @@ namespace System.Data.Services.Client
                         if (atomProperty.MaterializedValue == null && !atomProperty.IsNull)
                         {
                             ClientType complexType = ClientType.Create(property.PropertyType);
-                            object complexInstance = Util.ActivatorCreateInstance(property.PropertyType);
-                            MaterializeDataValues(complexType, atomProperty.Properties, materializer.ignoreMissingProperties, materializer.context);
-                            ApplyDataValues(complexType, atomProperty.Properties, materializer.ignoreMissingProperties, materializer.context, complexInstance);
+                            object complexInstance = Util.ActivatorCreateInstance(
+                                property.PropertyType
+                            );
+                            MaterializeDataValues(
+                                complexType,
+                                atomProperty.Properties,
+                                materializer.ignoreMissingProperties,
+                                materializer.context
+                            );
+                            ApplyDataValues(
+                                complexType,
+                                atomProperty.Properties,
+                                materializer.ignoreMissingProperties,
+                                materializer.context,
+                                complexInstance
+                            );
                             atomProperty.MaterializedValue = complexInstance;
                         }
                     }
                     else
                     {
-                        MaterializeDataValue(property.NullablePropertyType, atomProperty, materializer.context);
+                        MaterializeDataValue(
+                            property.NullablePropertyType,
+                            atomProperty,
+                            materializer.context
+                        );
                     }
 
                     properties = atomProperty.Properties;
@@ -618,21 +811,32 @@ namespace System.Data.Services.Client
             return result;
         }
 
-        internal static void ProjectionEnsureEntryAvailableOfType(AtomMaterializer materializer, AtomEntry entry, Type requiredType)
+        internal static void ProjectionEnsureEntryAvailableOfType(
+            AtomMaterializer materializer,
+            AtomEntry entry,
+            Type requiredType
+        )
         {
             Debug.Assert(materializer != null, "materializer != null");
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(
                 materializer.targetInstance == null,
-                "materializer.targetInstance == null -- projection shouldn't have a target instance set; that's only used for POST replies");
+                "materializer.targetInstance == null -- projection shouldn't have a target instance set; that's only used for POST replies"
+            );
 
             if (entry.EntityHasBeenResolved)
             {
                 if (!requiredType.IsAssignableFrom(entry.ResolvedObject.GetType()))
                 {
                     throw new InvalidOperationException(
-                        "Expecting type '" + requiredType + "' for '" + entry.Identity + "', but found " +
-                        "a previously created instance of type '" + entry.ResolvedObject.GetType());
+                        "Expecting type '"
+                            + requiredType
+                            + "' for '"
+                            + entry.Identity
+                            + "', but found "
+                            + "a previously created instance of type '"
+                            + entry.ResolvedObject.GetType()
+                    );
                 }
 
                 return;
@@ -643,8 +847,10 @@ namespace System.Data.Services.Client
                 throw Error.InvalidOperation(Strings.Deserialize_MissingIdElement);
             }
 
-            if (!materializer.TryResolveAsCreated(entry) && 
-                !materializer.TryResolveFromContext(entry, requiredType))
+            if (
+                !materializer.TryResolveAsCreated(entry)
+                && !materializer.TryResolveFromContext(entry, requiredType)
+            )
             {
                 materializer.ResolveByCreatingWithType(entry, requiredType);
             }
@@ -652,24 +858,37 @@ namespace System.Data.Services.Client
             {
                 if (!requiredType.IsAssignableFrom(entry.ResolvedObject.GetType()))
                 {
-                    throw Error.InvalidOperation(Strings.Deserialize_Current(requiredType, entry.ResolvedObject.GetType()));
+                    throw Error.InvalidOperation(
+                        Strings.Deserialize_Current(requiredType, entry.ResolvedObject.GetType())
+                    );
                 }
             }
         }
 
-        internal static object DirectMaterializePlan(AtomMaterializer materializer, AtomEntry entry, Type expectedEntryType)
+        internal static object DirectMaterializePlan(
+            AtomMaterializer materializer,
+            AtomEntry entry,
+            Type expectedEntryType
+        )
         {
             materializer.Materialize(entry, expectedEntryType, true);
             return entry.ResolvedObject;
         }
 
-        internal static object ShallowMaterializePlan(AtomMaterializer materializer, AtomEntry entry, Type expectedEntryType)
+        internal static object ShallowMaterializePlan(
+            AtomMaterializer materializer,
+            AtomEntry entry,
+            Type expectedEntryType
+        )
         {
             materializer.Materialize(entry, expectedEntryType, false);
             return entry.ResolvedObject;
         }
 
-        internal static void ValidatePropertyMatch(ClientType.ClientProperty property, AtomContentProperty atomProperty)
+        internal static void ValidatePropertyMatch(
+            ClientType.ClientProperty property,
+            AtomContentProperty atomProperty
+        )
         {
             Debug.Assert(property != null, "property != null");
             Debug.Assert(atomProperty != null, "atomProperty != null");
@@ -681,17 +900,25 @@ namespace System.Data.Services.Client
 
             if (atomProperty.Feed != null && property.CollectionType == null)
             {
-                throw Error.InvalidOperation(Strings.Deserialize_MismatchAtomLinkFeedPropertyNotCollection(property.PropertyName));
+                throw Error.InvalidOperation(
+                    Strings.Deserialize_MismatchAtomLinkFeedPropertyNotCollection(
+                        property.PropertyName
+                    )
+                );
             }
 
             if (atomProperty.Entry != null && property.CollectionType != null)
             {
-                throw Error.InvalidOperation(Strings.Deserialize_MismatchAtomLinkEntryPropertyIsCollection(property.PropertyName));
+                throw Error.InvalidOperation(
+                    Strings.Deserialize_MismatchAtomLinkEntryPropertyIsCollection(
+                        property.PropertyName
+                    )
+                );
             }
         }
 
         #endregion Projection support.
-        
+
         #region Internal methods.
 
         internal bool Read()
@@ -703,10 +930,12 @@ namespace System.Data.Services.Client
             {
                 Debug.Assert(
                     this.parser.DataKind != AtomDataKind.None,
-                    "parser.DataKind != AtomDataKind.None -- otherwise parser.Read() didn't update its state");
+                    "parser.DataKind != AtomDataKind.None -- otherwise parser.Read() didn't update its state"
+                );
                 Debug.Assert(
                     this.parser.DataKind != AtomDataKind.Finished,
-                    "parser.DataKind != AtomDataKind.Finished -- otherwise parser.Read() shouldn't have returned true");
+                    "parser.DataKind != AtomDataKind.Finished -- otherwise parser.Read() shouldn't have returned true"
+                );
 
                 switch (this.parser.DataKind)
                 {
@@ -716,25 +945,35 @@ namespace System.Data.Services.Client
                     case AtomDataKind.Entry:
                         Debug.Assert(
                             this.parser.CurrentEntry != null,
-                            "parser.CurrentEntry != null -- otherwise parser.DataKind shouldn't be Entry");
+                            "parser.CurrentEntry != null -- otherwise parser.DataKind shouldn't be Entry"
+                        );
                         this.CurrentEntry.ResolvedObject = this.TargetInstance;
-                        this.currentValue = this.materializeEntryPlan.Run(this, this.CurrentEntry, this.expectedType);
+                        this.currentValue = this.materializeEntryPlan.Run(
+                            this,
+                            this.CurrentEntry,
+                            this.expectedType
+                        );
                         return true;
                     case AtomDataKind.PagingLinks:
                         break;
                     default:
                         Debug.Assert(
                             this.parser.DataKind == AtomDataKind.Custom,
-                            "parser.DataKind == AtomDataKind.Custom -- otherwise AtomMaterializer.Read switch is missing a case");
+                            "parser.DataKind == AtomDataKind.Custom -- otherwise AtomMaterializer.Read switch is missing a case"
+                        );
 
-                        Type underlyingExpectedType = Nullable.GetUnderlyingType(this.expectedType) ?? this.expectedType;
+                        Type underlyingExpectedType =
+                            Nullable.GetUnderlyingType(this.expectedType) ?? this.expectedType;
                         ClientType targetType = ClientType.Create(underlyingExpectedType);
                         if (ClientConvert.IsKnownType(underlyingExpectedType))
                         {
                             string elementText = this.parser.ReadCustomElementString();
                             if (elementText != null)
                             {
-                                this.currentValue = ClientConvert.ChangeType(elementText, underlyingExpectedType);
+                                this.currentValue = ClientConvert.ChangeType(
+                                    elementText,
+                                    underlyingExpectedType
+                                );
                             }
 
                             return true;
@@ -749,8 +988,19 @@ namespace System.Data.Services.Client
                             else
                             {
                                 this.currentValue = targetType.CreateInstance();
-                                MaterializeDataValues(targetType, property.Properties, this.ignoreMissingProperties, this.context);
-                                ApplyDataValues(targetType, property.Properties, this.ignoreMissingProperties, this.context, this.currentValue);
+                                MaterializeDataValues(
+                                    targetType,
+                                    property.Properties,
+                                    this.ignoreMissingProperties,
+                                    this.context
+                                );
+                                ApplyDataValues(
+                                    targetType,
+                                    property.Properties,
+                                    this.ignoreMissingProperties,
+                                    this.context,
+                                    this.currentValue
+                                );
                             }
 
                             return true;
@@ -760,7 +1010,10 @@ namespace System.Data.Services.Client
                 }
             }
 
-            Debug.Assert(this.parser.DataKind == AtomDataKind.Finished, "parser.DataKind == AtomDataKind.None");
+            Debug.Assert(
+                this.parser.DataKind == AtomDataKind.Finished,
+                "parser.DataKind == AtomDataKind.None"
+            );
             Debug.Assert(this.parser.CurrentEntry == null, "parser.Current == null");
             return false;
         }
@@ -786,7 +1039,9 @@ namespace System.Data.Services.Client
 
             if (entry.IsNull)
             {
-                throw new NullReferenceException(Strings.AtomMaterializer_EntryToAccessIsNull(name));
+                throw new NullReferenceException(
+                    Strings.AtomMaterializer_EntryToAccessIsNull(name)
+                );
             }
         }
 
@@ -800,7 +1055,10 @@ namespace System.Data.Services.Client
             }
             else
             {
-                result = ProjectionPlanCompiler.CompilePlan(projection, queryComponents.NormalizerRewrites);
+                result = ProjectionPlanCompiler.CompilePlan(
+                    projection,
+                    queryComponents.NormalizerRewrites
+                );
                 result.LastSegmentType = queryComponents.LastSegmentType;
             }
 
@@ -828,12 +1086,19 @@ namespace System.Data.Services.Client
         private static Action<object, object> GetAddToCollectionDelegate(Type listType)
         {
             Debug.Assert(listType != null, "listType != null");
-            
+
             Type listElementType;
-            MethodInfo addMethod = ClientType.GetAddToCollectionMethod(listType, out listElementType);
+            MethodInfo addMethod = ClientType.GetAddToCollectionMethod(
+                listType,
+                out listElementType
+            );
             ParameterExpression list = Expression.Parameter(typeof(object), "list");
             ParameterExpression item = Expression.Parameter(typeof(object), "element");
-            Expression body = Expression.Call(Expression.Convert(list, listType), addMethod, Expression.Convert(item, listElementType));
+            Expression body = Expression.Call(
+                Expression.Convert(list, listType),
+                addMethod,
+                Expression.Convert(item, listElementType)
+            );
 #if ASTORIA_LIGHT
             LambdaExpression lambda = ExpressionHelpers.CreateLambda(body, list, item);
 #else
@@ -842,11 +1107,18 @@ namespace System.Data.Services.Client
             return (Action<object, object>)lambda.Compile();
         }
 
-        private static object GetOrCreateCollectionProperty(object instance, ClientType.ClientProperty property, Type collectionType)
+        private static object GetOrCreateCollectionProperty(
+            object instance,
+            ClientType.ClientProperty property,
+            Type collectionType
+        )
         {
             Debug.Assert(instance != null, "instance != null");
             Debug.Assert(property != null, "property != null");
-            Debug.Assert(property.CollectionType != null, "property.CollectionType != null -- otherwise property isn't a collection");
+            Debug.Assert(
+                property.CollectionType != null,
+                "property.CollectionType != null -- otherwise property isn't a collection"
+            );
 
             object result;
             result = property.GetValue(instance);
@@ -857,15 +1129,21 @@ namespace System.Data.Services.Client
                     collectionType = property.PropertyType;
                     if (collectionType.IsInterface)
                     {
-                        collectionType = typeof(System.Collections.ObjectModel.Collection<>).MakeGenericType(property.CollectionType);
+                        collectionType =
+                            typeof(System.Collections.ObjectModel.Collection<>).MakeGenericType(
+                                property.CollectionType
+                            );
                     }
                 }
 
                 result = Activator.CreateInstance(collectionType);
-                property.SetValue(instance, result, property.PropertyName, false );
+                property.SetValue(instance, result, property.PropertyName, false);
             }
 
-            Debug.Assert(result != null, "result != null -- otherwise GetOrCreateCollectionProperty didn't fall back to creation");
+            Debug.Assert(
+                result != null,
+                "result != null -- otherwise GetOrCreateCollectionProperty didn't fall back to creation"
+            );
             return result;
         }
 
@@ -873,7 +1151,8 @@ namespace System.Data.Services.Client
             AtomMaterializer materializer,
             IEnumerable list,
             Type nestedExpectedType,
-            IEnumerable<AtomEntry> entries)
+            IEnumerable<AtomEntry> entries
+        )
         {
             Debug.Assert(materializer != null, "materializer != null");
             Debug.Assert(list != null, "list != null");
@@ -883,14 +1162,18 @@ namespace System.Data.Services.Client
             {
                 if (!feedEntry.EntityHasBeenResolved)
                 {
-                    materializer.Materialize(feedEntry, nestedExpectedType,  false);
+                    materializer.Materialize(feedEntry, nestedExpectedType, false);
                 }
 
                 addMethod(list, feedEntry.ResolvedObject);
             }
         }
 
-         private static bool MaterializeDataValue(Type type, AtomContentProperty atomProperty, DataServiceContext context)
+        private static bool MaterializeDataValue(
+            Type type,
+            AtomContentProperty atomProperty,
+            DataServiceContext context
+        )
         {
             Debug.Assert(type != null, "type != null");
             Debug.Assert(atomProperty != null, "atomProperty != null");
@@ -904,8 +1187,16 @@ namespace System.Data.Services.Client
             bool knownType = ClientConvert.IsKnownType(underlyingType);
             if (!knownType)
             {
-                nestedElementType = MaterializeAtom.GetEntryClientType(propertyTypeName, context, type, true);
-                Debug.Assert(nestedElementType != null, "nestedElementType != null -- otherwise ReadTypeAttribute (or someone!) should throw");
+                nestedElementType = MaterializeAtom.GetEntryClientType(
+                    propertyTypeName,
+                    context,
+                    type,
+                    true
+                );
+                Debug.Assert(
+                    nestedElementType != null,
+                    "nestedElementType != null -- otherwise ReadTypeAttribute (or someone!) should throw"
+                );
                 knownType = ClientConvert.IsKnownType(nestedElementType.ElementType);
             }
 
@@ -915,7 +1206,12 @@ namespace System.Data.Services.Client
                 {
                     if (!ClientType.CanAssignNull(type))
                     {
-                        throw new InvalidOperationException(Strings.AtomMaterializer_CannotAssignNull(atomProperty.Name, type.FullName));
+                        throw new InvalidOperationException(
+                            Strings.AtomMaterializer_CannotAssignNull(
+                                atomProperty.Name,
+                                type.FullName
+                            )
+                        );
                     }
 
                     atomProperty.MaterializedValue = null;
@@ -926,7 +1222,14 @@ namespace System.Data.Services.Client
                     object value = propertyValueText;
                     if (propertyValueText != null)
                     {
-                        value = ClientConvert.ChangeType(propertyValueText, (null != nestedElementType ? nestedElementType.ElementType : underlyingType));
+                        value = ClientConvert.ChangeType(
+                            propertyValueText,
+                            (
+                                null != nestedElementType
+                                    ? nestedElementType.ElementType
+                                    : underlyingType
+                            )
+                        );
                     }
 
                     atomProperty.MaterializedValue = value;
@@ -938,10 +1241,11 @@ namespace System.Data.Services.Client
         }
 
         private static void MaterializeDataValues(
-            ClientType actualType, 
+            ClientType actualType,
             List<AtomContentProperty> values,
             bool ignoreMissingProperties,
-            DataServiceContext context)
+            DataServiceContext context
+        )
         {
             Debug.Assert(actualType != null, "actualType != null");
             Debug.Assert(values != null, "values != null");
@@ -950,7 +1254,7 @@ namespace System.Data.Services.Client
             foreach (var atomProperty in values)
             {
                 string propertyName = atomProperty.Name;
-                
+
                 var property = actualType.GetProperty(propertyName, ignoreMissingProperties); // may throw
                 if (property == null)
                 {
@@ -959,7 +1263,11 @@ namespace System.Data.Services.Client
 
                 if (atomProperty.Feed == null && atomProperty.Entry == null)
                 {
-                    bool materialized = MaterializeDataValue(property.NullablePropertyType, atomProperty, context);
+                    bool materialized = MaterializeDataValue(
+                        property.NullablePropertyType,
+                        atomProperty,
+                        context
+                    );
                     if (!materialized && property.CollectionType != null)
                     {
                         throw Error.NotSupported(Strings.ClientType_CollectionOfNonEntities);
@@ -968,7 +1276,13 @@ namespace System.Data.Services.Client
             }
         }
 
-        private static void ApplyDataValue(ClientType type, AtomContentProperty property, bool ignoreMissingProperties, DataServiceContext context, object instance)
+        private static void ApplyDataValue(
+            ClientType type,
+            AtomContentProperty property,
+            bool ignoreMissingProperties,
+            DataServiceContext context,
+            object instance
+        )
         {
             Debug.Assert(type != null, "type != null");
             Debug.Assert(property != null, "property != null");
@@ -983,13 +1297,19 @@ namespace System.Data.Services.Client
 
             if (property.Properties != null)
             {
-                if (prop.IsKnownType ||
-                    ClientConvert.IsKnownType(MaterializeAtom.GetEntryClientType(property.TypeName, context, prop.PropertyType, true).ElementType))
+                if (
+                    prop.IsKnownType
+                    || ClientConvert.IsKnownType(
+                        MaterializeAtom
+                            .GetEntryClientType(property.TypeName, context, prop.PropertyType, true)
+                            .ElementType
+                    )
+                )
                 {
                     throw Error.InvalidOperation(Strings.Deserialize_ExpectingSimpleValue);
                 }
 
-                 bool needToSet = false;
+                bool needToSet = false;
                 ClientType complexType = ClientType.Create(prop.PropertyType);
                 object complexInstance = prop.GetValue(instance);
                 if (complexInstance == null)
@@ -998,21 +1318,38 @@ namespace System.Data.Services.Client
                     needToSet = true;
                 }
 
-                MaterializeDataValues(complexType, property.Properties, ignoreMissingProperties, context);
-                ApplyDataValues(complexType, property.Properties, ignoreMissingProperties, context, complexInstance);
+                MaterializeDataValues(
+                    complexType,
+                    property.Properties,
+                    ignoreMissingProperties,
+                    context
+                );
+                ApplyDataValues(
+                    complexType,
+                    property.Properties,
+                    ignoreMissingProperties,
+                    context,
+                    complexInstance
+                );
 
                 if (needToSet)
                 {
-                    prop.SetValue(instance, complexInstance, property.Name, true );
+                    prop.SetValue(instance, complexInstance, property.Name, true);
                 }
             }
             else
             {
-                prop.SetValue(instance, property.MaterializedValue, property.Name, true );
+                prop.SetValue(instance, property.MaterializedValue, property.Name, true);
             }
         }
 
-        private static void ApplyDataValues(ClientType type, IEnumerable<AtomContentProperty> properties, bool ignoreMissingProperties, DataServiceContext context, object instance)
+        private static void ApplyDataValues(
+            ClientType type,
+            IEnumerable<AtomContentProperty> properties,
+            bool ignoreMissingProperties,
+            DataServiceContext context,
+            object instance
+        )
         {
             Debug.Assert(type != null, "type != null");
             Debug.Assert(properties != null, "properties != null");
@@ -1025,7 +1362,12 @@ namespace System.Data.Services.Client
             }
         }
 
-        private static void SetValueOnPath(List<AtomContentProperty> values, string path, string value, string typeName)
+        private static void SetValueOnPath(
+            List<AtomContentProperty> values,
+            string path,
+            string value,
+            string typeName
+        )
         {
             Debug.Assert(values != null, "values != null");
             Debug.Assert(path != null, "path != null");
@@ -1036,7 +1378,10 @@ namespace System.Data.Services.Client
             {
                 if (values == null)
                 {
-                    Debug.Assert(property != null, "property != null -- if values is null then this isn't the first step");
+                    Debug.Assert(
+                        property != null,
+                        "property != null -- if values is null then this isn't the first step"
+                    );
                     property.EnsureProperties();
                     values = property.Properties;
                 }
@@ -1061,8 +1406,11 @@ namespace System.Data.Services.Client
                 values = property.Properties;
             }
 
-            Debug.Assert(property != null, "property != null -- property path should have at least one segment");
-            
+            Debug.Assert(
+                property != null,
+                "property != null -- property path should have at least one segment"
+            );
+
             if (existing == false)
             {
                 property.TypeName = typeName;
@@ -1074,26 +1422,45 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(entry.Tag is XElement, "entry.Tag is XElement");
-            Debug.Assert(entryType != null, "entryType != null -- othewise how would we know to apply property mappings (note that for projections entry.ActualType may be different that entryType)?");
-            Debug.Assert(!entry.EntityPropertyMappingsApplied, "!entry.EntityPropertyMappingsApplied -- EPM should happen only once per entry");
+            Debug.Assert(
+                entryType != null,
+                "entryType != null -- othewise how would we know to apply property mappings (note that for projections entry.ActualType may be different that entryType)?"
+            );
+            Debug.Assert(
+                !entry.EntityPropertyMappingsApplied,
+                "!entry.EntityPropertyMappingsApplied -- EPM should happen only once per entry"
+            );
 
             if (entryType.HasEntityPropertyMappings)
             {
                 XElement entryElement = entry.Tag as XElement;
                 Debug.Assert(entryElement != null, "entryElement != null");
-                ApplyEntityPropertyMappings(entry, entryElement, entryType.EpmTargetTree.SyndicationRoot);
-                ApplyEntityPropertyMappings(entry, entryElement, entryType.EpmTargetTree.NonSyndicationRoot);
+                ApplyEntityPropertyMappings(
+                    entry,
+                    entryElement,
+                    entryType.EpmTargetTree.SyndicationRoot
+                );
+                ApplyEntityPropertyMappings(
+                    entry,
+                    entryElement,
+                    entryType.EpmTargetTree.NonSyndicationRoot
+                );
             }
 
             entry.EntityPropertyMappingsApplied = true;
         }
 
-        private static void ApplyEntityPropertyMappings(AtomEntry entry, XElement entryElement, EpmTargetPathSegment target)
+        private static void ApplyEntityPropertyMappings(
+            AtomEntry entry,
+            XElement entryElement,
+            EpmTargetPathSegment target
+        )
         {
             Debug.Assert(target != null, "target != null");
             Debug.Assert(!target.HasContent, "!target.HasContent");
 
-            Stack<System.Data.Services.Common.EpmTargetPathSegment> segments = new Stack<System.Data.Services.Common.EpmTargetPathSegment>();
+            Stack<System.Data.Services.Common.EpmTargetPathSegment> segments =
+                new Stack<System.Data.Services.Common.EpmTargetPathSegment>();
             Stack<XElement> elements = new Stack<XElement>();
 
             segments.Push(target);
@@ -1105,12 +1472,27 @@ namespace System.Data.Services.Client
                 XElement element = elements.Pop();
                 if (segment.HasContent)
                 {
-                    var node = element.Nodes().Where(n => n.NodeType == XmlNodeType.Text || n.NodeType == XmlNodeType.SignificantWhitespace).FirstOrDefault();
+                    var node = element
+                        .Nodes()
+                        .Where(n =>
+                            n.NodeType == XmlNodeType.Text
+                            || n.NodeType == XmlNodeType.SignificantWhitespace
+                        )
+                        .FirstOrDefault();
                     string elementValue = (node == null) ? null : ((XText)node).Value;
-                    Debug.Assert(segment.EpmInfo != null, "segment.EpmInfo != null -- otherwise segment.HasValue should be false");
+                    Debug.Assert(
+                        segment.EpmInfo != null,
+                        "segment.EpmInfo != null -- otherwise segment.HasValue should be false"
+                    );
 
                     string path = segment.EpmInfo.Attribute.SourcePath;
-                    string typeName = (string)element.Attribute(XName.Get(XmlConstants.AtomTypeAttributeName, XmlConstants.DataWebMetadataNamespace));
+                    string typeName = (string)
+                        element.Attribute(
+                            XName.Get(
+                                XmlConstants.AtomTypeAttributeName,
+                                XmlConstants.DataWebMetadataNamespace
+                            )
+                        );
 
                     SetValueOnPath(entry.DataValues, path, elementValue, typeName);
                 }
@@ -1120,15 +1502,24 @@ namespace System.Data.Services.Client
                     if (item.IsAttribute)
                     {
                         string localName = item.SegmentName.Substring(1);
-                        var attribute = element.Attribute(XName.Get(localName, item.SegmentNamespaceUri));
+                        var attribute = element.Attribute(
+                            XName.Get(localName, item.SegmentNamespaceUri)
+                        );
                         if (attribute != null)
                         {
-                            SetValueOnPath(entry.DataValues, item.EpmInfo.Attribute.SourcePath, attribute.Value, null);
+                            SetValueOnPath(
+                                entry.DataValues,
+                                item.EpmInfo.Attribute.SourcePath,
+                                attribute.Value,
+                                null
+                            );
                         }
                     }
                     else
                     {
-                        var child = element.Element(XName.Get(item.SegmentName, item.SegmentNamespaceUri));
+                        var child = element.Element(
+                            XName.Get(item.SegmentName, item.SegmentNamespaceUri)
+                        );
                         if (child != null)
                         {
                             segments.Push(item);
@@ -1137,11 +1528,17 @@ namespace System.Data.Services.Client
                     }
                 }
 
-                Debug.Assert(segments.Count == elements.Count, "segments.Count == elements.Count -- otherwise they're out of sync");
+                Debug.Assert(
+                    segments.Count == elements.Count,
+                    "segments.Count == elements.Count -- otherwise they're out of sync"
+                );
             }
         }
 
-        private static AtomContentProperty GetPropertyOrThrow(List<AtomContentProperty> properties, string propertyName)
+        private static AtomContentProperty GetPropertyOrThrow(
+            List<AtomContentProperty> properties,
+            string propertyName
+        )
         {
             AtomContentProperty atomProperty = null;
             if (properties != null)
@@ -1151,7 +1548,9 @@ namespace System.Data.Services.Client
 
             if (atomProperty == null)
             {
-                throw new InvalidOperationException(Strings.AtomMaterializer_PropertyMissing(propertyName));
+                throw new InvalidOperationException(
+                    Strings.AtomMaterializer_PropertyMissing(propertyName)
+                );
             }
 
             Debug.Assert(atomProperty != null, "atomProperty != null");
@@ -1169,14 +1568,22 @@ namespace System.Data.Services.Client
 
             if (atomProperty == null)
             {
-                throw new InvalidOperationException(Strings.AtomMaterializer_PropertyMissingFromEntry(propertyName, entry.Identity));
+                throw new InvalidOperationException(
+                    Strings.AtomMaterializer_PropertyMissingFromEntry(propertyName, entry.Identity)
+                );
             }
 
             Debug.Assert(atomProperty != null, "atomProperty != null");
             return atomProperty;
         }
 
-        private void MergeLists(AtomEntry entry, ClientType.ClientProperty property, IEnumerable list, Uri nextLink, ProjectionPlan plan)
+        private void MergeLists(
+            AtomEntry entry,
+            ClientType.ClientProperty property,
+            IEnumerable list,
+            Uri nextLink,
+            ProjectionPlan plan
+        )
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(entry.ResolvedObject != null, "entry.ResolvedObject != null");
@@ -1184,11 +1591,13 @@ namespace System.Data.Services.Client
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(plan != null || nextLink == null, "plan != null || nextLink == null");
 
-            if (entry.ShouldUpdateFromPayload && 
-                property.NullablePropertyType == list.GetType() && 
-                property.GetValue(entry.ResolvedObject) == null)
+            if (
+                entry.ShouldUpdateFromPayload
+                && property.NullablePropertyType == list.GetType()
+                && property.GetValue(entry.ResolvedObject) == null
+            )
             {
-                property.SetValue(entry.ResolvedObject, list, property.PropertyName, false );
+                property.SetValue(entry.ResolvedObject, list, property.PropertyName, false);
                 this.FoundNextLinkForCollection(list, nextLink, plan);
 
                 foreach (object item in list)
@@ -1211,13 +1620,17 @@ namespace System.Data.Services.Client
 
             Debug.Assert(
                 entry.ResolvedObject == this.TargetInstance,
-                "entry.ResolvedObject == this.TargetInstance -- otherwise there we ResolveOrCreateInstance more than once on the same entry");
+                "entry.ResolvedObject == this.TargetInstance -- otherwise there we ResolveOrCreateInstance more than once on the same entry"
+            );
             Debug.Assert(
-                this.mergeOption == MergeOption.OverwriteChanges || this.mergeOption == MergeOption.PreserveChanges,
-                "MergeOption.OverwriteChanges and MergeOption.PreserveChanges are the only expected values during SaveChanges");
+                this.mergeOption == MergeOption.OverwriteChanges
+                    || this.mergeOption == MergeOption.PreserveChanges,
+                "MergeOption.OverwriteChanges and MergeOption.PreserveChanges are the only expected values during SaveChanges"
+            );
             entry.ActualType = ClientType.Create(entry.ResolvedObject.GetType());
             this.log.FoundTargetInstance(entry);
-            entry.ShouldUpdateFromPayload = this.mergeOption == MergeOption.PreserveChanges ? false : true;
+            entry.ShouldUpdateFromPayload =
+                this.mergeOption == MergeOption.PreserveChanges ? false : true;
             entry.EntityHasBeenResolved = true;
             return true;
         }
@@ -1228,21 +1641,37 @@ namespace System.Data.Services.Client
             if (tracking)
             {
                 EntityStates state;
-                entry.ResolvedObject = this.context.TryGetEntity(entry.Identity, entry.ETagText, this.mergeOption, out state);
+                entry.ResolvedObject = this.context.TryGetEntity(
+                    entry.Identity,
+                    entry.ETagText,
+                    this.mergeOption,
+                    out state
+                );
                 if (entry.ResolvedObject != null)
                 {
                     if (!expectedEntryType.IsInstanceOfType(entry.ResolvedObject))
                     {
-                        throw Error.InvalidOperation(Strings.Deserialize_Current(expectedEntryType, entry.ResolvedObject.GetType()));
+                        throw Error.InvalidOperation(
+                            Strings.Deserialize_Current(
+                                expectedEntryType,
+                                entry.ResolvedObject.GetType()
+                            )
+                        );
                     }
 
                     entry.ActualType = ClientType.Create(entry.ResolvedObject.GetType());
                     entry.EntityHasBeenResolved = true;
 
-                     entry.ShouldUpdateFromPayload =
-                        this.mergeOption == MergeOption.OverwriteChanges ||
-                        (this.mergeOption == MergeOption.PreserveChanges && state == EntityStates.Unchanged) ||
-                        (this.mergeOption == MergeOption.PreserveChanges && state == EntityStates.Deleted);
+                    entry.ShouldUpdateFromPayload =
+                        this.mergeOption == MergeOption.OverwriteChanges
+                        || (
+                            this.mergeOption == MergeOption.PreserveChanges
+                            && state == EntityStates.Unchanged
+                        )
+                        || (
+                            this.mergeOption == MergeOption.PreserveChanges
+                            && state == EntityStates.Deleted
+                        );
                     this.log.FoundExistingInstance(entry);
 
                     return true;
@@ -1256,7 +1685,8 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(
                 entry.ResolvedObject == null,
-                "entry.ResolvedObject == null -- otherwise we're about to overwrite - should never be called");
+                "entry.ResolvedObject == null -- otherwise we're about to overwrite - should never be called"
+            );
             entry.ActualType = ClientType.Create(type);
             entry.ResolvedObject = Activator.CreateInstance(type);
             entry.CreatedByMaterializer = true;
@@ -1269,11 +1699,20 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(
                 entry.ResolvedObject == null,
-                "entry.ResolvedObject == null -- otherwise we're about to overwrite - should never be called");
+                "entry.ResolvedObject == null -- otherwise we're about to overwrite - should never be called"
+            );
 
-            ClientType actualType = MaterializeAtom.GetEntryClientType(entry.TypeName, this.context, expectedEntryType, true);
+            ClientType actualType = MaterializeAtom.GetEntryClientType(
+                entry.TypeName,
+                this.context,
+                expectedEntryType,
+                true
+            );
 
-            Debug.Assert(actualType != null, "actualType != null -- otherwise ClientType.Create returned a null value");
+            Debug.Assert(
+                actualType != null,
+                "actualType != null -- otherwise ClientType.Create returned a null value"
+            );
             this.ResolveByCreatingWithType(entry, actualType.ElementType);
         }
 
@@ -1286,8 +1725,9 @@ namespace System.Data.Services.Client
             }
 
             Debug.Assert(
-                existingEntry.ResolvedObject != null, 
-                "existingEntry.ResolvedObject != null -- how did it get there otherwise?");
+                existingEntry.ResolvedObject != null,
+                "existingEntry.ResolvedObject != null -- how did it get there otherwise?"
+            );
             entry.ActualType = existingEntry.ActualType;
             entry.ResolvedObject = existingEntry.ResolvedObject;
             entry.CreatedByMaterializer = existingEntry.CreatedByMaterializer;
@@ -1300,7 +1740,10 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(expectedEntryType != null, "expectedEntryType != null");
-            Debug.Assert(entry.EntityHasBeenResolved == false, "entry.EntityHasBeenResolved == false");
+            Debug.Assert(
+                entry.EntityHasBeenResolved == false,
+                "entry.EntityHasBeenResolved == false"
+            );
 
             if (!this.TryResolveAsTarget(entry))
             {
@@ -1329,7 +1772,8 @@ namespace System.Data.Services.Client
             AtomEntry entry,
             ClientType.ClientProperty property,
             AtomFeed feed,
-            bool includeLinks)
+            bool includeLinks
+        )
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(property != null, "property != null");
@@ -1341,8 +1785,16 @@ namespace System.Data.Services.Client
                 this.Materialize(feedEntry, collectionType.ElementType, includeLinks);
             }
 
-            ProjectionPlan continuationPlan = includeLinks ? CreatePlanForDirectMaterialization(property.CollectionType) : CreatePlanForShallowMaterialization(property.CollectionType);
-            this.ApplyItemsToCollection(entry, property, feed.Entries.Select(e => e.ResolvedObject), feed.NextLink, continuationPlan);
+            ProjectionPlan continuationPlan = includeLinks
+                ? CreatePlanForDirectMaterialization(property.CollectionType)
+                : CreatePlanForShallowMaterialization(property.CollectionType);
+            this.ApplyItemsToCollection(
+                entry,
+                property,
+                feed.Entries.Select(e => e.ResolvedObject),
+                feed.NextLink,
+                continuationPlan
+            );
         }
 
         private void ApplyItemsToCollection(
@@ -1350,13 +1802,16 @@ namespace System.Data.Services.Client
             ClientType.ClientProperty property,
             IEnumerable items,
             Uri nextLink,
-            ProjectionPlan continuationPlan)
+            ProjectionPlan continuationPlan
+        )
         {
             Debug.Assert(entry != null, "entry != null");
             Debug.Assert(property != null, "property != null");
             Debug.Assert(items != null, "items != null");
 
-            object collection = entry.ShouldUpdateFromPayload ? GetOrCreateCollectionProperty(entry.ResolvedObject, property, null) : null;
+            object collection = entry.ShouldUpdateFromPayload
+                ? GetOrCreateCollectionProperty(entry.ResolvedObject, property, null)
+                : null;
             ClientType collectionType = ClientType.Create(property.CollectionType);
             foreach (object item in items)
             {
@@ -1364,31 +1819,43 @@ namespace System.Data.Services.Client
                 {
                     string message = Strings.AtomMaterializer_EntryIntoCollectionMismatch(
                         item.GetType().FullName,
-                        collectionType.ElementType.FullName);
+                        collectionType.ElementType.FullName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
                 if (entry.ShouldUpdateFromPayload)
                 {
-                    property.SetValue(collection, item, property.PropertyName, true );
+                    property.SetValue(collection, item, property.PropertyName, true);
                     this.log.AddedLink(entry, property.PropertyName, item);
                 }
             }
 
             if (entry.ShouldUpdateFromPayload)
             {
-                this.FoundNextLinkForCollection(collection as IEnumerable, nextLink, continuationPlan);
+                this.FoundNextLinkForCollection(
+                    collection as IEnumerable,
+                    nextLink,
+                    continuationPlan
+                );
             }
             else
             {
-                this.FoundNextLinkForUnmodifiedCollection(property.GetValue(entry.ResolvedObject) as IEnumerable);
+                this.FoundNextLinkForUnmodifiedCollection(
+                    property.GetValue(entry.ResolvedObject) as IEnumerable
+                );
             }
 
-            if (this.mergeOption == MergeOption.OverwriteChanges || this.mergeOption == MergeOption.PreserveChanges)
+            if (
+                this.mergeOption == MergeOption.OverwriteChanges
+                || this.mergeOption == MergeOption.PreserveChanges
+            )
             {
                 var itemsToRemove =
                     from x in this.context.GetLinks(entry.ResolvedObject, property.PropertyName)
-                    where MergeOption.OverwriteChanges == this.mergeOption || EntityStates.Added != x.State
+                    where
+                        MergeOption.OverwriteChanges == this.mergeOption
+                        || EntityStates.Added != x.State
                     select x.Target;
                 itemsToRemove = itemsToRemove.Except(EnumerateAsElementType<object>(items));
                 foreach (var item in itemsToRemove)
@@ -1403,13 +1870,20 @@ namespace System.Data.Services.Client
             }
         }
 
-        private void FoundNextLinkForCollection(IEnumerable collection, Uri link, ProjectionPlan plan)
+        private void FoundNextLinkForCollection(
+            IEnumerable collection,
+            Uri link,
+            ProjectionPlan plan
+        )
         {
             Debug.Assert(plan != null || link == null, "plan != null || link == null");
 
             if (collection != null && !this.nextLinkTable.ContainsKey(collection))
             {
-                DataServiceQueryContinuation continuation = DataServiceQueryContinuation.Create(link, plan);
+                DataServiceQueryContinuation continuation = DataServiceQueryContinuation.Create(
+                    link,
+                    plan
+                );
                 this.nextLinkTable.Add(collection, continuation);
                 Util.SetNextLinkForCollection(collection, continuation);
             }
@@ -1426,22 +1900,32 @@ namespace System.Data.Services.Client
         private void Materialize(AtomEntry entry, Type expectedEntryType, bool includeLinks)
         {
             Debug.Assert(entry != null, "entry != null");
-            Debug.Assert(entry.DataValues != null, "entry.DataValues != null -- otherwise not correctly initialized");
+            Debug.Assert(
+                entry.DataValues != null,
+                "entry.DataValues != null -- otherwise not correctly initialized"
+            );
             Debug.Assert(
                 entry.ResolvedObject == null || entry.ResolvedObject == this.targetInstance,
-                "entry.ResolvedObject == null || entry.ResolvedObject == this.targetInstance -- otherwise getting called twice");
+                "entry.ResolvedObject == null || entry.ResolvedObject == this.targetInstance -- otherwise getting called twice"
+            );
             Debug.Assert(expectedEntryType != null, "expectedType != null");
 
             this.ResolveOrCreateInstance(entry, expectedEntryType);
-            Debug.Assert(entry.ResolvedObject != null, "entry.ResolvedObject != null -- otherwise ResolveOrCreateInstnace didn't do its job");
+            Debug.Assert(
+                entry.ResolvedObject != null,
+                "entry.ResolvedObject != null -- otherwise ResolveOrCreateInstnace didn't do its job"
+            );
 
             this.MaterializeResolvedEntry(entry, includeLinks);
         }
 
-         private void MaterializeResolvedEntry(AtomEntry entry, bool includeLinks)
+        private void MaterializeResolvedEntry(AtomEntry entry, bool includeLinks)
         {
             Debug.Assert(entry != null, "entry != null");
-            Debug.Assert(entry.ResolvedObject != null, "entry.ResolvedObject != null -- otherwise not resolved/created!");
+            Debug.Assert(
+                entry.ResolvedObject != null,
+                "entry.ResolvedObject != null -- otherwise not resolved/created!"
+            );
 
             ClientType actualType = entry.ActualType;
 
@@ -1450,7 +1934,12 @@ namespace System.Data.Services.Client
                 ApplyEntityPropertyMappings(entry, entry.ActualType);
             }
 
-            MaterializeDataValues(actualType, entry.DataValues, this.ignoreMissingProperties, this.context);
+            MaterializeDataValues(
+                actualType,
+                entry.DataValues,
+                this.ignoreMissingProperties,
+                this.context
+            );
 
             foreach (var e in entry.DataValues)
             {
@@ -1475,31 +1964,49 @@ namespace System.Data.Services.Client
                 AtomFeed feedValue = e.Feed;
                 if (feedValue != null)
                 {
-                    Debug.Assert(includeLinks, "includeLinks -- otherwise we shouldn't be materializing this entry");
+                    Debug.Assert(
+                        includeLinks,
+                        "includeLinks -- otherwise we shouldn't be materializing this entry"
+                    );
                     this.ApplyFeedToCollection(entry, prop, feedValue, includeLinks);
                 }
                 else if (e.Entry != null)
                 {
                     if (!e.IsNull)
                     {
-                        Debug.Assert(includeLinks, "includeLinks -- otherwise we shouldn't be materializing this entry");
+                        Debug.Assert(
+                            includeLinks,
+                            "includeLinks -- otherwise we shouldn't be materializing this entry"
+                        );
                         this.Materialize(e.Entry, prop.PropertyType, includeLinks);
                     }
 
                     if (entry.ShouldUpdateFromPayload)
                     {
-                        prop.SetValue(entry.ResolvedObject, e.Entry.ResolvedObject, e.Name, true );
+                        prop.SetValue(entry.ResolvedObject, e.Entry.ResolvedObject, e.Name, true);
                         this.log.SetLink(entry, prop.PropertyName, e.Entry.ResolvedObject);
                     }
                 }
                 else
                 {
-                    Debug.Assert(entry.ShouldUpdateFromPayload, "entry.ShouldUpdateFromPayload -- otherwise we're about to set a property we shouldn't");
-                    ApplyDataValue(actualType, e, this.ignoreMissingProperties, this.context, entry.ResolvedObject);
+                    Debug.Assert(
+                        entry.ShouldUpdateFromPayload,
+                        "entry.ShouldUpdateFromPayload -- otherwise we're about to set a property we shouldn't"
+                    );
+                    ApplyDataValue(
+                        actualType,
+                        e,
+                        this.ignoreMissingProperties,
+                        this.context,
+                        entry.ResolvedObject
+                    );
                 }
             }
 
-            Debug.Assert(entry.ResolvedObject != null, "entry.ResolvedObject != null -- otherwise we didn't do any useful work");
+            Debug.Assert(
+                entry.ResolvedObject != null,
+                "entry.ResolvedObject != null -- otherwise we didn't do any useful work"
+            );
             if (this.materializedObjectCallback != null)
             {
                 this.materializedObjectCallback(entry.Tag, entry.ResolvedObject);

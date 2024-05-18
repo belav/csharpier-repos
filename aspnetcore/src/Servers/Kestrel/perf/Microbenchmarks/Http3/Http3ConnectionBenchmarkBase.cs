@@ -3,11 +3,11 @@
 
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Time.Testing;
@@ -46,10 +46,16 @@ public abstract class Http3ConnectionBenchmarkBase
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             dateHeaderValueManager: new DateHeaderValueManager(timeProvider),
-            timeProvider: timeProvider);
+            timeProvider: timeProvider
+        );
         serviceContext.DateHeaderValueManager.OnHeartbeat();
 
-        _http3 = new Http3InMemory(serviceContext, timeProvider, new DefaultTimeoutHandler(), NullLoggerFactory.Instance);
+        _http3 = new Http3InMemory(
+            serviceContext,
+            timeProvider,
+            new DefaultTimeoutHandler(),
+            NullLoggerFactory.Instance
+        );
 
         _http3.InitializeConnectionAsync(ProcessRequest).GetAwaiter().GetResult();
     }
@@ -85,7 +91,5 @@ public abstract class Http3ConnectionBenchmarkBase
     }
 
     [GlobalCleanup]
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

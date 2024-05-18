@@ -1,13 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="TypeConverterAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-    using System.Diagnostics;    
+namespace System.ComponentModel
+{
+    using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
@@ -20,7 +21,8 @@ namespace System.ComponentModel {
     ///       be inherited.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class TypeConverterAttribute : Attribute {
+    public sealed class TypeConverterAttribute : Attribute
+    {
         private string typeName;
 
         /// <devdoc>
@@ -38,27 +40,33 @@ namespace System.ComponentModel {
         ///       empty string ("").
         ///    </para>
         /// </devdoc>
-        public TypeConverterAttribute() {
+        public TypeConverterAttribute()
+        {
             this.typeName = string.Empty;
         }
-        
+
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using 
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using
         ///    the specified type as the data converter for the object this attribute
         ///    is bound
         ///    to.</para>
         /// </devdoc>
-        public TypeConverterAttribute(Type type) {
+        public TypeConverterAttribute(Type type)
+        {
             this.typeName = type.AssemblyQualifiedName;
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using 
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using
         ///    the specified type name as the data converter for the object this attribute is bound to.</para>
         /// </devdoc>
-        public TypeConverterAttribute(string typeName) {
+        public TypeConverterAttribute(string typeName)
+        {
             string temp = typeName.ToUpper(CultureInfo.InvariantCulture);
-            Debug.Assert(temp.IndexOf(".DLL") == -1, "Came across: " + typeName + " . Please remove the .dll extension");
+            Debug.Assert(
+                temp.IndexOf(".DLL") == -1,
+                "Came across: " + typeName + " . Please remove the .dll extension"
+            );
             this.typeName = typeName;
         }
 
@@ -67,20 +75,20 @@ namespace System.ComponentModel {
         /// to use as a converter for the object this attribute
         /// is bound to.</para>
         /// </devdoc>
-        public string ConverterTypeName {
-            get {
-                return typeName;
-            }
+        public string ConverterTypeName
+        {
+            get { return typeName; }
         }
 
-        public override bool Equals(object obj) {
-            TypeConverterAttribute other = obj as TypeConverterAttribute; 
+        public override bool Equals(object obj)
+        {
+            TypeConverterAttribute other = obj as TypeConverterAttribute;
             return (other != null) && other.ConverterTypeName == typeName;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return typeName.GetHashCode();
         }
     }
 }
-

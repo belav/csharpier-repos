@@ -67,10 +67,19 @@ namespace Microsoft.Web.WebPages.OAuth.Test
 
             var client = new Mock<IAuthenticationClient>();
             client.Setup(c => c.ProviderName).Returns("windowslive");
-            client.Setup(c => c.RequestAuthentication(
-                                    context.Object,
-                                    It.Is<Uri>(u => u.AbsoluteUri.StartsWith("http://live.com/login.aspx?__provider__=windowslive", StringComparison.OrdinalIgnoreCase))))
-                  .Verifiable();
+            client
+                .Setup(c =>
+                    c.RequestAuthentication(
+                        context.Object,
+                        It.Is<Uri>(u =>
+                            u.AbsoluteUri.StartsWith(
+                                "http://live.com/login.aspx?__provider__=windowslive",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
+                )
+                .Verifiable();
 
             OAuthWebSecurity.RegisterClient(client.Object);
 
@@ -96,10 +105,19 @@ namespace Microsoft.Web.WebPages.OAuth.Test
 
             var client = new Mock<IAuthenticationClient>();
             client.Setup(c => c.ProviderName).Returns("yahoo");
-            client.Setup(c => c.RequestAuthentication(
-                                    context.Object,
-                                    It.Is<Uri>(u => u.AbsoluteUri.StartsWith("http://yahoo.com/?__provider__=yahoo", StringComparison.OrdinalIgnoreCase))))
-                  .Verifiable();
+            client
+                .Setup(c =>
+                    c.RequestAuthentication(
+                        context.Object,
+                        It.Is<Uri>(u =>
+                            u.AbsoluteUri.StartsWith(
+                                "http://yahoo.com/?__provider__=yahoo",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
+                )
+                .Verifiable();
 
             OAuthWebSecurity.RegisterClient(client.Object);
 
@@ -122,18 +140,24 @@ namespace Microsoft.Web.WebPages.OAuth.Test
 
             var client = new Mock<IAuthenticationClient>(MockBehavior.Strict);
             client.Setup(c => c.ProviderName).Returns("facebook");
-            client.Setup(c => c.VerifyAuthentication(context.Object)).Returns(new AuthenticationResult(true, "facebook", "123",
-                                                                                                "super", null));
+            client
+                .Setup(c => c.VerifyAuthentication(context.Object))
+                .Returns(new AuthenticationResult(true, "facebook", "123", "super", null));
 
             var anotherClient = new Mock<IAuthenticationClient>(MockBehavior.Strict);
             anotherClient.Setup(c => c.ProviderName).Returns("twitter");
-            anotherClient.Setup(c => c.VerifyAuthentication(context.Object)).Returns(AuthenticationResult.Failed);
+            anotherClient
+                .Setup(c => c.VerifyAuthentication(context.Object))
+                .Returns(AuthenticationResult.Failed);
 
             OAuthWebSecurity.RegisterClient(client.Object);
             OAuthWebSecurity.RegisterClient(anotherClient.Object);
 
             // Act
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthenticationCore(context.Object, "one.aspx");
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthenticationCore(
+                context.Object,
+                "one.aspx"
+            );
 
             // Assert
             Assert.False(result.IsSuccessful);
@@ -157,7 +181,10 @@ namespace Microsoft.Web.WebPages.OAuth.Test
             OAuthWebSecurity.RegisterClient(anotherClient.Object);
 
             // Act
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthenticationCore(context.Object, "");
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthenticationCore(
+                context.Object,
+                ""
+            );
 
             // Assert
             Assert.False(result.IsSuccessful);
@@ -177,13 +204,20 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                 context.Setup(c => c.Response.Cookies).Returns(cookies);
 
                 var dataProvider = new Mock<IOpenAuthDataProvider>(MockBehavior.Strict);
-                dataProvider.Setup(p => p.GetUserNameFromOpenAuth("twitter", "12345")).Returns("hola");
+                dataProvider
+                    .Setup(p => p.GetUserNameFromOpenAuth("twitter", "12345"))
+                    .Returns("hola");
                 OAuthWebSecurity.OAuthDataProvider = dataProvider.Object;
 
                 OAuthWebSecurity.RegisterTwitterClient("sdfdsfsd", "dfdsfdsf");
 
                 // Act
-                bool successful = OAuthWebSecurity.LoginCore(context.Object, "twitter", "12345", createPersistentCookie: false);
+                bool successful = OAuthWebSecurity.LoginCore(
+                    context.Object,
+                    "twitter",
+                    "12345",
+                    createPersistentCookie: false
+                );
 
                 // Assert
                 Assert.True(successful);
@@ -221,11 +255,18 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                 OAuthWebSecurity.RegisterTwitterClient("consumerKey", "consumerSecrte");
 
                 var dataProvider = new Mock<IOpenAuthDataProvider>();
-                dataProvider.Setup(p => p.GetUserNameFromOpenAuth("twitter", "12345")).Returns((string)null);
+                dataProvider
+                    .Setup(p => p.GetUserNameFromOpenAuth("twitter", "12345"))
+                    .Returns((string)null);
                 OAuthWebSecurity.OAuthDataProvider = dataProvider.Object;
 
                 // Act
-                bool successful = OAuthWebSecurity.LoginCore(context.Object, "twitter", "12345", createPersistentCookie: false);
+                bool successful = OAuthWebSecurity.LoginCore(
+                    context.Object,
+                    "twitter",
+                    "12345",
+                    createPersistentCookie: false
+                );
 
                 // Assert
                 Assert.False(successful);
@@ -317,7 +358,12 @@ namespace Microsoft.Web.WebPages.OAuth.Test
         public void TestRegisterFacebookClient()
         {
             // Arrange
-            OAuthWebSecurity.RegisterFacebookClient("one", "two", displayName: "FB", extraData: null);
+            OAuthWebSecurity.RegisterFacebookClient(
+                "one",
+                "two",
+                displayName: "FB",
+                extraData: null
+            );
 
             // Act
             var data = OAuthWebSecurity.RegisteredClientData;
@@ -334,7 +380,12 @@ namespace Microsoft.Web.WebPages.OAuth.Test
         public void TestRegisterMicrosoftClient()
         {
             // Arrange
-            OAuthWebSecurity.RegisterMicrosoftClient("one", "two", displayName: "MS", extraData: null);
+            OAuthWebSecurity.RegisterMicrosoftClient(
+                "one",
+                "two",
+                displayName: "MS",
+                extraData: null
+            );
 
             // Act
             var data = OAuthWebSecurity.RegisteredClientData;
@@ -351,7 +402,12 @@ namespace Microsoft.Web.WebPages.OAuth.Test
         public void TestRegisterTwitterClient()
         {
             // Arrange
-            OAuthWebSecurity.RegisterTwitterClient("x0", "y0", displayName: "Tweet", extraData: null);
+            OAuthWebSecurity.RegisterTwitterClient(
+                "x0",
+                "y0",
+                displayName: "Tweet",
+                extraData: null
+            );
 
             // Act
             var data = OAuthWebSecurity.RegisteredClientData;
@@ -368,7 +424,12 @@ namespace Microsoft.Web.WebPages.OAuth.Test
         public void TestRegisterLinkedInClient()
         {
             // Arrange
-            OAuthWebSecurity.RegisterLinkedInClient("x0", "y0", displayName: "LINKED", extraData: null);
+            OAuthWebSecurity.RegisterLinkedInClient(
+                "x0",
+                "y0",
+                displayName: "LINKED",
+                extraData: null
+            );
 
             // Act
             var data = OAuthWebSecurity.RegisteredClientData;
