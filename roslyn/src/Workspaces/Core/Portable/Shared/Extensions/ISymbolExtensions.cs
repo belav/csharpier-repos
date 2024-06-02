@@ -18,7 +18,6 @@ using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Roslyn.Utilities;
-
 using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
@@ -26,10 +25,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static partial class ISymbolExtensions
     {
         /// <summary>
-        /// Checks a given symbol for browsability based on its declaration location, attributes 
-        /// explicitly limiting browsability, and whether showing of advanced members is enabled. 
+        /// Checks a given symbol for browsability based on its declaration location, attributes
+        /// explicitly limiting browsability, and whether showing of advanced members is enabled.
         /// The optional editorBrowsableInfo parameters may be used to specify the symbols of the
-        /// constructors of the various browsability limiting attributes because finding these 
+        /// constructors of the various browsability limiting attributes because finding these
         /// repeatedly over a large list of symbols can be slow. If these are not provided,
         /// they will be found in the compilation.
         /// </summary>
@@ -37,23 +36,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol symbol,
             bool hideAdvancedMembers,
             Compilation compilation,
-            EditorBrowsableInfo editorBrowsableInfo = default)
+            EditorBrowsableInfo editorBrowsableInfo = default
+        )
         {
             return IsEditorBrowsableWithState(
                 symbol,
                 hideAdvancedMembers,
                 compilation,
-                editorBrowsableInfo).isBrowsable;
+                editorBrowsableInfo
+            ).isBrowsable;
         }
 
         // In addition to given symbol's browsability, also returns its EditorBrowsableState if it contains EditorBrowsableAttribute.
-        public static (bool isBrowsable, bool isEditorBrowsableStateAdvanced) IsEditorBrowsableWithState(
+        public static (
+            bool isBrowsable,
+            bool isEditorBrowsableStateAdvanced
+        ) IsEditorBrowsableWithState(
             this ISymbol symbol,
             bool hideAdvancedMembers,
             Compilation compilation,
-            EditorBrowsableInfo editorBrowsableInfo = default)
+            EditorBrowsableInfo editorBrowsableInfo = default
+        )
         {
-            // Namespaces can't have attributes, so just return true here.  This also saves us a 
+            // Namespaces can't have attributes, so just return true here.  This also saves us a
             // costly check if this namespace has any locations in source (since a merged namespace
             // needs to go collect all the locations).
             if (symbol.Kind == SymbolKind.Namespace)
@@ -75,23 +80,37 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Ignore browsability limiting attributes if the symbol is declared in source.
-            // Check all locations since some of VB's embedded My symbols are declared in 
+            // Check all locations since some of VB's embedded My symbols are declared in
             // both source and the MyTemplateLocation.
             if (symbol.Locations.All(loc => loc.IsInSource))
             {
                 // The HideModuleNameAttribute still applies to Modules defined in source
-                return (!IsBrowsingProhibitedByHideModuleNameAttribute(symbol, editorBrowsableInfo.HideModuleNameAttribute), isEditorBrowsableStateAdvanced: false);
+                return (
+                    !IsBrowsingProhibitedByHideModuleNameAttribute(
+                        symbol,
+                        editorBrowsableInfo.HideModuleNameAttribute
+                    ),
+                    isEditorBrowsableStateAdvanced: false
+                );
             }
 
-            var (isProhibited, isEditorBrowsableStateAdvanced) = IsBrowsingProhibited(symbol, hideAdvancedMembers, editorBrowsableInfo);
+            var (isProhibited, isEditorBrowsableStateAdvanced) = IsBrowsingProhibited(
+                symbol,
+                hideAdvancedMembers,
+                editorBrowsableInfo
+            );
 
             return (!isProhibited, isEditorBrowsableStateAdvanced);
         }
 
-        private static (bool isProhibited, bool isEditorBrowsableStateAdvanced) IsBrowsingProhibited(
+        private static (
+            bool isProhibited,
+            bool isEditorBrowsableStateAdvanced
+        ) IsBrowsingProhibited(
             ISymbol symbol,
             bool hideAdvancedMembers,
-            EditorBrowsableInfo editorBrowsableInfo)
+            EditorBrowsableInfo editorBrowsableInfo
+        )
         {
             var attributes = symbol.GetAttributes();
             if (attributes.Length == 0)
@@ -99,17 +118,43 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return (isProhibited: false, isEditorBrowsableStateAdvanced: false);
             }
 
-            var (isProhibited, isEditorBrowsableStateAdvanced) = IsBrowsingProhibitedByEditorBrowsableAttribute(attributes, hideAdvancedMembers, editorBrowsableInfo.EditorBrowsableAttributeConstructor);
+            var (isProhibited, isEditorBrowsableStateAdvanced) =
+                IsBrowsingProhibitedByEditorBrowsableAttribute(
+                    attributes,
+                    hideAdvancedMembers,
+                    editorBrowsableInfo.EditorBrowsableAttributeConstructor
+                );
 
-            return ((isProhibited
-                || IsBrowsingProhibitedByTypeLibTypeAttribute(attributes, editorBrowsableInfo.TypeLibTypeAttributeConstructors)
-                || IsBrowsingProhibitedByTypeLibFuncAttribute(attributes, editorBrowsableInfo.TypeLibFuncAttributeConstructors)
-                || IsBrowsingProhibitedByTypeLibVarAttribute(attributes, editorBrowsableInfo.TypeLibVarAttributeConstructors)
-                || IsBrowsingProhibitedByHideModuleNameAttribute(symbol, editorBrowsableInfo.HideModuleNameAttribute, attributes)), isEditorBrowsableStateAdvanced);
+            return (
+                (
+                    isProhibited
+                    || IsBrowsingProhibitedByTypeLibTypeAttribute(
+                        attributes,
+                        editorBrowsableInfo.TypeLibTypeAttributeConstructors
+                    )
+                    || IsBrowsingProhibitedByTypeLibFuncAttribute(
+                        attributes,
+                        editorBrowsableInfo.TypeLibFuncAttributeConstructors
+                    )
+                    || IsBrowsingProhibitedByTypeLibVarAttribute(
+                        attributes,
+                        editorBrowsableInfo.TypeLibVarAttributeConstructors
+                    )
+                    || IsBrowsingProhibitedByHideModuleNameAttribute(
+                        symbol,
+                        editorBrowsableInfo.HideModuleNameAttribute,
+                        attributes
+                    )
+                ),
+                isEditorBrowsableStateAdvanced
+            );
         }
 
         private static bool IsBrowsingProhibitedByHideModuleNameAttribute(
-            ISymbol symbol, INamedTypeSymbol? hideModuleNameAttribute, ImmutableArray<AttributeData> attributes = default)
+            ISymbol symbol,
+            INamedTypeSymbol? hideModuleNameAttribute,
+            ImmutableArray<AttributeData> attributes = default
+        )
         {
             if (hideModuleNameAttribute == null || !symbol.IsModuleType())
             {
@@ -129,23 +174,34 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        private static (bool isProhibited, bool isEditorBrowsableStateAdvanced) IsBrowsingProhibitedByEditorBrowsableAttribute(
-            ImmutableArray<AttributeData> attributes, bool hideAdvancedMembers, IMethodSymbol? constructor)
+        private static (
+            bool isProhibited,
+            bool isEditorBrowsableStateAdvanced
+        ) IsBrowsingProhibitedByEditorBrowsableAttribute(
+            ImmutableArray<AttributeData> attributes,
+            bool hideAdvancedMembers,
+            IMethodSymbol? constructor
+        )
         {
             if (constructor == null)
                 return (isProhibited: false, isEditorBrowsableStateAdvanced: false);
 
             foreach (var attribute in attributes)
             {
-                if (Equals(attribute.AttributeConstructor, constructor) &&
-                    attribute.ConstructorArguments is [{ Value: int value }])
+                if (
+                    Equals(attribute.AttributeConstructor, constructor)
+                    && attribute.ConstructorArguments is [{ Value: int value }]
+                )
                 {
                     var state = (EditorBrowsableState)value;
                     if (EditorBrowsableState.Never == state)
                         return (isProhibited: true, isEditorBrowsableStateAdvanced: false);
 
                     if (EditorBrowsableState.Advanced == state)
-                        return (isProhibited: hideAdvancedMembers, isEditorBrowsableStateAdvanced: true);
+                        return (
+                            isProhibited: hideAdvancedMembers,
+                            isEditorBrowsableStateAdvanced: true
+                        );
                 }
             }
 
@@ -153,30 +209,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         private static bool IsBrowsingProhibitedByTypeLibTypeAttribute(
-            ImmutableArray<AttributeData> attributes, ImmutableArray<IMethodSymbol> constructors)
+            ImmutableArray<AttributeData> attributes,
+            ImmutableArray<IMethodSymbol> constructors
+        )
         {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
-                TypeLibTypeFlagsFHidden);
+                TypeLibTypeFlagsFHidden
+            );
         }
 
         private static bool IsBrowsingProhibitedByTypeLibFuncAttribute(
-            ImmutableArray<AttributeData> attributes, ImmutableArray<IMethodSymbol> constructors)
+            ImmutableArray<AttributeData> attributes,
+            ImmutableArray<IMethodSymbol> constructors
+        )
         {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
-                TypeLibFuncFlagsFHidden);
+                TypeLibFuncFlagsFHidden
+            );
         }
 
         private static bool IsBrowsingProhibitedByTypeLibVarAttribute(
-            ImmutableArray<AttributeData> attributes, ImmutableArray<IMethodSymbol> constructors)
+            ImmutableArray<AttributeData> attributes,
+            ImmutableArray<IMethodSymbol> constructors
+        )
         {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
-                TypeLibVarFlagsFHidden);
+                TypeLibVarFlagsFHidden
+            );
         }
 
         private const int TypeLibTypeFlagsFHidden = 0x0010;
@@ -184,7 +249,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private const int TypeLibVarFlagsFHidden = 0x0040;
 
         private static bool IsBrowsingProhibitedByTypeLibAttributeWorker(
-            ImmutableArray<AttributeData> attributes, ImmutableArray<IMethodSymbol> attributeConstructors, int hiddenFlag)
+            ImmutableArray<AttributeData> attributes,
+            ImmutableArray<IMethodSymbol> attributeConstructors,
+            int hiddenFlag
+        )
         {
             foreach (var attribute in attributes)
             {
@@ -223,12 +291,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static DocumentationComment GetDocumentationComment(this ISymbol symbol, Compilation compilation, CultureInfo? preferredCulture = null, bool expandIncludes = false, bool expandInheritdoc = false, CancellationToken cancellationToken = default)
-            => GetDocumentationComment(symbol, visitedSymbols: null, compilation, preferredCulture, expandIncludes, expandInheritdoc, cancellationToken);
+        public static DocumentationComment GetDocumentationComment(
+            this ISymbol symbol,
+            Compilation compilation,
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            bool expandInheritdoc = false,
+            CancellationToken cancellationToken = default
+        ) =>
+            GetDocumentationComment(
+                symbol,
+                visitedSymbols: null,
+                compilation,
+                preferredCulture,
+                expandIncludes,
+                expandInheritdoc,
+                cancellationToken
+            );
 
-        private static DocumentationComment GetDocumentationComment(ISymbol symbol, HashSet<ISymbol>? visitedSymbols, Compilation compilation, CultureInfo? preferredCulture, bool expandIncludes, bool expandInheritdoc, CancellationToken cancellationToken)
+        private static DocumentationComment GetDocumentationComment(
+            ISymbol symbol,
+            HashSet<ISymbol>? visitedSymbols,
+            Compilation compilation,
+            CultureInfo? preferredCulture,
+            bool expandIncludes,
+            bool expandInheritdoc,
+            CancellationToken cancellationToken
+        )
         {
-            var xmlText = symbol.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            var xmlText = symbol.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
             if (expandInheritdoc)
             {
                 if (string.IsNullOrEmpty(xmlText))
@@ -246,7 +341,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 try
                 {
                     var element = XElement.Parse(xmlText, LoadOptions.PreserveWhitespace);
-                    element.ReplaceNodes(RewriteMany(symbol, visitedSymbols, compilation, element.Nodes().ToArray(), cancellationToken));
+                    element.ReplaceNodes(
+                        RewriteMany(
+                            symbol,
+                            visitedSymbols,
+                            compilation,
+                            element.Nodes().ToArray(),
+                            cancellationToken
+                        )
+                    );
                     xmlText = element.ToString(SaveOptions.DisableFormatting);
                 }
                 catch (XmlException)
@@ -255,12 +358,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     // actionable, so avoid the overhead of telemetry reporting for it.
                     // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1385578
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-                {
-                }
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken)) { }
             }
 
-            return RoslynString.IsNullOrEmpty(xmlText) ? DocumentationComment.Empty : DocumentationComment.FromXmlFragment(xmlText);
+            return RoslynString.IsNullOrEmpty(xmlText)
+                ? DocumentationComment.Empty
+                : DocumentationComment.FromXmlFragment(xmlText);
 
             static bool IsEligibleForAutomaticInheritdoc(ISymbol symbol)
             {
@@ -299,14 +403,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        private static XNode[] RewriteInheritdocElements(ISymbol symbol, HashSet<ISymbol>? visitedSymbols, Compilation compilation, XNode node, CancellationToken cancellationToken)
+        private static XNode[] RewriteInheritdocElements(
+            ISymbol symbol,
+            HashSet<ISymbol>? visitedSymbols,
+            Compilation compilation,
+            XNode node,
+            CancellationToken cancellationToken
+        )
         {
             if (node.NodeType == XmlNodeType.Element)
             {
                 var element = (XElement)node;
                 if (ElementNameIs(element, DocumentationCommentXmlNames.InheritdocElementName))
                 {
-                    var rewritten = RewriteInheritdocElement(symbol, visitedSymbols, compilation, element, cancellationToken);
+                    var rewritten = RewriteInheritdocElement(
+                        symbol,
+                        visitedSymbols,
+                        compilation,
+                        element,
+                        cancellationToken
+                    );
                     if (rewritten is object)
                     {
                         return rewritten;
@@ -329,28 +445,58 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (oldNodes != null)
             {
-                var rewritten = RewriteMany(symbol, visitedSymbols, compilation, oldNodes.ToArray(), cancellationToken);
+                var rewritten = RewriteMany(
+                    symbol,
+                    visitedSymbols,
+                    compilation,
+                    oldNodes.ToArray(),
+                    cancellationToken
+                );
                 container.ReplaceNodes(rewritten);
             }
 
             return [container];
         }
 
-        private static XNode[] RewriteMany(ISymbol symbol, HashSet<ISymbol>? visitedSymbols, Compilation compilation, XNode[] nodes, CancellationToken cancellationToken)
+        private static XNode[] RewriteMany(
+            ISymbol symbol,
+            HashSet<ISymbol>? visitedSymbols,
+            Compilation compilation,
+            XNode[] nodes,
+            CancellationToken cancellationToken
+        )
         {
             var result = new List<XNode>();
             foreach (var child in nodes)
             {
-                result.AddRange(RewriteInheritdocElements(symbol, visitedSymbols, compilation, child, cancellationToken));
+                result.AddRange(
+                    RewriteInheritdocElements(
+                        symbol,
+                        visitedSymbols,
+                        compilation,
+                        child,
+                        cancellationToken
+                    )
+                );
             }
 
             return result.ToArray();
         }
 
-        private static XNode[]? RewriteInheritdocElement(ISymbol memberSymbol, HashSet<ISymbol>? visitedSymbols, Compilation compilation, XElement element, CancellationToken cancellationToken)
+        private static XNode[]? RewriteInheritdocElement(
+            ISymbol memberSymbol,
+            HashSet<ISymbol>? visitedSymbols,
+            Compilation compilation,
+            XElement element,
+            CancellationToken cancellationToken
+        )
         {
-            var crefAttribute = element.Attribute(XName.Get(DocumentationCommentXmlNames.CrefAttributeName));
-            var pathAttribute = element.Attribute(XName.Get(DocumentationCommentXmlNames.PathAttributeName));
+            var crefAttribute = element.Attribute(
+                XName.Get(DocumentationCommentXmlNames.CrefAttributeName)
+            );
+            var pathAttribute = element.Attribute(
+                XName.Get(DocumentationCommentXmlNames.PathAttributeName)
+            );
 
             var candidate = GetCandidateSymbol(memberSymbol);
             var hasCandidateCref = candidate is object;
@@ -372,7 +518,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             else
             {
                 var crefValue = crefAttribute.Value;
-                symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(crefValue, compilation);
+                symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
+                    crefValue,
+                    compilation
+                );
                 if (symbol is null)
                 {
                     return null;
@@ -388,7 +537,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             try
             {
-                var inheritedDocumentation = GetDocumentationComment(symbol, visitedSymbols, compilation, preferredCulture: null, expandIncludes: true, expandInheritdoc: true, cancellationToken);
+                var inheritedDocumentation = GetDocumentationComment(
+                    symbol,
+                    visitedSymbols,
+                    compilation,
+                    preferredCulture: null,
+                    expandIncludes: true,
+                    expandInheritdoc: true,
+                    cancellationToken
+                );
                 if (inheritedDocumentation == DocumentationComment.Empty)
                 {
                     return Array.Empty<XNode>();
@@ -428,20 +585,32 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     }
                 */
                 // Note: there is no way to cref an instantiated generic type. See https://github.com/dotnet/csharplang/issues/401
-                var typeParameterRefs = document.Descendants(DocumentationCommentXmlNames.TypeParameterReferenceElementName).ToImmutableArray();
+                var typeParameterRefs = document
+                    .Descendants(DocumentationCommentXmlNames.TypeParameterReferenceElementName)
+                    .ToImmutableArray();
                 foreach (var typeParameterRef in typeParameterRefs)
                 {
-                    if (typeParameterRef.Attribute(DocumentationCommentXmlNames.NameAttributeName) is XAttribute typeParamName)
+                    if (
+                        typeParameterRef.Attribute(DocumentationCommentXmlNames.NameAttributeName)
+                        is XAttribute typeParamName
+                    )
                     {
-                        var index = symbol.OriginalDefinition.GetAllTypeParameters().IndexOf(p => p.Name == typeParamName.Value);
+                        var index = symbol
+                            .OriginalDefinition.GetAllTypeParameters()
+                            .IndexOf(p => p.Name == typeParamName.Value);
                         if (index >= 0)
                         {
                             var typeArgs = symbol.GetAllTypeArguments();
                             if (index < typeArgs.Length)
                             {
                                 var docId = typeArgs[index].GetDocumentationCommentId();
-                                var replacement = new XElement(DocumentationCommentXmlNames.SeeElementName);
-                                replacement.SetAttributeValue(DocumentationCommentXmlNames.CrefAttributeName, docId);
+                                var replacement = new XElement(
+                                    DocumentationCommentXmlNames.SeeElementName
+                                );
+                                replacement.SetAttributeValue(
+                                    DocumentationCommentXmlNames.CrefAttributeName,
+                                    docId
+                                );
                                 typeParameterRef.ReplaceWith(replacement);
                             }
                         }
@@ -474,17 +643,25 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 if (memberSymbol is IMethodSymbol methodSymbol)
                 {
-                    if (methodSymbol.MethodKind is MethodKind.Constructor or MethodKind.StaticConstructor)
+                    if (
+                        methodSymbol.MethodKind
+                        is MethodKind.Constructor
+                            or MethodKind.StaticConstructor
+                    )
                     {
                         var baseType = memberSymbol.ContainingType.BaseType;
 #nullable disable // Can 'baseType' be null here? https://github.com/dotnet/roslyn/issues/39166
-                        return baseType.Constructors.Where(c => IsSameSignature(methodSymbol, c)).FirstOrDefault();
+                        return baseType
+                            .Constructors.Where(c => IsSameSignature(methodSymbol, c))
+                            .FirstOrDefault();
 #nullable enable
                     }
                     else
                     {
                         // check for implicit interface
-                        return methodSymbol.ExplicitOrImplicitInterfaceImplementations().FirstOrDefault();
+                        return methodSymbol
+                            .ExplicitOrImplicitInterfaceImplementations()
+                            .FirstOrDefault();
                     }
                 }
                 else if (memberSymbol is INamedTypeSymbol typeSymbol)
@@ -618,7 +795,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             try
             {
-                var xpathResult = (IEnumerable)System.Xml.XPath.Extensions.XPathEvaluate(node, xpath);
+                var xpathResult = (IEnumerable)
+                    System.Xml.XPath.Extensions.XPathEvaluate(node, xpath);
 
                 // Throws InvalidOperationException if the result of the XPath is an XDocument:
                 return xpathResult?.Cast<XNode>().ToArray();
@@ -633,19 +811,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        private static bool ElementNameIs(XElement element, string name)
-            => string.IsNullOrEmpty(element.Name.NamespaceName) && DocumentationCommentXmlNames.ElementEquals(element.Name.LocalName, name);
+        private static bool ElementNameIs(XElement element, string name) =>
+            string.IsNullOrEmpty(element.Name.NamespaceName)
+            && DocumentationCommentXmlNames.ElementEquals(element.Name.LocalName, name);
 
         /// <summary>
         /// First, remove symbols from the set if they are overridden by other symbols in the set.
-        /// If a symbol is overridden only by symbols outside of the set, then it is not removed. 
+        /// If a symbol is overridden only by symbols outside of the set, then it is not removed.
         /// This is useful for filtering out symbols that cannot be accessed in a given context due
         /// to the existence of overriding members. Second, remove remaining symbols that are
         /// unsupported (e.g. pointer types in VB) or not editor browsable based on the EditorBrowsable
         /// attribute.
         /// </summary>
         public static ImmutableArray<T> FilterToVisibleAndBrowsableSymbols<T>(
-            this ImmutableArray<T> symbols, bool hideAdvancedMembers, Compilation compilation) where T : ISymbol
+            this ImmutableArray<T> symbols,
+            bool hideAdvancedMembers,
+            Compilation compilation
+        )
+            where T : ISymbol
         {
             symbols = symbols.RemoveOverriddenSymbolsWithinSet();
 
@@ -656,19 +839,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // PERF: HasUnsupportedMetadata may require recreating the syntax tree to get the base class, so first
             // check to see if we're referencing a symbol defined in source.
             static bool isSymbolDefinedInSource(Location l) => l.IsInSource;
-            return symbols.WhereAsArray((s, arg) =>
-                // Check if symbol is namespace (which is always visible) first to avoid realizing all locations
-                // of each namespace symbol, which might end up allocating in LOH
-                (s.IsNamespace() || s.Locations.Any(isSymbolDefinedInSource) || !s.HasUnsupportedMetadata) &&
-                !s.IsDestructor() &&
-                s.IsEditorBrowsable(
-                    arg.hideAdvancedMembers,
-                    arg.editorBrowsableInfo.Compilation,
-                    arg.editorBrowsableInfo),
-                (hideAdvancedMembers, editorBrowsableInfo));
+            return symbols.WhereAsArray(
+                (s, arg) =>
+                    // Check if symbol is namespace (which is always visible) first to avoid realizing all locations
+                    // of each namespace symbol, which might end up allocating in LOH
+                    (
+                        s.IsNamespace()
+                        || s.Locations.Any(isSymbolDefinedInSource)
+                        || !s.HasUnsupportedMetadata
+                    )
+                    && !s.IsDestructor()
+                    && s.IsEditorBrowsable(
+                        arg.hideAdvancedMembers,
+                        arg.editorBrowsableInfo.Compilation,
+                        arg.editorBrowsableInfo
+                    ),
+                (hideAdvancedMembers, editorBrowsableInfo)
+            );
         }
 
-        private static ImmutableArray<T> RemoveOverriddenSymbolsWithinSet<T>(this ImmutableArray<T> symbols) where T : ISymbol
+        private static ImmutableArray<T> RemoveOverriddenSymbolsWithinSet<T>(
+            this ImmutableArray<T> symbols
+        )
+            where T : ISymbol
         {
             var overriddenSymbols = new MetadataUnifyingSymbolHashSet();
 
@@ -683,9 +876,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static ImmutableArray<T> FilterToVisibleAndBrowsableSymbolsAndNotUnsafeSymbols<T>(
-            this ImmutableArray<T> symbols, bool hideAdvancedMembers, Compilation compilation) where T : ISymbol
+            this ImmutableArray<T> symbols,
+            bool hideAdvancedMembers,
+            Compilation compilation
+        )
+            where T : ISymbol
         {
-            return symbols.FilterToVisibleAndBrowsableSymbols(hideAdvancedMembers, compilation)
+            return symbols
+                .FilterToVisibleAndBrowsableSymbols(hideAdvancedMembers, compilation)
                 .WhereAsArray(s => !s.RequiresUnsafeModifier());
         }
     }

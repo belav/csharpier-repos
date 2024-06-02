@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class RequestServicesEndpointRoutingTest : RequestServicesTestBase<BasicWebSite.Startup>
 {
     public RequestServicesEndpointRoutingTest(MvcTestFixture<BasicWebSite.Startup> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public override async Task HasEndpointMatch()

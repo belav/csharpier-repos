@@ -15,18 +15,28 @@ namespace Microsoft.CodeAnalysis
         [Fact]
         public void Equality()
         {
-            assertEqualsAndHashCode(default(NullabilityInfo), default(NullabilityInfo), equal: true);
-            assertEqualsAndHashCode(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
-                                    new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
-                                    equal: true);
+            assertEqualsAndHashCode(
+                default(NullabilityInfo),
+                default(NullabilityInfo),
+                equal: true
+            );
+            assertEqualsAndHashCode(
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
+                equal: true
+            );
 
-            assertEqualsAndHashCode(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
-                                    new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull),
-                                    equal: false);
+            assertEqualsAndHashCode(
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
+                new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull),
+                equal: false
+            );
 
-            assertEqualsAndHashCode(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull),
-                                    new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
-                                    equal: false);
+            assertEqualsAndHashCode(
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull),
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.NotNull),
+                equal: false
+            );
 
             void assertEqualsAndHashCode(NullabilityInfo n1, NullabilityInfo n2, bool equal)
             {

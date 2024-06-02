@@ -34,33 +34,31 @@ public class GuidTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    public GuidTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Guid)
-        : base(storeType, typeof(Guid), dbType, jsonValueReaderWriter: JsonGuidReaderWriter.Instance)
-    {
-    }
+    public GuidTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Guid)
+        : base(
+            storeType,
+            typeof(Guid),
+            dbType,
+            jsonValueReaderWriter: JsonGuidReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="GuidTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected GuidTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new GuidTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new GuidTypeMapping(parameters);
 
     /// <summary>
     ///     Gets the string format to be used to generate SQL literals of this type.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => "'{0}'";
+    protected override string SqlLiteralFormatString => "'{0}'";
 }

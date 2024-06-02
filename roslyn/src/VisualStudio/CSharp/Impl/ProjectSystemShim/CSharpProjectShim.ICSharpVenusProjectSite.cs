@@ -14,47 +14,85 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
     internal partial class CSharpProjectShim : ICSharpVenusProjectSite
     {
-        public void AddReferenceToCodeDirectory(string assemblyFileName, ICSharpProjectRoot project)
-            => AddReferenceToCodeDirectoryEx(assemblyFileName, project, CompilerOptions.OPTID_IMPORTS);
+        public void AddReferenceToCodeDirectory(
+            string assemblyFileName,
+            ICSharpProjectRoot project
+        ) =>
+            AddReferenceToCodeDirectoryEx(assemblyFileName, project, CompilerOptions.OPTID_IMPORTS);
 
-        public void RemoveReferenceToCodeDirectory(string assemblyFileName, ICSharpProjectRoot project)
+        public void RemoveReferenceToCodeDirectory(
+            string assemblyFileName,
+            ICSharpProjectRoot project
+        )
         {
             var projectSite = GetProjectSite(project);
 
-            var projectReferencesToRemove = ProjectSystemProject.GetProjectReferences().Where(p => p.ProjectId == projectSite.ProjectSystemProject.Id).ToList();
+            var projectReferencesToRemove = ProjectSystemProject
+                .GetProjectReferences()
+                .Where(p => p.ProjectId == projectSite.ProjectSystemProject.Id)
+                .ToList();
 
             if (projectReferencesToRemove.Count == 0)
             {
-                throw new ArgumentException($"The project {nameof(project)} is not currently referenced by this project.");
+                throw new ArgumentException(
+                    $"The project {nameof(project)} is not currently referenced by this project."
+                );
             }
 
             foreach (var projectReferenceToRemove in projectReferencesToRemove)
             {
-                ProjectSystemProject.RemoveProjectReference(new ProjectReference(projectSite.ProjectSystemProject.Id));
+                ProjectSystemProject.RemoveProjectReference(
+                    new ProjectReference(projectSite.ProjectSystemProject.Id)
+                );
             }
         }
 
-        public void OnDiskFileUpdated(string filename, ref System.Runtime.InteropServices.ComTypes.FILETIME pFT)
-            => throw new NotImplementedException();
+        public void OnDiskFileUpdated(
+            string filename,
+            ref System.Runtime.InteropServices.ComTypes.FILETIME pFT
+        ) => throw new NotImplementedException();
 
-        public void OnCodeDirectoryAliasesChanged(ICSharpProjectRoot project, int previousAliasesCount, string[] previousAliases, int currentAliasesCount, string[] currentAliases)
+        public void OnCodeDirectoryAliasesChanged(
+            ICSharpProjectRoot project,
+            int previousAliasesCount,
+            string[] previousAliases,
+            int currentAliasesCount,
+            string[] currentAliases
+        )
         {
             var projectSite = GetProjectSite(project);
 
             using (ProjectSystemProject.CreateBatchScope())
             {
-                var existingProjectReference = ProjectSystemProject.GetProjectReferences().Single(p => p.ProjectId == projectSite.ProjectSystemProject.Id);
+                var existingProjectReference = ProjectSystemProject
+                    .GetProjectReferences()
+                    .Single(p => p.ProjectId == projectSite.ProjectSystemProject.Id);
 
                 ProjectSystemProject.RemoveProjectReference(existingProjectReference);
-                ProjectSystemProject.AddProjectReference(new ProjectReference(existingProjectReference.ProjectId, ImmutableArray.Create(currentAliases), existingProjectReference.EmbedInteropTypes));
+                ProjectSystemProject.AddProjectReference(
+                    new ProjectReference(
+                        existingProjectReference.ProjectId,
+                        ImmutableArray.Create(currentAliases),
+                        existingProjectReference.EmbedInteropTypes
+                    )
+                );
             }
         }
 
-        public void AddReferenceToCodeDirectoryEx(string assemblyFileName, ICSharpProjectRoot projectRoot, CompilerOptions optionID)
+        public void AddReferenceToCodeDirectoryEx(
+            string assemblyFileName,
+            ICSharpProjectRoot projectRoot,
+            CompilerOptions optionID
+        )
         {
             var projectSite = GetProjectSite(projectRoot);
 
-            ProjectSystemProject.AddProjectReference(new ProjectReference(projectSite.ProjectSystemProject.Id, embedInteropTypes: optionID == CompilerOptions.OPTID_IMPORTSUSINGNOPIA));
+            ProjectSystemProject.AddProjectReference(
+                new ProjectReference(
+                    projectSite.ProjectSystemProject.Id,
+                    embedInteropTypes: optionID == CompilerOptions.OPTID_IMPORTSUSINGNOPIA
+                )
+            );
         }
 
         /// <summary>
@@ -71,7 +109,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             // the project system.
             if (project.GetProjectSite(ref projectSiteGuid) is not CSharpProjectShim projectSite)
             {
-                throw new ArgumentException($"{project} was not properly sited with the language service.", nameof(project));
+                throw new ArgumentException(
+                    $"{project} was not properly sited with the language service.",
+                    nameof(project)
+                );
             }
 
             return projectSite;

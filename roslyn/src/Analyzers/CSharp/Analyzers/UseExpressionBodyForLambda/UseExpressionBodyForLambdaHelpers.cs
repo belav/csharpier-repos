@@ -13,12 +13,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
     internal static class UseExpressionBodyForLambdaHelpers
     {
-        internal static readonly LocalizableString UseExpressionBodyTitle = new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_expression_body_for_lambda_expression), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources));
-        internal static readonly LocalizableString UseBlockBodyTitle = new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_block_body_for_lambda_expression), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources));
+        internal static readonly LocalizableString UseExpressionBodyTitle =
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Use_expression_body_for_lambda_expression),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            );
+        internal static readonly LocalizableString UseBlockBodyTitle =
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Use_block_body_for_lambda_expression),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            );
 
         internal static bool CanOfferUseBlockBody(
-            SemanticModel semanticModel, ExpressionBodyPreference preference,
-            LambdaExpressionSyntax declaration, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            ExpressionBodyPreference preference,
+            LambdaExpressionSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
             var userPrefersBlockBodies = preference == ExpressionBodyPreference.Never;
             if (!userPrefersBlockBodies)
@@ -38,13 +51,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             // able to create the right sort of block body (i.e. with a return-statement or
             // expr-statement).  So, if we can't figure out what lambda type this is, we should not
             // proceed.
-            if (semanticModel.GetTypeInfo(declaration, cancellationToken).ConvertedType is not INamedTypeSymbol lambdaType || lambdaType.DelegateInvokeMethod == null)
+            if (
+                semanticModel.GetTypeInfo(declaration, cancellationToken).ConvertedType
+                    is not INamedTypeSymbol lambdaType
+                || lambdaType.DelegateInvokeMethod == null
+            )
             {
                 return false;
             }
 
             var canOffer = expressionBodyOpt.TryConvertToStatement(
-                semicolonTokenOpt: null, createReturnStatementForExpression: false, out _);
+                semicolonTokenOpt: null,
+                createReturnStatementForExpression: false,
+                out _
+            );
             if (!canOffer)
             {
                 // Couldn't even convert the expression into statement form.
@@ -52,8 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             }
 
             var languageVersion = declaration.SyntaxTree.Options.LanguageVersion();
-            if (expressionBodyOpt.IsKind(SyntaxKind.ThrowExpression) &&
-                languageVersion < LanguageVersion.CSharp7)
+            if (
+                expressionBodyOpt.IsKind(SyntaxKind.ThrowExpression)
+                && languageVersion < LanguageVersion.CSharp7
+            )
             {
                 // Can't convert this prior to C# 7 because ```a => throw ...``` isn't allowed.
                 return false;
@@ -63,7 +85,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         }
 
         internal static bool CanOfferUseExpressionBody(
-            ExpressionBodyPreference preference, LambdaExpressionSyntax declaration, LanguageVersion languageVersion, CancellationToken cancellationToken)
+            ExpressionBodyPreference preference,
+            LambdaExpressionSyntax declaration,
+            LanguageVersion languageVersion,
+            CancellationToken cancellationToken
+        )
         {
             var userPrefersExpressionBodies = preference != ExpressionBodyPreference.Never;
             if (!userPrefersExpressionBodies)
@@ -79,23 +105,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 return false;
             }
 
-            // They don't have an expression body.  See if we could convert the block they 
+            // They don't have an expression body.  See if we could convert the block they
             // have into one.
-            return TryConvertToExpressionBody(declaration, languageVersion, preference, cancellationToken, out _);
+            return TryConvertToExpressionBody(
+                declaration,
+                languageVersion,
+                preference,
+                cancellationToken,
+                out _
+            );
         }
 
-        internal static ExpressionSyntax? GetBodyAsExpression(LambdaExpressionSyntax declaration)
-            => declaration.Body as ExpressionSyntax;
+        internal static ExpressionSyntax? GetBodyAsExpression(LambdaExpressionSyntax declaration) =>
+            declaration.Body as ExpressionSyntax;
 
-        internal static CodeStyleOption2<ExpressionBodyPreference> GetCodeStyleOption(AnalyzerOptionsProvider provider)
-            => ((CSharpAnalyzerOptionsProvider)provider).PreferExpressionBodiedLambdas;
+        internal static CodeStyleOption2<ExpressionBodyPreference> GetCodeStyleOption(
+            AnalyzerOptionsProvider provider
+        ) => ((CSharpAnalyzerOptionsProvider)provider).PreferExpressionBodiedLambdas;
 
         /// <summary>
         /// Helper to get the true ReportDiagnostic severity for a given option.  Importantly, this
         /// handle ReportDiagnostic.Default and will map that back to the appropriate value in that
         /// case.
         /// </summary>
-        internal static ReportDiagnostic GetOptionSeverity(CodeStyleOption2<ExpressionBodyPreference> optionValue)
+        internal static ReportDiagnostic GetOptionSeverity(
+            CodeStyleOption2<ExpressionBodyPreference> optionValue
+        )
         {
             var severity = optionValue.Notification.Severity;
             return severity == ReportDiagnostic.Default
@@ -108,11 +143,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             LanguageVersion languageVersion,
             ExpressionBodyPreference conversionPreference,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out ExpressionSyntax? expression)
+            [NotNullWhen(true)] out ExpressionSyntax? expression
+        )
         {
             var body = declaration.Body as BlockSyntax;
 
-            return body.TryConvertToExpressionBody(languageVersion, conversionPreference, cancellationToken, out expression, out _);
+            return body.TryConvertToExpressionBody(
+                languageVersion,
+                conversionPreference,
+                cancellationToken,
+                out expression,
+                out _
+            );
         }
     }
 }

@@ -51,8 +51,7 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
     /// </remarks>
-    string? GetProductVersion()
-        => this[CoreAnnotationNames.ProductVersion] as string;
+    string? GetProductVersion() => this[CoreAnnotationNames.ProductVersion] as string;
 
     /// <summary>
     ///     Gets a value indicating whether the CLR type is used by shared type entities in the model.
@@ -62,7 +61,9 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     /// </remarks>
     /// <param name="type">The CLR type.</param>
     /// <returns>Whether the CLR type is used by shared type entities in the model.</returns>
-    bool IsShared([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type);
+    bool IsShared(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type
+    );
 
     /// <summary>
     ///     Gets all entity types defined in the model.
@@ -99,7 +100,8 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     IReadOnlyEntityType? FindEntityType(
         string name,
         string definingNavigationName,
-        IReadOnlyEntityType definingEntityType);
+        IReadOnlyEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with
@@ -127,7 +129,8 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     IReadOnlyEntityType? FindEntityType(
         Type type,
         string definingNavigationName,
-        IReadOnlyEntityType definingEntityType);
+        IReadOnlyEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Gets the entity types matching the given type.
@@ -150,7 +153,8 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     /// <returns>List of entity types corresponding to the least derived types from the given.</returns>
     IEnumerable<IReadOnlyEntityType> FindLeastDerivedEntityTypes(
         Type type,
-        Func<IReadOnlyEntityType, bool>? condition = null)
+        Func<IReadOnlyEntityType, bool>? condition = null
+    )
     {
         var derivedLevels = new Dictionary<Type, int> { [type] = 0 };
 
@@ -220,7 +224,10 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -229,8 +236,7 @@ public interface IReadOnlyModel : IReadOnlyAnnotatable
         {
             builder.Append(indentString).Append("Model: ");
 
-            if (this is Model
-                && GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot)
+            if (this is Model && GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot)
             {
                 builder.Append(" ChangeTrackingStrategy.").Append(GetChangeTrackingStrategy());
             }

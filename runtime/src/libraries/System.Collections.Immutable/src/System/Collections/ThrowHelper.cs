@@ -9,7 +9,10 @@ namespace System.Collections
 {
     internal static class ThrowHelper
     {
-        public static void ThrowIfNull(object arg, [CallerArgumentExpression(nameof(arg))] string? paramName = null)
+        public static void ThrowIfNull(
+            object arg,
+            [CallerArgumentExpression(nameof(arg))] string? paramName = null
+        )
         {
             if (arg is null)
             {
@@ -26,8 +29,7 @@ namespace System.Collections
             throw new ArgumentNullException(paramName);
 
         [DoesNotReturn]
-        public static void ThrowKeyNotFoundException() =>
-            throw new KeyNotFoundException();
+        public static void ThrowKeyNotFoundException() => throw new KeyNotFoundException();
 
         [DoesNotReturn]
         public static void ThrowInvalidOperationException() =>

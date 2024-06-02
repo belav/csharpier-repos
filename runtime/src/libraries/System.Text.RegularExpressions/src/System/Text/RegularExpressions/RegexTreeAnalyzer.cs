@@ -13,10 +13,20 @@ namespace System.Text.RegularExpressions
         public static AnalysisResults Analyze(RegexTree regexTree)
         {
             var results = new AnalysisResults(regexTree);
-            results._complete = TryAnalyze(regexTree.Root, results, isAtomicByAncestor: true, isInLoop: false);
+            results._complete = TryAnalyze(
+                regexTree.Root,
+                results,
+                isAtomicByAncestor: true,
+                isInLoop: false
+            );
             return results;
 
-            static bool TryAnalyze(RegexNode node, AnalysisResults results, bool isAtomicByAncestor, bool isInLoop)
+            static bool TryAnalyze(
+                RegexNode node,
+                AnalysisResults results,
+                bool isAtomicByAncestor,
+                bool isInLoop
+            )
             {
                 if (!StackHelper.TryEnsureSufficientExecutionStack())
                 {
@@ -47,8 +57,14 @@ namespace System.Text.RegularExpressions
                     switch (node.Kind)
                     {
                         case RegexNodeKind.Alternate:
-                        case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.M != node.N:
-                        case RegexNodeKind.Oneloop or RegexNodeKind.Notoneloop or RegexNodeKind.Setloop or RegexNodeKind.Onelazy or RegexNodeKind.Notonelazy or RegexNodeKind.Setlazy when node.M != node.N:
+                        case RegexNodeKind.Loop
+                        or RegexNodeKind.Lazyloop when node.M != node.N:
+                        case RegexNodeKind.Oneloop
+                        or RegexNodeKind.Notoneloop
+                        or RegexNodeKind.Setloop
+                        or RegexNodeKind.Onelazy
+                        or RegexNodeKind.Notonelazy
+                        or RegexNodeKind.Setlazy when node.M != node.N:
                             (results._mayBacktrack ??= new HashSet<RegexNode>()).Add(node);
                             break;
                     }
@@ -87,32 +103,40 @@ namespace System.Text.RegularExpressions
                     // Determine whether the child should be treated as atomic (whether anything
                     // can backtrack into it), which is influenced by whether this node (the child's
                     // parent) is considered atomic by itself or by its parent.
-                    bool treatChildAsAtomic = (isAtomicByAncestor | isAtomicBySelf) && node.Kind switch
-                    {
-                        // If the parent is atomic, so is the child.  That's the whole purpose
-                        // of the Atomic node, and lookarounds are also implicitly atomic.
-                        RegexNodeKind.Atomic or RegexNodeKind.NegativeLookaround or RegexNodeKind.PositiveLookaround => true,
+                    bool treatChildAsAtomic =
+                        (isAtomicByAncestor | isAtomicBySelf)
+                        && node.Kind switch
+                        {
+                            // If the parent is atomic, so is the child.  That's the whole purpose
+                            // of the Atomic node, and lookarounds are also implicitly atomic.
+                            RegexNodeKind.Atomic
+                            or RegexNodeKind.NegativeLookaround
+                            or RegexNodeKind.PositiveLookaround
+                                => true,
 
-                        // Each branch is considered independently, so any atomicity applied to the alternation also applies
-                        // to each individual branch.  This is true as well for conditionals.
-                        RegexNodeKind.Alternate or RegexNodeKind.BackreferenceConditional or RegexNodeKind.ExpressionConditional => true,
+                            // Each branch is considered independently, so any atomicity applied to the alternation also applies
+                            // to each individual branch.  This is true as well for conditionals.
+                            RegexNodeKind.Alternate
+                            or RegexNodeKind.BackreferenceConditional
+                            or RegexNodeKind.ExpressionConditional
+                                => true,
 
-                        // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also atomic.
-                        RegexNodeKind.Capture => true,
+                            // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also atomic.
+                            RegexNodeKind.Capture => true,
 
-                        // If the parent is a concatenation and this is the last node, any atomicity
-                        // applying to the concatenation applies to this node, too.
-                        RegexNodeKind.Concatenate => i == childCount - 1,
+                            // If the parent is a concatenation and this is the last node, any atomicity
+                            // applying to the concatenation applies to this node, too.
+                            RegexNodeKind.Concatenate => i == childCount - 1,
 
-                        // For loops with a max iteration count of 1, they themselves can be considered
-                        // atomic as can whatever they wrap, as they won't ever iterate more than once
-                        // and thus we don't need to worry about one iteration consuming input destined
-                        // for a subsequent iteration.
-                        RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.N == 1 => true,
+                            // For loops with a max iteration count of 1, they themselves can be considered
+                            // atomic as can whatever they wrap, as they won't ever iterate more than once
+                            // and thus we don't need to worry about one iteration consuming input destined
+                            // for a subsequent iteration.
+                            RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.N == 1 => true,
 
-                        // For any other parent type, give up on trying to prove atomicity.
-                        _ => false,
-                    };
+                            // For any other parent type, give up on trying to prove atomicity.
+                            _ => false,
+                        };
 
                     // Now analyze the child.
                     if (!TryAnalyze(child, results, treatChildAsAtomic, isInLoop))
@@ -156,14 +180,19 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Set of nodes that are considered to be atomic based on themselves or their ancestry.</summary>
         internal readonly HashSet<RegexNode> _isAtomicByAncestor = new(); // since the root is implicitly atomic, every tree will contain atomic-by-ancestor nodes
+
         /// <summary>Set of nodes that directly or indirectly contain capture groups.</summary>
         internal readonly HashSet<RegexNode> _containsCapture = new(); // the root is a capture, so this will always contain at least the root node
+
         /// <summary>Set of nodes that directly or indirectly contain backtracking constructs that aren't hidden internaly by atomic constructs.</summary>
         internal HashSet<RegexNode>? _mayBacktrack;
+
         /// <summary>Set of nodes contained inside loops.</summary>
         internal HashSet<RegexNode>? _inLoops;
+
         /// <summary>Whether any node has <see cref="RegexOptions.IgnoreCase"/> set.</summary>
         internal bool _hasIgnoreCase;
+
         /// <summary>Whether any node has <see cref="RegexOptions.RightToLeft"/> set.</summary>
         internal bool _hasRightToLeft;
 
@@ -188,7 +217,8 @@ namespace System.Text.RegularExpressions
         /// code being emitted to deal with captures that can't occur, but functionally it's the
         /// safe choice.
         /// </remarks>
-        public bool MayContainCapture(RegexNode node) => !_complete || _containsCapture.Contains(node);
+        public bool MayContainCapture(RegexNode node) =>
+            !_complete || _containsCapture.Contains(node);
 
         /// <summary>Gets whether a node is or directory or indirectly contains a backtracking construct that isn't hidden by an internal atomic construct.</summary>
         /// <remarks>
@@ -201,7 +231,8 @@ namespace System.Text.RegularExpressions
         /// true for any node that requires backtracking. In that vein, if the whole tree couldn't be examined,
         /// this returns true.
         /// </remarks>
-        public bool MayBacktrack(RegexNode node) => !_complete || (_mayBacktrack?.Contains(node) ?? false);
+        public bool MayBacktrack(RegexNode node) =>
+            !_complete || (_mayBacktrack?.Contains(node) ?? false);
 
         /// <summary>Gets whether a node may be contained inside of one or more loops.</summary>
         /// <remarks>

@@ -21,7 +21,10 @@ internal sealed class InputRadioContext
     /// </summary>
     /// <param name="parentContext">The parent context, if any.</param>
     /// <param name="changeEventCallback">The event callback to be invoked when the selected value is changed.</param>
-    public InputRadioContext(InputRadioContext? parentContext, EventCallback<ChangeEventArgs> changeEventCallback)
+    public InputRadioContext(
+        InputRadioContext? parentContext,
+        EventCallback<ChangeEventArgs> changeEventCallback
+    )
     {
         ParentContext = parentContext;
         ChangeEventCallback = changeEventCallback;
@@ -32,6 +35,8 @@ internal sealed class InputRadioContext
     /// </summary>
     /// <param name="groupName">The group name of the ancestor <see cref="InputRadioContext"/>.</param>
     /// <returns>The <see cref="InputRadioContext"/>, or <c>null</c> if none was found.</returns>
-    public InputRadioContext? FindContextInAncestors(string groupName)
-        => string.Equals(GroupName, groupName) ? this : ParentContext?.FindContextInAncestors(groupName);
+    public InputRadioContext? FindContextInAncestors(string groupName) =>
+        string.Equals(GroupName, groupName)
+            ? this
+            : ParentContext?.FindContextInAncestors(groupName);
 }

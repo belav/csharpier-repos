@@ -56,7 +56,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             #region Usage
             Person person = new Person();
 
-            string jsonIncludeDefaultValues = JsonConvert.SerializeObject(person, Formatting.Indented);
+            string jsonIncludeDefaultValues = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented
+            );
 
             Console.WriteLine(jsonIncludeDefaultValues);
             // {
@@ -66,10 +69,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Salary": null
             // }
 
-            string jsonIgnoreDefaultValues = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings
-            {
-                DefaultValueHandling = DefaultValueHandling.Ignore
-            });
+            string jsonIgnoreDefaultValues = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
+            );
 
             Console.WriteLine(jsonIgnoreDefaultValues);
             // {}

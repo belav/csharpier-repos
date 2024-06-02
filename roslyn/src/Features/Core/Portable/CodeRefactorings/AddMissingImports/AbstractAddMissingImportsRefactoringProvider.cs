@@ -14,7 +14,9 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.AddMissingImports
 {
-    internal abstract class AbstractAddMissingImportsRefactoringProvider(IPasteTrackingService? pasteTrackingService) : CodeRefactoringProvider
+    internal abstract class AbstractAddMissingImportsRefactoringProvider(
+        IPasteTrackingService? pasteTrackingService
+    ) : CodeRefactoringProvider
     {
         private readonly IPasteTrackingService? _pasteTrackingService = pasteTrackingService;
         protected abstract string CodeActionTitle { get; }
@@ -28,21 +30,29 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var (document, _, cancellationToken) = context;
             // Currently this refactoring requires the SourceTextContainer to have a pasted text span.
-            var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await document
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!_pasteTrackingService.TryGetPastedTextSpan(sourceText.Container, out var textSpan))
             {
                 return;
             }
 
             // Check pasted text span for missing imports
-            var addMissingImportsService = document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+            var addMissingImportsService =
+                document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(context.Options, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
             var options = new AddMissingImportsOptions(
                 cleanupOptions,
-                context.Options.GetOptions(document.Project.Services).HideAdvancedMembers);
+                context.Options.GetOptions(document.Project.Services).HideAdvancedMembers
+            );
 
-            var analysis = await addMissingImportsService.AnalyzeAsync(document, textSpan, options, cancellationToken).ConfigureAwait(false);
+            var analysis = await addMissingImportsService
+                .AnalyzeAsync(document, textSpan, options, cancellationToken)
+                .ConfigureAwait(false);
             if (!analysis.CanAddMissingImports)
             {
                 return;
@@ -50,9 +60,17 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var addImportsCodeAction = CodeAction.Create(
                 CodeActionTitle,
-                (progressTracker, cancellationToken) => AddMissingImportsAsync(
-                    document, addMissingImportsService, analysis, options.CleanupOptions.FormattingOptions, progressTracker, cancellationToken),
-                CodeActionTitle);
+                (progressTracker, cancellationToken) =>
+                    AddMissingImportsAsync(
+                        document,
+                        addMissingImportsService,
+                        analysis,
+                        options.CleanupOptions.FormattingOptions,
+                        progressTracker,
+                        cancellationToken
+                    ),
+                CodeActionTitle
+            );
 
             context.RegisterRefactoring(addImportsCodeAction, textSpan);
         }
@@ -63,10 +81,18 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             AddMissingImportsAnalysisResult analysis,
             SyntaxFormattingOptions formattingOptions,
             IProgress<CodeAnalysisProgress> progressTracker,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var modifiedDocument = await addMissingImportsService.AddMissingImportsAsync(
-                document, analysis, formattingOptions, progressTracker, cancellationToken).ConfigureAwait(false);
+            var modifiedDocument = await addMissingImportsService
+                .AddMissingImportsAsync(
+                    document,
+                    analysis,
+                    formattingOptions,
+                    progressTracker,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return modifiedDocument.Project.Solution;
         }
     }

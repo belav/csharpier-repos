@@ -70,13 +70,13 @@ namespace System.Threading
         private const int TIMEOUT_CHECK_FREQUENCY = 10;
 
         // The thread tracking disabled mask
-        private const int LOCK_ID_DISABLE_MASK = unchecked((int)0x80000000);        // 1000 0000 0000 0000 0000 0000 0000 0000
+        private const int LOCK_ID_DISABLE_MASK = unchecked((int)0x80000000); // 1000 0000 0000 0000 0000 0000 0000 0000
 
         // The lock is held by some thread, but we don't know which
-        private const int LOCK_ANONYMOUS_OWNED = 0x1;                               // 0000 0000 0000 0000 0000 0000 0000 0001
+        private const int LOCK_ANONYMOUS_OWNED = 0x1; // 0000 0000 0000 0000 0000 0000 0000 0001
 
         // Waiters mask if the thread tracking is disabled
-        private const int WAITERS_MASK = ~(LOCK_ID_DISABLE_MASK | 1);               // 0111 1111 1111 1111 1111 1111 1111 1110
+        private const int WAITERS_MASK = ~(LOCK_ID_DISABLE_MASK | 1); // 0111 1111 1111 1111 1111 1111 1111 1110
 
         // The Thread tacking is disabled and the lock bit is set, used in Enter fast path to make sure the id is disabled and lock is available
         private const int ID_DISABLED_AND_ANONYMOUS_OWNED = unchecked((int)0x80000001); // 1000 0000 0000 0000 0000 0000 0000 0001
@@ -92,7 +92,12 @@ namespace System.Threading
         private const int MAXIMUM_WAITERS = WAITERS_MASK;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int CompareExchange(ref int location, int value, int comparand, ref bool success)
+        private static int CompareExchange(
+            ref int location,
+            int value,
+            int comparand,
+            ref bool success
+        )
         {
             int result = Interlocked.CompareExchange(ref location, value, comparand);
             success = (result == comparand);
@@ -149,9 +154,18 @@ namespace System.Threading
         {
             // Try to keep the code and branching in this method as small as possible in order to inline the method
             int observedOwner = _owner;
-            if (lockTaken || // invalid parameter
-                (observedOwner & ID_DISABLED_AND_ANONYMOUS_OWNED) != LOCK_ID_DISABLE_MASK || // thread tracking is enabled or the lock is already acquired
-                CompareExchange(ref _owner, observedOwner | LOCK_ANONYMOUS_OWNED, observedOwner, ref lockTaken) != observedOwner) // acquiring the lock failed
+            if (
+                lockTaken
+                || // invalid parameter
+                (observedOwner & ID_DISABLED_AND_ANONYMOUS_OWNED) != LOCK_ID_DISABLE_MASK
+                || // thread tracking is enabled or the lock is already acquired
+                CompareExchange(
+                    ref _owner,
+                    observedOwner | LOCK_ANONYMOUS_OWNED,
+                    observedOwner,
+                    ref lockTaken
+                ) != observedOwner
+            ) // acquiring the lock failed
                 ContinueTryEnter(Timeout.Infinite, ref lockTaken); // Then try the slow path if any of the above conditions is met
         }
 
@@ -189,7 +203,12 @@ namespace System.Threading
             else
             {
                 // Lock wasn't held; try to acquire it.
-                CompareExchange(ref _owner, observedOwner | LOCK_ANONYMOUS_OWNED, observedOwner, ref lockTaken);
+                CompareExchange(
+                    ref _owner,
+                    observedOwner | LOCK_ANONYMOUS_OWNED,
+                    observedOwner,
+                    ref lockTaken
+                );
             }
         }
 
@@ -226,7 +245,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(timeout), timeout, SR.SpinLock_TryEnter_ArgumentOutOfRange);
+                    nameof(timeout),
+                    timeout,
+                    SR.SpinLock_TryEnter_ArgumentOutOfRange
+                );
             }
 
             // Call reliable enter with the int-based timeout milliseconds
@@ -258,10 +280,20 @@ namespace System.Threading
         public void TryEnter(int millisecondsTimeout, ref bool lockTaken)
         {
             int observedOwner = _owner;
-            if (millisecondsTimeout < -1 || // invalid parameter
-                lockTaken || // invalid parameter
-                (observedOwner & ID_DISABLED_AND_ANONYMOUS_OWNED) != LOCK_ID_DISABLE_MASK ||  // thread tracking is enabled or the lock is already acquired
-                CompareExchange(ref _owner, observedOwner | LOCK_ANONYMOUS_OWNED, observedOwner, ref lockTaken) != observedOwner) // acquiring the lock failed
+            if (
+                millisecondsTimeout < -1
+                || // invalid parameter
+                lockTaken
+                || // invalid parameter
+                (observedOwner & ID_DISABLED_AND_ANONYMOUS_OWNED) != LOCK_ID_DISABLE_MASK
+                || // thread tracking is enabled or the lock is already acquired
+                CompareExchange(
+                    ref _owner,
+                    observedOwner | LOCK_ANONYMOUS_OWNED,
+                    observedOwner,
+                    ref lockTaken
+                ) != observedOwner
+            ) // acquiring the lock failed
                 ContinueTryEnter(millisecondsTimeout, ref lockTaken); // The call the slow pth
         }
 
@@ -284,7 +316,10 @@ namespace System.Threading
             if (millisecondsTimeout < -1)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(millisecondsTimeout), millisecondsTimeout, SR.SpinLock_TryEnter_ArgumentOutOfRange);
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.SpinLock_TryEnter_ArgumentOutOfRange
+                );
             }
 
             uint startTime = 0;
@@ -318,7 +353,10 @@ namespace System.Threading
             observedOwner = _owner;
             if ((observedOwner & LOCK_ANONYMOUS_OWNED) == LOCK_UNOWNED)
             {
-                if (CompareExchange(ref _owner, observedOwner | 1, observedOwner, ref lockTaken) == observedOwner)
+                if (
+                    CompareExchange(ref _owner, observedOwner | 1, observedOwner, ref lockTaken)
+                    == observedOwner
+                )
                 {
                     // Acquired lock
                     return;
@@ -359,12 +397,17 @@ namespace System.Threading
                 observedOwner = _owner;
                 if ((observedOwner & LOCK_ANONYMOUS_OWNED) == LOCK_UNOWNED)
                 {
-                    int newOwner = (observedOwner & WAITERS_MASK) == 0 ? // Gets the number of waiters, if zero
-                           observedOwner | 1 // don't decrement it. just set the lock bit, it is zero because a previous call of Exit(false) which corrupted the waiters
-                           : (observedOwner - 2) | 1; // otherwise decrement the waiters and set the lock bit
+                    int newOwner =
+                        (observedOwner & WAITERS_MASK) == 0
+                            ? // Gets the number of waiters, if zero
+                            observedOwner | 1 // don't decrement it. just set the lock bit, it is zero because a previous call of Exit(false) which corrupted the waiters
+                            : (observedOwner - 2) | 1; // otherwise decrement the waiters and set the lock bit
                     Debug.Assert((newOwner & WAITERS_MASK) >= 0);
 
-                    if (CompareExchange(ref _owner, newOwner, observedOwner, ref lockTaken) == observedOwner)
+                    if (
+                        CompareExchange(ref _owner, newOwner, observedOwner, ref lockTaken)
+                        == observedOwner
+                    )
                     {
                         return;
                     }
@@ -373,7 +416,10 @@ namespace System.Threading
                 if (spinner.Count % TIMEOUT_CHECK_FREQUENCY == 0)
                 {
                     // Check the timeout.
-                    if (millisecondsTimeout != Timeout.Infinite && TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0)
+                    if (
+                        millisecondsTimeout != Timeout.Infinite
+                        && TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0
+                    )
                     {
                         DecrementWaiters();
                         return;
@@ -391,8 +437,12 @@ namespace System.Threading
             while (true)
             {
                 int observedOwner = _owner;
-                if ((observedOwner & WAITERS_MASK) == 0) return; // don't decrement the waiters if it's corrupted by previous call of Exit(false)
-                if (Interlocked.CompareExchange(ref _owner, observedOwner - 2, observedOwner) == observedOwner)
+                if ((observedOwner & WAITERS_MASK) == 0)
+                    return; // don't decrement the waiters if it's corrupted by previous call of Exit(false)
+                if (
+                    Interlocked.CompareExchange(ref _owner, observedOwner - 2, observedOwner)
+                    == observedOwner
+                )
                 {
                     Debug.Assert(!IsThreadOwnerTrackingEnabled); // Make sure the waiters never be negative which will cause the thread tracking bit to be flipped
                     break;
@@ -404,7 +454,11 @@ namespace System.Threading
         /// <summary>
         /// ContinueTryEnter for the thread tracking mode enabled
         /// </summary>
-        private void ContinueTryEnterWithThreadTracking(int millisecondsTimeout, uint startTime, ref bool lockTaken)
+        private void ContinueTryEnterWithThreadTracking(
+            int millisecondsTimeout,
+            uint startTime,
+            ref bool lockTaken
+        )
         {
             Debug.Assert(IsThreadOwnerTrackingEnabled);
 
@@ -431,15 +485,23 @@ namespace System.Threading
 
                 if (_owner == LockUnowned)
                 {
-                    if (CompareExchange(ref _owner, newOwner, LockUnowned, ref lockTaken) == LockUnowned)
+                    if (
+                        CompareExchange(ref _owner, newOwner, LockUnowned, ref lockTaken)
+                        == LockUnowned
+                    )
                     {
                         return;
                     }
                 }
                 // Check the timeout.  We only RDTSC if the next spin will yield, to amortize the cost.
-                if (millisecondsTimeout == 0 ||
-                    (millisecondsTimeout != Timeout.Infinite && spinner.NextSpinWillYield &&
-                    TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0))
+                if (
+                    millisecondsTimeout == 0
+                    || (
+                        millisecondsTimeout != Timeout.Infinite
+                        && spinner.NextSpinWillYield
+                        && TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0
+                    )
+                )
                 {
                     return;
                 }
@@ -641,7 +703,6 @@ namespace System.Threading
             public bool IsHeld => _spinLock.IsHeld;
         }
         #endregion
-
     }
 }
 #pragma warning restore 0420

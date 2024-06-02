@@ -11,5 +11,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Testing;
 internal record RunTestsPartialResult(
     [property: DataMember(Name = "stage")] string Stage,
     [property: DataMember(Name = "message")] string Message,
-    [property: DataMember(Name = "progress"), JsonProperty(NullValueHandling = NullValueHandling.Ignore)] TestProgress? Progress
+    [property:
+        DataMember(Name = "progress"),
+        JsonProperty(NullValueHandling = NullValueHandling.Ignore)
+    ]
+        TestProgress? Progress
 );

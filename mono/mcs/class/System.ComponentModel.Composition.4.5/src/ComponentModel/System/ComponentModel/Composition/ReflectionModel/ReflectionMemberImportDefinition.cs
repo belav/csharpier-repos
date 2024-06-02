@@ -4,12 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -19,16 +19,27 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public ReflectionMemberImportDefinition(
             LazyMemberInfo importingLazyMember,
-            string contractName, 
+            string contractName,
             string requiredTypeIdentity,
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata,
-            ImportCardinality cardinality, 
-            bool isRecomposable, 
+            ImportCardinality cardinality,
+            bool isRecomposable,
             bool isPrerequisite,
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object> metadata,
-            ICompositionElement origin) 
-            : base(contractName, requiredTypeIdentity, requiredMetadata, cardinality, isRecomposable, isPrerequisite, requiredCreationPolicy, metadata, origin)
+            ICompositionElement origin
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                metadata,
+                origin
+            )
         {
             Assumes.NotNull(contractName);
 
@@ -37,22 +48,28 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override ImportingItem ToImportingItem()
         {
-            ReflectionWritableMember member = this.ImportingLazyMember.ToReflectionWriteableMember();
-            return new ImportingMember(this, member, new ImportType(member.ReturnType, this.Cardinality));
+            ReflectionWritableMember member =
+                this.ImportingLazyMember.ToReflectionWriteableMember();
+            return new ImportingMember(
+                this,
+                member,
+                new ImportType(member.ReturnType, this.Cardinality)
+            );
         }
 
         public LazyMemberInfo ImportingLazyMember
         {
-            get { return this._importingLazyMember; } 
+            get { return this._importingLazyMember; }
         }
 
         protected override string GetDisplayName()
         {
             return string.Format(
                 CultureInfo.CurrentCulture,
-                "{0} (ContractName=\"{1}\")",    // NOLOC
+                "{0} (ContractName=\"{1}\")", // NOLOC
                 this.ImportingLazyMember.ToReflectionMember().GetDisplayName(),
-                this.ContractName);
+                this.ContractName
+            );
         }
     }
 }

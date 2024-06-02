@@ -23,48 +23,56 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-
-    using WebCtrlStyle = System.Web.UI.WebControls.Style;
     using DialogResult = System.Windows.Forms.DialogResult;
+    using WebCtrlStyle = System.Web.UI.WebControls.Style;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal abstract class MobileTemplatedControlDesigner : TemplatedControlDesigner, IMobileDesigner, IDeviceSpecificDesigner
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal abstract class MobileTemplatedControlDesigner
+        : TemplatedControlDesigner,
+            IMobileDesigner,
+            IDeviceSpecificDesigner
     {
-        #if TRACE
-            internal static BooleanSwitch TemplateableControlDesignerSwitch =
-                new BooleanSwitch("MobileTemplatedControlDesigner", "Enable TemplateableControl designer general purpose traces.");
-        #endif
+#if TRACE
+        internal static BooleanSwitch TemplateableControlDesignerSwitch = new BooleanSwitch(
+            "MobileTemplatedControlDesigner",
+            "Enable TemplateableControl designer general purpose traces."
+        );
+#endif
 
-        private System.Windows.Forms.Control    _header;
-        private MobileControl                   _mobileControl;
-        private System.Web.UI.Control           _control;
-        private DesignerVerbCollection          _designerVerbs = null;
-        private DeviceSpecificChoice            _currentChoice = null;
-        private bool                            _containmentStatusDirty = true;
-        private ContainmentStatus               _containmentStatus;
-        private IDesignerHost                   _host;
-        private IWebFormsDocumentService        _iWebFormsDocumentService;
-        private IMobileWebFormServices          _iMobileWebFormServices;
-        private const String                    _htmlString = "html";
-        private TemplateEditingVerb[]           _templateVerbs;
-        private bool                            _templateVerbsDirty = true;
-        private const int                       _templateWidth = 275;
+        private System.Windows.Forms.Control _header;
+        private MobileControl _mobileControl;
+        private System.Web.UI.Control _control;
+        private DesignerVerbCollection _designerVerbs = null;
+        private DeviceSpecificChoice _currentChoice = null;
+        private bool _containmentStatusDirty = true;
+        private ContainmentStatus _containmentStatus;
+        private IDesignerHost _host;
+        private IWebFormsDocumentService _iWebFormsDocumentService;
+        private IMobileWebFormServices _iMobileWebFormServices;
+        private const String _htmlString = "html";
+        private TemplateEditingVerb[] _templateVerbs;
+        private bool _templateVerbsDirty = true;
+        private const int _templateWidth = 275;
 
-        private static readonly String _noChoiceText =
-            SR.GetString(SR.DeviceFilter_NoChoice);
+        private static readonly String _noChoiceText = SR.GetString(SR.DeviceFilter_NoChoice);
 
-        private static readonly String _defaultChoiceText =
-            SR.GetString(SR.DeviceFilter_DefaultChoice);
+        private static readonly String _defaultChoiceText = SR.GetString(
+            SR.DeviceFilter_DefaultChoice
+        );
 
-        private static readonly String _nonHtmlSchemaErrorMessage =
-            SR.GetString(SR.MobileControl_NonHtmlSchemaErrorMessage);
+        private static readonly String _nonHtmlSchemaErrorMessage = SR.GetString(
+            SR.MobileControl_NonHtmlSchemaErrorMessage
+        );
 
-        private static readonly String _illFormedWarning =
-            SR.GetString(SR.TemplateFrame_IllFormedWarning);
+        private static readonly String _illFormedWarning = SR.GetString(
+            SR.TemplateFrame_IllFormedWarning
+        );
 
         private const String _illFormedHtml =
             "<DIV style=\"font-family:tahoma;font-size:8pt; COLOR: infotext; BACKGROUND-COLOR: infobackground\">{0}</DIV>";
@@ -82,10 +90,7 @@ namespace System.Web.UI.Design.MobileControls
         // DesignerAdapterUtil.GetMaxWidthToFit does.
         public virtual int TemplateWidth
         {
-            get
-            {
-                return _templateWidth;
-            }
+            get { return _templateWidth; }
         }
 
         public override bool AllowResize
@@ -102,10 +107,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool AllowTemplateEditing
         {
-            get
-            {
-                return (CurrentChoice != null && IsHTMLSchema(CurrentChoice) && !ErrorMode);
-            }
+            get { return (CurrentChoice != null && IsHTMLSchema(CurrentChoice) && !ErrorMode); }
         }
 
         [
@@ -118,10 +120,7 @@ namespace System.Web.UI.Design.MobileControls
         ]
         protected String AppliedDeviceFilters
         {
-            get
-            {
-                return String.Empty;
-            }
+            get { return String.Empty; }
         }
 
         protected ContainmentStatus ContainmentStatus
@@ -133,8 +132,7 @@ namespace System.Web.UI.Design.MobileControls
                     return _containmentStatus;
                 }
 
-                _containmentStatus =
-                    DesignerAdapterUtil.GetContainmentStatus(_control);
+                _containmentStatus = DesignerAdapterUtil.GetContainmentStatus(_control);
 
                 _containmentStatusDirty = false;
                 return _containmentStatus;
@@ -143,11 +141,7 @@ namespace System.Web.UI.Design.MobileControls
 
         public DeviceSpecificChoice CurrentChoice
         {
-            get
-            {
-                return _currentChoice;
-            }
-
+            get { return _currentChoice; }
             set
             {
                 if (_currentChoice != value)
@@ -177,21 +171,23 @@ namespace System.Web.UI.Design.MobileControls
         {
             get
             {
-                return typeof(HtmlControlDesigner).InvokeMember("DesignTimeElement", 
-                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic, 
-                    null, this, null, CultureInfo.InvariantCulture);
+                return typeof(HtmlControlDesigner).InvokeMember(
+                    "DesignTimeElement",
+                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic,
+                    null,
+                    this,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
             }
         }
 
         public override bool DesignTimeHtmlRequiresLoadComplete
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        // 
+        //
 
 
         // Return true only when GetErrorMessage returns non-null string and
@@ -225,8 +221,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iMobileWebFormServices == null)
                 {
-                    _iMobileWebFormServices =
-                        (IMobileWebFormServices)GetService(typeof(IMobileWebFormServices));
+                    _iMobileWebFormServices = (IMobileWebFormServices)GetService(
+                        typeof(IMobileWebFormServices)
+                    );
                 }
 
                 return _iMobileWebFormServices;
@@ -239,8 +236,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iWebFormsDocumentService == null)
                 {
-                    _iWebFormsDocumentService =
-                        (IWebFormsDocumentService)GetService(typeof(IWebFormsDocumentService));
+                    _iWebFormsDocumentService = (IWebFormsDocumentService)GetService(
+                        typeof(IWebFormsDocumentService)
+                    );
 
                     Debug.Assert(_iWebFormsDocumentService != null);
                 }
@@ -254,10 +252,7 @@ namespace System.Web.UI.Design.MobileControls
         /// </summary>
         protected bool LoadComplete
         {
-            get
-            {
-                return !IWebFormsDocumentService.IsLoading;
-            }
+            get { return !IWebFormsDocumentService.IsLoading; }
         }
 
         [
@@ -270,10 +265,7 @@ namespace System.Web.UI.Design.MobileControls
         ]
         protected String PropertyOverrides
         {
-            get
-            {
-                return String.Empty;
-            }
+            get { return String.Empty; }
         }
 
         [
@@ -300,8 +292,10 @@ namespace System.Web.UI.Design.MobileControls
             }
             set
             {
-                if (String.IsNullOrEmpty(value) ||
-                    value.Equals(SR.GetString(SR.DeviceFilter_NoChoice)))
+                if (
+                    String.IsNullOrEmpty(value)
+                    || value.Equals(SR.GetString(SR.DeviceFilter_NoChoice))
+                )
                 {
                     CurrentChoice = null;
                     return;
@@ -316,9 +310,13 @@ namespace System.Web.UI.Design.MobileControls
 
                 foreach (DeviceSpecificChoice choice in CurrentDeviceSpecific.Choices)
                 {
-                    if (DesignerUtility.ChoiceToUniqueIdentifier(choice).Equals(value) ||
-                        (choice.Filter.Length == 0 &&
-                         value.Equals(SR.GetString(SR.DeviceFilter_DefaultChoice))))
+                    if (
+                        DesignerUtility.ChoiceToUniqueIdentifier(choice).Equals(value)
+                        || (
+                            choice.Filter.Length == 0
+                            && value.Equals(SR.GetString(SR.DeviceFilter_DefaultChoice))
+                        )
+                    )
                     {
                         CurrentChoice = choice;
                         return;
@@ -333,9 +331,11 @@ namespace System.Web.UI.Design.MobileControls
         {
             get
             {
-                return (ContainmentStatus == ContainmentStatus.InForm ||
-                        ContainmentStatus == ContainmentStatus.InPanel ||
-                        ContainmentStatus == ContainmentStatus.InTemplateFrame);
+                return (
+                    ContainmentStatus == ContainmentStatus.InForm
+                    || ContainmentStatus == ContainmentStatus.InPanel
+                    || ContainmentStatus == ContainmentStatus.InTemplateFrame
+                );
             }
         }
 
@@ -347,9 +347,12 @@ namespace System.Web.UI.Design.MobileControls
                 {
                     _designerVerbs = new DesignerVerbCollection();
 
-                    _designerVerbs.Add(new DesignerVerb(
-                        SR.GetString(SR.TemplateableDesigner_SetTemplatesFilterVerb),
-                        new EventHandler(this.OnSetTemplatesFilterVerb)));
+                    _designerVerbs.Add(
+                        new DesignerVerb(
+                            SR.GetString(SR.TemplateableDesigner_SetTemplatesFilterVerb),
+                            new EventHandler(this.OnSetTemplatesFilterVerb)
+                        )
+                    );
                 }
 
                 _designerVerbs[0].Enabled = !this.InTemplateMode;
@@ -380,27 +383,31 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        [
-            Conditional("DEBUG")
-        ]
+        [Conditional("DEBUG")]
         private void CheckTemplateName(String templateName)
         {
-            Debug.Assert (
-                templateName == Constants.HeaderTemplateTag ||
-                templateName == Constants.FooterTemplateTag ||
-                templateName == Constants.ItemTemplateTag ||
-                templateName == Constants.AlternatingItemTemplateTag ||
-                templateName == Constants.SeparatorTemplateTag ||
-                templateName == Constants.ItemDetailsTemplateTag ||
-                templateName == Constants.ContentTemplateTag);
+            Debug.Assert(
+                templateName == Constants.HeaderTemplateTag
+                    || templateName == Constants.FooterTemplateTag
+                    || templateName == Constants.ItemTemplateTag
+                    || templateName == Constants.AlternatingItemTemplateTag
+                    || templateName == Constants.SeparatorTemplateTag
+                    || templateName == Constants.ItemDetailsTemplateTag
+                    || templateName == Constants.ContentTemplateTag
+            );
         }
 
-        protected override ITemplateEditingFrame CreateTemplateEditingFrame(TemplateEditingVerb verb)
+        protected override ITemplateEditingFrame CreateTemplateEditingFrame(
+            TemplateEditingVerb verb
+        )
         {
-            ITemplateEditingService teService =
-                (ITemplateEditingService)GetService(typeof(ITemplateEditingService));
-            Debug.Assert(teService != null,
-                "How did we get this far without an ITemplateEditingService");
+            ITemplateEditingService teService = (ITemplateEditingService)GetService(
+                typeof(ITemplateEditingService)
+            );
+            Debug.Assert(
+                teService != null,
+                "How did we get this far without an ITemplateEditingService"
+            );
 
             String[] templateNames = GetTemplateFrameNames(verb.Index);
             ITemplateEditingFrame editingFrame = teService.CreateFrame(
@@ -408,7 +415,8 @@ namespace System.Web.UI.Design.MobileControls
                 TemplateDeviceFilter,
                 templateNames,
                 WebCtrlStyle,
-                null /* we don't have template styles */);
+                null /* we don't have template styles */
+            );
 
             editingFrame.InitialWidth = _templateWidth;
             return editingFrame;
@@ -425,12 +433,20 @@ namespace System.Web.UI.Design.MobileControls
                     // If the page is in loading mode, it means the remove is trigged by webformdesigner.
                     if (IWebFormsDocumentService.IsLoading)
                     {
-                        IMobileWebFormServices.SetCache(_control.ID, (Object) DefaultTemplateDeviceFilter, (Object) this.TemplateDeviceFilter);
+                        IMobileWebFormServices.SetCache(
+                            _control.ID,
+                            (Object)DefaultTemplateDeviceFilter,
+                            (Object)this.TemplateDeviceFilter
+                        );
                     }
                     else
                     {
                         // setting to null will remove the entry.
-                        IMobileWebFormServices.SetCache(_control.ID, (Object) DefaultTemplateDeviceFilter, null);
+                        IMobileWebFormServices.SetCache(
+                            _control.ID,
+                            (Object)DefaultTemplateDeviceFilter,
+                            null
+                        );
                     }
                 }
             }
@@ -443,8 +459,10 @@ namespace System.Web.UI.Design.MobileControls
             base.OnComponentChanged(sender, ce);
 
             MemberDescriptor member = ce.Member;
-            if (member != null &&
-                member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName))
+            if (
+                member != null
+                && member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName)
+            )
             {
                 PropertyDescriptor propDesc = (PropertyDescriptor)member;
 
@@ -454,7 +472,11 @@ namespace System.Web.UI.Design.MobileControls
                     {
                         // Update the dictionary of device filters stored in the page designer
                         // setting to null will remove the entry.
-                        IMobileWebFormServices.SetCache(ce.OldValue.ToString(), (Object) DefaultTemplateDeviceFilter, null);
+                        IMobileWebFormServices.SetCache(
+                            ce.OldValue.ToString(),
+                            (Object)DefaultTemplateDeviceFilter,
+                            null
+                        );
                         break;
                     }
 
@@ -501,7 +523,7 @@ namespace System.Web.UI.Design.MobileControls
                 _templateVerbsDirty = false;
             }
 
-            foreach(TemplateEditingVerb verb in _templateVerbs)
+            foreach (TemplateEditingVerb verb in _templateVerbs)
             {
                 verb.Enabled = AllowTemplateEditing;
             }
@@ -545,7 +567,12 @@ namespace System.Web.UI.Design.MobileControls
         protected virtual String GetDesignTimeErrorHtml(String errorMessage, bool infoMode)
         {
             return DesignerAdapterUtil.GetDesignTimeErrorHtml(
-                errorMessage, infoMode, _control, Behavior, ContainmentStatus);
+                errorMessage,
+                infoMode,
+                _control,
+                Behavior,
+                ContainmentStatus
+            );
         }
 
         protected virtual String GetDesignTimeNormalHtml()
@@ -628,7 +655,8 @@ namespace System.Web.UI.Design.MobileControls
         public override String GetTemplateContent(
             ITemplateEditingFrame editingFrame,
             String templateName,
-            out bool allowEditing)
+            out bool allowEditing
+        )
         {
             Debug.Assert(AllowTemplateEditing);
 #if DEBUG
@@ -648,7 +676,11 @@ namespace System.Web.UI.Design.MobileControls
                 if (!IsCompleteHtml(templateContent))
                 {
                     allowEditing = false;
-                    templateContent = String.Format(CultureInfo.CurrentCulture, _illFormedHtml, _illFormedWarning);
+                    templateContent = String.Format(
+                        CultureInfo.CurrentCulture,
+                        _illFormedHtml,
+                        _illFormedWarning
+                    );
                 }
             }
 
@@ -676,22 +708,28 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.MobileControl ||
-                         component is System.Web.UI.MobileControls.DeviceSpecific,
-                         "MobileTemplatedControlDesigner.Initialize - Invalid (Mobile) Control");
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.MobileControl
+                    || component is System.Web.UI.MobileControls.DeviceSpecific,
+                "MobileTemplatedControlDesigner.Initialize - Invalid (Mobile) Control"
+            );
 
             base.Initialize(component);
 
             if (component is System.Web.UI.MobileControls.MobileControl)
             {
-                _mobileControl = (System.Web.UI.MobileControls.MobileControl) component;
+                _mobileControl = (System.Web.UI.MobileControls.MobileControl)component;
             }
             // else the component is a DeviceSpecific control
-            _control = (System.Web.UI.Control) component;
+            _control = (System.Web.UI.Control)component;
 
             if (IMobileWebFormServices != null)
             {
-                this.TemplateDeviceFilter = (String) IMobileWebFormServices.GetCache(_control.ID, (Object)DefaultTemplateDeviceFilter);
+                this.TemplateDeviceFilter = (String)
+                    IMobileWebFormServices.GetCache(
+                        _control.ID,
+                        (Object)DefaultTemplateDeviceFilter
+                    );
             }
         }
 
@@ -710,15 +748,15 @@ namespace System.Web.UI.Design.MobileControls
         {
             Debug.Assert(choice != null);
 
-            return choice.Xmlns != null &&
-                choice.Xmlns.ToLower(CultureInfo.InvariantCulture).IndexOf(_htmlString, StringComparison.Ordinal) != -1;
+            return choice.Xmlns != null
+                && choice
+                    .Xmlns.ToLower(CultureInfo.InvariantCulture)
+                    .IndexOf(_htmlString, StringComparison.Ordinal) != -1;
         }
 
         // Notification that is called when current choice is changed, it is currently
         // used to notify StyleSheet that template device filter is changed.
-        protected virtual void OnCurrentChoiceChange()
-        {
-        }
+        protected virtual void OnCurrentChoiceChange() { }
 
         /// <summary>
         ///    <para>
@@ -730,8 +768,8 @@ namespace System.Web.UI.Design.MobileControls
             ISite site = _control.Site;
             if (site != null)
             {
-                IComponentChangeService changeService =
-                    (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                IComponentChangeService changeService = (IComponentChangeService)
+                    site.GetService(typeof(IComponentChangeService));
                 if (changeService != null)
                 {
                     try
@@ -809,34 +847,39 @@ namespace System.Web.UI.Design.MobileControls
             base.PreFilterProperties(properties);
 
             // DesignTime Property only, we will use this to select choices.
-            properties[_templateDeviceFilterPropertyName] =
-                TypeDescriptor.CreateProperty(this.GetType(),
+            properties[_templateDeviceFilterPropertyName] = TypeDescriptor.CreateProperty(
+                this.GetType(),
                 _templateDeviceFilterPropertyName,
                 typeof(String),
                 new DefaultValueAttribute(SR.GetString(SR.DeviceFilter_NoChoice)),
                 MobileCategoryAttribute.Design,
                 InTemplateMode ? BrowsableAttribute.No : BrowsableAttribute.Yes
-                );
+            );
 
             // design time only entry used to display dialog box used to create choices.
-            properties[_appliedDeviceFiltersPropertyName] =
-                TypeDescriptor.CreateProperty(this.GetType(),
+            properties[_appliedDeviceFiltersPropertyName] = TypeDescriptor.CreateProperty(
+                this.GetType(),
                 _appliedDeviceFiltersPropertyName,
                 typeof(String),
-                InTemplateMode? BrowsableAttribute.No : BrowsableAttribute.Yes
-                );
+                InTemplateMode ? BrowsableAttribute.No : BrowsableAttribute.Yes
+            );
 
             // design time only entry used to display dialog box to create choices.
-            properties[_propertyOverridesPropertyName] =
-                TypeDescriptor.CreateProperty(this.GetType(),
+            properties[_propertyOverridesPropertyName] = TypeDescriptor.CreateProperty(
+                this.GetType(),
                 _propertyOverridesPropertyName,
                 typeof(String),
-                InTemplateMode? BrowsableAttribute.No : BrowsableAttribute.Yes
-                );
+                InTemplateMode ? BrowsableAttribute.No : BrowsableAttribute.Yes
+            );
 
-            PropertyDescriptor property = (PropertyDescriptor) properties[_expressionsPropertyName];
-            if (property != null) {
-                properties[_expressionsPropertyName] = TypeDescriptor.CreateProperty(this.GetType(), property, BrowsableAttribute.No);
+            PropertyDescriptor property = (PropertyDescriptor)properties[_expressionsPropertyName];
+            if (property != null)
+            {
+                properties[_expressionsPropertyName] = TypeDescriptor.CreateProperty(
+                    this.GetType(),
+                    property,
+                    BrowsableAttribute.No
+                );
             }
         }
 
@@ -849,7 +892,8 @@ namespace System.Web.UI.Design.MobileControls
         public override void SetTemplateContent(
             ITemplateEditingFrame editingFrame,
             String templateName,
-            String templateContent)
+            String templateContent
+        )
         {
             Debug.Assert(AllowTemplateEditing);
 
@@ -879,8 +923,9 @@ namespace System.Web.UI.Design.MobileControls
 
         protected virtual void ShowTemplatingOptionsDialog()
         {
-            IComponentChangeService changeService =
-                (IComponentChangeService)GetService(typeof(IComponentChangeService));
+            IComponentChangeService changeService = (IComponentChangeService)GetService(
+                typeof(IComponentChangeService)
+            );
             if (changeService != null)
             {
                 try
@@ -902,7 +947,8 @@ namespace System.Web.UI.Design.MobileControls
                 TemplatingOptionsDialog dialog = new TemplatingOptionsDialog(
                     this,
                     _control.Site,
-                    MobileControlDesigner.MergingContextTemplates);
+                    MobileControlDesigner.MergingContextTemplates
+                );
                 dialog.ShowDialog();
             }
             finally
@@ -940,41 +986,28 @@ namespace System.Web.UI.Design.MobileControls
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
-        void IDeviceSpecificDesigner.SetDeviceSpecificEditor
-            (IRefreshableDeviceSpecificEditor editor)
-        {
-        }
+        void IDeviceSpecificDesigner.SetDeviceSpecificEditor(
+            IRefreshableDeviceSpecificEditor editor
+        ) { }
 
         String IDeviceSpecificDesigner.CurrentDeviceSpecificID
         {
-            get
-            {
-                return _defaultDeviceSpecificIdentifier;
-            }
+            get { return _defaultDeviceSpecificIdentifier; }
         }
 
         System.Windows.Forms.Control IDeviceSpecificDesigner.Header
         {
-            get
-            {
-                return _header;
-            }
+            get { return _header; }
         }
 
         System.Web.UI.Control IDeviceSpecificDesigner.UnderlyingControl
         {
-            get
-            {
-                return _control;
-            }
+            get { return _control; }
         }
 
         Object IDeviceSpecificDesigner.UnderlyingObject
         {
-            get
-            {
-                return _control;
-            }
+            get { return _control; }
         }
 
         void IDeviceSpecificDesigner.InitHeader(int mergingContext)
@@ -993,13 +1026,17 @@ namespace System.Web.UI.Design.MobileControls
             {
                 case MobileControlDesigner.MergingContextTemplates:
                 {
-                    lblDescription.Text = SR.GetString(SR.TemplateableDesigner_SettingTemplatingChoiceDescription);
+                    lblDescription.Text = SR.GetString(
+                        SR.TemplateableDesigner_SettingTemplatingChoiceDescription
+                    );
                     break;
                 }
 
                 default:
                 {
-                    lblDescription.Text = SR.GetString(SR.TemplateableDesigner_SettingGenericChoiceDescription);
+                    lblDescription.Text = SR.GetString(
+                        SR.TemplateableDesigner_SettingGenericChoiceDescription
+                    );
                     break;
                 }
             }
@@ -1007,18 +1044,22 @@ namespace System.Web.UI.Design.MobileControls
             _header = panel;
         }
 
-        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext)
-        {
-        }
+        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext) { }
 
-        bool IDeviceSpecificDesigner.GetDeviceSpecific(String deviceSpecificParentID, out DeviceSpecific ds)
+        bool IDeviceSpecificDesigner.GetDeviceSpecific(
+            String deviceSpecificParentID,
+            out DeviceSpecific ds
+        )
         {
             Debug.Assert(_defaultDeviceSpecificIdentifier == deviceSpecificParentID);
             ds = CurrentDeviceSpecific;
             return true;
         }
 
-        void IDeviceSpecificDesigner.SetDeviceSpecific(String deviceSpecificParentID, DeviceSpecific ds)
+        void IDeviceSpecificDesigner.SetDeviceSpecific(
+            String deviceSpecificParentID,
+            DeviceSpecific ds
+        )
         {
             Debug.Assert(_defaultDeviceSpecificIdentifier == deviceSpecificParentID);
 
@@ -1054,90 +1095,76 @@ namespace System.Web.UI.Design.MobileControls
                     }
                     else
                     {
-                        TemplateDeviceFilter = DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice);
+                        TemplateDeviceFilter = DesignerUtility.ChoiceToUniqueIdentifier(
+                            CurrentChoice
+                        );
                     }
                 }
             }
         }
 
-        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID()
-        {
-        }
+        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID() { }
 
         ////////////////////////////////////////////////////////////////////////
         //  End IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
         // Hack : Internal class used to provide TemplateContainerAttribute for Templates.
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
-        [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class TemplateContainer
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
+        [Obsolete(
+            "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+        )]
+        internal class TemplateContainer
         {
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate HeaderTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate FooterTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate ItemTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate AlternatingItemTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate SeparatorTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate ContentTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate LabelTemplate
             {
-                get {return null;}
+                get { return null; }
             }
 
-            [
-                TemplateContainer(typeof(MobileListItem))
-            ]
+            [TemplateContainer(typeof(MobileListItem))]
             internal ITemplate ItemDetailsTemplate
             {
-                get {return null;}
+                get { return null; }
             }
         }
     }

@@ -30,9 +30,15 @@ internal partial class DbContextInfoCommand
     {
         Reporter.WriteData("{");
         Reporter.WriteData("  \"type\": " + Json.Literal(result["Type"] as string) + ",");
-        Reporter.WriteData("  \"providerName\": " + Json.Literal(result["ProviderName"] as string) + ",");
-        Reporter.WriteData("  \"databaseName\": " + Json.Literal(result["DatabaseName"] as string) + ",");
-        Reporter.WriteData("  \"dataSource\": " + Json.Literal(result["DataSource"] as string) + ",");
+        Reporter.WriteData(
+            "  \"providerName\": " + Json.Literal(result["ProviderName"] as string) + ","
+        );
+        Reporter.WriteData(
+            "  \"databaseName\": " + Json.Literal(result["DatabaseName"] as string) + ","
+        );
+        Reporter.WriteData(
+            "  \"dataSource\": " + Json.Literal(result["DataSource"] as string) + ","
+        );
         Reporter.WriteData("  \"options\": " + Json.Literal(result["Options"] as string));
         Reporter.WriteData("}");
     }

@@ -33,7 +33,11 @@ public class Program
 
         h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
 
-        await h2Connection.StartStreamAsync(1, Http2Utilities.BrowserRequestHeaders, endStream: true);
+        await h2Connection.StartStreamAsync(
+            1,
+            Http2Utilities.BrowserRequestHeaders,
+            endStream: true
+        );
 
         var headersFrame = await h2Connection.ReceiveFrameAsync();
 
@@ -74,7 +78,10 @@ public class Program
             h2Connection.Logger.LogInformation($"{header.Key}: {header.Value}");
         }
 
-        await h2Connection.StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
+        await h2Connection.StopConnectionAsync(
+            expectedLastStreamId: 1,
+            ignoreNonGoAwayFrames: false
+        );
 
         h2Connection.Logger.LogInformation("Connection stopped.");
     }

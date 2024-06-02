@@ -21,31 +21,62 @@ namespace Microsoft.CodeAnalysis.CodeActions
         public static readonly PerLanguageOption2<int> WrappingColumn =
             new("FormattingOptions_WrappingColumn", CodeActionOptions.DefaultWrappingColumn);
 
-        public static CodeActionOptions GetCodeActionOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-            => new()
+        public static CodeActionOptions GetCodeActionOptions(
+            this IGlobalOptionService globalOptions,
+            LanguageServices languageServices
+        ) =>
+            new()
             {
                 CleanupOptions = globalOptions.GetCodeCleanupOptions(languageServices),
                 CodeGenerationOptions = globalOptions.GetCodeGenerationOptions(languageServices),
                 CodeStyleOptions = globalOptions.GetCodeStyleOptions(languageServices),
                 SearchOptions = globalOptions.GetSymbolSearchOptions(languageServices.Language),
-                ImplementTypeOptions = globalOptions.GetImplementTypeOptions(languageServices.Language),
-                ExtractMethodOptions = globalOptions.GetExtractMethodOptions(languageServices.Language),
-                HideAdvancedMembers = globalOptions.GetOption(CompletionOptionsStorage.HideAdvancedMembers, languageServices.Language),
+                ImplementTypeOptions = globalOptions.GetImplementTypeOptions(
+                    languageServices.Language
+                ),
+                ExtractMethodOptions = globalOptions.GetExtractMethodOptions(
+                    languageServices.Language
+                ),
+                HideAdvancedMembers = globalOptions.GetOption(
+                    CompletionOptionsStorage.HideAdvancedMembers,
+                    languageServices.Language
+                ),
                 WrappingColumn = globalOptions.GetOption(WrappingColumn, languageServices.Language),
-                ConditionalExpressionWrappingLength = globalOptions.GetOption(ConditionalExpressionWrappingLength, languageServices.Language),
-                CollectionExpressionWrappingLength = globalOptions.GetOption(CollectionExpressionWrappingLength, languageServices.Language),
+                ConditionalExpressionWrappingLength = globalOptions.GetOption(
+                    ConditionalExpressionWrappingLength,
+                    languageServices.Language
+                ),
+                CollectionExpressionWrappingLength = globalOptions.GetOption(
+                    CollectionExpressionWrappingLength,
+                    languageServices.Language
+                ),
             };
 
-        internal static CodeActionOptionsProvider GetCodeActionOptionsProvider(this IGlobalOptionService globalOptions)
+        internal static CodeActionOptionsProvider GetCodeActionOptionsProvider(
+            this IGlobalOptionService globalOptions
+        )
         {
             var cache = ImmutableDictionary<string, CodeActionOptions>.Empty;
-            return new DelegatingCodeActionOptionsProvider(languageService => ImmutableInterlocked.GetOrAdd(ref cache, languageService.Language, (_, options) => GetCodeActionOptions(options, languageService), globalOptions));
+            return new DelegatingCodeActionOptionsProvider(languageService =>
+                ImmutableInterlocked.GetOrAdd(
+                    ref cache,
+                    languageService.Language,
+                    (_, options) => GetCodeActionOptions(options, languageService),
+                    globalOptions
+                )
+            );
         }
 
-        public static readonly PerLanguageOption2<int> ConditionalExpressionWrappingLength = new(
-            "dotnet_conditional_expression_wrapping_length", CodeActionOptions.DefaultConditionalExpressionWrappingLength);
+        public static readonly PerLanguageOption2<int> ConditionalExpressionWrappingLength =
+            new(
+                "dotnet_conditional_expression_wrapping_length",
+                CodeActionOptions.DefaultConditionalExpressionWrappingLength
+            );
 
-        public static readonly PerLanguageOption2<int> CollectionExpressionWrappingLength = new(
-            "dotnet_collection_expression_wrapping_length", CodeActionOptions.DefaultCollectionExpressionWrappingLength);
+        public static readonly PerLanguageOption2<int> CollectionExpressionWrappingLength =
+            new(
+                "dotnet_collection_expression_wrapping_length",
+                CodeActionOptions.DefaultCollectionExpressionWrappingLength
+            );
     }
 }

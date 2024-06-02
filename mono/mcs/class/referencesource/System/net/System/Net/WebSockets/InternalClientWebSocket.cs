@@ -22,10 +22,25 @@ namespace System.Net.WebSockets
         private readonly SafeHandle m_SessionHandle;
         private readonly WebSocketProtocolComponent.Property[] m_Properties;
 
-        public InternalClientWebSocket(Stream innerStream, string subProtocol, int receiveBufferSize, int sendBufferSize,
-            TimeSpan keepAliveInterval, bool useZeroMaskingKey, ArraySegment<byte> internalBuffer)
-            : base(innerStream, subProtocol, keepAliveInterval, 
-                WebSocketBuffer.CreateClientBuffer(internalBuffer, receiveBufferSize, sendBufferSize))
+        public InternalClientWebSocket(
+            Stream innerStream,
+            string subProtocol,
+            int receiveBufferSize,
+            int sendBufferSize,
+            TimeSpan keepAliveInterval,
+            bool useZeroMaskingKey,
+            ArraySegment<byte> internalBuffer
+        )
+            : base(
+                innerStream,
+                subProtocol,
+                keepAliveInterval,
+                WebSocketBuffer.CreateClientBuffer(
+                    internalBuffer,
+                    receiveBufferSize,
+                    sendBufferSize
+                )
+            )
         {
             m_Properties = this.InternalBuffer.CreateProperties(useZeroMaskingKey);
             m_SessionHandle = this.CreateWebSocketHandle();
@@ -47,8 +62,11 @@ namespace System.Net.WebSockets
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-            Justification = "Only harmless information (useZeroMaskingKey) is passed from PT code into native code.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Only harmless information (useZeroMaskingKey) is passed from PT code into native code."
+        )]
         private SafeHandle CreateWebSocketHandle()
         {
             Contract.Assert(m_Properties != null, "'m_Properties' MUST NOT be NULL.");

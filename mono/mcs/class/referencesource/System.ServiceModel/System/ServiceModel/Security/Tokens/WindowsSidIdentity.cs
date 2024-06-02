@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.Security.Principal;
+    using System.ServiceModel;
 
     class WindowsSidIdentity : IIdentity
     {
@@ -31,7 +31,9 @@ namespace System.ServiceModel.Security.Tokens
             if (name == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("name");
             if (authenticationType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authenticationType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authenticationType"
+                );
 
             this.sid = sid;
             this.name = name;
@@ -43,17 +45,17 @@ namespace System.ServiceModel.Security.Tokens
             get { return this.sid; }
         }
 
-        public string AuthenticationType 
+        public string AuthenticationType
         {
             get { return this.authenticationType; }
         }
-        
+
         public bool IsAuthenticated
-        { 
-            get { return true; } 
+        {
+            get { return true; }
         }
 
-        public string Name 
+        public string Name
         {
             get
             {

@@ -35,6 +35,4 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         ResultHasErrors
     }
-
 }
-

@@ -11,15 +11,17 @@ namespace Microsoft.Interop
     {
         public string EntryPoint { get; init; }
 
-        public static LibraryImportData From(LibraryImportCompilationData libraryImport)
-            => new LibraryImportData(libraryImport.ModuleName) with
+        public static LibraryImportData From(LibraryImportCompilationData libraryImport) =>
+            new LibraryImportData(libraryImport.ModuleName) with
             {
                 EntryPoint = libraryImport.EntryPoint,
                 IsUserDefined = libraryImport.IsUserDefined,
                 SetLastError = libraryImport.SetLastError,
                 StringMarshalling = libraryImport.StringMarshalling,
                 StringMarshallingCustomType = libraryImport.StringMarshallingCustomType is not null
-                    ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(libraryImport.StringMarshallingCustomType)
+                    ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(
+                        libraryImport.StringMarshallingCustomType
+                    )
                     : null,
             };
     }
@@ -28,7 +30,8 @@ namespace Microsoft.Interop
     /// Contains the data related to a LibraryImportAttribute, with references to Roslyn symbols.
     /// Use <seealso cref="LibraryImportData"/> instead when using for incremental compilation state to avoid keeping a compilation alive
     /// </summary>
-    internal sealed record LibraryImportCompilationData(string ModuleName) : InteropAttributeCompilationData
+    internal sealed record LibraryImportCompilationData(string ModuleName)
+        : InteropAttributeCompilationData
     {
         public string EntryPoint { get; init; }
     }

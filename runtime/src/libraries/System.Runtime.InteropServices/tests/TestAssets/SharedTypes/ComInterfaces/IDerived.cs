@@ -23,7 +23,9 @@ namespace SharedTypes.ComInterfaces
     internal partial class Derived : GetAndSetInt, IDerived
     {
         string _data = "hello";
+
         public string GetName() => _data;
+
         public void SetName(string name) => _data = name;
     }
 }

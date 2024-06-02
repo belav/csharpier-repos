@@ -10,45 +10,56 @@ namespace System.Net.Mail
     using System.Collections;
     using System.IO;
     using System.Net;
-    using System.Security.Permissions;
     using System.Security.Authentication.ExtendedProtection;
-    // 
+    using System.Security.Permissions;
+    //
 
 #if MAKE_MAILCLIENT_PUBLIC
     internal
 #else
     internal
 #endif
- class SmtpDigestAuthenticationModule : ISmtpAuthenticationModule
+    class SmtpDigestAuthenticationModule : ISmtpAuthenticationModule
     {
         Hashtable sessions = new Hashtable();
 
-        internal SmtpDigestAuthenticationModule()
-        {
-        }
+        internal SmtpDigestAuthenticationModule() { }
 
         #region ISmtpAuthenticationModule Members
 
         // Security this method will access NetworkCredential properties that demand UnmanagedCode and Environment Permission
         [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        public Authorization Authenticate(string challenge, NetworkCredential credential, object sessionCookie, string spn, ChannelBinding channelBindingToken)
+        public Authorization Authenticate(
+            string challenge,
+            NetworkCredential credential,
+            object sessionCookie,
+            string spn,
+            ChannelBinding channelBindingToken
+        )
         {
-
             lock (this.sessions)
             {
                 NTAuthentication clientContext = this.sessions[sessionCookie] as NTAuthentication;
                 if (clientContext == null)
                 {
-                    if (credential == null){
+                    if (credential == null)
+                    {
                         return null;
                     }
-                    // 
+                    //
 
 
-                   
 
-                    this.sessions[sessionCookie] = clientContext = new NTAuthentication(false, "WDigest", credential, spn, ContextFlags.Connection, channelBindingToken);
+
+                    this.sessions[sessionCookie] = clientContext = new NTAuthentication(
+                        false,
+                        "WDigest",
+                        credential,
+                        spn,
+                        ContextFlags.Connection,
+                        channelBindingToken
+                    );
                 }
 
                 string resp = clientContext.GetOutgoingBlob(challenge);
@@ -67,13 +78,11 @@ namespace System.Net.Mail
 
         public string AuthenticationType
         {
-            get
-            {
-                return "WDigest";
-            }
+            get { return "WDigest"; }
         }
 
-        public void CloseContext(object sessionCookie) {
+        public void CloseContext(object sessionCookie)
+        {
             // This is a no-op since the context is not
             // kept open by this module beyond auth completion.
         }

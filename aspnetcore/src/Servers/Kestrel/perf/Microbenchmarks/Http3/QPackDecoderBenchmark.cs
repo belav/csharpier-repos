@@ -57,7 +57,12 @@ public class QPackDecoderBenchmark
         {
             var buffer = new byte[1024 * 1024];
             var totalHeaderSize = 0;
-            var success = QPackHeaderWriter.BeginEncodeHeaders(enumerator, buffer, ref totalHeaderSize, out var length);
+            var success = QPackHeaderWriter.BeginEncodeHeaders(
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            );
             if (!success)
             {
                 throw new InvalidOperationException();
@@ -80,44 +85,50 @@ public class QPackDecoderBenchmark
     [Benchmark]
     public void DecodeHeaderFieldLine_LargeLiteralValue()
     {
-        _decoder.Decode(_headerFieldLine_LargeLiteralValue, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _headerFieldLine_LargeLiteralValue,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
         _decoder.Reset();
     }
 
     [Benchmark]
     public void DecodeHeaderFieldLine_LargeLiteralValue_Multiple()
     {
-        _decoder.Decode(_headerFieldLine_LargeLiteralValue_Multiple, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _headerFieldLine_LargeLiteralValue_Multiple,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
         _decoder.Reset();
     }
 
     [Benchmark]
     public void DecodeHeaderFieldLine_Static_Multiple()
     {
-        _decoder.Decode(_headerFieldLine_Static_Multiple, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _headerFieldLine_Static_Multiple,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
         _decoder.Reset();
     }
 
     private sealed class TestHeadersHandler : IHttpStreamHeadersHandler
     {
-        public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnDynamicIndexedHeader(
+            int? index,
+            ReadOnlySpan<byte> name,
+            ReadOnlySpan<byte> value
+        ) { }
 
-        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
 
-        public void OnHeadersComplete(bool endStream)
-        {
-        }
+        public void OnHeadersComplete(bool endStream) { }
 
-        public void OnStaticIndexedHeader(int index)
-        {
-        }
+        public void OnStaticIndexedHeader(int index) { }
 
-        public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value) { }
     }
 }

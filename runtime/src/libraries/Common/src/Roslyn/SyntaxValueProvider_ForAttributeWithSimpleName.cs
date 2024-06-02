@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Aliases = System.Collections.Generic.ValueListBuilder<(string aliasName, string symbolName)>;
@@ -29,21 +28,22 @@ internal static partial class SyntaxValueProviderExtensions
         public readonly bool ContainsGlobalAliases;
         public readonly bool ContainsAttributeList;
 
-        public SyntaxTreeInfo(SyntaxTree tree, bool containsGlobalAliases, bool containsAttributeList)
+        public SyntaxTreeInfo(
+            SyntaxTree tree,
+            bool containsGlobalAliases,
+            bool containsAttributeList
+        )
         {
             Tree = tree;
             ContainsGlobalAliases = containsGlobalAliases;
             ContainsAttributeList = containsAttributeList;
         }
 
-        public bool Equals(SyntaxTreeInfo? other)
-            => Tree == other?.Tree;
+        public bool Equals(SyntaxTreeInfo? other) => Tree == other?.Tree;
 
-        public override bool Equals(object? obj)
-            => this.Equals(obj as SyntaxTreeInfo);
+        public override bool Equals(object? obj) => this.Equals(obj as SyntaxTreeInfo);
 
-        public override int GetHashCode()
-            => Tree.GetHashCode();
+        public override int GetHashCode() => Tree.GetHashCode();
     }
 
     /// <summary>
@@ -55,7 +55,8 @@ internal static partial class SyntaxValueProviderExtensions
     /// the number of *relevant syntax trees*. This can lead to huge memory churn keeping track of a high number of
     /// trees, most of which are not going to be relevant.
     /// </summary>
-    private static readonly ConditionalWeakTable<SyntaxTree, SyntaxTreeInfo> s_treeToInfo = new ConditionalWeakTable<SyntaxTree, SyntaxTreeInfo>();
+    private static readonly ConditionalWeakTable<SyntaxTree, SyntaxTreeInfo> s_treeToInfo =
+        new ConditionalWeakTable<SyntaxTree, SyntaxTreeInfo>();
 
 #if false
     // Not used in runtime.  Pooling is not a pattern here, and we use ValueListBuilder instead.
@@ -84,11 +85,15 @@ internal static partial class SyntaxValueProviderExtensions
     /// Note: a 'Values'-provider of arrays are returned.  Each array provides all the matching nodes from a single <see
     /// cref="SyntaxTree"/>.
     /// </remarks>
-    public static IncrementalValuesProvider<(SyntaxTree tree, ImmutableArray<SyntaxNode> matches)> ForAttributeWithSimpleName(
+    public static IncrementalValuesProvider<(
+        SyntaxTree tree,
+        ImmutableArray<SyntaxNode> matches
+    )> ForAttributeWithSimpleName(
         this SyntaxValueProvider @this,
         IncrementalGeneratorInitializationContext context,
         string simpleName,
-        Func<SyntaxNode, CancellationToken, bool> predicate)
+        Func<SyntaxNode, CancellationToken, bool> predicate
+    )
     {
         var syntaxHelper = CSharpSyntaxHelper.Instance;
 
@@ -96,28 +101,39 @@ internal static partial class SyntaxValueProviderExtensions
         // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when another tree is
         // changed. CreateSyntaxProvider will have to rerun all incremental nodes since it passes along the
         // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the compilation).
-        var syntaxTreesProvider = context.CompilationProvider
-            .SelectMany((compilation, cancellationToken) => compilation.SyntaxTrees
-                .Select(tree => GetTreeInfo(tree, syntaxHelper, cancellationToken))
-                .Where(info => info.ContainsGlobalAliases || info.ContainsAttributeList))
-            /*.WithTrackingName("compilationUnit_ForAttribute")*/;
+        var syntaxTreesProvider = context.CompilationProvider.SelectMany(
+            (compilation, cancellationToken) =>
+                compilation
+                    .SyntaxTrees.Select(tree => GetTreeInfo(tree, syntaxHelper, cancellationToken))
+                    .Where(info => info.ContainsGlobalAliases || info.ContainsAttributeList)
+        )
+        /*.WithTrackingName("compilationUnit_ForAttribute")*/;
 
         // Create a provider that provides (and updates) the global aliases for any particular file when it is edited.
         var individualFileGlobalAliasesProvider = syntaxTreesProvider
             .Where(info => info.ContainsGlobalAliases)
-            .Select((info, cancellationToken) => getGlobalAliasesInCompilationUnit(info.Tree.GetRoot(cancellationToken)))
-            /*.WithTrackingName("individualFileGlobalAliases_ForAttribute")*/;
+            .Select(
+                (info, cancellationToken) =>
+                    getGlobalAliasesInCompilationUnit(info.Tree.GetRoot(cancellationToken))
+            )
+        /*.WithTrackingName("individualFileGlobalAliases_ForAttribute")*/;
 
         // Create an aggregated view of all global aliases across all files.  This should only update when an individual
         // file changes its global aliases or a file is added / removed from the compilation
         var collectedGlobalAliasesProvider = individualFileGlobalAliasesProvider
             .Collect()
-            .WithComparer(ImmutableArrayValueComparer<GlobalAliases>.Instance)
-            /*.WithTrackingName("collectedGlobalAliases_ForAttribute")*/;
+            .WithComparer(
+                ImmutableArrayValueComparer<GlobalAliases>.Instance
+            )
+        /*.WithTrackingName("collectedGlobalAliases_ForAttribute")*/;
 
-        var allUpGlobalAliasesProvider = collectedGlobalAliasesProvider
-            .Select(static (arrays, _) => GlobalAliases.Create(arrays.SelectMany(a => a.AliasAndSymbolNames).ToImmutableArray()))
-            /*.WithTrackingName("allUpGlobalAliases_ForAttribute")*/;
+        var allUpGlobalAliasesProvider = collectedGlobalAliasesProvider.Select(
+            static (arrays, _) =>
+                GlobalAliases.Create(
+                    arrays.SelectMany(a => a.AliasAndSymbolNames).ToImmutableArray()
+                )
+        )
+        /*.WithTrackingName("allUpGlobalAliases_ForAttribute")*/;
 
 #if false
 
@@ -144,36 +160,57 @@ internal static partial class SyntaxValueProviderExtensions
         // particular file when it's compilation unit changes.
         var syntaxTreeAndGlobalAliasesProvider = syntaxTreesProvider
             .Where(info => info.ContainsAttributeList)
-            .Combine(allUpGlobalAliasesProvider)
-            /*.WithTrackingName("compilationUnitAndGlobalAliases_ForAttribute")*/;
+            .Combine(
+                allUpGlobalAliasesProvider
+            )
+        /*.WithTrackingName("compilationUnitAndGlobalAliases_ForAttribute")*/;
 
         // For each pair of compilation unit + global aliases, walk the compilation unit
         var result = syntaxTreeAndGlobalAliasesProvider
-            .Select((tuple, c) => (tuple.Left.Tree, GetMatchingNodes(syntaxHelper, tuple.Right, tuple.Left.Tree, simpleName, predicate, c)))
-            .Where(tuple => tuple.Item2.Length > 0)
-            /*.WithTrackingName("result_ForAttribute")*/;
+            .Select(
+                (tuple, c) =>
+                    (
+                        tuple.Left.Tree,
+                        GetMatchingNodes(
+                            syntaxHelper,
+                            tuple.Right,
+                            tuple.Left.Tree,
+                            simpleName,
+                            predicate,
+                            c
+                        )
+                    )
+            )
+            .Where(tuple =>
+                tuple.Item2.Length > 0
+            )
+        /*.WithTrackingName("result_ForAttribute")*/;
 
         return result;
 
-        static GlobalAliases getGlobalAliasesInCompilationUnit(
-            SyntaxNode compilationUnit)
+        static GlobalAliases getGlobalAliasesInCompilationUnit(SyntaxNode compilationUnit)
         {
             Debug.Assert(compilationUnit is ICompilationUnitSyntax);
             var globalAliases = new Aliases(Span<(string aliasName, string symbolName)>.Empty);
 
-            CSharpSyntaxHelper.Instance.AddAliases(compilationUnit, ref globalAliases, global: true);
+            CSharpSyntaxHelper.Instance.AddAliases(
+                compilationUnit,
+                ref globalAliases,
+                global: true
+            );
 
             return GlobalAliases.Create(globalAliases.AsSpan().ToImmutableArray());
         }
     }
 
     private static SyntaxTreeInfo GetTreeInfo(
-        SyntaxTree tree, ISyntaxHelper syntaxHelper, CancellationToken cancellationToken)
+        SyntaxTree tree,
+        ISyntaxHelper syntaxHelper,
+        CancellationToken cancellationToken
+    )
     {
         // prevent captures for the case where the item is in the tree.
-        return s_treeToInfo.TryGetValue(tree, out var info)
-            ? info
-            : computeTreeInfo();
+        return s_treeToInfo.TryGetValue(tree, out var info) ? info : computeTreeInfo();
 
         SyntaxTreeInfo computeTreeInfo()
         {
@@ -192,13 +229,16 @@ internal static partial class SyntaxValueProviderExtensions
         SyntaxTree syntaxTree,
         string name,
         Func<SyntaxNode, CancellationToken, bool> predicate,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var compilationUnit = syntaxTree.GetRoot(cancellationToken);
         Debug.Assert(compilationUnit is ICompilationUnitSyntax);
 
         var isCaseSensitive = syntaxHelper.IsCaseSensitive;
-        var comparison = isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+        var comparison = isCaseSensitive
+            ? StringComparison.Ordinal
+            : StringComparison.OrdinalIgnoreCase;
 
         // As we walk down the compilation unit and nested namespaces, we may encounter additional using aliases local
         // to this file. Keep track of them so we can determine if they would allow an attribute in code to bind to the
@@ -215,7 +255,13 @@ internal static partial class SyntaxValueProviderExtensions
 
         try
         {
-            processCompilationUnit(compilationUnit, ref localAliases, ref seenNames, ref results, ref attributeTargets);
+            processCompilationUnit(
+                compilationUnit,
+                ref localAliases,
+                ref seenNames,
+                ref results,
+                ref attributeTargets
+            );
 
             if (results.Length == 0)
                 return ImmutableArray<SyntaxNode>.Empty;
@@ -234,13 +280,20 @@ internal static partial class SyntaxValueProviderExtensions
             ref Aliases localAliases,
             ref ValueListBuilder<string> seenNames,
             ref ValueListBuilder<SyntaxNode> results,
-            ref ValueListBuilder<SyntaxNode> attributeTargets)
+            ref ValueListBuilder<SyntaxNode> attributeTargets
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             syntaxHelper.AddAliases(compilationUnit, ref localAliases, global: false);
 
-            processCompilationOrNamespaceMembers(compilationUnit, ref localAliases, ref seenNames, ref results, ref attributeTargets);
+            processCompilationOrNamespaceMembers(
+                compilationUnit,
+                ref localAliases,
+                ref seenNames,
+                ref results,
+                ref attributeTargets
+            );
         }
 
         void processCompilationOrNamespaceMembers(
@@ -248,7 +301,8 @@ internal static partial class SyntaxValueProviderExtensions
             ref Aliases localAliases,
             ref ValueListBuilder<string> seenNames,
             ref ValueListBuilder<SyntaxNode> results,
-            ref ValueListBuilder<SyntaxNode> attributeTargets)
+            ref ValueListBuilder<SyntaxNode> attributeTargets
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -258,9 +312,21 @@ internal static partial class SyntaxValueProviderExtensions
                 {
                     var childNode = child.AsNode()!;
                     if (syntaxHelper.IsAnyNamespaceBlock(childNode))
-                        processNamespaceBlock(childNode, ref localAliases, ref seenNames, ref results, ref attributeTargets);
+                        processNamespaceBlock(
+                            childNode,
+                            ref localAliases,
+                            ref seenNames,
+                            ref results,
+                            ref attributeTargets
+                        );
                     else
-                        processMember(childNode, ref localAliases, ref seenNames, ref results, ref attributeTargets);
+                        processMember(
+                            childNode,
+                            ref localAliases,
+                            ref seenNames,
+                            ref results,
+                            ref attributeTargets
+                        );
                 }
             }
         }
@@ -270,7 +336,8 @@ internal static partial class SyntaxValueProviderExtensions
             ref Aliases localAliases,
             ref ValueListBuilder<string> seenNames,
             ref ValueListBuilder<SyntaxNode> results,
-            ref ValueListBuilder<SyntaxNode> attributeTargets)
+            ref ValueListBuilder<SyntaxNode> attributeTargets
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -278,7 +345,12 @@ internal static partial class SyntaxValueProviderExtensions
             syntaxHelper.AddAliases(namespaceBlock, ref localAliases, global: false);
 
             processCompilationOrNamespaceMembers(
-                namespaceBlock, ref localAliases, ref seenNames, ref results, ref attributeTargets);
+                namespaceBlock,
+                ref localAliases,
+                ref seenNames,
+                ref results,
+                ref attributeTargets
+            );
 
             // after recursing into this namespace, dump any local aliases we added from this namespace decl itself.
             localAliases.Length = localAliasCount;
@@ -289,7 +361,8 @@ internal static partial class SyntaxValueProviderExtensions
             ref Aliases localAliases,
             ref ValueListBuilder<string> seenNames,
             ref ValueListBuilder<SyntaxNode> results,
-            ref ValueListBuilder<SyntaxNode> attributeTargets)
+            ref ValueListBuilder<SyntaxNode> attributeTargets
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -309,10 +382,25 @@ internal static partial class SyntaxValueProviderExtensions
                         {
                             // Have to lookup both with the name in the attribute, as well as adding the 'Attribute' suffix.
                             // e.g. if there is [X] then we have to lookup with X and with XAttribute.
-                            var simpleAttributeName = syntaxHelper.GetUnqualifiedIdentifierOfName(
-                                syntaxHelper.GetNameOfAttribute(attribute)).ValueText;
-                            if (matchesAttributeName(ref localAliases, ref seenNames, simpleAttributeName, withAttributeSuffix: false) ||
-                                matchesAttributeName(ref localAliases, ref seenNames, simpleAttributeName, withAttributeSuffix: true))
+                            var simpleAttributeName = syntaxHelper
+                                .GetUnqualifiedIdentifierOfName(
+                                    syntaxHelper.GetNameOfAttribute(attribute)
+                                )
+                                .ValueText;
+                            if (
+                                matchesAttributeName(
+                                    ref localAliases,
+                                    ref seenNames,
+                                    simpleAttributeName,
+                                    withAttributeSuffix: false
+                                )
+                                || matchesAttributeName(
+                                    ref localAliases,
+                                    ref seenNames,
+                                    simpleAttributeName,
+                                    withAttributeSuffix: true
+                                )
+                            )
                             {
                                 attributeTargets.Length = 0;
                                 syntaxHelper.AddAttributeTargets(node, ref attributeTargets);
@@ -339,9 +427,7 @@ internal static partial class SyntaxValueProviderExtensions
                         // Avoid performance issue in ChildSyntaxList when iterating the child list in reverse
                         // (see https://github.com/dotnet/roslyn/issues/66475) by iterating forward first to
                         // ensure child nodes are realized.
-                        foreach (var childNode in childNodesAndTokens)
-                        {
-                        }
+                        foreach (var childNode in childNodesAndTokens) { }
 
                         foreach (var child in childNodesAndTokens.Reverse())
                         {
@@ -349,7 +435,6 @@ internal static partial class SyntaxValueProviderExtensions
                                 nodeStack.Append(child.AsNode()!);
                         }
                     }
-
                 }
             }
             finally
@@ -364,9 +449,9 @@ internal static partial class SyntaxValueProviderExtensions
         {
             if (withAttributeSuffix)
             {
-                return name.Length + "Attribute".Length == matchAgainst.Length &&
-                    matchAgainst.HasAttributeSuffix(isCaseSensitive) &&
-                    matchAgainst.StartsWith(name, comparison);
+                return name.Length + "Attribute".Length == matchAgainst.Length
+                    && matchAgainst.HasAttributeSuffix(isCaseSensitive)
+                    && matchAgainst.StartsWith(name, comparison);
             }
             else
             {
@@ -378,13 +463,16 @@ internal static partial class SyntaxValueProviderExtensions
             ref Aliases localAliases,
             ref ValueListBuilder<string> seenNames,
             string currentAttributeName,
-            bool withAttributeSuffix)
+            bool withAttributeSuffix
+        )
         {
             // If the names match, we're done.
             if (withAttributeSuffix)
             {
-                if (nameHasAttributeSuffix &&
-                    matchesName(currentAttributeName, name, withAttributeSuffix))
+                if (
+                    nameHasAttributeSuffix
+                    && matchesName(currentAttributeName, name, withAttributeSuffix)
+                )
                 {
                     return true;
                 }
@@ -412,8 +500,15 @@ internal static partial class SyntaxValueProviderExtensions
             {
                 // see if user wrote `[SomeAlias]`.  If so, if we find a `using SomeAlias = ...` recurse using the
                 // ... name portion to see if it might bind to the attr name the caller is searching for.
-                if (matchesName(currentAttributeName, aliasName, withAttributeSuffix) &&
-                    matchesAttributeName(ref localAliases, ref seenNames, symbolName, withAttributeSuffix: false))
+                if (
+                    matchesName(currentAttributeName, aliasName, withAttributeSuffix)
+                    && matchesAttributeName(
+                        ref localAliases,
+                        ref seenNames,
+                        symbolName,
+                        withAttributeSuffix: false
+                    )
+                )
                 {
                     return true;
                 }
@@ -421,8 +516,15 @@ internal static partial class SyntaxValueProviderExtensions
 
             foreach (var (aliasName, symbolName) in globalAliases.AliasAndSymbolNames)
             {
-                if (matchesName(currentAttributeName, aliasName, withAttributeSuffix) &&
-                    matchesAttributeName(ref localAliases, ref seenNames, symbolName, withAttributeSuffix: false))
+                if (
+                    matchesName(currentAttributeName, aliasName, withAttributeSuffix)
+                    && matchesAttributeName(
+                        ref localAliases,
+                        ref seenNames,
+                        symbolName,
+                        withAttributeSuffix: false
+                    )
+                )
                 {
                     return true;
                 }

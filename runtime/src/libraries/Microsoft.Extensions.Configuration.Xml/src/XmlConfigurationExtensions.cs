@@ -23,9 +23,18 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: false, reloadOnChange: false);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: false,
+                reloadOnChange: false
+            );
         }
 
         /// <summary>
@@ -38,9 +47,19 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path, bool optional)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path,
+            bool optional
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: false);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: optional,
+                reloadOnChange: false
+            );
         }
 
         /// <summary>
@@ -54,9 +73,20 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path,
+            bool optional,
+            bool reloadOnChange
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: reloadOnChange);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: optional,
+                reloadOnChange: reloadOnChange
+            );
         }
 
         /// <summary>
@@ -71,7 +101,13 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, IFileProvider? provider, string path, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            IFileProvider? provider,
+            string path,
+            bool optional,
+            bool reloadOnChange
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -98,8 +134,10 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, Action<XmlConfigurationSource>? configureSource)
-            => builder.Add(configureSource);
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            Action<XmlConfigurationSource>? configureSource
+        ) => builder.Add(configureSource);
 
         /// <summary>
         /// Adds a XML configuration source to <paramref name="builder"/>.
@@ -109,7 +147,10 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
-        public static IConfigurationBuilder AddXmlStream(this IConfigurationBuilder builder, Stream stream)
+        public static IConfigurationBuilder AddXmlStream(
+            this IConfigurationBuilder builder,
+            Stream stream
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 

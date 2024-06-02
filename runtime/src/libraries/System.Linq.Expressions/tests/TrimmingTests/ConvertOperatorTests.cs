@@ -21,10 +21,11 @@ internal class Program
         {
             UnaryExpression conversion = Expression.Convert(class1Parameter, convertType);
 
-            Func<Class1, string> getNameFunc = 
-                Expression.Lambda<Func<Class1, string>>(
-                    Expression.Call(null, getNameMethodInfo, conversion), 
-                    class1Parameter)
+            Func<Class1, string> getNameFunc = Expression
+                .Lambda<Func<Class1, string>>(
+                    Expression.Call(null, getNameMethodInfo, conversion),
+                    class1Parameter
+                )
                 .Compile();
 
             string name = getNameFunc(new Class1() { Name = convertType.Name });
@@ -70,9 +71,14 @@ internal class Class1 : IHasName
 {
     public string Name { get; set; }
 
-    public static implicit operator Class2(Class1 class1) => new Class2() { Name = class1.Name + "_implicit" };
-    public static explicit operator Class3(Class1 class1) => new Class3() { Name = class1.Name + "_explicit" };
-    public static implicit operator Class4(Class1 class1) => new Class4() { Name = class1.Name + "_implicit" };
+    public static implicit operator Class2(Class1 class1) =>
+        new Class2() { Name = class1.Name + "_implicit" };
+
+    public static explicit operator Class3(Class1 class1) =>
+        new Class3() { Name = class1.Name + "_explicit" };
+
+    public static implicit operator Class4(Class1 class1) =>
+        new Class4() { Name = class1.Name + "_implicit" };
 }
 
 internal class Class2 : IHasName

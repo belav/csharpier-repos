@@ -9,9 +9,9 @@ namespace System.ServiceModel.Diagnostics
     [Obsolete("This has been replaced by System.Runtime.Diagnostics.EventLogCategory")]
     enum EventLogCategory : ushort
     {
-        ServiceAuthorization = 1,  // reserved
-        MessageAuthentication,     // reserved
-        ObjectAccess,              // reserved
+        ServiceAuthorization = 1, // reserved
+        MessageAuthentication, // reserved
+        ObjectAccess, // reserved
         Tracing,
         WebHost,
         FailFast,
@@ -24,5 +24,4 @@ namespace System.ServiceModel.Diagnostics
         SharingService,
         ListenerAdapter
     }
-
 }

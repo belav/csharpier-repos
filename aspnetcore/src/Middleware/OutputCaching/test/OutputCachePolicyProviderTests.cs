@@ -11,14 +11,7 @@ public class OutputCachePolicyProviderTests
 {
     public static TheoryData<string> CacheableMethods
     {
-        get
-        {
-            return new TheoryData<string>
-                {
-                    HttpMethods.Get,
-                    HttpMethods.Head
-                };
-        }
+        get { return new TheoryData<string> { HttpMethods.Get, HttpMethods.Head }; }
     }
 
     public static TheoryData<string> NonCacheableMethods
@@ -26,16 +19,16 @@ public class OutputCachePolicyProviderTests
         get
         {
             return new TheoryData<string>
-                {
-                    HttpMethods.Post,
-                    HttpMethods.Put,
-                    HttpMethods.Delete,
-                    HttpMethods.Trace,
-                    HttpMethods.Connect,
-                    HttpMethods.Options,
-                    "",
-                    null
-                };
+            {
+                HttpMethods.Post,
+                HttpMethods.Put,
+                HttpMethods.Delete,
+                HttpMethods.Trace,
+                HttpMethods.Connect,
+                HttpMethods.Options,
+                "",
+                null
+            };
         }
     }
 

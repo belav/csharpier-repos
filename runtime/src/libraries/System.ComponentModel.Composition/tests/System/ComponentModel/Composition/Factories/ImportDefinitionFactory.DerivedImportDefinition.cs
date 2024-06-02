@@ -15,7 +15,12 @@ namespace System.ComponentModel.Composition.Factories
             private readonly bool _isRecomposable;
             private readonly bool _isPrerequisite;
 
-            public DerivedImportDefinition(Expression<Func<ExportDefinition, bool>> constraint, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite)
+            public DerivedImportDefinition(
+                Expression<Func<ExportDefinition, bool>> constraint,
+                ImportCardinality cardinality,
+                bool isRecomposable,
+                bool isPrerequisite
+            )
             {
                 _constraint = constraint ?? (export => false);
                 _cardinality = cardinality;

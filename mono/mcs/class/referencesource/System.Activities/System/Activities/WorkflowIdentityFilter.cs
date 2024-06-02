@@ -17,7 +17,8 @@ namespace System.Activities
     {
         public static bool IsValid(this WorkflowIdentityFilter value)
         {
-            return (int)value >= (int)WorkflowIdentityFilter.Exact && (int)value <= (int)WorkflowIdentityFilter.AnyRevision;
+            return (int)value >= (int)WorkflowIdentityFilter.Exact
+                && (int)value <= (int)WorkflowIdentityFilter.AnyRevision;
         }
     }
 }

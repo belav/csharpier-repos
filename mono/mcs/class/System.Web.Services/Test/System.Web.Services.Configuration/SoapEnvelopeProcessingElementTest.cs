@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,37 +32,37 @@ using System;
 using System.Web.Services.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Services {
-	[TestFixture]
-	public class SoapEnvelopeProcessingElementTest
-	{
-		[Test]
-		public void Ctors ()
-		{
-			SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
-			Assert.IsFalse (el.IsStrict, "A1");
-			Assert.AreEqual (Int32.MaxValue, el.ReadTimeout, "A2");
+namespace MonoTests.System.Web.Services
+{
+    [TestFixture]
+    public class SoapEnvelopeProcessingElementTest
+    {
+        [Test]
+        public void Ctors()
+        {
+            SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement();
+            Assert.IsFalse(el.IsStrict, "A1");
+            Assert.AreEqual(Int32.MaxValue, el.ReadTimeout, "A2");
 
-			el = new SoapEnvelopeProcessingElement (500);
-			Assert.IsFalse (el.IsStrict, "A3");
-			Assert.AreEqual (500, el.ReadTimeout, "A4");
+            el = new SoapEnvelopeProcessingElement(500);
+            Assert.IsFalse(el.IsStrict, "A3");
+            Assert.AreEqual(500, el.ReadTimeout, "A4");
 
-			el = new SoapEnvelopeProcessingElement (500, true);
-			Assert.IsTrue (el.IsStrict, "A5");
-			Assert.AreEqual (500, el.ReadTimeout, "A6");
-		}
+            el = new SoapEnvelopeProcessingElement(500, true);
+            Assert.IsTrue(el.IsStrict, "A5");
+            Assert.AreEqual(500, el.ReadTimeout, "A6");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
+        [Test]
+        public void GetSet()
+        {
+            SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement();
 
-			el.IsStrict = true;
-			Assert.IsTrue (el.IsStrict, "A1");
+            el.IsStrict = true;
+            Assert.IsTrue(el.IsStrict, "A1");
 
-			el.ReadTimeout = 500;
-			Assert.AreEqual (500, el.ReadTimeout, "A2");
-		}
-	}
+            el.ReadTimeout = 500;
+            Assert.AreEqual(500, el.ReadTimeout, "A2");
+        }
+    }
 }
-

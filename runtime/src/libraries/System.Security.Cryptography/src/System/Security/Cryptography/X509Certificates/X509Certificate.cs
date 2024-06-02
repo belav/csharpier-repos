@@ -48,53 +48,64 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate()
-        {
-        }
+        public X509Certificate() { }
 
         // Null turns into the empty span here, which is correct for compat.
         [UnsupportedOSPlatform("browser")]
         public X509Certificate(byte[] data)
-            : this(new ReadOnlySpan<byte>(data))
-        {
-        }
+            : this(new ReadOnlySpan<byte>(data)) { }
 
         private protected X509Certificate(ReadOnlySpan<byte> data)
         {
             if (!data.IsEmpty)
             {
                 // For compat reasons, this constructor treats passing a null or empty data set as the same as calling the nullary constructor.
-                using (var safePasswordHandle = new SafePasswordHandle((string?)null, passwordProvided: false))
+                using (
+                    var safePasswordHandle = new SafePasswordHandle(
+                        (string?)null,
+                        passwordProvided: false
+                    )
+                )
                 {
-                    Pal = CertificatePal.FromBlob(data, safePasswordHandle, X509KeyStorageFlags.DefaultKeySet);
+                    Pal = CertificatePal.FromBlob(
+                        data,
+                        safePasswordHandle,
+                        X509KeyStorageFlags.DefaultKeySet
+                    );
                 }
             }
         }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate(byte[] rawData, string? password)
-            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet)
-        {
-        }
+            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
         public X509Certificate(byte[] rawData, SecureString? password)
-            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet)
-        {
-        }
+            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags)
+        public X509Certificate(
+            byte[] rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             if (rawData == null || rawData.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromBlob(rawData, safePasswordHandle, keyStorageFlags);
             }
@@ -102,27 +113,39 @@ namespace System.Security.Cryptography.X509Certificates
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
-        public X509Certificate(byte[] rawData, SecureString? password, X509KeyStorageFlags keyStorageFlags)
+        public X509Certificate(
+            byte[] rawData,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             if (rawData == null || rawData.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromBlob(rawData, safePasswordHandle, keyStorageFlags);
             }
         }
 
-        private protected X509Certificate(ReadOnlySpan<byte> rawData, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags)
+        private protected X509Certificate(
+            ReadOnlySpan<byte> rawData,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             if (rawData.IsEmpty)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromBlob(rawData, safePasswordHandle, keyStorageFlags);
             }
@@ -142,43 +165,49 @@ namespace System.Security.Cryptography.X509Certificates
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate(string fileName)
-            : this(fileName, (string?)null, X509KeyStorageFlags.DefaultKeySet)
-        {
-        }
+            : this(fileName, (string?)null, X509KeyStorageFlags.DefaultKeySet) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate(string fileName, string? password)
-            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet)
-        {
-        }
+            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
         public X509Certificate(string fileName, SecureString? password)
-            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet)
-        {
-        }
+            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate(string fileName, string? password, X509KeyStorageFlags keyStorageFlags)
+        public X509Certificate(
+            string fileName,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             ArgumentNullException.ThrowIfNull(fileName);
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromFile(fileName, safePasswordHandle, keyStorageFlags);
             }
         }
 
-        private protected X509Certificate(string fileName, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags)
+        private protected X509Certificate(
+            string fileName,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             ArgumentNullException.ThrowIfNull(fileName);
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromFile(fileName, safePasswordHandle, keyStorageFlags);
             }
@@ -187,14 +216,21 @@ namespace System.Security.Cryptography.X509Certificates
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
 #pragma warning disable SYSLIB0026
-        public X509Certificate(string fileName, SecureString? password, X509KeyStorageFlags keyStorageFlags) : this()
+        public X509Certificate(
+            string fileName,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+            : this()
 #pragma warning restore SYSLIB0026
         {
             ArgumentNullException.ThrowIfNull(fileName);
 
             ValidateKeyStorageFlags(keyStorageFlags);
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 Pal = CertificatePal.FromFile(fileName, safePasswordHandle, keyStorageFlags);
             }
@@ -212,9 +248,14 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
 #pragma warning disable SYSLIB0026
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public X509Certificate(SerializationInfo info, StreamingContext context) : this()
+        public X509Certificate(SerializationInfo info, StreamingContext context)
+            : this()
 #pragma warning restore SYSLIB0026
         {
             throw new PlatformNotSupportedException();
@@ -277,7 +318,8 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is X509Certificate other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is X509Certificate other && Equals(other);
 
         public virtual bool Equals([NotNullWhen(true)] X509Certificate? other)
         {
@@ -306,9 +348,11 @@ namespace System.Security.Cryptography.X509Certificates
             VerifyContentType(contentType);
 
             if (Pal == null)
-                throw new CryptographicException(ErrorCode.E_POINTER);  // Not the greatest error, but needed for backward compat.
+                throw new CryptographicException(ErrorCode.E_POINTER); // Not the greatest error, but needed for backward compat.
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 return Pal.Export(contentType, safePasswordHandle);
             }
@@ -320,9 +364,11 @@ namespace System.Security.Cryptography.X509Certificates
             VerifyContentType(contentType);
 
             if (Pal == null)
-                throw new CryptographicException(ErrorCode.E_POINTER);  // Not the greatest error, but needed for backward compat.
+                throw new CryptographicException(ErrorCode.E_POINTER); // Not the greatest error, but needed for backward compat.
 
-            using (var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true))
+            using (
+                var safePasswordHandle = new SafePasswordHandle(password, passwordProvided: true)
+            )
             {
                 return Pal.Export(contentType, safePasswordHandle);
             }
@@ -346,7 +392,10 @@ namespace System.Security.Cryptography.X509Certificates
             return GetCertHash(hashAlgorithm, Pal);
         }
 
-        private static byte[] GetCertHash(HashAlgorithmName hashAlgorithm, ICertificatePalCore certPal)
+        private static byte[] GetCertHash(
+            HashAlgorithmName hashAlgorithm,
+            ICertificatePalCore certPal
+        )
         {
             return CryptographicOperations.HashData(hashAlgorithm, certPal.RawData);
         }
@@ -354,11 +403,17 @@ namespace System.Security.Cryptography.X509Certificates
         public virtual bool TryGetCertHash(
             HashAlgorithmName hashAlgorithm,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ThrowIfInvalid();
 
-            return CryptographicOperations.TryHashData(hashAlgorithm, Pal.RawData, destination, out bytesWritten);
+            return CryptographicOperations.TryHashData(
+                hashAlgorithm,
+                Pal.RawData,
+                destination,
+                out bytesWritten
+            );
         }
 
         public virtual string GetCertHashString()
@@ -374,7 +429,10 @@ namespace System.Security.Cryptography.X509Certificates
             return GetCertHashString(hashAlgorithm, Pal);
         }
 
-        internal static string GetCertHashString(HashAlgorithmName hashAlgorithm, ICertificatePalCore certPal)
+        internal static string GetCertHashString(
+            HashAlgorithmName hashAlgorithm,
+            ICertificatePalCore certPal
+        )
         {
             return GetCertHash(hashAlgorithm, certPal).ToHexStringUpper();
         }
@@ -437,7 +495,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             ThrowIfInvalid();
 
-            byte[] keyAlgorithmParameters = _lazyKeyAlgorithmParameters ??= Pal.KeyAlgorithmParameters;
+            byte[] keyAlgorithmParameters = _lazyKeyAlgorithmParameters ??=
+                Pal.KeyAlgorithmParameters;
             return keyAlgorithmParameters.CloneByteArray();
         }
 
@@ -498,7 +557,9 @@ namespace System.Security.Cryptography.X509Certificates
             return Pal.LegacySubject;
         }
 
-        [Obsolete("X509Certificate.GetIssuerName has been deprecated. Use the Issuer property instead.")]
+        [Obsolete(
+            "X509Certificate.GetIssuerName has been deprecated. Use the Issuer property instead."
+        )]
         public virtual string GetIssuerName()
         {
             ThrowIfInvalid();
@@ -559,40 +620,80 @@ namespace System.Security.Cryptography.X509Certificates
             return sb.ToString();
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public virtual void Import(byte[] rawData)
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public virtual void Import(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public virtual void Import(
+            byte[] rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
         [System.CLSCompliantAttribute(false)]
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public virtual void Import(byte[] rawData, SecureString? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public virtual void Import(
+            byte[] rawData,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public virtual void Import(string fileName)
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public virtual void Import(string fileName, string? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public virtual void Import(
+            string fileName,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
         [System.CLSCompliantAttribute(false)]
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public virtual void Import(string fileName, SecureString? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public virtual void Import(
+            string fileName,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
@@ -630,7 +731,9 @@ namespace System.Security.Cryptography.X509Certificates
         internal void ThrowIfInvalid()
         {
             if (Pal is null)
-                throw new CryptographicException(SR.Format(SR.Cryptography_InvalidHandle, "m_safeCertContext")); // Keeping "m_safeCertContext" string for backward compat sake.
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_InvalidHandle, "m_safeCertContext")
+                ); // Keeping "m_safeCertContext" string for backward compat sake.
         }
 
         /// <summary>
@@ -676,24 +779,36 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new ArgumentException(
                     SR.Format(SR.Cryptography_X509_InvalidFlagCombination, persistenceFlags),
-                    nameof(keyStorageFlags));
+                    nameof(keyStorageFlags)
+                );
             }
         }
 
         private static void VerifyContentType(X509ContentType contentType)
         {
-            if (!(contentType == X509ContentType.Cert || contentType == X509ContentType.SerializedCert || contentType == X509ContentType.Pkcs12))
+            if (
+                !(
+                    contentType == X509ContentType.Cert
+                    || contentType == X509ContentType.SerializedCert
+                    || contentType == X509ContentType.Pkcs12
+                )
+            )
                 throw new CryptographicException(SR.Cryptography_X509_InvalidContentType);
         }
 
-        internal static void EnforceIterationCountLimit(ref ReadOnlySpan<byte> pkcs12, bool readingFromFile, bool passwordProvided)
+        internal static void EnforceIterationCountLimit(
+            ref ReadOnlySpan<byte> pkcs12,
+            bool readingFromFile,
+            bool passwordProvided
+        )
         {
             if (readingFromFile || passwordProvided)
             {
                 return;
             }
 
-            long pkcs12UnspecifiedPasswordIterationLimit = LocalAppContextSwitches.Pkcs12UnspecifiedPasswordIterationLimit;
+            long pkcs12UnspecifiedPasswordIterationLimit =
+                LocalAppContextSwitches.Pkcs12UnspecifiedPasswordIterationLimit;
 
             // -1 = no limit
             if (LocalAppContextSwitches.Pkcs12UnspecifiedPasswordIterationLimit == -1)
@@ -704,7 +819,8 @@ namespace System.Security.Cryptography.X509Certificates
             // any other negative number means use default limits
             if (pkcs12UnspecifiedPasswordIterationLimit < 0)
             {
-                pkcs12UnspecifiedPasswordIterationLimit = LocalAppContextSwitches.DefaultPkcs12UnspecifiedPasswordIterationLimit;
+                pkcs12UnspecifiedPasswordIterationLimit =
+                    LocalAppContextSwitches.DefaultPkcs12UnspecifiedPasswordIterationLimit;
             }
 
             try
@@ -713,8 +829,13 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     checked
                     {
-                        KdfWorkLimiter.SetIterationLimit((ulong)pkcs12UnspecifiedPasswordIterationLimit);
-                        ulong observedIterationCount = GetIterationCount(pkcs12, out int bytesConsumed);
+                        KdfWorkLimiter.SetIterationLimit(
+                            (ulong)pkcs12UnspecifiedPasswordIterationLimit
+                        );
+                        ulong observedIterationCount = GetIterationCount(
+                            pkcs12,
+                            out int bytesConsumed
+                        );
                         pkcs12 = pkcs12.Slice(0, bytesConsumed);
 
                         // Check both conditions: we want a KDF-exceeded failure anywhere in the system to produce a failure here.
@@ -725,7 +846,10 @@ namespace System.Security.Cryptography.X509Certificates
                         // potentially allows a clever adversary a window through which to squeeze in work beyond our configured
                         // limits. To mitigate this risk, we'll fail now if we observed *any* KDF-exceeded failure while processing
                         // this PFX.
-                        if (observedIterationCount > (ulong)pkcs12UnspecifiedPasswordIterationLimit || KdfWorkLimiter.WasWorkLimitExceeded())
+                        if (
+                            observedIterationCount > (ulong)pkcs12UnspecifiedPasswordIterationLimit
+                            || KdfWorkLimiter.WasWorkLimitExceeded()
+                        )
                         {
                             throw new X509IterationCountExceededException(); // iteration count exceeded
                         }
@@ -738,14 +862,19 @@ namespace System.Security.Cryptography.X509Certificates
             }
             catch (X509IterationCountExceededException)
             {
-                throw new CryptographicException(SR.Cryptography_X509_PfxWithoutPassword_MaxAllowedIterationsExceeded);
+                throw new CryptographicException(
+                    SR.Cryptography_X509_PfxWithoutPassword_MaxAllowedIterationsExceeded
+                );
             }
             catch (Exception ex)
             {
                 // It's important for this catch-all block to be *outside* the inner try/finally
                 // so that we can prevent exception filters from running before we've had a chance
                 // to clean up the threadstatic.
-                throw new CryptographicException(SR.Cryptography_X509_PfxWithoutPassword_ProblemFound, ex);
+                throw new CryptographicException(
+                    SR.Cryptography_X509_PfxWithoutPassword_ProblemFound,
+                    ex
+                );
             }
         }
 
@@ -776,11 +905,11 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         internal const X509KeyStorageFlags KeyStorageFlagsAll =
-            X509KeyStorageFlags.UserKeySet |
-            X509KeyStorageFlags.MachineKeySet |
-            X509KeyStorageFlags.Exportable |
-            X509KeyStorageFlags.UserProtected |
-            X509KeyStorageFlags.PersistKeySet |
-            X509KeyStorageFlags.EphemeralKeySet;
+            X509KeyStorageFlags.UserKeySet
+            | X509KeyStorageFlags.MachineKeySet
+            | X509KeyStorageFlags.Exportable
+            | X509KeyStorageFlags.UserProtected
+            | X509KeyStorageFlags.PersistKeySet
+            | X509KeyStorageFlags.EphemeralKeySet;
     }
 }

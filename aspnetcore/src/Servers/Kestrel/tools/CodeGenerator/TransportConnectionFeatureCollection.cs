@@ -36,7 +36,8 @@ public class TransportConnectionFeatureCollection
             "IConnectionLifetimeFeature"
         };
 
-        var usings = $@"
+        var usings =
+            $@"
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;";
 
@@ -46,6 +47,7 @@ using Microsoft.AspNetCore.Http.Features;";
             allFeatures: allFeatures,
             implementedFeatures: implementedFeatures,
             extraUsings: usings,
-            fallbackFeatures: "MultiplexedConnectionFeatures");
+            fallbackFeatures: "MultiplexedConnectionFeatures"
+        );
     }
 }

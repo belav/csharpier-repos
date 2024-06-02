@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Language.Flow;
 
 namespace Moq.Language
@@ -40,9 +39,9 @@ namespace Moq.Language
         /// mock.SetupGet(x => x.Suspended)
         ///     .Returns(() => returnValues[0]);
         /// </code>
-        /// The lambda expression to retrieve the return value is lazy-executed, 
-        /// meaning that its value may change depending on the moment the property  
-        /// is retrieved and the value the <c>returnValues</c> array has at 
+        /// The lambda expression to retrieve the return value is lazy-executed,
+        /// meaning that its value may change depending on the moment the property
+        /// is retrieved and the value the <c>returnValues</c> array has at
         /// that moment.
         /// </example>
         IReturnsResult<TMock> Returns(Func<TProperty> valueFunction);

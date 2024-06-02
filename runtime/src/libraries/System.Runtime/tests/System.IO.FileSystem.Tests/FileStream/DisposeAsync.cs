@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.Threading.Tasks;
+using Microsoft.Win32.SafeHandles;
 using Xunit;
 
 namespace System.IO.Tests
@@ -24,17 +24,36 @@ namespace System.IO.Tests
         {
             string path = GetTestFilePath();
 
-            var fs1 = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            var fs1 = new FileStream(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.ReadWrite
+            );
             fs1.Write(new byte[100], 0, 100);
 
-            using (var fs2 = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (
+                var fs2 = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 Assert.Equal(0, fs2.Length);
             }
 
             await fs1.DisposeAsync();
 
-            using (var fs2 = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (
+                var fs2 = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 Assert.Equal(100, fs2.Length);
             }
@@ -54,7 +73,10 @@ namespace System.IO.Tests
         [Fact]
         public async Task DerivedFileStream_PropertiesDontThrow_OnDisposeAsync()
         {
-            var fs = new FileStream_Dispose.DerivedFileStreamAccessingPropertiesOnDispose(GetTestFilePath(), FileMode.Create);
+            var fs = new FileStream_Dispose.DerivedFileStreamAccessingPropertiesOnDispose(
+                GetTestFilePath(),
+                FileMode.Create
+            );
             await fs.DisposeAsync();
             fs.VerifyAfterDispose();
         }
@@ -63,12 +85,16 @@ namespace System.IO.Tests
         {
             public bool CloseInvoked;
             public bool DisposeInvoked;
-            public DerivedFileStream(string path, FileMode mode) : base(path, mode) { }
+
+            public DerivedFileStream(string path, FileMode mode)
+                : base(path, mode) { }
+
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;
                 base.Dispose(disposing);
             }
+
             public override void Close()
             {
                 CloseInvoked = true;

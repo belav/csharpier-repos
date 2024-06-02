@@ -8,7 +8,9 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     [Serializable]
     public class ContextMessageProperty : IMessageProperty
     {
@@ -34,18 +36,12 @@ namespace System.ServiceModel.Channels
 
         public static string Name
         {
-            get
-            {
-                return PropertyName;
-            }
+            get { return PropertyName; }
         }
 
         public IDictionary<string, string> Context
         {
-            get
-            {
-                return this.contextStore;
-            }
+            get { return this.contextStore; }
         }
 
         internal static ContextMessageProperty Empty
@@ -62,12 +58,21 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static bool TryCreateFromHttpCookieHeader(string httpCookieHeader, out ContextMessageProperty context)
+        public static bool TryCreateFromHttpCookieHeader(
+            string httpCookieHeader,
+            out ContextMessageProperty context
+        )
         {
-            return ContextProtocol.HttpCookieToolbox.TryCreateFromHttpCookieHeader(httpCookieHeader, out context);
+            return ContextProtocol.HttpCookieToolbox.TryCreateFromHttpCookieHeader(
+                httpCookieHeader,
+                out context
+            );
         }
 
-        public static bool TryGet(Message message, out ContextMessageProperty contextMessageProperty)
+        public static bool TryGet(
+            Message message,
+            out ContextMessageProperty contextMessageProperty
+        )
         {
             if (message == null)
             {
@@ -77,7 +82,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out contextMessageProperty);
         }
 
-        public static bool TryGet(MessageProperties properties, out ContextMessageProperty contextMessageProperty)
+        public static bool TryGet(
+            MessageProperties properties,
+            out ContextMessageProperty contextMessageProperty
+        )
         {
             if (properties == null)
             {
@@ -116,7 +124,6 @@ namespace System.ServiceModel.Channels
 
             properties[PropertyName] = this;
         }
-
 
         public IMessageProperty CreateCopy()
         {

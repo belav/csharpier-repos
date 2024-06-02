@@ -18,30 +18,26 @@ namespace System.ServiceModel.Discovery.Configuration
 
         [ConfigurationProperty(ConfigurationStrings.Endpoint)]
         [SuppressMessage(
-            FxCop.Category.Configuration, 
-            FxCop.Rule.ConfigurationPropertyNameRule, 
-            Justification = "The configuration name for this element is 'endpoint'.")]
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyNameRule,
+            Justification = "The configuration name for this element is 'endpoint'."
+        )]
         public ChannelEndpointElement DiscoveryEndpoint
         {
-            get
-            {
-                return (ChannelEndpointElement)base[ConfigurationStrings.Endpoint];
-            } 
+            get { return (ChannelEndpointElement)base[ConfigurationStrings.Endpoint]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.FindCriteria)]
         public FindCriteriaElement FindCriteria
         {
-            get
-            {
-                return (FindCriteriaElement)base[ConfigurationStrings.FindCriteria];
-            }
+            get { return (FindCriteriaElement)base[ConfigurationStrings.FindCriteria]; }
         }
 
         [SuppressMessage(
-            FxCop.Category.Configuration, 
-            FxCop.Rule.ConfigurationPropertyAttributeRule, 
-            Justification = "This property only overrides the base property.")]
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property only overrides the base property."
+        )]
         public override Type BindingElementType
         {
             get { return typeof(DiscoveryClientBindingElement); }
@@ -53,25 +49,30 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Endpoint,
-                        typeof(ChannelEndpointElement),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Endpoint,
+                            typeof(ChannelEndpointElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.FindCriteria,
-                        typeof(FindCriteriaElement),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));                  
+                            ConfigurationStrings.FindCriteria,
+                            typeof(FindCriteriaElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -83,15 +84,21 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             base.ApplyConfiguration(bindingElement);
 
-            DiscoveryClientBindingElement discoveryClientBindingElement = (DiscoveryClientBindingElement)bindingElement;
-            
-            if (PropertyValueOrigin.Default == this.ElementInformation.Properties[ConfigurationStrings.Endpoint].ValueOrigin)
-            {                
-                discoveryClientBindingElement.DiscoveryEndpointProvider = new ConfigurationDiscoveryEndpointProvider();
+            DiscoveryClientBindingElement discoveryClientBindingElement =
+                (DiscoveryClientBindingElement)bindingElement;
+
+            if (
+                PropertyValueOrigin.Default
+                == this.ElementInformation.Properties[ConfigurationStrings.Endpoint].ValueOrigin
+            )
+            {
+                discoveryClientBindingElement.DiscoveryEndpointProvider =
+                    new ConfigurationDiscoveryEndpointProvider();
             }
             else
             {
-                discoveryClientBindingElement.DiscoveryEndpointProvider = new ConfigurationDiscoveryEndpointProvider(this.DiscoveryEndpoint);                
+                discoveryClientBindingElement.DiscoveryEndpointProvider =
+                    new ConfigurationDiscoveryEndpointProvider(this.DiscoveryEndpoint);
             }
 
             this.FindCriteria.ApplyConfiguration(discoveryClientBindingElement.FindCriteria);
@@ -103,9 +110,13 @@ namespace System.ServiceModel.Discovery.Configuration
 
             DiscoveryClientElement source = (DiscoveryClientElement)from;
 
-            if (PropertyValueOrigin.Default == this.ElementInformation.Properties[ConfigurationStrings.Endpoint].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                == this.ElementInformation.Properties[ConfigurationStrings.Endpoint].ValueOrigin
+            )
             {
-                ChannelEndpointElement udpChannelEndpointElement = ConfigurationUtility.GetDefaultDiscoveryEndpointElement();
+                ChannelEndpointElement udpChannelEndpointElement =
+                    ConfigurationUtility.GetDefaultDiscoveryEndpointElement();
                 udpChannelEndpointElement.Copy(source.DiscoveryEndpoint);
             }
             else
@@ -117,16 +128,18 @@ namespace System.ServiceModel.Discovery.Configuration
 
         protected internal override BindingElement CreateBindingElement()
         {
-            DiscoveryClientBindingElement discoveryClientBindingElement = new DiscoveryClientBindingElement();
+            DiscoveryClientBindingElement discoveryClientBindingElement =
+                new DiscoveryClientBindingElement();
             this.ApplyConfiguration(discoveryClientBindingElement);
 
             return discoveryClientBindingElement;
-        }        
+        }
 
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             throw FxTrace.Exception.AsError(
-                new NotSupportedException(SR2.DiscoveryConfigInitializeFromNotSupported));             
-        }        
+                new NotSupportedException(SR2.DiscoveryConfigInitializeFromNotSupported)
+            );
+        }
     }
 }

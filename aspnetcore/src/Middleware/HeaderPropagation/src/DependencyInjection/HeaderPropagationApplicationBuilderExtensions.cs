@@ -17,7 +17,8 @@ public static class HeaderPropagationApplicationBuilderExtensions
         CultureInfo.CurrentCulture,
         "Unable to find the required services. Please add all the required services by calling '{0}.{1}' inside the call to 'ConfigureServices(...)' in the application startup code.",
         nameof(IServiceCollection),
-        nameof(HeaderPropagationServiceCollectionExtensions.AddHeaderPropagation));
+        nameof(HeaderPropagationServiceCollectionExtensions.AddHeaderPropagation)
+    );
 
     /// <summary>
     /// Adds a middleware that collect headers to be propagated to a <see cref="HttpClient"/>.

@@ -18,7 +18,8 @@ internal sealed class RequestTimeoutsMiddleware
         RequestDelegate next,
         ICancellationTokenLinker cancellationTokenProvider,
         ILogger<RequestTimeoutsMiddleware> logger,
-        IOptionsMonitor<RequestTimeoutOptions> options)
+        IOptionsMonitor<RequestTimeoutOptions> options
+    )
     {
         _next = next;
         _cancellationTokenProvider = cancellationTokenProvider;
@@ -39,7 +40,11 @@ internal sealed class RequestTimeoutsMiddleware
 
         var options = _options.CurrentValue;
 
-        if (timeoutMetadata is null && policyMetadata?.Timeout is null && options.DefaultPolicy?.Timeout is null)
+        if (
+            timeoutMetadata is null
+            && policyMetadata?.Timeout is null
+            && options.DefaultPolicy?.Timeout is null
+        )
         {
             return _next(context);
         }
@@ -70,7 +75,9 @@ internal sealed class RequestTimeoutsMiddleware
                 }
                 else
                 {
-                    throw new InvalidOperationException($"The requested timeout policy '{timeoutMetadata.PolicyName}' is not available.");
+                    throw new InvalidOperationException(
+                        $"The requested timeout policy '{timeoutMetadata.PolicyName}' is not available."
+                    );
                 }
             }
         }
@@ -96,7 +103,12 @@ internal sealed class RequestTimeoutsMiddleware
         async Task SetTimeoutAsync()
         {
             var originalToken = context.RequestAborted;
-            var (linkedCts, timeoutCts) = _cancellationTokenProvider.GetLinkedCancellationTokenSource(context, originalToken, timeSpan.Value);
+            var (linkedCts, timeoutCts) =
+                _cancellationTokenProvider.GetLinkedCancellationTokenSource(
+                    context,
+                    originalToken,
+                    timeSpan.Value
+                );
 
             try
             {
@@ -107,7 +119,7 @@ internal sealed class RequestTimeoutsMiddleware
                 await _next(context);
             }
             catch (OperationCanceledException operationCanceledException)
-            when (linkedCts.IsCancellationRequested && !originalToken.IsCancellationRequested)
+                when (linkedCts.IsCancellationRequested && !originalToken.IsCancellationRequested)
             {
                 if (context.Response.HasStarted)
                 {
@@ -119,7 +131,8 @@ internal sealed class RequestTimeoutsMiddleware
 
                 context.Response.Clear();
 
-                context.Response.StatusCode = selectedPolicy?.TimeoutStatusCode ?? StatusCodes.Status504GatewayTimeout;
+                context.Response.StatusCode =
+                    selectedPolicy?.TimeoutStatusCode ?? StatusCodes.Status504GatewayTimeout;
 
                 if (selectedPolicy?.WriteTimeoutResponse is not null)
                 {

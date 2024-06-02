@@ -37,11 +37,16 @@ public class ClientErrorResultFilterTest
         var context = GetContext(actionResult);
         var factory = new Mock<IClientErrorFactory>();
         factory
-            .Setup(f => f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>()))
+            .Setup(f =>
+                f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>())
+            )
             .Returns((IActionResult)null)
             .Verifiable();
 
-        var filter = new ClientErrorResultFilter(factory.Object, NullLogger<ClientErrorResultFilter>.Instance);
+        var filter = new ClientErrorResultFilter(
+            factory.Object,
+            NullLogger<ClientErrorResultFilter>.Instance
+        );
 
         // Act
         filter.OnResultExecuting(context);
@@ -104,8 +109,10 @@ public class ClientErrorResultFilterTest
 
     private static ClientErrorResultFilter GetFilter()
     {
-        var factory = Mock.Of<IClientErrorFactory>(
-            f => f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>()) == Result);
+        var factory = Mock.Of<IClientErrorFactory>(f =>
+            f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>())
+            == Result
+        );
 
         return new ClientErrorResultFilter(factory, NullLogger<ClientErrorResultFilter>.Instance);
     }
@@ -116,6 +123,7 @@ public class ClientErrorResultFilterTest
             new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()),
             Array.Empty<IFilterMetadata>(),
             actionResult,
-            new object());
+            new object()
+        );
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,88 +34,98 @@ using Mono.Net.Dns;
 
 namespace System.Net
 {
-	class DnsAsyncResult : IAsyncResult
-	{
-		static WaitCallback internal_cb = new WaitCallback (CB);
-		ManualResetEvent handle;
-		bool synch;
-		bool is_completed;
-		AsyncCallback callback;
-		object state;
-		IPHostEntry entry;
-		Exception exc;
+    class DnsAsyncResult : IAsyncResult
+    {
+        static WaitCallback internal_cb = new WaitCallback(CB);
+        ManualResetEvent handle;
+        bool synch;
+        bool is_completed;
+        AsyncCallback callback;
+        object state;
+        IPHostEntry entry;
+        Exception exc;
 
-		public DnsAsyncResult (AsyncCallback cb, object state)
-		{
-			this.callback = cb;
-			this.state = state;
-		}
+        public DnsAsyncResult(AsyncCallback cb, object state)
+        {
+            this.callback = cb;
+            this.state = state;
+        }
 
-		public void SetCompleted (bool synch, IPHostEntry entry, Exception e)
-		{
-			this.synch = synch;
-			this.entry = entry;
-			exc = e;
-			lock (this) {
-				if (is_completed)
-					return;
-				is_completed = true;
-				if (handle != null)
-					handle.Set ();
-			}
-			if (callback != null)
-				ThreadPool.QueueUserWorkItem (internal_cb, this);
-		}
+        public void SetCompleted(bool synch, IPHostEntry entry, Exception e)
+        {
+            this.synch = synch;
+            this.entry = entry;
+            exc = e;
+            lock (this)
+            {
+                if (is_completed)
+                    return;
+                is_completed = true;
+                if (handle != null)
+                    handle.Set();
+            }
+            if (callback != null)
+                ThreadPool.QueueUserWorkItem(internal_cb, this);
+        }
 
-		public void SetCompleted (bool synch, Exception e)
-		{
-			SetCompleted (synch, null, e);
-		}
+        public void SetCompleted(bool synch, Exception e)
+        {
+            SetCompleted(synch, null, e);
+        }
 
-		public void SetCompleted (bool synch, IPHostEntry entry)
-		{
-			SetCompleted (synch, entry, null);
-		}
+        public void SetCompleted(bool synch, IPHostEntry entry)
+        {
+            SetCompleted(synch, entry, null);
+        }
 
-		static void CB (object _this)
-		{
-			DnsAsyncResult ares = (DnsAsyncResult) _this;
-			ares.callback (ares);
-		}
+        static void CB(object _this)
+        {
+            DnsAsyncResult ares = (DnsAsyncResult)_this;
+            ares.callback(ares);
+        }
 
-		public object AsyncState {
-			get { return state; }
-		}
+        public object AsyncState
+        {
+            get { return state; }
+        }
 
-		public WaitHandle AsyncWaitHandle {
-			get {
-				lock (this) {
-					if (handle == null)
-						handle = new ManualResetEvent (is_completed);
-				}
-				return handle;
-			}
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
+                    if (handle == null)
+                        handle = new ManualResetEvent(is_completed);
+                }
+                return handle;
+            }
+        }
 
-		public Exception Exception {
-			get { return exc; }
-		}
+        public Exception Exception
+        {
+            get { return exc; }
+        }
 
-		public IPHostEntry HostEntry {
-			get { return entry; }
-		}
+        public IPHostEntry HostEntry
+        {
+            get { return entry; }
+        }
 
-		public bool CompletedSynchronously {
-			get { return synch; }
-		}
+        public bool CompletedSynchronously
+        {
+            get { return synch; }
+        }
 
-		public bool IsCompleted {
-			get {
-				lock (this) {
-					return is_completed;
-				}
-			}
-		}
-	}
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (this)
+                {
+                    return is_completed;
+                }
+            }
+        }
+    }
 }
-
