@@ -184,15 +184,17 @@ namespace System.ComponentModel
         {
             get { throw null; }
         }
-        public virtual System.Attribute? this[[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                | System
-                    .Diagnostics
-                    .CodeAnalysis
-                    .DynamicallyAccessedMemberTypes
-                    .PublicParameterlessConstructor
-        )]
-            System.Type attributeType]
+        public virtual System.Attribute? this[
+            [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
+                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
+                    | System
+                        .Diagnostics
+                        .CodeAnalysis
+                        .DynamicallyAccessedMemberTypes
+                        .PublicParameterlessConstructor
+            )]
+                System.Type attributeType
+        ]
         {
             get { throw null; }
         }
@@ -6122,11 +6124,15 @@ namespace System.ComponentModel.Design
             {
                 get { throw null; }
             }
-            public System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection? this[int index]
+            public System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection? this[
+                int index
+            ]
             {
                 get { throw null; }
             }
-            public System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection? this[string name]
+            public System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection? this[
+                string name
+            ]
             {
                 get { throw null; }
             }
@@ -7301,12 +7307,17 @@ namespace System.ComponentModel.Design.Serialization
     {
         protected MemberRelationshipService() { }
 
-        public System.ComponentModel.Design.Serialization.MemberRelationship this[System.ComponentModel.Design.Serialization.MemberRelationship source]
+        public System.ComponentModel.Design.Serialization.MemberRelationship this[
+            System.ComponentModel.Design.Serialization.MemberRelationship source
+        ]
         {
             get { throw null; }
             set { }
         }
-        public System.ComponentModel.Design.Serialization.MemberRelationship this[object sourceOwner, System.ComponentModel.MemberDescriptor sourceMember]
+        public System.ComponentModel.Design.Serialization.MemberRelationship this[
+            object sourceOwner,
+            System.ComponentModel.MemberDescriptor sourceMember
+        ]
         {
             get { throw null; }
             set { }

@@ -127,11 +127,13 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets the attribute with the specified type.
         /// </summary>
-        public virtual Attribute? this[[DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                | DynamicallyAccessedMemberTypes.PublicFields
-        )]
-            Type attributeType]
+        public virtual Attribute? this[
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type attributeType
+        ]
         {
             get
             {

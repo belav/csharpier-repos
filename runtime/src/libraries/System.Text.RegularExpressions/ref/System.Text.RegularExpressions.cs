@@ -65,7 +65,9 @@ namespace System.Text.RegularExpressions
         {
             get { throw null; }
         }
-        System.Text.RegularExpressions.Capture System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>.this[int index]
+        System.Text.RegularExpressions.Capture System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>.this[
+            int index
+        ]
         {
             get { throw null; }
             set { }
@@ -231,7 +233,9 @@ namespace System.Text.RegularExpressions
         {
             get { throw null; }
         }
-        System.Text.RegularExpressions.Group System.Collections.Generic.IList<System.Text.RegularExpressions.Group>.this[int index]
+        System.Text.RegularExpressions.Group System.Collections.Generic.IList<System.Text.RegularExpressions.Group>.this[
+            int index
+        ]
         {
             get { throw null; }
             set { }
@@ -412,7 +416,9 @@ namespace System.Text.RegularExpressions
         {
             get { throw null; }
         }
-        System.Text.RegularExpressions.Match System.Collections.Generic.IList<System.Text.RegularExpressions.Match>.this[int index]
+        System.Text.RegularExpressions.Match System.Collections.Generic.IList<System.Text.RegularExpressions.Match>.this[
+            int index
+        ]
         {
             get { throw null; }
             set { }

@@ -1055,10 +1055,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 class DamOnIndexOnly
                 {
-                    int this[[DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicFields
-                    )]
-                        Type idx]
+                    int this[
+                        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                            Type idx
+                    ]
                     {
                         get => throw new NotImplementedException();
                     }
@@ -1136,8 +1136,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 }
 
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type this[[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                    Type idx]
+                Type this[
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                        Type idx
+                ]
                 {
                     get => throw new NotImplementedException();
                     set => throw new NotImplementedException();
