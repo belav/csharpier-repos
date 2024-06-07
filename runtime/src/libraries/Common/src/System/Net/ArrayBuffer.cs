@@ -35,11 +35,9 @@ namespace System.Net
 
             _usePool = usePool;
             _bytes =
-                initialSize == 0
-                    ? Array.Empty<byte>()
-                    : usePool
-                        ? ArrayPool<byte>.Shared.Rent(initialSize)
-                        : new byte[initialSize];
+                initialSize == 0 ? Array.Empty<byte>()
+                : usePool ? ArrayPool<byte>.Shared.Rent(initialSize)
+                : new byte[initialSize];
             _activeStart = 0;
             _availableStart = 0;
         }

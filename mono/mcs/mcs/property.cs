@@ -535,11 +535,9 @@ namespace Mono.CSharp
         {
             get
             {
-                return (get != null && set != null)
-                    ? Variance.None
-                    : set == null
-                        ? Variance.Covariant
-                        : Variance.Contravariant;
+                return (get != null && set != null) ? Variance.None
+                    : set == null ? Variance.Covariant
+                    : Variance.Contravariant;
             }
         }
 
@@ -1054,11 +1052,9 @@ namespace Mono.CSharp
                 parent,
                 type,
                 mod,
-                parent.PartialContainer.Kind == MemberKind.Interface
-                    ? AllowedModifiersInterface
-                    : parent.PartialContainer.Kind == MemberKind.Struct
-                        ? AllowedModifiersStruct
-                        : AllowedModifiersClass,
+                parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
+                : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                : AllowedModifiersClass,
                 name,
                 attrs
             ) { }
@@ -1853,11 +1849,9 @@ namespace Mono.CSharp
                 parent,
                 type,
                 mod_flags,
-                parent.PartialContainer.Kind == MemberKind.Interface
-                    ? AllowedModifiersInterface
-                    : parent.PartialContainer.Kind == MemberKind.Struct
-                        ? AllowedModifiersStruct
-                        : AllowedModifiersClass,
+                parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
+                : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                : AllowedModifiersClass,
                 name,
                 attrs
             ) { }

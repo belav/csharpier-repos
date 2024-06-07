@@ -74,17 +74,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private static volatile InternalPrimitiveTypeE[]? s_codeA;
 
         internal static InternalPrimitiveTypeE ToCode(Type? type) =>
-            type == null
-                ? ToPrimitiveTypeEnum(TypeCode.Empty)
-                : type.IsPrimitive
-                    ? ToPrimitiveTypeEnum(Type.GetTypeCode(type))
-                    : ReferenceEquals(type, s_typeofDateTime)
-                        ? InternalPrimitiveTypeE.DateTime
-                        : ReferenceEquals(type, s_typeofTimeSpan)
-                            ? InternalPrimitiveTypeE.TimeSpan
-                            : ReferenceEquals(type, s_typeofDecimal)
-                                ? InternalPrimitiveTypeE.Decimal
-                                : InternalPrimitiveTypeE.Invalid;
+            type == null ? ToPrimitiveTypeEnum(TypeCode.Empty)
+            : type.IsPrimitive ? ToPrimitiveTypeEnum(Type.GetTypeCode(type))
+            : ReferenceEquals(type, s_typeofDateTime) ? InternalPrimitiveTypeE.DateTime
+            : ReferenceEquals(type, s_typeofTimeSpan) ? InternalPrimitiveTypeE.TimeSpan
+            : ReferenceEquals(type, s_typeofDecimal) ? InternalPrimitiveTypeE.Decimal
+            : InternalPrimitiveTypeE.Invalid;
 
         internal static bool IsWriteAsByteArray(InternalPrimitiveTypeE code)
         {

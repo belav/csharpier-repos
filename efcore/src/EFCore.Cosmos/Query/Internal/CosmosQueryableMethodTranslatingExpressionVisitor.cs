@@ -1269,14 +1269,12 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         {
             if (binaryExpression.NodeType == ExpressionType.Equal)
             {
-                var valueExpression = IsPartitionKeyPropertyAccess(
-                    binaryExpression.Left,
-                    entityType
-                )
+                var valueExpression =
+                    IsPartitionKeyPropertyAccess(binaryExpression.Left, entityType)
                     ? binaryExpression.Right
                     : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
-                        ? binaryExpression.Left
-                        : null;
+                    ? binaryExpression.Left
+                    : null;
 
                 if (
                     valueExpression is ConstantExpression

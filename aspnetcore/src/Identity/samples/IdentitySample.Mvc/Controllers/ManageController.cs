@@ -40,19 +40,14 @@ public class ManageController : Controller
     public async Task<IActionResult> Index(ManageMessageId? message = null)
     {
         ViewData["StatusMessage"] =
-            message == ManageMessageId.ChangePasswordSuccess
-                ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess
-                    ? "Your password has been set."
-                    : message == ManageMessageId.SetTwoFactorSuccess
-                        ? "Your two-factor authentication provider has been set."
-                        : message == ManageMessageId.Error
-                            ? "An error has occurred."
-                            : message == ManageMessageId.AddPhoneSuccess
-                                ? "Your phone number was added."
-                                : message == ManageMessageId.RemovePhoneSuccess
-                                    ? "Your phone number was removed."
-                                    : "";
+            message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+            : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+            : message == ManageMessageId.SetTwoFactorSuccess
+            ? "Your two-factor authentication provider has been set."
+            : message == ManageMessageId.Error ? "An error has occurred."
+            : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+            : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+            : "";
 
         var user = await GetCurrentUserAsync();
         var model = new IndexViewModel
@@ -333,13 +328,10 @@ public class ManageController : Controller
     public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
     {
         ViewData["StatusMessage"] =
-            message == ManageMessageId.RemoveLoginSuccess
-                ? "The external login was removed."
-                : message == ManageMessageId.AddLoginSuccess
-                    ? "The external login was added."
-                    : message == ManageMessageId.Error
-                        ? "An error has occurred."
-                        : "";
+            message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+            : message == ManageMessageId.AddLoginSuccess ? "The external login was added."
+            : message == ManageMessageId.Error ? "An error has occurred."
+            : "";
         var user = await GetCurrentUserAsync();
         if (user == null)
         {

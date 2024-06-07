@@ -1626,11 +1626,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (conditional.WhenFalse == expressionOpt)
                     || (previousToken == conditional.ColonToken);
 
-                var otherTypes = inTrueClause
-                    ? GetTypes(conditional.WhenFalse)
-                    : inFalseClause
-                        ? GetTypes(conditional.WhenTrue)
-                        : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
+                var otherTypes =
+                    inTrueClause ? GetTypes(conditional.WhenFalse)
+                    : inFalseClause ? GetTypes(conditional.WhenTrue)
+                    : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
 
                 return otherTypes.IsEmpty() ? InferTypes(conditional) : otherTypes;
             }

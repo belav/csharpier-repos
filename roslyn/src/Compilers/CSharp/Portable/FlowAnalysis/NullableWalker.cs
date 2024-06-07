@@ -7429,11 +7429,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol accessType = accessTypeWithAnnotations.Type;
             var oldType = node.Type;
             var resultType =
-                oldType.IsVoidType() || oldType.IsErrorType()
-                    ? oldType
-                    : oldType.IsNullableType() && !accessType.IsNullableType()
-                        ? MakeNullableOf(accessTypeWithAnnotations)
-                        : accessType;
+                oldType.IsVoidType() || oldType.IsErrorType() ? oldType
+                : oldType.IsNullableType() && !accessType.IsNullableType()
+                ? MakeNullableOf(accessTypeWithAnnotations)
+                : accessType;
 
             // Per LDM 2019-02-13 decision, the result of a conditional access "may be null" even if
             // both the receiver and right-hand-side are believed not to be null.
@@ -9075,11 +9074,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            int receiverSlot = method.IsStatic
-                ? 0
-                : receiverOpt is null
-                    ? -1
-                    : MakeSlot(receiverOpt);
+            int receiverSlot =
+                method.IsStatic ? 0
+                : receiverOpt is null ? -1
+                : MakeSlot(receiverOpt);
 
             if (receiverSlot < 0)
             {

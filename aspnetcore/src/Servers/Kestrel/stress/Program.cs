@@ -551,11 +551,9 @@ public class Program
         Console.WriteLine(
             "       Tracing: "
                 + (
-                    logPath == null
-                        ? (object)false
-                        : logPath.Length == 0
-                            ? (object)true
-                            : logPath
+                    logPath == null ? (object)false
+                    : logPath.Length == 0 ? (object)true
+                    : logPath
                 )
         );
         Console.WriteLine("   ASP.NET Log: " + aspnetLog);

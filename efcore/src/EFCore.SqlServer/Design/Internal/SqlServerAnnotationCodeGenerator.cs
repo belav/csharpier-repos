@@ -529,11 +529,10 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     seedAnnotation = model.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
                 }
 
-                var seed = seedAnnotation is null
-                    ? 1L
-                    : seedAnnotation.Value is int intValue
-                        ? intValue
-                        : (long?)seedAnnotation.Value ?? 1L;
+                var seed =
+                    seedAnnotation is null ? 1L
+                    : seedAnnotation.Value is int intValue ? intValue
+                    : (long?)seedAnnotation.Value ?? 1L;
 
                 var increment =
                     GetAndRemove<int?>(annotations, SqlServerAnnotationNames.IdentityIncrement)

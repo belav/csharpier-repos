@@ -786,10 +786,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                         testCode =
                             deleteOrphansTiming == CascadeTiming.Immediate
-                                ? () => context.ChangeTracker.DetectChanges()
-                                : deleteOrphansTiming == null
-                                    ? () => context.ChangeTracker.CascadeChanges()
-                                    : () => context.SaveChanges();
+                            ? () => context.ChangeTracker.DetectChanges()
+                            : deleteOrphansTiming == null
+                            ? () => context.ChangeTracker.CascadeChanges()
+                            : () => context.SaveChanges();
                     }
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;

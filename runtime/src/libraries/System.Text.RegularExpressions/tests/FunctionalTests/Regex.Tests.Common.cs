@@ -138,15 +138,10 @@ namespace System.Text.RegularExpressions.Tests
                 );
             }
 
-            return options is null
-                ? new Regex(pattern, OptionsFromEngine(engine))
+            return options is null ? new Regex(pattern, OptionsFromEngine(engine))
                 : matchTimeout is null
-                    ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
-                    : new Regex(
-                        pattern,
-                        options.Value | OptionsFromEngine(engine),
-                        matchTimeout.Value
-                    );
+                ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                : new Regex(pattern, options.Value | OptionsFromEngine(engine), matchTimeout.Value);
         }
 
         public static async Task<Regex[]> GetRegexesAsync(
@@ -178,15 +173,15 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     try
                     {
-                        results[i] = options is null
-                            ? new Regex(pattern, OptionsFromEngine(engine))
+                        results[i] =
+                            options is null ? new Regex(pattern, OptionsFromEngine(engine))
                             : matchTimeout is null
-                                ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
-                                : new Regex(
-                                    pattern,
-                                    options.Value | OptionsFromEngine(engine),
-                                    matchTimeout.Value
-                                );
+                            ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                            : new Regex(
+                                pattern,
+                                options.Value | OptionsFromEngine(engine),
+                                matchTimeout.Value
+                            );
                     }
                     catch (ArgumentOutOfRangeException aoore)
                     {

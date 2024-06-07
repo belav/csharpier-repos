@@ -117,11 +117,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (GlobalContext == null || other.GlobalContext == null)
             {
                 return (
-                    GlobalContext != null
-                        ? 1
-                        : other.GlobalContext != null
-                            ? -1
-                            : 0
+                    GlobalContext != null ? 1
+                    : other.GlobalContext != null ? -1
+                    : 0
                 );
             }
 
@@ -132,11 +130,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (LocalContext == null || other.LocalContext == null)
             {
                 return (
-                    LocalContext != null
-                        ? 1
-                        : other.LocalContext != null
-                            ? -1
-                            : 0
+                    LocalContext != null ? 1
+                    : other.LocalContext != null ? -1
+                    : 0
                 );
             }
 

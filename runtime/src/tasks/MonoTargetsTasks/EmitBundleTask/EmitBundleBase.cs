@@ -621,11 +621,9 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
         foreach (var c in filename)
         {
             sb.Append(
-                IsAlphanumeric(c)
-                    ? c
-                    : (c == '+')
-                        ? "plus"
-                        : '_'
+                IsAlphanumeric(c) ? c
+                : (c == '+') ? "plus"
+                : '_'
             ); // To help differentiate timezones differing by a symbol (i.e. GMT+0 GMT-0)
         }
 

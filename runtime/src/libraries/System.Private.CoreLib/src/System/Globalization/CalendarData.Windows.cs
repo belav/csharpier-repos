@@ -548,16 +548,15 @@ namespace System.Globalization
         // Get native two digit year max
         internal static int GetTwoDigitYearMax(CalendarId calendarId)
         {
-            return GlobalizationMode.Invariant
-                ? Invariant.iTwoDigitYearMax
+            return GlobalizationMode.Invariant ? Invariant.iTwoDigitYearMax
                 : CallGetCalendarInfoEx(
                     null,
                     calendarId,
                     CAL_ITWODIGITYEARMAX,
                     out int twoDigitYearMax
                 )
-                    ? twoDigitYearMax
-                    : -1;
+                ? twoDigitYearMax
+                : -1;
         }
     }
 }

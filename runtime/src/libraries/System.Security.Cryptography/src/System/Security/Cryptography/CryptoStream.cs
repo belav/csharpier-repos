@@ -215,11 +215,9 @@ namespace System.Security.Cryptography
             if (GetType() != typeof(CryptoStream))
                 return base.FlushAsync(cancellationToken);
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : !_canWrite
-                    ? Task.CompletedTask
-                    : _stream.FlushAsync(cancellationToken);
+            return cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken)
+                : !_canWrite ? Task.CompletedTask
+                : _stream.FlushAsync(cancellationToken);
         }
 
         public override long Seek(long offset, SeekOrigin origin)

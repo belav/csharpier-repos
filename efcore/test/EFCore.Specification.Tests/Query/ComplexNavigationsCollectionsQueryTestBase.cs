@@ -3837,13 +3837,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .OneToMany_Optional1.OrderBy(xx => xx.Id)
                             .Select(xx => xx.Name)
                             .ToList(),
-                        Condition = x.Id == 1
-                            ? "01"
-                            : x.Id == 2
-                                ? "02"
-                                : x.Id == 3
-                                    ? "03"
-                                    : null
+                        Condition = x.Id == 1 ? "01"
+                        : x.Id == 2 ? "02"
+                        : x.Id == 3 ? "03"
+                        : null
                     })
                     .Where(x => x.Condition == "02"),
             assertOrder: true,

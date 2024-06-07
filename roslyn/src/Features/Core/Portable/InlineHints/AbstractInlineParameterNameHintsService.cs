@@ -383,11 +383,11 @@ namespace Microsoft.CodeAnalysis.InlineHints
             ISyntaxFactsService syntaxFacts
         )
         {
-            var identifierNameSyntax = syntaxFacts.IsArgument(argument)
-                ? syntaxFacts.GetExpressionOfArgument(argument)
+            var identifierNameSyntax =
+                syntaxFacts.IsArgument(argument) ? syntaxFacts.GetExpressionOfArgument(argument)
                 : syntaxFacts.IsAttributeArgument(argument)
-                    ? syntaxFacts.GetExpressionOfAttributeArgument(argument)
-                    : null;
+                ? syntaxFacts.GetExpressionOfAttributeArgument(argument)
+                : null;
 
             if (!syntaxFacts.IsIdentifierName(identifierNameSyntax))
                 return string.Empty;

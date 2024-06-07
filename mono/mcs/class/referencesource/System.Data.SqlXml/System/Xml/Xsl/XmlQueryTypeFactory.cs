@@ -2524,19 +2524,20 @@ namespace System.Xml.Xsl
                 XmlQualifiedNameTest nameTest = left.NameTest.Intersect(right.NameTest);
 
                 // Intersect types
-                XmlSchemaType type = XmlSchemaType.IsDerivedFrom(
-                    left.SchemaType,
-                    right.SchemaType, /* except:*/
-                    XmlSchemaDerivationMethod.Empty
-                )
+                XmlSchemaType type =
+                    XmlSchemaType.IsDerivedFrom(
+                        left.SchemaType,
+                        right.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
                     ? left.SchemaType
                     : XmlSchemaType.IsDerivedFrom(
                         right.SchemaType,
                         left.SchemaType, /* except:*/
                         XmlSchemaDerivationMethod.Empty
                     )
-                        ? right.SchemaType
-                        : null;
+                    ? right.SchemaType
+                    : null;
                 bool isNillable = left.IsNillable && right.IsNillable;
 
                 if (

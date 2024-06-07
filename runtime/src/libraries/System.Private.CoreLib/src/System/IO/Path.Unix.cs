@@ -98,11 +98,9 @@ namespace System.IO
             // If it's not set, just return the default path.
             // If it is, return it, ensuring it ends with a slash.
             string? path = Environment.GetEnvironmentVariable(TempEnvVar);
-            return string.IsNullOrEmpty(path)
-                ? DefaultTempPath
-                : PathInternal.IsDirectorySeparator(path[path.Length - 1])
-                    ? path
-                    : path + PathInternal.DirectorySeparatorChar;
+            return string.IsNullOrEmpty(path) ? DefaultTempPath
+                : PathInternal.IsDirectorySeparator(path[path.Length - 1]) ? path
+                : path + PathInternal.DirectorySeparatorChar;
         }
 
         public static unsafe string GetTempFileName()

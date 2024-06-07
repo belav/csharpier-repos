@@ -704,11 +704,9 @@ namespace System.IO
                     returnFullPath: true
                 );
 
-            return targetPath == null
-                ? null
-                : isDirectory
-                    ? new DirectoryInfo(targetPath)
-                    : new FileInfo(targetPath);
+            return targetPath == null ? null
+                : isDirectory ? new DirectoryInfo(targetPath)
+                : new FileInfo(targetPath);
         }
 
         internal static string? GetLinkTarget(string linkPath, bool isDirectory) =>

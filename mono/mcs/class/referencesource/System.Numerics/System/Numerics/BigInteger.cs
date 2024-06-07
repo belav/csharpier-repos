@@ -299,11 +299,9 @@ namespace System.Numerics
             if (_bits == null)
             {
                 if (other._bits == null)
-                    return _sign < other._sign
-                        ? -1
-                        : _sign > other._sign
-                            ? +1
-                            : 0;
+                    return _sign < other._sign ? -1
+                        : _sign > other._sign ? +1
+                        : 0;
                 return -other._sign;
             }
             int cuThis,
@@ -1220,11 +1218,9 @@ namespace System.Numerics
             }
 
             return regRes.GetInteger(
-                value._sign > 0
-                    ? +1
-                    : expIsEven
-                        ? +1
-                        : -1
+                value._sign > 0 ? +1
+                : expIsEven ? +1
+                : -1
             );
         }
 

@@ -50,11 +50,9 @@ namespace System.Globalization.Tests
             string charCategoryString = data[2];
             string numericValueString = data[8];
             StrongBidiCategory bidiCategory =
-                data[4] == "L"
-                    ? StrongBidiCategory.StrongLeftToRight
-                    : data[4] == "R" || data[4] == "AL"
-                        ? StrongBidiCategory.StrongRightToLeft
-                        : StrongBidiCategory.Other;
+                data[4] == "L" ? StrongBidiCategory.StrongLeftToRight
+                : data[4] == "R" || data[4] == "AL" ? StrongBidiCategory.StrongRightToLeft
+                : StrongBidiCategory.Other;
 
             int codePoint = int.Parse(charValueString, NumberStyles.HexNumber);
             Parse(testCases, codePoint, charCategoryString, numericValueString, bidiCategory);

@@ -132,22 +132,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         }
 
         private static string GetData1(Size size) =>
-            size == Size.Small
-                ? SmallData1
-                : size == Size.Medium
-                    ? MediumData1
-                    : size == Size.Large
-                        ? LargeData1
-                        : ExtraLargeData1;
+            size == Size.Small ? SmallData1
+            : size == Size.Medium ? MediumData1
+            : size == Size.Large ? LargeData1
+            : ExtraLargeData1;
 
         private static string GetData2(Size size) =>
-            size == Size.Small
-                ? SmallData2
-                : size == Size.Medium
-                    ? MediumData2
-                    : size == Size.Large
-                        ? LargeData2
-                        : ExtraLargeData2;
+            size == Size.Small ? SmallData2
+            : size == Size.Medium ? MediumData2
+            : size == Size.Large ? LargeData2
+            : ExtraLargeData2;
 
         private static Checksum? GetChecksum1(bool withChecksum) =>
             withChecksum ? s_checksum1 : null;

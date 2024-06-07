@@ -1006,11 +1006,9 @@ namespace BoundTreeGenerator
                     WriteLine(
                         "Public {0}ReadOnly Property {2} As {1}",
                         (
-                            IsNew(field)
-                                ? "Shadows "
-                                : IsPropertyOverrides(field)
-                                    ? "Overrides "
-                                    : ""
+                            IsNew(field) ? "Shadows "
+                            : IsPropertyOverrides(field) ? "Overrides "
+                            : ""
                         ),
                         field.Type,
                         field.Name
@@ -1204,13 +1202,13 @@ namespace BoundTreeGenerator
 
             string wasUpdatedCheck(Field field)
             {
-                var format = TypeIsTypeSymbol(field)
+                var format =
+                    TypeIsTypeSymbol(field)
                     ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
                     : TypeIsSymbol(field)
-                        ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
-                        : IsValueType(field.Type) && field.Type[^1] == '?'
-                            ? "!{0}.Equals(this.{1})"
-                            : "{0} != this.{1}";
+                    ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
+                    : IsValueType(field.Type) && field.Type[^1] == '?' ? "!{0}.Equals(this.{1})"
+                    : "{0} != this.{1}";
 
                 return string.Format(format, ToCamelCase(field.Name), field.Name);
             }

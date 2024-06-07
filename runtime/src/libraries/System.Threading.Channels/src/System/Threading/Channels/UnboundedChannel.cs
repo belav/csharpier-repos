@@ -333,26 +333,22 @@ namespace System.Threading.Channels
                 Exception? doneWriting = _parent._doneWriting;
                 return cancellationToken.IsCancellationRequested
                     ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
-                    : doneWriting == null
-                        ? new ValueTask<bool>(true)
-                        : // unbounded writing can always be done if we haven't completed
-                        doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
-                            : default;
+                    : doneWriting == null ? new ValueTask<bool>(true)
+                    : // unbounded writing can always be done if we haven't completed
+                    doneWriting != ChannelUtilities.s_doneWritingSentinel
+                    ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
+                    : default;
             }
 
             public override ValueTask WriteAsync(T item, CancellationToken cancellationToken) =>
                 cancellationToken.IsCancellationRequested
-                    ? new ValueTask(Task.FromCanceled(cancellationToken))
-                    : TryWrite(item)
-                        ? default
-                        : new ValueTask(
-                            Task.FromException(
-                                ChannelUtilities.CreateInvalidCompletionException(
-                                    _parent._doneWriting
-                                )
-                            )
-                        );
+                ? new ValueTask(Task.FromCanceled(cancellationToken))
+                : TryWrite(item) ? default
+                : new ValueTask(
+                    Task.FromException(
+                        ChannelUtilities.CreateInvalidCompletionException(_parent._doneWriting)
+                    )
+                );
 
             /// <summary>Gets the number of items in the channel. This should only be used by the debugger.</summary>
             private int ItemsCountForDebugger => _parent._items.Count;

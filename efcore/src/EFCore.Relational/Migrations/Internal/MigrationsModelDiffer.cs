@@ -440,11 +440,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         else
         {
             operations =
-                target != null
-                    ? Add(target, diffContext)
-                    : source != null
-                        ? Remove(source, diffContext)
-                        : Enumerable.Empty<MigrationOperation>();
+                target != null ? Add(target, diffContext)
+                : source != null ? Remove(source, diffContext)
+                : Enumerable.Empty<MigrationOperation>();
         }
 
         return operations.Concat(GetDataOperations(source, target, diffContext));
@@ -2885,11 +2883,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected virtual object? GetDefaultValue(Type type) =>
-        type == typeof(string)
-            ? string.Empty
-            : type.IsArray
-                ? Array.CreateInstance(type.GetElementType()!, 0)
-                : type.UnwrapNullableType().GetDefaultValue();
+        type == typeof(string) ? string.Empty
+        : type.IsArray ? Array.CreateInstance(type.GetElementType()!, 0)
+        : type.UnwrapNullableType().GetDefaultValue();
 
     private static ValueConverter? GetValueConverter(
         IProperty property,
@@ -3038,11 +3034,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         /// </summary>
         public virtual T? FindSource<T>(T? target)
             where T : class =>
-            target == null
-                ? null
-                : _targetToSource.TryGetValue(target, out var source)
-                    ? (T)source
-                    : null;
+            target == null ? null
+            : _targetToSource.TryGetValue(target, out var source) ? (T)source
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3052,11 +3046,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         /// </summary>
         public virtual T? FindTarget<T>(T? source)
             where T : class =>
-            source == null
-                ? null
-                : _sourceToTarget.TryGetValue(source, out var target)
-                    ? (T)target
-                    : null;
+            source == null ? null
+            : _sourceToTarget.TryGetValue(source, out var target) ? (T)target
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

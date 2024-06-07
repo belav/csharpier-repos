@@ -3233,11 +3233,9 @@ class C{0}
             var source = string.Join(
                 Environment.NewLine,
                 range.Select(i =>
-                    i == 0
-                        ? string.Format(template, i, i + 1, i + 1)
-                        : i == (numConstants - 1)
-                            ? string.Format(template, i, i - 1, i - 1)
-                            : string.Format(template, i, i - 1, i + 1)
+                    i == 0 ? string.Format(template, i, i + 1, i + 1)
+                    : i == (numConstants - 1) ? string.Format(template, i, i - 1, i - 1)
+                    : string.Format(template, i, i - 1, i + 1)
                 )
             );
 
@@ -3332,11 +3330,9 @@ enum E{0}
             var source = string.Join(
                 Environment.NewLine,
                 range.Select(i =>
-                    i == 0
-                        ? string.Format(template, i, i + 1, i + 1)
-                        : i == (numConstants - 1)
-                            ? string.Format(template, i, i - 1, i - 1)
-                            : string.Format(template, i, i - 1, i + 1)
+                    i == 0 ? string.Format(template, i, i + 1, i + 1)
+                    : i == (numConstants - 1) ? string.Format(template, i, i - 1, i - 1)
+                    : string.Format(template, i, i - 1, i + 1)
                 )
             );
 
@@ -3455,11 +3451,9 @@ enum E{0}
             var source = string.Join(
                 Environment.NewLine,
                 range.Select(i =>
-                    i == 0
-                        ? string.Format(template, i, i + 1, i + 1)
-                        : i == (numEnums - 1)
-                            ? string.Format(template, i, i - 1, i - 1)
-                            : string.Format(template, i, i - 1, i + 1)
+                    i == 0 ? string.Format(template, i, i + 1, i + 1)
+                    : i == (numEnums - 1) ? string.Format(template, i, i - 1, i - 1)
+                    : string.Format(template, i, i - 1, i + 1)
                 )
             );
 

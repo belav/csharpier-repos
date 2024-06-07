@@ -83,15 +83,11 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
         }
 
         var functionName =
-            method == GeometryCombineMethod
-                ? "CollectionAggregate"
-                : method == UnionMethod
-                    ? "UnionAggregate"
-                    : method == ConvexHullMethod
-                        ? "ConvexHullAggregate"
-                        : method == EnvelopeCombineMethod
-                            ? "EnvelopeAggregate"
-                            : null;
+            method == GeometryCombineMethod ? "CollectionAggregate"
+            : method == UnionMethod ? "UnionAggregate"
+            : method == ConvexHullMethod ? "ConvexHullAggregate"
+            : method == EnvelopeCombineMethod ? "EnvelopeAggregate"
+            : null;
 
         if (functionName is null)
         {

@@ -177,13 +177,11 @@ internal readonly struct HeaderSegmentCollection
                     ++_offset;
                     char ch = _offset == _headerLength ? (char)0 : _header[_offset];
                     // todo - array of attrs
-                    Attr attr = char.IsWhiteSpace(ch)
-                        ? Attr.Whitespace
-                        : ch == '\"'
-                            ? Attr.Quote
-                            : (ch == ',' || ch == (char)0)
-                                ? Attr.Delimiter
-                                : Attr.Value;
+                    Attr attr =
+                        char.IsWhiteSpace(ch) ? Attr.Whitespace
+                        : ch == '\"' ? Attr.Quote
+                        : (ch == ',' || ch == (char)0) ? Attr.Delimiter
+                        : Attr.Value;
 
                     switch (_mode)
                     {

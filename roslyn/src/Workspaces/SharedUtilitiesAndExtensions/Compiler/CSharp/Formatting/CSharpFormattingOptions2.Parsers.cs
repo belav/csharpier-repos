@@ -95,11 +95,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             (NewLineBeforeOpenBracePlacement)ParseEditorConfigFlags(
                 list,
                 static s =>
-                    s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v)
-                        ? (int)v
-                        : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v)
-                            ? (int)v
-                            : 0,
+                    s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v) ? (int)v
+                    : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v) ? (int)v
+                    : 0,
                 noneToken: "none",
                 allToken: "all",
                 allValue: (int)NewLineBeforeOpenBracePlacement.All

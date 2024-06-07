@@ -642,11 +642,10 @@ namespace System.Security.Permissions
 #endif
             !AppContextSwitches.UseLegacyPathHandling;
 
-            int startIndex = !skipPrefix
-                ? 0
-                : PathInternal.IsDevice(path)
-                    ? PathInternal.DevicePrefixLength
-                    : 0;
+            int startIndex =
+                !skipPrefix ? 0
+                : PathInternal.IsDevice(path) ? PathInternal.DevicePrefixLength
+                : 0;
 
             char currentChar;
             for (int i = startIndex; i < path.Length; i++)

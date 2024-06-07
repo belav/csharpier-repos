@@ -141,9 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
 
             return original is BlockSyntax block
                 ? block.WithStatements(SyntaxFactory.List(statementArray))
-                : statementArray.Length == 1
-                    ? statementArray[0]
-                    : SyntaxFactory.Block(statementArray);
+                : statementArray.Length == 1 ? statementArray[0]
+                : SyntaxFactory.Block(statementArray);
         }
 
         protected override IfStatementSyntax UpdateIf(

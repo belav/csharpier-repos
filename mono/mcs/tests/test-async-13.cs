@@ -342,11 +342,9 @@ class Tester : Base
                 return true;
             });
 
-        return b
-            ? -1
-            : i == 8
-                ? 0
-                : i;
+        return b ? -1
+            : i == 8 ? 0
+            : i;
     }
 
     async Task<int> BinaryTest_3()

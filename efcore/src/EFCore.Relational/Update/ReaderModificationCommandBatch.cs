@@ -341,11 +341,9 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
         {
             AddParameterCore(
                 columnModification.ParameterName,
-                columnModification.UseCurrentValue
-                    ? columnModification.Value
-                    : direction == ParameterDirection.InputOutput
-                        ? DBNull.Value
-                        : null
+                columnModification.UseCurrentValue ? columnModification.Value
+                : direction == ParameterDirection.InputOutput ? DBNull.Value
+                : null
             );
         }
 

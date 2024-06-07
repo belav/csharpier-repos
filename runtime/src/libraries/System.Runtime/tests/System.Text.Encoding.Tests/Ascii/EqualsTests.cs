@@ -105,11 +105,10 @@ namespace System.Text.Tests
                 for (char i = (char)0; i <= 127; i++)
                 {
                     char left = i;
-                    char right = char.IsAsciiLetterUpper(left)
-                        ? char.ToLower(left)
-                        : char.IsAsciiLetterLower(left)
-                            ? char.ToUpper(left)
-                            : left;
+                    char right =
+                        char.IsAsciiLetterUpper(left) ? char.ToLower(left)
+                        : char.IsAsciiLetterLower(left) ? char.ToUpper(left)
+                        : left;
                     yield return new object[] { new string(left, i), new string(right, i) };
                 }
             }

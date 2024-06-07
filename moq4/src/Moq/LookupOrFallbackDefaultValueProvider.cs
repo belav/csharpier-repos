@@ -144,11 +144,10 @@ namespace Moq
             Debug.Assert(type != typeof(void));
             Debug.Assert(mock != null);
 
-            var handlerKey = type.IsGenericType
-                ? type.GetGenericTypeDefinition()
-                : type.IsArray
-                    ? typeof(Array)
-                    : type;
+            var handlerKey =
+                type.IsGenericType ? type.GetGenericTypeDefinition()
+                : type.IsArray ? typeof(Array)
+                : type;
 
             Func<Type, Mock, object> factory;
             if (

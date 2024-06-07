@@ -14,23 +14,18 @@ namespace System.IO.Ports
         public static string[] GetPortNames()
         {
 #if NETCOREAPP
-            return OperatingSystem.IsLinux()
-                ? GetPortNames_Linux()
-                : OperatingSystem.IsMacOS()
-                    ? GetPortNames_OSX()
-                    : OperatingSystem.IsFreeBSD()
-                        ? GetPortNames_FreeBSD()
+            return OperatingSystem.IsLinux() ? GetPortNames_Linux()
+                : OperatingSystem.IsMacOS() ? GetPortNames_OSX()
+                : OperatingSystem.IsFreeBSD() ? GetPortNames_FreeBSD()
 #else
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-                ? GetPortNames_Linux()
-                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-                    ? GetPortNames_OSX()
-                    : RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"))
-                        ? GetPortNames_FreeBSD()
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? GetPortNames_Linux()
+                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? GetPortNames_OSX()
+                : RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"))
+                ? GetPortNames_FreeBSD()
 #endif
-                        : throw new PlatformNotSupportedException(
-                            SR.PlatformNotSupported_SerialPort_GetPortNames
-                        );
+                : throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_SerialPort_GetPortNames
+                );
         }
 
         private static string[] GetPortNames_Linux()

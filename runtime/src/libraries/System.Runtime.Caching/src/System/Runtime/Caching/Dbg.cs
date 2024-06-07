@@ -24,15 +24,15 @@ namespace System.Runtime.Caching
                 return;
             }
 
-            string exceptionMessage = e is null
-                ? null
+            string exceptionMessage =
+                e is null ? null
                 : e is ExternalException ee
-                    ? "Exception "
-                        + e
-                        + Environment.NewLine
-                        + "_hr=0x"
-                        + ee.ErrorCode.ToString("x", CultureInfo.InvariantCulture)
-                    : "Exception " + e;
+                ? "Exception "
+                    + e
+                    + Environment.NewLine
+                    + "_hr=0x"
+                    + ee.ErrorCode.ToString("x", CultureInfo.InvariantCulture)
+                : "Exception " + e;
 
             if (string.IsNullOrEmpty(message) & exceptionMessage != null)
             {

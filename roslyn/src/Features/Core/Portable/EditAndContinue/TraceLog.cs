@@ -74,24 +74,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             public object? GetDebuggerDisplay() =>
-                (!Tokens.IsDefault)
-                    ? string.Join(",", Tokens.Select(token => token.ToString("X8")))
-                    : (Object is ImmutableArray<string> array)
-                        ? string.Join(",", array)
-                        : (Object is null)
-                            ? Int32
-                            : (Object is StrongBox<EnumType> { Value: var enumType })
-                                ? enumType switch
-                                {
-                                    EnumType.ProjectAnalysisSummary
-                                        => (ProjectAnalysisSummary)Int32,
-                                    EnumType.RudeEditKind => (RudeEditKind)Int32,
-                                    EnumType.ModuleUpdateStatus => (ModuleUpdateStatus)Int32,
-                                    EnumType.EditAndContinueCapabilities
-                                        => (EditAndContinueCapabilities)Int32,
-                                    _ => throw ExceptionUtilities.UnexpectedValue(enumType)
-                                }
-                                : Object;
+                (!Tokens.IsDefault) ? string.Join(",", Tokens.Select(token => token.ToString("X8")))
+                : (Object is ImmutableArray<string> array) ? string.Join(",", array)
+                : (Object is null) ? Int32
+                : (Object is StrongBox<EnumType> { Value: var enumType })
+                ? enumType switch
+                {
+                    EnumType.ProjectAnalysisSummary => (ProjectAnalysisSummary)Int32,
+                    EnumType.RudeEditKind => (RudeEditKind)Int32,
+                    EnumType.ModuleUpdateStatus => (ModuleUpdateStatus)Int32,
+                    EnumType.EditAndContinueCapabilities => (EditAndContinueCapabilities)Int32,
+                    _ => throw ExceptionUtilities.UnexpectedValue(enumType)
+                }
+                : Object;
 
             public static implicit operator Arg(string? value) => new(value);
 

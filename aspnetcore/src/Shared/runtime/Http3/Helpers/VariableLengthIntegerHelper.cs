@@ -230,13 +230,10 @@ namespace System.Net.Http
             Debug.Assert(value >= 0);
             Debug.Assert(value <= EightByteLimit);
 
-            return value <= OneByteLimit
-                ? 1
-                : value <= TwoByteLimit
-                    ? 2
-                    : value <= FourByteLimit
-                        ? 4
-                        : 8; // EightByteLimit
+            return value <= OneByteLimit ? 1
+                : value <= TwoByteLimit ? 2
+                : value <= FourByteLimit ? 4
+                : 8; // EightByteLimit
         }
     }
 }

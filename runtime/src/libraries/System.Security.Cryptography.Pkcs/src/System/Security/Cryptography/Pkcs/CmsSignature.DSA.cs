@@ -147,15 +147,11 @@ namespace System.Security.Cryptography.Pkcs
                 }
 
                 string? oidValue =
-                    hashAlgorithmName == HashAlgorithmName.SHA1
-                        ? Oids.DsaWithSha1
-                        : hashAlgorithmName == HashAlgorithmName.SHA256
-                            ? Oids.DsaWithSha256
-                            : hashAlgorithmName == HashAlgorithmName.SHA384
-                                ? Oids.DsaWithSha384
-                                : hashAlgorithmName == HashAlgorithmName.SHA512
-                                    ? Oids.DsaWithSha512
-                                    : null;
+                    hashAlgorithmName == HashAlgorithmName.SHA1 ? Oids.DsaWithSha1
+                    : hashAlgorithmName == HashAlgorithmName.SHA256 ? Oids.DsaWithSha256
+                    : hashAlgorithmName == HashAlgorithmName.SHA384 ? Oids.DsaWithSha384
+                    : hashAlgorithmName == HashAlgorithmName.SHA512 ? Oids.DsaWithSha512
+                    : null;
 
                 if (oidValue == null)
                 {

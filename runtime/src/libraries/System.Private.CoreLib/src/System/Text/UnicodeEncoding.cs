@@ -2029,14 +2029,11 @@ namespace System.Text
         }
 
         public override ReadOnlySpan<byte> Preamble =>
-            GetType() != typeof(UnicodeEncoding)
-                ? new ReadOnlySpan<byte>(GetPreamble())
-                : // in case a derived UnicodeEncoding overrode GetPreamble
-                !byteOrderMark
-                    ? default
-                    : bigEndian
-                        ? [0xfe, 0xff]
-                        : [0xff, 0xfe];
+            GetType() != typeof(UnicodeEncoding) ? new ReadOnlySpan<byte>(GetPreamble())
+            : // in case a derived UnicodeEncoding overrode GetPreamble
+            !byteOrderMark ? default
+            : bigEndian ? [0xfe, 0xff]
+            : [0xff, 0xfe];
 
         public override int GetMaxByteCount(int charCount)
         {

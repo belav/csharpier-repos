@@ -447,11 +447,10 @@ namespace Microsoft.Build.Evaluation
                 import.Project,
                 TextWriter.Null.WriteLine
             );
-            path = Path.IsPathRooted(path)
-                ? path
-                : dir != null
-                    ? Path.Combine(dir, path)
-                    : Path.GetFullPath(path);
+            path =
+                Path.IsPathRooted(path) ? path
+                : dir != null ? Path.Combine(dir, path)
+                : Path.GetFullPath(path);
             if (ProjectCollection.OngoingImports.Contains(path))
             {
                 switch (load_settings)

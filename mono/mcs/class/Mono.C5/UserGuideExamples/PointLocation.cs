@@ -325,17 +325,12 @@ namespace PointLocation
             {
                 int c = DoubleComparer.StaticCompare(a.x, b.x);
 
-                return c != 0
-                    ? c
-                    : (a.start && !b.start)
-                        ? 1
-                        : (!a.start && b.start)
-                            ? -1
-                            : a.id < b.id
-                                ? -1
-                                : a.id > b.id
-                                    ? 1
-                                    : 0;
+                return c != 0 ? c
+                    : (a.start && !b.start) ? 1
+                    : (!a.start && b.start) ? -1
+                    : a.id < b.id ? -1
+                    : a.id > b.id ? 1
+                    : 0;
             }
         }
     }
@@ -349,20 +344,16 @@ namespace PointLocation
 
         public int Compare(double a, double b)
         {
-            return a > b + eps
-                ? 1
-                : a < b - eps
-                    ? -1
-                    : 0;
+            return a > b + eps ? 1
+                : a < b - eps ? -1
+                : 0;
         }
 
         public static int StaticCompare(double a, double b)
         {
-            return a > b + eps
-                ? 1
-                : a < b - eps
-                    ? -1
-                    : 0;
+            return a > b + eps ? 1
+                : a < b - eps ? -1
+                : 0;
         }
     }
 

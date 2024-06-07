@@ -191,11 +191,9 @@ public class DbContextOperations
     private string? GetNamespaceFromOutputPath(string directoryPath)
     {
         var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
-        return string.IsNullOrEmpty(subNamespace)
-            ? _rootNamespace
-            : string.IsNullOrEmpty(_rootNamespace)
-                ? subNamespace
-                : _rootNamespace + "." + subNamespace;
+        return string.IsNullOrEmpty(subNamespace) ? _rootNamespace
+            : string.IsNullOrEmpty(_rootNamespace) ? subNamespace
+            : _rootNamespace + "." + subNamespace;
     }
 
     // if outputDir is a subfolder of projectDir, then use each subfolder as a sub-namespace

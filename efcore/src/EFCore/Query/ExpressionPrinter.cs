@@ -508,11 +508,9 @@ public class ExpressionPrinter : ExpressionVisitor
             }
 
             var stringValue =
-                value == null
-                    ? "null"
-                    : value.ToString() != value.GetType().ToString()
-                        ? value.ToString()
-                        : value.GetType().ShortDisplayName();
+                value == null ? "null"
+                : value.ToString() != value.GetType().ToString() ? value.ToString()
+                : value.GetType().ShortDisplayName();
 
             if (value is string)
             {

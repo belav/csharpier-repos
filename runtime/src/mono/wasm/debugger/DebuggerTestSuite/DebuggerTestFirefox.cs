@@ -515,11 +515,9 @@ public class DebuggerTestFirefox : DebuggerTestBase
             resumeLimit = JObject.FromObject(
                 new
                 {
-                    type = kind == StepKind.Over
-                        ? "next"
-                        : kind == StepKind.Out
-                            ? "finish"
-                            : "step"
+                    type = kind == StepKind.Over ? "next"
+                    : kind == StepKind.Out ? "finish"
+                    : "step"
                 }
             );
         }

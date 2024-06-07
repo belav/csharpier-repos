@@ -4017,11 +4017,9 @@ namespace System.Net
                                 NetRes.GetWebStatusString("net_connclosed", m_Error),
                                 m_Error,
                                 (
-                                    isolatedKeepAliveFailure
-                                        ? WebExceptionInternalStatus.Isolated
-                                        : retry
-                                            ? WebExceptionInternalStatus.Recoverable
-                                            : WebExceptionInternalStatus.RequestFatal
+                                    isolatedKeepAliveFailure ? WebExceptionInternalStatus.Isolated
+                                    : retry ? WebExceptionInternalStatus.Recoverable
+                                    : WebExceptionInternalStatus.RequestFatal
                                 ),
                                 theException
                             );

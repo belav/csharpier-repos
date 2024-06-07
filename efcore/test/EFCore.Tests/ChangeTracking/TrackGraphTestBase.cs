@@ -345,11 +345,10 @@ public abstract class TrackGraphTestBase
                     context,
                     sweet,
                     node =>
-                        node.Entry.State = node.Entry.Metadata.IsOwned()
-                            ? node.SourceEntry.State
-                            : node.Entry.IsKeySet
-                                ? EntityState.Unchanged
-                                : EntityState.Added
+                        node.Entry.State =
+                            node.Entry.Metadata.IsOwned() ? node.SourceEntry.State
+                            : node.Entry.IsKeySet ? EntityState.Unchanged
+                            : EntityState.Added
                 )
             );
         }

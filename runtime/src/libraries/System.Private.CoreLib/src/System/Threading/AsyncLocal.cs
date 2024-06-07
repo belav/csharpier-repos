@@ -224,8 +224,8 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new TwoElementAsyncLocalValueMap(newItem, _item1)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new TwoElementAsyncLocalValueMap(_item0, newItem)
-                            : new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem);
+                        ? new TwoElementAsyncLocalValueMap(_item0, newItem)
+                        : new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem);
                 }
                 else
                 {
@@ -234,8 +234,8 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new OneElementAsyncLocalValueMap(_item1)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new OneElementAsyncLocalValueMap(_item0)
-                            : this;
+                        ? new OneElementAsyncLocalValueMap(_item0)
+                        : this;
                 }
             }
 
@@ -291,15 +291,10 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new ThreeElementAsyncLocalValueMap(newItem, _item1, _item2)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new ThreeElementAsyncLocalValueMap(_item0, newItem, _item2)
-                            : ReferenceEquals(key, _item2.Key)
-                                ? new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem)
-                                : new FourElementAsyncLocalValueMap(
-                                    _item0,
-                                    _item1,
-                                    _item2,
-                                    newItem
-                                );
+                        ? new ThreeElementAsyncLocalValueMap(_item0, newItem, _item2)
+                        : ReferenceEquals(key, _item2.Key)
+                        ? new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem)
+                        : new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem);
                 }
                 else
                 {
@@ -308,10 +303,10 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new TwoElementAsyncLocalValueMap(_item1, _item2)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new TwoElementAsyncLocalValueMap(_item0, _item2)
-                            : ReferenceEquals(key, _item2.Key)
-                                ? new TwoElementAsyncLocalValueMap(_item0, _item1)
-                                : this;
+                        ? new TwoElementAsyncLocalValueMap(_item0, _item2)
+                        : ReferenceEquals(key, _item2.Key)
+                        ? new TwoElementAsyncLocalValueMap(_item0, _item1)
+                        : this;
                 }
             }
 
@@ -374,19 +369,14 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new FourElementAsyncLocalValueMap(newItem, _item1, _item2, _item3)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new FourElementAsyncLocalValueMap(_item0, newItem, _item2, _item3)
-                            : ReferenceEquals(key, _item2.Key)
-                                ? new FourElementAsyncLocalValueMap(_item0, _item1, newItem, _item3)
-                                : ReferenceEquals(key, _item3.Key)
-                                    ? new FourElementAsyncLocalValueMap(
-                                        _item0,
-                                        _item1,
-                                        _item2,
-                                        newItem
-                                    )
-                                    : new MultiElementAsyncLocalValueMap(
-                                        new[] { _item0, _item1, _item2, _item3, newItem }
-                                    ); // upgrade to a multi
+                        ? new FourElementAsyncLocalValueMap(_item0, newItem, _item2, _item3)
+                        : ReferenceEquals(key, _item2.Key)
+                        ? new FourElementAsyncLocalValueMap(_item0, _item1, newItem, _item3)
+                        : ReferenceEquals(key, _item3.Key)
+                        ? new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem)
+                        : new MultiElementAsyncLocalValueMap(
+                            new[] { _item0, _item1, _item2, _item3, newItem }
+                        ); // upgrade to a multi
                 }
                 else
                 {
@@ -395,12 +385,12 @@ namespace System.Threading
                     return ReferenceEquals(key, _item0.Key)
                         ? new ThreeElementAsyncLocalValueMap(_item1, _item2, _item3)
                         : ReferenceEquals(key, _item1.Key)
-                            ? new ThreeElementAsyncLocalValueMap(_item0, _item2, _item3)
-                            : ReferenceEquals(key, _item2.Key)
-                                ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item3)
-                                : ReferenceEquals(key, _item3.Key)
-                                    ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item2)
-                                    : this;
+                        ? new ThreeElementAsyncLocalValueMap(_item0, _item2, _item3)
+                        : ReferenceEquals(key, _item2.Key)
+                        ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item3)
+                        : ReferenceEquals(key, _item3.Key)
+                        ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item2)
+                        : this;
                 }
             }
 

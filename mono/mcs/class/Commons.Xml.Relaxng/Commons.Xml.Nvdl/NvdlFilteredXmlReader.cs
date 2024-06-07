@@ -320,11 +320,10 @@ namespace Commons.Xml.Nvdl
         {
             get
             {
-                return initial
-                    ? ReadState.Initial
+                return initial ? ReadState.Initial
                     : placeHolder != XmlNodeType.None && reader.ReadState != ReadState.Error
-                        ? ReadState.Interactive
-                        : reader.ReadState;
+                    ? ReadState.Interactive
+                    : reader.ReadState;
             }
         }
 

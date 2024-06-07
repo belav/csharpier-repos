@@ -200,11 +200,9 @@ namespace System.Web.DynamicData
             dc.DataFormatString = DataFormatString;
             dc.HtmlEncode = HtmlEncode;
             dc.Mode =
-                (rowState & DataControlRowState.Edit) != 0
-                    ? DataBoundControlMode.Edit
-                    : (rowState & DataControlRowState.Insert) != 0
-                        ? DataBoundControlMode.Insert
-                        : DataBoundControlMode.ReadOnly;
+                (rowState & DataControlRowState.Edit) != 0 ? DataBoundControlMode.Edit
+                : (rowState & DataControlRowState.Insert) != 0 ? DataBoundControlMode.Insert
+                : DataBoundControlMode.ReadOnly;
             dc.NullDisplayText = NullDisplayText;
             dc.UIHint = UIHint;
             dc.InternalSetAttributes(attributes);

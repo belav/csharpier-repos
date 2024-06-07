@@ -2265,13 +2265,9 @@ namespace System.Net
                 else if (DownloadProgressChanged != null)
                 {
                     progressPercentage =
-                        progress.TotalBytesToReceive < 0
-                            ? 0
-                            : progress.TotalBytesToReceive == 0
-                                ? 100
-                                : (int)(
-                                    (100 * progress.BytesReceived) / progress.TotalBytesToReceive
-                                );
+                        progress.TotalBytesToReceive < 0 ? 0
+                        : progress.TotalBytesToReceive == 0 ? 100
+                        : (int)((100 * progress.BytesReceived) / progress.TotalBytesToReceive);
                     asyncOp.Post(
                         _reportDownloadProgressChanged!,
                         new DownloadProgressChangedEventArgs(

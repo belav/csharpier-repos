@@ -577,11 +577,9 @@ internal abstract class MessagePackHubProtocolWorker
     private void WriteCompletionMessage(CompletionMessage message, ref MessagePackWriter writer)
     {
         var resultKind =
-            message.Error != null
-                ? ErrorResult
-                : message.HasResult
-                    ? NonVoidResult
-                    : VoidResult;
+            message.Error != null ? ErrorResult
+            : message.HasResult ? NonVoidResult
+            : VoidResult;
 
         writer.WriteArrayHeader(4 + (resultKind != VoidResult ? 1 : 0));
         writer.Write(HubProtocolConstants.CompletionMessageType);

@@ -232,11 +232,9 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
     ) =>
         Can_read_and_write_JSON_value<NullableBytesType, byte[]?>(
             nameof(NullableBytesType.Bytes),
-            value == null
-                ? default
-                : value == ""
-                    ? Array.Empty<byte>()
-                    : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
+            value == null ? default
+            : value == "" ? Array.Empty<byte>()
+            : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
             json
         );
 

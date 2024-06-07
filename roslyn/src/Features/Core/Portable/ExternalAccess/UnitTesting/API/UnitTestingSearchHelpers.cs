@@ -127,16 +127,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 
                 var (container, type) =
                     lastPlus >= 0
-                        ? (
-                            fullyQualifiedTypeName[..lastPlus],
-                            fullyQualifiedTypeName[(lastPlus + 1)..]
-                        )
-                        : lastDot >= 0
-                            ? (
-                                fullyQualifiedTypeName[..lastDot],
-                                fullyQualifiedTypeName[(lastDot + 1)..]
-                            )
-                            : ("", fullyQualifiedTypeName);
+                    ? (fullyQualifiedTypeName[..lastPlus], fullyQualifiedTypeName[(lastPlus + 1)..])
+                    : lastDot >= 0
+                    ? (fullyQualifiedTypeName[..lastDot], fullyQualifiedTypeName[(lastDot + 1)..])
+                    : ("", fullyQualifiedTypeName);
 
                 GetNameAndArity(type, out type, out var typeArity);
 

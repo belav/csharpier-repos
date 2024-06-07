@@ -63,13 +63,10 @@ namespace System.IO
             EnsureNotClosed();
 
             long pos =
-                origin == SeekOrigin.Begin
-                    ? offset
-                    : origin == SeekOrigin.Current
-                        ? _position + offset
-                        : origin == SeekOrigin.End
-                            ? _content.Length + offset
-                            : throw new ArgumentOutOfRangeException(nameof(origin));
+                origin == SeekOrigin.Begin ? offset
+                : origin == SeekOrigin.Current ? _position + offset
+                : origin == SeekOrigin.End ? _content.Length + offset
+                : throw new ArgumentOutOfRangeException(nameof(origin));
 
             if (pos > int.MaxValue)
             {

@@ -317,13 +317,11 @@ public class ValueConverterSelector : IValueConverterSelector
                 yield return _converters.GetOrAdd(
                     (modelClrType, typeof(string)),
                     k =>
-                        k.ModelClrType == typeof(DateTime)
-                            ? DateTimeToStringConverter.DefaultInfo
-                            : k.ModelClrType == typeof(DateTimeOffset)
-                                ? DateTimeOffsetToStringConverter.DefaultInfo
-                                : k.ModelClrType == typeof(TimeSpan)
-                                    ? TimeSpanToStringConverter.DefaultInfo
-                                    : TimeOnlyToStringConverter.DefaultInfo
+                        k.ModelClrType == typeof(DateTime) ? DateTimeToStringConverter.DefaultInfo
+                        : k.ModelClrType == typeof(DateTimeOffset)
+                        ? DateTimeOffsetToStringConverter.DefaultInfo
+                        : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToStringConverter.DefaultInfo
+                        : TimeOnlyToStringConverter.DefaultInfo
                 );
             }
 
@@ -332,13 +330,11 @@ public class ValueConverterSelector : IValueConverterSelector
                 yield return _converters.GetOrAdd(
                     (modelClrType, typeof(long)),
                     k =>
-                        k.ModelClrType == typeof(DateTime)
-                            ? DateTimeToBinaryConverter.DefaultInfo
-                            : k.ModelClrType == typeof(DateTimeOffset)
-                                ? DateTimeOffsetToBinaryConverter.DefaultInfo
-                                : k.ModelClrType == typeof(TimeSpan)
-                                    ? TimeSpanToTicksConverter.DefaultInfo
-                                    : TimeOnlyToTicksConverter.DefaultInfo
+                        k.ModelClrType == typeof(DateTime) ? DateTimeToBinaryConverter.DefaultInfo
+                        : k.ModelClrType == typeof(DateTimeOffset)
+                        ? DateTimeOffsetToBinaryConverter.DefaultInfo
+                        : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToTicksConverter.DefaultInfo
+                        : TimeOnlyToTicksConverter.DefaultInfo
                 );
             }
 
@@ -357,10 +353,10 @@ public class ValueConverterSelector : IValueConverterSelector
                             i =>
                                 (
                                     i.ModelClrType == typeof(DateTime)
-                                        ? DateTimeToBinaryConverter.DefaultInfo.Create()
-                                        : i.ModelClrType == typeof(TimeSpan)
-                                            ? TimeSpanToTicksConverter.DefaultInfo.Create()
-                                            : TimeOnlyToTicksConverter.DefaultInfo.Create()
+                                    ? DateTimeToBinaryConverter.DefaultInfo.Create()
+                                    : i.ModelClrType == typeof(TimeSpan)
+                                    ? TimeSpanToTicksConverter.DefaultInfo.Create()
+                                    : TimeOnlyToTicksConverter.DefaultInfo.Create()
                                 ).ComposeWith(NumberToBytesConverter<long>.DefaultInfo.Create()),
                             NumberToBytesConverter<long>.DefaultInfo.MappingHints
                         )

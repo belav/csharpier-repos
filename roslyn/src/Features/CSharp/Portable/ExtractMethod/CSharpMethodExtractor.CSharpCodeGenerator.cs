@@ -327,11 +327,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static SyntaxKind GetParameterRefSyntaxKind(ParameterBehavior parameterBehavior)
             {
-                return parameterBehavior == ParameterBehavior.Ref
-                    ? SyntaxKind.RefKeyword
-                    : parameterBehavior == ParameterBehavior.Out
-                        ? SyntaxKind.OutKeyword
-                        : SyntaxKind.None;
+                return parameterBehavior == ParameterBehavior.Ref ? SyntaxKind.RefKeyword
+                    : parameterBehavior == ParameterBehavior.Out ? SyntaxKind.OutKeyword
+                    : SyntaxKind.None;
             }
 
             private ImmutableArray<StatementSyntax> CreateMethodBody(

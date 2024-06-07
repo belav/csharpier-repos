@@ -1097,11 +1097,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // `(a != null && a.b(out x)) is true or false` matches any boolean
                             // both subpatterns must have the same bool test for the test to propagate out
                             var leftNullTest = isBoolTest(binary.Left);
-                            return leftNullTest is null
-                                ? null
-                                : leftNullTest != isBoolTest(binary.Right)
-                                    ? null
-                                    : leftNullTest;
+                            return leftNullTest is null ? null
+                                : leftNullTest != isBoolTest(binary.Right) ? null
+                                : leftNullTest;
                         }
 
                         // `(a != null && a.b(out x)) is true and true` matches `true`

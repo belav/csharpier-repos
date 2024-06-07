@@ -60,17 +60,16 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
         RelationalTypeMapping? typeMapping
     )
     {
-        var operandTypeMapping = typeMapping is null
-            ? null
-            : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset)
-                ? typeMapping
-                : atTimeZoneExpression.Operand.Type == typeof(DateTime)
-                    ? _typeMappingSource.FindMapping(
-                        typeof(DateTime),
-                        "datetime2",
-                        precision: typeMapping.Precision
-                    )
-                    : null;
+        var operandTypeMapping =
+            typeMapping is null ? null
+            : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset) ? typeMapping
+            : atTimeZoneExpression.Operand.Type == typeof(DateTime)
+            ? _typeMappingSource.FindMapping(
+                typeof(DateTime),
+                "datetime2",
+                precision: typeMapping.Precision
+            )
+            : null;
 
         return new AtTimeZoneExpression(
             operandTypeMapping is null

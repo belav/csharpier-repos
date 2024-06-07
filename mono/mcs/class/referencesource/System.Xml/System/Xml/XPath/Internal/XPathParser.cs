@@ -109,12 +109,10 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    this.scanner.Kind == XPathScanner.LexKind.Eq
-                        ? Operator.Op.EQ
-                        : this.scanner.Kind == XPathScanner.LexKind.Ne
-                            ? Operator.Op.NE
-                            :
-                            /*default :*/Operator.Op.INVALID
+                    this.scanner.Kind == XPathScanner.LexKind.Eq ? Operator.Op.EQ
+                    : this.scanner.Kind == XPathScanner.LexKind.Ne ? Operator.Op.NE
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -134,16 +132,12 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    this.scanner.Kind == XPathScanner.LexKind.Lt
-                        ? Operator.Op.LT
-                        : this.scanner.Kind == XPathScanner.LexKind.Le
-                            ? Operator.Op.LE
-                            : this.scanner.Kind == XPathScanner.LexKind.Gt
-                                ? Operator.Op.GT
-                                : this.scanner.Kind == XPathScanner.LexKind.Ge
-                                    ? Operator.Op.GE
-                                    :
-                                    /*default :*/Operator.Op.INVALID
+                    this.scanner.Kind == XPathScanner.LexKind.Lt ? Operator.Op.LT
+                    : this.scanner.Kind == XPathScanner.LexKind.Le ? Operator.Op.LE
+                    : this.scanner.Kind == XPathScanner.LexKind.Gt ? Operator.Op.GT
+                    : this.scanner.Kind == XPathScanner.LexKind.Ge ? Operator.Op.GE
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -163,12 +157,10 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    this.scanner.Kind == XPathScanner.LexKind.Plus
-                        ? Operator.Op.PLUS
-                        : this.scanner.Kind == XPathScanner.LexKind.Minus
-                            ? Operator.Op.MINUS
-                            :
-                            /*default :*/Operator.Op.INVALID
+                    this.scanner.Kind == XPathScanner.LexKind.Plus ? Operator.Op.PLUS
+                    : this.scanner.Kind == XPathScanner.LexKind.Minus ? Operator.Op.MINUS
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -188,14 +180,11 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    this.scanner.Kind == XPathScanner.LexKind.Star
-                        ? Operator.Op.MUL
-                        : TestOp("div")
-                            ? Operator.Op.DIV
-                            : TestOp("mod")
-                                ? Operator.Op.MOD
-                                :
-                                /*default :*/Operator.Op.INVALID
+                    this.scanner.Kind == XPathScanner.LexKind.Star ? Operator.Op.MUL
+                    : TestOp("div") ? Operator.Op.DIV
+                    : TestOp("mod") ? Operator.Op.MOD
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -444,16 +433,13 @@ namespace MS.Internal.Xml.XPath
                         nodePrefix = string.Empty;
                         nodeName = string.Empty;
                         nodeType = (
-                            this.scanner.Name == "comment"
-                                ? XPathNodeType.Comment
-                                : this.scanner.Name == "text"
-                                    ? XPathNodeType.Text
-                                    : this.scanner.Name == "node"
-                                        ? XPathNodeType.All
-                                        : this.scanner.Name == "processing-instruction"
-                                            ? XPathNodeType.ProcessingInstruction
-                                            :
-                                            /* default: */XPathNodeType.Root
+                            this.scanner.Name == "comment" ? XPathNodeType.Comment
+                            : this.scanner.Name == "text" ? XPathNodeType.Text
+                            : this.scanner.Name == "node" ? XPathNodeType.All
+                            : this.scanner.Name == "processing-instruction"
+                            ? XPathNodeType.ProcessingInstruction
+                            :
+                            /* default: */XPathNodeType.Root
                         );
                         Debug.Assert(nodeType != XPathNodeType.Root);
                         NextLex();

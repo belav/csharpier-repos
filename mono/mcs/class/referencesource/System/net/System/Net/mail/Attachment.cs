@@ -327,11 +327,9 @@ namespace System.Net.Mail
             set
             {
                 part.ContentLocation =
-                    value == null
-                        ? null
-                        : value.IsAbsoluteUri
-                            ? value.AbsoluteUri
-                            : value.OriginalString;
+                    value == null ? null
+                    : value.IsAbsoluteUri ? value.AbsoluteUri
+                    : value.OriginalString;
             }
         }
 

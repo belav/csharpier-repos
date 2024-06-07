@@ -627,11 +627,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '=':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.EqualsEqualsToken
-                        : TextWindow.TryAdvance('>')
-                            ? SyntaxKind.EqualsGreaterThanToken
-                            : SyntaxKind.EqualsToken;
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.EqualsEqualsToken
+                        : TextWindow.TryAdvance('>') ? SyntaxKind.EqualsGreaterThanToken
+                        : SyntaxKind.EqualsToken;
                     break;
 
                 case '*':
@@ -682,22 +681,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '+':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.PlusEqualsToken
-                        : TextWindow.TryAdvance('+')
-                            ? SyntaxKind.PlusPlusToken
-                            : SyntaxKind.PlusToken;
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.PlusEqualsToken
+                        : TextWindow.TryAdvance('+') ? SyntaxKind.PlusPlusToken
+                        : SyntaxKind.PlusToken;
                     break;
 
                 case '-':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.MinusEqualsToken
-                        : TextWindow.TryAdvance('-')
-                            ? SyntaxKind.MinusMinusToken
-                            : TextWindow.TryAdvance('>')
-                                ? SyntaxKind.MinusGreaterThanToken
-                                : SyntaxKind.MinusToken;
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.MinusEqualsToken
+                        : TextWindow.TryAdvance('-') ? SyntaxKind.MinusMinusToken
+                        : TextWindow.TryAdvance('>') ? SyntaxKind.MinusGreaterThanToken
+                        : SyntaxKind.MinusToken;
                     break;
 
                 case '%':
@@ -709,11 +705,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '&':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.AmpersandEqualsToken
-                        : TextWindow.TryAdvance('&')
-                            ? SyntaxKind.AmpersandAmpersandToken
-                            : SyntaxKind.AmpersandToken;
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.AmpersandEqualsToken
+                        : TextWindow.TryAdvance('&') ? SyntaxKind.AmpersandAmpersandToken
+                        : SyntaxKind.AmpersandToken;
                     break;
 
                 case '^':
@@ -725,22 +720,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '|':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.BarEqualsToken
-                        : TextWindow.TryAdvance('|')
-                            ? SyntaxKind.BarBarToken
-                            : SyntaxKind.BarToken;
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.BarEqualsToken
+                        : TextWindow.TryAdvance('|') ? SyntaxKind.BarBarToken
+                        : SyntaxKind.BarToken;
                     break;
 
                 case '<':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=')
-                        ? SyntaxKind.LessThanEqualsToken
+                    info.Kind =
+                        TextWindow.TryAdvance('=') ? SyntaxKind.LessThanEqualsToken
                         : TextWindow.TryAdvance('<')
-                            ? TextWindow.TryAdvance('=')
-                                ? SyntaxKind.LessThanLessThanEqualsToken
-                                : SyntaxKind.LessThanLessThanToken
-                            : SyntaxKind.LessThanToken;
+                        ? TextWindow.TryAdvance('=') ? SyntaxKind.LessThanLessThanEqualsToken
+                            : SyntaxKind.LessThanLessThanToken
+                        : SyntaxKind.LessThanToken;
                     break;
 
                 case '>':
@@ -973,11 +966,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
                 else if (
                     !(
-                        isHex
-                            ? SyntaxFacts.IsHexDigit(ch)
-                            : isBinary
-                                ? SyntaxFacts.IsBinaryDigit(ch)
-                                : SyntaxFacts.IsDecDigit(ch)
+                        isHex ? SyntaxFacts.IsHexDigit(ch)
+                        : isBinary ? SyntaxFacts.IsBinaryDigit(ch)
+                        : SyntaxFacts.IsDecDigit(ch)
                     )
                 )
                 {

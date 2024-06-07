@@ -367,11 +367,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 filePath =
                     projectName
                     + (
-                        language == LanguageNames.CSharp
-                            ? ".csproj"
-                            : language == LanguageNames.VisualBasic
-                                ? ".vbproj"
-                                : ("." + language)
+                        language == LanguageNames.CSharp ? ".csproj"
+                        : language == LanguageNames.VisualBasic ? ".vbproj"
+                        : ("." + language)
                     );
             }
 
@@ -688,11 +686,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var language = GetLanguage(workspace, projectElement);
 
             projectId++;
-            return language == LanguageNames.CSharp
-                ? "CSharpAssembly" + projectId
-                : language == LanguageNames.VisualBasic
-                    ? "VisualBasicAssembly" + projectId
-                    : language + "Assembly" + projectId;
+            return language == LanguageNames.CSharp ? "CSharpAssembly" + projectId
+                : language == LanguageNames.VisualBasic ? "VisualBasicAssembly" + projectId
+                : language + "Assembly" + projectId;
         }
 
         private static string GetLanguage(TestWorkspace workspace, XElement projectElement)

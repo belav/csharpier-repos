@@ -395,11 +395,10 @@ namespace System.IO
         internal static bool HasWildCardCharacters(string path)
         {
             // Question mark is part of some device paths
-            int startIndex = AppContextSwitches.UseLegacyPathHandling
-                ? 0
-                : IsDevice(path)
-                    ? ExtendedPathPrefix.Length
-                    : 0;
+            int startIndex =
+                AppContextSwitches.UseLegacyPathHandling ? 0
+                : IsDevice(path) ? ExtendedPathPrefix.Length
+                : 0;
             return AnyPathHasWildCardCharacters(path, startIndex: startIndex);
         }
 

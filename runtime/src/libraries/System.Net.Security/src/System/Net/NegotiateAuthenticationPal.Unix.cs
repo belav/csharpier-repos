@@ -184,14 +184,14 @@ namespace System.Net
             {
                 get
                 {
-                    return
-                        (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG) != 0
+                    return (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG)
+                            != 0
                         && Package != NegotiationInfoClass.NTLM
                         ? TokenImpersonationLevel.Delegation
                         : (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_IDENTIFY_FLAG)
                         != 0
-                            ? TokenImpersonationLevel.Identification
-                            : TokenImpersonationLevel.Impersonation;
+                        ? TokenImpersonationLevel.Identification
+                        : TokenImpersonationLevel.Impersonation;
                 }
             }
 
@@ -391,11 +391,9 @@ namespace System.Net
                 }
 
                 byte[]? result =
-                    resultBlobLength == 0 || _tokenBuffer == null
-                        ? null
-                        : _tokenBuffer.Length == resultBlobLength
-                            ? _tokenBuffer
-                            : _tokenBuffer[0..resultBlobLength];
+                    resultBlobLength == 0 || _tokenBuffer == null ? null
+                    : _tokenBuffer.Length == resultBlobLength ? _tokenBuffer
+                    : _tokenBuffer[0..resultBlobLength];
 
                 // The return value will tell us correctly if the handshake is over or not
                 if (statusCode == NegotiateAuthenticationStatusCode.Completed)

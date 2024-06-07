@@ -63,11 +63,9 @@ namespace System.Globalization
             for (int i = 0; i < len; i++)
                 if (d1[i] != d2[i])
                     return d1[i] < d2[i] ? -1 : 1;
-            return d1.Length == d2.Length
-                ? 0
-                : d1.Length < d2.Length
-                    ? -1
-                    : 1;
+            return d1.Length == d2.Length ? 0
+                : d1.Length < d2.Length ? -1
+                : 1;
         }
         #endregion
 

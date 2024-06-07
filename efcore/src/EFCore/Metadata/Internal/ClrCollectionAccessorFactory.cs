@@ -118,13 +118,10 @@ public class ClrCollectionAccessorFactory
             var fieldInfo = navigation.FieldInfo;
 
             return (
-                fieldInfo == null
-                    ? propertyInfo
-                    : propertyInfo == null
-                        ? fieldInfo
-                        : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType)
-                            ? propertyInfo
-                            : fieldInfo
+                fieldInfo == null ? propertyInfo
+                : propertyInfo == null ? fieldInfo
+                : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType) ? propertyInfo
+                : fieldInfo
             );
         }
     }

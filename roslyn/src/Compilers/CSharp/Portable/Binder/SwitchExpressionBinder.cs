@@ -134,11 +134,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         out bool requiresFalseWhenClause,
                         out bool unnamedEnumValue
                     );
-                    ErrorCode warningCode = requiresFalseWhenClause
+                    ErrorCode warningCode =
+                        requiresFalseWhenClause
                         ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen
                         : unnamedEnumValue
-                            ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue
-                            : ErrorCode.WRN_SwitchExpressionNotExhaustive;
+                        ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue
+                        : ErrorCode.WRN_SwitchExpressionNotExhaustive;
                     diagnostics.Add(warningCode, node.SwitchKeyword.GetLocation(), samplePattern);
                     return true;
                 }

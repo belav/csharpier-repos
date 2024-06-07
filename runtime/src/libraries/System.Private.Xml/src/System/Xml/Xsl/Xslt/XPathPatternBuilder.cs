@@ -113,16 +113,13 @@ namespace System.Xml.Xsl.Xslt
         )
         {
             QilNode nameTest = (
-                name != null && nsUri != null
-                    ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
-                    : // ns:bar || bar
-                    nsUri != null
-                        ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                        : // ns:*
-                        name != null
-                            ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                            : // *:foo
-                            /*name  == nsUri == null*/f.True() // *
+                name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                : // ns:bar || bar
+                nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                : // ns:*
+                name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                : // *:foo
+                /*name  == nsUri == null*/f.True() // *
             );
 
             XmlNodeKindFlags intersection = XPathBuilder.AxisTypeMask(
@@ -132,13 +129,11 @@ namespace System.Xml.Xsl.Xslt
             );
 
             QilNode typeTest = (
-                intersection == 0
-                    ? f.False()
-                    : // input & required doesn't intersect
-                    intersection == itr.XmlType.NodeKinds
-                        ? f.True()
-                        : // input is subset of required
-                        /*else*/f.IsType(itr, T.NodeChoice(intersection))
+                intersection == 0 ? f.False()
+                : // input & required doesn't intersect
+                intersection == itr.XmlType.NodeKinds ? f.True()
+                : // input is subset of required
+                /*else*/f.IsType(itr, T.NodeChoice(intersection))
             );
 
             QilLoop filter = f.BaseFactory.Filter(itr, f.And(typeTest, nameTest));

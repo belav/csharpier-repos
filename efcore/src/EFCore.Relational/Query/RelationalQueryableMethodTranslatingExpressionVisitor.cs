@@ -3261,19 +3261,18 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 nullableResultType
             );
             var resultVariable = Expression.Variable(nullableResultType, "result");
-            var returnValueForNull = resultType.IsNullableType()
-                ? (Expression)Expression.Default(resultType)
-                : translation.Type.IsNullableType()
-                    ? Expression.Default(resultType)
-                    : Expression.Throw(
-                        Expression.New(
-                            typeof(InvalidOperationException)
-                                .GetConstructors()
-                                .Single(ci => ci.GetParameters().Length == 1),
-                            Expression.Constant(CoreStrings.SequenceContainsNoElements)
-                        ),
-                        resultType
-                    );
+            var returnValueForNull =
+                resultType.IsNullableType() ? (Expression)Expression.Default(resultType)
+                : translation.Type.IsNullableType() ? Expression.Default(resultType)
+                : Expression.Throw(
+                    Expression.New(
+                        typeof(InvalidOperationException)
+                            .GetConstructors()
+                            .Single(ci => ci.GetParameters().Length == 1),
+                        Expression.Constant(CoreStrings.SequenceContainsNoElements)
+                    ),
+                    resultType
+                );
 
             shaper = Expression.Block(
                 new[] { resultVariable },

@@ -128,11 +128,9 @@ public class ColumnModification : IColumnModification
     public virtual object? OriginalValue
     {
         get =>
-            Entry == null
-                ? _originalValue
-                : Entry.SharedIdentityEntry == null
-                    ? GetOriginalValue(Entry, Property!)
-                    : GetOriginalValue(Entry.SharedIdentityEntry, Property!);
+            Entry == null ? _originalValue
+            : Entry.SharedIdentityEntry == null ? GetOriginalValue(Entry, Property!)
+            : GetOriginalValue(Entry.SharedIdentityEntry, Property!);
         set
         {
             if (Entry == null)
@@ -157,11 +155,9 @@ public class ColumnModification : IColumnModification
     public virtual object? Value
     {
         get =>
-            Entry == null
-                ? _value
-                : Entry.EntityState == EntityState.Deleted
-                    ? null
-                    : GetCurrentValue(Entry, Property!);
+            Entry == null ? _value
+            : Entry.EntityState == EntityState.Deleted ? null
+            : GetCurrentValue(Entry, Property!);
         set
         {
             if (Entry == null)

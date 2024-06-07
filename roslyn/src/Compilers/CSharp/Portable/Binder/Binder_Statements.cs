@@ -4591,15 +4591,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Depending on whether the filter constant is true or false, and whether there are other catch clauses,
                 // we suggest different actions
-                var errorCode = boundFilter.ConstantValueOpt.BooleanValue
-                    ? ErrorCode.WRN_FilterIsConstantTrue
+                var errorCode =
+                    boundFilter.ConstantValueOpt.BooleanValue ? ErrorCode.WRN_FilterIsConstantTrue
                     : (
                         filter.Parent.Parent is TryStatementSyntax s
                         && s.Catches.Count == 1
                         && s.Finally == null
                     )
-                        ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
-                        : ErrorCode.WRN_FilterIsConstantFalse;
+                    ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
+                    : ErrorCode.WRN_FilterIsConstantFalse;
 
                 // Since the expression is a constant, the name can be retrieved from the first token
                 Error(diagnostics, errorCode, filter.FilterExpression);

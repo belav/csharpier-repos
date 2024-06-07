@@ -159,11 +159,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             protected override IList<System.Windows.Documents.Inline> CreateLineTextInlines()
             {
                 var propertyId =
-                    _spanKind == HighlightSpanKind.Definition
-                        ? DefinitionHighlightTag.TagId
-                        : _spanKind == HighlightSpanKind.WrittenReference
-                            ? WrittenReferenceHighlightTag.TagId
-                            : ReferenceHighlightTag.TagId;
+                    _spanKind == HighlightSpanKind.Definition ? DefinitionHighlightTag.TagId
+                    : _spanKind == HighlightSpanKind.WrittenReference
+                    ? WrittenReferenceHighlightTag.TagId
+                    : ReferenceHighlightTag.TagId;
 
                 var properties = Presenter
                     .FormatMapService.GetEditorFormatMap("text")
@@ -317,10 +316,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // Create an appropriate highlight span on that buffer for the reference.
                 var key =
                     spanKind == HighlightSpanKind.Definition
-                        ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
-                        : spanKind == HighlightSpanKind.WrittenReference
-                            ? PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey
-                            : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
+                    ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
+                    : spanKind == HighlightSpanKind.WrittenReference
+                    ? PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey
+                    : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
 
                 textBuffer.Properties.RemoveProperty(key);
                 textBuffer.Properties.AddProperty(

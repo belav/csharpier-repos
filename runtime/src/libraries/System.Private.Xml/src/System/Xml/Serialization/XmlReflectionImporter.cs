@@ -2376,11 +2376,10 @@ namespace System.Xml.Serialization
                         element.IsNullable = xmlElement.GetIsNullableSpecified()
                             ? xmlElement.IsNullable
                             : typeModel.TypeDesc.IsOptionalValue;
-                        element.Form = rpc
-                            ? XmlSchemaForm.Unqualified
-                            : xmlElement.Form == XmlSchemaForm.None
-                                ? elementFormDefault
-                                : xmlElement.Form;
+                        element.Form =
+                            rpc ? XmlSchemaForm.Unqualified
+                            : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                            : xmlElement.Form;
 
                         CheckNullable(element.IsNullable, targetTypeDesc, element.Mapping);
                         if (!rpc)
@@ -2403,13 +2402,11 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(
-                            arrayElementType
-                        )
+                        Type targetType =
+                            typeof(IXmlSerializable).IsAssignableFrom(arrayElementType)
                             ? arrayElementType
-                            : typeof(XmlNode).IsAssignableFrom(arrayElementType)
-                                ? arrayElementType
-                                : typeof(XmlElement);
+                            : typeof(XmlNode).IsAssignableFrom(arrayElementType) ? arrayElementType
+                            : typeof(XmlElement);
                         if (!arrayElementType.IsAssignableFrom(targetType))
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlIllegalAnyElement, arrayElementType.FullName)
@@ -2503,11 +2500,10 @@ namespace System.Xml.Serialization
                     );
                     arrayElement.Mapping = arrayMapping;
                     arrayElement.IsNullable = a.XmlArray.IsNullable;
-                    arrayElement.Form = rpc
-                        ? XmlSchemaForm.Unqualified
-                        : a.XmlArray.Form == XmlSchemaForm.None
-                            ? elementFormDefault
-                            : a.XmlArray.Form;
+                    arrayElement.Form =
+                        rpc ? XmlSchemaForm.Unqualified
+                        : a.XmlArray.Form == XmlSchemaForm.None ? elementFormDefault
+                        : a.XmlArray.Form;
                     sequenceId = a.XmlArray.Order;
                     CheckNullable(arrayElement.IsNullable, accessor.TypeDesc, arrayElement.Mapping);
                     if (!rpc)
@@ -2663,11 +2659,10 @@ namespace System.Xml.Serialization
                             element.IsNullable = xmlElement.GetIsNullableSpecified()
                                 ? xmlElement.IsNullable
                                 : typeModel.TypeDesc.IsOptionalValue;
-                            element.Form = rpc
-                                ? XmlSchemaForm.Unqualified
-                                : xmlElement.Form == XmlSchemaForm.None
-                                    ? elementFormDefault
-                                    : xmlElement.Form;
+                            element.Form =
+                                rpc ? XmlSchemaForm.Unqualified
+                                : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                                : xmlElement.Form;
 
                             CheckNullable(element.IsNullable, accessor.TypeDesc, element.Mapping);
                             if (!rpc)
@@ -2781,11 +2776,10 @@ namespace System.Xml.Serialization
                         element.IsNullable = xmlElement.GetIsNullableSpecified()
                             ? xmlElement.IsNullable
                             : typeModel.TypeDesc.IsOptionalValue;
-                        element.Form = rpc
-                            ? XmlSchemaForm.Unqualified
-                            : xmlElement.Form == XmlSchemaForm.None
-                                ? elementFormDefault
-                                : xmlElement.Form;
+                        element.Form =
+                            rpc ? XmlSchemaForm.Unqualified
+                            : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                            : xmlElement.Form;
                         CheckNullable(element.IsNullable, targetTypeDesc, element.Mapping);
 
                         if (!rpc)
@@ -2808,11 +2802,10 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(accessorType)
-                            ? accessorType
-                            : typeof(XmlNode).IsAssignableFrom(accessorType)
-                                ? accessorType
-                                : typeof(XmlElement);
+                        Type targetType =
+                            typeof(IXmlSerializable).IsAssignableFrom(accessorType) ? accessorType
+                            : typeof(XmlNode).IsAssignableFrom(accessorType) ? accessorType
+                            : typeof(XmlElement);
                         if (!accessorType.IsAssignableFrom(targetType))
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlIllegalAnyElement, accessorType.FullName)

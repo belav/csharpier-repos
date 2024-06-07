@@ -1429,10 +1429,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
-                            ? () => context.ChangeTracker.DetectChanges()
-                            : deleteOrphansTiming == null
-                                ? () => context.ChangeTracker.CascadeChanges()
-                                : (Action)(() => context.SaveChanges());
+                        ? () => context.ChangeTracker.DetectChanges()
+                        : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
+                        : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 
@@ -1683,10 +1682,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
-                            ? () => context.ChangeTracker.DetectChanges()
-                            : deleteOrphansTiming == null
-                                ? () => context.ChangeTracker.CascadeChanges()
-                                : (Action)(() => context.SaveChanges());
+                        ? () => context.ChangeTracker.DetectChanges()
+                        : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
+                        : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 

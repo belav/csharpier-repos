@@ -488,11 +488,9 @@ namespace System.Net.Sockets.Tests
                     using (suppressContext ? ExecutionContext.SuppressFlow() : default)
                     {
                         pending =
-                            sendMode == 0
-                                ? client.SendAsync(saea)
-                                : sendMode == 1
-                                    ? client.SendToAsync(saea)
-                                    : client.SendPacketsAsync(saea);
+                            sendMode == 0 ? client.SendAsync(saea)
+                            : sendMode == 1 ? client.SendToAsync(saea)
+                            : client.SendPacketsAsync(saea);
                     }
                     asyncLocal.Value = 0;
 

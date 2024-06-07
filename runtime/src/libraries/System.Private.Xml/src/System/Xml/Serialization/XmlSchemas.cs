@@ -619,13 +619,10 @@ namespace System.Xml.Serialization
             else if (o is XmlSchemaExternal)
             {
                 string itemType =
-                    o is XmlSchemaImport
-                        ? "import"
-                        : o is XmlSchemaInclude
-                            ? "include"
-                            : o is XmlSchemaRedefine
-                                ? "redefine"
-                                : o.GetType().Name;
+                    o is XmlSchemaImport ? "import"
+                    : o is XmlSchemaInclude ? "include"
+                    : o is XmlSchemaRedefine ? "redefine"
+                    : o.GetType().Name;
                 item = SR.Format(SR.XmlSchemaItem, ns, itemType, details);
             }
             else if (o is XmlSchema)

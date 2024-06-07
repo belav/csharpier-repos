@@ -119,11 +119,9 @@ internal sealed class TerminalFormatStrings
 
         int maxColors = db.GetNumber(TermInfo.WellKnownNumbers.MaxColors);
         MaxColors = // normalize to either the full range of all ANSI colors, just the dark ones, or none
-            maxColors >= 16
-                ? 16
-                : maxColors >= 8
-                    ? 8
-                    : 0;
+            maxColors >= 16 ? 16
+            : maxColors >= 8 ? 8
+            : 0;
 
         AddKey(db, TermInfo.WellKnownStrings.KeyF1, ConsoleKey.F1);
         AddKey(db, TermInfo.WellKnownStrings.KeyF2, ConsoleKey.F2);

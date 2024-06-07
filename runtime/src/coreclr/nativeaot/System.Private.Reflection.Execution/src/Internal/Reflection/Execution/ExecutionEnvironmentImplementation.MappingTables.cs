@@ -1211,18 +1211,18 @@ namespace Internal.Reflection.Execution
                             RuntimeAugments.IsUnmanagedPointerType(fieldTypeHandle)
                             || RuntimeAugments.IsFunctionPointerType(fieldTypeHandle)
                         )
-                            ? (FieldAccessor)
-                                new PointerTypeFieldAccessorForInstanceFields(
-                                    fieldAccessMetadata.Offset + fieldOffsetDelta,
-                                    declaringTypeHandle,
-                                    fieldTypeHandle
-                                )
-                            : (FieldAccessor)
-                                new ReferenceTypeFieldAccessorForInstanceFields(
-                                    fieldAccessMetadata.Offset + fieldOffsetDelta,
-                                    declaringTypeHandle,
-                                    fieldTypeHandle
-                                );
+                        ? (FieldAccessor)
+                            new PointerTypeFieldAccessorForInstanceFields(
+                                fieldAccessMetadata.Offset + fieldOffsetDelta,
+                                declaringTypeHandle,
+                                fieldTypeHandle
+                            )
+                        : (FieldAccessor)
+                            new ReferenceTypeFieldAccessorForInstanceFields(
+                                fieldAccessMetadata.Offset + fieldOffsetDelta,
+                                declaringTypeHandle,
+                                fieldTypeHandle
+                            );
                 }
 
                 case FieldTableFlags.NonGCStatic:
@@ -1292,22 +1292,22 @@ namespace Internal.Reflection.Execution
                             RuntimeAugments.IsUnmanagedPointerType(fieldTypeHandle)
                             || RuntimeAugments.IsFunctionPointerType(fieldTypeHandle)
                         )
-                            ? (FieldAccessor)
-                                new PointerTypeFieldAccessorForStaticFields(
-                                    cctorContext,
-                                    staticsBase,
-                                    fieldOffset,
-                                    fieldAccessMetadata.Flags,
-                                    fieldTypeHandle
-                                )
-                            : (FieldAccessor)
-                                new ReferenceTypeFieldAccessorForStaticFields(
-                                    cctorContext,
-                                    staticsBase,
-                                    fieldOffset,
-                                    fieldAccessMetadata.Flags,
-                                    fieldTypeHandle
-                                );
+                        ? (FieldAccessor)
+                            new PointerTypeFieldAccessorForStaticFields(
+                                cctorContext,
+                                staticsBase,
+                                fieldOffset,
+                                fieldAccessMetadata.Flags,
+                                fieldTypeHandle
+                            )
+                        : (FieldAccessor)
+                            new ReferenceTypeFieldAccessorForStaticFields(
+                                cctorContext,
+                                staticsBase,
+                                fieldOffset,
+                                fieldAccessMetadata.Flags,
+                                fieldTypeHandle
+                            );
                 }
             }
 

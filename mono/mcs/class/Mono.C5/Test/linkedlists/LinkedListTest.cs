@@ -2374,22 +2374,17 @@ namespace C5UnitTests.linkedlists.plain
                 for (int j = 0; j < 7 - i; j++)
                 {
                     Assert.AreEqual(
-                        i <= 3
-                            ? i
-                            : i <= 5
-                                ? 3
-                                : i - 2,
+                        i <= 3 ? i
+                        : i <= 5 ? 3
+                        : i - 2,
                         views[i][j].Offset,
                         "view[" + i + "][" + j + "] offset"
                     );
                     Assert.AreEqual(
-                        j == 0
-                            ? 0
-                            : i <= 3 && i + j > 4
-                                ? j - 2
-                                : i > 4 || i + j <= 3
-                                    ? j
-                                    : j - 1,
+                        j == 0 ? 0
+                        : i <= 3 && i + j > 4 ? j - 2
+                        : i > 4 || i + j <= 3 ? j
+                        : j - 1,
                         views[i][j].Count,
                         "view[" + i + "][" + j + "] count"
                     );
@@ -2482,11 +2477,9 @@ namespace C5UnitTests.linkedlists.plain
                 for (int j = 0; j < 7 - i; j++)
                 {
                     Assert.AreEqual(
-                        i < 2
-                            ? i
-                            : i < 6
-                                ? 2
-                                : i - 3,
+                        i < 2 ? i
+                        : i < 6 ? 2
+                        : i - 3,
                         views[i][j].Offset,
                         "view[" + i + "][" + j + "] offset"
                     );
@@ -2748,13 +2741,10 @@ namespace C5UnitTests.linkedlists.plain
                         LinkedList<int> v = (LinkedList<int>)list.View(i, j);
                         list.RemoveAllCopies(2);
                         Assert.AreEqual(
-                            i == 0
-                                ? 0
-                                : i <= 4
-                                    ? 1
-                                    : i <= 6
-                                        ? 2
-                                        : 3,
+                            i == 0 ? 0
+                            : i <= 4 ? 1
+                            : i <= 6 ? 2
+                            : 3,
                             v.Offset,
                             "v.Offset, i=" + i + ", j=" + j
                         );

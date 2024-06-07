@@ -132,13 +132,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             var parent = (LocalDeclarationStatementSyntax)declarationSyntax.Parent;
                             var modifiers = parent.Modifiers;
                             Debug.Assert(!modifiers.Any(SyntaxKind.ConstKeyword)); // const locals don't have a sequence point
-                            var firstToken = modifiers.Any()
-                                ? modifiers[0]
-                                : parent.UsingKeyword == default
-                                    ? (SyntaxToken?)null
-                                    : parent.AwaitKeyword == default
-                                        ? parent.UsingKeyword
-                                        : parent.AwaitKeyword;
+                            var firstToken =
+                                modifiers.Any() ? modifiers[0]
+                                : parent.UsingKeyword == default ? (SyntaxToken?)null
+                                : parent.AwaitKeyword == default ? parent.UsingKeyword
+                                : parent.AwaitKeyword;
                             GetFirstLocalOrFieldBreakpointSpan(
                                 firstToken,
                                 declaratorSyntax,

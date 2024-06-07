@@ -815,11 +815,9 @@ namespace System.Data
             {
                 case Operators.EqualTo:
                     c = (
-                        c == 0
-                            ? 0
-                            : c < 0
-                                ? -1
-                                : 1
+                        c == 0 ? 0
+                        : c < 0 ? -1
+                        : 1
                     );
                     break;
                 case Operators.GreaterThen:

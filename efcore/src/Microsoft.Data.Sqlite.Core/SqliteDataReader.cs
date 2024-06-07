@@ -275,10 +275,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The name of the column.</returns>
         public override string GetName(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetName)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetName(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetName)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetName(ordinal);
 
         /// <summary>
         ///     Gets the ordinal of the specified column.
@@ -287,12 +286,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The zero-based column ordinal.</returns>
         public override int GetOrdinal(string name) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetOrdinal))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetOrdinal(name);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetOrdinal)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetOrdinal(name);
 
         /// <summary>
         ///     Gets the declared data type name of the specified column. The storage class is returned for computed
@@ -304,12 +300,11 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
         public override string GetDataTypeName(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetDataTypeName))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetDataTypeName(ordinal);
+            ? throw new InvalidOperationException(
+                Resources.DataReaderClosed(nameof(GetDataTypeName))
+            )
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetDataTypeName(ordinal);
 
         /// <summary>
         ///     Gets the data type of the specified column.
@@ -324,12 +319,9 @@ namespace Microsoft.Data.Sqlite
 #endif
         public override Type GetFieldType(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetFieldType))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetFieldType(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetFieldType)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetFieldType(ordinal);
 
         /// <summary>
         ///     Gets a value indicating whether the specified column is <see cref="DBNull" />.
@@ -338,10 +330,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns><see langword="true" /> if the specified column is <see cref="DBNull" />; otherwise, <see langword="false" />.</returns>
         public override bool IsDBNull(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(IsDBNull)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.IsDBNull(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(IsDBNull)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.IsDBNull(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="bool" />.
@@ -350,12 +341,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override bool GetBoolean(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetBoolean))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetBoolean(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetBoolean)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetBoolean(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="byte" />.
@@ -364,10 +352,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override byte GetByte(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetByte)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetByte(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetByte)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetByte(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="char" />.
@@ -376,10 +363,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override char GetChar(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetChar)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetChar(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetChar)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetChar(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="DateTime" />.
@@ -388,12 +374,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override DateTime GetDateTime(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetDateTime))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetDateTime(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetDateTime)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetDateTime(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="DateTimeOffset" />.
@@ -402,12 +385,11 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public virtual DateTimeOffset GetDateTimeOffset(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetDateTimeOffset))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetDateTimeOffset(ordinal);
+            ? throw new InvalidOperationException(
+                Resources.DataReaderClosed(nameof(GetDateTimeOffset))
+            )
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetDateTimeOffset(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="TimeSpan" />.
@@ -416,12 +398,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public virtual TimeSpan GetTimeSpan(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetTimeSpan))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetTimeSpan(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetTimeSpan)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetTimeSpan(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="decimal" />.
@@ -430,12 +409,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override decimal GetDecimal(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetDecimal))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetDecimal(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetDecimal)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetDecimal(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="double" />.
@@ -444,10 +420,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override double GetDouble(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetDouble)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetDouble(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetDouble)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetDouble(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="float" />.
@@ -456,10 +431,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override float GetFloat(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetFloat)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetFloat(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetFloat)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetFloat(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="Guid" />.
@@ -468,10 +442,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override Guid GetGuid(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetGuid)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetGuid(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetGuid)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetGuid(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="short" />.
@@ -480,10 +453,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override short GetInt16(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt16)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetInt16(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt16)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetInt16(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="int" />.
@@ -492,10 +464,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override int GetInt32(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt32)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetInt32(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt32)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetInt32(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="long" />.
@@ -504,10 +475,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override long GetInt64(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt64)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetInt64(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetInt64)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetInt64(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column as a <see cref="string" />.
@@ -516,10 +486,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The value of the column.</returns>
         public override string GetString(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetString)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetString(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetString)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetString(ordinal);
 
         /// <summary>
         ///     Reads a stream of bytes from the specified column. Not supported.
@@ -538,10 +507,9 @@ namespace Microsoft.Data.Sqlite
             int length
         ) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetBytes)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetBytes(ordinal, dataOffset, buffer, bufferOffset, length);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetBytes)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetBytes(ordinal, dataOffset, buffer, bufferOffset, length);
 
         /// <summary>
         ///     Reads a stream of characters from the specified column. Not supported.
@@ -560,10 +528,9 @@ namespace Microsoft.Data.Sqlite
             int length
         ) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetChars)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetChars(ordinal, dataOffset, buffer, bufferOffset, length);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetChars)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetChars(ordinal, dataOffset, buffer, bufferOffset, length);
 
         /// <summary>
         ///     Retrieves data as a Stream. If the reader includes rowid (or any of its aliases), a
@@ -575,10 +542,9 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/blob-io">BLOB I/O</seealso>
         public override Stream GetStream(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetStream)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetStream(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetStream)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetStream(ordinal);
 
         /// <summary>
         ///     Retrieves data as a <see cref="TextReader" />.
@@ -587,12 +553,9 @@ namespace Microsoft.Data.Sqlite
         /// <returns>The returned object.</returns>
         public override TextReader GetTextReader(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetTextReader))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetTextReader(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetTextReader)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetTextReader(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column.
@@ -603,12 +566,9 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
         public override T GetFieldValue<T>(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(
-                    Resources.DataReaderClosed(nameof(GetFieldValue))
-                )
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetFieldValue<T>(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetFieldValue)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetFieldValue<T>(ordinal);
 
         /// <summary>
         ///     Gets the value of the specified column.
@@ -618,10 +578,9 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
         public override object GetValue(int ordinal) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValue)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetValue(ordinal);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValue)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetValue(ordinal);
 
         /// <summary>
         ///     Gets the column values of the current row.
@@ -631,10 +590,9 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
         public override int GetValues(object?[] values) =>
             _closed
-                ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValues)))
-                : _record == null
-                    ? throw new InvalidOperationException(Resources.NoData)
-                    : _record.GetValues(values);
+            ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValues)))
+            : _record == null ? throw new InvalidOperationException(Resources.NoData)
+            : _record.GetValues(values);
 
         /// <summary>
         ///     Returns a System.Data.DataTable that describes the column metadata of the System.Data.Common.DbDataReader.

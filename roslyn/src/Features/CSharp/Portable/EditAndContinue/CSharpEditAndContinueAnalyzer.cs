@@ -397,13 +397,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             CommonForEachStatementSyntax node,
             int position
         ) =>
-            position < node.OpenParenToken.SpanStart
-                ? ForEachPart.ForEach
-                : position < node.InKeyword.SpanStart
-                    ? ForEachPart.VariableDeclaration
-                    : position < node.Expression.SpanStart
-                        ? ForEachPart.In
-                        : ForEachPart.Expression;
+            position < node.OpenParenToken.SpanStart ? ForEachPart.ForEach
+            : position < node.InKeyword.SpanStart ? ForEachPart.VariableDeclaration
+            : position < node.Expression.SpanStart ? ForEachPart.In
+            : ForEachPart.Expression;
 
         private static TextSpan GetActiveSpan(ForEachStatementSyntax node, ForEachPart part) =>
             part switch
@@ -2613,13 +2610,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             TextSpan second,
             TextSpan defaultSpan
         ) =>
-            (first.Length > 0 && second.Length > 0)
-                ? TextSpan.FromBounds(first.Start, second.End)
-                : (first.Length > 0)
-                    ? first
-                    : (second.Length > 0)
-                        ? second
-                        : defaultSpan;
+            (first.Length > 0 && second.Length > 0) ? TextSpan.FromBounds(first.Start, second.End)
+            : (first.Length > 0) ? first
+            : (second.Length > 0) ? second
+            : defaultSpan;
 
         internal override TextSpan GetLambdaParameterDiagnosticSpan(SyntaxNode lambda, int ordinal)
         {

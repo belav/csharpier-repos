@@ -333,11 +333,9 @@ namespace System.Collections.Generic
                 IEqualityComparer<T>? comparer = _comparer;
                 Debug.Assert(typeof(T).IsValueType || comparer is not null);
                 int hashCode =
-                    typeof(T).IsValueType && comparer == null
-                        ? item!.GetHashCode()
-                        : item is not null
-                            ? comparer!.GetHashCode(item)
-                            : 0;
+                    typeof(T).IsValueType && comparer == null ? item!.GetHashCode()
+                    : item is not null ? comparer!.GetHashCode(item)
+                    : 0;
 
                 ref int bucket = ref GetBucketRef(hashCode);
                 int i = bucket - 1; // Value in buckets is 1-based

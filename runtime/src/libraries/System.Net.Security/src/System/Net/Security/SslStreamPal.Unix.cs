@@ -306,11 +306,9 @@ namespace System.Net.Security
                 }
 
                 outputBuffer =
-                    outputSize == 0
-                        ? null
-                        : outputSize == output!.Length
-                            ? output
-                            : new Span<byte>(output, 0, outputSize).ToArray();
+                    outputSize == 0 ? null
+                    : outputSize == output!.Length ? output
+                    : new Span<byte>(output, 0, outputSize).ToArray();
 
                 return new SecurityStatusPal(errorCode);
             }

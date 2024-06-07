@@ -1091,11 +1091,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (hiddenMembers.Any())
                 {
-                    ErrorCode errorCode = overridingMemberIsMethod
-                        ? ErrorCode.ERR_CantOverrideNonFunction
-                        : overridingMemberIsProperty
-                            ? ErrorCode.ERR_CantOverrideNonProperty
-                            : ErrorCode.ERR_CantOverrideNonEvent;
+                    ErrorCode errorCode =
+                        overridingMemberIsMethod ? ErrorCode.ERR_CantOverrideNonFunction
+                        : overridingMemberIsProperty ? ErrorCode.ERR_CantOverrideNonProperty
+                        : ErrorCode.ERR_CantOverrideNonEvent;
 
                     diagnostics.Add(
                         errorCode,

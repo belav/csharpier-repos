@@ -229,11 +229,9 @@ public class Driver
         {
             int index = arg.Length > 2 && arg[0] == '-' && arg[1] == '-' ? 2 : -1;
             index =
-                index >= 0
-                    ? index
-                    : arg.Length > 0 && arg[0] == '/'
-                        ? 1
-                        : -1;
+                index >= 0 ? index
+                : arg.Length > 0 && arg[0] == '/' ? 1
+                : -1;
             if (index < 0)
             {
                 assembly = arg;

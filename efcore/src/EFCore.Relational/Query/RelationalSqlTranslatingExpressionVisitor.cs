@@ -551,18 +551,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             _ => binaryExpression.NodeType
         };
 
-        return
-            TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
+        return TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
             || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
             ? QueryCompilationContext.NotTranslatedExpression
             : uncheckedNodeTypeVariant == ExpressionType.Coalesce
-                ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
-                : _sqlExpressionFactory.MakeBinary(
-                    uncheckedNodeTypeVariant,
-                    sqlLeft!,
-                    sqlRight!,
-                    null
-                ) ?? QueryCompilationContext.NotTranslatedExpression;
+            ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
+            : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft!, sqlRight!, null)
+                ?? QueryCompilationContext.NotTranslatedExpression;
 
         Expression ProcessGetType(
             StructuralTypeReferenceExpression typeReference,
@@ -2414,14 +2409,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                                 );
 
                             condition =
-                                condition == null
-                                    ? optionalPropertiesCondition
-                                    : nodeType == ExpressionType.Equal
-                                        ? Expression.OrElse(condition, optionalPropertiesCondition)
-                                        : Expression.AndAlso(
-                                            condition,
-                                            optionalPropertiesCondition
-                                        );
+                                condition == null ? optionalPropertiesCondition
+                                : nodeType == ExpressionType.Equal
+                                ? Expression.OrElse(condition, optionalPropertiesCondition)
+                                : Expression.AndAlso(condition, optionalPropertiesCondition);
                         }
 
                         if (condition != null)
@@ -2587,11 +2578,11 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         nodeType != ExpressionType.Equal
                     );
 
-                    comparisons = comparisons is null
-                        ? comparison
+                    comparisons =
+                        comparisons is null ? comparison
                         : nodeType == ExpressionType.Equal
-                            ? Expression.AndAlso(comparisons, comparison)
-                            : Expression.OrElse(comparisons, comparison);
+                        ? Expression.AndAlso(comparisons, comparison)
+                        : Expression.OrElse(comparisons, comparison);
                 }
 
                 foreach (var complexProperty in type.GetComplexProperties())

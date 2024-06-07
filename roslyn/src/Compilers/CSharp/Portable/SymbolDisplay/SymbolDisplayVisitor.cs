@@ -134,11 +134,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             text =
-                (text == null)
-                    ? "?"
-                    : (_escapeKeywordIdentifiers && IsEscapable(kind))
-                        ? EscapeIdentifier(text)
-                        : text;
+                (text == null) ? "?"
+                : (_escapeKeywordIdentifiers && IsEscapable(kind)) ? EscapeIdentifier(text)
+                : text;
 
             return new SymbolDisplayPart(kind, symbol, text);
         }

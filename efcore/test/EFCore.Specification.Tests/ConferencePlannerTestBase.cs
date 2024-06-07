@@ -855,13 +855,11 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                             .ToList();
 
                         var trackName = track.Name;
-                        var attendees = trackName.Contains("1")
-                            ? attendees1
-                            : trackName.Contains("2")
-                                ? attendees2
-                                : trackName.Contains("3")
-                                    ? attendees3
-                                    : attendees1.Concat(attendees2).Concat(attendees3).ToList();
+                        var attendees =
+                            trackName.Contains("1") ? attendees1
+                            : trackName.Contains("2") ? attendees2
+                            : trackName.Contains("3") ? attendees3
+                            : attendees1.Concat(attendees2).Concat(attendees3).ToList();
 
                         session.SessionAttendees = attendees
                             .Select(a => new SessionAttendee { Session = session, Attendee = a })

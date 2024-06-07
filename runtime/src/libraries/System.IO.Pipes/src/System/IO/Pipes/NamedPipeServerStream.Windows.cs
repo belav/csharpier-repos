@@ -301,13 +301,11 @@ namespace System.IO.Pipes
         }
 
         public Task WaitForConnectionAsync(CancellationToken cancellationToken) =>
-            cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : IsAsync
-                    ? WaitForConnectionCoreAsync(cancellationToken).AsTask()
-                    : AsyncOverSyncWithIoCancellation
-                        .InvokeAsync(static s => s.WaitForConnection(), this, cancellationToken)
-                        .AsTask();
+            cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken)
+            : IsAsync ? WaitForConnectionCoreAsync(cancellationToken).AsTask()
+            : AsyncOverSyncWithIoCancellation
+                .InvokeAsync(static s => s.WaitForConnection(), this, cancellationToken)
+                .AsTask();
 
         public void Disconnect()
         {

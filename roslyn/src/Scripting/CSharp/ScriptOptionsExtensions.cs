@@ -17,17 +17,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         )
         {
             var parseOptions =
-                (options.ParseOptions is null)
-                    ? CSharpScriptCompiler.DefaultParseOptions
-                    : (options.ParseOptions is CSharpParseOptions existing)
-                        ? existing
-                        : throw new InvalidOperationException(
-                            string.Format(
-                                ScriptingResources.CannotSetLanguageSpecificOption,
-                                LanguageNames.CSharp,
-                                nameof(LanguageVersion)
-                            )
-                        );
+                (options.ParseOptions is null) ? CSharpScriptCompiler.DefaultParseOptions
+                : (options.ParseOptions is CSharpParseOptions existing) ? existing
+                : throw new InvalidOperationException(
+                    string.Format(
+                        ScriptingResources.CannotSetLanguageSpecificOption,
+                        LanguageNames.CSharp,
+                        nameof(LanguageVersion)
+                    )
+                );
 
             return options.WithParseOptions(parseOptions.WithLanguageVersion(languageVersion));
         }

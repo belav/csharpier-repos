@@ -402,15 +402,14 @@ namespace Microsoft.CodeAnalysis.Editing
             return ParameterDeclaration(
                 symbol.Name,
                 TypeExpression(symbol.Type),
-                initializer is not null
-                    ? initializer
-                    : symbol.HasExplicitDefaultValue
-                        ? GenerateExpression(
-                            symbol.Type,
-                            symbol.ExplicitDefaultValue,
-                            canUseFieldReference: true
-                        )
-                        : null,
+                initializer is not null ? initializer
+                : symbol.HasExplicitDefaultValue
+                ? GenerateExpression(
+                    symbol.Type,
+                    symbol.ExplicitDefaultValue,
+                    canUseFieldReference: true
+                )
+                : null,
                 symbol.RefKind,
                 isExtension: symbol
                     is { Ordinal: 0, ContainingSymbol: IMethodSymbol { IsExtensionMethod: true } },

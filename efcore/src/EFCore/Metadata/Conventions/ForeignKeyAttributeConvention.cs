@@ -423,8 +423,7 @@ public class ForeignKeyAttributeConvention
             );
         }
 
-        return
-            relationshipBuilder.HasNavigation(
+        return relationshipBuilder.HasNavigation(
                 (string?)null,
                 pointsToPrincipal: false,
                 fromDataAnnotation: true
@@ -437,8 +436,8 @@ public class ForeignKeyAttributeConvention
                 null,
                 fromDataAnnotation: true
             ) == null
-                ? null
-                : relationshipBuilder;
+            ? null
+            : relationshipBuilder;
     }
 
     private static ForeignKeyAttribute? GetForeignKeyAttribute(IConventionNavigationBase navigation)

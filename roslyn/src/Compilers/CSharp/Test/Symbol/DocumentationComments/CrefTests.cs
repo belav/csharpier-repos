@@ -1303,13 +1303,11 @@ static class D
             foreach (var crefSyntax in GetCrefSyntaxes(compilation))
             {
                 string text = crefSyntax.ToString();
-                string arguments = text.Contains("C()")
-                    ? "C()"
-                    : text.Contains("C")
-                        ? "C"
-                        : text.Contains("D()")
-                            ? "D()"
-                            : "D";
+                string arguments =
+                    text.Contains("C()") ? "C()"
+                    : text.Contains("C") ? "C"
+                    : text.Contains("D()") ? "D()"
+                    : "D";
                 Assert.Null(
                     GetReferencedSymbol(
                         crefSyntax,

@@ -1110,11 +1110,9 @@ namespace System.IO
             if (!useRights)
             {
                 fAccess =
-                    access == FileAccess.Read
-                        ? GENERIC_READ
-                        : access == FileAccess.Write
-                            ? GENERIC_WRITE
-                            : GENERIC_READ | GENERIC_WRITE;
+                    access == FileAccess.Read ? GENERIC_READ
+                    : access == FileAccess.Write ? GENERIC_WRITE
+                    : GENERIC_READ | GENERIC_WRITE;
             }
             else
             {
@@ -1124,11 +1122,10 @@ namespace System.IO
             // Get absolute path - Security needs this to prevent something
             // like trying to create a file in c:\tmp with the name
             // "..\WinNT\System32\ntoskrnl.exe".  Store it for user convenience.
-            int maxPath = useLongPath
-                ? PathInternal.MaxLongPath
-                : AppContextSwitches.BlockLongPaths
-                    ? PathInternal.MaxShortPath
-                    : PathInternal.MaxLongPath;
+            int maxPath =
+                useLongPath ? PathInternal.MaxLongPath
+                : AppContextSwitches.BlockLongPaths ? PathInternal.MaxShortPath
+                : PathInternal.MaxLongPath;
 
             string filePath = Path.NormalizePath(path, true, maxPath);
 

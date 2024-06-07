@@ -1438,11 +1438,9 @@ namespace System.Net
                         // were set. note that this means that we won't ever buffer for unknown verbs unless
                         // you call [Begin]GetRequestStream before [Begin]GetResponse.
                         HttpWriteMode =
-                            ContentLength >= 0
-                                ? HttpWriteMode.ContentLength
-                                : onRequestStream
-                                    ? HttpWriteMode.Buffer
-                                    : HttpWriteMode.None;
+                            ContentLength >= 0 ? HttpWriteMode.ContentLength
+                            : onRequestStream ? HttpWriteMode.Buffer
+                            : HttpWriteMode.None;
                     }
                 }
             }

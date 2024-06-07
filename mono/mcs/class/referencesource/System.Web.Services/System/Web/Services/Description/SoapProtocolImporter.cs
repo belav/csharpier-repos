@@ -1250,11 +1250,9 @@ namespace System.Web.Services.Description
                 else
                 {
                     string ns =
-                        soapBindingStyle == SoapBindingStyle.Rpc
-                            ? parameter.mapping.Namespace
-                            : parameter.IsOut
-                                ? response.Namespace
-                                : request.Namespace;
+                        soapBindingStyle == SoapBindingStyle.Rpc ? parameter.mapping.Namespace
+                        : parameter.IsOut ? response.Namespace
+                        : request.Namespace;
                     bool forceUseMemberName = parameter.name != parameter.mapping.MemberName;
                     xmlExporter.AddMappingMetadata(
                         paramsMetadata[j],

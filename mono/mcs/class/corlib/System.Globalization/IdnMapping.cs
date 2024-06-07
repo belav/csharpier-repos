@@ -489,11 +489,9 @@ namespace System.Globalization
                         for (int k = base_num; ; k += base_num)
                         {
                             int t =
-                                k <= bias + tmin
-                                    ? tmin
-                                    : k >= bias + tmax
-                                        ? tmax
-                                        : k - bias;
+                                k <= bias + tmin ? tmin
+                                : k >= bias + tmax ? tmax
+                                : k - bias;
                             if (q < t)
                                 break;
                             sb.Append(EncodeDigit(t + (q - t) % (base_num - t)));
@@ -522,13 +520,10 @@ namespace System.Globalization
 
         int DecodeDigit(char c)
         {
-            return c - '0' < 10
-                ? c - 22
-                : c - 'A' < 26
-                    ? c - 'A'
-                    : c - 'a' < 26
-                        ? c - 'a'
-                        : base_num;
+            return c - '0' < 10 ? c - 22
+                : c - 'A' < 26 ? c - 'A'
+                : c - 'a' < 26 ? c - 'a'
+                : base_num;
         }
 
         int Adapt(int delta, int numPoints, bool firstTime)
@@ -573,11 +568,9 @@ namespace System.Globalization
                     int digit = DecodeDigit(s[z++]);
                     i = i + digit * w;
                     int t =
-                        k <= bias + tmin
-                            ? tmin
-                            : k >= bias + tmax
-                                ? tmax
-                                : k - bias;
+                        k <= bias + tmin ? tmin
+                        : k >= bias + tmax ? tmax
+                        : k - bias;
                     if (digit < t)
                         break;
                     w = w * (base_num - t);

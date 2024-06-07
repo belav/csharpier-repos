@@ -69,11 +69,9 @@ internal static class SharedTypeExtensions
     }
 
     public static Type MakeNullable(this Type type, bool nullable = true) =>
-        type.IsNullableType() == nullable
-            ? type
-            : nullable
-                ? typeof(Nullable<>).MakeGenericType(type)
-                : type.UnwrapNullableType();
+        type.IsNullableType() == nullable ? type
+        : nullable ? typeof(Nullable<>).MakeGenericType(type)
+        : type.UnwrapNullableType();
 
     public static bool IsNumeric(this Type type)
     {

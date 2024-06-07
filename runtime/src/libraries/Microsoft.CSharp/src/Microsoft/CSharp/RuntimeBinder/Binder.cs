@@ -69,10 +69,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             CSharpConversionKind conversionKind =
                 ((flags & CSharpBinderFlags.ConvertExplicit) != 0)
-                    ? CSharpConversionKind.ExplicitConversion
-                    : ((flags & CSharpBinderFlags.ConvertArrayIndex) != 0)
-                        ? CSharpConversionKind.ArrayCreationConversion
-                        : CSharpConversionKind.ImplicitConversion;
+                ? CSharpConversionKind.ExplicitConversion
+                : ((flags & CSharpBinderFlags.ConvertArrayIndex) != 0)
+                ? CSharpConversionKind.ArrayCreationConversion
+                : CSharpConversionKind.ImplicitConversion;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
 
             return new CSharpConvertBinder(

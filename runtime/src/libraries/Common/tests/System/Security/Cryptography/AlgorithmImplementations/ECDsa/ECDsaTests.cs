@@ -584,17 +584,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
             dataArray.CopyTo(dataArray2, 1);
 
             using HashAlgorithm halg =
-                hashAlgorithm == HashAlgorithmName.MD5
-                    ? MD5.Create()
-                    : hashAlgorithm == HashAlgorithmName.SHA1
-                        ? SHA1.Create()
-                        : hashAlgorithm == HashAlgorithmName.SHA256
-                            ? SHA256.Create()
-                            : hashAlgorithm == HashAlgorithmName.SHA384
-                                ? SHA384.Create()
-                                : hashAlgorithm == HashAlgorithmName.SHA512
-                                    ? SHA512.Create()
-                                    : throw new Exception("Hash algorithm not supported.");
+                hashAlgorithm == HashAlgorithmName.MD5 ? MD5.Create()
+                : hashAlgorithm == HashAlgorithmName.SHA1 ? SHA1.Create()
+                : hashAlgorithm == HashAlgorithmName.SHA256 ? SHA256.Create()
+                : hashAlgorithm == HashAlgorithmName.SHA384 ? SHA384.Create()
+                : hashAlgorithm == HashAlgorithmName.SHA512 ? SHA512.Create()
+                : throw new Exception("Hash algorithm not supported.");
 
             List<byte[]> signatures = new List<byte[]>(6);
 

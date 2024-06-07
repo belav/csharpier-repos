@@ -309,9 +309,8 @@ namespace System.Net.Http
 
                 return cancellationToken.IsCancellationRequested
                     ? Task.FromCanceled(cancellationToken)
-                    : _connection == null
-                        ? Task.CompletedTask
-                        : CopyToAsyncCore(destination, cancellationToken);
+                    : _connection == null ? Task.CompletedTask
+                    : CopyToAsyncCore(destination, cancellationToken);
             }
 
             private async Task CopyToAsyncCore(

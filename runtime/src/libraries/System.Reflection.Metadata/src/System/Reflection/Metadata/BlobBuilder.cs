@@ -432,11 +432,9 @@ namespace System.Reflection.Metadata
 
             _nextOrPrevious = (last != this) ? last : prefix;
             prefix._nextOrPrevious =
-                (first != this)
-                    ? first
-                    : (prefixFirst != prefix)
-                        ? prefixFirst
-                        : prefix;
+                (first != this) ? first
+                : (prefixFirst != prefix) ? prefixFirst
+                : prefix;
 
             if (last != this)
             {
@@ -513,11 +511,9 @@ namespace System.Reflection.Metadata
                 //    ^_______________________________________________________|
                 _nextOrPrevious = suffixLast;
                 suffix._nextOrPrevious =
-                    (suffixFirst != suffix)
-                        ? suffixFirst
-                        : (first != this)
-                            ? first
-                            : suffix;
+                    (suffixFirst != suffix) ? suffixFirst
+                    : (first != this) ? first
+                    : suffix;
 
                 if (last != this)
                 {

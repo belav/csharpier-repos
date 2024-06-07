@@ -47,11 +47,9 @@ namespace System.Net.Http
             {
                 // While requests may report HTTP/1.0 as the protocol, we treat all HTTP/1.X connections as HTTP/1.1.
                 string protocol =
-                    this is HttpConnection
-                        ? "1.1"
-                        : this is Http2Connection
-                            ? "2"
-                            : "3";
+                    this is HttpConnection ? "1.1"
+                    : this is Http2Connection ? "2"
+                    : "3";
 
                 _connectionMetrics = new ConnectionMetrics(
                     metrics,
@@ -144,13 +142,8 @@ namespace System.Net.Http
             return descriptor.Equals(KnownHeaders.Date)
                 ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
                 : descriptor.Equals(KnownHeaders.Server)
-                    ? GetOrAddCachedValue(
-                        ref _lastServerHeaderValue,
-                        descriptor,
-                        value,
-                        valueEncoding
-                    )
-                    : descriptor.GetHeaderValue(value, valueEncoding);
+                ? GetOrAddCachedValue(ref _lastServerHeaderValue, descriptor, value, valueEncoding)
+                : descriptor.GetHeaderValue(value, valueEncoding);
 
             static string GetOrAddCachedValue(
                 [NotNull] ref string? cache,

@@ -2879,13 +2879,10 @@ public static partial class RequestDelegateFactory
         );
 
     private static Type? GetExpressionType(Type type) =>
-        type.IsArray
-            ? typeof(string[])
-            : type == typeof(StringValues)
-                ? typeof(StringValues)
-                : type == typeof(StringValues?)
-                    ? typeof(StringValues?)
-                    : null;
+        type.IsArray ? typeof(string[])
+        : type == typeof(StringValues) ? typeof(StringValues)
+        : type == typeof(StringValues?) ? typeof(StringValues?)
+        : null;
 
     private static Expression BindParameterFromRouteValueOrQueryString(
         ParameterInfo parameter,

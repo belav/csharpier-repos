@@ -747,11 +747,9 @@ namespace System.Text.Unicode.Tests
             where T : IHasToStringState
         {
             ToStringMode expected =
-                tss is ISpanFormattable
-                    ? ToStringMode.ISpanFormattableTryFormat
-                    : tss is IFormattable
-                        ? ToStringMode.IFormattableToString
-                        : ToStringMode.ObjectToString;
+                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat
+                : tss is IFormattable ? ToStringMode.IFormattableToString
+                : ToStringMode.ObjectToString;
             Assert.Equal(expected, tss.ToStringState.ToStringMode);
         }
 

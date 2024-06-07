@@ -1047,10 +1047,10 @@ namespace System
                             && _info.Offset.Host == (IsDosPath ? 0 : 2)
                             && _info.Offset.Query == _info.Offset.End
                         )
-                            ? _string
-                            : (IsDosPath && (_string[start] == '/' || _string[start] == '\\'))
-                                ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
-                                : _string.Substring(start, _info.Offset.Query - start);
+                        ? _string
+                        : (IsDosPath && (_string[start] == '/' || _string[start] == '\\'))
+                        ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
+                        : _string.Substring(start, _info.Offset.Query - start);
 
                     // Should be a rare case, convert c|\ into c:\
                     if (IsDosPath && str[1] == '|')
@@ -3972,11 +3972,9 @@ namespace System
                         ref idx,
                         length,
                         (
-                            ((syntaxFlags & UriSyntaxFlags.MayHaveQuery) != 0)
-                                ? '?'
-                                : _syntax.InFact(UriSyntaxFlags.MayHaveFragment)
-                                    ? '#'
-                                    : c_EOL
+                            ((syntaxFlags & UriSyntaxFlags.MayHaveQuery) != 0) ? '?'
+                            : _syntax.InFact(UriSyntaxFlags.MayHaveFragment) ? '#'
+                            : c_EOL
                         )
                     );
                 }

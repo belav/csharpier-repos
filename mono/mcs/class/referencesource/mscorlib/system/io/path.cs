@@ -1573,11 +1573,9 @@ namespace System.IO
         {
             if (path1 == null || path2 == null || path3 == null)
                 throw new ArgumentNullException(
-                    (path1 == null)
-                        ? "path1"
-                        : (path2 == null)
-                            ? "path2"
-                            : "path3"
+                    (path1 == null) ? "path1"
+                    : (path2 == null) ? "path2"
+                    : "path3"
                 );
             Contract.EndContractBlock();
             CheckInvalidPathChars(path1);
@@ -1591,13 +1589,10 @@ namespace System.IO
         {
             if (path1 == null || path2 == null || path3 == null || path4 == null)
                 throw new ArgumentNullException(
-                    (path1 == null)
-                        ? "path1"
-                        : (path2 == null)
-                            ? "path2"
-                            : (path3 == null)
-                                ? "path3"
-                                : "path4"
+                    (path1 == null) ? "path1"
+                    : (path2 == null) ? "path2"
+                    : (path3 == null) ? "path3"
+                    : "path4"
                 );
             Contract.EndContractBlock();
             CheckInvalidPathChars(path1);

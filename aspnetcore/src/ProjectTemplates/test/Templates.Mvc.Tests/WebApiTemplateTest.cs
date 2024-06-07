@@ -529,11 +529,10 @@ public class WebApiTemplateTest : LoggedTest
             string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
             || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase);
         var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
-        var expectedLaunchProfileNames = requiresHttps
-            ? new[] { "https", "IIS Express" }
-            : noHttps
-                ? new[] { "http", "IIS Express" }
-                : new[] { "http", "https", "IIS Express" };
+        var expectedLaunchProfileNames =
+            requiresHttps ? new[] { "https", "IIS Express" }
+            : noHttps ? new[] { "http", "IIS Express" }
+            : new[] { "http", "https", "IIS Express" };
         await project.VerifyLaunchSettings(expectedLaunchProfileNames);
 
         // Avoid the F# compiler. See https://github.com/dotnet/aspnetcore/issues/14022

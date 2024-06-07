@@ -6676,17 +6676,11 @@ namespace System.Threading.Tasks
             TimeProvider timeProvider,
             CancellationToken cancellationToken
         ) =>
-            cancellationToken.IsCancellationRequested
-                ? FromCanceled(cancellationToken)
-                : millisecondsDelay == 0
-                    ? CompletedTask
-                    : cancellationToken.CanBeCanceled
-                        ? new DelayPromiseWithCancellation(
-                            millisecondsDelay,
-                            timeProvider,
-                            cancellationToken
-                        )
-                        : new DelayPromise(millisecondsDelay, timeProvider);
+            cancellationToken.IsCancellationRequested ? FromCanceled(cancellationToken)
+            : millisecondsDelay == 0 ? CompletedTask
+            : cancellationToken.CanBeCanceled
+            ? new DelayPromiseWithCancellation(millisecondsDelay, timeProvider, cancellationToken)
+            : new DelayPromise(millisecondsDelay, timeProvider);
 
         internal static uint ValidateTimeout(TimeSpan timeout, ExceptionArgument argument)
         {
@@ -7543,11 +7537,9 @@ namespace System.Threading.Tasks
             ArgumentNullException.ThrowIfNull(task1);
             ArgumentNullException.ThrowIfNull(task2);
 
-            return task1.IsCompleted
-                ? FromResult(task1)
-                : task2.IsCompleted
-                    ? FromResult(task2)
-                    : new TwoTaskWhenAnyPromise<TTask>(task1, task2);
+            return task1.IsCompleted ? FromResult(task1)
+                : task2.IsCompleted ? FromResult(task2)
+                : new TwoTaskWhenAnyPromise<TTask>(task1, task2);
         }
 
         /// <summary>A promise type used by WhenAny to wait on exactly two tasks.</summary>

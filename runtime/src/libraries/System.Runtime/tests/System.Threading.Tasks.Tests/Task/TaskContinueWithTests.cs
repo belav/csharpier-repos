@@ -1927,11 +1927,10 @@ namespace System.Threading.Tasks.Tests
                     bool useContinueWith = (j == 0);
                     bool useContinueWhenAny = (j == 1);
                     bool useContinueWhenAll = (j == 2);
-                    string type = useContinueWith
-                        ? "ContinueWith"
-                        : useContinueWhenAny
-                            ? "ContinueWhenAny"
-                            : "ContinueWhenAll";
+                    string type =
+                        useContinueWith ? "ContinueWith"
+                        : useContinueWhenAny ? "ContinueWhenAny"
+                        : "ContinueWhenAll";
                     Debug.WriteLine(
                         "    ** Options = " + options + ", continuation type = " + type
                     );
@@ -2025,11 +2024,10 @@ namespace System.Threading.Tasks.Tests
                     bool useContinueWith = (j == 0);
                     bool useContinueWhenAny = (j == 1);
                     bool useContinueWhenAll = (j == 2);
-                    string type = useContinueWith
-                        ? "ContinueWith"
-                        : useContinueWhenAny
-                            ? "ContinueWhenAny"
-                            : "ContinueWhenAll";
+                    string type =
+                        useContinueWith ? "ContinueWith"
+                        : useContinueWhenAny ? "ContinueWhenAny"
+                        : "ContinueWhenAll";
                     Debug.WriteLine(
                         "    ** Options = " + options + ", continuation type = " + type
                     );

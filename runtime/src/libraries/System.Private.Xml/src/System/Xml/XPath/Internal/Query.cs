@@ -176,12 +176,10 @@ namespace MS.Internal.Xml.XPath
                 string baseUriR = copy.BaseURI;
                 int cmpBase = string.CompareOrdinal(baseUriL, baseUriR);
                 cmp = (
-                    cmpBase < 0
-                        ? XmlNodeOrder.Before
-                        : cmpBase > 0
-                            ? XmlNodeOrder.After
-                            :
-                            /*default*/XmlNodeOrder.Unknown
+                    cmpBase < 0 ? XmlNodeOrder.Before
+                    : cmpBase > 0 ? XmlNodeOrder.After
+                    :
+                    /*default*/XmlNodeOrder.Unknown
                 );
             }
             return cmp;

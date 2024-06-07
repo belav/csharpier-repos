@@ -2593,13 +2593,11 @@ namespace Mono.CSharp
                 if (target_type.IsPointer || target_type.IsByRefLike)
                     return null;
 
-                return source == null
-                    ? EmptyExpression.Null
-                    : target_is_value_type
-                        ? new UnboxCast(source, target_type)
-                        : source is Constant
-                            ? (Expression)new EmptyConstantCast((Constant)source, target_type)
-                            : new ClassCast(source, target_type);
+                return source == null ? EmptyExpression.Null
+                    : target_is_value_type ? new UnboxCast(source, target_type)
+                    : source is Constant
+                    ? (Expression)new EmptyConstantCast((Constant)source, target_type)
+                    : new ClassCast(source, target_type);
             }
 
             //

@@ -1108,11 +1108,9 @@ namespace System.Globalization
 
                 section = FindSection(
                     format,
-                    dig[0] == 0
-                        ? 2
-                        : number.sign
-                            ? 1
-                            : 0
+                    dig[0] == 0 ? 2
+                    : number.sign ? 1
+                    : 0
                 );
 
                 while (true)
@@ -1373,11 +1371,9 @@ namespace System.Globalization
                                 else
                                 {
                                     ch =
-                                        *cur != 0
-                                            ? *cur++
-                                            : digPos > lastDigit
-                                                ? '0'
-                                                : '\0';
+                                        *cur != 0 ? *cur++
+                                        : digPos > lastDigit ? '0'
+                                        : '\0';
                                 }
                                 if (ch != 0)
                                 {

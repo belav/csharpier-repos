@@ -2380,11 +2380,9 @@ namespace System.Data.Linq.SqlClient
                     this.GetAggregate(
                         aggType,
                         returnType,
-                        isCount
-                            ? null
-                            : (lambda == null)
-                                ? aref
-                                : exp
+                        isCount ? null
+                        : (lambda == null) ? aref
+                        : exp
                     ),
                     alias,
                     this.dominatingExpression

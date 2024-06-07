@@ -2656,16 +2656,15 @@ namespace System.Tests
             Assert.InRange(values.Length, 2, 4);
 
             string result =
-                values.Length == 2
-                    ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
-                    : values.Length == 3
-                        ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
-                        : string.Concat(
-                            values[0].AsSpan(),
-                            values[1].AsSpan(),
-                            values[2].AsSpan(),
-                            values[3].AsSpan()
-                        );
+                values.Length == 2 ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
+                : values.Length == 3
+                ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
+                : string.Concat(
+                    values[0].AsSpan(),
+                    values[1].AsSpan(),
+                    values[2].AsSpan(),
+                    values[3].AsSpan()
+                );
 
             if (result.Length == 0)
             {

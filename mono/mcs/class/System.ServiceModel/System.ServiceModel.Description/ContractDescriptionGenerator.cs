@@ -647,11 +647,9 @@ namespace System.ServiceModel.Description
             if (action == null)
                 action = String.Concat(
                     cd.Namespace,
-                    cd.Namespace.Length == 0
-                        ? "urn:"
-                        : cd.Namespace.EndsWith("/")
-                            ? ""
-                            : "/",
+                    cd.Namespace.Length == 0 ? "urn:"
+                    : cd.Namespace.EndsWith("/") ? ""
+                    : "/",
                     cd.Name,
                     "/",
                     od.Name,
@@ -918,11 +916,9 @@ namespace System.ServiceModel.Description
 
         static Type MessageFilterOutByRef(Type type)
         {
-            return type == null
-                ? null
-                : type.IsByRef
-                    ? type.GetElementType()
-                    : type;
+            return type == null ? null
+                : type.IsByRef ? type.GetElementType()
+                : type;
         }
 
         static MessageParameterAttribute GetMessageParameterAttribute(

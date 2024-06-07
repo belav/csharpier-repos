@@ -153,10 +153,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _kind =
                 conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
-                    ? ConversionKind.NoConversion
-                    : isImplicit
-                        ? ConversionKind.ImplicitUserDefined
-                        : ConversionKind.ExplicitUserDefined;
+                ? ConversionKind.NoConversion
+                : isImplicit ? ConversionKind.ImplicitUserDefined
+                : ConversionKind.ExplicitUserDefined;
 
             _uncommonData =
                 conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators

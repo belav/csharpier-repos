@@ -83,11 +83,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             [NotNullWhen(true)] out (string title, string equivalenceKey)? info
         )
         {
-            info = CanOfferUseBlockScoped(
-                options.NamespaceDeclarations,
-                namespaceDecl,
-                forAnalyzer: false
-            )
+            info =
+                CanOfferUseBlockScoped(
+                    options.NamespaceDeclarations,
+                    namespaceDecl,
+                    forAnalyzer: false
+                )
                 ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
                 : CanOfferUseFileScoped(
                     options.NamespaceDeclarations,
@@ -95,8 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                     namespaceDecl,
                     forAnalyzer: false
                 )
-                    ? GetInfo(NamespaceDeclarationPreference.FileScoped)
-                    : null;
+                ? GetInfo(NamespaceDeclarationPreference.FileScoped)
+                : null;
 
             return info != null;
         }

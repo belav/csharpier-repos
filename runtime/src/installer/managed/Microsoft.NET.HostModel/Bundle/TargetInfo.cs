@@ -79,11 +79,9 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public bool IsNativeBinary(string filePath)
         {
-            return IsWindows
-                ? PEUtils.IsPEImage(filePath)
-                : IsOSX
-                    ? MachOUtils.IsMachOImage(filePath)
-                    : ElfUtils.IsElfImage(filePath);
+            return IsWindows ? PEUtils.IsPEImage(filePath)
+                : IsOSX ? MachOUtils.IsMachOImage(filePath)
+                : ElfUtils.IsElfImage(filePath);
         }
 
         public string GetAssemblyName(string hostName)
@@ -103,13 +101,10 @@ namespace Microsoft.NET.HostModel.Bundle
         private static readonly OSPlatform s_freebsdOSPlatform = OSPlatform.Create("FREEBSD");
 
         private static OSPlatform HostOS =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-                ? OSPlatform.Linux
-                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-                    ? OSPlatform.OSX
-                    : RuntimeInformation.IsOSPlatform(s_freebsdOSPlatform)
-                        ? s_freebsdOSPlatform
-                        : OSPlatform.Windows;
+            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? OSPlatform.Linux
+            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? OSPlatform.OSX
+            : RuntimeInformation.IsOSPlatform(s_freebsdOSPlatform) ? s_freebsdOSPlatform
+            : OSPlatform.Windows;
 
         public bool IsOSX => OS.Equals(OSPlatform.OSX);
         public bool IsWindows => OS.Equals(OSPlatform.Windows);
@@ -130,16 +125,12 @@ namespace Microsoft.NET.HostModel.Bundle
             && (relativePath.Equals(HostFxr) || relativePath.Equals(HostPolicy));
 
         private string HostFxr =>
-            IsWindows
-                ? "hostfxr.dll"
-                : IsOSX
-                    ? "libhostfxr.dylib"
-                    : "libhostfxr.so";
+            IsWindows ? "hostfxr.dll"
+            : IsOSX ? "libhostfxr.dylib"
+            : "libhostfxr.so";
         private string HostPolicy =>
-            IsWindows
-                ? "hostpolicy.dll"
-                : IsOSX
-                    ? "libhostpolicy.dylib"
-                    : "libhostpolicy.so";
+            IsWindows ? "hostpolicy.dll"
+            : IsOSX ? "libhostpolicy.dylib"
+            : "libhostpolicy.so";
     }
 }

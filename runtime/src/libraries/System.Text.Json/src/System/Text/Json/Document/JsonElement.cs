@@ -333,11 +333,9 @@ namespace System.Text.Json
 
             JsonTokenType type = TokenType;
 
-            return type == JsonTokenType.True
-                ? true
-                : type == JsonTokenType.False
-                    ? false
-                    : ThrowJsonElementWrongTypeException(type);
+            return type == JsonTokenType.True ? true
+                : type == JsonTokenType.False ? false
+                : ThrowJsonElementWrongTypeException(type);
 
             static bool ThrowJsonElementWrongTypeException(JsonTokenType actualType)
             {

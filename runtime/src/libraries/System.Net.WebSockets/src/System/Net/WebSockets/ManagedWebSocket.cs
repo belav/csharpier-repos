@@ -658,14 +658,9 @@ namespace System.Net.WebSockets
             {
                 return new ValueTask(
                     Task.FromException(
-                        exc is OperationCanceledException
-                            ? exc
-                            : _state == WebSocketState.Aborted
-                                ? CreateOperationCanceledException(exc)
-                                : new WebSocketException(
-                                    WebSocketError.ConnectionClosedPrematurely,
-                                    exc
-                                )
+                        exc is OperationCanceledException ? exc
+                        : _state == WebSocketState.Aborted ? CreateOperationCanceledException(exc)
+                        : new WebSocketException(WebSocketError.ConnectionClosedPrematurely, exc)
                     )
                 );
             }
@@ -1030,11 +1025,9 @@ namespace System.Net.WebSockets
                                         2
                                         + (_isServer ? MaskLength : 0)
                                         + (
-                                            payloadLength <= 125
-                                                ? 0
-                                                : payloadLength == 126
-                                                    ? sizeof(ushort)
-                                                    : sizeof(ulong)
+                                            payloadLength <= 125 ? 0
+                                            : payloadLength == 126 ? sizeof(ushort)
+                                            : sizeof(ulong)
                                         ); // additional 2 or 8 bytes for 16-bit or 64-bit length
                                     await EnsureBufferContainsAsync(minNeeded, cancellationToken)
                                         .ConfigureAwait(false);

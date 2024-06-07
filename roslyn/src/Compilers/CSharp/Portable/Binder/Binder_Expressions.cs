@@ -362,19 +362,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (expression is null)
                 return null;
-            var result = !expression.NeedsToBeConverted()
-                ? expression
+            var result =
+                !expression.NeedsToBeConverted() ? expression
                 : type is null
-                    ? BindToNaturalType(
-                        expression,
-                        BindingDiagnosticBag.Discarded,
-                        reportNoTargetType: false
-                    )
-                    : GenerateConversionForAssignment(
-                        type,
-                        expression,
-                        BindingDiagnosticBag.Discarded
-                    );
+                ? BindToNaturalType(
+                    expression,
+                    BindingDiagnosticBag.Discarded,
+                    reportNoTargetType: false
+                )
+                : GenerateConversionForAssignment(type, expression, BindingDiagnosticBag.Discarded);
             return result;
         }
 
@@ -5004,11 +5000,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             BindValueKind valueKind =
-                refKind == RefKind.None
-                    ? BindValueKind.RValue
-                    : refKind == RefKind.In
-                        ? BindValueKind.ReadonlyRef
-                        : BindValueKind.RefOrOut;
+                refKind == RefKind.None ? BindValueKind.RValue
+                : refKind == RefKind.In ? BindValueKind.ReadonlyRef
+                : BindValueKind.RefOrOut;
 
             BoundExpression argument;
             if (allowArglist)
@@ -13872,19 +13866,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             var argument = arguments.Arguments[0];
 
             var argType = argument.Type;
-            ThreeState argIsIndexNotRange = TypeSymbol.Equals(
-                argType,
-                Compilation.GetWellKnownType(WellKnownType.System_Index),
-                TypeCompareKind.ConsiderEverything
-            )
+            ThreeState argIsIndexNotRange =
+                TypeSymbol.Equals(
+                    argType,
+                    Compilation.GetWellKnownType(WellKnownType.System_Index),
+                    TypeCompareKind.ConsiderEverything
+                )
                 ? ThreeState.True
                 : TypeSymbol.Equals(
                     argType,
                     Compilation.GetWellKnownType(WellKnownType.System_Range),
                     TypeCompareKind.ConsiderEverything
                 )
-                    ? ThreeState.False
-                    : ThreeState.Unknown;
+                ? ThreeState.False
+                : ThreeState.Unknown;
 
             Debug.Assert(receiver.Type is not null);
             if (!argIsIndexNotRange.HasValue())

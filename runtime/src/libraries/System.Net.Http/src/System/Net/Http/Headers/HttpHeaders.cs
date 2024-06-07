@@ -1353,11 +1353,9 @@ namespace System.Net.Http.Headers
             return Count<object>(info.ParsedAndInvalidValues) + Count<string>(info.RawValue);
 
             static int Count<T>(object? valueStore) =>
-                valueStore is null
-                    ? 0
-                    : valueStore is List<T> list
-                        ? list.Count
-                        : 1;
+                valueStore is null ? 0
+                : valueStore is List<T> list ? list.Count
+                : 1;
         }
 
         private static void ReadStoreValues<T>(

@@ -130,11 +130,9 @@ namespace System
                 // in this example.  Only when the user passes in TimeZoneInfo.Local or
                 // TimeZoneInfo.Utc to the ConvertTime(...) methods will this check succeed.
                 //
-                return ReferenceEquals(timeZone, s_utcTimeZone)
-                    ? DateTimeKind.Utc
-                    : ReferenceEquals(timeZone, _localTimeZone)
-                        ? DateTimeKind.Local
-                        : DateTimeKind.Unspecified;
+                return ReferenceEquals(timeZone, s_utcTimeZone) ? DateTimeKind.Utc
+                    : ReferenceEquals(timeZone, _localTimeZone) ? DateTimeKind.Local
+                    : DateTimeKind.Unspecified;
             }
 
             public Dictionary<string, TimeZoneInfo>? _systemTimeZones;
@@ -508,10 +506,10 @@ namespace System
             CachedData cachedData = s_cachedData;
             DateTime adjustedTime =
                 dateTime.Kind == DateTimeKind.Local
-                    ? ConvertTime(dateTime, cachedData.Local, this, flags, cachedData)
-                    : dateTime.Kind == DateTimeKind.Utc
-                        ? ConvertTime(dateTime, s_utcTimeZone, this, flags, cachedData)
-                        : dateTime;
+                ? ConvertTime(dateTime, cachedData.Local, this, flags, cachedData)
+                : dateTime.Kind == DateTimeKind.Utc
+                ? ConvertTime(dateTime, s_utcTimeZone, this, flags, cachedData)
+                : dateTime;
 
             AdjustmentRule? rule = GetAdjustmentRuleForTime(adjustedTime, out int? ruleIndex);
             if (rule != null && rule.HasDaylightSaving)
@@ -844,11 +842,9 @@ namespace System
             // check for overflow
             long ticks = utcDateTime.Ticks + destinationOffset.Ticks;
 
-            return ticks > DateTimeOffset.MaxValue.Ticks
-                ? DateTimeOffset.MaxValue
-                : ticks < DateTimeOffset.MinValue.Ticks
-                    ? DateTimeOffset.MinValue
-                    : new DateTimeOffset(ticks, destinationOffset);
+            return ticks > DateTimeOffset.MaxValue.Ticks ? DateTimeOffset.MaxValue
+                : ticks < DateTimeOffset.MinValue.Ticks ? DateTimeOffset.MinValue
+                : new DateTimeOffset(ticks, destinationOffset);
         }
 
         /// <summary>
@@ -1603,11 +1599,9 @@ namespace System
 
             long ticks = dateTime.Ticks + offset.Ticks;
 
-            return ticks > DateTime.MaxValue.Ticks
-                ? DateTime.MaxValue
-                : ticks < DateTime.MinValue.Ticks
-                    ? DateTime.MinValue
-                    : new DateTime(ticks);
+            return ticks > DateTime.MaxValue.Ticks ? DateTime.MaxValue
+                : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue
+                : new DateTime(ticks);
         }
 
         /// <summary>
@@ -1623,11 +1617,9 @@ namespace System
         {
             // used to calculate the UTC offset in the destinationTimeZone
             DateTime utcConverted =
-                ticks > DateTime.MaxValue.Ticks
-                    ? DateTime.MaxValue
-                    : ticks < DateTime.MinValue.Ticks
-                        ? DateTime.MinValue
-                        : new DateTime(ticks);
+                ticks > DateTime.MaxValue.Ticks ? DateTime.MaxValue
+                : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue
+                : new DateTime(ticks);
 
             // verify the time is between MinValue and MaxValue in the new time zone
             TimeSpan offset = GetUtcOffsetFromUtc(
@@ -1637,11 +1629,9 @@ namespace System
             );
             ticks += offset.Ticks;
 
-            return ticks > DateTime.MaxValue.Ticks
-                ? DateTime.MaxValue
-                : ticks < DateTime.MinValue.Ticks
-                    ? DateTime.MinValue
-                    : new DateTime(ticks);
+            return ticks > DateTime.MaxValue.Ticks ? DateTime.MaxValue
+                : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue
+                : new DateTime(ticks);
         }
 
         /// <summary>

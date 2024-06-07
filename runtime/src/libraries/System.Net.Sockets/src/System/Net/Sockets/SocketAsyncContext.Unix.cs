@@ -1460,11 +1460,9 @@ namespace System.Net.Sockets
             )
             {
                 string queueType =
-                    typeof(TOperation) == typeof(ReadOperation)
-                        ? "recv"
-                        : typeof(TOperation) == typeof(WriteOperation)
-                            ? "send"
-                            : "???";
+                    typeof(TOperation) == typeof(ReadOperation) ? "recv"
+                    : typeof(TOperation) == typeof(WriteOperation) ? "send"
+                    : "???";
 
                 OutputTrace(
                     $"{IdOf(context)}-{queueType}.{memberName}: {message}, {_state}-{_sequenceNumber}, {((_tail == null) ? "empty" : "not empty")}"

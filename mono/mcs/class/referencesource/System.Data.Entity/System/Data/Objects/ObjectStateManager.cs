@@ -598,11 +598,9 @@ namespace System.Data.Objects
                     validEntries.Contains(entry),
                     "The entry in the dangling foreign key store is no longer in the ObjectStateManager. Key="
                         + (
-                            entry.State == EntityState.Detached
-                                ? "detached"
-                                : entry.EntityKey != null
-                                    ? "null"
-                                    : entry.EntityKey.ConcatKeyValue()
+                            entry.State == EntityState.Detached ? "detached"
+                            : entry.EntityKey != null ? "null"
+                            : entry.EntityKey.ConcatKeyValue()
                         )
                 );
                 Debug.Assert(

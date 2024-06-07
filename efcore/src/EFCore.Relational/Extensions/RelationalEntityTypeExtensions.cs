@@ -466,11 +466,9 @@ public static class RelationalEntityTypeExtensions
     public static string? GetSqlQuery(this IReadOnlyEntityType entityType)
     {
         var nameAnnotation = entityType.FindAnnotation(RelationalAnnotationNames.SqlQuery);
-        return nameAnnotation != null
-            ? (string?)nameAnnotation.Value
-            : entityType.BaseType != null
-                ? entityType.GetRootType().GetSqlQuery()
-                : null;
+        return nameAnnotation != null ? (string?)nameAnnotation.Value
+            : entityType.BaseType != null ? entityType.GetRootType().GetSqlQuery()
+            : null;
     }
 
     /// <summary>
@@ -526,11 +524,9 @@ public static class RelationalEntityTypeExtensions
     public static string? GetFunctionName(this IReadOnlyEntityType entityType)
     {
         var nameAnnotation = entityType.FindAnnotation(RelationalAnnotationNames.FunctionName);
-        return nameAnnotation != null
-            ? (string?)nameAnnotation.Value
-            : entityType.BaseType != null
-                ? entityType.GetRootType().GetFunctionName()
-                : null;
+        return nameAnnotation != null ? (string?)nameAnnotation.Value
+            : entityType.BaseType != null ? entityType.GetRootType().GetFunctionName()
+            : null;
     }
 
     /// <summary>
@@ -1725,14 +1721,12 @@ public static class RelationalEntityTypeExtensions
     public static string? GetMappingStrategy(this IReadOnlyEntityType entityType) =>
         (string?)entityType[RelationalAnnotationNames.MappingStrategy]
         ?? (
-            entityType.BaseType != null
-                ? entityType.GetRootType().GetMappingStrategy()
-                : entityType.GetDiscriminatorPropertyName() != null
-                    ? RelationalAnnotationNames.TphMappingStrategy
-                    : entityType.FindPrimaryKey() == null
-                    || !entityType.GetDirectlyDerivedTypes().Any()
-                        ? null
-                        : RelationalAnnotationNames.TptMappingStrategy
+            entityType.BaseType != null ? entityType.GetRootType().GetMappingStrategy()
+            : entityType.GetDiscriminatorPropertyName() != null
+            ? RelationalAnnotationNames.TphMappingStrategy
+            : entityType.FindPrimaryKey() == null || !entityType.GetDirectlyDerivedTypes().Any()
+            ? null
+            : RelationalAnnotationNames.TptMappingStrategy
         );
 
     /// <summary>

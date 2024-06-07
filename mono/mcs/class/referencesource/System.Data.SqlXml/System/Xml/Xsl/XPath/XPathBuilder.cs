@@ -260,19 +260,15 @@ namespace System.Xml.Xsl.XPath
         static XPathOperator InvertOp(XPathOperator op)
         {
             return (
-                op == XPathOperator.Lt
-                    ? XPathOperator.Gt
-                    : // '<'  --> '>'
-                    op == XPathOperator.Le
-                        ? XPathOperator.Ge
-                        : // '<=' --> '>='
-                        op == XPathOperator.Gt
-                            ? XPathOperator.Lt
-                            : // '>'  --> '<'
-                            op == XPathOperator.Ge
-                                ? XPathOperator.Le
-                                : // '>=' --> '<='
-                                /*default:*/op
+                op == XPathOperator.Lt ? XPathOperator.Gt
+                : // '<'  --> '>'
+                op == XPathOperator.Le ? XPathOperator.Ge
+                : // '<=' --> '>='
+                op == XPathOperator.Gt ? XPathOperator.Lt
+                : // '>'  --> '<'
+                op == XPathOperator.Ge ? XPathOperator.Le
+                : // '>=' --> '<='
+                /*default:*/op
             );
         }
 
@@ -361,12 +357,12 @@ namespace System.Xml.Xsl.XPath
                 XmlTypeCode compType = (
                     leftType.TypeCode == XmlTypeCode.Boolean
                     || rightType.TypeCode == XmlTypeCode.Boolean
-                        ? XmlTypeCode.Boolean
-                        : leftType.TypeCode == XmlTypeCode.Double
-                        || rightType.TypeCode == XmlTypeCode.Double
-                            ? XmlTypeCode.Double
-                            :
-                            /*default:*/XmlTypeCode.String
+                    ? XmlTypeCode.Boolean
+                    : leftType.TypeCode == XmlTypeCode.Double
+                    || rightType.TypeCode == XmlTypeCode.Double
+                    ? XmlTypeCode.Double
+                    :
+                    /*default:*/XmlTypeCode.String
                 );
                 return CompareValues(op, left, right, compType);
             }
@@ -527,16 +523,13 @@ namespace System.Xml.Xsl.XPath
                     QilLoop filter = (QilLoop)qilAxis;
                     filter.Body = f.And(
                         filter.Body,
-                        name != null && nsUri != null
-                            ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
-                            : // ns:bar || bar
-                            nsUri != null
-                                ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                                : // ns:*
-                                name != null
-                                    ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                                    : // *:foo
-                                    /*name  == nsUri == null*/f.True() // *
+                        name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                        : // ns:bar || bar
+                        nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                        : // ns:*
+                        name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                        : // *:foo
+                        /*name  == nsUri == null*/f.True() // *
                     );
                     return filter;
                 }
@@ -544,16 +537,13 @@ namespace System.Xml.Xsl.XPath
 
             return f.Filter(
                 itr = f.For(qilAxis),
-                name != null && nsUri != null
-                    ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
-                    : // ns:bar || bar
-                    nsUri != null
-                        ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                        : // ns:*
-                        name != null
-                            ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                            : // *:foo
-                            /*name  == nsUri == null*/f.True() // *
+                name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                : // ns:bar || bar
+                nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                : // ns:*
+                name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                : // *:foo
+                /*name  == nsUri == null*/f.True() // *
             );
         }
 

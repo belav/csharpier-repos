@@ -575,11 +575,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                 token,
                 semanticModel,
                 typeSyntaxGetter: f =>
-                    f is ForEachStatementSyntax forEachStatement
-                        ? forEachStatement.Type
-                        : f is ForEachVariableStatementSyntax forEachVariableStatement
-                            ? forEachVariableStatement.Variable
-                            : null, // Return null to bail out.
+                    f is ForEachStatementSyntax forEachStatement ? forEachStatement.Type
+                    : f is ForEachVariableStatementSyntax forEachVariableStatement
+                    ? forEachVariableStatement.Variable
+                    : null, // Return null to bail out.
                 modifierGetter: f => default,
                 possibleDeclarationComputer: d =>
                     ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local)),
@@ -753,11 +752,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             return modifiers.IsConst
                 ? ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
                 : modifiers.IsAsync || modifiers.IsUnsafe
-                    ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
-                    : ImmutableArray.Create(
-                        new SymbolKindOrTypeKind(SymbolKind.Local),
-                        new SymbolKindOrTypeKind(MethodKind.LocalFunction)
-                    );
+                ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
+                : ImmutableArray.Create(
+                    new SymbolKindOrTypeKind(SymbolKind.Local),
+                    new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                );
         }
 
         private static DeclarationModifiers GetDeclarationModifiers(SyntaxTokenList modifiers)
@@ -883,11 +882,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
         {
             // There's no special glyph for local functions.
             // We don't need to differentiate them at this point.
-            return symbolKindOrTypeKind.SymbolKind.HasValue
-                ? symbolKindOrTypeKind.SymbolKind.Value
-                : symbolKindOrTypeKind.MethodKind.HasValue
-                    ? SymbolKind.Method
-                    : throw ExceptionUtilities.Unreachable();
+            return symbolKindOrTypeKind.SymbolKind.HasValue ? symbolKindOrTypeKind.SymbolKind.Value
+                : symbolKindOrTypeKind.MethodKind.HasValue ? SymbolKind.Method
+                : throw ExceptionUtilities.Unreachable();
         }
     }
 }

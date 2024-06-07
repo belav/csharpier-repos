@@ -86,11 +86,10 @@ namespace Microsoft.Build.Execution
         {
             projects = projectCollection;
             global_properties = globalProperties ?? new Dictionary<string, string>();
-            tools_version = !string.IsNullOrEmpty(toolsVersion)
-                ? toolsVersion
-                : !string.IsNullOrEmpty(xml.ToolsVersion)
-                    ? xml.ToolsVersion
-                    : projects.DefaultToolsVersion;
+            tools_version =
+                !string.IsNullOrEmpty(toolsVersion) ? toolsVersion
+                : !string.IsNullOrEmpty(xml.ToolsVersion) ? xml.ToolsVersion
+                : projects.DefaultToolsVersion;
             InitializeProperties(xml);
         }
 
@@ -414,11 +413,10 @@ namespace Microsoft.Build.Execution
                 import.Project,
                 TextWriter.Null.WriteLine
             );
-            path = Path.IsPathRooted(path)
-                ? path
-                : dir != null
-                    ? Path.Combine(dir, path)
-                    : Path.GetFullPath(path);
+            path =
+                Path.IsPathRooted(path) ? path
+                : dir != null ? Path.Combine(dir, path)
+                : Path.GetFullPath(path);
             if (projects.OngoingImports.Contains(path))
                 throw new InvalidProjectFileException(
                     import.Location,

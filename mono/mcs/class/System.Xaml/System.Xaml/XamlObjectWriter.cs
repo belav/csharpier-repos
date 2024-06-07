@@ -512,11 +512,9 @@ namespace System.Xaml
 
             var args = state.Type.GetSortedConstructorArguments().ToArray();
             var argt =
-                args != null
-                    ? (IList<XamlType>)(from arg in args select arg.Type).ToArray()
-                    : considerPositionalParameters
-                        ? state.Type.GetPositionalParameters(contents.Count)
-                        : null;
+                args != null ? (IList<XamlType>)(from arg in args select arg.Type).ToArray()
+                : considerPositionalParameters ? state.Type.GetPositionalParameters(contents.Count)
+                : null;
 
             var argv = new object[argt.Count];
             for (int i = 0; i < argv.Length; i++)

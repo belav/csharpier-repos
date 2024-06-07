@@ -523,11 +523,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
             else
             {
-                var defaultBaseType = src.IsEnum
-                    ? "System.Enum"
-                    : src.IsValueType
-                        ? "System.ValueType"
-                        : "System.Object";
+                var defaultBaseType =
+                    src.IsEnum ? "System.Enum"
+                    : src.IsValueType ? "System.ValueType"
+                    : "System.Object";
                 expectedBaseName =
                     GetCustomAttributeCtorValues<object>(src, nameof(KeptBaseTypeAttribute))
                         .FirstOrDefault()

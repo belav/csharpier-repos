@@ -936,19 +936,20 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     TypeToGenerateIn.Language
                 );
 
-                var members = withFields
+                var members =
+                    withFields
                     ? SyntaxGeneratorExtensions.CreateFieldsForParameters(
                         _parameters,
                         ParameterToNewFieldMap,
                         IsContainedInUnsafeType
                     )
                     : withProperties
-                        ? SyntaxGeneratorExtensions.CreatePropertiesForParameters(
-                            _parameters,
-                            ParameterToNewPropertyMap,
-                            IsContainedInUnsafeType
-                        )
-                        : ImmutableArray<ISymbol>.Empty;
+                    ? SyntaxGeneratorExtensions.CreatePropertiesForParameters(
+                        _parameters,
+                        ParameterToNewPropertyMap,
+                        IsContainedInUnsafeType
+                    )
+                    : ImmutableArray<ISymbol>.Empty;
 
                 var semanticModel = await document
                     .GetRequiredSemanticModelAsync(cancellationToken)
@@ -986,11 +987,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                var newMemberMap = withFields
-                    ? ParameterToNewFieldMap
-                    : withProperties
-                        ? ParameterToNewPropertyMap
-                        : ImmutableDictionary<string, string>.Empty;
+                var newMemberMap =
+                    withFields ? ParameterToNewFieldMap
+                    : withProperties ? ParameterToNewPropertyMap
+                    : ImmutableDictionary<string, string>.Empty;
 
                 return await provider
                     .GetRequiredService<ICodeGenerationService>()
