@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Collections
     ///
     /// <para>The following table summarizes the performance characteristics of
     /// <see cref="ImmutableSegmentedList{T}"/>:</para>
-    /// 
+    ///
     /// <list type="table">
     ///   <item>
     ///     <description>Operation</description>
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Collections
     ///     <description>Requires creating a new segmented list and cloning all impacted segments</description>
     ///   </item>
     /// </list>
-    /// 
+    ///
     /// <para>This type is backed by segmented arrays to avoid using the Large Object Heap without impacting algorithmic
     /// complexity.</para>
     /// </remarks>
@@ -68,15 +68,19 @@ namespace Microsoft.CodeAnalysis.Collections
     /// This effectively copies the one field in the struct to a local variable so that it is insulated from other
     /// threads.</para>
     /// </devremarks>
-    internal readonly partial struct ImmutableSegmentedList<T> : IImmutableList<T>, IReadOnlyList<T>, IList<T>, IList, IEquatable<ImmutableSegmentedList<T>>
+    internal readonly partial struct ImmutableSegmentedList<T>
+        : IImmutableList<T>,
+            IReadOnlyList<T>,
+            IList<T>,
+            IList,
+            IEquatable<ImmutableSegmentedList<T>>
     {
         /// <inheritdoc cref="ImmutableList{T}.Empty"/>
         public static readonly ImmutableSegmentedList<T> Empty = new(new SegmentedList<T>());
 
         private readonly SegmentedList<T> _list;
 
-        private ImmutableSegmentedList(SegmentedList<T> list)
-            => _list = list;
+        private ImmutableSegmentedList(SegmentedList<T> list) => _list = list;
 
         public int Count => _list.Count;
 
@@ -109,17 +113,25 @@ namespace Microsoft.CodeAnalysis.Collections
             set => throw new NotSupportedException();
         }
 
-        public static bool operator ==(ImmutableSegmentedList<T> left, ImmutableSegmentedList<T> right)
-            => left.Equals(right);
+        public static bool operator ==(
+            ImmutableSegmentedList<T> left,
+            ImmutableSegmentedList<T> right
+        ) => left.Equals(right);
 
-        public static bool operator !=(ImmutableSegmentedList<T> left, ImmutableSegmentedList<T> right)
-            => !left.Equals(right);
+        public static bool operator !=(
+            ImmutableSegmentedList<T> left,
+            ImmutableSegmentedList<T> right
+        ) => !left.Equals(right);
 
-        public static bool operator ==(ImmutableSegmentedList<T>? left, ImmutableSegmentedList<T>? right)
-            => left.GetValueOrDefault().Equals(right.GetValueOrDefault());
+        public static bool operator ==(
+            ImmutableSegmentedList<T>? left,
+            ImmutableSegmentedList<T>? right
+        ) => left.GetValueOrDefault().Equals(right.GetValueOrDefault());
 
-        public static bool operator !=(ImmutableSegmentedList<T>? left, ImmutableSegmentedList<T>? right)
-            => !left.GetValueOrDefault().Equals(right.GetValueOrDefault());
+        public static bool operator !=(
+            ImmutableSegmentedList<T>? left,
+            ImmutableSegmentedList<T>? right
+        ) => !left.GetValueOrDefault().Equals(right.GetValueOrDefault());
 
         /// <inheritdoc cref="ImmutableList{T}.ItemRef(int)"/>
         public ref readonly T ItemRef(int index)
@@ -184,70 +196,61 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList{T}.BinarySearch(T)"/>
-        public int BinarySearch(T item)
-            => _list.BinarySearch(item);
+        public int BinarySearch(T item) => _list.BinarySearch(item);
 
         /// <inheritdoc cref="ImmutableList{T}.BinarySearch(T, IComparer{T}?)"/>
-        public int BinarySearch(T item, IComparer<T>? comparer)
-            => _list.BinarySearch(item, comparer);
+        public int BinarySearch(T item, IComparer<T>? comparer) =>
+            _list.BinarySearch(item, comparer);
 
         /// <inheritdoc cref="ImmutableList{T}.BinarySearch(int, int, T, IComparer{T}?)"/>
-        public int BinarySearch(int index, int count, T item, IComparer<T>? comparer)
-            => _list.BinarySearch(index, count, item, comparer);
+        public int BinarySearch(int index, int count, T item, IComparer<T>? comparer) =>
+            _list.BinarySearch(index, count, item, comparer);
 
         /// <inheritdoc cref="ImmutableList{T}.Clear()"/>
-        public ImmutableSegmentedList<T> Clear()
-            => Empty;
+        public ImmutableSegmentedList<T> Clear() => Empty;
 
-        public bool Contains(T value)
-            => _list.Contains(value);
+        public bool Contains(T value) => _list.Contains(value);
 
         /// <inheritdoc cref="ImmutableList{T}.ConvertAll{TOutput}(Func{T, TOutput})"/>
-        public ImmutableSegmentedList<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
-            => new ImmutableSegmentedList<TOutput>(_list.ConvertAll(converter));
+        public ImmutableSegmentedList<TOutput> ConvertAll<TOutput>(
+            Converter<T, TOutput> converter
+        ) => new ImmutableSegmentedList<TOutput>(_list.ConvertAll(converter));
 
         /// <inheritdoc cref="ImmutableList{T}.CopyTo(T[])"/>
-        public void CopyTo(T[] array)
-            => _list.CopyTo(array);
+        public void CopyTo(T[] array) => _list.CopyTo(array);
 
-        public void CopyTo(T[] array, int arrayIndex)
-            => _list.CopyTo(array, arrayIndex);
+        public void CopyTo(T[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
 
         /// <inheritdoc cref="ImmutableList{T}.CopyTo(int, T[], int, int)"/>
-        public void CopyTo(int index, T[] array, int arrayIndex, int count)
-            => _list.CopyTo(index, array, arrayIndex, count);
+        public void CopyTo(int index, T[] array, int arrayIndex, int count) =>
+            _list.CopyTo(index, array, arrayIndex, count);
 
         /// <inheritdoc cref="ImmutableList{T}.Exists(Predicate{T})"/>
-        public bool Exists(Predicate<T> match)
-            => _list.Exists(match);
+        public bool Exists(Predicate<T> match) => _list.Exists(match);
 
         /// <inheritdoc cref="ImmutableList{T}.Find(Predicate{T})"/>
-        public T? Find(Predicate<T> match)
-            => _list.Find(match);
+        public T? Find(Predicate<T> match) => _list.Find(match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindAll(Predicate{T})"/>
-        public ImmutableSegmentedList<T> FindAll(Predicate<T> match)
-            => new ImmutableSegmentedList<T>(_list.FindAll(match));
+        public ImmutableSegmentedList<T> FindAll(Predicate<T> match) =>
+            new ImmutableSegmentedList<T>(_list.FindAll(match));
 
         /// <inheritdoc cref="ImmutableList{T}.FindIndex(Predicate{T})"/>
-        public int FindIndex(Predicate<T> match)
-            => _list.FindIndex(match);
+        public int FindIndex(Predicate<T> match) => _list.FindIndex(match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindIndex(int, Predicate{T})"/>
-        public int FindIndex(int startIndex, Predicate<T> match)
-            => _list.FindIndex(startIndex, match);
+        public int FindIndex(int startIndex, Predicate<T> match) =>
+            _list.FindIndex(startIndex, match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindIndex(int, int, Predicate{T})"/>
-        public int FindIndex(int startIndex, int count, Predicate<T> match)
-            => _list.FindIndex(startIndex, count, match);
+        public int FindIndex(int startIndex, int count, Predicate<T> match) =>
+            _list.FindIndex(startIndex, count, match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindLast(Predicate{T})"/>
-        public T? FindLast(Predicate<T> match)
-            => _list.FindLast(match);
+        public T? FindLast(Predicate<T> match) => _list.FindLast(match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindLastIndex(Predicate{T})"/>
-        public int FindLastIndex(Predicate<T> match)
-            => _list.FindLastIndex(match);
+        public int FindLastIndex(Predicate<T> match) => _list.FindLastIndex(match);
 
         /// <inheritdoc cref="ImmutableList{T}.FindLastIndex(int, Predicate{T})"/>
         public int FindLastIndex(int startIndex, Predicate<T> match)
@@ -280,12 +283,10 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList{T}.ForEach(Action{T})"/>
-        public void ForEach(Action<T> action)
-            => _list.ForEach(action);
+        public void ForEach(Action<T> action) => _list.ForEach(action);
 
         /// <inheritdoc cref="ImmutableList{T}.GetEnumerator()"/>
-        public Enumerator GetEnumerator()
-            => new(_list);
+        public Enumerator GetEnumerator() => new(_list);
 
         /// <inheritdoc cref="ImmutableList{T}.GetRange(int, int)"/>
         public ImmutableSegmentedList<T> GetRange(int index, int count)
@@ -298,11 +299,10 @@ namespace Microsoft.CodeAnalysis.Collections
             return new ImmutableSegmentedList<T>(self._list.GetRange(index, count));
         }
 
-        public int IndexOf(T value)
-            => _list.IndexOf(value);
+        public int IndexOf(T value) => _list.IndexOf(value);
 
-        public int IndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer)
-            => _list.IndexOf(item, index, count, equalityComparer);
+        public int IndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer) =>
+            _list.IndexOf(item, index, count, equalityComparer);
 
         /// <inheritdoc cref="ImmutableList{T}.Insert(int, T)"/>
         public ImmutableSegmentedList<T> Insert(int index, T item)
@@ -423,7 +423,10 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList{T}.RemoveRange(IEnumerable{T}, IEqualityComparer{T}?)"/>
-        public ImmutableSegmentedList<T> RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
+        public ImmutableSegmentedList<T> RemoveRange(
+            IEnumerable<T> items,
+            IEqualityComparer<T>? equalityComparer
+        )
         {
             if (items is null)
                 throw new ArgumentNullException(nameof(items));
@@ -477,7 +480,11 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList{T}.Replace(T, T, IEqualityComparer{T}?)"/>
-        public ImmutableSegmentedList<T> Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
+        public ImmutableSegmentedList<T> Replace(
+            T oldValue,
+            T newValue,
+            IEqualityComparer<T>? equalityComparer
+        )
         {
             var self = this;
 
@@ -576,90 +583,76 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList{T}.ToBuilder()"/>
-        public Builder ToBuilder()
-            => new Builder(this);
+        public Builder ToBuilder() => new Builder(this);
 
-        private ValueBuilder ToValueBuilder()
-            => new ValueBuilder(this);
+        private ValueBuilder ToValueBuilder() => new ValueBuilder(this);
 
-        public override int GetHashCode()
-            => _list?.GetHashCode() ?? 0;
+        public override int GetHashCode() => _list?.GetHashCode() ?? 0;
 
         public override bool Equals(object? obj)
         {
-            return obj is ImmutableSegmentedList<T> other
-                && Equals(other);
+            return obj is ImmutableSegmentedList<T> other && Equals(other);
         }
 
-        public bool Equals(ImmutableSegmentedList<T> other)
-            => _list == other._list;
+        public bool Equals(ImmutableSegmentedList<T> other) => _list == other._list;
 
         /// <inheritdoc cref="ImmutableList{T}.TrueForAll(Predicate{T})"/>
-        public bool TrueForAll(Predicate<T> match)
-            => _list.TrueForAll(match);
+        public bool TrueForAll(Predicate<T> match) => _list.TrueForAll(match);
 
-        IImmutableList<T> IImmutableList<T>.Clear()
-            => Clear();
+        IImmutableList<T> IImmutableList<T>.Clear() => Clear();
 
-        IImmutableList<T> IImmutableList<T>.Add(T value)
-            => Add(value);
+        IImmutableList<T> IImmutableList<T>.Add(T value) => Add(value);
 
-        IImmutableList<T> IImmutableList<T>.AddRange(IEnumerable<T> items)
-            => AddRange(items);
+        IImmutableList<T> IImmutableList<T>.AddRange(IEnumerable<T> items) => AddRange(items);
 
-        IImmutableList<T> IImmutableList<T>.Insert(int index, T element)
-            => Insert(index, element);
+        IImmutableList<T> IImmutableList<T>.Insert(int index, T element) => Insert(index, element);
 
-        IImmutableList<T> IImmutableList<T>.InsertRange(int index, IEnumerable<T> items)
-            => InsertRange(index, items);
+        IImmutableList<T> IImmutableList<T>.InsertRange(int index, IEnumerable<T> items) =>
+            InsertRange(index, items);
 
-        IImmutableList<T> IImmutableList<T>.Remove(T value, IEqualityComparer<T>? equalityComparer)
-            => Remove(value, equalityComparer);
+        IImmutableList<T> IImmutableList<T>.Remove(
+            T value,
+            IEqualityComparer<T>? equalityComparer
+        ) => Remove(value, equalityComparer);
 
-        IImmutableList<T> IImmutableList<T>.RemoveAll(Predicate<T> match)
-            => RemoveAll(match);
+        IImmutableList<T> IImmutableList<T>.RemoveAll(Predicate<T> match) => RemoveAll(match);
 
-        IImmutableList<T> IImmutableList<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
-            => RemoveRange(items, equalityComparer);
+        IImmutableList<T> IImmutableList<T>.RemoveRange(
+            IEnumerable<T> items,
+            IEqualityComparer<T>? equalityComparer
+        ) => RemoveRange(items, equalityComparer);
 
-        IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count)
-            => RemoveRange(index, count);
+        IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count) =>
+            RemoveRange(index, count);
 
-        IImmutableList<T> IImmutableList<T>.RemoveAt(int index)
-            => RemoveAt(index);
+        IImmutableList<T> IImmutableList<T>.RemoveAt(int index) => RemoveAt(index);
 
-        IImmutableList<T> IImmutableList<T>.SetItem(int index, T value)
-            => SetItem(index, value);
+        IImmutableList<T> IImmutableList<T>.SetItem(int index, T value) => SetItem(index, value);
 
-        IImmutableList<T> IImmutableList<T>.Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
-            => Replace(oldValue, newValue, equalityComparer);
+        IImmutableList<T> IImmutableList<T>.Replace(
+            T oldValue,
+            T newValue,
+            IEqualityComparer<T>? equalityComparer
+        ) => Replace(oldValue, newValue, equalityComparer);
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
+            IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => ((IEnumerable<T>)this).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
 
-        void IList<T>.Insert(int index, T item)
-            => throw new NotSupportedException();
+        void IList<T>.Insert(int index, T item) => throw new NotSupportedException();
 
-        void IList<T>.RemoveAt(int index)
-            => throw new NotSupportedException();
+        void IList<T>.RemoveAt(int index) => throw new NotSupportedException();
 
-        void ICollection<T>.Add(T item)
-            => throw new NotSupportedException();
+        void ICollection<T>.Add(T item) => throw new NotSupportedException();
 
-        void ICollection<T>.Clear()
-            => throw new NotSupportedException();
+        void ICollection<T>.Clear() => throw new NotSupportedException();
 
-        bool ICollection<T>.Remove(T item)
-            => throw new NotSupportedException();
+        bool ICollection<T>.Remove(T item) => throw new NotSupportedException();
 
-        int IList.Add(object? value)
-            => throw new NotSupportedException();
+        int IList.Add(object? value) => throw new NotSupportedException();
 
-        void IList.Clear()
-            => throw new NotSupportedException();
+        void IList.Clear() => throw new NotSupportedException();
 
         bool IList.Contains(object? value)
         {
@@ -673,14 +666,11 @@ namespace Microsoft.CodeAnalysis.Collections
             return backingList.IndexOf(value);
         }
 
-        void IList.Insert(int index, object? value)
-            => throw new NotSupportedException();
+        void IList.Insert(int index, object? value) => throw new NotSupportedException();
 
-        void IList.Remove(object? value)
-            => throw new NotSupportedException();
+        void IList.Remove(object? value) => throw new NotSupportedException();
 
-        void IList.RemoveAt(int index)
-            => throw new NotSupportedException();
+        void IList.RemoveAt(int index) => throw new NotSupportedException();
 
         void ICollection.CopyTo(Array array, int index)
         {

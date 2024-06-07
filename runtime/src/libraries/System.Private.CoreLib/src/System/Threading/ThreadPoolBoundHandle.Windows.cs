@@ -58,15 +58,18 @@ namespace System.Threading
                 Debug.Assert(succeeded);
             }
             catch (Exception ex)
-            {   // BindHandle throws ApplicationException on full CLR and Exception on CoreCLR.
+            { // BindHandle throws ApplicationException on full CLR and Exception on CoreCLR.
                 // We do not let either of these leak and convert them to ArgumentException to
                 // indicate that the specified handles are invalid.
 
-                if (ex.HResult == HResults.E_HANDLE)         // Bad handle
+                if (ex.HResult == HResults.E_HANDLE) // Bad handle
                     throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-                if (ex.HResult == HResults.E_INVALIDARG)     // Handle already bound or sync handle
-                    throw new ArgumentException(SR.Argument_AlreadyBoundOrSyncHandle, nameof(handle));
+                if (ex.HResult == HResults.E_INVALIDARG) // Handle already bound or sync handle
+                    throw new ArgumentException(
+                        SR.Argument_AlreadyBoundOrSyncHandle,
+                        nameof(handle)
+                    );
 
                 throw;
             }
@@ -114,7 +117,9 @@ namespace System.Threading
         ///     it remains the responsibility of the caller to call <see cref="SafeHandle.Dispose()"/>.
         /// </remarks>
         public static unsafe ThreadPoolBoundHandle BindHandle(SafeHandle handle) =>
-            ThreadPool.UseWindowsThreadPool ? BindHandleWindowsThreadPool(handle) : BindHandleCore(handle);
+            ThreadPool.UseWindowsThreadPool
+                ? BindHandleWindowsThreadPool(handle)
+                : BindHandleCore(handle);
 
         /// <summary>
         ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, specifying
@@ -158,10 +163,14 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData) =>
-            ThreadPool.UseWindowsThreadPool ?
-            AllocateNativeOverlappedWindowsThreadPool(callback, state, pinData) :
-            AllocateNativeOverlappedPortableCore(callback, state, pinData);
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) =>
+            ThreadPool.UseWindowsThreadPool
+                ? AllocateNativeOverlappedWindowsThreadPool(callback, state, pinData)
+                : AllocateNativeOverlappedPortableCore(callback, state, pinData);
 
         /// <summary>
         ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, specifying
@@ -208,10 +217,14 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData) =>
-            ThreadPool.UseWindowsThreadPool ?
-            UnsafeAllocateNativeOverlappedWindowsThreadPool(callback, state, pinData) :
-            UnsafeAllocateNativeOverlappedPortableCore(callback, state, pinData);
+        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) =>
+            ThreadPool.UseWindowsThreadPool
+                ? UnsafeAllocateNativeOverlappedWindowsThreadPool(callback, state, pinData)
+                : UnsafeAllocateNativeOverlappedPortableCore(callback, state, pinData);
 
         /// <summary>
         ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, using the callback,
@@ -242,10 +255,12 @@ namespace System.Threading
         /// </exception>
         /// <seealso cref="PreAllocatedOverlapped"/>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(PreAllocatedOverlapped preAllocated) =>
-            ThreadPool.UseWindowsThreadPool ?
-            AllocateNativeOverlappedWindowsThreadPool(preAllocated) :
-            AllocateNativeOverlappedPortableCore(preAllocated);
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            PreAllocatedOverlapped preAllocated
+        ) =>
+            ThreadPool.UseWindowsThreadPool
+                ? AllocateNativeOverlappedWindowsThreadPool(preAllocated)
+                : AllocateNativeOverlappedPortableCore(preAllocated);
 
         /// <summary>
         ///     Frees the unmanaged memory associated with a <see cref="NativeOverlapped"/> structure
@@ -301,9 +316,9 @@ namespace System.Threading
         /// </exception>
         [CLSCompliant(false)]
         public static unsafe object? GetNativeOverlappedState(NativeOverlapped* overlapped) =>
-            ThreadPool.UseWindowsThreadPool ?
-            GetNativeOverlappedStateWindowsThreadPool(overlapped) :
-            GetNativeOverlappedStatePortableCore(overlapped);
+            ThreadPool.UseWindowsThreadPool
+                ? GetNativeOverlappedStateWindowsThreadPool(overlapped)
+                : GetNativeOverlappedStatePortableCore(overlapped);
 
         public void Dispose()
         {

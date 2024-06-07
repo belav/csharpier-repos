@@ -14,9 +14,7 @@ public class AuthenticationFailureException : Exception
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public AuthenticationFailureException(string? message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="AuthenticationFailureException"/>
@@ -26,7 +24,5 @@ public class AuthenticationFailureException : Exception
     /// <param name="message">The message that describes the error.</param>
     /// <param name="innerException">The exception that is the cause of the current exception, or <see langword="null"/>.</param>
     public AuthenticationFailureException(string? message, Exception? innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) { }
 }

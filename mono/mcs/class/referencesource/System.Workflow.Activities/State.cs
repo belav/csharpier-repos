@@ -3,23 +3,23 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
+    using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.Runtime;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.ComponentModel.Design.Serialization;
     using System.Xml.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
 
     #endregion
 
@@ -30,26 +30,30 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(StateActivityValidator))]
     [SRCategory(SR.Standard)]
     [System.Runtime.InteropServices.ComVisible(false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class StateActivity : CompositeActivity
     {
         #region Fields
 
         public const string StateChangeTrackingDataKey = "StateActivity.StateChange";
-        internal static DependencyProperty StateMachineExecutionStateProperty = DependencyProperty.Register(StateMachineExecutionState.StateMachineExecutionStateKey, typeof(StateMachineExecutionState), typeof(StateActivity), new PropertyMetadata());
+        internal static DependencyProperty StateMachineExecutionStateProperty =
+            DependencyProperty.Register(
+                StateMachineExecutionState.StateMachineExecutionStateKey,
+                typeof(StateMachineExecutionState),
+                typeof(StateActivity),
+                new PropertyMetadata()
+            );
 
         #endregion Fields
 
         #region Constructor
 
-        public StateActivity()
-        {
-        }
+        public StateActivity() { }
 
         public StateActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion Constructor
 
@@ -69,7 +73,10 @@ namespace System.Workflow.Activities
             if (childActivity == null)
                 throw new ArgumentNullException("childActivity");
             if (!this.EnabledActivities.Contains(childActivity))
-                throw new ArgumentException(SR.GetString(SR.Error_StateChildNotFound), "childActivity");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_StateChildNotFound),
+                    "childActivity"
+                );
             else
             {
                 Activity[] dynamicChildActivity = this.GetDynamicActivities(childActivity);
@@ -100,7 +107,10 @@ namespace System.Workflow.Activities
             if (childActivity != null)
                 return GetDynamicActivity(childActivity);
 
-            throw new ArgumentException(SR.GetString(SR.Error_StateChildNotFound), "childActivityName");
+            throw new ArgumentException(
+                SR.GetString(SR.Error_StateChildNotFound),
+                "childActivityName"
+            );
         }
 
         #endregion Public Methods
@@ -113,20 +123,26 @@ namespace System.Workflow.Activities
 
             StateActivity rootState = StateMachineHelpers.GetRootState(this);
             if (!StateMachineHelpers.IsStateMachine(rootState))
-                throw new InvalidOperationException(SR.GetError_StateActivityMustBeContainedInAStateMachine());
+                throw new InvalidOperationException(
+                    SR.GetError_StateActivityMustBeContainedInAStateMachine()
+                );
 
             string initialStateName = StateMachineHelpers.GetInitialStateName(this);
             if (String.IsNullOrEmpty(initialStateName))
-                throw new InvalidOperationException(SR.GetError_CannotExecuteStateMachineWithoutInitialState());
+                throw new InvalidOperationException(
+                    SR.GetError_CannotExecuteStateMachineWithoutInitialState()
+                );
 
-            // 
+            //
 
 
             if (this.QualifiedName != initialStateName)
                 StateMachineSubscriptionManager.DisableStateWorkflowQueues(context, this);
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -153,7 +169,9 @@ namespace System.Workflow.Activities
         private void ExecuteRootState(ActivityExecutionContext context)
         {
             StateActivity state = (StateActivity)context.Activity;
-            StateMachineExecutionState executionState = new StateMachineExecutionState(this.WorkflowInstanceId);
+            StateMachineExecutionState executionState = new StateMachineExecutionState(
+                this.WorkflowInstanceId
+            );
             executionState.SchedulerBusy = false;
             state.SetValue(StateActivity.StateMachineExecutionStateProperty, executionState);
             executionState.SubscriptionManager.CreateSetStateEventQueue(context);
@@ -216,14 +234,18 @@ namespace System.Workflow.Activities
                 if (String.IsNullOrEmpty(executionState.NextStateName))
                 {
                     executionState.SubscriptionManager.ReevaluateSubscriptions(context);
-                    EnteringStateAction enteringState = new EnteringStateAction(state.QualifiedName);
+                    EnteringStateAction enteringState = new EnteringStateAction(
+                        state.QualifiedName
+                    );
                     executionState.EnqueueAction(enteringState);
                     executionState.LockQueue();
                 }
                 else
                 {
                     // The StateInitialization requested a state transtion
-                    EnteringStateAction enteringState = new EnteringStateAction(state.QualifiedName);
+                    EnteringStateAction enteringState = new EnteringStateAction(
+                        state.QualifiedName
+                    );
                     executionState.EnqueueAction(enteringState);
                     executionState.ProcessTransitionRequest(context);
                 }
@@ -259,7 +281,8 @@ namespace System.Workflow.Activities
                 return; // if we're faulting, then we're already in a bad state, so we don't try to unsubscribe
 
             StateMachineExecutionState executionState = GetExecutionState(state);
-            StateMachineSubscriptionManager subscriptionManager = executionState.SubscriptionManager;
+            StateMachineSubscriptionManager subscriptionManager =
+                executionState.SubscriptionManager;
             subscriptionManager.UnsubscribeState(context);
 
             if (StateMachineHelpers.IsRootState(state))
@@ -278,7 +301,8 @@ namespace System.Workflow.Activities
             Debug.Assert(executionContext.Activity == this);
 
             bool canCloseNow = true;
-            ActivityExecutionContextManager contextManager = executionContext.ExecutionContextManager;
+            ActivityExecutionContextManager contextManager =
+                executionContext.ExecutionContextManager;
 
             foreach (ActivityExecutionContext existingContext in contextManager.ExecutionContexts)
             {
@@ -286,7 +310,10 @@ namespace System.Workflow.Activities
                 {
                     canCloseNow = false;
 
-                    if (existingContext.Activity.ExecutionStatus == ActivityExecutionStatus.Executing)
+                    if (
+                        existingContext.Activity.ExecutionStatus
+                        == ActivityExecutionStatus.Executing
+                    )
                         existingContext.CancelActivity(existingContext.Activity);
                 }
             }
@@ -322,12 +349,17 @@ namespace System.Workflow.Activities
             Debug.Assert(!executionState.SchedulerBusy);
             executionState.SchedulerBusy = true;
             ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
-            ActivityExecutionContext childContext = contextManager.CreateExecutionContext(childActivity);
+            ActivityExecutionContext childContext = contextManager.CreateExecutionContext(
+                childActivity
+            );
             childContext.Activity.Closed += state.HandleChildActivityClosed;
             childContext.ExecuteActivity(childContext.Activity);
         }
 
-        private static void CleanupChildAtClosure(ActivityExecutionContext context, Activity childActivity)
+        private static void CleanupChildAtClosure(
+            ActivityExecutionContext context,
+            Activity childActivity
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -339,7 +371,9 @@ namespace System.Workflow.Activities
             childActivity.Closed -= state.HandleChildActivityClosed;
 
             ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
-            ActivityExecutionContext childContext = contextManager.GetExecutionContext(childActivity);
+            ActivityExecutionContext childContext = contextManager.GetExecutionContext(
+                childActivity
+            );
             contextManager.CompleteExecutionContext(childContext);
         }
 
@@ -351,12 +385,14 @@ namespace System.Workflow.Activities
             base.Invoke<EventArgs>(this.HandleProcessActionEvent, new EventArgs());
         }
 
-        private void HandleProcessActionEvent(object sender,
-            EventArgs eventArgs)
+        private void HandleProcessActionEvent(object sender, EventArgs eventArgs)
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             StateMachineExecutionState executionState = GetExecutionState(context);
             executionState.SchedulerBusy = false;
@@ -365,11 +401,17 @@ namespace System.Workflow.Activities
 
         #region HandleStatusChange
 
-        private void HandleChildActivityClosed(object sender, ActivityExecutionStatusChangedEventArgs eventArgs)
+        private void HandleChildActivityClosed(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs eventArgs
+        )
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
             if (eventArgs == null)
                 throw new ArgumentNullException("eventArgs");
 
@@ -394,7 +436,8 @@ namespace System.Workflow.Activities
                         return;
                     }
 
-                    StateInitializationActivity stateInitialization = completedChildActivity as StateInitializationActivity;
+                    StateInitializationActivity stateInitialization =
+                        completedChildActivity as StateInitializationActivity;
                     if (stateInitialization != null)
                     {
                         HandleStateInitializationCompleted(context, stateInitialization);
@@ -417,7 +460,9 @@ namespace System.Workflow.Activities
                     break;
 
                 default:
-                    throw new InvalidOperationException(SR.GetInvalidActivityStatus(context.Activity));
+                    throw new InvalidOperationException(
+                        SR.GetInvalidActivityStatus(context.Activity)
+                    );
             }
         }
 
@@ -429,7 +474,10 @@ namespace System.Workflow.Activities
                 throw new InvalidOperationException(SR.GetError_InvalidCompositeStateChild());
         }
 
-        internal static void ExecuteEventDriven(ActivityExecutionContext context, EventDrivenActivity eventDriven)
+        internal static void ExecuteEventDriven(
+            ActivityExecutionContext context,
+            EventDrivenActivity eventDriven
+        )
         {
             StateMachineExecutionState executionState = GetExecutionState(context);
             Debug.Assert(!executionState.HasEnqueuedActions);
@@ -453,14 +501,20 @@ namespace System.Workflow.Activities
             executionState.ProcessActions(context);
         }
 
-        private static void ExecuteStateInitialization(ActivityExecutionContext context, StateInitializationActivity stateInitialization)
+        private static void ExecuteStateInitialization(
+            ActivityExecutionContext context,
+            StateInitializationActivity stateInitialization
+        )
         {
             StateMachineExecutionState executionState = GetExecutionState(context);
             Debug.Assert(!executionState.HasEnqueuedActions);
             ExecuteChild(context, stateInitialization);
         }
 
-        private static void HandleStateInitializationCompleted(ActivityExecutionContext context, StateInitializationActivity stateInitialization)
+        private static void HandleStateInitializationCompleted(
+            ActivityExecutionContext context,
+            StateInitializationActivity stateInitialization
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -470,13 +524,19 @@ namespace System.Workflow.Activities
             StateActivity state = (StateActivity)context.Activity;
             StateMachineExecutionState executionState = GetExecutionState(state);
 
-            if (!String.IsNullOrEmpty(executionState.NextStateName) && executionState.NextStateName.Equals(state.QualifiedName))
+            if (
+                !String.IsNullOrEmpty(executionState.NextStateName)
+                && executionState.NextStateName.Equals(state.QualifiedName)
+            )
                 throw new InvalidOperationException(SR.GetInvalidSetStateInStateInitialization());
 
             EnteringLeafState(context);
         }
 
-        private static void ExecuteStateFinalization(ActivityExecutionContext context, StateFinalizationActivity stateFinalization)
+        private static void ExecuteStateFinalization(
+            ActivityExecutionContext context,
+            StateFinalizationActivity stateFinalization
+        )
         {
             StateMachineExecutionState executionState = GetExecutionState(context);
             ExecuteChild(context, stateFinalization);
@@ -518,23 +578,32 @@ namespace System.Workflow.Activities
 
         #region Helper methods
 
-        private static StateInitializationActivity GetStateInitialization(ActivityExecutionContext context)
+        private static StateInitializationActivity GetStateInitialization(
+            ActivityExecutionContext context
+        )
         {
             StateActivity state = (StateActivity)context.Activity;
-            Debug.Assert(StateMachineHelpers.IsLeafState(state),
-                "GetStateInitialization: StateInitialization is only allowed in a leaf node state");
+            Debug.Assert(
+                StateMachineHelpers.IsLeafState(state),
+                "GetStateInitialization: StateInitialization is only allowed in a leaf node state"
+            );
             return GetHandlerActivity<StateInitializationActivity>(context);
         }
 
-        private static StateFinalizationActivity GetStateFinalization(ActivityExecutionContext context)
+        private static StateFinalizationActivity GetStateFinalization(
+            ActivityExecutionContext context
+        )
         {
             StateActivity state = (StateActivity)context.Activity;
-            Debug.Assert(StateMachineHelpers.IsLeafState(state),
-                "GetStateFinalization: StateFinalization is only allowed in a leaf node state");
+            Debug.Assert(
+                StateMachineHelpers.IsLeafState(state),
+                "GetStateFinalization: StateFinalization is only allowed in a leaf node state"
+            );
             return GetHandlerActivity<StateFinalizationActivity>(context);
         }
 
-        private static T GetHandlerActivity<T>(ActivityExecutionContext context) where T : class
+        private static T GetHandlerActivity<T>(ActivityExecutionContext context)
+            where T : class
         {
             StateActivity state = (StateActivity)context.Activity;
             foreach (Activity activity in state.EnabledActivities)
@@ -548,7 +617,9 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        private static StateMachineExecutionState GetExecutionState(ActivityExecutionContext context)
+        private static StateMachineExecutionState GetExecutionState(
+            ActivityExecutionContext context
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -557,7 +628,6 @@ namespace System.Workflow.Activities
             StateMachineExecutionState executionState = GetExecutionState(state);
             return executionState;
         }
-
 
         private static StateMachineExecutionState GetExecutionState(StateActivity state)
         {
@@ -575,7 +645,10 @@ namespace System.Workflow.Activities
 
         #region Dynamic Update Functions
 
-        protected override void OnActivityChangeAdd(ActivityExecutionContext executionContext, Activity addedActivity)
+        protected override void OnActivityChangeAdd(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -595,14 +668,21 @@ namespace System.Workflow.Activities
             // Activity we added is an EventDrivenActivity
 
             // First we disable the queue
-            StateMachineSubscriptionManager.ChangeEventDrivenQueueState(executionContext, eventDriven, false);
-            StateActivity rootState = StateMachineHelpers.GetRootState(executionContext.Activity as StateActivity);
+            StateMachineSubscriptionManager.ChangeEventDrivenQueueState(
+                executionContext,
+                eventDriven,
+                false
+            );
+            StateActivity rootState = StateMachineHelpers.GetRootState(
+                executionContext.Activity as StateActivity
+            );
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
             StateActivity currentState = StateMachineHelpers.GetCurrentState(executionContext);
             if (currentState == null)
                 return; // Dynamic update happened before we entered the initial state
 
-            StateMachineSubscriptionManager subscriptionManager = executionState.SubscriptionManager;
+            StateMachineSubscriptionManager subscriptionManager =
+                executionState.SubscriptionManager;
             subscriptionManager.ReevaluateSubscriptions(executionContext);
             executionState.LockQueue();
             executionState.ProcessActions(executionContext);

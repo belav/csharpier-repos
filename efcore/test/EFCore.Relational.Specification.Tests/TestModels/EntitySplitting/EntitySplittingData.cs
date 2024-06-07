@@ -63,8 +63,8 @@ public class EntitySplittingData : ISetSource
         throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
     }
 
-    private static EntityOne[] CreateEntityOnes()
-        => new EntityOne[]
+    private static EntityOne[] CreateEntityOnes() =>
+        new EntityOne[]
         {
             new()
             {
@@ -128,8 +128,8 @@ public class EntitySplittingData : ISetSource
             },
         };
 
-    private static EntityTwo[] CreateEntityTwos()
-        => new EntityTwo[]
+    private static EntityTwo[] CreateEntityTwos() =>
+        new EntityTwo[]
         {
             new() { Id = 1, Name = "Two1" },
             new() { Id = 2, Name = "Two2" },
@@ -138,8 +138,8 @@ public class EntitySplittingData : ISetSource
             new() { Id = 5, Name = "Two5" },
         };
 
-    private static EntityThree[] CreateEntityThrees()
-        => new EntityThree[]
+    private static EntityThree[] CreateEntityThrees() =>
+        new EntityThree[]
         {
             new() { Id = 1, Name = "Three1" },
             new() { Id = 2, Name = "Three2" },
@@ -148,8 +148,8 @@ public class EntitySplittingData : ISetSource
             new() { Id = 5, Name = "Three5" },
         };
 
-    private static BaseEntity[] CreateHierarchyEntities()
-        => new BaseEntity[]
+    private static BaseEntity[] CreateHierarchyEntities() =>
+        new BaseEntity[]
         {
             new() { Id = 1, BaseValue = 1 },
             new MiddleEntity
@@ -214,19 +214,21 @@ public class EntitySplittingData : ISetSource
 
             for (var j = 0; j < i; j++)
             {
-                _entityOnes[i].OwnedCollection.Add(
-                    new OwnedCollection
-                    {
-                        Id = i * 100 + j,
-                        OwnedIntValue1 = i * 10 + 1,
-                        OwnedIntValue2 = i * 10 + 2,
-                        OwnedIntValue3 = i * 10 + 3,
-                        OwnedIntValue4 = i * 10 + 4,
-                        OwnedStringValue1 = "O" + i + "1",
-                        OwnedStringValue2 = "O" + i + "2",
-                        OwnedStringValue3 = "O" + i + "3",
-                        OwnedStringValue4 = "O" + i + "4"
-                    });
+                _entityOnes[i]
+                    .OwnedCollection.Add(
+                        new OwnedCollection
+                        {
+                            Id = i * 100 + j,
+                            OwnedIntValue1 = i * 10 + 1,
+                            OwnedIntValue2 = i * 10 + 2,
+                            OwnedIntValue3 = i * 10 + 3,
+                            OwnedIntValue4 = i * 10 + 4,
+                            OwnedStringValue1 = "O" + i + "1",
+                            OwnedStringValue2 = "O" + i + "2",
+                            OwnedStringValue3 = "O" + i + "3",
+                            OwnedStringValue4 = "O" + i + "4"
+                        }
+                    );
             }
         }
 
@@ -257,19 +259,21 @@ public class EntitySplittingData : ISetSource
 
             for (var j = 0; j < i; j++)
             {
-                _baseEntities[i].OwnedCollection.Add(
-                    new OwnedCollection
-                    {
-                        Id = i * 100 + j,
-                        OwnedIntValue1 = i * 10 + 1,
-                        OwnedIntValue2 = i * 10 + 2,
-                        OwnedIntValue3 = i * 10 + 3,
-                        OwnedIntValue4 = i * 10 + 4,
-                        OwnedStringValue1 = "O" + i + "1",
-                        OwnedStringValue2 = "O" + i + "2",
-                        OwnedStringValue3 = "O" + i + "3",
-                        OwnedStringValue4 = "O" + i + "4"
-                    });
+                _baseEntities[i]
+                    .OwnedCollection.Add(
+                        new OwnedCollection
+                        {
+                            Id = i * 100 + j,
+                            OwnedIntValue1 = i * 10 + 1,
+                            OwnedIntValue2 = i * 10 + 2,
+                            OwnedIntValue3 = i * 10 + 3,
+                            OwnedIntValue4 = i * 10 + 4,
+                            OwnedStringValue1 = "O" + i + "1",
+                            OwnedStringValue2 = "O" + i + "2",
+                            OwnedStringValue3 = "O" + i + "3",
+                            OwnedStringValue4 = "O" + i + "4"
+                        }
+                    );
             }
         }
     }

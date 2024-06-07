@@ -94,8 +94,10 @@ public class RelationalScaffoldingModelFactoryTest
             }
         };
 
-        var entityType =
-            (EntityType)_factory.Create(info, new ModelReverseEngineerOptions { NoPluralize = true }).FindEntityType("Jobs");
+        var entityType = (EntityType)
+            _factory
+                .Create(info, new ModelReverseEngineerOptions { NoPluralize = true })
+                .FindEntityType("Jobs");
 
         Assert.Collection(
             entityType.GetProperties(),
@@ -118,6 +120,7 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Assert.Equal("salary", column.GetColumnName());
                 Assert.Equal(typeof(int?), column.ClrType);
-            });
+            }
+        );
     }
 }

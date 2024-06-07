@@ -51,85 +51,107 @@ public class Program
             app.VersionOptionFromAssemblyAttributes(typeof(Program).Assembly);
             var verbose = app.VerboseOption();
 
-            app.Command("create", command =>
-            {
-                command.Description = "Adds table and indexes to the database.";
-
-                var connectionStringArg = command.Argument(
-                    "[connectionString]", "The connection string to connect to the database.");
-
-                var schemaNameArg = command.Argument(
-                    "[schemaName]", "Name of the table schema.");
-
-                var tableNameArg = command.Argument(
-                    "[tableName]", "Name of the table to be created.");
-
-                command.HelpOption();
-
-                command.OnExecute(() =>
+            app.Command(
+                "create",
+                command =>
                 {
-                    var reporter = CreateReporter(verbose.HasValue());
-                    if (string.IsNullOrEmpty(connectionStringArg.Value)
-                        || string.IsNullOrEmpty(schemaNameArg.Value)
-                        || string.IsNullOrEmpty(tableNameArg.Value))
+                    command.Description = "Adds table and indexes to the database.";
+
+                    var connectionStringArg = command.Argument(
+                        "[connectionString]",
+                        "The connection string to connect to the database."
+                    );
+
+                    var schemaNameArg = command.Argument(
+                        "[schemaName]",
+                        "Name of the table schema."
+                    );
+
+                    var tableNameArg = command.Argument(
+                        "[tableName]",
+                        "Name of the table to be created."
+                    );
+
+                    command.HelpOption();
+
+                    command.OnExecute(() =>
                     {
-                        reporter.Error("Invalid input");
-                        command.ShowHelp();
-                        return 2;
-                    }
+                        var reporter = CreateReporter(verbose.HasValue());
+                        if (
+                            string.IsNullOrEmpty(connectionStringArg.Value)
+                            || string.IsNullOrEmpty(schemaNameArg.Value)
+                            || string.IsNullOrEmpty(tableNameArg.Value)
+                        )
+                        {
+                            reporter.Error("Invalid input");
+                            command.ShowHelp();
+                            return 2;
+                        }
 
-                    _connectionString = connectionStringArg.Value;
-                    _schemaName = schemaNameArg.Value;
-                    _tableName = tableNameArg.Value;
+                        _connectionString = connectionStringArg.Value;
+                        _schemaName = schemaNameArg.Value;
+                        _tableName = tableNameArg.Value;
 
-                    return CreateTableAndIndexes(reporter);
-                });
-            });
+                        return CreateTableAndIndexes(reporter);
+                    });
+                }
+            );
 
-            app.Command("script", command =>
-            {
-                command.Description = "Generates a SQL script for the table and indexes.";
-
-                var schemaNameArg = command.Argument(
-                    "[schemaName]", "Name of the table schema.");
-
-                var tableNameArg = command.Argument(
-                    "[tableName]", "Name of the table to be created.");
-
-                var outputOption = command.Option(
-                    "-o|--output",
-                    "The file to write the result to.",
-                    CommandOptionType.SingleValue);
-
-                var idempotentOption = command.Option(
-                    "-i|--idempotent",
-                    "Generates a script that can be used on a database that already has the table.",
-                    CommandOptionType.NoValue);
-
-                command.HelpOption();
-
-                command.OnExecute(() =>
+            app.Command(
+                "script",
+                command =>
                 {
-                    var reporter = CreateReporter(verbose.HasValue());
-                    if (string.IsNullOrEmpty(schemaNameArg.Value)
-                        || string.IsNullOrEmpty(tableNameArg.Value))
-                    {
-                        reporter.Error("Invalid input");
-                        command.ShowHelp();
-                        return 2;
-                    }
+                    command.Description = "Generates a SQL script for the table and indexes.";
 
-                    _schemaName = schemaNameArg.Value;
-                    _tableName = tableNameArg.Value;
-                    _idempotent = idempotentOption.HasValue();
-                    if (outputOption.HasValue())
-                    {
-                        _outputPath = outputOption.Value();
-                    }
+                    var schemaNameArg = command.Argument(
+                        "[schemaName]",
+                        "Name of the table schema."
+                    );
 
-                    return ScriptTableAndIndexes(reporter);
-                });
-            });
+                    var tableNameArg = command.Argument(
+                        "[tableName]",
+                        "Name of the table to be created."
+                    );
+
+                    var outputOption = command.Option(
+                        "-o|--output",
+                        "The file to write the result to.",
+                        CommandOptionType.SingleValue
+                    );
+
+                    var idempotentOption = command.Option(
+                        "-i|--idempotent",
+                        "Generates a script that can be used on a database that already has the table.",
+                        CommandOptionType.NoValue
+                    );
+
+                    command.HelpOption();
+
+                    command.OnExecute(() =>
+                    {
+                        var reporter = CreateReporter(verbose.HasValue());
+                        if (
+                            string.IsNullOrEmpty(schemaNameArg.Value)
+                            || string.IsNullOrEmpty(tableNameArg.Value)
+                        )
+                        {
+                            reporter.Error("Invalid input");
+                            command.ShowHelp();
+                            return 2;
+                        }
+
+                        _schemaName = schemaNameArg.Value;
+                        _tableName = tableNameArg.Value;
+                        _idempotent = idempotentOption.HasValue();
+                        if (outputOption.HasValue())
+                        {
+                            _outputPath = outputOption.Value();
+                        }
+
+                        return ScriptTableAndIndexes(reporter);
+                    });
+                }
+            );
 
             // Show help information if no subcommand/option was specified.
             app.OnExecute(() =>
@@ -147,11 +169,10 @@ public class Program
         }
     }
 
-    private IReporter CreateReporter(bool verbose)
-        => new ConsoleReporter(_console, verbose, quiet: false);
+    private IReporter CreateReporter(bool verbose) =>
+        new ConsoleReporter(_console, verbose, quiet: false);
 
-    private SqlQueries CreateSqlQueries()
-        => new SqlQueries(_schemaName, _tableName);
+    private SqlQueries CreateSqlQueries() => new SqlQueries(_schemaName, _tableName);
 
     private int ScriptTableAndIndexes(IReporter reporter)
     {
@@ -190,7 +211,8 @@ public class Program
         catch (Exception ex)
         {
             reporter.Error(
-                $"An error occurred while trying to script the table and index. {ex.Message}");
+                $"An error occurred while trying to script the table and index. {ex.Message}"
+            );
 
             return 1;
         }
@@ -216,8 +238,9 @@ public class Program
                 if (reader.Read())
                 {
                     reporter.Warn(
-                        $"Table with schema '{_schemaName}' and name '{_tableName}' already exists. " +
-                        "Provide a different table name and try again.");
+                        $"Table with schema '{_schemaName}' and name '{_tableName}' already exists. "
+                            + "Provide a different table name and try again."
+                    );
                     return 1;
                 }
             }
@@ -234,7 +257,8 @@ public class Program
                     command = new SqlCommand(
                         sqlQueries.CreateNonClusteredIndexOnExpirationTime,
                         connection,
-                        transaction);
+                        transaction
+                    );
 
                     reporter.Verbose($"Executing {command.CommandText}");
                     command.ExecuteNonQuery();
@@ -246,7 +270,8 @@ public class Program
                 catch (Exception ex)
                 {
                     reporter.Error(
-                        $"An error occurred while trying to create the table and index. {ex.Message}");
+                        $"An error occurred while trying to create the table and index. {ex.Message}"
+                    );
                     transaction.Rollback();
 
                     return 1;
@@ -266,7 +291,9 @@ public class Program
         catch (Exception ex)
         {
             throw new ArgumentException(
-                $"Invalid SQL Server connection string '{_connectionString}'. {ex.Message}", ex);
+                $"Invalid SQL Server connection string '{_connectionString}'. {ex.Message}",
+                ex
+            );
         }
     }
 }

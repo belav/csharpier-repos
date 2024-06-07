@@ -18,7 +18,13 @@ internal sealed class Heartbeat : IDisposable
     private readonly Thread _timerThread;
     private readonly ManualResetEventSlim _stopEvent;
 
-    public Heartbeat(IHeartbeatHandler[] callbacks, TimeProvider timeProvider, IDebugger debugger, KestrelTrace trace, TimeSpan interval)
+    public Heartbeat(
+        IHeartbeatHandler[] callbacks,
+        TimeProvider timeProvider,
+        IDebugger debugger,
+        KestrelTrace trace,
+        TimeSpan interval
+    )
     {
         _callbacks = callbacks;
         _timeProvider = timeProvider;

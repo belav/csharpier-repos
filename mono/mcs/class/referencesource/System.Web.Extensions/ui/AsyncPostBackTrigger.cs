@@ -3,20 +3,21 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.UI {
+
+namespace System.Web.UI
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Resources;
+    using System.Web.UI;
     using System.Web.Util;
 
-    public class AsyncPostBackTrigger : UpdatePanelControlTrigger {
-
+    public class AsyncPostBackTrigger : UpdatePanelControlTrigger
+    {
         private IScriptManagerInternal _scriptManager;
 
         private Control _associatedControl;
@@ -24,16 +25,19 @@ namespace System.Web.UI {
         private bool _eventHandled;
         private string _eventName;
 
-        public AsyncPostBackTrigger() {
-        }
+        public AsyncPostBackTrigger() { }
 
-        internal AsyncPostBackTrigger(IScriptManagerInternal scriptManager) {
+        internal AsyncPostBackTrigger(IScriptManagerInternal scriptManager)
+        {
             _scriptManager = scriptManager;
         }
 
-        private static MethodInfo EventHandler {
-            get {
-                if (_eventHandler == null) {
+        private static MethodInfo EventHandler
+        {
+            get
+            {
+                if (_eventHandler == null)
+                {
                     _eventHandler = typeof(AsyncPostBackTrigger).GetMethod("OnEvent");
                 }
                 return _eventHandler;
@@ -41,55 +45,73 @@ namespace System.Web.UI {
         }
 
         [
-        SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ID"),
-        TypeConverter("System.Web.UI.Design.AsyncPostBackTriggerControlIDConverter, " +
-            AssemblyRef.SystemWebExtensionsDesign)
+            SuppressMessage(
+                "Microsoft.Naming",
+                "CA1709:IdentifiersShouldBeCasedCorrectly",
+                MessageId = "ID"
+            ),
+            TypeConverter(
+                "System.Web.UI.Design.AsyncPostBackTriggerControlIDConverter, "
+                    + AssemblyRef.SystemWebExtensionsDesign
+            )
         ]
-        public new string ControlID {
-            get {
-                return base.ControlID;
-            }
-            set {
-                base.ControlID = value;
-            }
+        public new string ControlID
+        {
+            get { return base.ControlID; }
+            set { base.ControlID = value; }
         }
 
         [
-        DefaultValue(""),
-        Category("Behavior"),
-        ResourceDescription("AsyncPostBackTrigger_EventName"),
-        TypeConverter("System.Web.UI.Design.AsyncPostBackTriggerEventNameConverter, " +
-            AssemblyRef.SystemWebExtensionsDesign),
+            DefaultValue(""),
+            Category("Behavior"),
+            ResourceDescription("AsyncPostBackTrigger_EventName"),
+            TypeConverter(
+                "System.Web.UI.Design.AsyncPostBackTriggerEventNameConverter, "
+                    + AssemblyRef.SystemWebExtensionsDesign
+            ),
         ]
-        public string EventName {
-            get {
-                if (_eventName == null) {
+        public string EventName
+        {
+            get
+            {
+                if (_eventName == null)
+                {
                     return String.Empty;
                 }
                 return _eventName;
             }
-            set {
-                _eventName = value;
-            }
+            set { _eventName = value; }
         }
 
-        internal IScriptManagerInternal ScriptManager {
-            get {
-                if (_scriptManager == null) {
+        internal IScriptManagerInternal ScriptManager
+        {
+            get
+            {
+                if (_scriptManager == null)
+                {
                     Page page = Owner.Page;
-                    if (page == null) {
+                    if (page == null)
+                    {
                         throw new InvalidOperationException(AtlasWeb.Common_PageCannotBeNull);
                     }
                     _scriptManager = UI.ScriptManager.GetCurrent(page);
-                    if (_scriptManager == null) {
-                        throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, AtlasWeb.Common_ScriptManagerRequired, Owner.ID));
+                    if (_scriptManager == null)
+                    {
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                AtlasWeb.Common_ScriptManagerRequired,
+                                Owner.ID
+                            )
+                        );
                     }
                 }
                 return _scriptManager;
             }
         }
 
-        protected internal override void Initialize() {
+        protected internal override void Initialize()
+        {
             base.Initialize();
 
             _associatedControl = FindTargetControl(true);
@@ -97,39 +119,76 @@ namespace System.Web.UI {
             ScriptManager.RegisterAsyncPostBackControl(_associatedControl);
 
             string eventName = EventName;
-            if (eventName.Length != 0) {
+            if (eventName.Length != 0)
+            {
                 // If EventName is specified, attach our event handler to it
-                EventInfo eventInfo = _associatedControl.GetType().GetEvent(eventName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
-                if (eventInfo == null) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, AtlasWeb.AsyncPostBackTrigger_CannotFindEvent, eventName, ControlID, Owner.ID));
+                EventInfo eventInfo = _associatedControl
+                    .GetType()
+                    .GetEvent(
+                        eventName,
+                        BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public
+                    );
+                if (eventInfo == null)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            AtlasWeb.AsyncPostBackTrigger_CannotFindEvent,
+                            eventName,
+                            ControlID,
+                            Owner.ID
+                        )
+                    );
                 }
 
                 MethodInfo handlerMethod = eventInfo.EventHandlerType.GetMethod("Invoke");
                 ParameterInfo[] parameters = handlerMethod.GetParameters();
-                if (!handlerMethod.ReturnType.Equals(typeof(void)) ||
-                    (parameters.Length != 2) ||
-                    (typeof(EventArgs).IsAssignableFrom(parameters[1].ParameterType) == false)) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, AtlasWeb.AsyncPostBackTrigger_InvalidEvent, eventName, ControlID, Owner.ID));
+                if (
+                    !handlerMethod.ReturnType.Equals(typeof(void))
+                    || (parameters.Length != 2)
+                    || (typeof(EventArgs).IsAssignableFrom(parameters[1].ParameterType) == false)
+                )
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            AtlasWeb.AsyncPostBackTrigger_InvalidEvent,
+                            eventName,
+                            ControlID,
+                            Owner.ID
+                        )
+                    );
                 }
 
-                Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, this, EventHandler);
+                Delegate handler = Delegate.CreateDelegate(
+                    eventInfo.EventHandlerType,
+                    this,
+                    EventHandler
+                );
                 eventInfo.AddEventHandler(_associatedControl, handler);
             }
         }
 
-        protected internal override bool HasTriggered() {
-            if (!String.IsNullOrEmpty(EventName)) {
+        protected internal override bool HasTriggered()
+        {
+            if (!String.IsNullOrEmpty(EventName))
+            {
                 // If EventName is specified we are triggered if our event was raised
                 return _eventHandled;
             }
-            else {
+            else
+            {
                 // If EventName is not specified, check if the control that caused the
                 // postback either has the exact UniqueID we're looking for, or at least
                 // begins with it.
                 string sourceElement = ScriptManager.AsyncPostBackSourceElementID;
-                return
-                    (sourceElement == _associatedControl.UniqueID) ||
-                    (sourceElement.StartsWith(_associatedControl.UniqueID + "$", StringComparison.Ordinal));
+                return (sourceElement == _associatedControl.UniqueID)
+                    || (
+                        sourceElement.StartsWith(
+                            _associatedControl.UniqueID + "$",
+                            StringComparison.Ordinal
+                        )
+                    );
             }
         }
 
@@ -137,20 +196,28 @@ namespace System.Web.UI {
         // so the private reflection works in medium trust.
         // However, ASP.NET AJAX 1.0 was released with this method public. Since it would be a breaking change to make it private
         // now, it was decided to leave it as is.
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers",
-            Justification="TODO: This will be fixed in fc_serverfx")]
-        public void OnEvent(object sender, EventArgs e) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            Justification = "TODO: This will be fixed in fc_serverfx"
+        )]
+        public void OnEvent(object sender, EventArgs e)
+        {
             _eventHandled = true;
         }
 
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
-        public override string ToString() {
-            if (String.IsNullOrEmpty(ControlID)) {
+        public override string ToString()
+        {
+            if (String.IsNullOrEmpty(ControlID))
+            {
                 return "AsyncPostBack";
             }
-            else {
-                return "AsyncPostBack: " + ControlID +
-                    (String.IsNullOrEmpty(EventName) ? String.Empty : ("." + EventName));
+            else
+            {
+                return "AsyncPostBack: "
+                    + ControlID
+                    + (String.IsNullOrEmpty(EventName) ? String.Empty : ("." + EventName));
             }
         }
     }

@@ -12,7 +12,11 @@ namespace System
     {
         readonly string varName;
 
-        public UriTemplateVariablePathSegment(string originalSegment, bool endsWithSlash, string varName)
+        public UriTemplateVariablePathSegment(
+            string originalSegment,
+            bool endsWithSlash,
+            string varName
+        )
             : base(originalSegment, UriTemplatePartType.Variable, endsWithSlash)
         {
             Fx.Assert(!string.IsNullOrEmpty(varName), "bad variable segment");
@@ -21,11 +25,9 @@ namespace System
 
         public string VarName
         {
-            get
-            {
-                return this.varName;
-            }
+            get { return this.varName; }
         }
+
         public override void Bind(string[] values, ref int valueIndex, StringBuilder path)
         {
             Fx.Assert(valueIndex < values.Length, "Not enough values to bind");
@@ -52,7 +54,11 @@ namespace System
             }
             return (other.Nature == UriTemplatePartType.Variable);
         }
-        public override bool IsMatch(UriTemplateLiteralPathSegment segment, bool ignoreTrailingSlash)
+
+        public override bool IsMatch(
+            UriTemplateLiteralPathSegment segment,
+            bool ignoreTrailingSlash
+        )
         {
             if (!ignoreTrailingSlash && (this.EndsWithSlash != segment.EndsWithSlash))
             {
@@ -60,9 +66,13 @@ namespace System
             }
             return (!segment.IsNullOrEmpty());
         }
+
         public override void Lookup(string segment, NameValueCollection boundParameters)
         {
-            Fx.Assert(!string.IsNullOrEmpty(segment), "How can that be? Lookup is expected to be called after IsMatch");
+            Fx.Assert(
+                !string.IsNullOrEmpty(segment),
+                "How can that be? Lookup is expected to be called after IsMatch"
+            );
             boundParameters.Add(this.varName, segment);
         }
     }

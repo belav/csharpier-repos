@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using Microsoft.VisualStudio.Debugger.Clr;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 using Microsoft.VisualStudio.Debugger.Metadata;
-using System;
-using System.Diagnostics;
 using Xunit;
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void Root()
         {
             var source =
-@"unsafe class C
+                @"unsafe class C
 {
     internal C(long p)
     {
@@ -36,10 +36,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 int i = 0x1234;
                 long ptr = (long)&i;
                 var type = assembly.GetType("C");
-                var value = GetFunctionPointerField(CreateDkmClrValue(type.Instantiate(ptr)), "pfn");
+                var value = GetFunctionPointerField(
+                    CreateDkmClrValue(type.Instantiate(ptr)),
+                    "pfn"
+                );
                 var evalResult = FormatResult("pfn", value);
-                Verify(evalResult,
-                    EvalResult("pfn", PointerToString(new IntPtr(ptr)), "System.Object*", "pfn", DkmEvaluationResultFlags.None, DkmEvaluationResultCategory.Other));
+                Verify(
+                    evalResult,
+                    EvalResult(
+                        "pfn",
+                        PointerToString(new IntPtr(ptr)),
+                        "System.Object*",
+                        "pfn",
+                        DkmEvaluationResultFlags.None,
+                        DkmEvaluationResultCategory.Other
+                    )
+                );
             }
         }
 
@@ -47,7 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void Member()
         {
             var source =
-@"unsafe class C
+                @"unsafe class C
 {
     internal C(long p)
     {
@@ -57,27 +69,55 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 }";
             var assembly = GetUnsafeAssembly(source);
             const long ptr = 0x0;
-            DkmClrValue getMemberValue(DkmClrValue v, string m) => (m == "pfn") ? GetFunctionPointerField(v, m) : null;
-            var runtime = new DkmClrRuntimeInstance(ReflectionUtilities.GetMscorlibAndSystemCore(assembly), getMemberValue: getMemberValue);
+            DkmClrValue getMemberValue(DkmClrValue v, string m) =>
+                (m == "pfn") ? GetFunctionPointerField(v, m) : null;
+            var runtime = new DkmClrRuntimeInstance(
+                ReflectionUtilities.GetMscorlibAndSystemCore(assembly),
+                getMemberValue: getMemberValue
+            );
             using (runtime.Load())
             {
                 var type = runtime.GetType("C");
                 var value = type.Instantiate(ptr);
                 var evalResult = FormatResult("o", value);
-                Verify(evalResult,
-                    EvalResult("o", "{C}", "C", "o", DkmEvaluationResultFlags.Expandable, DkmEvaluationResultCategory.Other));
+                Verify(
+                    evalResult,
+                    EvalResult(
+                        "o",
+                        "{C}",
+                        "C",
+                        "o",
+                        DkmEvaluationResultFlags.Expandable,
+                        DkmEvaluationResultCategory.Other
+                    )
+                );
                 var children = GetChildren(evalResult);
-                Verify(children,
-                    EvalResult("pfn", PointerToString(new IntPtr(ptr)), "int*", "o.pfn", DkmEvaluationResultFlags.None, DkmEvaluationResultCategory.Other));
+                Verify(
+                    children,
+                    EvalResult(
+                        "pfn",
+                        PointerToString(new IntPtr(ptr)),
+                        "int*",
+                        "o.pfn",
+                        DkmEvaluationResultFlags.None,
+                        DkmEvaluationResultCategory.Other
+                    )
+                );
             }
         }
 
         private DkmClrValue GetFunctionPointerField(DkmClrValue value, string fieldName)
         {
             var valueType = value.Type.GetLmrType();
-            var fieldInfo = valueType.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var fieldInfo = valueType.GetField(
+                fieldName,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
             var fieldValue = fieldInfo.GetValue(value.RawValue);
-            return CreateDkmClrValue(DkmClrValue.UnboxPointer(fieldValue), new DkmClrType(FunctionPointerType.Instance));
+            return CreateDkmClrValue(
+                DkmClrValue.UnboxPointer(fieldValue),
+                new DkmClrType(FunctionPointerType.Instance)
+            );
         }
 
         // Function pointer type has IsPointer == true and GetElementType() == null.
@@ -85,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         {
             internal static readonly FunctionPointerType Instance = new FunctionPointerType();
 
-            private FunctionPointerType() : base(typeof(object).MakePointerType())
+            private FunctionPointerType()
+                : base(typeof(object).MakePointerType())
             {
                 Debug.Assert(this.IsPointer);
             }

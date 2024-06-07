@@ -22,9 +22,11 @@ public class FormFileModelBinderProvider : IModelBinderProvider
 
         // Note: This condition needs to be kept in sync with ApiBehaviorApplicationModelProvider.
         var modelType = context.Metadata.ModelType;
-        if (modelType == typeof(IFormFile) ||
-            modelType == typeof(IFormFileCollection) ||
-            typeof(IEnumerable<IFormFile>).IsAssignableFrom(modelType))
+        if (
+            modelType == typeof(IFormFile)
+            || modelType == typeof(IFormFileCollection)
+            || typeof(IEnumerable<IFormFile>).IsAssignableFrom(modelType)
+        )
         {
             var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
             return new FormFileModelBinder(loggerFactory);

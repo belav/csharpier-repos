@@ -9,9 +9,7 @@ public class ValueConvertersEndToEndSqliteTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqliteTest.ValueConvertersEndToEndSqliteFixture>
 {
     public ValueConvertersEndToEndSqliteTest(ValueConvertersEndToEndSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(nameof(ConvertingEntity.BoolAsChar), "TEXT", false)]
@@ -147,11 +145,14 @@ public class ValueConvertersEndToEndSqliteTest
     public virtual void Properties_with_conversions_map_to_appropriately_null_columns(
         string propertyName,
         string databaseType,
-        bool isNullable)
+        bool isNullable
+    )
     {
         using var context = CreateContext();
 
-        var property = context.Model.FindEntityType(typeof(ConvertingEntity))!.FindProperty(propertyName);
+        var property = context
+            .Model.FindEntityType(typeof(ConvertingEntity))!
+            .FindProperty(propertyName);
 
         Assert.Equal(databaseType, property!.GetColumnType());
         Assert.Equal(isNullable, property!.IsNullable);
@@ -159,21 +160,19 @@ public class ValueConvertersEndToEndSqliteTest
 
     public class ValueConvertersEndToEndSqliteFixture : ValueConvertersEndToEndFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<ConvertingEntity>(
-                b =>
-                {
-                    b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
-                    b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
-                    b.Property(e => e.NullableEnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                    b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                });
+            modelBuilder.Entity<ConvertingEntity>(b =>
+            {
+                b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
+                b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
+                b.Property(e => e.NullableEnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+                b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+            });
         }
     }
 }

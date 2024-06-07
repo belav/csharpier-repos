@@ -39,10 +39,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             DkmClrValueFlags valueFlags,
             DkmEvaluationResultCategory category = default(DkmEvaluationResultCategory),
             DkmEvaluationResultAccessType access = default(DkmEvaluationResultAccessType),
-            ulong nativeComPointer = 0)
+            ulong nativeComPointer = 0
+        )
         {
-            Debug.Assert((type == null) || !type.GetLmrType().IsTypeVariables() || (valueFlags == DkmClrValueFlags.Synthetic));
-            Debug.Assert((alias == null) || evalFlags.Includes(DkmEvaluationResultFlags.HasObjectId));
+            Debug.Assert(
+                (type == null)
+                    || !type.GetLmrType().IsTypeVariables()
+                    || (valueFlags == DkmClrValueFlags.Synthetic)
+            );
+            Debug.Assert(
+                (alias == null) || evalFlags.Includes(DkmEvaluationResultFlags.HasObjectId)
+            );
             // The "real" DkmClrValue will always have a value of zero for null pointers.
             Debug.Assert((type == null) || !type.GetLmrType().IsPointer || (value != null));
 
@@ -72,9 +79,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         internal readonly object RawValue;
 
-        public void Close()
-        {
-        }
+        public void Close() { }
 
         public DkmClrValue Dereference(DkmInspectionContext inspectionContext)
         {
@@ -93,7 +98,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             object value;
             try
             {
-                var intPtr = Environment.Is64BitProcess ? new IntPtr((long)RawValue) : new IntPtr((int)RawValue);
+                var intPtr = Environment.Is64BitProcess
+                    ? new IntPtr((long)RawValue)
+                    : new IntPtr((int)RawValue);
                 value = Dereference(intPtr, elementType);
             }
             catch (Exception e)
@@ -101,7 +108,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 value = e;
                 evalFlags |= DkmEvaluationResultFlags.ExceptionThrown;
             }
-            var valueType = new DkmClrType(this.Type.RuntimeInstance, (value == null || elementType.IsPointer) ? elementType : (TypeImpl)value.GetType());
+            var valueType = new DkmClrType(
+                this.Type.RuntimeInstance,
+                (value == null || elementType.IsPointer) ? elementType : (TypeImpl)value.GetType()
+            );
             return new DkmClrValue(
                 value,
                 value,
@@ -110,7 +120,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 evalFlags: evalFlags,
                 valueFlags: valueFlags,
                 category: DkmEvaluationResultCategory.Other,
-                access: DkmEvaluationResultAccessType.None);
+                access: DkmEvaluationResultAccessType.None
+            );
         }
 
         public bool IsNull
@@ -124,7 +135,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                     throw new InvalidOperationException();
                 }
                 var lmrType = Type.GetLmrType();
-                return ((RawValue == null) && !lmrType.IsValueType) || (lmrType.IsPointer && (Convert.ToInt64(RawValue) == 0));
+                return ((RawValue == null) && !lmrType.IsValueType)
+                    || (lmrType.IsPointer && (Convert.ToInt64(RawValue) == 0));
             }
         }
 
@@ -132,21 +144,33 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         {
             // NOTE: This is just a "for testing purposes" approximation of what the real DkmClrValue.HostObjectValue
             //       will return.  We will need to update this implementation to match the real behavior we add
-            //       specialized support for additional types. 
+            //       specialized support for additional types.
             var typeCode = Metadata.Type.GetTypeCode(lmrType);
-            return (lmrType.IsPointer || lmrType.IsEnum || typeCode != TypeCode.DateTime || typeCode != TypeCode.Object)
+            return (
+                lmrType.IsPointer
+                || lmrType.IsEnum
+                || typeCode != TypeCode.DateTime
+                || typeCode != TypeCode.Object
+            )
                 ? rawValue
                 : null;
         }
 
-        public string GetValueString(DkmInspectionContext inspectionContext, ReadOnlyCollection<string> formatSpecifiers)
+        public string GetValueString(
+            DkmInspectionContext inspectionContext,
+            ReadOnlyCollection<string> formatSpecifiers
+        )
         {
             if (inspectionContext == null)
             {
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(this, MethodId.GetValueString, f => f.GetValueString(this, inspectionContext, formatSpecifiers));
+            return inspectionContext.InspectionSession.InvokeFormatter(
+                this,
+                MethodId.GetValueString,
+                f => f.GetValueString(this, inspectionContext, formatSpecifiers)
+            );
         }
 
         public bool HasUnderlyingString(DkmInspectionContext inspectionContext)
@@ -156,7 +180,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(this, MethodId.HasUnderlyingString, f => f.HasUnderlyingString(this, inspectionContext));
+            return inspectionContext.InspectionSession.InvokeFormatter(
+                this,
+                MethodId.HasUnderlyingString,
+                f => f.HasUnderlyingString(this, inspectionContext)
+            );
         }
 
         public string GetUnderlyingString(DkmInspectionContext inspectionContext)
@@ -166,7 +194,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(this, MethodId.GetUnderlyingString, f => f.GetUnderlyingString(this, inspectionContext));
+            return inspectionContext.InspectionSession.InvokeFormatter(
+                this,
+                MethodId.GetUnderlyingString,
+                f => f.GetUnderlyingString(this, inspectionContext)
+            );
         }
 
         public void GetResult(
@@ -177,7 +209,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             ReadOnlyCollection<string> FormatSpecifiers,
             string ResultName,
             string ResultFullName,
-            DkmCompletionRoutine<DkmEvaluationAsyncResult> CompletionRoutine)
+            DkmCompletionRoutine<DkmEvaluationAsyncResult> CompletionRoutine
+        )
         {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
@@ -193,9 +226,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                         FormatSpecifiers,
                         ResultName,
                         ResultFullName,
-                        CompletionRoutine);
+                        CompletionRoutine
+                    );
                     return (object)null;
-                });
+                }
+            );
         }
 
         public string EvaluateToString(DkmInspectionContext inspectionContext)
@@ -219,7 +254,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
                 // We should check the signature and virtual-ness, but this is
                 // close enough for testing.
-                if (type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Any(m => m.Name == "ToString"))
+                if (
+                    type.GetMethods(
+                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                        )
+                        .Any(m => m.Name == "ToString")
+                )
                 {
                     break;
                 }
@@ -228,14 +268,23 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             }
 
             var rawValue = RawValue;
-            Debug.Assert(rawValue != null || this.Type.GetLmrType().IsVoid(), "In our mock system, this should only happen for void.");
+            Debug.Assert(
+                rawValue != null || this.Type.GetLmrType().IsVoid(),
+                "In our mock system, this should only happen for void."
+            );
             return rawValue?.ToString();
         }
 
         /// <remarks>
         /// Very simple expression evaluation (may not support all syntax supported by Concord).
         /// </remarks>
-        public void EvaluateDebuggerDisplayString(DkmWorkList workList, DkmInspectionContext inspectionContext, DkmClrType targetType, string formatString, DkmCompletionRoutine<DkmEvaluateDebuggerDisplayStringAsyncResult> completionRoutine)
+        public void EvaluateDebuggerDisplayString(
+            DkmWorkList workList,
+            DkmInspectionContext inspectionContext,
+            DkmClrType targetType,
+            string formatString,
+            DkmCompletionRoutine<DkmEvaluateDebuggerDisplayStringAsyncResult> completionRoutine
+        )
         {
             Debug.Assert(!this.IsNull, "Not supported by VIL");
 
@@ -256,7 +305,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 {
                     if (openPos >= 0)
                     {
-                        throw new ArgumentException(string.Format("Nested braces in '{0}'", formatString));
+                        throw new ArgumentException(
+                            string.Format("Nested braces in '{0}'", formatString)
+                        );
                     }
                     openPos = i;
                 }
@@ -264,7 +315,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 {
                     if (openPos < 0)
                     {
-                        throw new ArgumentException(string.Format("Unmatched closing brace in '{0}'", formatString));
+                        throw new ArgumentException(
+                            string.Format("Unmatched closing brace in '{0}'", formatString)
+                        );
                     }
 
                     string name = formatString.Substring(openPos + 1, i - openPos - 1);
@@ -275,14 +328,23 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                     if (commaIndex >= 0)
                     {
                         var rawFormatSpecifiers = name.Substring(commaIndex + 1).Split(',');
-                        var trimmedFormatSpecifiers = ArrayBuilder<string>.GetInstance(rawFormatSpecifiers.Length);
-                        trimmedFormatSpecifiers.AddRange(rawFormatSpecifiers.Select(fs => fs.Trim()));
+                        var trimmedFormatSpecifiers = ArrayBuilder<string>.GetInstance(
+                            rawFormatSpecifiers.Length
+                        );
+                        trimmedFormatSpecifiers.AddRange(
+                            rawFormatSpecifiers.Select(fs => fs.Trim())
+                        );
                         formatSpecifiers = trimmedFormatSpecifiers.ToImmutableAndFree();
                         foreach (var formatSpecifier in formatSpecifiers)
                         {
                             if (formatSpecifier == "nq")
                             {
-                                inspectionContext = new DkmInspectionContext(inspectionContext.InspectionSession, inspectionContext.EvaluationFlags | DkmEvaluationFlags.NoQuotes, inspectionContext.Radix, inspectionContext.RuntimeInstance);
+                                inspectionContext = new DkmInspectionContext(
+                                    inspectionContext.InspectionSession,
+                                    inspectionContext.EvaluationFlags | DkmEvaluationFlags.NoQuotes,
+                                    inspectionContext.Radix,
+                                    inspectionContext.RuntimeInstance
+                                );
                             }
                             // If we need to support additional format specifiers, add them here...
                         }
@@ -292,10 +354,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
                     var type = ((TypeImpl)this.Type.GetLmrType()).Type;
                     const System.Reflection.BindingFlags bindingFlags =
-                        System.Reflection.BindingFlags.Public |
-                        System.Reflection.BindingFlags.NonPublic |
-                        System.Reflection.BindingFlags.Instance |
-                        System.Reflection.BindingFlags.Static;
+                        System.Reflection.BindingFlags.Public
+                        | System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                        | System.Reflection.BindingFlags.Static;
 
                     DkmClrValue exprValue;
                     var appDomain = this.Type.AppDomain;
@@ -307,10 +369,16 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                         exprValue = new DkmClrValue(
                             fieldValue,
                             fieldValue,
-                            DkmClrType.Create(appDomain, (TypeImpl)((fieldValue == null) ? field.FieldType : fieldValue.GetType())),
+                            DkmClrType.Create(
+                                appDomain,
+                                (TypeImpl)(
+                                    (fieldValue == null) ? field.FieldType : fieldValue.GetType()
+                                )
+                            ),
                             alias: null,
                             evalFlags: GetEvaluationResultFlags(fieldValue),
-                            valueFlags: DkmClrValueFlags.None);
+                            valueFlags: DkmClrValueFlags.None
+                        );
                     }
                     else
                     {
@@ -321,10 +389,18 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                             exprValue = new DkmClrValue(
                                 propertyValue,
                                 propertyValue,
-                                DkmClrType.Create(appDomain, (TypeImpl)((propertyValue == null) ? property.PropertyType : propertyValue.GetType())),
+                                DkmClrType.Create(
+                                    appDomain,
+                                    (TypeImpl)(
+                                        (propertyValue == null)
+                                            ? property.PropertyType
+                                            : propertyValue.GetType()
+                                    )
+                                ),
                                 alias: null,
                                 evalFlags: GetEvaluationResultFlags(propertyValue),
-                                valueFlags: DkmClrValueFlags.None);
+                                valueFlags: DkmClrValueFlags.None
+                            );
                         }
                         else
                         {
@@ -343,22 +419,34 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                                 exprValue = new DkmClrValue(
                                     methodValue,
                                     methodValue,
-                                    DkmClrType.Create(appDomain, (TypeImpl)((methodValue == null) ? method.ReturnType : methodValue.GetType())),
+                                    DkmClrType.Create(
+                                        appDomain,
+                                        (TypeImpl)(
+                                            (methodValue == null)
+                                                ? method.ReturnType
+                                                : methodValue.GetType()
+                                        )
+                                    ),
                                     alias: null,
                                     evalFlags: GetEvaluationResultFlags(methodValue),
-                                    valueFlags: DkmClrValueFlags.None);
+                                    valueFlags: DkmClrValueFlags.None
+                                );
                             }
                             else
                             {
                                 var stringValue = "Problem evaluating expression";
-                                var stringType = DkmClrType.Create(appDomain, (TypeImpl)typeof(string));
+                                var stringType = DkmClrType.Create(
+                                    appDomain,
+                                    (TypeImpl)typeof(string)
+                                );
                                 exprValue = new DkmClrValue(
                                     stringValue,
                                     stringValue,
                                     stringType,
                                     alias: null,
                                     evalFlags: DkmEvaluationResultFlags.None,
-                                    valueFlags: DkmClrValueFlags.Error);
+                                    valueFlags: DkmClrValueFlags.Error
+                                );
                             }
                         }
                     }
@@ -373,13 +461,25 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
             if (openPos >= 0)
             {
-                throw new ArgumentException(string.Format("Unmatched open brace in '{0}'", formatString));
+                throw new ArgumentException(
+                    string.Format("Unmatched open brace in '{0}'", formatString)
+                );
             }
 
-            workList.AddWork(() => completionRoutine(new DkmEvaluateDebuggerDisplayStringAsyncResult(pooled.ToStringAndFree())));
+            workList.AddWork(
+                () =>
+                    completionRoutine(
+                        new DkmEvaluateDebuggerDisplayStringAsyncResult(pooled.ToStringAndFree())
+                    )
+            );
         }
 
-        public DkmClrValue GetMemberValue(string MemberName, int MemberType, string ParentTypeName, DkmInspectionContext InspectionContext)
+        public DkmClrValue GetMemberValue(
+            string MemberName,
+            int MemberType,
+            string ParentTypeName,
+            DkmInspectionContext InspectionContext
+        )
         {
             if (InspectionContext == null)
             {
@@ -426,7 +526,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                         evalFlags: DkmEvaluationResultFlags.None,
                         valueFlags: DkmClrValueFlags.None,
                         category: DkmEvaluationResultCategory.Property,
-                        access: DkmEvaluationResultAccessType.Public);
+                        access: DkmEvaluationResultAccessType.Public
+                    );
                 }
                 else if (MemberName == InternalWellKnownMemberNames.NullableValue)
                 {
@@ -442,7 +543,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                         evalFlags: DkmEvaluationResultFlags.None,
                         valueFlags: DkmClrValueFlags.None,
                         category: DkmEvaluationResultCategory.Property,
-                        access: DkmEvaluationResultAccessType.Public);
+                        access: DkmEvaluationResultAccessType.Public
+                    );
                 }
             }
 
@@ -453,11 +555,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             var access = DkmEvaluationResultAccessType.None;
 
             const BindingFlags bindingFlags =
-                BindingFlags.DeclaredOnly |
-                BindingFlags.Instance |
-                BindingFlags.Static |
-                BindingFlags.Public |
-                BindingFlags.NonPublic;
+                BindingFlags.DeclaredOnly
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic;
 
             switch ((MemberTypes)MemberType)
             {
@@ -466,7 +568,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                     declaredType = field.FieldType;
                     category = DkmEvaluationResultCategory.Data;
                     access = GetFieldAccess(field);
-                    if (field.Attributes.HasFlag(System.Reflection.FieldAttributes.Literal) || field.Attributes.HasFlag(System.Reflection.FieldAttributes.InitOnly))
+                    if (
+                        field.Attributes.HasFlag(System.Reflection.FieldAttributes.Literal)
+                        || field.Attributes.HasFlag(System.Reflection.FieldAttributes.InitOnly)
+                    )
                     {
                         evalFlags |= DkmEvaluationResultFlags.ReadOnly;
                     }
@@ -485,7 +590,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                             evalFlags: evalFlags | DkmEvaluationResultFlags.ExceptionThrown,
                             valueFlags: DkmClrValueFlags.None,
                             category: category,
-                            access: access);
+                            access: access
+                        );
                     }
                     break;
                 case MemberTypes.Property:
@@ -512,7 +618,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                             evalFlags: evalFlags | DkmEvaluationResultFlags.ExceptionThrown,
                             valueFlags: DkmClrValueFlags.None,
                             category: category,
-                            access: access);
+                            access: access
+                        );
                     }
                     break;
                 default:
@@ -542,7 +649,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 evalFlags: evalFlags,
                 valueFlags: DkmClrValueFlags.None,
                 category: category,
-                access: access);
+                access: access
+            );
         }
 
         internal static unsafe object UnboxPointer(object value)
@@ -569,14 +677,18 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
             var array = (System.Array)RawValue;
             var element = array.GetValue(indices);
-            var type = DkmClrType.Create(this.Type.AppDomain, (TypeImpl)((element == null) ? array.GetType().GetElementType() : element.GetType()));
+            var type = DkmClrType.Create(
+                this.Type.AppDomain,
+                (TypeImpl)((element == null) ? array.GetType().GetElementType() : element.GetType())
+            );
             return new DkmClrValue(
                 element,
                 element,
                 type: type,
                 alias: null,
                 evalFlags: DkmEvaluationResultFlags.None,
-                valueFlags: DkmClrValueFlags.None);
+                valueFlags: DkmClrValueFlags.None
+            );
         }
 
         public ReadOnlyCollection<int> ArrayDimensions
@@ -619,7 +731,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             }
         }
 
-        public DkmClrValue InstantiateProxyType(DkmInspectionContext inspectionContext, DkmClrType proxyType)
+        public DkmClrValue InstantiateProxyType(
+            DkmInspectionContext inspectionContext,
+            DkmClrType proxyType
+        )
         {
             if (inspectionContext == null)
             {
@@ -629,10 +744,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             var lmrType = proxyType.GetLmrType();
             Debug.Assert(!lmrType.IsGenericTypeDefinition);
             const BindingFlags bindingFlags =
-                BindingFlags.CreateInstance |
-                BindingFlags.Instance |
-                BindingFlags.NonPublic |
-                BindingFlags.Public;
+                BindingFlags.CreateInstance
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Public;
             var constructor = lmrType.GetConstructors(bindingFlags).Single();
             var value = constructor.Invoke(bindingFlags, null, new[] { RawValue }, null);
             return new DkmClrValue(
@@ -641,10 +756,13 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 type: proxyType,
                 alias: null,
                 evalFlags: DkmEvaluationResultFlags.None,
-                valueFlags: DkmClrValueFlags.None);
+                valueFlags: DkmClrValueFlags.None
+            );
         }
 
-        private static readonly ReadOnlyCollection<DkmClrType> s_noArguments = ArrayBuilder<DkmClrType>.GetInstance(0).ToImmutableAndFree();
+        private static readonly ReadOnlyCollection<DkmClrType> s_noArguments =
+            ArrayBuilder<DkmClrType>.GetInstance(0).ToImmutableAndFree();
+
         public DkmClrValue InstantiateDynamicViewProxy(DkmInspectionContext inspectionContext)
         {
             if (inspectionContext == null)
@@ -655,14 +773,19 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             var module = new DkmClrModuleInstance(
                 this.Type.AppDomain.RuntimeInstance,
                 typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException).Assembly,
-                new DkmModule("Microsoft.CSharp.dll"));
+                new DkmModule("Microsoft.CSharp.dll")
+            );
             var proxyType = module.ResolveTypeName(
                 "Microsoft.CSharp.RuntimeBinder.DynamicMetaObjectProviderDebugView",
-                s_noArguments);
+                s_noArguments
+            );
             return this.InstantiateProxyType(inspectionContext, proxyType);
         }
 
-        public DkmClrValue InstantiateResultsViewProxy(DkmInspectionContext inspectionContext, DkmClrType enumerableType)
+        public DkmClrValue InstantiateResultsViewProxy(
+            DkmInspectionContext inspectionContext,
+            DkmClrType enumerableType
+        )
         {
             if (EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown))
             {
@@ -683,9 +806,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
             var typeArgs = enumerableType.GenericArguments;
             Debug.Assert(typeArgs.Count <= 1);
-            var proxyTypeName = (typeArgs.Count == 0)
-                ? "System.Linq.SystemCore_EnumerableDebugView"
-                : "System.Linq.SystemCore_EnumerableDebugView`1";
+            var proxyTypeName =
+                (typeArgs.Count == 0)
+                    ? "System.Linq.SystemCore_EnumerableDebugView"
+                    : "System.Linq.SystemCore_EnumerableDebugView`1";
             DkmClrType proxyType;
             try
             {
@@ -774,7 +898,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             }
         }
 
-        private static DkmEvaluationResultAccessType GetFieldAccess(Microsoft.VisualStudio.Debugger.Metadata.FieldInfo field)
+        private static DkmEvaluationResultAccessType GetFieldAccess(
+            Microsoft.VisualStudio.Debugger.Metadata.FieldInfo field
+        )
         {
             if (field.IsPrivate)
             {
@@ -794,12 +920,16 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             }
         }
 
-        private static DkmEvaluationResultAccessType GetPropertyAccess(Microsoft.VisualStudio.Debugger.Metadata.PropertyInfo property)
+        private static DkmEvaluationResultAccessType GetPropertyAccess(
+            Microsoft.VisualStudio.Debugger.Metadata.PropertyInfo property
+        )
         {
             return GetMethodAccess(property.GetGetMethod(nonPublic: true));
         }
 
-        private static DkmEvaluationResultAccessType GetMethodAccess(Microsoft.VisualStudio.Debugger.Metadata.MethodBase method)
+        private static DkmEvaluationResultAccessType GetMethodAccess(
+            Microsoft.VisualStudio.Debugger.Metadata.MethodBase method
+        )
         {
             if (method.IsPrivate)
             {

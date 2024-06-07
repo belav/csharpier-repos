@@ -7,7 +7,9 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     internal static class FeatureAttribute
     {
         public const string AddImportsOnPaste = nameof(AddImportsOnPaste);
-        public const string AutomaticEndConstructCorrection = nameof(AutomaticEndConstructCorrection);
+        public const string AutomaticEndConstructCorrection = nameof(
+            AutomaticEndConstructCorrection
+        );
         public const string AutomaticPairCompletion = nameof(AutomaticPairCompletion);
         public const string BraceHighlighting = nameof(BraceHighlighting);
         public const string BracePairs = nameof(BracePairs);

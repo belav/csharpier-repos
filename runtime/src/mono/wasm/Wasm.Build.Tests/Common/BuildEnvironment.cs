@@ -14,41 +14,45 @@ namespace Wasm.Build.Tests
 {
     public class BuildEnvironment
     {
-        public string                           DotNet                        { get; init; }
-        public bool                             IsWorkload                    { get; init; }
-        public string                           DefaultBuildArgs              { get; init; }
-        public IDictionary<string, string>      EnvVars                       { get; init; }
-        public string                           DirectoryBuildPropsContents   { get; init; }
-        public string                           DirectoryBuildTargetsContents { get; init; }
-        public string                           LogRootPath                   { get; init; }
+        public string DotNet { get; init; }
+        public bool IsWorkload { get; init; }
+        public string DefaultBuildArgs { get; init; }
+        public IDictionary<string, string> EnvVars { get; init; }
+        public string DirectoryBuildPropsContents { get; init; }
+        public string DirectoryBuildTargetsContents { get; init; }
+        public string LogRootPath { get; init; }
 
-        public string                           WorkloadPacksDir              { get; init; }
-        public string                           BuiltNuGetsPath               { get; init; }
+        public string WorkloadPacksDir { get; init; }
+        public string BuiltNuGetsPath { get; init; }
 
         public bool UseWebcil { get; init; }
         public bool IsWorkloadWithMultiThreadingForDefaultFramework { get; init; }
         public bool IsRunningOnCI => EnvironmentVariables.IsRunningOnCI;
 
-        public static readonly string           RelativeTestAssetsPath = @"..\testassets\";
-        public static readonly string           TestAssetsPath = Path.Combine(AppContext.BaseDirectory, "testassets");
-        public static readonly string           TestDataPath = Path.Combine(AppContext.BaseDirectory, "data");
-        // ActiveIssue for Linux/OSx: https://github.com/dotnet/runtime/issues/92335
-        public static readonly string           TmpPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-                                                    Path.Combine(AppContext.BaseDirectory, "wbt artifacts") :
-                                                    Path.Combine(AppContext.BaseDirectory, "wbt");
+        public static readonly string RelativeTestAssetsPath = @"..\testassets\";
+        public static readonly string TestAssetsPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "testassets"
+        );
+        public static readonly string TestDataPath = Path.Combine(AppContext.BaseDirectory, "data");
 
-        public static readonly string           DefaultRuntimeIdentifier =
+        // ActiveIssue for Linux/OSx: https://github.com/dotnet/runtime/issues/92335
+        public static readonly string TmpPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? Path.Combine(AppContext.BaseDirectory, "wbt artifacts")
+            : Path.Combine(AppContext.BaseDirectory, "wbt");
+
+        public static readonly string DefaultRuntimeIdentifier =
 #if TARGET_WASI
-                                                    "wasi-wasm";
+            "wasi-wasm";
 #else
-                                                    "browser-wasm";
+            "browser-wasm";
 #endif
 
         private static readonly Dictionary<string, string> s_runtimePackVersions = new();
 
         public BuildEnvironment()
         {
-            DirectoryInfo? solutionRoot = new (AppContext.BaseDirectory);
+            DirectoryInfo? solutionRoot = new(AppContext.BaseDirectory);
             while (solutionRoot != null)
             {
                 if (File.Exists(Path.Combine(solutionRoot.FullName, "NuGet.config")))
@@ -63,19 +67,27 @@ namespace Wasm.Build.Tests
             if (string.IsNullOrEmpty(sdkForWorkloadPath))
             {
                 // Is this a "local run?
-                string sdkDirName = string.IsNullOrEmpty(EnvironmentVariables.SdkDirName) ? "dotnet-latest" : EnvironmentVariables.SdkDirName;
-                string probePath = Path.Combine(Path.GetDirectoryName(typeof(BuildEnvironment).Assembly.Location)!,
-                                                "..",
-                                                "..",
-                                                "..",
-                                                sdkDirName);
+                string sdkDirName = string.IsNullOrEmpty(EnvironmentVariables.SdkDirName)
+                    ? "dotnet-latest"
+                    : EnvironmentVariables.SdkDirName;
+                string probePath = Path.Combine(
+                    Path.GetDirectoryName(typeof(BuildEnvironment).Assembly.Location)!,
+                    "..",
+                    "..",
+                    "..",
+                    sdkDirName
+                );
                 if (Directory.Exists(probePath))
                     sdkForWorkloadPath = Path.GetFullPath(probePath);
                 else
-                    throw new Exception($"Environment variable SDK_FOR_WORKLOAD_TESTING_PATH not set, and could not find it at {probePath}");
+                    throw new Exception(
+                        $"Environment variable SDK_FOR_WORKLOAD_TESTING_PATH not set, and could not find it at {probePath}"
+                    );
             }
             if (!Directory.Exists(sdkForWorkloadPath))
-                throw new Exception($"Could not find SDK_FOR_WORKLOAD_TESTING_PATH={sdkForWorkloadPath}");
+                throw new Exception(
+                    $"Could not find SDK_FOR_WORKLOAD_TESTING_PATH={sdkForWorkloadPath}"
+                );
 
             sdkForWorkloadPath = Path.GetFullPath(sdkForWorkloadPath);
 
@@ -93,7 +105,9 @@ namespace Wasm.Build.Tests
             DefaultBuildArgs = string.Empty;
             WorkloadPacksDir = Path.Combine(sdkForWorkloadPath, "packs");
             EnvVars = new Dictionary<string, string>();
-            bool workloadInstalled = EnvironmentVariables.SdkHasWorkloadInstalled != null && EnvironmentVariables.SdkHasWorkloadInstalled == "true";
+            bool workloadInstalled =
+                EnvironmentVariables.SdkHasWorkloadInstalled != null
+                && EnvironmentVariables.SdkHasWorkloadInstalled == "true";
             if (workloadInstalled)
             {
                 DirectoryBuildPropsContents = s_directoryBuildPropsForWorkloads;
@@ -106,18 +120,29 @@ namespace Wasm.Build.Tests
                 DirectoryBuildTargetsContents = s_directoryBuildTargetsForLocal;
             }
 
-            IsWorkloadWithMultiThreadingForDefaultFramework = IsMultiThreadingRuntimePackAvailableFor(BuildTestBase.DefaultTargetFramework);
-            if (IsWorkload && EnvironmentVariables.IsRunningOnCI && !IsWorkloadWithMultiThreadingForDefaultFramework)
+            IsWorkloadWithMultiThreadingForDefaultFramework =
+                IsMultiThreadingRuntimePackAvailableFor(BuildTestBase.DefaultTargetFramework);
+            if (
+                IsWorkload
+                && EnvironmentVariables.IsRunningOnCI
+                && !IsWorkloadWithMultiThreadingForDefaultFramework
+            )
             {
                 throw new Exception(
-                            "Expected the multithreading runtime pack to be available when running on CI." +
-                            $" {nameof(IsRunningOnCI)} is true but {nameof(IsWorkloadWithMultiThreadingForDefaultFramework)} is false.");
+                    "Expected the multithreading runtime pack to be available when running on CI."
+                        + $" {nameof(IsRunningOnCI)} is true but {nameof(IsWorkloadWithMultiThreadingForDefaultFramework)} is false."
+                );
             }
 
             UseWebcil = EnvironmentVariables.UseWebcil;
 
-            if (EnvironmentVariables.BuiltNuGetsPath is null || !Directory.Exists(EnvironmentVariables.BuiltNuGetsPath))
-                throw new Exception($"Cannot find 'BUILT_NUGETS_PATH={EnvironmentVariables.BuiltNuGetsPath}'");
+            if (
+                EnvironmentVariables.BuiltNuGetsPath is null
+                || !Directory.Exists(EnvironmentVariables.BuiltNuGetsPath)
+            )
+                throw new Exception(
+                    $"Cannot find 'BUILT_NUGETS_PATH={EnvironmentVariables.BuiltNuGetsPath}'"
+                );
 
             BuiltNuGetsPath = EnvironmentVariables.BuiltNuGetsPath;
 
@@ -128,7 +153,8 @@ namespace Wasm.Build.Tests
             EnvVars["DOTNET_INSTALL_DIR"] = sdkForWorkloadPath;
             EnvVars["DOTNET_MULTILEVEL_LOOKUP"] = "0";
             EnvVars["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "1";
-            EnvVars["PATH"] = $"{sdkForWorkloadPath}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}";
+            EnvVars["PATH"] =
+                $"{sdkForWorkloadPath}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}";
             EnvVars["EM_WORKAROUND_PYTHON_BUG_34780"] = "1";
 
             if (!UseWebcil)
@@ -159,28 +185,60 @@ namespace Wasm.Build.Tests
             Directory.CreateDirectory(TmpPath);
         }
 
-        public string GetRuntimePackVersion(string tfm = BuildTestBase.DefaultTargetFramework)
-            => s_runtimePackVersions.TryGetValue(tfm, out string? version)
-                    ? version
-                    : throw new ArgumentException($"No runtime pack version found for tfm={tfm} .");
+        public string GetRuntimePackVersion(string tfm = BuildTestBase.DefaultTargetFramework) =>
+            s_runtimePackVersions.TryGetValue(tfm, out string? version)
+                ? version
+                : throw new ArgumentException($"No runtime pack version found for tfm={tfm} .");
 
-        public string GetRuntimePackDir(string tfm = BuildTestBase.DefaultTargetFramework, RuntimeVariant runtimeType = RuntimeVariant.SingleThreaded)
-            => Path.Combine(WorkloadPacksDir,
-                    runtimeType is RuntimeVariant.SingleThreaded
-                        ? $"Microsoft.NETCore.App.Runtime.Mono.{DefaultRuntimeIdentifier}"
-                        : $"Microsoft.NETCore.App.Runtime.Mono.multithread.{DefaultRuntimeIdentifier}",
-                    GetRuntimePackVersion(tfm));
-        public string GetRuntimeNativeDir(string tfm = BuildTestBase.DefaultTargetFramework, RuntimeVariant runtimeType = RuntimeVariant.SingleThreaded)
-            => Path.Combine(GetRuntimePackDir(tfm, runtimeType), "runtimes", DefaultRuntimeIdentifier, "native");
-        public bool IsMultiThreadingRuntimePackAvailableFor(string tfm)
-            => IsWorkload && File.Exists(Path.Combine(GetRuntimeNativeDir(tfm, RuntimeVariant.MultiThreaded), "dotnet.native.worker.js"));
+        public string GetRuntimePackDir(
+            string tfm = BuildTestBase.DefaultTargetFramework,
+            RuntimeVariant runtimeType = RuntimeVariant.SingleThreaded
+        ) =>
+            Path.Combine(
+                WorkloadPacksDir,
+                runtimeType is RuntimeVariant.SingleThreaded
+                    ? $"Microsoft.NETCore.App.Runtime.Mono.{DefaultRuntimeIdentifier}"
+                    : $"Microsoft.NETCore.App.Runtime.Mono.multithread.{DefaultRuntimeIdentifier}",
+                GetRuntimePackVersion(tfm)
+            );
 
-        public static string WasmOverridePacksTargetsPath = Path.Combine(TestDataPath, "WasmOverridePacks.targets");
+        public string GetRuntimeNativeDir(
+            string tfm = BuildTestBase.DefaultTargetFramework,
+            RuntimeVariant runtimeType = RuntimeVariant.SingleThreaded
+        ) =>
+            Path.Combine(
+                GetRuntimePackDir(tfm, runtimeType),
+                "runtimes",
+                DefaultRuntimeIdentifier,
+                "native"
+            );
 
-        protected static string s_directoryBuildPropsForWorkloads = File.ReadAllText(Path.Combine(TestDataPath, "Workloads.Directory.Build.props"));
-        protected static string s_directoryBuildTargetsForWorkloads = File.ReadAllText(Path.Combine(TestDataPath, "Workloads.Directory.Build.targets"));
+        public bool IsMultiThreadingRuntimePackAvailableFor(string tfm) =>
+            IsWorkload
+            && File.Exists(
+                Path.Combine(
+                    GetRuntimeNativeDir(tfm, RuntimeVariant.MultiThreaded),
+                    "dotnet.native.worker.js"
+                )
+            );
 
-        protected static string s_directoryBuildPropsForLocal = File.ReadAllText(Path.Combine(TestDataPath, "Local.Directory.Build.props"));
-        protected static string s_directoryBuildTargetsForLocal = File.ReadAllText(Path.Combine(TestDataPath, "Local.Directory.Build.targets"));
+        public static string WasmOverridePacksTargetsPath = Path.Combine(
+            TestDataPath,
+            "WasmOverridePacks.targets"
+        );
+
+        protected static string s_directoryBuildPropsForWorkloads = File.ReadAllText(
+            Path.Combine(TestDataPath, "Workloads.Directory.Build.props")
+        );
+        protected static string s_directoryBuildTargetsForWorkloads = File.ReadAllText(
+            Path.Combine(TestDataPath, "Workloads.Directory.Build.targets")
+        );
+
+        protected static string s_directoryBuildPropsForLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Local.Directory.Build.props")
+        );
+        protected static string s_directoryBuildTargetsForLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Local.Directory.Build.targets")
+        );
     }
 }

@@ -28,7 +28,14 @@ internal sealed class BatchingLogger : ILogger
         return _provider.IsEnabled;
     }
 
-    public void Log<TState>(DateTimeOffset timestamp, LogLevel logLevel, EventId _, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        DateTimeOffset timestamp,
+        LogLevel logLevel,
+        EventId _,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         if (!IsEnabled(logLevel))
         {
@@ -36,7 +43,9 @@ internal sealed class BatchingLogger : ILogger
         }
 
         var builder = new StringBuilder();
-        builder.Append(timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff zzz", CultureInfo.InvariantCulture));
+        builder.Append(
+            timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff zzz", CultureInfo.InvariantCulture)
+        );
         builder.Append(" [");
         builder.Append(logLevel.ToString());
         builder.Append("] ");
@@ -45,10 +54,13 @@ internal sealed class BatchingLogger : ILogger
         var scopeProvider = _provider.ScopeProvider;
         if (scopeProvider != null)
         {
-            scopeProvider.ForEachScope((scope, stringBuilder) =>
-            {
-                stringBuilder.Append(" => ").Append(scope);
-            }, builder);
+            scopeProvider.ForEachScope(
+                (scope, stringBuilder) =>
+                {
+                    stringBuilder.Append(" => ").Append(scope);
+                },
+                builder
+            );
 
             builder.AppendLine(":");
         }
@@ -67,7 +79,13 @@ internal sealed class BatchingLogger : ILogger
         _provider.AddMessage(timestamp, builder.ToString());
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         Log(DateTimeOffset.Now, logLevel, eventId, state, exception, formatter);
     }

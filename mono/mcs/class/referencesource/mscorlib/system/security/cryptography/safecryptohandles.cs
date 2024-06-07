@@ -1,19 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // SafeCryptoHandles.cs
 //
 
-namespace System.Security.Cryptography {
-    using System.Runtime.InteropServices;
+namespace System.Security.Cryptography
+{
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using Microsoft.Win32.SafeHandles;
 
@@ -25,18 +26,23 @@ namespace System.Security.Cryptography {
     ///     used in this class is actually a pointer to a CRYPT_PROV_CTX unmanaged structure defined in
     ///     COMCryptography.h
     /// </remarks>
-    [System.Security.SecurityCritical]  // auto-generated
-    internal sealed class SafeProvHandle : SafeHandleZeroOrMinusOneIsInvalid {
-
-        private SafeProvHandle() : base(true) {
+    [System.Security.SecurityCritical] // auto-generated
+    internal sealed class SafeProvHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeProvHandle()
+            : base(true)
+        {
             SetHandle(IntPtr.Zero);
         }
 
-        private SafeProvHandle(IntPtr handle) : base (true) {
+        private SafeProvHandle(IntPtr handle)
+            : base(true)
+        {
             SetHandle(handle);
         }
 
-        internal static SafeProvHandle InvalidHandle {
+        internal static SafeProvHandle InvalidHandle
+        {
             get { return new SafeProvHandle(); }
         }
 
@@ -62,21 +68,26 @@ namespace System.Security.Cryptography {
     ///     Since we need to delete the key handle before the provider is released we need to actually hold a
     ///     pointer to a CRYPT_KEY_CTX unmanaged structure whose destructor decrements a refCount. Only when
     ///     the provider refCount is 0 it is deleted. This way, we loose a ---- in the critical finalization
-    ///     of the key handle and provider handle. This also applies to hash handles, which point to a 
+    ///     of the key handle and provider handle. This also applies to hash handles, which point to a
     ///     CRYPT_HASH_CTX. Those strucutres are defined in COMCryptography.h
     /// </summary>
-    [System.Security.SecurityCritical]  // auto-generated
-    internal sealed class SafeKeyHandle : SafeHandleZeroOrMinusOneIsInvalid {
-
-        private SafeKeyHandle() : base(true) {
+    [System.Security.SecurityCritical] // auto-generated
+    internal sealed class SafeKeyHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeKeyHandle()
+            : base(true)
+        {
             SetHandle(IntPtr.Zero);
         }
 
-        private SafeKeyHandle(IntPtr handle) : base (true) {
+        private SafeKeyHandle(IntPtr handle)
+            : base(true)
+        {
             SetHandle(handle);
         }
 
-        internal static SafeKeyHandle InvalidHandle {
+        internal static SafeKeyHandle InvalidHandle
+        {
             get { return new SafeKeyHandle(); }
         }
 
@@ -101,18 +112,23 @@ namespace System.Security.Cryptography {
     ///     See code:System.Security.Cryptography.SafeKeyHandle for information about the release process
     ///     for a CRYPT_HASH_CTX.
     /// </remarks>
-    [System.Security.SecurityCritical]  // auto-generated
-    internal sealed class SafeHashHandle : SafeHandleZeroOrMinusOneIsInvalid {
-
-        private SafeHashHandle() : base(true) {
+    [System.Security.SecurityCritical] // auto-generated
+    internal sealed class SafeHashHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeHashHandle()
+            : base(true)
+        {
             SetHandle(IntPtr.Zero);
         }
 
-        private SafeHashHandle(IntPtr handle) : base (true) {
+        private SafeHashHandle(IntPtr handle)
+            : base(true)
+        {
             SetHandle(handle);
         }
 
-        internal static SafeHashHandle InvalidHandle {
+        internal static SafeHashHandle InvalidHandle
+        {
             get { return new SafeHashHandle(); }
         }
 
@@ -131,4 +147,3 @@ namespace System.Security.Cryptography {
     }
 #endif // #if FEATURE_CRYPTO || FEATURE_LEGACYNETCFCRYPTO
 }
-

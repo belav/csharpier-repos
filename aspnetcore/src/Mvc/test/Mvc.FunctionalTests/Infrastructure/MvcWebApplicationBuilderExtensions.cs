@@ -18,7 +18,11 @@ public static class MvcWebApplicationBuilderExtensions
     /// <param name="culture">The culture to use when processing <see cref="HttpRequest"/>.</param>
     /// <param name="uiCulture">The UI culture to use when processing <see cref="HttpRequest"/>.</param>
     /// <returns>An instance of this <see cref="IWebHostBuilder"/></returns>
-    public static IWebHostBuilder UseRequestCulture<TStartup>(this IWebHostBuilder builder, string culture, string uiCulture)
+    public static IWebHostBuilder UseRequestCulture<TStartup>(
+        this IWebHostBuilder builder,
+        string culture,
+        string uiCulture
+    )
         where TStartup : class
     {
         ArgumentNullException.ThrowIfNull(culture);
@@ -26,12 +30,10 @@ public static class MvcWebApplicationBuilderExtensions
 
         builder.ConfigureServices(services =>
         {
-            services.TryAddSingleton(new TestCulture
-            {
-                Culture = culture,
-                UICulture = uiCulture
-            });
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IStartupFilter, CultureReplacerStartupFilter>());
+            services.TryAddSingleton(new TestCulture { Culture = culture, UICulture = uiCulture });
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IStartupFilter, CultureReplacerStartupFilter>()
+            );
         });
 
         return builder;

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,55 +27,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Collections.Specialized;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeNamespaceImportTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeNamespaceImport cni = new CodeNamespaceImport ();
-			Assert.IsNull (cni.LinePragma, "#1");
-			Assert.IsNotNull (cni.Namespace, "#2");
-			Assert.AreEqual (string.Empty, cni.Namespace, "#3");
+    [TestFixture]
+    public class CodeNamespaceImportTest
+    {
+        [Test]
+        public void Constructor0()
+        {
+            CodeNamespaceImport cni = new CodeNamespaceImport();
+            Assert.IsNull(cni.LinePragma, "#1");
+            Assert.IsNotNull(cni.Namespace, "#2");
+            Assert.AreEqual(string.Empty, cni.Namespace, "#3");
 
-			CodeLinePragma linePragma = new CodeLinePragma ("a", 5);
-			cni.LinePragma = linePragma;
-			Assert.IsNotNull (cni.LinePragma, "#4");
-			Assert.AreSame (linePragma, cni.LinePragma, "#5");
+            CodeLinePragma linePragma = new CodeLinePragma("a", 5);
+            cni.LinePragma = linePragma;
+            Assert.IsNotNull(cni.LinePragma, "#4");
+            Assert.AreSame(linePragma, cni.LinePragma, "#5");
 
-			cni.LinePragma = null;
-			Assert.IsNull (cni.LinePragma, "#6");
+            cni.LinePragma = null;
+            Assert.IsNull(cni.LinePragma, "#6");
 
-			string ns = "mono";
-			cni.Namespace = ns;
-			Assert.AreSame (ns, cni.Namespace, "#7");
+            string ns = "mono";
+            cni.Namespace = ns;
+            Assert.AreSame(ns, cni.Namespace, "#7");
 
-			cni.Namespace = null;
-			Assert.IsNotNull (cni.Namespace, "#8");
-			Assert.AreEqual (string.Empty, cni.Namespace, "#9");
-		}
+            cni.Namespace = null;
+            Assert.IsNotNull(cni.Namespace, "#8");
+            Assert.AreEqual(string.Empty, cni.Namespace, "#9");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			string ns = "mono";
+        [Test]
+        public void Constructor1()
+        {
+            string ns = "mono";
 
-			CodeNamespaceImport cni = new CodeNamespaceImport (ns);
-			Assert.IsNull (cni.LinePragma, "#1");
-			Assert.IsNotNull (cni.Namespace, "#2");
-			Assert.AreSame (ns, cni.Namespace, "#3");
+            CodeNamespaceImport cni = new CodeNamespaceImport(ns);
+            Assert.IsNull(cni.LinePragma, "#1");
+            Assert.IsNotNull(cni.Namespace, "#2");
+            Assert.AreSame(ns, cni.Namespace, "#3");
 
-			cni = new CodeNamespaceImport ((string) null);
-			Assert.IsNotNull (cni.Namespace, "#4");
-			Assert.AreEqual (string.Empty, cni.Namespace, "#5");
-		}
-	}
+            cni = new CodeNamespaceImport((string)null);
+            Assert.IsNotNull(cni.Namespace, "#4");
+            Assert.AreEqual(string.Empty, cni.Namespace, "#5");
+        }
+    }
 }

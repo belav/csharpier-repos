@@ -16,14 +16,20 @@ namespace Microsoft.Interop
         public required SequenceEqualImmutableArray<Location>? AdditionalLocations { get; init; }
         public required ValueEqualityImmutableDictionary<string, string>? Properties { get; init; }
 
-        public Diagnostic ToDiagnostic() => Diagnostic.Create(
-            Descriptor,
-            Location,
-            additionalLocations: AdditionalLocations,
-            properties: Properties?.Map,
-            messageArgs: MessageArgs.Array.ToArray());
+        public Diagnostic ToDiagnostic() =>
+            Diagnostic.Create(
+                Descriptor,
+                Location,
+                additionalLocations: AdditionalLocations,
+                properties: Properties?.Map,
+                messageArgs: MessageArgs.Array.ToArray()
+            );
 
-        public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, Location location, params object?[] messageArgs)
+        public static DiagnosticInfo Create(
+            DiagnosticDescriptor descriptor,
+            Location location,
+            params object?[] messageArgs
+        )
         {
             return new DiagnosticInfo()
             {
@@ -35,7 +41,12 @@ namespace Microsoft.Interop
             };
         }
 
-        public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, Location location, ImmutableDictionary<string, string>? properties, params object?[] messageArgs)
+        public static DiagnosticInfo Create(
+            DiagnosticDescriptor descriptor,
+            Location location,
+            ImmutableDictionary<string, string>? properties,
+            params object?[] messageArgs
+        )
         {
             return new DiagnosticInfo()
             {
@@ -47,13 +58,21 @@ namespace Microsoft.Interop
             };
         }
 
-        public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, Location location, IEnumerable<Location>? additionalLocations, ImmutableDictionary<string, string>? properties, params object?[] messageArgs)
+        public static DiagnosticInfo Create(
+            DiagnosticDescriptor descriptor,
+            Location location,
+            IEnumerable<Location>? additionalLocations,
+            ImmutableDictionary<string, string>? properties,
+            params object?[] messageArgs
+        )
         {
             return new DiagnosticInfo()
             {
                 Descriptor = descriptor,
                 Location = location,
-                AdditionalLocations = (additionalLocations ?? ImmutableArray<Location>.Empty).ToSequenceEqualImmutableArray(),
+                AdditionalLocations = (
+                    additionalLocations ?? ImmutableArray<Location>.Empty
+                ).ToSequenceEqualImmutableArray(),
                 Properties = properties.ToValueEquals(),
                 MessageArgs = messageArgs.Select(o => o.ToString()).ToSequenceEqualImmutableArray()
             };

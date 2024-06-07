@@ -25,7 +25,6 @@ internal sealed class DefaultCoreProfileConfig : ManualConfig
 
         AddValidator(JitOptimizationsValidator.FailOnError);
 
-        AddJob(Job.InProcess
-            .WithStrategy(RunStrategy.Throughput));
+        AddJob(Job.InProcess.WithStrategy(RunStrategy.Throughput));
     }
 }

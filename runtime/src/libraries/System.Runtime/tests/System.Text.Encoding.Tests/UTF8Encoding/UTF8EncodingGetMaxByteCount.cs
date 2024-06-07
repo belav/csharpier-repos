@@ -31,8 +31,14 @@ namespace System.Text.Tests
         [InlineData(int.MaxValue)]
         public void GetMaxByteCount_NegativeTests(int charCount)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(nameof(charCount), () => Encoding.UTF8.GetMaxByteCount(charCount));
-            Assert.Throws<ArgumentOutOfRangeException>(nameof(charCount), () => new UTF8Encoding().GetMaxByteCount(charCount));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                nameof(charCount),
+                () => Encoding.UTF8.GetMaxByteCount(charCount)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                nameof(charCount),
+                () => new UTF8Encoding().GetMaxByteCount(charCount)
+            );
         }
     }
 }

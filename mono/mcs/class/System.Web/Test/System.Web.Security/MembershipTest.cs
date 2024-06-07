@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,61 +30,75 @@
 using System;
 using System.Text;
 using System.Web.Security;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Security {
+namespace MonoTests.System.Web.Security
+{
+    [TestFixture]
+    public class MembershipTest
+    {
+        [Test]
+        public void Provider()
+        {
+            Assert.IsNotNull(Membership.Provider, "Membership.Provider");
+        }
 
-	[TestFixture]
-	public class MembershipTest {
+        [Test]
+        public void GeneratePassword()
+        {
+            string pwd;
+            int count;
+            int i;
 
-		[Test]
-		public void Provider ()
-		{
-			Assert.IsNotNull (Membership.Provider, "Membership.Provider");
-		}
+            pwd = Membership.GeneratePassword(5, 0);
+            Assert.AreEqual(5, pwd.Length, "A1");
 
-		[Test]
-		public void GeneratePassword ()
-		{
-			string pwd;
-			int count;
-			int i;
+            pwd = Membership.GeneratePassword(5, 1);
+            Assert.AreEqual(5, pwd.Length, "A2");
+            /* count up the non-alphanumeric characters in the string */
+            count = 0;
+            for (i = 0; i < pwd.Length; i++)
+                if (!Char.IsLetterOrDigit(pwd, i))
+                    count++;
+            Assert.IsTrue(count >= 1, "A2");
+        }
 
-			pwd = Membership.GeneratePassword (5, 0);
-			Assert.AreEqual (5, pwd.Length, "A1");
+        [Test(Description = "Bug #647631")]
+        public void CreatePassword_InvalidInput()
+        {
+            MembershipUser user;
 
-			pwd = Membership.GeneratePassword (5, 1);
-			Assert.AreEqual (5, pwd.Length, "A2");
-			/* count up the non-alphanumeric characters in the string */
-			count = 0;
-			for (i = 0; i < pwd.Length; i ++)
-				if (!Char.IsLetterOrDigit (pwd, i))
-					count++;
-			Assert.IsTrue (count >= 1, "A2");
-		}
+            Assert.Throws<MembershipCreateUserException>(
+                () =>
+                {
+                    user = Membership.CreateUser(null, "password");
+                },
+                "#A1"
+            );
 
-		[Test (Description = "Bug #647631")]
-		public void CreatePassword_InvalidInput ()
-		{
-			MembershipUser user;
+            Assert.Throws<MembershipCreateUserException>(
+                () =>
+                {
+                    user = Membership.CreateUser(String.Empty, "password");
+                },
+                "#A2"
+            );
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser (null, "password");
-			}, "#A1");
+            Assert.Throws<MembershipCreateUserException>(
+                () =>
+                {
+                    user = Membership.CreateUser("user", null);
+                },
+                "#B1"
+            );
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser (String.Empty, "password");
-			}, "#A2");
-
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser ("user", null);
-			}, "#B1");
-
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser ("user", String.Empty);
-			}, "#B2");
-		}
-	}
+            Assert.Throws<MembershipCreateUserException>(
+                () =>
+                {
+                    user = Membership.CreateUser("user", String.Empty);
+                },
+                "#B2"
+            );
+        }
+    }
 }
-

@@ -20,7 +20,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public bool bWarningCallback;
         public bool bErrorCallback;
         public int errorCount;
@@ -83,7 +82,8 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "TFS_470021 Unexpected local particle qualified name when chameleon schema is added to set")]
         public void TFS_470021()
         {
-            string cham = @"<?xml version='1.0' encoding='utf-8' ?>
+            string cham =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema id='a0'
                   elementFormDefault='qualified'
                   xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -95,7 +95,8 @@ namespace System.Xml.XmlSchemaTests
   </xs:complexType>
   <xs:element name='gect1_a' type ='ctseq1_a'/>
 </xs:schema>";
-            string main = @"<?xml version='1.0' encoding='utf-8' ?>
+            string main =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema id='m0'
                   targetNamespace='http://tempuri.org/chameleon1'
                   elementFormDefault='qualified'
@@ -116,9 +117,10 @@ namespace System.Xml.XmlSchemaTests
             using (var tempDirectory = new TempDirectory())
             {
                 string chamPath = Path.Combine(tempDirectory.Path, "cham.xsd");
-                string tempDirectoryPath = tempDirectory.Path[tempDirectory.Path.Length - 1] == Path.DirectorySeparatorChar ?
-                    tempDirectory.Path :
-                    tempDirectory.Path + Path.DirectorySeparatorChar;
+                string tempDirectoryPath =
+                    tempDirectory.Path[tempDirectory.Path.Length - 1] == Path.DirectorySeparatorChar
+                        ? tempDirectory.Path
+                        : tempDirectory.Path + Path.DirectorySeparatorChar;
 
                 using (XmlWriter w = XmlWriter.Create(chamPath))
                 {
@@ -154,7 +156,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void FractionDigitsMismatch_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -181,7 +184,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void FractionDigitsFacetBaseFixed_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -202,11 +206,12 @@ namespace System.Xml.XmlSchemaTests
             Exception ex = Assert.Throws<XmlSchemaException>(() => ss.Compile());
             Assert.Contains("fixed", ex.Message);
         }
-        
+
         [Fact]
         public void MinLengthLtBaseMinLength_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -232,7 +237,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void MaxLengthGtBaseMaxLength_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -264,7 +270,7 @@ namespace System.Xml.XmlSchemaTests
                 return new List<object[]>()
                 {
                     new object[]
-                    {  // minLength and length specified in same derivation step.
+                    { // minLength and length specified in same derivation step.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -278,7 +284,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxLength and length specified in same derivation step.
+                    { // maxLength and length specified in same derivation step.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -292,7 +298,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has minLength; derived type has lesser length
+                    { // base type has minLength; derived type has lesser length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -310,7 +316,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has maxLength; derived type has greater length
+                    { // base type has maxLength; derived type has greater length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -328,7 +334,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has length; derived type has lesser maxLength
+                    { // base type has length; derived type has lesser maxLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -346,7 +352,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has length; derived type has greater minLength
+                    { // base type has length; derived type has greater minLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -364,7 +370,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has maxLength; derived type has greater length
+                    { // base type has maxLength; derived type has greater length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -402,7 +408,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void MinLengthGtMaxLength_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -429,7 +436,7 @@ namespace System.Xml.XmlSchemaTests
                 return new List<object[]>()
                 {
                     new object[]
-                    {  // base type has length; derived type has equal maxLength
+                    { // base type has length; derived type has equal maxLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -447,7 +454,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has length; derived type has greater maxLength
+                    { // base type has length; derived type has greater maxLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -465,7 +472,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has length; derived type has equal minLength
+                    { // base type has length; derived type has equal minLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -483,7 +490,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has length; derived type has lesser minLength
+                    { // base type has length; derived type has lesser minLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -501,7 +508,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has minLength; derived type has equal length
+                    { // base type has minLength; derived type has equal length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -519,7 +526,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has minLength; derived type has greater length
+                    { // base type has minLength; derived type has greater length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -537,7 +544,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has maxLength; derived type has equal length
+                    { // base type has maxLength; derived type has equal length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -555,7 +562,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // base type has maxLength; derived type has lesser length
+                    { // base type has maxLength; derived type has lesser length
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -573,7 +580,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minLength is equal to maxLength
+                    { // minLength is equal to maxLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -587,7 +594,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minLength is less than maxLength
+                    { // minLength is less than maxLength
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -620,7 +627,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void LengthGtBaseLength_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -649,7 +657,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void SequenceRestrictsChoiceValid()
         {
-            string schema = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+            string schema =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' 
 		   targetNamespace='urn:gba:sqg' xmlns:ns1='urn:gba:sqg'
 		   elementFormDefault='qualified' attributeFormDefault='unqualified'>
     <xs:complexType name='base' abstract='true'>
@@ -682,11 +691,11 @@ namespace System.Xml.XmlSchemaTests
             ss.Compile();
         }
 
-
         [Fact]
         public void SequenceRestrictsChoiceComplexButValid()
         {
-            string schema = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:ns1='urn:gba:sqg'
+            string schema =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:ns1='urn:gba:sqg'
            xmlns:xenc='http://www.w3.org/2001/04/xmlenc#'
 		   xmlns:ds='http://www.w3.org/2000/09/xmldsig#'
 		   xmlns:xi='urn:gba:sqg' targetNamespace='urn:gba:sqg'
@@ -729,7 +738,8 @@ namespace System.Xml.XmlSchemaTests
         public void SequenceRestrictsChoiceInvalid()
         {
             // particle "f" in derrived type has no mapping to any particle in the base type.
-            string schema = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+            string schema =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' 
 		   targetNamespace='urn:gba:sqg' xmlns:ns1='urn:gba:sqg'
 		   elementFormDefault='qualified' attributeFormDefault='unqualified'>
 	<xs:complexType name='base' abstract='true'>
@@ -774,11 +784,12 @@ namespace System.Xml.XmlSchemaTests
         #region FacetBaseFixed tests
         public static IEnumerable<object[]> FacetBaseFixed_Throws_TestData
         {
-            get{
+            get
+            {
                 return new List<object[]>()
                 {
                     new object[]
-                    {  // length, derived type has larger value.
+                    { // length, derived type has larger value.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -796,7 +807,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // length, derived type has smaller value
+                    { // length, derived type has smaller value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -814,7 +825,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minLength, derived type has larger value.
+                    { // minLength, derived type has larger value.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -832,7 +843,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minLength, derived type has smaller value.
+                    { // minLength, derived type has smaller value.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -850,7 +861,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxLength, derived type has lower value.
+                    { // maxLength, derived type has lower value.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -868,7 +879,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxLength, derived type has larger value.
+                    { // maxLength, derived type has larger value.
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -886,7 +897,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // whiteSpace
+                    { // whiteSpace
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -904,7 +915,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxInclusive, derived type with larger value
+                    { // maxInclusive, derived type with larger value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -922,7 +933,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxInclusive, derived type with smaller value
+                    { // maxInclusive, derived type with smaller value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -940,7 +951,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxExclusive, derived type has larger value
+                    { // maxExclusive, derived type has larger value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -958,7 +969,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxExclusive, derived type has smaller value
+                    { // maxExclusive, derived type has smaller value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -976,7 +987,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minExclusive, derived type has larger value
+                    { // minExclusive, derived type has larger value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -994,7 +1005,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minExclusive, derived type has smaller value
+                    { // minExclusive, derived type has smaller value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -1012,7 +1023,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minInclusive, derived type has larger value
+                    { // minInclusive, derived type has larger value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -1030,7 +1041,7 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // minInclusive, derived type has smaller value
+                    { // minInclusive, derived type has smaller value
                         @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
@@ -1066,7 +1077,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void InvalidAllMax_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:complexType name='person'>
@@ -1089,7 +1101,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void InvalidAllElementMax_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:complexType name='person'>
@@ -1113,7 +1126,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void InvalidExemplar_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8'?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:complexType name = 'personType'>
@@ -1141,7 +1155,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void GroupBaseRestNotEmptiable_Throws()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8'?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='component'>
@@ -1189,8 +1204,8 @@ namespace System.Xml.XmlSchemaTests
                 return new List<object[]>()
                 {
                     new object[]
-                    {  // invalid value for minOccurs and maxOccurs
-@"<?xml version='1.0' encoding='utf-8'?>
+                    { // invalid value for minOccurs and maxOccurs
+                        @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:group name='foods'>
@@ -1208,8 +1223,8 @@ namespace System.Xml.XmlSchemaTests
 "
                     },
                     new object[]
-                    {  // maxOccurs too large
-@"<?xml version='1.0' encoding='utf-8'?>
+                    { // maxOccurs too large
+                        @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:group name='foods'>
@@ -1248,7 +1263,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void TotalDigitsParseValue_Succeeds()
         {
-            string schema = @"<?xml version='1.0' encoding='utf-8' ?>
+            string schema =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified'
            xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='foo'>
@@ -1284,7 +1300,7 @@ namespace System.Xml.XmlSchemaTests
                 {
                     new object[]
                     {
-@"<?xml version='1.0' encoding='utf-8'?>
+                        @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='baseType'>
@@ -1302,7 +1318,7 @@ namespace System.Xml.XmlSchemaTests
                     },
                     new object[]
                     {
-@"<?xml version='1.0' encoding='utf-8'?>
+                        @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='baseType'>
@@ -1351,7 +1367,7 @@ namespace System.Xml.XmlSchemaTests
                 {
                     new object[]
                     {
-@"<?xml version='1.0' encoding='utf-8'?>
+                        @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:simpleType name='baseType'>
@@ -1461,7 +1477,9 @@ namespace System.Xml.XmlSchemaTests
             public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
             {
                 int uriIndex = int.Parse(absoluteUri.Host);
-                string[] schema = { @"<?xml version='1.0' encoding='utf-8'?>
+                string[] schema =
+                {
+                    @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:attributeGroup name='baseGroup'>
@@ -1471,7 +1489,7 @@ namespace System.Xml.XmlSchemaTests
     </xs:attributeGroup>
 </xs:schema>
 ",
-@"<?xml version='1.0' encoding='utf-8'?>
+                    @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified'
             xmlns:xs='http://www.w3.org/2001/XMLSchema'>
     <xs:attributeGroup name='baseGroup'>

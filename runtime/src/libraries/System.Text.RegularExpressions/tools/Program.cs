@@ -18,7 +18,9 @@ namespace GenerateRegexCasingTable
         public static void Main(string[] args)
         {
             if (args.Length < 1 || !File.Exists(args[0]))
-                Console.WriteLine("Error: Please pass in the full path to UnicodeData.txt so that the files can be generated.");
+                Console.WriteLine(
+                    "Error: Please pass in the full path to UnicodeData.txt so that the files can be generated."
+                );
 
             string unicodeTxtFilePath = args[0];
 
@@ -26,10 +28,19 @@ namespace GenerateRegexCasingTable
             bool testCompat = false;
             bool generateTable = true;
 
-            Dictionary<char, char> lowerCasingTable = UnicodeDataCasingParser.Parse(unicodeTxtFilePath, upperCase: false);
-            Dictionary<char, char> upperCasingTable = UnicodeDataCasingParser.Parse(unicodeTxtFilePath, upperCase: true);
+            Dictionary<char, char> lowerCasingTable = UnicodeDataCasingParser.Parse(
+                unicodeTxtFilePath,
+                upperCase: false
+            );
+            Dictionary<char, char> upperCasingTable = UnicodeDataCasingParser.Parse(
+                unicodeTxtFilePath,
+                upperCase: true
+            );
 
-            (Dictionary<char, int>? equivalenceMap, Dictionary<int, SortedSet<char>>? equivalenceValues) = GenerateMapAndValuesFromCasingTable(lowerCasingTable, upperCasingTable);
+            (
+                Dictionary<char, int>? equivalenceMap,
+                Dictionary<int, SortedSet<char>>? equivalenceValues
+            ) = GenerateMapAndValuesFromCasingTable(lowerCasingTable, upperCasingTable);
 
             if (testCompat)
             {
@@ -41,12 +52,16 @@ namespace GenerateRegexCasingTable
                     {
                         if (equivalenceMapEntry.Key != equivalence)
                         {
-                            if (textInfo.ToLower(equivalenceMapEntry.Key) != equivalence &&
-                                textInfo.ToUpper(equivalenceMapEntry.Key) != equivalence &&
-                                textInfo.ToLower(equivalence) != equivalenceMapEntry.Key &&
-                                textInfo.ToUpper(equivalence) != equivalenceMapEntry.Key)
+                            if (
+                                textInfo.ToLower(equivalenceMapEntry.Key) != equivalence
+                                && textInfo.ToUpper(equivalenceMapEntry.Key) != equivalence
+                                && textInfo.ToLower(equivalence) != equivalenceMapEntry.Key
+                                && textInfo.ToUpper(equivalence) != equivalenceMapEntry.Key
+                            )
                             {
-                                Console.WriteLine($"There shouldn't be a mapping between \\u{((ushort)equivalenceMapEntry.Key):X4} and \\u{((ushort)equivalence):X4}");
+                                Console.WriteLine(
+                                    $"There shouldn't be a mapping between \\u{((ushort)equivalenceMapEntry.Key):X4} and \\u{((ushort)equivalence):X4}"
+                                );
                             }
                         }
                     }
@@ -59,8 +74,12 @@ namespace GenerateRegexCasingTable
                 string fileName = "RegexCaseEquivalences.Data.cs";
                 Console.WriteLine("Generating Regex case folding table...");
                 dataTable.GenerateDataTableWithPartitions(64, fileName);
-                Console.WriteLine($"Regex case folding table file was generated at: {Path.Combine(Directory.GetCurrentDirectory(), fileName)}");
-                Console.WriteLine("Please use it to replace the existing one at src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/ directory.");
+                Console.WriteLine(
+                    $"Regex case folding table file was generated at: {Path.Combine(Directory.GetCurrentDirectory(), fileName)}"
+                );
+                Console.WriteLine(
+                    "Please use it to replace the existing one at src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/ directory."
+                );
             }
         }
 
@@ -71,7 +90,13 @@ namespace GenerateRegexCasingTable
         /// <param name="lowerCasingTable">The lower casing table to use to generate the equivalence classes.</param>
         /// <param name="upperCasingTable">The upper casing table to use to generate the equivalence classes.</param>
         /// <returns>A pair containing the map and value dictionaries with the equivalence classes.</returns>
-        public static (Dictionary<char, int>, Dictionary<int, SortedSet<char>>) GenerateMapAndValuesFromCasingTable(Dictionary<char, char> lowerCasingTable, Dictionary<char, char> upperCasingTable)
+        public static (
+            Dictionary<char, int>,
+            Dictionary<int, SortedSet<char>>
+        ) GenerateMapAndValuesFromCasingTable(
+            Dictionary<char, char> lowerCasingTable,
+            Dictionary<char, char> upperCasingTable
+        )
         {
             Dictionary<char, int> map = new Dictionary<char, int>();
             Dictionary<int, SortedSet<char>> values = new Dictionary<int, SortedSet<char>>();

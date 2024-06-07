@@ -20,7 +20,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullPropertyName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("propertyName", () => new AttributeProviderAttribute("typeName", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyName",
+                () => new AttributeProviderAttribute("typeName", null)
+            );
         }
 
         [Theory]
@@ -36,8 +39,14 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeName", () => new AttributeProviderAttribute((string)null));
-            AssertExtensions.Throws<ArgumentNullException>("typeName", () => new AttributeProviderAttribute((string)null, "propertyName"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeName",
+                () => new AttributeProviderAttribute((string)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeName",
+                () => new AttributeProviderAttribute((string)null, "propertyName")
+            );
         }
 
         [Theory]
@@ -52,7 +61,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new AttributeProviderAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new AttributeProviderAttribute((Type)null)
+            );
         }
     }
 }

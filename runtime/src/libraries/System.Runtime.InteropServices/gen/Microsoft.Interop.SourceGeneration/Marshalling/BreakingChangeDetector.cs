@@ -12,7 +12,8 @@ namespace Microsoft.Interop
     /// An <see cref="IMarshallingGeneratorFactory"/> that adds diagnostics to warn users about breaking changes in the interop generators,
     /// whether from built-in to source-generated interop or between versions of interop source-generation.
     /// </summary>
-    public sealed class BreakingChangeDetector(IMarshallingGeneratorFactory inner) : IMarshallingGeneratorFactory
+    public sealed class BreakingChangeDetector(IMarshallingGeneratorFactory inner)
+        : IMarshallingGeneratorFactory
     {
         public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context)
         {
@@ -23,8 +24,15 @@ namespace Microsoft.Interop
             }
 
             // Breaking change: [MarshalAs(UnmanagedType.Struct)] in object in unmanaged-to-managed scenarios will not respect VT_BYREF.
-            if (info is { RefKind: RefKind.In, MarshallingAttributeInfo: NativeMarshallingAttributeInfo(ManagedTypeInfo(_, TypeNames.ComVariantMarshaller), _) }
-                && context.Direction == MarshalDirection.UnmanagedToManaged)
+            if (
+                info
+                    is {
+                        RefKind: RefKind.In,
+                        MarshallingAttributeInfo: NativeMarshallingAttributeInfo
+                        (ManagedTypeInfo(_, TypeNames.ComVariantMarshaller), _)
+                    }
+                && context.Direction == MarshalDirection.UnmanagedToManaged
+            )
             {
                 gen = ResolvedGenerator.ResolvedWithDiagnostics(
                     gen.Generator,
@@ -32,7 +40,9 @@ namespace Microsoft.Interop
                         new GeneratorDiagnostic.NotRecommended(info, context)
                         {
                             Details = SR.InVariantShouldBeRef
-                        }));
+                        }
+                    )
+                );
             }
 
             return gen;

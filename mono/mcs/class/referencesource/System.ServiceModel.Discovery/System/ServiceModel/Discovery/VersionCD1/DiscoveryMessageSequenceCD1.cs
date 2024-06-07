@@ -25,7 +25,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             this.discoveryMessageSequence = discoveryMessageSequence;
         }
 
-        public static DiscoveryMessageSequenceCD1 FromDiscoveryMessageSequence(DiscoveryMessageSequence discoveryMessageSequence)
+        public static DiscoveryMessageSequenceCD1 FromDiscoveryMessageSequence(
+            DiscoveryMessageSequence discoveryMessageSequence
+        )
         {
             if (discoveryMessageSequence == null)
             {
@@ -41,7 +43,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureAppSequenceSchema(DiscoveryVersion.WSDiscoveryCD1, schemaSet);
+            return SchemaUtility.EnsureAppSequenceSchema(
+                DiscoveryVersion.WSDiscoveryCD1,
+                schemaSet
+            );
         }
 
         public DiscoveryMessageSequence ToDiscoveryMessageSequence()
@@ -54,7 +59,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
             return null;
         }
 
-        [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(DiscoveryMessageSequence))]
+        [Fx.Tag.InheritThrows(
+            From = "ReadFrom",
+            FromDeclaringType = typeof(DiscoveryMessageSequence)
+        )]
         public void ReadXml(XmlReader reader)
         {
             this.discoveryMessageSequence.ReadFrom(reader);

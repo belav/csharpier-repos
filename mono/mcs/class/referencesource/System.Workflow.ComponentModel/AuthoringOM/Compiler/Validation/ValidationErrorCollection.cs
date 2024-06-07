@@ -1,17 +1,15 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     #region ValidationErrorCollection
 
     [Serializable()]
     public sealed class ValidationErrorCollection : Collection<ValidationError>
     {
-        public ValidationErrorCollection()
-        {
-        }
+        public ValidationErrorCollection() { }
 
         public ValidationErrorCollection(ValidationErrorCollection value)
         {

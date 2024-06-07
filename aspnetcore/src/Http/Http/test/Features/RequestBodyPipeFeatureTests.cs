@@ -47,11 +47,15 @@ public class RequestBodyPipeFeatureTests
         var bufferLengths = new List<int>();
 
         mockStream.Setup(s => s.CanRead).Returns(true);
-        mockStream.Setup(s => s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())).Returns<Memory<byte>, CancellationToken>((buffer, token) =>
-        {
-            bufferLengths.Add(buffer.Length);
-            return ValueTask.FromResult(0);
-        });
+        mockStream
+            .Setup(s => s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>()))
+            .Returns<Memory<byte>, CancellationToken>(
+                (buffer, token) =>
+                {
+                    bufferLengths.Add(buffer.Length);
+                    return ValueTask.FromResult(0);
+                }
+            );
 
         context.Request.Body = mockStream.Object;
         var feature = new RequestBodyPipeFeature(context);

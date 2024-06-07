@@ -13,20 +13,24 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 /// </summary>
 internal class RazorComponentDataSourceOptions
 {
-    internal static readonly EqualityComparer<IComponentRenderMode> RenderModeComparer = EqualityComparer<IComponentRenderMode>
-        .Create(
-            equals: (x, y) => (x,y) switch
-            {
-                (InteractiveServerRenderMode, InteractiveServerRenderMode) => true,
-                (InteractiveWebAssemblyRenderMode, InteractiveWebAssemblyRenderMode) => true,
-                _ => false,
-            },
-            getHashCode: obj => obj switch
-            {
-                InteractiveServerRenderMode => 1,
-                InteractiveWebAssemblyRenderMode => 2,
-                _ => throw new InvalidOperationException($"Unknown render mode: {obj}"),
-            });
+    internal static readonly EqualityComparer<IComponentRenderMode> RenderModeComparer =
+        EqualityComparer<IComponentRenderMode>.Create(
+            equals: (x, y) =>
+                (x, y) switch
+                {
+                    (InteractiveServerRenderMode, InteractiveServerRenderMode) => true,
+                    (InteractiveWebAssemblyRenderMode, InteractiveWebAssemblyRenderMode) => true,
+                    _ => false,
+                },
+            getHashCode: obj =>
+                obj switch
+                {
+                    InteractiveServerRenderMode => 1,
+                    InteractiveWebAssemblyRenderMode => 2,
+                    _ => throw new InvalidOperationException($"Unknown render mode: {obj}"),
+                }
+        );
 
-    internal ISet<IComponentRenderMode> ConfiguredRenderModes { get; } = new HashSet<IComponentRenderMode>(RenderModeComparer);
+    internal ISet<IComponentRenderMode> ConfiguredRenderModes { get; } =
+        new HashSet<IComponentRenderMode>(RenderModeComparer);
 }

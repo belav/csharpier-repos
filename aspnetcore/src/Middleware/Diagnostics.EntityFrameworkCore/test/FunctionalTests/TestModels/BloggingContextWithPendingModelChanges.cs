@@ -10,22 +10,18 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 public class BloggingContextWithPendingModelChanges : BloggingContext
 {
     public BloggingContextWithPendingModelChanges(DbContextOptions options)
-        : base(options)
-    { }
+        : base(options) { }
 
     [DbContext(typeof(BloggingContextWithPendingModelChanges))]
     public class BloggingModelSnapshot : ModelSnapshot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void BuildModel(ModelBuilder modelBuilder) { }
     }
 
     [DbContext(typeof(BloggingContextWithPendingModelChanges))]
     [Migration("111111111111111_MigrationOne")]
     public partial class MigrationOne : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        { }
+        protected override void Up(MigrationBuilder migrationBuilder) { }
     }
 }

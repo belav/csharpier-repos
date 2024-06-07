@@ -36,5 +36,9 @@ public interface IHttpSysRequestTimingFeature
     /// <param name="endingTimestampType">The timestamp type marking the end of the time period.</param>
     /// <param name="elapsed">A <see cref="TimeSpan"/> for the elapsed time between the starting and ending timestamps.</param>
     /// <returns>True if both given timings were set (i.e., non-zero).</returns>
-    bool TryGetElapsedTime(HttpSysRequestTimingType startingTimestampType, HttpSysRequestTimingType endingTimestampType, out TimeSpan elapsed);
+    bool TryGetElapsedTime(
+        HttpSysRequestTimingType startingTimestampType,
+        HttpSysRequestTimingType endingTimestampType,
+        out TimeSpan elapsed
+    );
 }

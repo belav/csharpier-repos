@@ -6,7 +6,9 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
 {
     internal static class WorkspacePathHelper
     {
-        internal static (string workspacePath, WorkspaceType workspaceType) GetWorkspaceInfo(string workspaceFilePath)
+        internal static (string workspacePath, WorkspaceType workspaceType) GetWorkspaceInfo(
+            string workspaceFilePath
+        )
         {
             var workspacePath = Path.GetFullPath(workspaceFilePath);
 

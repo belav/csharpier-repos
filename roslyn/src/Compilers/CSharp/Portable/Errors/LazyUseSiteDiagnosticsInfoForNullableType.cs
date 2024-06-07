@@ -11,13 +11,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly LanguageVersion _languageVersion;
         private readonly TypeWithAnnotations _possiblyNullableTypeSymbol;
 
-        internal LazyUseSiteDiagnosticsInfoForNullableType(LanguageVersion languageVersion, TypeWithAnnotations possiblyNullableTypeSymbol)
+        internal LazyUseSiteDiagnosticsInfoForNullableType(
+            LanguageVersion languageVersion,
+            TypeWithAnnotations possiblyNullableTypeSymbol
+        )
         {
             _languageVersion = languageVersion;
             _possiblyNullableTypeSymbol = possiblyNullableTypeSymbol;
         }
 
-        private LazyUseSiteDiagnosticsInfoForNullableType(LazyUseSiteDiagnosticsInfoForNullableType original, DiagnosticSeverity severity) : base(original, severity)
+        private LazyUseSiteDiagnosticsInfoForNullableType(
+            LazyUseSiteDiagnosticsInfoForNullableType original,
+            DiagnosticSeverity severity
+        )
+            : base(original, severity)
         {
             _languageVersion = original._languageVersion;
             _possiblyNullableTypeSymbol = original._possiblyNullableTypeSymbol;
@@ -32,9 +39,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_possiblyNullableTypeSymbol.IsNullableType())
             {
-                return _possiblyNullableTypeSymbol.Type.OriginalDefinition.GetUseSiteInfo().DiagnosticInfo;
+                return _possiblyNullableTypeSymbol
+                    .Type.OriginalDefinition.GetUseSiteInfo()
+                    .DiagnosticInfo;
             }
-            return Binder.GetNullableUnconstrainedTypeParameterDiagnosticIfNecessary(_languageVersion, _possiblyNullableTypeSymbol);
+            return Binder.GetNullableUnconstrainedTypeParameterDiagnosticIfNecessary(
+                _languageVersion,
+                _possiblyNullableTypeSymbol
+            );
         }
     }
 }

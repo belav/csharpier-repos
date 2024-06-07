@@ -11,7 +11,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConventionForeignKey, IRuntimeForeignKey
+public class ForeignKey
+    : ConventionAnnotatable,
+        IMutableForeignKey,
+        IConventionForeignKey,
+        IRuntimeForeignKey
 {
     private DeleteBehavior? _deleteBehavior;
     private bool? _isUnique;
@@ -53,7 +57,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         Key principalKey,
         EntityType dependentEntityType,
         EntityType principalEntityType,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Validate(dependentProperties, principalKey, dependentEntityType, principalEntityType);
 
@@ -69,7 +74,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
             throw new InvalidOperationException(
                 CoreStrings.ForeignKeyReferencedEntityKeyMismatch(
                     principalKey.Properties.Format(),
-                    principalEntityType.DisplayName()));
+                    principalEntityType.DisplayName()
+                )
+            );
         }
 
         _builder = new InternalForeignKeyBuilder(this, dependentEntityType.Model.Builder);
@@ -116,8 +123,11 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     public virtual InternalForeignKeyBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(
-            Property.Format(Properties.Select(p => p.Name))));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(
+                CoreStrings.ObjectRemovedFromModel(Property.Format(Properties.Select(p => p.Name)))
+            );
     }
 
     /// <summary>
@@ -126,9 +136,7 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && DeclaringEntityType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && DeclaringEntityType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -136,8 +144,7 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -145,8 +152,7 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => DeclaringEntityType.Model.IsReadOnly;
+    public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -162,8 +168,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<SkipNavigation> GetReferencingSkipNavigations()
-        => ReferencingSkipNavigations ?? Enumerable.Empty<SkipNavigation>();
+    public virtual IEnumerable<SkipNavigation> GetReferencingSkipNavigations() =>
+        ReferencingSkipNavigations ?? Enumerable.Empty<SkipNavigation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -172,8 +178,7 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -199,8 +204,14 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => Builder.ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        Builder.ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -211,15 +222,15 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     public virtual IReadOnlyList<Property> SetProperties(
         IReadOnlyList<Property> properties,
         Key principalKey,
-        ConfigurationSource? configurationSource)
+        ConfigurationSource? configurationSource
+    )
     {
         EnsureMutable();
 
         var oldProperties = Properties;
         var oldPrincipalKey = PrincipalKey;
 
-        if (oldProperties.SequenceEqual(properties)
-            && oldPrincipalKey == principalKey)
+        if (oldProperties.SequenceEqual(properties) && oldPrincipalKey == principalKey)
         {
             if (configurationSource != null)
             {
@@ -245,8 +256,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
             UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
         }
 
-        return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher
-            .OnForeignKeyPropertiesChanged(Builder, oldProperties, oldPrincipalKey)!;
+        return (IReadOnlyList<Property>)
+            DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
+                Builder,
+                oldProperties,
+                oldPrincipalKey
+            )!;
     }
 
     /// <summary>
@@ -256,8 +271,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetPropertiesConfigurationSource()
-        => _propertiesConfigurationSource;
+    public virtual ConfigurationSource? GetPropertiesConfigurationSource() =>
+        _propertiesConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -281,8 +296,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetPrincipalKeyConfigurationSource()
-        => _principalKeyConfigurationSource;
+    public virtual ConfigurationSource? GetPrincipalKeyConfigurationSource() =>
+        _principalKeyConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -290,9 +305,13 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdatePrincipalKeyConfigurationSource(ConfigurationSource configurationSource)
+    public virtual void UpdatePrincipalKeyConfigurationSource(
+        ConfigurationSource configurationSource
+    )
     {
-        _principalKeyConfigurationSource = configurationSource.Max(_principalKeyConfigurationSource);
+        _principalKeyConfigurationSource = configurationSource.Max(
+            _principalKeyConfigurationSource
+        );
         PrincipalKey.UpdateConfigurationSource(configurationSource);
     }
 
@@ -303,8 +322,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetPrincipalEndConfigurationSource()
-        => _principalEndConfigurationSource;
+    public virtual ConfigurationSource? GetPrincipalEndConfigurationSource() =>
+        _principalEndConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -312,8 +331,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetPrincipalEndConfigurationSource(ConfigurationSource? configurationSource)
-        => _principalEndConfigurationSource = configurationSource;
+    public virtual void SetPrincipalEndConfigurationSource(
+        ConfigurationSource? configurationSource
+    ) => _principalEndConfigurationSource = configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -321,8 +341,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdatePrincipalEndConfigurationSource(ConfigurationSource configurationSource)
-        => _principalEndConfigurationSource = configurationSource.Max(_principalEndConfigurationSource);
+    public virtual void UpdatePrincipalEndConfigurationSource(
+        ConfigurationSource configurationSource
+    ) =>
+        _principalEndConfigurationSource = configurationSource.Max(
+            _principalEndConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -330,7 +354,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Navigation? DependentToPrincipal { [DebuggerStepThrough] get; private set; }
+    public virtual Navigation? DependentToPrincipal
+    {
+        [DebuggerStepThrough]
+        get;
+        private set;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -340,8 +369,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     /// </summary>
     public virtual Navigation? SetDependentToPrincipal(
         string? name,
-        ConfigurationSource configurationSource)
-        => Navigation(MemberIdentity.Create(name), configurationSource, pointsToPrincipal: true);
+        ConfigurationSource configurationSource
+    ) => Navigation(MemberIdentity.Create(name), configurationSource, pointsToPrincipal: true);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -351,8 +380,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     /// </summary>
     public virtual Navigation? SetDependentToPrincipal(
         MemberInfo? property,
-        ConfigurationSource configurationSource)
-        => Navigation(MemberIdentity.Create(property), configurationSource, pointsToPrincipal: true);
+        ConfigurationSource configurationSource
+    ) => Navigation(MemberIdentity.Create(property), configurationSource, pointsToPrincipal: true);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -362,8 +391,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     /// </summary>
     public virtual Navigation? SetDependentToPrincipal(
         MemberIdentity? property,
-        ConfigurationSource configurationSource)
-        => Navigation(property, configurationSource, pointsToPrincipal: true);
+        ConfigurationSource configurationSource
+    ) => Navigation(property, configurationSource, pointsToPrincipal: true);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -372,8 +401,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetDependentToPrincipalConfigurationSource()
-        => _dependentToPrincipalConfigurationSource;
+    public virtual ConfigurationSource? GetDependentToPrincipalConfigurationSource() =>
+        _dependentToPrincipalConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -381,8 +410,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateDependentToPrincipalConfigurationSource(ConfigurationSource? configurationSource)
-        => _dependentToPrincipalConfigurationSource = configurationSource.Max(_dependentToPrincipalConfigurationSource);
+    public virtual void UpdateDependentToPrincipalConfigurationSource(
+        ConfigurationSource? configurationSource
+    ) =>
+        _dependentToPrincipalConfigurationSource = configurationSource.Max(
+            _dependentToPrincipalConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -390,7 +423,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Navigation? PrincipalToDependent { [DebuggerStepThrough] get; private set; }
+    public virtual Navigation? PrincipalToDependent
+    {
+        [DebuggerStepThrough]
+        get;
+        private set;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -398,8 +436,10 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Navigation? SetPrincipalToDependent(string? name, ConfigurationSource configurationSource)
-        => Navigation(MemberIdentity.Create(name), configurationSource, pointsToPrincipal: false);
+    public virtual Navigation? SetPrincipalToDependent(
+        string? name,
+        ConfigurationSource configurationSource
+    ) => Navigation(MemberIdentity.Create(name), configurationSource, pointsToPrincipal: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -407,8 +447,10 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Navigation? SetPrincipalToDependent(MemberInfo? property, ConfigurationSource configurationSource)
-        => Navigation(MemberIdentity.Create(property), configurationSource, pointsToPrincipal: false);
+    public virtual Navigation? SetPrincipalToDependent(
+        MemberInfo? property,
+        ConfigurationSource configurationSource
+    ) => Navigation(MemberIdentity.Create(property), configurationSource, pointsToPrincipal: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -416,8 +458,10 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Navigation? SetPrincipalToDependent(MemberIdentity? property, ConfigurationSource configurationSource)
-        => Navigation(property, configurationSource, pointsToPrincipal: false);
+    public virtual Navigation? SetPrincipalToDependent(
+        MemberIdentity? property,
+        ConfigurationSource configurationSource
+    ) => Navigation(property, configurationSource, pointsToPrincipal: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -426,8 +470,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetPrincipalToDependentConfigurationSource()
-        => _principalToDependentConfigurationSource;
+    public virtual ConfigurationSource? GetPrincipalToDependentConfigurationSource() =>
+        _principalToDependentConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -435,8 +479,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdatePrincipalToDependentConfigurationSource(ConfigurationSource? configurationSource)
-        => _principalToDependentConfigurationSource = configurationSource.Max(_principalToDependentConfigurationSource);
+    public virtual void UpdatePrincipalToDependentConfigurationSource(
+        ConfigurationSource? configurationSource
+    ) =>
+        _principalToDependentConfigurationSource = configurationSource.Max(
+            _principalToDependentConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -447,25 +495,26 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     private Navigation? Navigation(
         MemberIdentity? propertyIdentity,
         ConfigurationSource configurationSource,
-        bool pointsToPrincipal)
+        bool pointsToPrincipal
+    )
     {
         EnsureMutable();
 
         var name = propertyIdentity?.Name;
         if (name != null)
         {
-            if (pointsToPrincipal
-                && PrincipalEntityType.IsKeyless)
+            if (pointsToPrincipal && PrincipalEntityType.IsKeyless)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.NavigationToKeylessType(name, PrincipalEntityType.DisplayName()));
+                    CoreStrings.NavigationToKeylessType(name, PrincipalEntityType.DisplayName())
+                );
             }
 
-            if (!pointsToPrincipal
-                && DeclaringEntityType.IsKeyless)
+            if (!pointsToPrincipal && DeclaringEntityType.IsKeyless)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.NavigationToKeylessType(name, DeclaringEntityType.DisplayName()));
+                    CoreStrings.NavigationToKeylessType(name, DeclaringEntityType.DisplayName())
+                );
             }
         }
 
@@ -485,22 +534,26 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
                 UpdatePrincipalToDependentConfigurationSource(configurationSource);
             }
 
-            if (name == null
-                && configurationSource.OverridesStrictly(oldConfigurationSource))
+            if (name == null && configurationSource.OverridesStrictly(oldConfigurationSource))
             {
-                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                    Builder,
+                    pointsToPrincipal
+                );
             }
 
             return oldNavigation!;
         }
 
-        if (name == null
-            && IsOwnership
-            && !pointsToPrincipal)
+        if (name == null && IsOwnership && !pointsToPrincipal)
         {
             throw new InvalidOperationException(
                 CoreStrings.OwnershipToDependent(
-                    oldNavigation?.Name, PrincipalEntityType.DisplayName(), DeclaringEntityType.DisplayName()));
+                    oldNavigation?.Name,
+                    PrincipalEntityType.DisplayName(),
+                    DeclaringEntityType.DisplayName()
+                )
+            );
         }
 
         if (oldNavigation != null)
@@ -521,8 +574,16 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         if (propertyIdentity?.Name != null)
         {
             navigation = pointsToPrincipal
-                ? DeclaringEntityType.AddNavigation(propertyIdentity.Value, this, pointsToPrincipal: true)
-                : PrincipalEntityType.AddNavigation(propertyIdentity.Value, this, pointsToPrincipal: false);
+                ? DeclaringEntityType.AddNavigation(
+                    propertyIdentity.Value,
+                    this,
+                    pointsToPrincipal: true
+                )
+                : PrincipalEntityType.AddNavigation(
+                    propertyIdentity.Value,
+                    this,
+                    pointsToPrincipal: false
+                );
         }
 
         if (pointsToPrincipal)
@@ -543,35 +604,48 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
             string? removedNavigationName;
             if (pointsToPrincipal)
             {
-                removedNavigationName = DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
-                    DeclaringEntityType.Builder,
-                    PrincipalEntityType.Builder,
-                    oldNavigation.Name,
-                    oldNavigation.GetIdentifyingMemberInfo());
+                removedNavigationName =
+                    DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                        DeclaringEntityType.Builder,
+                        PrincipalEntityType.Builder,
+                        oldNavigation.Name,
+                        oldNavigation.GetIdentifyingMemberInfo()
+                    );
             }
             else
             {
-                removedNavigationName = DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
-                    PrincipalEntityType.Builder,
-                    DeclaringEntityType.Builder,
-                    oldNavigation.Name,
-                    oldNavigation.GetIdentifyingMemberInfo());
+                removedNavigationName =
+                    DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                        PrincipalEntityType.Builder,
+                        DeclaringEntityType.Builder,
+                        oldNavigation.Name,
+                        oldNavigation.GetIdentifyingMemberInfo()
+                    );
             }
 
             if (navigation == null)
             {
-                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                    Builder,
+                    pointsToPrincipal
+                );
                 return oldNavigation.Name == removedNavigationName ? oldNavigation : null;
             }
         }
 
         if (navigation != null)
         {
-            navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher.OnNavigationAdded(navigation.Builder)?.Metadata;
+            navigation = (Navigation?)
+                DeclaringEntityType
+                    .Model.ConventionDispatcher.OnNavigationAdded(navigation.Builder)
+                    ?.Metadata;
         }
         else
         {
-            DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+            DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                Builder,
+                pointsToPrincipal
+            );
         }
 
         return navigation;
@@ -602,36 +676,42 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         var oldUnique = IsUnique;
         _isUnique = unique;
 
-        if (unique == false
-            && IsRequiredDependent)
+        if (unique == false && IsRequiredDependent)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonUniqueRequiredDependentForeignKey(Properties.Format(), DeclaringEntityType.DisplayName()));
+                CoreStrings.NonUniqueRequiredDependentForeignKey(
+                    Properties.Format(),
+                    DeclaringEntityType.DisplayName()
+                )
+            );
         }
 
         var navigationMember = PrincipalToDependent?.GetIdentifyingMemberInfo();
-        if (unique.HasValue
-            && navigationMember != null)
+        if (unique.HasValue && navigationMember != null)
         {
-            if (!Internal.Navigation.IsCompatible(
+            if (
+                !Internal.Navigation.IsCompatible(
                     PrincipalToDependent!.Name,
                     navigationMember,
                     PrincipalEntityType,
                     DeclaringEntityType,
                     !unique,
-                    shouldThrow: false))
+                    shouldThrow: false
+                )
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.UnableToSetIsUnique(
                         unique.Value,
                         PrincipalToDependent.Name,
-                        PrincipalEntityType.DisplayName()));
+                        PrincipalEntityType.DisplayName()
+                    )
+                );
             }
         }
 
-        _isUniqueConfigurationSource = unique == null
-            ? null
-            : configurationSource.Max(_isUniqueConfigurationSource);
+        _isUniqueConfigurationSource =
+            unique == null ? null : configurationSource.Max(_isUniqueConfigurationSource);
 
         return IsUnique != oldUnique
             ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(Builder)
@@ -647,8 +727,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetIsUniqueConfigurationSource()
-        => _isUniqueConfigurationSource;
+    public virtual ConfigurationSource? GetIsUniqueConfigurationSource() =>
+        _isUniqueConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -675,17 +755,17 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         var oldRequired = IsRequired;
         _isRequired = required ?? DefaultIsRequired;
 
-        _isRequiredConfigurationSource = required == null
-            ? null
-            : configurationSource.Max(_isRequiredConfigurationSource);
+        _isRequiredConfigurationSource =
+            required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
         return IsRequired != oldRequired
-            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(Builder)
+            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
+                Builder
+            )
             : oldRequired;
     }
 
-    private bool DefaultIsRequired
-        => !Properties.Any(p => p.IsNullable);
+    private bool DefaultIsRequired => !Properties.Any(p => p.IsNullable);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -694,8 +774,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetIsRequiredConfigurationSource()
-        => _isRequiredConfigurationSource;
+    public virtual ConfigurationSource? GetIsRequiredConfigurationSource() =>
+        _isRequiredConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -703,8 +783,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetIsRequiredConfigurationSource(ConfigurationSource? configurationSource)
-        => _isRequiredConfigurationSource = configurationSource;
+    public virtual void SetIsRequiredConfigurationSource(
+        ConfigurationSource? configurationSource
+    ) => _isRequiredConfigurationSource = configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -724,26 +805,33 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool? SetIsRequiredDependent(bool? required, ConfigurationSource configurationSource)
+    public virtual bool? SetIsRequiredDependent(
+        bool? required,
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
-        if (!IsUnique
-            && required == true)
+        if (!IsUnique && required == true)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonUniqueRequiredDependentForeignKey(Properties.Format(), DeclaringEntityType.DisplayName()));
+                CoreStrings.NonUniqueRequiredDependentForeignKey(
+                    Properties.Format(),
+                    DeclaringEntityType.DisplayName()
+                )
+            );
         }
 
         var oldRequired = IsRequiredDependent;
         _isRequiredDependent = required;
 
-        _isRequiredDependentConfigurationSource = required == null
-            ? null
-            : configurationSource.Max(_isRequiredConfigurationSource);
+        _isRequiredDependentConfigurationSource =
+            required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
         return IsRequiredDependent != oldRequired
-            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(Builder)
+            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
+                Builder
+            )
             : oldRequired;
     }
 
@@ -756,8 +844,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetIsRequiredDependentConfigurationSource()
-        => _isRequiredDependentConfigurationSource;
+    public virtual ConfigurationSource? GetIsRequiredDependentConfigurationSource() =>
+        _isRequiredDependentConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -765,8 +853,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetIsRequiredDependentConfigurationSource(ConfigurationSource? configurationSource)
-        => _isRequiredDependentConfigurationSource = configurationSource;
+    public virtual void SetIsRequiredDependentConfigurationSource(
+        ConfigurationSource? configurationSource
+    ) => _isRequiredDependentConfigurationSource = configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -786,7 +875,10 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DeleteBehavior? SetDeleteBehavior(DeleteBehavior? deleteBehavior, ConfigurationSource configurationSource)
+    public virtual DeleteBehavior? SetDeleteBehavior(
+        DeleteBehavior? deleteBehavior,
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -810,8 +902,7 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const DeleteBehavior DefaultDeleteBehavior
-        = DeleteBehavior.ClientSetNull;
+    public const DeleteBehavior DefaultDeleteBehavior = DeleteBehavior.ClientSetNull;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -820,8 +911,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetDeleteBehaviorConfigurationSource()
-        => _deleteBehaviorConfigurationSource;
+    public virtual ConfigurationSource? GetDeleteBehaviorConfigurationSource() =>
+        _deleteBehaviorConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -829,8 +920,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateDeleteBehaviorConfigurationSource(ConfigurationSource configurationSource)
-        => _deleteBehaviorConfigurationSource = configurationSource.Max(_deleteBehaviorConfigurationSource);
+    public virtual void UpdateDeleteBehaviorConfigurationSource(
+        ConfigurationSource configurationSource
+    ) =>
+        _deleteBehaviorConfigurationSource = configurationSource.Max(
+            _deleteBehaviorConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -858,14 +953,19 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         {
             if (!DeclaringEntityType.IsOwned())
             {
-                throw new InvalidOperationException(CoreStrings.ClashingNonOwnedEntityType(DeclaringEntityType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.ClashingNonOwnedEntityType(DeclaringEntityType.DisplayName())
+                );
             }
 
             if (PrincipalToDependent == null)
             {
                 throw new InvalidOperationException(
                     CoreStrings.NavigationlessOwnership(
-                        PrincipalEntityType.DisplayName(), DeclaringEntityType.DisplayName()));
+                        PrincipalEntityType.DisplayName(),
+                        DeclaringEntityType.DisplayName()
+                    )
+                );
             }
         }
 
@@ -895,8 +995,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetIsOwnershipConfigurationSource()
-        => _isOwnershipConfigurationSource;
+    public virtual ConfigurationSource? GetIsOwnershipConfigurationSource() =>
+        _isOwnershipConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -904,8 +1004,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateIsOwnershipConfigurationSource(ConfigurationSource configurationSource)
-        => _isOwnershipConfigurationSource = configurationSource.Max(_isOwnershipConfigurationSource);
+    public virtual void UpdateIsOwnershipConfigurationSource(
+        ConfigurationSource configurationSource
+    ) => _isOwnershipConfigurationSource = configurationSource.Max(_isOwnershipConfigurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -913,8 +1014,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Navigation> FindNavigationsFromInHierarchy(EntityType entityType)
-        => ((IReadOnlyForeignKey)this).FindNavigationsFromInHierarchy(entityType).Cast<Navigation>();
+    public virtual IEnumerable<Navigation> FindNavigationsFromInHierarchy(EntityType entityType) =>
+        ((IReadOnlyForeignKey)this).FindNavigationsFromInHierarchy(entityType).Cast<Navigation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -922,8 +1023,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Navigation> FindNavigationsTo(EntityType entityType)
-        => ((IReadOnlyForeignKey)this).FindNavigationsTo(entityType).Cast<Navigation>();
+    public virtual IEnumerable<Navigation> FindNavigationsTo(EntityType entityType) =>
+        ((IReadOnlyForeignKey)this).FindNavigationsTo(entityType).Cast<Navigation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -931,8 +1032,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual EntityType ResolveOtherEntityType(EntityType entityType)
-        => (EntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
+    public virtual EntityType ResolveOtherEntityType(EntityType entityType) =>
+        (EntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
     // Note: This is set and used only by IdentityMapFactoryFactory, which ensures thread-safety
     /// <summary>
@@ -952,7 +1053,6 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
 
             return _dependentKeyValueFactory!;
         }
-
         set
         {
             EnsureReadOnly();
@@ -979,7 +1079,6 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
 
             return _dependentsMapFactory!;
         }
-
         set
         {
             EnsureReadOnly();
@@ -994,10 +1093,11 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyForeignKey)this).ToDebugString(),
-            () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1005,14 +1105,15 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     private static void Validate(
         IReadOnlyList<Property> properties,
         Key principalKey,
         EntityType declaringEntityType,
-        EntityType principalEntityType)
+        EntityType principalEntityType
+    )
     {
         for (var i = 0; i < properties.Count; i++)
         {
@@ -1021,17 +1122,27 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
             {
                 if (property == properties[j])
                 {
-                    throw new InvalidOperationException(CoreStrings.DuplicatePropertyInForeignKey(properties.Format(), property.Name));
+                    throw new InvalidOperationException(
+                        CoreStrings.DuplicatePropertyInForeignKey(
+                            properties.Format(),
+                            property.Name
+                        )
+                    );
                 }
             }
 
             var actualProperty = declaringEntityType.FindProperty(property.Name);
-            if (actualProperty?.DeclaringType.IsAssignableFrom(property.DeclaringType) != true
-                || !property.IsInModel)
+            if (
+                actualProperty?.DeclaringType.IsAssignableFrom(property.DeclaringType) != true
+                || !property.IsInModel
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.ForeignKeyPropertiesWrongEntity(
-                        properties.Format(), declaringEntityType.DisplayName()));
+                        properties.Format(),
+                        declaringEntityType.DisplayName()
+                    )
+                );
             }
         }
 
@@ -1043,10 +1154,12 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
             dependentProperties: properties,
             principalProperties: principalKey.Properties,
             unique: null,
-            shouldThrow: true);
+            shouldThrow: true
+        );
 
-        var duplicateForeignKey = declaringEntityType.FindForeignKeysInHierarchy(
-            properties, principalKey, principalEntityType).FirstOrDefault();
+        var duplicateForeignKey = declaringEntityType
+            .FindForeignKeysInHierarchy(properties, principalKey, principalEntityType)
+            .FirstOrDefault();
         if (duplicateForeignKey != null)
         {
             throw new InvalidOperationException(
@@ -1055,14 +1168,19 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
                     declaringEntityType.DisplayName(),
                     duplicateForeignKey.DeclaringEntityType.DisplayName(),
                     principalKey.Properties.Format(),
-                    principalEntityType.DisplayName()));
+                    principalEntityType.DisplayName()
+                )
+            );
         }
 
         if (principalEntityType.Model != declaringEntityType.Model)
         {
             throw new InvalidOperationException(
                 CoreStrings.EntityTypeModelMismatch(
-                    declaringEntityType.DisplayName(), principalEntityType.DisplayName()));
+                    declaringEntityType.DisplayName(),
+                    principalEntityType.DisplayName()
+                )
+            );
         }
     }
 
@@ -1080,31 +1198,38 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         IReadOnlyList<IReadOnlyProperty>? dependentProperties,
         IReadOnlyList<IReadOnlyProperty>? principalProperties,
         bool? unique,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         Check.NotNull(principalEntityType, nameof(principalEntityType));
         Check.NotNull(dependentEntityType, nameof(dependentEntityType));
 
-        if (navigationToPrincipal != null
+        if (
+            navigationToPrincipal != null
             && !Internal.Navigation.IsCompatible(
                 navigationToPrincipal.Name,
                 navigationToPrincipal,
                 dependentEntityType,
                 principalEntityType,
                 shouldBeCollection: false,
-                shouldThrow: shouldThrow))
+                shouldThrow: shouldThrow
+            )
+        )
         {
             return false;
         }
 
-        if (navigationToDependent != null
+        if (
+            navigationToDependent != null
             && !Internal.Navigation.IsCompatible(
                 navigationToDependent.Name,
                 navigationToDependent,
                 principalEntityType,
                 dependentEntityType,
                 shouldBeCollection: !unique,
-                shouldThrow: shouldThrow))
+                shouldThrow: shouldThrow
+            )
+        )
         {
             return false;
         }
@@ -1116,7 +1241,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
                 dependentProperties,
                 principalEntityType,
                 dependentEntityType,
-                shouldThrow);
+                shouldThrow
+            );
     }
 
     /// <summary>
@@ -1130,7 +1256,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
         IReadOnlyList<IReadOnlyProperty> dependentProperties,
         IReadOnlyEntityType principalEntityType,
         IReadOnlyEntityType dependentEntityType,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         Check.NotNull(principalProperties, nameof(principalProperties));
         Check.NotNull(dependentProperties, nameof(dependentProperties));
@@ -1146,7 +1273,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
                         dependentProperties.Format(),
                         dependentEntityType.DisplayName(),
                         principalProperties.Format(),
-                        principalEntityType.DisplayName()));
+                        principalEntityType.DisplayName()
+                    )
+                );
             }
 
             return false;
@@ -1161,7 +1290,9 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
                         dependentProperties.Format(includeTypes: true),
                         dependentEntityType.DisplayName(),
                         principalProperties.Format(includeTypes: true),
-                        principalEntityType.DisplayName()));
+                        principalEntityType.DisplayName()
+                    )
+                );
             }
 
             return false;
@@ -1172,14 +1303,16 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
 
     private static bool ArePropertyCountsEqual(
         IReadOnlyList<IReadOnlyProperty> principalProperties,
-        IReadOnlyList<IReadOnlyProperty> dependentProperties)
-        => principalProperties.Count == dependentProperties.Count;
+        IReadOnlyList<IReadOnlyProperty> dependentProperties
+    ) => principalProperties.Count == dependentProperties.Count;
 
     private static bool ArePropertyTypesCompatible(
         IReadOnlyList<IReadOnlyProperty> principalProperties,
-        IReadOnlyList<IReadOnlyProperty> dependentProperties)
-        => principalProperties.Select(p => p.ClrType.UnwrapNullableType()).SequenceEqual(
-            dependentProperties.Select(p => p.ClrType.UnwrapNullableType()));
+        IReadOnlyList<IReadOnlyProperty> dependentProperties
+    ) =>
+        principalProperties
+            .Select(p => p.ClrType.UnwrapNullableType())
+            .SequenceEqual(dependentProperties.Select(p => p.ClrType.UnwrapNullableType()));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1332,11 +1465,15 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableForeignKey.SetProperties(IReadOnlyList<IMutableProperty> properties, IMutableKey principalKey)
-        => SetProperties(
+    void IMutableForeignKey.SetProperties(
+        IReadOnlyList<IMutableProperty> properties,
+        IMutableKey principalKey
+    ) =>
+        SetProperties(
             properties as IReadOnlyList<Property> ?? properties.Cast<Property>().ToArray(),
             (Key)principalKey,
-            ConfigurationSource.Explicit);
+            ConfigurationSource.Explicit
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1344,18 +1481,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IMutableNavigation? IMutableForeignKey.SetDependentToPrincipal(string? name)
-        => SetDependentToPrincipal(name, ConfigurationSource.Explicit);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    [DebuggerStepThrough]
-    IMutableNavigation? IMutableForeignKey.SetDependentToPrincipal(MemberInfo? property)
-        => SetDependentToPrincipal(property, ConfigurationSource.Explicit);
+    IMutableNavigation? IMutableForeignKey.SetDependentToPrincipal(string? name) =>
+        SetDependentToPrincipal(name, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1364,8 +1491,8 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableNavigation? IMutableForeignKey.SetPrincipalToDependent(string? name)
-        => SetPrincipalToDependent(name, ConfigurationSource.Explicit);
+    IMutableNavigation? IMutableForeignKey.SetDependentToPrincipal(MemberInfo? property) =>
+        SetDependentToPrincipal(property, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1374,8 +1501,18 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableNavigation? IMutableForeignKey.SetPrincipalToDependent(MemberInfo? property)
-        => SetPrincipalToDependent(property, ConfigurationSource.Explicit);
+    IMutableNavigation? IMutableForeignKey.SetPrincipalToDependent(string? name) =>
+        SetPrincipalToDependent(name, ConfigurationSource.Explicit);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [DebuggerStepThrough]
+    IMutableNavigation? IMutableForeignKey.SetPrincipalToDependent(MemberInfo? property) =>
+        SetPrincipalToDependent(property, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1550,68 +1687,112 @@ public class ForeignKey : ConventionAnnotatable, IMutableForeignKey, IConvention
     IReadOnlyList<IConventionProperty> IConventionForeignKey.SetProperties(
         IReadOnlyList<IConventionProperty> properties,
         IConventionKey principalKey,
-        bool fromDataAnnotation)
-        => SetProperties(
-            properties.Cast<Property>().ToArray(), (Key)principalKey,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        SetProperties(
+            properties.Cast<Property>().ToArray(),
+            (Key)principalKey,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionNavigation? IConventionForeignKey.SetDependentToPrincipal(string? name, bool fromDataAnnotation)
-        => SetDependentToPrincipal(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionNavigation? IConventionForeignKey.SetDependentToPrincipal(
+        string? name,
+        bool fromDataAnnotation
+    ) =>
+        SetDependentToPrincipal(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionNavigation? IConventionForeignKey.SetDependentToPrincipal(MemberInfo? property, bool fromDataAnnotation)
-        => SetDependentToPrincipal(property, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionNavigation? IConventionForeignKey.SetDependentToPrincipal(
+        MemberInfo? property,
+        bool fromDataAnnotation
+    ) =>
+        SetDependentToPrincipal(
+            property,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionNavigation? IConventionForeignKey.SetPrincipalToDependent(string? name, bool fromDataAnnotation)
-        => SetPrincipalToDependent(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionNavigation? IConventionForeignKey.SetPrincipalToDependent(
+        string? name,
+        bool fromDataAnnotation
+    ) =>
+        SetPrincipalToDependent(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionNavigation? IConventionForeignKey.SetPrincipalToDependent(MemberInfo? property, bool fromDataAnnotation)
-        => SetPrincipalToDependent(property, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionNavigation? IConventionForeignKey.SetPrincipalToDependent(
+        MemberInfo? property,
+        bool fromDataAnnotation
+    ) =>
+        SetPrincipalToDependent(
+            property,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlySkipNavigation> IReadOnlyForeignKey.GetReferencingSkipNavigations()
-        => GetReferencingSkipNavigations();
+    IEnumerable<IReadOnlySkipNavigation> IReadOnlyForeignKey.GetReferencingSkipNavigations() =>
+        GetReferencingSkipNavigations();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IConventionForeignKey.SetIsUnique(bool? unique, bool fromDataAnnotation)
-        => SetIsUnique(unique, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionForeignKey.SetIsUnique(bool? unique, bool fromDataAnnotation) =>
+        SetIsUnique(
+            unique,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IConventionForeignKey.SetIsRequired(bool? required, bool fromDataAnnotation)
-        => SetIsRequired(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionForeignKey.SetIsRequired(bool? required, bool fromDataAnnotation) =>
+        SetIsRequired(
+            required,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IConventionForeignKey.SetIsRequiredDependent(bool? required, bool fromDataAnnotation)
-        => SetIsRequiredDependent(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionForeignKey.SetIsRequiredDependent(bool? required, bool fromDataAnnotation) =>
+        SetIsRequiredDependent(
+            required,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IConventionForeignKey.SetIsOwnership(bool? ownership, bool fromDataAnnotation)
-        => SetIsOwnership(ownership, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionForeignKey.SetIsOwnership(bool? ownership, bool fromDataAnnotation) =>
+        SetIsOwnership(
+            ownership,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    DeleteBehavior? IConventionForeignKey.SetDeleteBehavior(DeleteBehavior? deleteBehavior, bool fromDataAnnotation)
-        => SetDeleteBehavior(deleteBehavior, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    DeleteBehavior? IConventionForeignKey.SetDeleteBehavior(
+        DeleteBehavior? deleteBehavior,
+        bool fromDataAnnotation
+    ) =>
+        SetDeleteBehavior(
+            deleteBehavior,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IDependentKeyValueFactory<TKey> IForeignKey.GetDependentKeyValueFactory<TKey>()
-        => (IDependentKeyValueFactory<TKey>)DependentKeyValueFactory;
+    IDependentKeyValueFactory<TKey> IForeignKey.GetDependentKeyValueFactory<TKey>() =>
+        (IDependentKeyValueFactory<TKey>)DependentKeyValueFactory;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IDependentKeyValueFactory IForeignKey.GetDependentKeyValueFactory()
-        => DependentKeyValueFactory;
+    IDependentKeyValueFactory IForeignKey.GetDependentKeyValueFactory() => DependentKeyValueFactory;
 }

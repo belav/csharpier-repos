@@ -66,31 +66,36 @@ namespace System.Xml.Tests
             set
             {
                 if (value)
-                    _verificationFlags = _verificationFlags | ExceptionVerificationFlags.IgnoreMultipleDots;
+                    _verificationFlags =
+                        _verificationFlags | ExceptionVerificationFlags.IgnoreMultipleDots;
                 else
-                    _verificationFlags = _verificationFlags & (~ExceptionVerificationFlags.IgnoreMultipleDots);
+                    _verificationFlags =
+                        _verificationFlags & (~ExceptionVerificationFlags.IgnoreMultipleDots);
             }
         }
 
         public bool IgnoreLineInfo
         {
-            get
-            {
-                return (_verificationFlags & ExceptionVerificationFlags.IgnoreLineInfo) != 0;
-            }
+            get { return (_verificationFlags & ExceptionVerificationFlags.IgnoreLineInfo) != 0; }
             set
             {
                 if (value)
-                    _verificationFlags = _verificationFlags | ExceptionVerificationFlags.IgnoreLineInfo;
+                    _verificationFlags =
+                        _verificationFlags | ExceptionVerificationFlags.IgnoreLineInfo;
                 else
-                    _verificationFlags = _verificationFlags & (~ExceptionVerificationFlags.IgnoreLineInfo);
+                    _verificationFlags =
+                        _verificationFlags & (~ExceptionVerificationFlags.IgnoreLineInfo);
             }
         }
 
         private const string ESCAPE_ANY = "~%anything%~";
         private const string ESCAPE_NUMBER = "~%number%~";
 
-        public ExceptionVerifier(string assemblyName, ExceptionVerificationFlags flags, ITestOutputHelper output)
+        public ExceptionVerifier(
+            string assemblyName,
+            ExceptionVerificationFlags flags,
+            ITestOutputHelper output
+        )
         {
             _output = output;
 
@@ -110,7 +115,9 @@ namespace System.Xml.Tests
                         }
                         break;
                     default:
-                        _asm = Assembly.LoadFrom(Path.Combine(GetRuntimeInstallDir(), assemblyName + ".dll"));
+                        _asm = Assembly.LoadFrom(
+                            Path.Combine(GetRuntimeInstallDir(), assemblyName + ".dll")
+                        );
                         break;
                 }
 
@@ -119,12 +126,17 @@ namespace System.Xml.Tests
 
                 // let's determine if this is a loc run, if it is then we need to load satellite assembly
                 _locAsm = null;
-                if (!CultureInfo.CurrentCulture.Equals(new CultureInfo("en-US")) && !CultureInfo.CurrentCulture.Equals(new CultureInfo("en")))
+                if (
+                    !CultureInfo.CurrentCulture.Equals(new CultureInfo("en-US"))
+                    && !CultureInfo.CurrentCulture.Equals(new CultureInfo("en"))
+                )
                 {
                     try
                     {
                         // load satellite assembly
-                        _locAsm = _asm.GetSatelliteAssembly(new CultureInfo(CultureInfo.CurrentCulture.Parent.IetfLanguageTag));
+                        _locAsm = _asm.GetSatelliteAssembly(
+                            new CultureInfo(CultureInfo.CurrentCulture.Parent.IetfLanguageTag)
+                        );
                     }
                     catch (FileNotFoundException e1)
                     {
@@ -162,7 +174,10 @@ namespace System.Xml.Tests
             {
                 if (s.EndsWith(".resources"))
                 {
-                    resStream = null != _locAsm ? _locAsm.GetManifestResourceStream(s) : _asm.GetManifestResourceStream(s);
+                    resStream =
+                        null != _locAsm
+                            ? _locAsm.GetManifestResourceStream(s)
+                            : _asm.GetManifestResourceStream(s);
                     bFound = true;
                     if (bFound && resStream != null)
                     {
@@ -196,28 +211,42 @@ namespace System.Xml.Tests
         }
 
         public ExceptionVerifier(string assemblyName, ITestOutputHelper output)
-            : this(assemblyName, ExceptionVerificationFlags.None, output)
-        { }
+            : this(assemblyName, ExceptionVerificationFlags.None, output) { }
 
         private void ExceptionInfoOutput()
         {
             // Use reflection to obtain "res" property value
             var exceptionType = _ex.GetType();
-            var fInfo = exceptionType.GetField("res", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase) ??
-                        exceptionType.BaseType.GetField("res", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase);
+            var fInfo =
+                exceptionType.GetField(
+                    "res",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
+                )
+                ?? exceptionType.BaseType.GetField(
+                    "res",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
+                );
 
             if (fInfo == null)
                 throw new VerifyException("Cannot obtain Resource ID from Exception.");
 
             _output.WriteLine(
-                            "\n===== Original Exception Message =====\n" + _ex.Message +
-                            "\n===== Resource Id =====\n" + fInfo.GetValue(_ex) +
-                            "\n===== HelpLink =====\n" + _ex.HelpLink +
-                            "\n===== Source =====\n" + _ex.Source);
+                "\n===== Original Exception Message =====\n"
+                    + _ex.Message
+                    + "\n===== Resource Id =====\n"
+                    + fInfo.GetValue(_ex)
+                    + "\n===== HelpLink =====\n"
+                    + _ex.HelpLink
+                    + "\n===== Source =====\n"
+                    + _ex.Source
+            );
 
             _output.WriteLine(
-                            "\n===== InnerException =====\n" + _ex.InnerException +
-                            "\n===== StackTrace =====\n" + _ex.StackTrace);
+                "\n===== InnerException =====\n"
+                    + _ex.InnerException
+                    + "\n===== StackTrace =====\n"
+                    + _ex.StackTrace
+            );
         }
 
         public string[] ReturnAllMatchingResIds(string message)
@@ -230,12 +259,15 @@ namespace System.Xml.Tests
             {
                 var resMessage = ide.Value.ToString();
 
-                resMessage = ESCAPE_ANY + Regex.Replace(resMessage, @"\{\d*\}", ESCAPE_ANY) + ESCAPE_ANY;
+                resMessage =
+                    ESCAPE_ANY + Regex.Replace(resMessage, @"\{\d*\}", ESCAPE_ANY) + ESCAPE_ANY;
                 resMessage = MakeEscapes(resMessage).Replace(ESCAPE_ANY, ".*");
                 if (Regex.Match(message, resMessage, RegexOptions.Singleline).ToString() == message)
                 {
                     list.Add(ide.Key);
-                    _output.WriteLine("  [" + ide.Key.ToString() + "] = \"" + ide.Value.ToString() + "\"");
+                    _output.WriteLine(
+                        "  [" + ide.Key.ToString() + "] = \"" + ide.Value.ToString() + "\""
+                    );
                 }
             }
 
@@ -263,13 +295,18 @@ namespace System.Xml.Tests
             _expectedMessage = _expectedMessage.ToLowerInvariant();
             _actualMessage = _actualMessage.ToLowerInvariant();
 
-            if (Regex.Match(_actualMessage, _expectedMessage, RegexOptions.Singleline).ToString() != _actualMessage)
+            if (
+                Regex.Match(_actualMessage, _expectedMessage, RegexOptions.Singleline).ToString()
+                != _actualMessage
+            )
             {
                 // Unescape before printing the expected message string
                 _expectedMessage = Regex.Unescape(_expectedMessage);
                 _output.WriteLine("Mismatch in error message");
                 _output.WriteLine("===== Expected Message =====\n" + _expectedMessage);
-                _output.WriteLine("===== Expected Message Length =====\n" + _expectedMessage.Length);
+                _output.WriteLine(
+                    "===== Expected Message Length =====\n" + _expectedMessage.Length
+                );
                 _output.WriteLine("===== Actual Message =====\n" + _actualMessage);
                 _output.WriteLine("===== Actual Message Length =====\n" + _actualMessage.Length);
                 throw new VerifyException("Mismatch in error message");
@@ -301,7 +338,12 @@ namespace System.Xml.Tests
             IsExceptionOk(e, list.ToArray());
         }
 
-        public void IsExceptionOk(Exception e, string expectedResId, string[] paramValues, LineInfo lineInfo)
+        public void IsExceptionOk(
+            Exception e,
+            string expectedResId,
+            string[] paramValues,
+            LineInfo lineInfo
+        )
         {
             var list = new ArrayList { expectedResId, lineInfo };
 
@@ -324,7 +366,10 @@ namespace System.Xml.Tests
 
         private static string MakeEscapes(string str)
         {
-            return new[] { "\\", "$", "{", "[", "(", "|", ")", "*", "+", "?" }.Aggregate(str, (current, esc) => current.Replace(esc, "\\" + esc));
+            return new[] { "\\", "$", "{", "[", "(", "|", ")", "*", "+", "?" }.Aggregate(
+                str,
+                (current, esc) => current.Replace(esc, "\\" + esc)
+            );
         }
 
         public string ConstructExpectedMessage(object[] IdsAndParams)
@@ -342,7 +387,12 @@ namespace System.Xml.Tests
             if (!_resources.ContainsKey(expectedResId))
             {
                 ExceptionInfoOutput();
-                throw new VerifyException("Resources in [" + _asm.GetName().Name + "] does not contain string resource: " + expectedResId);
+                throw new VerifyException(
+                    "Resources in ["
+                        + _asm.GetName().Name
+                        + "] does not contain string resource: "
+                        + expectedResId
+                );
             }
 
             // If LineInfo exist, construct LineInfo message
@@ -353,11 +403,20 @@ namespace System.Xml.Tests
                     var lineInfo = (IdsAndParams[1] as LineInfo);
 
                     // Xml_ErrorPosition = "Line {0}, position {1}."
-                    lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath) ? _resources["Xml_ErrorPosition"].ToString() : _resources["Xml_ErrorFilePosition"].ToString();
+                    lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath)
+                        ? _resources["Xml_ErrorPosition"].ToString()
+                        : _resources["Xml_ErrorFilePosition"].ToString();
 
                     var lineNumber = lineInfo.LineNumber.ToString();
                     var linePosition = lineInfo.LinePosition.ToString();
-                    lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath) ? string.Format(lineInfoMessage, lineNumber, linePosition) : string.Format(lineInfoMessage, lineInfo.FilePath, lineNumber, linePosition);
+                    lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath)
+                        ? string.Format(lineInfoMessage, lineNumber, linePosition)
+                        : string.Format(
+                            lineInfoMessage,
+                            lineInfo.FilePath,
+                            lineNumber,
+                            linePosition
+                        );
                 }
                 else
                     lineInfoMessage = ESCAPE_ANY;
@@ -396,11 +455,9 @@ namespace System.Xml.Tests
     public class VerifyException : Exception
     {
         public VerifyException(string msg)
-            : base(msg)
-        { }
+            : base(msg) { }
 
         public VerifyException(string msg, Exception innerException)
-            : base(msg, innerException)
-        { }
+            : base(msg, innerException) { }
     }
 }

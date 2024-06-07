@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpAsAndMemberAccessDiagnosticAnalyzer,
-        CSharpAsAndMemberAccessCodeFixProvider>;
+        CSharpAsAndMemberAccessCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternMatchingForAsAndMemberAccess)]
     public partial class CSharpAsAndMemberAccessTests
@@ -285,7 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     class C
                     {
                         string X;
-                    
+
                         void M(object o)
                         {
                             if (([|o as C|])?.X != null)
@@ -321,7 +322,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     {
                         C Y;
                         string X;
-                    
+
                         void M(object o)
                         {
                             if (([|o as C|])?.Y.X != null)
@@ -406,7 +407,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     {
                         C Y;
                         int? X;
-                    
+
                         void M(object o)
                         {
                             if (([|o as C|])?.Y.X != null)

@@ -23,7 +23,8 @@ public sealed class RazorComponentsEndpointConventionBuilder : IEndpointConventi
         ComponentApplicationBuilder builder,
         RazorComponentDataSourceOptions options,
         List<Action<EndpointBuilder>> conventions,
-        List<Action<EndpointBuilder>> finallyConventions)
+        List<Action<EndpointBuilder>> finallyConventions
+    )
     {
         _lock = @lock;
         _builder = builder;
@@ -66,4 +67,3 @@ public sealed class RazorComponentsEndpointConventionBuilder : IEndpointConventi
         _options.ConfiguredRenderModes.Add(renderMode);
     }
 }
-

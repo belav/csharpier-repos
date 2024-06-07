@@ -34,29 +34,31 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedParameter : Cci.IEmbeddedDefinition, Cci.IParameterDefinition
+        internal abstract class CommonEmbeddedParameter
+            : Cci.IEmbeddedDefinition,
+                Cci.IParameterDefinition
         {
             public readonly CommonEmbeddedMember ContainingPropertyOrMethod;
             public readonly TParameterSymbol UnderlyingParameter;
             private ImmutableArray<TAttributeData> _lazyAttributes;
 
-            protected CommonEmbeddedParameter(CommonEmbeddedMember containingPropertyOrMethod, TParameterSymbol underlyingParameter)
+            protected CommonEmbeddedParameter(
+                CommonEmbeddedMember containingPropertyOrMethod,
+                TParameterSymbol underlyingParameter
+            )
             {
                 this.ContainingPropertyOrMethod = containingPropertyOrMethod;
                 this.UnderlyingParameter = underlyingParameter;
             }
 
-            public bool IsEncDeleted
-                => false;
+            public bool IsEncDeleted => false;
 
             protected TEmbeddedTypesManager TypeManager
             {
-                get
-                {
-                    return ContainingPropertyOrMethod.TypeManager;
-                }
+                get { return ContainingPropertyOrMethod.TypeManager; }
             }
 
             protected abstract bool HasDefaultValue { get; }
@@ -70,14 +72,24 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract string Name { get; }
             protected abstract Cci.IParameterTypeInformation UnderlyingParameterTypeInformation { get; }
             protected abstract ushort Index { get; }
-            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(TPEModuleBuilder moduleBuilder);
+            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(
+                TPEModuleBuilder moduleBuilder
+            );
 
-            private bool IsTargetAttribute(TAttributeData attrData, AttributeDescription description, out int signatureIndex)
+            private bool IsTargetAttribute(
+                TAttributeData attrData,
+                AttributeDescription description,
+                out int signatureIndex
+            )
             {
                 return TypeManager.IsTargetAttribute(attrData, description, out signatureIndex);
             }
 
-            private ImmutableArray<TAttributeData> GetAttributes(TPEModuleBuilder moduleBuilder, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            private ImmutableArray<TAttributeData> GetAttributes(
+                TPEModuleBuilder moduleBuilder,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
@@ -93,35 +105,126 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                     ImmutableArray<TypedConstant> constructorArguments;
                     ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments;
 
-                    if (IsTargetAttribute(attrData, AttributeDescription.ParamArrayAttribute, out signatureIndex))
+                    if (
+                        IsTargetAttribute(
+                            attrData,
+                            AttributeDescription.ParamArrayAttribute,
+                            out signatureIndex
+                        )
+                    )
                     {
-                        if (signatureIndex == 0 && TypeManager.TryGetAttributeArguments(attrData, out constructorArguments, out namedArguments, syntaxNodeOpt, diagnostics))
+                        if (
+                            signatureIndex == 0
+                            && TypeManager.TryGetAttributeArguments(
+                                attrData,
+                                out constructorArguments,
+                                out namedArguments,
+                                syntaxNodeOpt,
+                                diagnostics
+                            )
+                        )
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_ParamArrayAttribute__ctor, constructorArguments, namedArguments, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    WellKnownMember.System_ParamArrayAttribute__ctor,
+                                    constructorArguments,
+                                    namedArguments,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
-                    else if (IsTargetAttribute(attrData, AttributeDescription.DateTimeConstantAttribute, out signatureIndex))
+                    else if (
+                        IsTargetAttribute(
+                            attrData,
+                            AttributeDescription.DateTimeConstantAttribute,
+                            out signatureIndex
+                        )
+                    )
                     {
-                        if (signatureIndex == 0 && TypeManager.TryGetAttributeArguments(attrData, out constructorArguments, out namedArguments, syntaxNodeOpt, diagnostics))
+                        if (
+                            signatureIndex == 0
+                            && TypeManager.TryGetAttributeArguments(
+                                attrData,
+                                out constructorArguments,
+                                out namedArguments,
+                                syntaxNodeOpt,
+                                diagnostics
+                            )
+                        )
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor, constructorArguments, namedArguments, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    WellKnownMember.System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor,
+                                    constructorArguments,
+                                    namedArguments,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
-                    else if (IsTargetAttribute(attrData, AttributeDescription.DecimalConstantAttribute, out signatureIndex))
+                    else if (
+                        IsTargetAttribute(
+                            attrData,
+                            AttributeDescription.DecimalConstantAttribute,
+                            out signatureIndex
+                        )
+                    )
                     {
-                        if ((signatureIndex == 0 || signatureIndex == 1) && TypeManager.TryGetAttributeArguments(attrData, out constructorArguments, out namedArguments, syntaxNodeOpt, diagnostics))
+                        if (
+                            (signatureIndex == 0 || signatureIndex == 1)
+                            && TypeManager.TryGetAttributeArguments(
+                                attrData,
+                                out constructorArguments,
+                                out namedArguments,
+                                syntaxNodeOpt,
+                                diagnostics
+                            )
+                        )
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(
-                                signatureIndex == 0 ? WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor :
-                                    WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctorByteByteInt32Int32Int32,
-                                constructorArguments, namedArguments, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    signatureIndex == 0
+                                        ? WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor
+                                        : WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctorByteByteInt32Int32Int32,
+                                    constructorArguments,
+                                    namedArguments,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
-                    else if (IsTargetAttribute(attrData, AttributeDescription.DefaultParameterValueAttribute, out signatureIndex))
+                    else if (
+                        IsTargetAttribute(
+                            attrData,
+                            AttributeDescription.DefaultParameterValueAttribute,
+                            out signatureIndex
+                        )
+                    )
                     {
-                        if (signatureIndex == 0 && TypeManager.TryGetAttributeArguments(attrData, out constructorArguments, out namedArguments, syntaxNodeOpt, diagnostics))
+                        if (
+                            signatureIndex == 0
+                            && TypeManager.TryGetAttributeArguments(
+                                attrData,
+                                out constructorArguments,
+                                out namedArguments,
+                                syntaxNodeOpt,
+                                diagnostics
+                            )
+                        )
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_Runtime_InteropServices_DefaultParameterValueAttribute__ctor, constructorArguments, namedArguments, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    WellKnownMember.System_Runtime_InteropServices_DefaultParameterValueAttribute__ctor,
+                                    constructorArguments,
+                                    namedArguments,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
                 }
@@ -131,10 +234,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IParameterDefinition.HasDefaultValue
             {
-                get
-                {
-                    return HasDefaultValue;
-                }
+                get { return HasDefaultValue; }
             }
 
             MetadataConstant Cci.IParameterDefinition.GetDefaultValue(EmitContext context)
@@ -144,50 +244,32 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IParameterDefinition.IsIn
             {
-                get
-                {
-                    return IsIn;
-                }
+                get { return IsIn; }
             }
 
             bool Cci.IParameterDefinition.IsOut
             {
-                get
-                {
-                    return IsOut;
-                }
+                get { return IsOut; }
             }
 
             bool Cci.IParameterDefinition.IsOptional
             {
-                get
-                {
-                    return IsOptional;
-                }
+                get { return IsOptional; }
             }
 
             bool Cci.IParameterDefinition.IsMarshalledExplicitly
             {
-                get
-                {
-                    return IsMarshalledExplicitly;
-                }
+                get { return IsMarshalledExplicitly; }
             }
 
             Cci.IMarshallingInformation Cci.IParameterDefinition.MarshallingInformation
             {
-                get
-                {
-                    return MarshallingInformation;
-                }
+                get { return MarshallingInformation; }
             }
 
             ImmutableArray<byte> Cci.IParameterDefinition.MarshallingDescriptor
             {
-                get
-                {
-                    return MarshallingDescriptor;
-                }
+                get { return MarshallingDescriptor; }
             }
 
             IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(EmitContext context)
@@ -195,7 +277,11 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 if (_lazyAttributes.IsDefault)
                 {
                     var diagnostics = DiagnosticBag.GetInstance();
-                    var attributes = GetAttributes((TPEModuleBuilder)context.Module, (TSyntaxNode)context.SyntaxNode, diagnostics);
+                    var attributes = GetAttributes(
+                        (TPEModuleBuilder)context.Module,
+                        (TSyntaxNode)context.SyntaxNode,
+                        diagnostics
+                    );
 
                     if (ImmutableInterlocked.InterlockedInitialize(ref _lazyAttributes, attributes))
                     {
@@ -228,26 +314,17 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ImmutableArray<Cci.ICustomModifier> Cci.IParameterTypeInformation.CustomModifiers
             {
-                get
-                {
-                    return UnderlyingParameterTypeInformation.CustomModifiers;
-                }
+                get { return UnderlyingParameterTypeInformation.CustomModifiers; }
             }
 
             bool Cci.IParameterTypeInformation.IsByReference
             {
-                get
-                {
-                    return UnderlyingParameterTypeInformation.IsByReference;
-                }
+                get { return UnderlyingParameterTypeInformation.IsByReference; }
             }
 
             ImmutableArray<Cci.ICustomModifier> Cci.IParameterTypeInformation.RefCustomModifiers
             {
-                get
-                {
-                    return UnderlyingParameterTypeInformation.RefCustomModifiers;
-                }
+                get { return UnderlyingParameterTypeInformation.RefCustomModifiers; }
             }
 
             Cci.ITypeReference Cci.IParameterTypeInformation.GetType(EmitContext context)
@@ -257,10 +334,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ushort Cci.IParameterListEntry.Index
             {
-                get
-                {
-                    return Index;
-                }
+                get { return Index; }
             }
 
             /// <remarks>
@@ -268,7 +342,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             /// </remarks>
             public override string ToString()
             {
-                return ((ISymbol)UnderlyingParameter).ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
+                return ((ISymbol)UnderlyingParameter).ToDisplayString(
+                    SymbolDisplayFormat.ILVisualizationFormat
+                );
             }
 
             public sealed override bool Equals(object obj)

@@ -23,11 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Newtonsoft.Json.Serialization;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -44,7 +44,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
     [TestFixture]
     public class CustomTraceWriter : TestFixtureBase
     {
-        #region Types
+#region Types
         public class NLogTraceWriter : ITraceWriter
         {
             private static readonly Logger Logger = LogManager.GetLogger("NLogTraceWriter");
@@ -85,12 +85,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 }
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             IList<string> countries = new List<string>
             {
                 "New Zealand",
@@ -99,10 +99,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 "China"
             };
 
-            string json = JsonConvert.SerializeObject(countries, Formatting.Indented, new JsonSerializerSettings
-            {
-                TraceWriter = new NLogTraceWriter()
-            });
+            string json = JsonConvert.SerializeObject(
+                countries,
+                Formatting.Indented,
+                new JsonSerializerSettings { TraceWriter = new NLogTraceWriter() }
+            );
 
             Console.WriteLine(json);
             // [
@@ -111,14 +112,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Denmark",
             //   "China"
             // ]
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""New Zealand"",
   ""Australia"",
   ""Denmark"",
   ""China""
-]", json);
+]",
+                json
+            );
         }
     }
 }

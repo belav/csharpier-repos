@@ -17,9 +17,7 @@ public class HttpOptionsAttribute : HttpMethodAttribute
     /// Creates a new <see cref="HttpOptionsAttribute"/>.
     /// </summary>
     public HttpOptionsAttribute()
-        : base(_supportedMethods)
-    {
-    }
+        : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpOptionsAttribute"/> with the given route template.

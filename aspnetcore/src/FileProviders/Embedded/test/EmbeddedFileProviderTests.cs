@@ -87,10 +87,7 @@ public class EmbeddedFileProviderTests
     {
         get
         {
-            var theoryData = new TheoryData<string>
-                {
-                    "ResourcesInSubdirectory/File3.txt"
-                };
+            var theoryData = new TheoryData<string> { "ResourcesInSubdirectory/File3.txt" };
 
             if (TestPlatformHelper.IsWindows)
             {
@@ -125,10 +122,7 @@ public class EmbeddedFileProviderTests
     {
         get
         {
-            var theoryData = new TheoryData<string>
-                {
-                    "Resources/File.txt"
-                };
+            var theoryData = new TheoryData<string> { "Resources/File.txt" };
 
             if (TestPlatformHelper.IsWindows)
             {
@@ -163,10 +157,7 @@ public class EmbeddedFileProviderTests
     {
         get
         {
-            var theoryData = new TheoryData<string>
-                {
-                    "sub/sub-dir/File3.txt"
-                };
+            var theoryData = new TheoryData<string> { "sub/sub-dir/File3.txt" };
 
             if (TestPlatformHelper.IsWindows)
             {
@@ -178,8 +169,14 @@ public class EmbeddedFileProviderTests
     }
 
     [Theory]
-    [MemberData(nameof(GetFileInfo_LocatesFilesUnderSubDirectories_IfDirectoriesContainsInvalidEverettCharData))]
-    public void GetFileInfo_LocatesFilesUnderSubDirectories_IfDirectoriesContainsInvalidEverettChar(string path)
+    [MemberData(
+        nameof(
+            GetFileInfo_LocatesFilesUnderSubDirectories_IfDirectoriesContainsInvalidEverettCharData
+        )
+    )]
+    public void GetFileInfo_LocatesFilesUnderSubDirectories_IfDirectoriesContainsInvalidEverettChar(
+        string path
+    )
     {
         // Arrange
         var provider = new EmbeddedFileProvider(GetType().Assembly);
@@ -209,9 +206,11 @@ public class EmbeddedFileProviderTests
         var files = provider.GetDirectoryContents(path);
 
         // Assert
-        Assert.Collection(files.OrderBy(f => f.Name, StringComparer.Ordinal),
+        Assert.Collection(
+            files.OrderBy(f => f.Name, StringComparer.Ordinal),
             file => Assert.Equal("File.txt", file.Name),
-            file => Assert.Equal("ResourcesInSubdirectory.File3.txt", file.Name));
+            file => Assert.Equal("ResourcesInSubdirectory.File3.txt", file.Name)
+        );
 
         Assert.False(provider.GetDirectoryContents("file").Exists);
         Assert.False(provider.GetDirectoryContents("file/").Exists);
@@ -237,7 +236,9 @@ public class EmbeddedFileProviderTests
     [Theory]
     [InlineData("Resources")]
     [InlineData("/Resources")]
-    public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_IfHierarchicalPathIsSpecified(string path)
+    public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_IfHierarchicalPathIsSpecified(
+        string path
+    )
     {
         // Arrange
         var provider = new EmbeddedFileProvider(GetType().Assembly);

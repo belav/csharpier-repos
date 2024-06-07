@@ -3,8 +3,8 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
-    using System;    
-    using System.Xml;    
+    using System;
+    using System.Xml;
 
     internal class ContractTypeNameCollection : NonNullItemCollection<XmlQualifiedName>
     {

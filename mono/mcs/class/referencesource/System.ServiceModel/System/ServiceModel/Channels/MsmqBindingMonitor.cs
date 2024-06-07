@@ -29,9 +29,7 @@ namespace System.ServiceModel.Channels
         bool retryMatchedFilters;
 
         public MsmqBindingMonitor(string host)
-            : this(host, DefaultUpdateInterval, false)
-        {
-        }
+            : this(host, DefaultUpdateInterval, false) { }
 
         public MsmqBindingMonitor(string host, TimeSpan updateInterval, bool retryMatchedFilters)
         {
@@ -77,7 +75,14 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Created)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CommunicationObjectCannotBeModified, this.GetType().ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CommunicationObjectCannotBeModified,
+                                this.GetType().ToString()
+                            )
+                        )
+                    );
                 }
 
                 this.currentState = CommunicationState.Opened;
@@ -91,7 +96,14 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Opened)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CommunicationObjectCannotBeModified, this.GetType().ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CommunicationObjectCannotBeModified,
+                                this.GetType().ToString()
+                            )
+                        )
+                    );
                 }
 
                 this.currentState = CommunicationState.Closed;
@@ -144,13 +156,22 @@ namespace System.ServiceModel.Channels
                 {
                     if (state.LastMatch != null)
                     {
-                        state.LastMatch.MatchLost(this.host, state.QueueName, state.IsPrivate, state.CallbackState);
+                        state.LastMatch.MatchLost(
+                            this.host,
+                            state.QueueName,
+                            state.IsPrivate,
+                            state.CallbackState
+                        );
                     }
 
                     state.LastMatchLength = matchLength;
                     state.LastMatch = filter;
 
-                    state.CallbackState = filter.MatchFound(this.host, state.QueueName, state.IsPrivate);
+                    state.CallbackState = filter.MatchFound(
+                        this.host,
+                        state.QueueName,
+                        state.IsPrivate
+                    );
                 }
             }
         }
@@ -162,7 +183,11 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state.CallbackState = state.LastMatch.MatchFound(this.host, state.QueueName, state.IsPrivate);
+                    state.CallbackState = state.LastMatch.MatchFound(
+                        this.host,
+                        state.QueueName,
+                        state.IsPrivate
+                    );
                 }
             }
         }
@@ -187,13 +212,22 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state.LastMatch.MatchLost(this.host, state.QueueName, state.IsPrivate, state.CallbackState);
+                    state.LastMatch.MatchLost(
+                        this.host,
+                        state.QueueName,
+                        state.IsPrivate,
+                        state.CallbackState
+                    );
                 }
 
                 state.LastMatchLength = bestMatchLength;
                 state.LastMatch = bestMatch;
 
-                state.CallbackState = bestMatch.MatchFound(this.host, state.QueueName, state.IsPrivate);
+                state.CallbackState = bestMatch.MatchFound(
+                    this.host,
+                    state.QueueName,
+                    state.IsPrivate
+                );
             }
         }
 
@@ -218,8 +252,10 @@ namespace System.ServiceModel.Channels
                         RetryMatchFilters(knownPrivateQueues.Values);
                     }
 
-                    bool scanNeeded = ((this.retryMatchedFilters == false) || 
-                        (this.retryMatchedFilters && (this.iteration % 2) != 0));
+                    bool scanNeeded = (
+                        (this.retryMatchedFilters == false)
+                        || (this.retryMatchedFilters && (this.iteration % 2) != 0)
+                    );
                     if (scanNeeded)
                     {
                         MsmqDiagnostics.ScanStarted();
@@ -227,7 +263,9 @@ namespace System.ServiceModel.Channels
                         // enumerate the public queues first
                         try
                         {
-                            MessageQueue[] queues = MessageQueue.GetPublicQueuesByMachine(this.host);
+                            MessageQueue[] queues = MessageQueue.GetPublicQueuesByMachine(
+                                this.host
+                            );
                             ProcessFoundQueues(queues, knownPublicQueues, false);
                         }
                         catch (MessageQueueException ex)
@@ -238,7 +276,9 @@ namespace System.ServiceModel.Channels
                         // enumerate the private queues next
                         try
                         {
-                            MessageQueue[] queues = MessageQueue.GetPrivateQueuesByMachine(this.host);
+                            MessageQueue[] queues = MessageQueue.GetPrivateQueuesByMachine(
+                                this.host
+                            );
                             ProcessFoundQueues(queues, knownPrivateQueues, true);
                         }
                         catch (MessageQueueException ex)
@@ -267,7 +307,11 @@ namespace System.ServiceModel.Channels
         // MSMQ is not enabled in partial trust, so this demand should not break customers.
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         */
-        void ProcessFoundQueues(MessageQueue[] queues, Dictionary<string, MatchState> knownQueues, bool isPrivate)
+        void ProcessFoundQueues(
+            MessageQueue[] queues,
+            Dictionary<string, MatchState> knownQueues,
+            bool isPrivate
+        )
         {
             foreach (MessageQueue queue in queues)
             {
@@ -319,7 +363,12 @@ namespace System.ServiceModel.Channels
                 knownQueues.Remove(state.QueueName);
                 if (state.LastMatch != null)
                 {
-                    state.LastMatch.MatchLost(this.host, state.QueueName, state.IsPrivate, state.CallbackState);
+                    state.LastMatch.MatchLost(
+                        this.host,
+                        state.QueueName,
+                        state.IsPrivate,
+                        state.CallbackState
+                    );
                 }
             }
         }
@@ -331,7 +380,12 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch == filter)
                 {
-                    state.LastMatch.MatchLost(this.host, state.QueueName, state.IsPrivate, state.CallbackState);
+                    state.LastMatch.MatchLost(
+                        this.host,
+                        state.QueueName,
+                        state.IsPrivate,
+                        state.CallbackState
+                    );
                     state.LastMatch = null;
                     state.LastMatchLength = -1;
                     MatchQueue(state);

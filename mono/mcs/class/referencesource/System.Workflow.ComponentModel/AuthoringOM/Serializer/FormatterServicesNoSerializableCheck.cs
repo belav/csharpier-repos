@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -11,21 +11,20 @@
 ** Purpose: Provides a methods of representing imaginary fields
 ** which are unique to serialization.  In this case, what we're
 ** representing is the private members of parent classes.  We
-** aggregate the FieldInfo associated with this member 
+** aggregate the FieldInfo associated with this member
 ** and return a managled form of the name.  The name that we
 ** return is .parentname.fieldname
 **
 **
 ============================================================*/
 using System;
-using System.Reflection;
-using System.Threading;
-using System.Globalization;
-using System.Security.Permissions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Threading;
 using System.Workflow.ComponentModel;
-
 
 namespace System.Runtime.Serialization
 {
@@ -36,7 +35,11 @@ namespace System.Runtime.Serialization
             public MemberInfo[] MemberInfo;
             public string[] Names;
         }
-        private static Dictionary<Type, MemberInfoName> m_MemberInfoTable = new Dictionary<Type, MemberInfoName>(32);
+
+        private static Dictionary<Type, MemberInfoName> m_MemberInfoTable = new Dictionary<
+            Type,
+            MemberInfoName
+        >(32);
         internal static readonly String FakeNameSeparatorString = "+";
 
         private static Object s_FormatterServicesSyncObject = null;
@@ -57,11 +60,16 @@ namespace System.Runtime.Serialization
         private static MemberInfo[] GetSerializableMembers2(Type type)
         {
             // get the list of all fields
-            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo[] fields = type.GetFields(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             int countProper = 0;
             for (int i = 0; i < fields.Length; i++)
             {
-                if ((fields[i].Attributes & FieldAttributes.NotSerialized) == FieldAttributes.NotSerialized)
+                if (
+                    (fields[i].Attributes & FieldAttributes.NotSerialized)
+                    == FieldAttributes.NotSerialized
+                )
                     continue;
                 countProper++;
             }
@@ -71,7 +79,10 @@ namespace System.Runtime.Serialization
                 countProper = 0;
                 for (int i = 0; i < fields.Length; i++)
                 {
-                    if ((fields[i].Attributes & FieldAttributes.NotSerialized) == FieldAttributes.NotSerialized)
+                    if (
+                        (fields[i].Attributes & FieldAttributes.NotSerialized)
+                        == FieldAttributes.NotSerialized
+                    )
                         continue;
                     properFields[countProper] = fields[i];
                     countProper++;
@@ -81,6 +92,7 @@ namespace System.Runtime.Serialization
             else
                 return fields;
         }
+
         private static bool CheckSerializable(Type type)
         {
             return true;
@@ -92,7 +104,11 @@ namespace System.Runtime.Serialization
             return false;
             */
         }
-        private static MemberInfo[] InternalGetSerializableMembers(Type type, out string[] typeNames)
+
+        private static MemberInfo[] InternalGetSerializableMembers(
+            Type type,
+            out string[] typeNames
+        )
         {
             typeNames = null;
 
@@ -118,15 +134,19 @@ namespace System.Runtime.Serialization
                     typeNames[index] = typeMembers[index].Name;
             }
 
-            //If this class doesn't extend directly from object, walk its hierarchy and 
+            //If this class doesn't extend directly from object, walk its hierarchy and
             //get all of the private and assembly-access fields (e.g. all fields that aren't
-            //virtual) and include them in the list of things to be serialized.  
+            //virtual) and include them in the list of things to be serialized.
             parentType = (Type)(type.BaseType);
             if (parentType != null && parentType != typeof(Object))
             {
                 Type[] parentTypes = null;
                 int parentTypeCount = 0;
-                bool classNamesUnique = GetParentTypes(parentType, out parentTypes, out parentTypeCount);
+                bool classNamesUnique = GetParentTypes(
+                    parentType,
+                    out parentTypes,
+                    out parentTypeCount
+                );
                 if (parentTypeCount > 0)
                 {
                     allMembers = new ArrayList();
@@ -139,7 +159,9 @@ namespace System.Runtime.Serialization
                             throw new SerializationException(); //String.Format(Environment.GetResourceString("Serialization_NonSerType"), parentType.FullName, parentType.Module.Assembly.FullName));
                         }
 
-                        typeFields = parentType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                        typeFields = parentType.GetFields(
+                            BindingFlags.NonPublic | BindingFlags.Instance
+                        );
                         String typeName = classNamesUnique ? parentType.Name : parentType.FullName;
                         foreach (FieldInfo field in typeFields)
                         {
@@ -147,7 +169,9 @@ namespace System.Runtime.Serialization
                             if (field.IsPrivate && !field.IsNotSerialized)
                             {
                                 allMembers.Add(field);
-                                allNames.Add(String.Concat(typeName, FakeNameSeparatorString, field.Name));
+                                allNames.Add(
+                                    String.Concat(typeName, FakeNameSeparatorString, field.Name)
+                                );
                                 //allMembers.Add(new SerializationFieldInfo(field, typeName));
                             }
                         }
@@ -156,7 +180,9 @@ namespace System.Runtime.Serialization
                     //copy all of the members which we've found so far into that.
                     if (allMembers != null && allMembers.Count > 0)
                     {
-                        MemberInfo[] membersTemp = new MemberInfo[allMembers.Count + typeMembers.Length];
+                        MemberInfo[] membersTemp = new MemberInfo[
+                            allMembers.Count + typeMembers.Length
+                        ];
                         Array.Copy(typeMembers, membersTemp, typeMembers.Length);
                         allMembers.CopyTo(membersTemp, typeMembers.Length);
                         typeMembers = membersTemp;
@@ -171,7 +197,11 @@ namespace System.Runtime.Serialization
             return typeMembers;
         }
 
-        private static bool GetParentTypes(Type parentType, out Type[] parentTypes, out int parentTypeCount)
+        private static bool GetParentTypes(
+            Type parentType,
+            out Type[] parentTypes,
+            out int parentTypeCount
+        )
         {
             //Check if there are any dup class names. Then we need to include as part of
             //typeName to prefix the Field names in SerializationFieldInfo
@@ -182,12 +212,17 @@ namespace System.Runtime.Serialization
             bool unique = true;
             for (Type t1 = parentType; t1 != typeof(object); t1 = t1.BaseType)
             {
-                if (t1.IsInterface) continue;
+                if (t1.IsInterface)
+                    continue;
                 string t1Name = t1.Name;
                 for (int i = 0; unique && i < parentTypeCount; i++)
                 {
                     string t2Name = parentTypes[i].Name;
-                    if (t2Name.Length == t1Name.Length && t2Name[0] == t1Name[0] && t1Name == t2Name)
+                    if (
+                        t2Name.Length == t1Name.Length
+                        && t2Name[0] == t1Name[0]
+                        && t1Name == t2Name
+                    )
                     {
                         unique = false;
                         break;

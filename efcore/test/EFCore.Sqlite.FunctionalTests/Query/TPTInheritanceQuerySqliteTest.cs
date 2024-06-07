@@ -3,13 +3,17 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TPTInheritanceQuerySqliteTest : TPTInheritanceQueryTestBase<TPTInheritanceQuerySqliteFixture>
+public class TPTInheritanceQuerySqliteTest
+    : TPTInheritanceQueryTestBase<TPTInheritanceQuerySqliteFixture>
 {
-    public TPTInheritanceQuerySqliteTest(TPTInheritanceQuerySqliteFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+    public TPTInheritanceQuerySqliteTest(
+        TPTInheritanceQuerySqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 }

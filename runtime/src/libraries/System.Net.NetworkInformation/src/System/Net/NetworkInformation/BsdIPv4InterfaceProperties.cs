@@ -19,33 +19,66 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override bool IsAutomaticPrivateAddressingActive { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsAutomaticPrivateAddressingActive
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override bool IsAutomaticPrivateAddressingEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsAutomaticPrivateAddressingEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override bool IsDhcpEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDhcpEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         // Doesn't seem to be exposed on a per-interface basis.
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override bool IsForwardingEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsForwardingEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override int Mtu { get { return _mtu; } }
+        public override int Mtu
+        {
+            get { return _mtu; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override bool UsesWins { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool UsesWins
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
     }
 }

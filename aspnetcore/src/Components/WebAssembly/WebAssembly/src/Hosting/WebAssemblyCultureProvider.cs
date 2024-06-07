@@ -7,13 +7,18 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-[UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "This type loads resx files. We don't expect it's dependencies to be trimmed in the ordinary case.")]
+[UnconditionalSuppressMessage(
+    "ReflectionAnalysis",
+    "IL2026",
+    Justification = "This type loads resx files. We don't expect it's dependencies to be trimmed in the ordinary case."
+)]
 #pragma warning disable CA1852 // Seal internal types
 internal partial class WebAssemblyCultureProvider
 #pragma warning restore CA1852 // Seal internal types
 {
     internal const string GetSatelliteAssemblies = "window.Blazor._internal.getSatelliteAssemblies";
-    internal const string ReadSatelliteAssemblies = "window.Blazor._internal.readSatelliteAssemblies";
+    internal const string ReadSatelliteAssemblies =
+        "window.Blazor._internal.readSatelliteAssemblies";
 
     // For unit testing.
     internal WebAssemblyCultureProvider(CultureInfo initialCulture, CultureInfo initialUICulture)
@@ -32,7 +37,8 @@ internal partial class WebAssemblyCultureProvider
     {
         Instance = new WebAssemblyCultureProvider(
             initialCulture: CultureInfo.CurrentCulture,
-            initialUICulture: CultureInfo.CurrentUICulture);
+            initialUICulture: CultureInfo.CurrentUICulture
+        );
     }
 
     public void ThrowIfCultureChangeIsUnsupported()
@@ -46,12 +52,26 @@ internal partial class WebAssemblyCultureProvider
         // It allows us to capture the initial .NET culture that is configured based on the browser language.
         // The current method is invoked as part of WebAssemblyHost.RunAsync i.e. after user code in Program.MainAsync has run
         // thus allows us to detect if the culture was changed by user code.
-        if (Environment.GetEnvironmentVariable("__BLAZOR_SHARDED_ICU") == "1" &&
-            ((!CultureInfo.CurrentCulture.Name.Equals(InitialCulture.Name, StringComparison.Ordinal) ||
-              !CultureInfo.CurrentUICulture.Name.Equals(InitialUICulture.Name, StringComparison.Ordinal))))
+        if (
+            Environment.GetEnvironmentVariable("__BLAZOR_SHARDED_ICU") == "1"
+            && (
+                (
+                    !CultureInfo.CurrentCulture.Name.Equals(
+                        InitialCulture.Name,
+                        StringComparison.Ordinal
+                    )
+                    || !CultureInfo.CurrentUICulture.Name.Equals(
+                        InitialUICulture.Name,
+                        StringComparison.Ordinal
+                    )
+                )
+            )
+        )
         {
-            throw new InvalidOperationException("Blazor detected a change in the application's culture that is not supported with the current project configuration. " +
-                "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file.");
+            throw new InvalidOperationException(
+                "Blazor detected a change in the application's culture that is not supported with the current project configuration. "
+                    + "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file."
+            );
         }
     }
 
@@ -59,7 +79,9 @@ internal partial class WebAssemblyCultureProvider
     {
         if (!OperatingSystem.IsBrowser())
         {
-            throw new PlatformNotSupportedException("This method is only supported in the browser.");
+            throw new PlatformNotSupportedException(
+                "This method is only supported in the browser."
+            );
         }
 
         var culturesToLoad = GetCultures(CultureInfo.CurrentCulture);

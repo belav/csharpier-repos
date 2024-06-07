@@ -1,5 +1,5 @@
 //
-// XmlTypeMapElementInfo.cs: 
+// XmlTypeMapElementInfo.cs:
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,187 +29,205 @@
 //
 
 using System;
-using System.Xml.Schema;
 using System.Collections;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlTypeMapElementInfo.
-	/// </summary>
-	internal class XmlTypeMapElementInfo
-	{
-		string _elementName;
-		string _namespace = "";
-		XmlSchemaForm _form;
-		XmlTypeMapMember _member;
-		object _choiceValue;
-		bool _isNullable;
-		int _nestingLevel;	// Only for array items
-		XmlTypeMapping _mappedType;
-		TypeData _type;
-		bool _wrappedElement = true;
-		int _explicitOrder = -1;
-		
-		public XmlTypeMapElementInfo (XmlTypeMapMember member, TypeData type)
-		{
-			_member = member;
-			_type = type;
-			if (type.IsValueType && type.IsNullable)
-				_isNullable = true;
-		}
+    /// <summary>
+    /// Summary description for XmlTypeMapElementInfo.
+    /// </summary>
+    internal class XmlTypeMapElementInfo
+    {
+        string _elementName;
+        string _namespace = "";
+        XmlSchemaForm _form;
+        XmlTypeMapMember _member;
+        object _choiceValue;
+        bool _isNullable;
+        int _nestingLevel; // Only for array items
+        XmlTypeMapping _mappedType;
+        TypeData _type;
+        bool _wrappedElement = true;
+        int _explicitOrder = -1;
 
-		public TypeData TypeData
-		{
-			get { return _type; }
-			set { _type = value; }
-		}
+        public XmlTypeMapElementInfo(XmlTypeMapMember member, TypeData type)
+        {
+            _member = member;
+            _type = type;
+            if (type.IsValueType && type.IsNullable)
+                _isNullable = true;
+        }
 
-		public object ChoiceValue
-		{
-			get { return _choiceValue; }
-			set { _choiceValue = value; }
-		}
+        public TypeData TypeData
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
 
-		public string ElementName
-		{
-			get { return _elementName; }
-			set { _elementName = value; }
-		}
+        public object ChoiceValue
+        {
+            get { return _choiceValue; }
+            set { _choiceValue = value; }
+        }
 
-		public string Namespace
-		{
-			get { return _namespace; }
-			set { _namespace = value; }
-		}
+        public string ElementName
+        {
+            get { return _elementName; }
+            set { _elementName = value; }
+        }
 
-		public string DataTypeNamespace
-		{
-			get 
-			{ 
-				if (_mappedType == null) return XmlSchema.Namespace;
-				else return _mappedType.XmlTypeNamespace;
-			}
-		}
+        public string Namespace
+        {
+            get { return _namespace; }
+            set { _namespace = value; }
+        }
 
-		public string DataTypeName
-		{
-			get 
-			{ 
-				if (_mappedType == null) return TypeData.XmlType;
-				else return _mappedType.XmlType;
-			}
-		}
+        public string DataTypeNamespace
+        {
+            get
+            {
+                if (_mappedType == null)
+                    return XmlSchema.Namespace;
+                else
+                    return _mappedType.XmlTypeNamespace;
+            }
+        }
 
-		public XmlSchemaForm Form 
-		{
-			get { return _form; }
-			set { _form = value; }
-		}
+        public string DataTypeName
+        {
+            get
+            {
+                if (_mappedType == null)
+                    return TypeData.XmlType;
+                else
+                    return _mappedType.XmlType;
+            }
+        }
 
-		public XmlTypeMapping MappedType
-		{
-			get { return _mappedType; }
-			set { _mappedType = value; }
-		}
+        public XmlSchemaForm Form
+        {
+            get { return _form; }
+            set { _form = value; }
+        }
 
-		public bool IsNullable
-		{
-			get { return _isNullable; }
-			set { _isNullable = value; }
-		}
+        public XmlTypeMapping MappedType
+        {
+            get { return _mappedType; }
+            set { _mappedType = value; }
+        }
 
-		internal bool IsPrimitive
-		{
-			get { return _mappedType == null; }
-		}
+        public bool IsNullable
+        {
+            get { return _isNullable; }
+            set { _isNullable = value; }
+        }
 
-		public XmlTypeMapMember Member
-		{
-			get { return _member; }
-			set { _member = value; }
-		}
+        internal bool IsPrimitive
+        {
+            get { return _mappedType == null; }
+        }
 
-		public int NestingLevel
-		{
-			get { return _nestingLevel; }
-			set { _nestingLevel = value; }
-		}
+        public XmlTypeMapMember Member
+        {
+            get { return _member; }
+            set { _member = value; }
+        }
 
-		public bool MultiReferenceType
-		{
-			get 
-			{ 
-				if (_mappedType != null) return _mappedType.MultiReferenceType;
-				else return false;
-			}
-		}
+        public int NestingLevel
+        {
+            get { return _nestingLevel; }
+            set { _nestingLevel = value; }
+        }
 
-		public bool WrappedElement
-		{
-			get { return _wrappedElement; }
-			set { _wrappedElement = value; }
-		}
+        public bool MultiReferenceType
+        {
+            get
+            {
+                if (_mappedType != null)
+                    return _mappedType.MultiReferenceType;
+                else
+                    return false;
+            }
+        }
 
-		public bool IsTextElement
-		{
-			get { return ElementName == "<text>"; }
-			set {
-				if (!value)
-					throw new Exception ("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
-				ElementName = "<text>"; Namespace = string.Empty;
-			}
-		}
+        public bool WrappedElement
+        {
+            get { return _wrappedElement; }
+            set { _wrappedElement = value; }
+        }
 
-		public bool IsUnnamedAnyElement
-		{
-			get { return ElementName == string.Empty; }
-			set {
-				if (!value)
-					throw new Exception ("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
-				ElementName = string.Empty; Namespace = string.Empty;
-			}
-		}
+        public bool IsTextElement
+        {
+            get { return ElementName == "<text>"; }
+            set
+            {
+                if (!value)
+                    throw new Exception("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
+                ElementName = "<text>";
+                Namespace = string.Empty;
+            }
+        }
 
-		public int ExplicitOrder
-		{
-			get { return _explicitOrder; }
-			set { _explicitOrder = value; }
-		}
+        public bool IsUnnamedAnyElement
+        {
+            get { return ElementName == string.Empty; }
+            set
+            {
+                if (!value)
+                    throw new Exception("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
+                ElementName = string.Empty;
+                Namespace = string.Empty;
+            }
+        }
 
-		public override bool Equals (object other)
-		{
-			if (other == null)
-				return false;
-			XmlTypeMapElementInfo oinfo = (XmlTypeMapElementInfo)other;
-			if (_elementName != oinfo._elementName) return false;
-			if (_type.XmlType != oinfo._type.XmlType) return false;
-			if (_namespace != oinfo._namespace) return false;
-			if (_form != oinfo._form) return false;
-			if (_type != oinfo._type) return false;
-			if (_isNullable != oinfo._isNullable) return false;
-			if (_choiceValue != null && !_choiceValue.Equals (oinfo._choiceValue)) return false;
-			if (_choiceValue != oinfo._choiceValue) return false;
-			return true;
-		}
+        public int ExplicitOrder
+        {
+            get { return _explicitOrder; }
+            set { _explicitOrder = value; }
+        }
 
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
-	}
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            XmlTypeMapElementInfo oinfo = (XmlTypeMapElementInfo)other;
+            if (_elementName != oinfo._elementName)
+                return false;
+            if (_type.XmlType != oinfo._type.XmlType)
+                return false;
+            if (_namespace != oinfo._namespace)
+                return false;
+            if (_form != oinfo._form)
+                return false;
+            if (_type != oinfo._type)
+                return false;
+            if (_isNullable != oinfo._isNullable)
+                return false;
+            if (_choiceValue != null && !_choiceValue.Equals(oinfo._choiceValue))
+                return false;
+            if (_choiceValue != oinfo._choiceValue)
+                return false;
+            return true;
+        }
 
-	class XmlTypeMapElementInfoList: ArrayList
-	{
-		public int IndexOfElement (string name, string namspace)
-		{
-			for (int n=0; n<Count; n++) {
-				XmlTypeMapElementInfo info = (XmlTypeMapElementInfo) base [n];
-				if (info.ElementName == name && info.Namespace == namspace)
-					return n;
-			}
-			return -1;
-		}
-	}
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
+
+    class XmlTypeMapElementInfoList : ArrayList
+    {
+        public int IndexOfElement(string name, string namspace)
+        {
+            for (int n = 0; n < Count; n++)
+            {
+                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo)base[n];
+                if (info.ElementName == name && info.Namespace == namspace)
+                    return n;
+            }
+            return -1;
+        }
+    }
 }
-

@@ -23,10 +23,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
 using System.Collections;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -34,7 +34,7 @@ namespace System.Data.Tests
     {
         private EventProperties _evProp = null;
 
-        private class EventProperties  //hold the event properties to be checked
+        private class EventProperties //hold the event properties to be checked
         {
             public ListChangedType lstType;
             public int NewIndex;
@@ -280,10 +280,13 @@ namespace System.Data.Tests
             DataView dv = new DataView(dt);
 
             // FindRows ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dvArr = dv.FindRows(3);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dvArr = dv.FindRows(3);
+                }
+            );
 
             dv.Sort = "String1";
             // Find = wrong sort, can not find
@@ -324,10 +327,13 @@ namespace System.Data.Tests
             DataView dv = new DataView(dt);
 
             // FindRows ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dvArr = dv.FindRows(new object[] { "3", "3-String1" });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dvArr = dv.FindRows(new object[] { "3", "3-String1" });
+                }
+            );
 
             dv.Sort = "String1,ChildId";
             // Find = wrong sort, can not find
@@ -369,7 +375,8 @@ namespace System.Data.Tests
         [Fact]
         public void Find_ByObject()
         {
-            int findResult, expectedResult = -1;
+            int findResult,
+                expectedResult = -1;
 
             //create the source datatable
             DataTable dt = DataProvider.CreateParentDataTable();
@@ -387,10 +394,13 @@ namespace System.Data.Tests
             }
 
             // Find ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                findResult = dv.Find("3");
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    findResult = dv.Find("3");
+                }
+            );
 
             dv.Sort = "String1";
             // Find = wrong sort, can not find
@@ -406,7 +416,8 @@ namespace System.Data.Tests
         [Fact]
         public void Find_ByArray()
         {
-            int FindResult, ExpectedResult = -1;
+            int FindResult,
+                ExpectedResult = -1;
 
             //create the source datatable
             DataTable dt = DataProvider.CreateParentDataTable();
@@ -416,7 +427,10 @@ namespace System.Data.Tests
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                if ((int)dt.Rows[i]["ParentId"] == 3 && dt.Rows[i]["String1"].ToString() == "3-String1")
+                if (
+                    (int)dt.Rows[i]["ParentId"] == 3
+                    && dt.Rows[i]["String1"].ToString() == "3-String1"
+                )
                 {
                     ExpectedResult = i;
                     break;
@@ -424,10 +438,13 @@ namespace System.Data.Tests
             }
 
             // Find ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                FindResult = dv.Find(new object[] { "3", "3-String1" });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    FindResult = dv.Find(new object[] { "3", "3-String1" });
+                }
+            );
 
             dv.Sort = "String1,ParentId";
             // Find = wrong sort, can not find
@@ -723,7 +740,10 @@ namespace System.Data.Tests
 
             //---------- CurrentRows --------
             dv.RowStateFilter = DataViewRowState.CurrentRows;
-            drResult = GetResultRows(dt, DataRowState.Unchanged | DataRowState.Added | DataRowState.Modified);
+            drResult = GetResultRows(
+                dt,
+                DataRowState.Unchanged | DataRowState.Added | DataRowState.Modified
+            );
             // CurrentRows
             Assert.True(CompareSortedRowsByParentId(dv, drResult));
 
@@ -765,20 +785,22 @@ namespace System.Data.Tests
             //                For a DataRowState of Deleted, the version is Original.
             //                For a DataRowState value of Detached, the version is Proposed.
 
-            if (((State & DataRowState.Added) > 0)
+            if (
+                ((State & DataRowState.Added) > 0)
                 | ((State & DataRowState.Modified) > 0)
-                | ((State & DataRowState.Unchanged) > 0))
+                | ((State & DataRowState.Unchanged) > 0)
+            )
                 drVer = DataRowVersion.Current;
-            if ((State & DataRowState.Deleted) > 0
-                | (State & DataRowState.Detached) > 0)
+            if ((State & DataRowState.Deleted) > 0 | (State & DataRowState.Detached) > 0)
                 drVer = DataRowVersion.Original;
 
             foreach (DataRow dr in dt.Rows)
             {
-                if (dr.HasVersion(drVer)
+                if (
+                    dr.HasVersion(drVer)
                     //&& ((int)dr["ParentId", drVer] == 1)
                     && ((dr.RowState & State) > 0)
-                    )
+                )
                     al.Add(dr);
             }
             DataRow[] result = al.ToArray();
@@ -787,14 +809,18 @@ namespace System.Data.Tests
 
         private bool CompareSortedRowsByParentId(DataView dv, DataRow[] drTable)
         {
-            if (dv.Count != drTable.Length) throw new Exception("DataRows[] length are different");
+            if (dv.Count != drTable.Length)
+                throw new Exception("DataRows[] length are different");
 
             //comparing the rows by using columns ParentId and ChildId
             if ((dv.RowStateFilter & DataViewRowState.Deleted) > 0)
             {
                 for (int i = 0; i < dv.Count; i++)
                 {
-                    if (dv[i].Row["ParentId", DataRowVersion.Original].ToString() != drTable[i]["ParentId", DataRowVersion.Original].ToString())
+                    if (
+                        dv[i].Row["ParentId", DataRowVersion.Original].ToString()
+                        != drTable[i]["ParentId", DataRowVersion.Original].ToString()
+                    )
                         return false;
                 }
             }
@@ -866,14 +892,16 @@ namespace System.Data.Tests
 
         private bool CompareSortedRowsByParentAndChildId(DataView dv, DataRow[] drTable)
         {
-            if (dv.Count != drTable.Length) throw new Exception("DataRows[] length are different");
+            if (dv.Count != drTable.Length)
+                throw new Exception("DataRows[] length are different");
 
             //comparing the rows by using columns ParentId and ChildId
             for (int i = 0; i < dv.Count; i++)
             {
-                if (dv[i].Row["ParentId"].ToString() != drTable[i]["ParentId"].ToString()
-                    &&
-                    dv[i].Row["ChildId"].ToString() != drTable[i]["ChildId"].ToString())
+                if (
+                    dv[i].Row["ParentId"].ToString() != drTable[i]["ParentId"].ToString()
+                    && dv[i].Row["ChildId"].ToString() != drTable[i]["ChildId"].ToString()
+                )
                     return false;
             }
             return true;

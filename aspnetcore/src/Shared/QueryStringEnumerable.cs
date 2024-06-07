@@ -10,8 +10,10 @@ using System.Runtime.Intrinsics.X86;
 
 #if QueryStringEnumerable_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
+
 #else
 namespace Microsoft.AspNetCore.Internal;
+
 #endif
 
 /// <summary>
@@ -22,7 +24,7 @@ public
 #else
 internal
 #endif
-    readonly struct QueryStringEnumerable
+readonly struct QueryStringEnumerable
 {
     private readonly ReadOnlyMemory<char> _queryString;
 
@@ -31,9 +33,7 @@ internal
     /// </summary>
     /// <param name="queryString">The query string.</param>
     public QueryStringEnumerable(string? queryString)
-        : this(queryString.AsMemory())
-    {
-    }
+        : this(queryString.AsMemory()) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="QueryStringEnumerable"/>.
@@ -48,8 +48,7 @@ internal
     /// Retrieves an object that can iterate through the name/value pairs in the query string.
     /// </summary>
     /// <returns>An object that can iterate through the name/value pairs in the query string.</returns>
-    public Enumerator GetEnumerator()
-        => new Enumerator(_queryString);
+    public Enumerator GetEnumerator() => new Enumerator(_queryString);
 
     /// <summary>
     /// Represents a single name/value pair extracted from a query string during enumeration.
@@ -68,7 +67,10 @@ internal
         /// </summary>
         public readonly ReadOnlyMemory<char> EncodedValue { get; }
 
-        internal EncodedNameValuePair(ReadOnlyMemory<char> encodedName, ReadOnlyMemory<char> encodedValue)
+        internal EncodedNameValuePair(
+            ReadOnlyMemory<char> encodedName,
+            ReadOnlyMemory<char> encodedValue
+        )
         {
             EncodedName = encodedName;
             EncodedValue = encodedValue;
@@ -78,15 +80,13 @@ internal
         /// Decodes the name from this name/value pair.
         /// </summary>
         /// <returns>Characters representing the decoded name.</returns>
-        public ReadOnlyMemory<char> DecodeName()
-            => Decode(EncodedName);
+        public ReadOnlyMemory<char> DecodeName() => Decode(EncodedName);
 
         /// <summary>
         /// Decodes the value from this name/value pair.
         /// </summary>
         /// <returns>Characters representing the decoded value.</returns>
-        public ReadOnlyMemory<char> DecodeValue()
-            => Decode(EncodedValue);
+        public ReadOnlyMemory<char> DecodeValue() => Decode(EncodedValue);
 
         private static unsafe ReadOnlyMemory<char> Decode(ReadOnlyMemory<char> chars)
         {
@@ -100,8 +100,13 @@ internal
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
             ReadOnlySpan<char> span = chars.Span;
             return Uri.UnescapeDataString(
-                string.Create(span.Length,
-                    (IntPtr)(&span), static (dest, ptr) => ((ReadOnlySpan<char>*)ptr)->Replace(dest, '+', ' '))).AsMemory();
+                    string.Create(
+                        span.Length,
+                        (IntPtr)(&span),
+                        static (dest, ptr) => ((ReadOnlySpan<char>*)ptr)->Replace(dest, '+', ' ')
+                    )
+                )
+                .AsMemory();
 #pragma warning restore CS8500
         }
     }
@@ -116,9 +121,7 @@ internal
         internal Enumerator(ReadOnlyMemory<char> query)
         {
             Current = default;
-            _query = query.IsEmpty || query.Span[0] != '?'
-                ? query
-                : query.Slice(1);
+            _query = query.IsEmpty || query.Span[0] != '?' ? query : query.Slice(1);
         }
 
         /// <summary>
@@ -154,7 +157,8 @@ internal
                 {
                     Current = new EncodedNameValuePair(
                         segment.Slice(0, equalIndex),
-                        segment.Slice(equalIndex + 1));
+                        segment.Slice(equalIndex + 1)
+                    );
                     return true;
                 }
                 else if (!segment.IsEmpty)

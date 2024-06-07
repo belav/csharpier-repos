@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
@@ -22,13 +22,7 @@ public class DefaultHeaderTests : LoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "GET / HTTP/1.0",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "GET / HTTP/1.0", "", "");
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -42,7 +36,8 @@ public class DefaultHeaderTests : LoggedTest
                     $"Date: {testContext.DateHeaderValue}",
                     "Server: Kestrel",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }

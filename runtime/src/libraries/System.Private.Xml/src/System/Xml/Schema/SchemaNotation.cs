@@ -12,8 +12,8 @@ namespace System.Xml.Schema
         internal const int PUBLIC = 1;
 
         private readonly XmlQualifiedName _name;
-        private string? _systemLiteral;   // System literal
-        private string? _pubid;    // pubid literal
+        private string? _systemLiteral; // System literal
+        private string? _pubid; // pubid literal
 
         internal SchemaNotation(XmlQualifiedName name)
         {

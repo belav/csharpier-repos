@@ -17,7 +17,8 @@ public class RouteValueProviderFactory : IValueProviderFactory
 
         var valueProvider = new RouteValueProvider(
             BindingSource.Path,
-            context.ActionContext.RouteData.Values);
+            context.ActionContext.RouteData.Values
+        );
 
         context.ValueProviders.Add(valueProvider);
 

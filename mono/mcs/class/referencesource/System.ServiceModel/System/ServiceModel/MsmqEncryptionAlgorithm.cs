@@ -15,7 +15,8 @@ namespace System.ServiceModel
     {
         public static bool IsDefined(MsmqEncryptionAlgorithm algorithm)
         {
-            return algorithm == MsmqEncryptionAlgorithm.RC4Stream || algorithm == MsmqEncryptionAlgorithm.Aes;
+            return algorithm == MsmqEncryptionAlgorithm.RC4Stream
+                || algorithm == MsmqEncryptionAlgorithm.Aes;
         }
 
         public static int ToInt32(MsmqEncryptionAlgorithm algorithm)

@@ -11,19 +11,24 @@ namespace System.ServiceModel.Dispatcher
     internal class PerCallInstanceContextProvider : InstanceContextProviderBase
     {
         internal PerCallInstanceContextProvider(DispatchRuntime dispatchRuntime)
-            : base(dispatchRuntime)
-        {
-        }
+            : base(dispatchRuntime) { }
 
         #region IInstanceContextProvider Members
 
-        public override InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        public override InstanceContext GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
             //Always return null so we will create new InstanceContext for each message
             return null;
         }
 
-        public override void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
+        public override void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
         {
             //no-op
         }
@@ -34,7 +39,10 @@ namespace System.ServiceModel.Dispatcher
             return true;
         }
 
-        public override void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        public override void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
             //no-op
         }

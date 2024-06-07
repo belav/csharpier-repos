@@ -18,7 +18,12 @@ public class CookieValidatePrincipalContext : PrincipalContext<CookieAuthenticat
     /// <param name="scheme"></param>
     /// <param name="ticket">Contains the initial values for identity and extra data</param>
     /// <param name="options"></param>
-    public CookieValidatePrincipalContext(HttpContext context, AuthenticationScheme scheme, CookieAuthenticationOptions options, AuthenticationTicket ticket)
+    public CookieValidatePrincipalContext(
+        HttpContext context,
+        AuthenticationScheme scheme,
+        CookieAuthenticationOptions options,
+        AuthenticationTicket ticket
+    )
         : base(context, scheme, options, ticket?.Properties)
     {
         ArgumentNullException.ThrowIfNull(ticket);
