@@ -524,12 +524,12 @@ namespace System.Xml.Xsl.XPath
                     filter.Body = f.And(
                         filter.Body,
                         name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
-                        : // ns:bar || bar
-                        nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                        : // ns:*
-                        name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                        : // *:foo
-                        /*name  == nsUri == null*/f.True() // *
+                            : // ns:bar || bar
+                            nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                            : // ns:*
+                            name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                            : // *:foo
+                            /*name  == nsUri == null*/f.True() // *
                     );
                     return filter;
                 }
@@ -538,12 +538,12 @@ namespace System.Xml.Xsl.XPath
             return f.Filter(
                 itr = f.For(qilAxis),
                 name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
-                : // ns:bar || bar
-                nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                : // ns:*
-                name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                : // *:foo
-                /*name  == nsUri == null*/f.True() // *
+                    : // ns:bar || bar
+                    nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                    : // ns:*
+                    name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                    : // *:foo
+                    /*name  == nsUri == null*/f.True() // *
             );
         }
 

@@ -1053,8 +1053,8 @@ namespace Mono.CSharp
                 type,
                 mod,
                 parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
-                : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
-                : AllowedModifiersClass,
+                    : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                    : AllowedModifiersClass,
                 name,
                 attrs
             ) { }
@@ -1850,8 +1850,8 @@ namespace Mono.CSharp
                 type,
                 mod_flags,
                 parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
-                : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
-                : AllowedModifiersClass,
+                    : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                    : AllowedModifiersClass,
                 name,
                 attrs
             ) { }

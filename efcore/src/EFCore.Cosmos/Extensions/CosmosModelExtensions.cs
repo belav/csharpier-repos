@@ -82,8 +82,8 @@ public static class CosmosModelExtensions
         model.SetOrRemoveAnnotation(
             CosmosAnnotationNames.Throughput,
             throughput == null || autoscale == null ? null
-            : autoscale.Value ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-            : ThroughputProperties.CreateManualThroughput(throughput.Value)
+                : autoscale.Value ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                : ThroughputProperties.CreateManualThroughput(throughput.Value)
         );
 
     /// <summary>
@@ -105,9 +105,9 @@ public static class CosmosModelExtensions
                 .SetOrRemoveAnnotation(
                     CosmosAnnotationNames.Throughput,
                     throughput == null || autoscale == null ? null
-                    : autoscale.Value
-                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                    : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                        : autoscale.Value
+                            ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                        : ThroughputProperties.CreateManualThroughput(throughput.Value),
                     fromDataAnnotation
                 )
                 ?.Value;

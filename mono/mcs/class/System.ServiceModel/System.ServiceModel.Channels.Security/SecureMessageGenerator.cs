@@ -311,8 +311,8 @@ namespace System.ServiceModel.Channels.Security
                 ? CounterParameters.CallCreateKeyIdentifierClause(
                     encToken,
                     !ShouldOutputEncryptedKey ? SecurityTokenReferenceStyle.Internal
-                    : includeEncToken ? Parameters.ReferenceStyle
-                    : SecurityTokenReferenceStyle.External
+                        : includeEncToken ? Parameters.ReferenceStyle
+                        : SecurityTokenReferenceStyle.External
                 )
                 : null;
 

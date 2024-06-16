@@ -648,8 +648,8 @@ namespace System.ServiceModel.Description
                 action = String.Concat(
                     cd.Namespace,
                     cd.Namespace.Length == 0 ? "urn:"
-                    : cd.Namespace.EndsWith("/") ? ""
-                    : "/",
+                        : cd.Namespace.EndsWith("/") ? ""
+                        : "/",
                     cd.Name,
                     "/",
                     od.Name,

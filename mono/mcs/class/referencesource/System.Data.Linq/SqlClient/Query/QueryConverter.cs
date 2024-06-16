@@ -2381,8 +2381,8 @@ namespace System.Data.Linq.SqlClient
                         aggType,
                         returnType,
                         isCount ? null
-                        : (lambda == null) ? aref
-                        : exp
+                            : (lambda == null) ? aref
+                            : exp
                     ),
                     alias,
                     this.dominatingExpression

@@ -1109,8 +1109,8 @@ namespace System.Globalization
                 section = FindSection(
                     format,
                     dig[0] == 0 ? 2
-                    : number.sign ? 1
-                    : 0
+                        : number.sign ? 1
+                        : 0
                 );
 
                 while (true)
