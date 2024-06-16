@@ -16,30 +16,53 @@ namespace Microsoft.AspNetCore.Analyzers.Http.Fixers;
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public class HeaderDictionaryIndexerFixer : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(
+            DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer.Id
+        );
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         foreach (var diagnostic in context.Diagnostics)
         {
-            if (diagnostic.Properties.TryGetValue("HeaderName", out var headerName) &&
-                diagnostic.Properties.TryGetValue("ResolvedPropertyName", out var resolvedPropertyName))
+            if (
+                diagnostic.Properties.TryGetValue("HeaderName", out var headerName)
+                && diagnostic.Properties.TryGetValue(
+                    "ResolvedPropertyName",
+                    out var resolvedPropertyName
+                )
+            )
             {
                 var title = $"Access header '{headerName}' with {resolvedPropertyName} property";
                 context.RegisterCodeFix(
-                    CodeAction.Create(title,
-                        cancellationToken => FixHeaderDictionaryIndexer(diagnostic, context.Document, resolvedPropertyName!, cancellationToken),
-                        equivalenceKey: title),
-                    diagnostic);
+                    CodeAction.Create(
+                        title,
+                        cancellationToken =>
+                            FixHeaderDictionaryIndexer(
+                                diagnostic,
+                                context.Document,
+                                resolvedPropertyName!,
+                                cancellationToken
+                            ),
+                        equivalenceKey: title
+                    ),
+                    diagnostic
+                );
             }
         }
 
         return Task.CompletedTask;
     }
 
-    private static async Task<Document> FixHeaderDictionaryIndexer(Diagnostic diagnostic, Document document, string resolvedPropertyName, CancellationToken cancellationToken)
+    private static async Task<Document> FixHeaderDictionaryIndexer(
+        Diagnostic diagnostic,
+        Document document,
+        string resolvedPropertyName,
+        CancellationToken cancellationToken
+    )
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -54,10 +77,21 @@ public class HeaderDictionaryIndexerFixer : CodeFixProvider
             param = argumentSyntax.Expression;
         }
 
-        if (param is ElementAccessExpressionSyntax { Expression: { } expression } elementAccessExpressionSyntax)
+        if (
+            param is ElementAccessExpressionSyntax
+            {
+                Expression: { } expression
+            } elementAccessExpressionSyntax
+        )
         {
-            var newExpression = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expression, SyntaxFactory.IdentifierName(resolvedPropertyName));
-            return document.WithSyntaxRoot(root.ReplaceNode(elementAccessExpressionSyntax, newExpression));
+            var newExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                expression,
+                SyntaxFactory.IdentifierName(resolvedPropertyName)
+            );
+            return document.WithSyntaxRoot(
+                root.ReplaceNode(elementAccessExpressionSyntax, newExpression)
+            );
         }
 
         return document;

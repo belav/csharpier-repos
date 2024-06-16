@@ -31,8 +31,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ValueProviderFactoryCollection(null); },
-                "list");
+                delegate
+                {
+                    new ValueProviderFactoryCollection(null);
+                },
+                "list"
+            );
         }
 
         [Fact]
@@ -53,8 +57,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { collection.Add(null); },
-                "item");
+                delegate
+                {
+                    collection.Add(null);
+                },
+                "item"
+            );
         }
 
         [Fact]
@@ -86,7 +94,10 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ValueProviderFactoryCollectionCombinedItemsInsertResetsCache()
         {
-            TestCacheReset((collection) => collection.Insert(0, new Mock<ValueProviderFactory>(MockBehavior.Strict).Object));
+            TestCacheReset(
+                (collection) =>
+                    collection.Insert(0, new Mock<ValueProviderFactory>(MockBehavior.Strict).Object)
+            );
         }
 
         [Fact]
@@ -98,7 +109,10 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ValueProviderFactoryCollectionCombinedItemsSetResetsCache()
         {
-            TestCacheReset((collection) => collection[0] = new Mock<ValueProviderFactory>(MockBehavior.Strict).Object);
+            TestCacheReset(
+                (collection) =>
+                    collection[0] = new Mock<ValueProviderFactory>(MockBehavior.Strict).Object
+            );
         }
 
         private static void TestCacheReset(Action<ValueProviderFactoryCollection> mutatingAction)
@@ -127,14 +141,28 @@ namespace System.Web.Mvc.Test
             var firstFactory = new Mock<ValueProviderFactory>();
             var secondFactory = new Mock<ValueProviderFactory>();
             var thirdFactory = new Mock<ValueProviderFactory>();
-            var dependencyFactories = new ValueProviderFactory[] { firstFactory.Object, secondFactory.Object };
+            var dependencyFactories = new ValueProviderFactory[]
+            {
+                firstFactory.Object,
+                secondFactory.Object
+            };
             var collectionFactories = new ValueProviderFactory[] { thirdFactory.Object };
-            var expectedFactories = new ValueProviderFactory[] { firstFactory.Object, secondFactory.Object, thirdFactory.Object };
+            var expectedFactories = new ValueProviderFactory[]
+            {
+                firstFactory.Object,
+                secondFactory.Object,
+                thirdFactory.Object
+            };
 
             var resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(ValueProviderFactory))).Returns(dependencyFactories);
+            resolver
+                .Setup(r => r.GetServices(typeof(ValueProviderFactory)))
+                .Returns(dependencyFactories);
 
-            var factories = new ValueProviderFactoryCollection(collectionFactories, resolver.Object);
+            var factories = new ValueProviderFactoryCollection(
+                collectionFactories,
+                resolver.Object
+            );
 
             // Act
             ValueProviderFactory[] combined = factories.CombinedItems;
@@ -155,9 +183,13 @@ namespace System.Web.Mvc.Test
             };
 
             Mock<ValueProviderFactory> mockFactory1 = new Mock<ValueProviderFactory>();
-            mockFactory1.Setup(o => o.GetValueProvider(controllerContext)).Returns(expectedValueProviders[0]);
+            mockFactory1
+                .Setup(o => o.GetValueProvider(controllerContext))
+                .Returns(expectedValueProviders[0]);
             Mock<ValueProviderFactory> mockFactory2 = new Mock<ValueProviderFactory>();
-            mockFactory2.Setup(o => o.GetValueProvider(controllerContext)).Returns(expectedValueProviders[1]);
+            mockFactory2
+                .Setup(o => o.GetValueProvider(controllerContext))
+                .Returns(expectedValueProviders[1]);
 
             ValueProviderFactoryCollection factories = new ValueProviderFactoryCollection()
             {
@@ -166,7 +198,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            ValueProviderCollection valueProviders = (ValueProviderCollection)factories.GetValueProvider(controllerContext);
+            ValueProviderCollection valueProviders = (ValueProviderCollection)
+                factories.GetValueProvider(controllerContext);
 
             // Assert
             Assert.Equal(expectedValueProviders, valueProviders.ToArray());
@@ -184,16 +217,26 @@ namespace System.Web.Mvc.Test
             };
 
             Mock<ValueProviderFactory> mockFactory1 = new Mock<ValueProviderFactory>();
-            mockFactory1.Setup(o => o.GetValueProvider(controllerContext)).Returns(expectedValueProviders[0]);
+            mockFactory1
+                .Setup(o => o.GetValueProvider(controllerContext))
+                .Returns(expectedValueProviders[0]);
             Mock<ValueProviderFactory> mockFactory2 = new Mock<ValueProviderFactory>();
-            mockFactory2.Setup(o => o.GetValueProvider(controllerContext)).Returns(expectedValueProviders[1]);
+            mockFactory2
+                .Setup(o => o.GetValueProvider(controllerContext))
+                .Returns(expectedValueProviders[1]);
 
             var resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(ValueProviderFactory))).Returns(new[] { mockFactory1.Object, mockFactory2.Object });
-            ValueProviderFactoryCollection factories = new ValueProviderFactoryCollection(new ValueProviderFactory[0], resolver.Object);
+            resolver
+                .Setup(r => r.GetServices(typeof(ValueProviderFactory)))
+                .Returns(new[] { mockFactory1.Object, mockFactory2.Object });
+            ValueProviderFactoryCollection factories = new ValueProviderFactoryCollection(
+                new ValueProviderFactory[0],
+                resolver.Object
+            );
 
             // Act
-            ValueProviderCollection valueProviders = (ValueProviderCollection)factories.GetValueProvider(controllerContext);
+            ValueProviderCollection valueProviders = (ValueProviderCollection)
+                factories.GetValueProvider(controllerContext);
 
             // Assert
             Assert.Equal(expectedValueProviders, valueProviders.ToArray());
@@ -225,8 +268,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { collection[0] = null; },
-                "item");
+                delegate
+                {
+                    collection[0] = null;
+                },
+                "item"
+            );
         }
     }
 }

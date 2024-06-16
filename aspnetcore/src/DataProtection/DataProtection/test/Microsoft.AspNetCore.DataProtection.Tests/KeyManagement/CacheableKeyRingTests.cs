@@ -48,7 +48,11 @@ public class CacheableKeyRingTests
     {
         // Arrange
         var keyRing = new Mock<IKeyRing>().Object;
-        var cacheableKeyRing = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.Now, keyRing);
+        var cacheableKeyRing = new CacheableKeyRing(
+            CancellationToken.None,
+            DateTimeOffset.Now,
+            keyRing
+        );
 
         // Act & assert
         Assert.Same(keyRing, cacheableKeyRing.KeyRing);

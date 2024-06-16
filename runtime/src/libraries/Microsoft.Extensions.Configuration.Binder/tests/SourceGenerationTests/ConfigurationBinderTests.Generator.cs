@@ -18,65 +18,43 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public void TestBindingInvocationsWithNewlines_GetMethodTypeArg()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 
             // Newline between the configuration instance and the binding invocation (with the dot on the first line)
-            GeolocationRecord record1 = (GeolocationRecord)configuration.
-                Get(typeof(GeolocationRecord), _ => { });
+            GeolocationRecord record1 = (GeolocationRecord)
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record1, 1, 2);
 
             // Newline between the configuration instance and the binding invocation (with the dot on the second line)
-            GeolocationRecord record2 = (GeolocationRecord)configuration
-                .Get(typeof(GeolocationRecord), _ => { });
+            GeolocationRecord record2 = (GeolocationRecord)
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record2, 1, 2);
 
             // Newlines between the instance, the invocation, and the arguments
-            GeolocationRecord record3 = (GeolocationRecord)configuration
-                .Get(
-                    typeof(GeolocationRecord),
-                    _ => { }
-                );
+            GeolocationRecord record3 = (GeolocationRecord)
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record3, 1, 2);
 
             // Newlines before and after the instance (with the dot on the first line)
             GeolocationRecord record4 = (GeolocationRecord)
-                configuration.
-                Get(typeof(GeolocationRecord), _ => { });
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record4, 1, 2);
 
             // Newlines before and after the instance (with the dot on the second line)
             GeolocationRecord record5 = (GeolocationRecord)
-                            configuration
-                            .Get(typeof(GeolocationRecord), _ => { });
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record5, 1, 2);
 
             // Newlines in every place possible
-            GeolocationRecord
-                record6
-                =
-                (
-                    GeolocationRecord
-                )
-                configuration
-                .
-                Get
-                (
-                    typeof
-                    (
-                        GeolocationRecord
-                    )
-                    ,
-                    _
-                    =>
-                    {
-                    }
-                )
-                ;
+            GeolocationRecord record6 = (GeolocationRecord)
+                configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record6, 1, 2);
         }
@@ -84,33 +62,22 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public void TestBindingInvocationsWithNewlines_GetMethodGeneric()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 
             // Newline between the invocation method name and the generic type argument
-            GeolocationRecord record1 = configuration.Get
-                <GeolocationRecord>();
+            GeolocationRecord record1 = configuration.Get<GeolocationRecord>();
 
             AssertRecordIsBound(record1, 1, 2);
 
             // Newlines on either side of the generic type argument
-            GeolocationRecord record2 = configuration.Get<
-                GeolocationRecord
-                >();
+            GeolocationRecord record2 = configuration.Get<GeolocationRecord>();
 
             AssertRecordIsBound(record2, 1, 2);
 
             // Newlines in every place possible
-            GeolocationRecord
-                record3
-                =
-                configuration
-                .
-                Get
-                <
-                GeolocationRecord
-                >
-                ()
-                ;
+            GeolocationRecord record3 = configuration.Get<GeolocationRecord>();
 
             AssertRecordIsBound(record3, 1, 2);
         }
@@ -120,7 +87,8 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         {
             // Newline between the configuration instance and the extension method invocation
             GeolocationRecord record1 = new GeolocationRecord();
-            TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}")
+            TestHelpers
+                .GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}")
                 .Bind(record1);
 
             AssertRecordIsBound(record1, 1, 2);
@@ -136,29 +104,20 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             // Newlines within the argument to the method returning the configuration and around the extension method argument
             GeolocationRecord record3 = new GeolocationRecord();
             TestHelpers
-                .GetConfigurationFromJsonString(@"{""Longitude"":1,
+                .GetConfigurationFromJsonString(
+                    @"{""Longitude"":1,
                     ""Latitude"":2}
-                    ")
-                .Bind(
-                    record3
-                );
+                    "
+                )
+                .Bind(record3);
 
             AssertRecordIsBound(record3, 1, 2);
 
             // Newlines in every place possible
             GeolocationRecord record4 = new GeolocationRecord();
             TestHelpers
-                .
-                GetConfigurationFromJsonString
-                (
-                    @"{""Longitude"":1, ""Latitude"":2}"
-                )
-                .
-                Bind
-                (
-                    record4
-                )
-                ;
+                .GetConfigurationFromJsonString(@"{""Longitude"":1, ""Latitude"":2}")
+                .Bind(record4);
 
             AssertRecordIsBound(record4, 1, 2);
         }
@@ -166,38 +125,29 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public void TestBindingInvocationsWithNewlines_BindStaticMethod()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 
             // Newline between the class and the static method invocation (with the dot on the first line)
             GeolocationRecord record1 = new GeolocationRecord();
-            ConfigurationBinder.
-                Bind(configuration, record1);
+            ConfigurationBinder.Bind(configuration, record1);
 
             // Newline between the class and the static method invocation (with the dot on the second line)
             GeolocationRecord record2 = new GeolocationRecord();
-            ConfigurationBinder
-                .Bind(configuration, record2);
+            ConfigurationBinder.Bind(configuration, record2);
 
             AssertRecordIsBound(record2, 1, 2);
 
             // Newline before the arguments
             GeolocationRecord record3 = new GeolocationRecord();
-            ConfigurationBinder.Bind(
-                configuration, record3);
+            ConfigurationBinder.Bind(configuration, record3);
 
             AssertRecordIsBound(record3, 1, 2);
 
             // Newlines in every place possible
             GeolocationRecord record4 = new GeolocationRecord();
-            ConfigurationBinder
-                .
-                Bind
-                (
-                    configuration
-                    ,
-                    record4
-                )
-                ;
+            ConfigurationBinder.Bind(configuration, record4);
 
             AssertRecordIsBound(record4, 1, 2);
         }
@@ -205,49 +155,41 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public void TestBindingInvocationsWithNewlines_GetValueMethod()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 
             // Newline between the configuration instance and the binding invocation (with the dot on the first line)
-            int lat1 = configuration.
-                GetValue<int>("Latitude");
+            int lat1 = configuration.GetValue<int>("Latitude");
 
             Assert.Equal(2, lat1);
 
             // Newline between the configuration instance and the binding invocation (with the dot on the second line)
-            int lat2 = configuration
-                .GetValue<int>("Latitude");
+            int lat2 = configuration.GetValue<int>("Latitude");
 
             Assert.Equal(2, lat2);
 
             // Newlines in every place possible
-            long
-                lat3
-                =
-                configuration
-                .
-                GetValue
-                <
-                    int
-                >
-                (
-                    "Latitude"
-                )
-                ;
+            long lat3 = configuration.GetValue<int>("Latitude");
             Assert.Equal(2, lat3);
 
             // Newlines and pragmas wrapped around the generic type argument
             long lat4 = configuration.GetValue<
 #if DEBUG
-                int
+            int
 #else
-                long
+            long
 #endif
-                >("Latitude");
+            >("Latitude");
 
             Assert.Equal(2, lat4);
         }
 
-        private static void AssertRecordIsBound(GeolocationRecord record, int longitude, int latitude)
+        private static void AssertRecordIsBound(
+            GeolocationRecord record,
+            int longitude,
+            int latitude
+        )
         {
             Assert.Equal((longitude, latitude), (record.Longitude, record.Latitude));
         }
@@ -264,7 +206,9 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             // the same as the suffix of the non generic type's name.
             // Manifested in https://github.com/dotnet/runtime/issues/90976.
 
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Value"":1}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Value"":1}"
+            );
 
             var c1 = new Cint();
             var c2 = new C<int>();
@@ -290,7 +234,9 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         {
             // Both types have the same name, but one is a nested type.
 
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Value"":1}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Value"":1}"
+            );
 
             var c1 = new ClassWithThisIdentifier();
             var c2 = new ClassWithThisIdentifier_Wrapper.ClassWithThisIdentifier();
@@ -328,7 +274,9 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public void MemberAccessibility_InaccessibleNestedTypeAsRootConfig()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Value"":1}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Value"":1}"
+            );
 
             // Ensure no compilation errors; types are skipped.
 
@@ -348,25 +296,39 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
             // Generic types.
 
-            Action<BinderOptions>? configureOptions = options => options.BindNonPublicProperties = true;
-            string GetNestedObjectPayload(string propName) => $$"""
-                {
-                    "{{propName}}": {
-                        "Value": 1
+            Action<BinderOptions>? configureOptions = options =>
+                options.BindNonPublicProperties = true;
+            string GetNestedObjectPayload(string propName) =>
+                $$"""
+                    {
+                        "{{propName}}": {
+                            "Value": 1
+                        }
                     }
-                }
-                """;
+                    """;
 
-            configuration = TestHelpers.GetConfigurationFromJsonString(GetNestedObjectPayload("item1"));
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                GetNestedObjectPayload("item1")
+            );
             var c6 = configuration.Get<Dictionary<string, InaccessibleClass_1>>(configureOptions);
 
-            configuration = TestHelpers.GetConfigurationFromJsonString(GetNestedObjectPayload("protectedMember"));
-            var c7 = configuration.Get<AccessibleGenericClass<InaccessibleClass_1>>(configureOptions);
-            var c8 = configuration.Get<AccessibleGenericClass<InaccessibleClass_1>>(configureOptions);
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                GetNestedObjectPayload("protectedMember")
+            );
+            var c7 = configuration.Get<AccessibleGenericClass<InaccessibleClass_1>>(
+                configureOptions
+            );
+            var c8 = configuration.Get<AccessibleGenericClass<InaccessibleClass_1>>(
+                configureOptions
+            );
 
-            configuration = TestHelpers.GetConfigurationFromJsonString(GetNestedObjectPayload("publicMember"));
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                GetNestedObjectPayload("publicMember")
+            );
             var c9 = configuration.Get<InaccessibleGenericClass<AccessibleClass>>(configureOptions);
-            var c10 = configuration.Get<InaccessibleGenericClass<InaccessibleClass_1>>(configureOptions);
+            var c10 = configuration.Get<InaccessibleGenericClass<InaccessibleClass_1>>(
+                configureOptions
+            );
 #pragma warning disable SYSLIB1104
 
             // Reflection fallback.
@@ -374,7 +336,7 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             Assert.Equal(1, c1.Value);
             Assert.Equal(1, c2.Value);
             Assert.Equal(1, c3.Value);
-            
+
             Assert.Equal(1, c4[0].Value);
             Assert.Equal(1, c5[0].Value);
             Assert.Equal(1, c6["item1"].Value);

@@ -17,25 +17,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     /// </summary>
     /// <remarks>
     /// This task takes a set of items passed in via <see cref="MetadataItems"/> and <see cref="PropertyItems"/> and transforms
-    /// them into a global analyzer config. 
-    /// 
+    /// them into a global analyzer config.
+    ///
     /// <see cref="PropertyItems"/> is expected to be a list of items whose <see cref="ITaskItem.ItemSpec"/> is the property name
     /// and have a metadata value called <c>Value</c> that contains the evaluated value of the property. Each of the ]
     /// <see cref="PropertyItems"/> will be transformed into an <c>build_property.<em>ItemSpec</em> = <em>Value</em></c> entry in the
     /// global section of the generated config file.
-    /// 
-    /// <see cref="MetadataItems"/> is expected to be a list of items whose <see cref="ITaskItem.ItemSpec"/> represents a file in the 
-    /// compilation source tree. It should have two metadata values: <c>ItemType</c> is the name of the MSBuild item that originally 
+    ///
+    /// <see cref="MetadataItems"/> is expected to be a list of items whose <see cref="ITaskItem.ItemSpec"/> represents a file in the
+    /// compilation source tree. It should have two metadata values: <c>ItemType</c> is the name of the MSBuild item that originally
     /// included the file (e.g. <c>Compile</c>, <c>AdditionalFile</c> etc.); <c>MetadataName</c> is expected to contain the name of
-    /// another piece of metadata that should be retrieved and used as the output value in the file. It is expected that a given 
+    /// another piece of metadata that should be retrieved and used as the output value in the file. It is expected that a given
     /// file can have multiple entries in the <see cref="MetadataItems" /> differing by its <c>ItemType</c>.
-    /// 
+    ///
     /// Each of the <see cref="MetadataItems"/> will be transformed into a new section in the generated config file. The section
-    /// header will be the full path of the item (generated via its<see cref="ITaskItem.ItemSpec"/>), and each section will have a 
+    /// header will be the full path of the item (generated via its<see cref="ITaskItem.ItemSpec"/>), and each section will have a
     /// set of <c>build_metadata.<em>ItemType</em>.<em>MetadataName</em> = <em>RetrievedMetadataValue</em></c>, one per <c>ItemType</c>
-    /// 
-    /// The Microsoft.Managed.Core.targets calls this task with the collected results of the <c>AnalyzerProperty</c> and 
-    /// <c>AnalyzerItemMetadata</c> item groups. 
+    ///
+    /// The Microsoft.Managed.Core.targets calls this task with the collected results of the <c>AnalyzerProperty</c> and
+    /// <c>AnalyzerItemMetadata</c> item groups.
     /// </remarks>
     public sealed class GenerateMSBuildEditorConfig : Task
     {
@@ -72,20 +72,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // collect the properties into a global section
             foreach (var prop in PropertyItems)
             {
-                builder.Append("build_property.")
-                       .Append(prop.ItemSpec)
-                       .Append(" = ")
-                       .AppendLine(prop.GetMetadata("Value"));
+                builder
+                    .Append("build_property.")
+                    .Append(prop.ItemSpec)
+                    .Append(" = ")
+                    .AppendLine(prop.GetMetadata("Value"));
             }
 
             // group the metadata items by their full path
-            var groupedItems = MetadataItems.GroupBy(i => NormalizeWithForwardSlash(i.GetMetadata("FullPath")));
+            var groupedItems = MetadataItems.GroupBy(i =>
+                NormalizeWithForwardSlash(i.GetMetadata("FullPath"))
+            );
 
             foreach (var group in groupedItems)
             {
                 // write the section for this item
-                builder.AppendLine()
-                       .Append("[");
+                builder.AppendLine().Append("[");
                 EncodeString(builder, group.Key);
                 builder.AppendLine("]");
 
@@ -93,14 +95,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     string itemType = item.GetMetadata("ItemType");
                     string metadataName = item.GetMetadata("MetadataName");
-                    if (!string.IsNullOrWhiteSpace(itemType) && !string.IsNullOrWhiteSpace(metadataName))
+                    if (
+                        !string.IsNullOrWhiteSpace(itemType)
+                        && !string.IsNullOrWhiteSpace(metadataName)
+                    )
                     {
-                        builder.Append("build_metadata.")
-                               .Append(itemType)
-                               .Append(".")
-                               .Append(metadataName)
-                               .Append(" = ")
-                               .AppendLine(item.GetMetadata(metadataName));
+                        builder
+                            .Append("build_metadata.")
+                            .Append(itemType)
+                            .Append(".")
+                            .Append(metadataName)
+                            .Append(" = ")
+                            .AppendLine(item.GetMetadata(metadataName));
                     }
                 }
             }
@@ -122,7 +128,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         return true;
                     }
                 }
-                var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+                var encoding = new UTF8Encoding(
+                    encoderShouldEmitUTF8Identifier: false,
+                    throwOnInvalidBytes: true
+                );
                 File.WriteAllText(targetFileName, ConfigFileContents, encoding);
                 return true;
             }
@@ -158,7 +167,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Equivalent to Roslyn.Utilities.PathUtilities.NormalizeWithForwardSlash
         /// Both methods should be kept in sync.
         /// </remarks>
-        private static string NormalizeWithForwardSlash(string p)
-            => PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
+        private static string NormalizeWithForwardSlash(string p) =>
+            PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
     }
 }

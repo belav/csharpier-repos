@@ -9,11 +9,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Web.UI.Design.WebControls.Util;
 using System.Diagnostics;
 using System.Drawing.Design;
 using System.Web.UI;
 using System.Web.UI.Design;
+using System.Web.UI.Design.WebControls.Util;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
@@ -31,28 +31,44 @@ namespace System.Web.UI.Design.WebControls
             EntityDataSource entityDataSource = (EntityDataSource)context.Instance;
             IServiceProvider serviceProvider = entityDataSource.Site;
 
-            IDesignerHost designerHost = (IDesignerHost)serviceProvider.GetService(typeof(IDesignerHost));
+            IDesignerHost designerHost = (IDesignerHost)
+                serviceProvider.GetService(typeof(IDesignerHost));
             Debug.Assert(designerHost != null, "Did not get DesignerHost service.");
 
-            EntityDataSourceDesigner designer = (EntityDataSourceDesigner)designerHost.GetDesigner(entityDataSource);
-            
+            EntityDataSourceDesigner designer = (EntityDataSourceDesigner)
+                designerHost.GetDesigner(entityDataSource);
+
             // Configure the dialog for the specified property and display it
-            return Initialize(designer, entityDataSource, context.PropertyDescriptor.Name, serviceProvider, value);
+            return Initialize(
+                designer,
+                entityDataSource,
+                context.PropertyDescriptor.Name,
+                serviceProvider,
+                value
+            );
         }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             ControlDesigner.InvokeTransactedChange(
                 (IComponent)context.Instance,
                 new TransactedChangeCallback(EditQueryChangeCallback),
                 new Pair(context, value),
-                Strings.ExpressionEditorTransactionDescription);
+                Strings.ExpressionEditorTransactionDescription
+            );
 
             return value;
         }
 
         // Determines if the specified property is one that has an associated "AutoGenerateXXXClause" property
-        private static bool GetAutoGen(string operation, EntityDataSourceDesigner entityDataSourceDesigner)
+        private static bool GetAutoGen(
+            string operation,
+            EntityDataSourceDesigner entityDataSourceDesigner
+        )
         {
             if (String.Equals("Where", operation, StringComparison.Ordinal))
             {
@@ -90,31 +106,42 @@ namespace System.Web.UI.Design.WebControls
             switch (propertyName)
             {
                 case "CommandText":
-                    return accessible ? Strings.ExpressionEditor_CommandTextLabelAccessibleName :
-                                        Strings.ExpressionEditor_CommandTextLabel;
+                    return accessible
+                        ? Strings.ExpressionEditor_CommandTextLabelAccessibleName
+                        : Strings.ExpressionEditor_CommandTextLabel;
                 case "OrderBy":
                 case "Select":
                 case "Where":
-                    return accessible ? Strings.ExpressionEditor_ExpressionStatementLabelAccessibleName(propertyName) :
-                                        Strings.ExpressionEditor_ExpressionStatementLabel(propertyName);
+                    return accessible
+                        ? Strings.ExpressionEditor_ExpressionStatementLabelAccessibleName(
+                            propertyName
+                        )
+                        : Strings.ExpressionEditor_ExpressionStatementLabel(propertyName);
                 default:
-                    Debug.Fail("Unknown property name in EntityDataSourceStatementEditor: " + propertyName);
+                    Debug.Fail(
+                        "Unknown property name in EntityDataSourceStatementEditor: " + propertyName
+                    );
                     return null;
-            }            
+            }
         }
-
 
         // Gets the F1 help topic for each of the dialogs using the specified property name
         private static string GetHelpTopic(string propertyName)
         {
             switch (propertyName)
             {
-                case "CommandText": return "net.Asp.EntityDataSource.CommandTextExpression";
-                case "OrderBy": return "net.Asp.EntityDataSource.OrderByExpression";
-                case "Select": return "net.Asp.EntityDataSource.SelectExpression";
-                case "Where": return "net.Asp.EntityDataSource.WhereExpression";
+                case "CommandText":
+                    return "net.Asp.EntityDataSource.CommandTextExpression";
+                case "OrderBy":
+                    return "net.Asp.EntityDataSource.OrderByExpression";
+                case "Select":
+                    return "net.Asp.EntityDataSource.SelectExpression";
+                case "Where":
+                    return "net.Asp.EntityDataSource.WhereExpression";
                 default:
-                    Debug.Fail("Unknown property name in EntityDataSourceStatementEditor: " + propertyName);
+                    Debug.Fail(
+                        "Unknown property name in EntityDataSourceStatementEditor: " + propertyName
+                    );
                     return String.Empty;
             }
         }
@@ -129,17 +156,22 @@ namespace System.Web.UI.Design.WebControls
                 case "OrderBy":
                     return "OrderByParameters";
                 case "Select":
-                     return "SelectParameters";
+                    return "SelectParameters";
                 case "Where":
                     return "WhereParameters";
                 default:
-                    Debug.Fail("Unknown property name in EntityDataSourceStatementEditor: " + propertyName);
+                    Debug.Fail(
+                        "Unknown property name in EntityDataSourceStatementEditor: " + propertyName
+                    );
                     return null;
             }
         }
 
         // Gets a clone of the parameters collection associated with the specified property name
-        private static ParameterCollection GetParameters(string propertyName, EntityDataSourceDesigner designer)
+        private static ParameterCollection GetParameters(
+            string propertyName,
+            EntityDataSourceDesigner designer
+        )
         {
             switch (propertyName)
             {
@@ -152,13 +184,19 @@ namespace System.Web.UI.Design.WebControls
                 case "Where":
                     return designer.CloneWhereParameters();
                 default:
-                    Debug.Fail("Unknown property name in EntityDataSourceStatementEditor: " + propertyName);
+                    Debug.Fail(
+                        "Unknown property name in EntityDataSourceStatementEditor: " + propertyName
+                    );
                     return null;
             }
         }
 
         // Updates the parameters collection associated with the specified property name
-        private static void SetParameters(string propertyName, EntityDataSourceDesigner designer, ParameterCollection parameters)
+        private static void SetParameters(
+            string propertyName,
+            EntityDataSourceDesigner designer,
+            ParameterCollection parameters
+        )
         {
             switch (propertyName)
             {
@@ -175,14 +213,21 @@ namespace System.Web.UI.Design.WebControls
                     designer.SetWhereParameterContents(parameters);
                     break;
                 default:
-                    Debug.Fail("Unknown property name in EntityDataSourceStatementEditor: " + propertyName);
+                    Debug.Fail(
+                        "Unknown property name in EntityDataSourceStatementEditor: " + propertyName
+                    );
                     break;
-
             }
         }
 
         // Configures and displays the editor dialog based on the specified property name
-        private bool Initialize(EntityDataSourceDesigner designer, EntityDataSource entityDataSource, string propertyName, IServiceProvider serviceProvider, string statement)
+        private bool Initialize(
+            EntityDataSourceDesigner designer,
+            EntityDataSource entityDataSource,
+            string propertyName,
+            IServiceProvider serviceProvider,
+            string statement
+        )
         {
             string propertyParameters = GetOperationParameterProperty(propertyName);
             string autoGenProperty = GetOperationAutoGenerateProperty(propertyName);
@@ -193,8 +238,18 @@ namespace System.Web.UI.Design.WebControls
             string accessibleName = GetStatementLabel(propertyName, true);
             string helpTopic = GetHelpTopic(propertyName);
 
-            EntityDataSourceStatementEditorForm form = new EntityDataSourceStatementEditorForm(entityDataSource, serviceProvider,
-                hasAutoGen, autoGen, propertyName, label, accessibleName, helpTopic, statement, parameters);
+            EntityDataSourceStatementEditorForm form = new EntityDataSourceStatementEditorForm(
+                entityDataSource,
+                serviceProvider,
+                hasAutoGen,
+                autoGen,
+                propertyName,
+                label,
+                accessibleName,
+                helpTopic,
+                statement,
+                parameters
+            );
 
             DialogResult result = UIHelper.ShowDialog(serviceProvider, form);
 
@@ -231,6 +286,5 @@ namespace System.Web.UI.Design.WebControls
                 return false;
             }
         }
-
     }
 }

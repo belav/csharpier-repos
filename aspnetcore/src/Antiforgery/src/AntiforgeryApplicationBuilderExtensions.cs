@@ -33,7 +33,9 @@ public static class AntiforgeryApplicationBuilderExtensions
     {
         if (builder.ApplicationServices.GetService(typeof(IAntiforgery)) == null)
         {
-            throw new InvalidOperationException("Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddAntiforgery' in the application startup code.");
+            throw new InvalidOperationException(
+                "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddAntiforgery' in the application startup code."
+            );
         }
     }
 }

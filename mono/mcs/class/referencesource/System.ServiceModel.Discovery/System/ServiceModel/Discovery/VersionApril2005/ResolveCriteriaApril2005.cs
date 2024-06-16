@@ -9,13 +9,13 @@ namespace System.ServiceModel.Discovery.VersionApril2005
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    [XmlSchemaProvider("GetSchema")]    
+    [XmlSchemaProvider("GetSchema")]
     [Fx.Tag.XamlVisible(false)]
     public class ResolveCriteriaApril2005 : IXmlSerializable
     {
         ResolveCriteria resolveCriteria;
 
-        ResolveCriteriaApril2005()        
+        ResolveCriteriaApril2005()
         {
             this.resolveCriteria = new ResolveCriteria();
         }
@@ -41,7 +41,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureResolveSchema(DiscoveryVersion.WSDiscoveryApril2005, schemaSet);
+            return SchemaUtility.EnsureResolveSchema(
+                DiscoveryVersion.WSDiscoveryApril2005,
+                schemaSet
+            );
         }
 
         public ResolveCriteria ToResolveCriteria()
@@ -63,6 +66,6 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         public void WriteXml(XmlWriter writer)
         {
             this.resolveCriteria.WriteTo(DiscoveryVersion.WSDiscoveryApril2005, writer);
-        }        
+        }
     }
 }

@@ -18,48 +18,54 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void Muxer_activation_of_Build_Output_Resource_DLL_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.ResourceLookupFixture_Built
-                .Copy();
+            var fixture = sharedTestState.ResourceLookupFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
 
-            dotnet.Exec("exec", appDll)
+            dotnet
+                .Exec("exec", appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
-        
+
         [Fact]
         public void Muxer_activation_of_Publish_Output_ResourceLookup_DLL_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.ResourceLookupFixture_Published
-                .Copy();
+            var fixture = sharedTestState.ResourceLookupFixture_Published.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
 
-            dotnet.Exec("exec", appDll)
+            dotnet
+                .Exec("exec", appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -73,11 +79,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 RepoDirectories = new RepoDirectoriesProvider();
 
-                ResourceLookupFixture_Built = new TestProjectFixture("ResourceLookup", RepoDirectories)
+                ResourceLookupFixture_Built = new TestProjectFixture(
+                    "ResourceLookup",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .BuildProject();
 
-                ResourceLookupFixture_Published = new TestProjectFixture("ResourceLookup", RepoDirectories)
+                ResourceLookupFixture_Published = new TestProjectFixture(
+                    "ResourceLookup",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject();
             }

@@ -16,20 +16,18 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsReplaceDefaultLiteral)]
-    public sealed class ReplaceDefaultLiteralTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public sealed class ReplaceDefaultLiteralTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ReplaceDefaultLiteralTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpReplaceDefaultLiteralCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpReplaceDefaultLiteralCodeFixProvider());
 
         private static readonly ImmutableArray<LanguageVersion> s_csharp7_1above =
-            ImmutableArray.Create(
-                LanguageVersion.CSharp7_1,
-                LanguageVersion.Latest);
+            ImmutableArray.Create(LanguageVersion.CSharp7_1, LanguageVersion.Latest);
 
         private static readonly ImmutableArray<LanguageVersion> s_csharp7below =
             ImmutableArray.Create(
@@ -39,23 +37,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                 LanguageVersion.CSharp4,
                 LanguageVersion.CSharp3,
                 LanguageVersion.CSharp2,
-                LanguageVersion.CSharp1);
+                LanguageVersion.CSharp1
+            );
 
-        private async Task TestWithLanguageVersionsAsync(string initialMarkup, string expectedMarkup, ImmutableArray<LanguageVersion> versions)
+        private async Task TestWithLanguageVersionsAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            ImmutableArray<LanguageVersion> versions
+        )
         {
             foreach (var version in versions)
             {
-                await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(version));
+                await TestInRegularAndScriptAsync(
+                    initialMarkup,
+                    expectedMarkup,
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(version)
+                );
             }
         }
 
-        private async Task TestMissingWithLanguageVersionsAsync(string initialMarkup, ImmutableArray<LanguageVersion> versions)
+        private async Task TestMissingWithLanguageVersionsAsync(
+            string initialMarkup,
+            ImmutableArray<LanguageVersion> versions
+        )
         {
             foreach (var version in versions)
             {
-                await TestMissingInRegularAndScriptAsync(initialMarkup,
-                    new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(version)));
+                await TestMissingInRegularAndScriptAsync(
+                    initialMarkup,
+                    new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(version))
+                );
             }
         }
 
@@ -80,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (1) { case 0: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -104,7 +117,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (1) { case (0): }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -119,7 +134,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (1) { case (int)[||]default: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -134,7 +151,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (1) { case [||]default(int): }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -149,7 +168,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (1) { case [||]0: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -174,7 +195,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch (System.DateTime.Now) { case default(System.DateTime): }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -199,7 +222,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
                         switch ((0, true)) { case default((int, bool)): }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -211,13 +236,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         public async Task TestCSharp7_1_InCaseSwitchLabel_NotForInvalidType(string expression)
         {
             await TestMissingWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         switch ({expression}) {{ case [||]default: }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -241,7 +268,9 @@ $@"class C
                         switch (1) { case 0 when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -265,7 +294,9 @@ $@"class C
                         switch (1) { case (0) when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -280,7 +311,9 @@ $@"class C
                         switch (1) { case (int)[||]default when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -295,7 +328,9 @@ $@"class C
                         switch (1) { case [||]default(int) when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -310,7 +345,9 @@ $@"class C
                         switch (1) { case [||]0 when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -335,7 +372,9 @@ $@"class C
                         switch (System.DateTime.Now) { case default(System.DateTime) when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -360,7 +399,9 @@ $@"class C
                         switch ((0, true)) { case default((int, bool)) when true: }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -369,16 +410,20 @@ $@"class C
         [InlineData("default")]
         [InlineData("() => { }")]
         [InlineData("")]
-        public async Task TestCSharp7_1_InCasePatternSwitchLabel_NotForInvalidType(string expression)
+        public async Task TestCSharp7_1_InCasePatternSwitchLabel_NotForInvalidType(
+            string expression
+        )
         {
             await TestMissingWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         switch ({expression}) {{ case [||]default when true: }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -402,7 +447,9 @@ $@"class C
                         if (true is false) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -426,7 +473,9 @@ $@"class C
                         if (true is (false)) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -441,7 +490,9 @@ $@"class C
                         if (true is (bool)[||]default) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -456,7 +507,9 @@ $@"class C
                         if (true is [||]default(bool)) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -471,7 +524,9 @@ $@"class C
                         if (true is [||]false) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -492,20 +547,22 @@ $@"class C
         public async Task TestCSharp7_1_InIsPattern_BuiltInType(string type, string expectedLiteral)
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M({type} value)
     {{
         if (value is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     void M({type} value)
     {{
         if (value is {expectedLiteral}) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -530,7 +587,9 @@ $@"class C
                         if (System.DateTime.Now is default(System.DateTime)) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -555,7 +614,9 @@ $@"class C
                         if ((0, true) is default((int, bool))) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -565,7 +626,7 @@ $@"class C
         public async Task TestCSharp7_1_InIsPattern_CustomReferenceType(string typeDeclaration)
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     {typeDeclaration}
     void M()
@@ -573,14 +634,16 @@ $@"class C
         if (new Type() is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     {typeDeclaration}
     void M()
     {{
         if (new Type() is null) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -590,10 +653,12 @@ $@"class C
         [InlineData("[System.Flags] enum Enum { None = 1 }")]
         [InlineData("[System.Flags] enum Enum { None = 1, None = 0 }")]
         [InlineData("[System.Flags] enum Enum { Some = 0 }")]
-        public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithoutSpecialMember(string enumDeclaration)
+        public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithoutSpecialMember(
+            string enumDeclaration
+        )
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     {enumDeclaration}
     void M()
@@ -601,14 +666,16 @@ $@"class C
         if (new Enum() is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     {enumDeclaration}
     void M()
     {{
         if (new Enum() is 0) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -623,10 +690,12 @@ $@"class C
         [InlineData("[System.Flags] enum Enum { None = default }")]
         [InlineData("[System.Flags] enum Enum { Some = 1, None = 0 }")]
         [InlineData("[System.FlagsAttribute] enum Enum { None = 0, Some = 1 }")]
-        public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithSpecialMember(string enumDeclaration)
+        public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithSpecialMember(
+            string enumDeclaration
+        )
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     {enumDeclaration}
     void M()
@@ -634,14 +703,16 @@ $@"class C
         if (new Enum() is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     {enumDeclaration}
     void M()
     {{
         if (new Enum() is Enum.None) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -668,7 +739,9 @@ $@"class C
                         if (new Struct() is default(Struct)) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -692,17 +765,21 @@ $@"class C
                         if (new { a = 0 } is null) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
         [InlineData("class Container<T> { }")]
         [InlineData("interface Container<T> { }")]
         [InlineData("delegate void Container<T>();")]
-        public async Task TestCSharp7_1_InIsPattern_CustomReferenceTypeOfAnonymousType(string typeDeclaration)
+        public async Task TestCSharp7_1_InIsPattern_CustomReferenceTypeOfAnonymousType(
+            string typeDeclaration
+        )
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     {typeDeclaration}
     Container<T> ToContainer<T>(T value) => new Container<T>();
@@ -711,7 +788,7 @@ $@"class C
         if (ToContainer(new {{ x = 0 }}) is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     {typeDeclaration}
     Container<T> ToContainer<T>(T value) => new Container<T>();
@@ -719,7 +796,9 @@ $@"class C
     {{
         if (ToContainer(new {{ x = 0 }}) is null) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -736,40 +815,52 @@ $@"class C
                         if (ToContainer(new { x = 0 }) is [||]default) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
         [InlineData("System.Threading", "CancellationToken", "None")]
         [InlineData("System", "IntPtr", "Zero")]
         [InlineData("System", "UIntPtr", "Zero")]
-        public async Task TestCSharp7_1_InIsPattern_SpecialTypeQualified(string @namespace, string type, string member)
+        public async Task TestCSharp7_1_InIsPattern_SpecialTypeQualified(
+            string @namespace,
+            string type,
+            string member
+        )
         {
             await TestWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         if (default({@namespace}.{type}) is [||]default) {{ }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         if (default({@namespace}.{type}) is {@namespace}.{type}.{member}) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Theory]
         [InlineData("System.Threading", "CancellationToken", "None")]
         [InlineData("System", "IntPtr", "Zero")]
         [InlineData("System", "UIntPtr", "Zero")]
-        public async Task TestCSharp7_1_InIsPattern_SpecialTypeUnqualifiedWithUsing(string @namespace, string type, string member)
+        public async Task TestCSharp7_1_InIsPattern_SpecialTypeUnqualifiedWithUsing(
+            string @namespace,
+            string type,
+            string member
+        )
         {
             await TestWithLanguageVersionsAsync(
-$@"using {@namespace};
+                $@"using {@namespace};
 class C
 {{
     void M()
@@ -777,30 +868,36 @@ class C
         if (default({type}) is [||]default) {{ }}
     }}
 }}",
-$@"using {@namespace};
+                $@"using {@namespace};
 class C
 {{
     void M()
     {{
         if (default({type}) is {type}.{member}) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Theory]
         [InlineData("CancellationToken")]
         [InlineData("IntPtr")]
         [InlineData("UIntPtr")]
-        public async Task TestCSharp7_1_InIsPattern_NotForSpecialTypeUnqualifiedWithoutUsing(string type)
+        public async Task TestCSharp7_1_InIsPattern_NotForSpecialTypeUnqualifiedWithoutUsing(
+            string type
+        )
         {
             await TestMissingWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         if (default({type}) is [||]default) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -816,7 +913,9 @@ $@"class C
                         if (value is [||]default) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -827,14 +926,16 @@ $@"class C
         public async Task TestCSharp7_1_InIsPattern_NotForInvalidType2(string expression)
         {
             await TestMissingWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{ 
         var value = {expression};
         if (value is [||]default) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Theory]
@@ -846,13 +947,15 @@ $@"class C
         public async Task TestCSharp7_1_InIsPattern_NotForInvalidType3(string expression)
         {
             await TestMissingWithLanguageVersionsAsync(
-$@"class C
+                $@"class C
 {{
     void M()
     {{
         if ({expression} is [||]default) {{ }}
     }}
-}}", s_csharp7_1above);
+}}",
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -868,7 +971,9 @@ $@"class C
                         if (value is [||]default) { }
                     }
                 }
-                """, ImmutableArray.Create(LanguageVersion.CSharp7_1));
+                """,
+                ImmutableArray.Create(LanguageVersion.CSharp7_1)
+            );
         }
 
         [Fact]
@@ -894,7 +999,9 @@ $@"class C
                         if (value is null) { }
                     }
                 }
-                """, ImmutableArray.Create(LanguageVersion.Latest));
+                """,
+                ImmutableArray.Create(LanguageVersion.Latest)
+            );
         }
 
         [Fact]
@@ -920,7 +1027,9 @@ $@"class C
                             /*a*/ false /*b*/) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -946,7 +1055,9 @@ $@"class C
                             /*a*/ default(System.DateTime) /*b*/) { }
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -961,7 +1072,9 @@ $@"class C
                         int i = [||]default;
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -976,7 +1089,9 @@ $@"class C
                         var v = [||]default;
                     }
                 }
-                """, s_csharp7_1above);
+                """,
+                s_csharp7_1above
+            );
         }
 
         [Fact]
@@ -991,7 +1106,9 @@ $@"class C
                         int i = [||]default;
                     }
                 }
-                """, s_csharp7below);
+                """,
+                s_csharp7below
+            );
         }
     }
 }

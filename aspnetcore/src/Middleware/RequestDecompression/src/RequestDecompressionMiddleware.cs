@@ -26,7 +26,8 @@ internal sealed partial class RequestDecompressionMiddleware
     public RequestDecompressionMiddleware(
         RequestDelegate next,
         ILogger<RequestDecompressionMiddleware> logger,
-        IRequestDecompressionProvider provider)
+        IRequestDecompressionProvider provider
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(logger);
@@ -59,8 +60,11 @@ internal sealed partial class RequestDecompressionMiddleware
         try
         {
             var sizeLimit =
-                context.GetEndpoint()?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()?.MaxRequestBodySize
-                    ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
+                context
+                    .GetEndpoint()
+                    ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()
+                    ?.MaxRequestBodySize
+                ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
 
             context.Request.Body = new SizeLimitedStream(decompressionStream, sizeLimit);
             await _next(context);

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 internal static class FormattingUtilities
 {
     public const int DefaultMaxDepth = 32;
-    public static readonly XsdDataContractExporter XsdDataContractExporter = new XsdDataContractExporter();
+    public static readonly XsdDataContractExporter XsdDataContractExporter =
+        new XsdDataContractExporter();
 
     /// <summary>
     /// Gets the default Reader Quotas for XmlReader.

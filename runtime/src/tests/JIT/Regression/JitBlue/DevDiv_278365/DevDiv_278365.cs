@@ -30,6 +30,6 @@ public class Program
         else
         {
             return 100;
-        }        
+        }
     }
 }

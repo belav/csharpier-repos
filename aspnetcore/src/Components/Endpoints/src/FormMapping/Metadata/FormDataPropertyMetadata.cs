@@ -4,7 +4,11 @@
 using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping.Metadata;
-internal class FormDataPropertyMetadata(PropertyInfo property, FormDataTypeMetadata propertyTypeInfo) : IFormDataValue
+
+internal class FormDataPropertyMetadata(
+    PropertyInfo property,
+    FormDataTypeMetadata propertyTypeInfo
+) : IFormDataValue
 {
     public PropertyInfo Property => property;
 

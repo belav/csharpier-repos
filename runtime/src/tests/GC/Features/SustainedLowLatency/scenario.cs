@@ -2,30 +2,31 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //This is modeled after a server executing requests
-//which pin some of their newly allocated objects. 
+//which pin some of their newly allocated objects.
 using System;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Threading;
 using System.Runtime;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 class request
 {
     Object[] survivors;
     GCHandle pin;
     static Random r = new Random(1234);
+
     public request(int alloc_volume, float surv_fraction)
     {
         survivors = new Object[1 + (int)(alloc_volume * surv_fraction) / 1000];
         int i = 0;
         int volume = 0;
-        //allocate half of the request size. 
+        //allocate half of the request size.
         while (volume < alloc_volume / 2)
         {
             int alloc_surv = r.Next(1000, 2000 + 2 * i);
-            
+
             int alloc = (int)(alloc_surv / surv_fraction) - alloc_surv;
-            
+
             int j = 0;
             while (j < alloc)
             {
@@ -39,12 +40,12 @@ class request
             volume += alloc_surv + alloc;
         }
         //allocate one pinned buffer
-        pin = GCHandle.Alloc (new byte [100], GCHandleType.Pinned);
+        pin = GCHandle.Alloc(new byte[100], GCHandleType.Pinned);
         //allocate the rest of the request
         while (volume < alloc_volume)
         {
-            int alloc_surv = r.Next(1000, 2000 + 2 * i);          
-            int alloc = (int)(alloc_surv / surv_fraction) - alloc_surv;          
+            int alloc_surv = r.Next(1000, 2000 + 2 * i);
+            int alloc = (int)(alloc_surv / surv_fraction) - alloc_surv;
             int j = 0;
             while (j < alloc)
             {
@@ -57,14 +58,14 @@ class request
             i++;
             volume += alloc_surv + alloc;
         }
-
     }
+
     public void retire()
     {
         pin.Free();
     }
 
-    static public int Main(String[] args)
+    public static int Main(String[] args)
     {
         int n_requests = 600;
         int allocation_volume = 100000; // 1 mil
@@ -86,16 +87,16 @@ class request
                     requests[i].retire();
                 }
                 requests[i] = new request(allocation_volume, survival_rate);
-                
             }
 
             Console.Write(" Cleaning up-------");
-            Console.WriteLine("gen0: {0}, gen1: {1}; gen2: {2}, heap size: {3:N0} bytes",
+            Console.WriteLine(
+                "gen0: {0}, gen1: {1}; gen2: {2}, heap size: {3:N0} bytes",
                 GC.CollectionCount(0),
                 GC.CollectionCount(1),
                 GC.CollectionCount(2),
-                GC.GetTotalMemory(false));
-
+                GC.GetTotalMemory(false)
+            );
 
             for (loop = 0; loop < n_requests; loop++)
             {
@@ -112,5 +113,3 @@ class request
         return 100;
     }
 }
-
-

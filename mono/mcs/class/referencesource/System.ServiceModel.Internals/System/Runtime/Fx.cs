@@ -42,7 +42,9 @@ namespace System.Runtime
         static ExceptionTrace exceptionTrace;
         static EtwDiagnosticTrace diagnosticTrace;
 
-        [Fx.Tag.SecurityNote(Critical = "This delegate is called from within a ConstrainedExecutionRegion, must not be settable from PT code")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This delegate is called from within a ConstrainedExecutionRegion, must not be settable from PT code"
+        )]
         [SecurityCritical]
         static ExceptionHandler asynchronousThreadExceptionHandler;
 
@@ -59,7 +61,7 @@ namespace System.Runtime
                 return exceptionTrace;
             }
         }
-        
+
         public static EtwDiagnosticTrace Trace
         {
             get
@@ -73,42 +75,46 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical field EtwProvider",
-            Safe = "Doesn't leak info\\resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical field EtwProvider",
+            Safe = "Doesn't leak info\\resources"
+        )]
         [SecuritySafeCritical]
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.UseNewGuidHelperRule,
-            Justification = "This is a method that creates ETW provider passing Guid Provider ID.")]        
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.UseNewGuidHelperRule,
+            Justification = "This is a method that creates ETW provider passing Guid Provider ID."
+        )]
         static EtwDiagnosticTrace InitializeTracing()
         {
-            EtwDiagnosticTrace trace = new EtwDiagnosticTrace(defaultEventSource, EtwDiagnosticTrace.DefaultEtwProviderId);
+            EtwDiagnosticTrace trace = new EtwDiagnosticTrace(
+                defaultEventSource,
+                EtwDiagnosticTrace.DefaultEtwProviderId
+            );
 
             if (null != trace.EtwProvider)
             {
                 trace.RefreshState += delegate()
-                    {
-                        Fx.UpdateLevel();
-                    };
+                {
+                    Fx.UpdateLevel();
+                };
             }
             Fx.UpdateLevel(trace);
-            return trace;            
+            return trace;
         }
 
         public static ExceptionHandler AsynchronousThreadExceptionHandler
         {
-            [Fx.Tag.SecurityNote(Critical = "access critical field", Safe = "ok for get-only access")]
+            [Fx.Tag.SecurityNote(
+                Critical = "access critical field",
+                Safe = "ok for get-only access"
+            )]
             [SecuritySafeCritical]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get
-            {
-                return Fx.asynchronousThreadExceptionHandler;
-            }
-
+            get { return Fx.asynchronousThreadExceptionHandler; }
             [Fx.Tag.SecurityNote(Critical = "sets a critical field")]
             [SecurityCritical]
-            set
-            {
-                Fx.asynchronousThreadExceptionHandler = value;
-            }
+            set { Fx.asynchronousThreadExceptionHandler = value; }
         }
 
         // Do not call the parameter "message" or else FxCop thinks it should be localized.
@@ -169,8 +175,10 @@ namespace System.Runtime
 
         // This never returns.  The Exception return type lets you write 'throw AssertAndFailFast()' which tells the compiler/tools that
         // execution stops.
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical method Environment.FailFast",
-            Safe = "The side affect of the app crashing is actually intended here")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical method Environment.FailFast",
+            Safe = "The side affect of the app crashing is actually intended here"
+        )]
         [SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception AssertAndFailFast(string description)
@@ -178,7 +186,7 @@ namespace System.Runtime
             Fx.Assert(description);
             string failFastMessage = InternalSR.FailFastMessage(description);
 
-            // The catch is here to force the finally to run, as finallys don't run until the stack walk gets to a catch.  
+            // The catch is here to force the finally to run, as finallys don't run until the stack walk gets to a catch.
             // The catch makes sure that the finally will run before the stack-walk leaves the frame, but the code inside is impossible to reach.
             try
             {
@@ -203,10 +211,15 @@ namespace System.Runtime
         {
             while (exception != null)
             {
-                if (exception is FatalException ||
-                    (exception is OutOfMemoryException && !(exception is InsufficientMemoryException)) ||
-                    exception is ThreadAbortException ||
-                    exception is FatalInternalException)
+                if (
+                    exception is FatalException
+                    || (
+                        exception is OutOfMemoryException
+                        && !(exception is InsufficientMemoryException)
+                    )
+                    || exception is ThreadAbortException
+                    || exception is FatalInternalException
+                )
                 {
                     return true;
                 }
@@ -214,8 +227,10 @@ namespace System.Runtime
                 // These exceptions aren't themselves fatal, but since the CLR uses them to wrap other exceptions,
                 // we want to check to see whether they've been used to wrap a fatal exception.  If so, then they
                 // count as fatal.
-                if (exception is TypeInitializationException ||
-                    exception is TargetInvocationException)
+                if (
+                    exception is TypeInitializationException
+                    || exception is TargetInvocationException
+                )
                 {
                     exception = exception.InnerException;
                 }
@@ -224,7 +239,9 @@ namespace System.Runtime
                     // AggregateExceptions have a collection of inner exceptions, which may themselves be other
                     // wrapping exceptions (including nested AggregateExceptions).  Recursively walk this
                     // hierarchy.  The (singular) InnerException is included in the collection.
-                    ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception).InnerExceptions;
+                    ReadOnlyCollection<Exception> innerExceptions = (
+                        (AggregateException)exception
+                    ).InnerExceptions;
                     foreach (Exception innerException in innerExceptions)
                     {
                         if (IsFatal(innerException))
@@ -251,8 +268,9 @@ namespace System.Runtime
             {
 #if DEBUG
                 object value;
-                return TryGetDebugSwitch(Fx.AssertsFailFastName, out value) &&
-                    typeof(int).IsAssignableFrom(value.GetType()) && ((int)value) != 0;
+                return TryGetDebugSwitch(Fx.AssertsFailFastName, out value)
+                    && typeof(int).IsAssignableFrom(value.GetType())
+                    && ((int)value) != 0;
 #else
                 return false;
 #endif
@@ -304,7 +322,8 @@ namespace System.Runtime
                     object value;
                     if (TryGetDebugSwitch(Fx.FastDebugName, out value))
                     {
-                        Fx.fastDebugCache = typeof(int).IsAssignableFrom(value.GetType()) && ((int)value) != 0;
+                        Fx.fastDebugCache =
+                            typeof(int).IsAssignableFrom(value.GetType()) && ((int)value) != 0;
                     }
                     Fx.fastDebugRetrieved = true;
                 }
@@ -326,7 +345,8 @@ namespace System.Runtime
                     object value;
                     if (TryGetDebugSwitch(Fx.StealthDebuggerName, out value))
                     {
-                        Fx.stealthDebuggerCache = typeof(int).IsAssignableFrom(value.GetType()) && ((int)value) != 0;
+                        Fx.stealthDebuggerCache =
+                            typeof(int).IsAssignableFrom(value.GetType()) && ((int)value) != 0;
                     }
                     Fx.stealthDebuggerRetrieved = true;
                 }
@@ -397,8 +417,11 @@ namespace System.Runtime
             return (new IOCompletionThunk(callback)).ThunkFrame;
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.UseNewGuidHelperRule,
-            Justification = "These are the core methods that should be used for all other Guid(string) calls.")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.UseNewGuidHelperRule,
+            Justification = "These are the core methods that should be used for all other Guid(string) calls."
+        )]
         public static Guid CreateGuid(string guidString)
         {
             bool success = false;
@@ -420,8 +443,11 @@ namespace System.Runtime
             return result;
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.UseNewGuidHelperRule,
-            Justification = "These are the core methods that should be used for all other Guid(string) calls.")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.UseNewGuidHelperRule,
+            Justification = "These are the core methods that should be used for all other Guid(string) calls."
+        )]
         public static bool TryCreateGuid(string guidString, out Guid result)
         {
             bool success = false;
@@ -459,7 +485,11 @@ namespace System.Runtime
             {
                 // Convert OOM into an exception that can be safely handled by higher layers.
                 throw Fx.Exception.AsError(
-                    new InsufficientMemoryException(InternalSR.BufferAllocationFailed(size), exception));
+                    new InsufficientMemoryException(
+                        InternalSR.BufferAllocationFailed(size),
+                        exception
+                    )
+                );
             }
         }
 
@@ -474,13 +504,22 @@ namespace System.Runtime
             {
                 // Convert OOM into an exception that can be safely handled by higher layers.
                 throw Fx.Exception.AsError(
-                    new InsufficientMemoryException(InternalSR.BufferAllocationFailed(size * sizeof(char)), exception));
+                    new InsufficientMemoryException(
+                        InternalSR.BufferAllocationFailed(size * sizeof(char)),
+                        exception
+                    )
+                );
             }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotCatchGeneralExceptionTypes,
-            Justification = "Don't want to hide the exception which is about to crash the process.")]
-        [Fx.Tag.SecurityNote(Miscellaneous = "Must not call into PT code as it is called within a CER.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DoNotCatchGeneralExceptionTypes,
+            Justification = "Don't want to hide the exception which is about to crash the process."
+        )]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "Must not call into PT code as it is called within a CER."
+        )]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         static void TraceExceptionNoThrow(Exception exception)
         {
@@ -497,11 +536,19 @@ namespace System.Runtime
             }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotCatchGeneralExceptionTypes,
-            Justification = "Don't want to hide the exception which is about to crash the process.")]
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.IsFatalRule, 
-            Justification = "Don't want to hide the exception which is about to crash the process.")]
-        [Fx.Tag.SecurityNote(Miscellaneous = "Must not call into PT code as it is called within a CER.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DoNotCatchGeneralExceptionTypes,
+            Justification = "Don't want to hide the exception which is about to crash the process."
+        )]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.IsFatalRule,
+            Justification = "Don't want to hide the exception which is about to crash the process."
+        )]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "Must not call into PT code as it is called within a CER."
+        )]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         static bool HandleAtThreadBase(Exception exception)
         {
@@ -535,8 +582,10 @@ namespace System.Runtime
                 return;
             }
 
-            if (TraceCore.ActionItemCallbackInvokedIsEnabled(trace) ||
-                TraceCore.ActionItemScheduledIsEnabled(trace))
+            if (
+                TraceCore.ActionItemCallbackInvokedIsEnabled(trace)
+                || TraceCore.ActionItemScheduledIsEnabled(trace)
+            )
             {
                 trace.SetEnd2EndActivityTracingEnabled(true);
             }
@@ -549,7 +598,9 @@ namespace System.Runtime
 
         public abstract class ExceptionHandler
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "Must not call into PT code as it is called within a CER.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "Must not call into PT code as it is called within a CER."
+            )]
             public abstract bool HandleException(Exception exception);
         }
 
@@ -639,13 +690,19 @@ namespace System.Runtime
                 internal const string Infinite = "infinite";
             }
 
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property | AttributeTargets.Class,
-                AllowMultiple = true, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Method
+                    | AttributeTargets.Constructor
+                    | AttributeTargets.Property
+                    | AttributeTargets.Class,
+                AllowMultiple = true,
+                Inherited = false
+            )]
             [Conditional("DEBUG")]
             public sealed class FriendAccessAllowedAttribute : Attribute
             {
-                public FriendAccessAllowedAttribute(string assemblyName) :
-                    base()
+                public FriendAccessAllowedAttribute(string assemblyName)
+                    : base()
                 {
                     this.AssemblyName = assemblyName;
                 }
@@ -655,20 +712,19 @@ namespace System.Runtime
 
             public static class Throws
             {
-                [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor,
-                    AllowMultiple = true, Inherited = false)]
+                [AttributeUsage(
+                    AttributeTargets.Method | AttributeTargets.Constructor,
+                    AllowMultiple = true,
+                    Inherited = false
+                )]
                 [Conditional("CODE_ANALYSIS_CDF")]
                 public sealed class TimeoutAttribute : ThrowsAttribute
                 {
-                    public TimeoutAttribute() :
-                        this("The operation timed out.")
-                    {
-                    }
+                    public TimeoutAttribute()
+                        : this("The operation timed out.") { }
 
-                    public TimeoutAttribute(string diagnosis) :
-                        base(typeof(TimeoutException), diagnosis)
-                    {
-                    }
+                    public TimeoutAttribute(string diagnosis)
+                        : base(typeof(TimeoutException), diagnosis) { }
                 }
             }
 
@@ -696,18 +752,12 @@ namespace System.Runtime
 
                 public Type ElementType
                 {
-                    get
-                    {
-                        return this.elementType;
-                    }
+                    get { return this.elementType; }
                 }
 
                 public CacheAttrition CacheAttrition
                 {
-                    get
-                    {
-                        return this.cacheAttrition;
-                    }
+                    get { return this.cacheAttrition; }
                 }
 
                 public string Scope { get; set; }
@@ -736,10 +786,7 @@ namespace System.Runtime
 
                 public Type ElementType
                 {
-                    get
-                    {
-                        return this.elementType;
-                    }
+                    get { return this.elementType; }
                 }
 
                 public string Scope { get; set; }
@@ -756,7 +803,11 @@ namespace System.Runtime
                 readonly ThrottleMetric throttleMetric;
                 readonly string limit;
 
-                public ThrottleAttribute(ThrottleAction throttleAction, ThrottleMetric throttleMetric, string limit)
+                public ThrottleAttribute(
+                    ThrottleAction throttleAction,
+                    ThrottleMetric throttleMetric,
+                    string limit
+                )
                 {
                     Scope = Strings.AppDomain;
 
@@ -772,36 +823,27 @@ namespace System.Runtime
 
                 public ThrottleAction ThrottleAction
                 {
-                    get
-                    {
-                        return this.throttleAction;
-                    }
+                    get { return this.throttleAction; }
                 }
 
                 public ThrottleMetric ThrottleMetric
                 {
-                    get
-                    {
-                        return this.throttleMetric;
-                    }
+                    get { return this.throttleMetric; }
                 }
 
                 public string Limit
                 {
-                    get
-                    {
-                        return this.limit;
-                    }
+                    get { return this.limit; }
                 }
 
-                public string Scope
-                { 
-                    get; set; 
-                }
+                public string Scope { get; set; }
             }
 
-            [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Constructor,
-                AllowMultiple = true, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Constructor,
+                AllowMultiple = true,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class ExternalResourceAttribute : Attribute
             {
@@ -816,18 +858,12 @@ namespace System.Runtime
 
                 public Location Location
                 {
-                    get
-                    {
-                        return this.location;
-                    }
+                    get { return this.location; }
                 }
 
                 public string Description
                 {
-                    get
-                    {
-                        return this.description;
-                    }
+                    get { return this.description; }
                 }
             }
 
@@ -862,10 +898,7 @@ namespace System.Runtime
 
                 public BlocksUsing BlocksUsing
                 {
-                    get
-                    {
-                        return this.blocksUsing;
-                    }
+                    get { return this.blocksUsing; }
                 }
 
                 public bool SupportsAsync { get; set; }
@@ -873,13 +906,14 @@ namespace System.Runtime
                 public string ReleaseMethod { get; set; }
             }
 
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Method | AttributeTargets.Constructor,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class BlockingAttribute : Attribute
             {
-                public BlockingAttribute()
-                {
-                }
+                public BlockingAttribute() { }
 
                 public string CancelMethod { get; set; }
                 public Type CancelDeclaringType { get; set; }
@@ -892,28 +926,36 @@ namespace System.Runtime
             //
             // Methods that don't call blocking methods and aren't marked as Blocking are assumed not to block, so
             // they do not require this attribute.
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Method | AttributeTargets.Constructor,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class GuaranteeNonBlockingAttribute : Attribute
             {
-                public GuaranteeNonBlockingAttribute()
-                {
-                }
+                public GuaranteeNonBlockingAttribute() { }
             }
 
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Method | AttributeTargets.Constructor,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class NonThrowingAttribute : Attribute
             {
-                public NonThrowingAttribute()
-                {
-                }
+                public NonThrowingAttribute() { }
             }
 
-            [SuppressMessage(FxCop.Category.Performance, "CA1813:AvoidUnsealedAttributes",
-                Justification = "This is intended to be an attribute heirarchy. It does not affect product perf.")]
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor,
-                AllowMultiple = true, Inherited = false)]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                "CA1813:AvoidUnsealedAttributes",
+                Justification = "This is intended to be an attribute heirarchy. It does not affect product perf."
+            )]
+            [AttributeUsage(
+                AttributeTargets.Method | AttributeTargets.Constructor,
+                AllowMultiple = true,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public class ThrowsAttribute : Attribute
             {
@@ -937,28 +979,23 @@ namespace System.Runtime
 
                 public Type ExceptionType
                 {
-                    get
-                    {
-                        return this.exceptionType;
-                    }
+                    get { return this.exceptionType; }
                 }
 
                 public string Diagnosis
                 {
-                    get
-                    {
-                        return this.diagnosis;
-                    }
+                    get { return this.diagnosis; }
                 }
             }
 
-            [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Method | AttributeTargets.Constructor,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class InheritThrowsAttribute : Attribute
             {
-                public InheritThrowsAttribute()
-                {
-                }
+                public InheritThrowsAttribute() { }
 
                 public Type FromDeclaringType { get; set; }
                 public string From { get; set; }
@@ -968,68 +1005,66 @@ namespace System.Runtime
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class KnownXamlExternalAttribute : Attribute
             {
-                public KnownXamlExternalAttribute()
-                {
-                }
+                public KnownXamlExternalAttribute() { }
             }
 
-            [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct,
+                AllowMultiple = false,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class XamlVisibleAttribute : Attribute
             {
                 public XamlVisibleAttribute()
-                    : this(true)
-                {
-                }
+                    : this(true) { }
 
                 public XamlVisibleAttribute(bool visible)
                 {
                     this.Visible = visible;
                 }
 
-                public bool Visible
-                {
-                    get;
-                    private set;
-                }
+                public bool Visible { get; private set; }
             }
 
-            [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module | AttributeTargets.Class |
-                AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method |
-                AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Interface |
-                AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
+            [AttributeUsage(
+                AttributeTargets.Assembly
+                    | AttributeTargets.Module
+                    | AttributeTargets.Class
+                    | AttributeTargets.Struct
+                    | AttributeTargets.Enum
+                    | AttributeTargets.Constructor
+                    | AttributeTargets.Method
+                    | AttributeTargets.Property
+                    | AttributeTargets.Field
+                    | AttributeTargets.Event
+                    | AttributeTargets.Interface
+                    | AttributeTargets.Delegate,
+                AllowMultiple = false,
+                Inherited = false
+            )]
             [Conditional("CODE_ANALYSIS_CDF")]
             public sealed class SecurityNoteAttribute : Attribute
             {
-                public SecurityNoteAttribute()
-                {
-                }
+                public SecurityNoteAttribute() { }
 
-                public string Critical
-                {
-                    get;
-                    set;
-                }
-                public string Safe
-                {
-                    get;
-                    set;
-                }
-                public string Miscellaneous
-                {
-                    get;
-                    set;
-                }
+                public string Critical { get; set; }
+                public string Safe { get; set; }
+                public string Miscellaneous { get; set; }
             }
         }
 
-        abstract class Thunk<T> where T : class
+        abstract class Thunk<T>
+            where T : class
         {
             [Fx.Tag.SecurityNote(Critical = "Make these safe to use in SecurityCritical contexts.")]
             [SecurityCritical]
             T callback;
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses critical field.", Safe = "Data provided by caller.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses critical field.",
+                Safe = "Data provided by caller."
+            )]
             [SecuritySafeCritical]
             protected Thunk(T callback)
             {
@@ -1038,31 +1073,29 @@ namespace System.Runtime
 
             internal T Callback
             {
-                [Fx.Tag.SecurityNote(Critical = "Accesses critical field.", Safe = "Data is not privileged.")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Accesses critical field.",
+                    Safe = "Data is not privileged."
+                )]
                 [SecuritySafeCritical]
-                get
-                {
-                    return this.callback;
-                }
+                get { return this.callback; }
             }
         }
 
         sealed class ActionThunk<T1> : Thunk<Action<T1>>
         {
-            public ActionThunk(Action<T1> callback) : base(callback)
-            {
-            }
+            public ActionThunk(Action<T1> callback)
+                : base(callback) { }
 
             public Action<T1> ThunkFrame
             {
-                get
-                {
-                    return new Action<T1>(UnhandledExceptionFrame);
-                }
+                get { return new Action<T1>(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(T1 result)
             {
@@ -1083,20 +1116,18 @@ namespace System.Runtime
 
         sealed class AsyncThunk : Thunk<AsyncCallback>
         {
-            public AsyncThunk(AsyncCallback callback) : base(callback)
-            {
-            }
+            public AsyncThunk(AsyncCallback callback)
+                : base(callback) { }
 
             public AsyncCallback ThunkFrame
             {
-                get
-                {
-                    return new AsyncCallback(UnhandledExceptionFrame);
-                }
+                get { return new AsyncCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(IAsyncResult result)
             {
@@ -1117,20 +1148,18 @@ namespace System.Runtime
 
         sealed class WaitThunk : Thunk<WaitCallback>
         {
-            public WaitThunk(WaitCallback callback) : base(callback)
-            {
-            }
+            public WaitThunk(WaitCallback callback)
+                : base(callback) { }
 
             public WaitCallback ThunkFrame
             {
-                get
-                {
-                    return new WaitCallback(UnhandledExceptionFrame);
-                }
+                get { return new WaitCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(object state)
             {
@@ -1151,20 +1180,18 @@ namespace System.Runtime
 
         sealed class TimerThunk : Thunk<TimerCallback>
         {
-            public TimerThunk(TimerCallback callback) : base(callback)
-            {
-            }
+            public TimerThunk(TimerCallback callback)
+                : base(callback) { }
 
             public TimerCallback ThunkFrame
             {
-                get
-                {
-                    return new TimerCallback(UnhandledExceptionFrame);
-                }
+                get { return new TimerCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(object state)
             {
@@ -1185,20 +1212,18 @@ namespace System.Runtime
 
         sealed class WaitOrTimerThunk : Thunk<WaitOrTimerCallback>
         {
-            public WaitOrTimerThunk(WaitOrTimerCallback callback) : base(callback)
-            {
-            }
+            public WaitOrTimerThunk(WaitOrTimerCallback callback)
+                : base(callback) { }
 
             public WaitOrTimerCallback ThunkFrame
             {
-                get
-                {
-                    return new WaitOrTimerCallback(UnhandledExceptionFrame);
-                }
+                get { return new WaitOrTimerCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(object state, bool timedOut)
             {
@@ -1219,20 +1244,18 @@ namespace System.Runtime
 
         sealed class SendOrPostThunk : Thunk<SendOrPostCallback>
         {
-            public SendOrPostThunk(SendOrPostCallback callback) : base(callback)
-            {
-            }
+            public SendOrPostThunk(SendOrPostCallback callback)
+                : base(callback) { }
 
             public SendOrPostCallback ThunkFrame
             {
-                get
-                {
-                    return new SendOrPostCallback(UnhandledExceptionFrame);
-                }
+                get { return new SendOrPostCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Guaranteed not to call into PT user code from the finally.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Guaranteed not to call into PT user code from the finally."
+            )]
             [SecuritySafeCritical]
             void UnhandledExceptionFrame(object state)
             {
@@ -1254,12 +1277,15 @@ namespace System.Runtime
         // This can't derive from Thunk since T would be unsafe.
         [Fx.Tag.SecurityNote(Critical = "unsafe object")]
         [SecurityCritical]
-        unsafe sealed class IOCompletionThunk
+        sealed unsafe class IOCompletionThunk
         {
             [Fx.Tag.SecurityNote(Critical = "Make these safe to use in SecurityCritical contexts.")]
             IOCompletionCallback callback;
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses critical field.", Safe = "Data provided by caller.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses critical field.",
+                Safe = "Data provided by caller."
+            )]
             public IOCompletionThunk(IOCompletionCallback callback)
             {
                 this.callback = callback;
@@ -1267,16 +1293,21 @@ namespace System.Runtime
 
             public IOCompletionCallback ThunkFrame
             {
-                [Fx.Tag.SecurityNote(Safe = "returns a delegate around the safe method UnhandledExceptionFrame")]
-                get
-                {
-                    return new IOCompletionCallback(UnhandledExceptionFrame);
-                }
+                [Fx.Tag.SecurityNote(
+                    Safe = "returns a delegate around the safe method UnhandledExceptionFrame"
+                )]
+                get { return new IOCompletionCallback(UnhandledExceptionFrame); }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses critical field, calls PrepareConstrainedRegions which has a LinkDemand",
-                Safe = "Delegates can be invoked, guaranteed not to call into PT user code from the finally.")]
-            void UnhandledExceptionFrame(uint error, uint bytesRead, NativeOverlapped* nativeOverlapped)
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses critical field, calls PrepareConstrainedRegions which has a LinkDemand",
+                Safe = "Delegates can be invoked, guaranteed not to call into PT user code from the finally."
+            )]
+            void UnhandledExceptionFrame(
+                uint error,
+                uint bytesRead,
+                NativeOverlapped* nativeOverlapped
+            )
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
@@ -1297,28 +1328,20 @@ namespace System.Runtime
         class InternalException : SystemException
         {
             public InternalException(string description)
-                : base(InternalSR.ShipAssertExceptionMessage(description))
-            {
-            }
+                : base(InternalSR.ShipAssertExceptionMessage(description)) { }
 
             protected InternalException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+                : base(info, context) { }
         }
 
         [Serializable]
         class FatalInternalException : InternalException
         {
             public FatalInternalException(string description)
-                : base(description)
-            {
-            }
+                : base(description) { }
 
             protected FatalInternalException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+                : base(info, context) { }
         }
     }
 }

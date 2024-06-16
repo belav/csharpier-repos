@@ -23,7 +23,12 @@ namespace System.Diagnostics
             IntPtr[] stackTrace = new IntPtr[frameCount];
             int trueFrameCount = RuntimeImports.RhGetCurrentThreadStackTrace(stackTrace);
             Debug.Assert(trueFrameCount == frameCount);
-            InitializeForIpAddressArray(stackTrace, skipFrames + SystemDiagnosticsStackDepth, frameCount, needFileInfo);
+            InitializeForIpAddressArray(
+                stackTrace,
+                skipFrames + SystemDiagnosticsStackDepth,
+                frameCount,
+                needFileInfo
+            );
         }
 #endif
 
@@ -39,7 +44,12 @@ namespace System.Diagnostics
         /// <summary>
         /// Initialize the stack trace based on a given array of IP addresses.
         /// </summary>
-        private void InitializeForIpAddressArray(IntPtr[] ipAddresses, int skipFrames, int endFrameIndex, bool needFileInfo)
+        private void InitializeForIpAddressArray(
+            IntPtr[] ipAddresses,
+            int skipFrames,
+            int endFrameIndex,
+            bool needFileInfo
+        )
         {
             int frameCount = (skipFrames < endFrameIndex ? endFrameIndex - skipFrames : 0);
 
@@ -67,7 +77,8 @@ namespace System.Diagnostics
                     }
                     else if (outputFrameIndex > 0)
                     {
-                        _stackFrames[outputFrameIndex - 1].SetIsLastFrameFromForeignExceptionStackTrace();
+                        _stackFrames[outputFrameIndex - 1]
+                            .SetIsLastFrameFromForeignExceptionStackTrace();
                     }
                 }
                 Debug.Assert(outputFrameIndex == outputFrameCount);

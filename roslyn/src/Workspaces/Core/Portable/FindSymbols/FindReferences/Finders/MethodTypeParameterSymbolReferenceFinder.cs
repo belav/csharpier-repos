@@ -10,27 +10,43 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class MethodTypeParameterSymbolReferenceFinder : AbstractTypeParameterSymbolReferenceFinder
+    internal sealed class MethodTypeParameterSymbolReferenceFinder
+        : AbstractTypeParameterSymbolReferenceFinder
     {
-        protected override bool CanFind(ITypeParameterSymbol symbol)
-            => symbol.TypeParameterKind == TypeParameterKind.Method;
+        protected override bool CanFind(ITypeParameterSymbol symbol) =>
+            symbol.TypeParameterKind == TypeParameterKind.Method;
 
         protected override ValueTask<ImmutableArray<ISymbol>> DetermineCascadedSymbolsAsync(
             ITypeParameterSymbol symbol,
             Solution solution,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var method = (IMethodSymbol)symbol.ContainingSymbol;
             var ordinal = method.TypeParameters.IndexOf(symbol);
 
             if (ordinal >= 0)
             {
-                if (method.PartialDefinitionPart != null && ordinal < method.PartialDefinitionPart.TypeParameters.Length)
-                    return new(ImmutableArray.Create<ISymbol>(method.PartialDefinitionPart.TypeParameters[ordinal]));
+                if (
+                    method.PartialDefinitionPart != null
+                    && ordinal < method.PartialDefinitionPart.TypeParameters.Length
+                )
+                    return new(
+                        ImmutableArray.Create<ISymbol>(
+                            method.PartialDefinitionPart.TypeParameters[ordinal]
+                        )
+                    );
 
-                if (method.PartialImplementationPart != null && ordinal < method.PartialImplementationPart.TypeParameters.Length)
-                    return new(ImmutableArray.Create<ISymbol>(method.PartialImplementationPart.TypeParameters[ordinal]));
+                if (
+                    method.PartialImplementationPart != null
+                    && ordinal < method.PartialImplementationPart.TypeParameters.Length
+                )
+                    return new(
+                        ImmutableArray.Create<ISymbol>(
+                            method.PartialImplementationPart.TypeParameters[ordinal]
+                        )
+                    );
             }
 
             return new(ImmutableArray<ISymbol>.Empty);
@@ -42,7 +58,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Type parameters are only found in documents that have both their name, and the name
             // of its owning method.  NOTE(cyrusn): We have to check in multiple files because of
@@ -55,9 +72,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // Also, we only look for files that have the name of the owning type.  This helps filter
             // down the set considerably.
             Contract.ThrowIfNull(symbol.DeclaringMethod);
-            return FindDocumentsAsync(project, documents, cancellationToken, symbol.Name,
+            return FindDocumentsAsync(
+                project,
+                documents,
+                cancellationToken,
+                symbol.Name,
                 GetMemberNameWithoutInterfaceName(symbol.DeclaringMethod.Name),
-                symbol.DeclaringMethod.ContainingType.Name);
+                symbol.DeclaringMethod.ContainingType.Name
+            );
         }
 
         private static string GetMemberNameWithoutInterfaceName(string fullName)

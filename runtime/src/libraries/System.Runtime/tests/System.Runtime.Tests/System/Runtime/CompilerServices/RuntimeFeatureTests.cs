@@ -21,8 +21,14 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public static void DynamicCode()
         {
-            Assert.Equal(RuntimeFeature.IsDynamicCodeSupported, RuntimeFeature.IsSupported("IsDynamicCodeSupported"));
-            Assert.Equal(RuntimeFeature.IsDynamicCodeCompiled, RuntimeFeature.IsSupported("IsDynamicCodeCompiled"));
+            Assert.Equal(
+                RuntimeFeature.IsDynamicCodeSupported,
+                RuntimeFeature.IsSupported("IsDynamicCodeSupported")
+            );
+            Assert.Equal(
+                RuntimeFeature.IsDynamicCodeCompiled,
+                RuntimeFeature.IsSupported("IsDynamicCodeCompiled")
+            );
 
             if (RuntimeFeature.IsDynamicCodeCompiled)
             {
@@ -31,7 +37,9 @@ namespace System.Runtime.CompilerServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("IsDynamicCodeCompiled returns false in cases where mono doesn't support these features")]
+        [SkipOnMono(
+            "IsDynamicCodeCompiled returns false in cases where mono doesn't support these features"
+        )]
         public static void DynamicCode_Jit()
         {
             if (PlatformDetection.IsNativeAot)
@@ -53,10 +61,14 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.True(RuntimeFeature.IsDynamicCodeSupported);
             Assert.False(RuntimeFeature.IsDynamicCodeCompiled);
         }
-        
+
         public static IEnumerable<object[]> GetStaticFeatureNames()
         {
-            foreach (var field in typeof(RuntimeFeature).GetFields(BindingFlags.Public | BindingFlags.Static))
+            foreach (
+                var field in typeof(RuntimeFeature).GetFields(
+                    BindingFlags.Public | BindingFlags.Static
+                )
+            )
             {
                 if (!field.IsLiteral)
                     continue;
@@ -64,7 +76,7 @@ namespace System.Runtime.CompilerServices.Tests
                 yield return new object[] { field.Name };
             }
         }
-        
+
         [Theory]
         [MemberData(nameof(GetStaticFeatureNames))]
         public static void StaticDataMatchesDynamicProbing(string probedValue)
@@ -78,19 +90,29 @@ namespace System.Runtime.CompilerServices.Tests
         public static void DynamicCode_ContextSwitch(bool isDynamicCodeSupported)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", isDynamicCodeSupported.ToString());
+            options.RuntimeConfigurationOptions.Add(
+                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                isDynamicCodeSupported.ToString()
+            );
 
             // IsDynamicCodeCompiled on Mono interpreter always returns false
-            bool isDynamicCodeCompiled = PlatformDetection.IsMonoInterpreter ? false : isDynamicCodeSupported;
+            bool isDynamicCodeCompiled = PlatformDetection.IsMonoInterpreter
+                ? false
+                : isDynamicCodeSupported;
 
-            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(static (isDynamicCodeSupportedString, isDynamicCodeCompiledString) =>
-            {
-                bool isDynamicCodeSupported = bool.Parse(isDynamicCodeSupportedString);
-                Assert.Equal(isDynamicCodeSupported, RuntimeFeature.IsDynamicCodeSupported);
+            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
+                static (isDynamicCodeSupportedString, isDynamicCodeCompiledString) =>
+                {
+                    bool isDynamicCodeSupported = bool.Parse(isDynamicCodeSupportedString);
+                    Assert.Equal(isDynamicCodeSupported, RuntimeFeature.IsDynamicCodeSupported);
 
-                bool isDynamicCodeCompiled = bool.Parse(isDynamicCodeCompiledString);
-                Assert.Equal(isDynamicCodeCompiled, RuntimeFeature.IsDynamicCodeCompiled);
-            }, isDynamicCodeSupported.ToString(), isDynamicCodeCompiled.ToString(), options);
+                    bool isDynamicCodeCompiled = bool.Parse(isDynamicCodeCompiledString);
+                    Assert.Equal(isDynamicCodeCompiled, RuntimeFeature.IsDynamicCodeCompiled);
+                },
+                isDynamicCodeSupported.ToString(),
+                isDynamicCodeCompiled.ToString(),
+                options
+            );
         }
     }
 }

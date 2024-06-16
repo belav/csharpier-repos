@@ -17,7 +17,9 @@ public static class Program
         string tier1StackTrace = Capture(true);
         if (tier0StackTrace != tier1StackTrace)
         {
-            throw new Exception($"Stack trace mismatch:\n------\nTier 0:\n------\n{tier0StackTrace}\n------\nTier 1:\n------\n{tier1StackTrace}");
+            throw new Exception(
+                $"Stack trace mismatch:\n------\nTier 0:\n------\n{tier0StackTrace}\n------\nTier 1:\n------\n{tier1StackTrace}"
+            );
         }
     }
 

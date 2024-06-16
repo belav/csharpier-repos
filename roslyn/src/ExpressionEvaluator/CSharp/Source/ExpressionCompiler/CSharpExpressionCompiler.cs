@@ -11,14 +11,19 @@ using Microsoft.VisualStudio.Debugger.Evaluation;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    [DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)), DkmContinueCorruptingException]
+    [
+        DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)),
+        DkmContinueCorruptingException
+    ]
     internal sealed class CSharpExpressionCompiler : ExpressionCompiler
     {
-        private static readonly DkmCompilerId s_compilerId = new DkmCompilerId(DkmVendorId.Microsoft, DkmLanguageId.CSharp);
+        private static readonly DkmCompilerId s_compilerId = new DkmCompilerId(
+            DkmVendorId.Microsoft,
+            DkmLanguageId.CSharp
+        );
 
-        public CSharpExpressionCompiler() : base(new CSharpFrameDecoder(), new CSharpLanguageInstructionDecoder())
-        {
-        }
+        public CSharpExpressionCompiler()
+            : base(new CSharpFrameDecoder(), new CSharpLanguageInstructionDecoder()) { }
 
         internal override DiagnosticFormatter DiagnosticFormatter
         {
@@ -30,15 +35,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { return s_compilerId; }
         }
 
-        internal delegate MetadataContext<CSharpMetadataContext> GetMetadataContextDelegate<TAppDomain>(TAppDomain appDomain);
-        internal delegate void SetMetadataContextDelegate<TAppDomain>(TAppDomain appDomain, MetadataContext<CSharpMetadataContext> metadataContext, bool report);
+        internal delegate MetadataContext<CSharpMetadataContext> GetMetadataContextDelegate<TAppDomain>(
+            TAppDomain appDomain
+        );
+        internal delegate void SetMetadataContextDelegate<TAppDomain>(
+            TAppDomain appDomain,
+            MetadataContext<CSharpMetadataContext> metadataContext,
+            bool report
+        );
 
         internal override EvaluationContextBase CreateTypeContext(
             DkmClrAppDomain appDomain,
             ImmutableArray<MetadataBlock> metadataBlocks,
             Guid moduleVersionId,
             int typeToken,
-            bool useReferencedModulesOnly)
+            bool useReferencedModulesOnly
+        )
         {
             return CreateTypeContext(
                 appDomain,
@@ -46,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 metadataBlocks,
                 moduleVersionId,
                 typeToken,
-                GetMakeAssemblyReferencesKind(useReferencedModulesOnly));
+                GetMakeAssemblyReferencesKind(useReferencedModulesOnly)
+            );
         }
 
         internal static EvaluationContext CreateTypeContext<TAppDomain>(
@@ -55,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<MetadataBlock> metadataBlocks,
             Guid moduleVersionId,
             int typeToken,
-            MakeAssemblyReferencesKind kind)
+            MakeAssemblyReferencesKind kind
+        )
         {
             CSharpCompilation? compilation;
 
@@ -64,10 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 // Avoid using the cache for referenced assemblies only
                 // since this should be the exceptional case.
                 compilation = metadataBlocks.ToCompilationReferencedModulesOnly(moduleVersionId);
-                return EvaluationContext.CreateTypeContext(
-                    compilation,
-                    moduleVersionId,
-                    typeToken);
+                return EvaluationContext.CreateTypeContext(compilation, moduleVersionId, typeToken);
             }
 
             var contextId = MetadataContextId.GetContextId(moduleVersionId, kind);
@@ -85,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var context = EvaluationContext.CreateTypeContext(
                 compilation,
                 moduleVersionId,
-                typeToken);
+                typeToken
+            );
 
             // New type context is not attached to the AppDomain since it is less
             // re-usable than the previous attached method context. (We could hold
@@ -106,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodVersion,
             uint ilOffset,
             int localSignatureToken,
-            bool useReferencedModulesOnly)
+            bool useReferencedModulesOnly
+        )
         {
             return CreateMethodContext(
                 appDomain,
@@ -119,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 methodVersion,
                 ilOffset,
                 localSignatureToken,
-                GetMakeAssemblyReferencesKind(useReferencedModulesOnly));
+                GetMakeAssemblyReferencesKind(useReferencedModulesOnly)
+            );
         }
 
         internal static EvaluationContext CreateMethodContext<TAppDomain>(
@@ -133,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodVersion,
             uint ilOffset,
             int localSignatureToken,
-            MakeAssemblyReferencesKind kind)
+            MakeAssemblyReferencesKind kind
+        )
         {
             CSharpCompilation compilation;
             int offset = EvaluationContextBase.NormalizeILOffset(ilOffset);
@@ -150,12 +165,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     methodToken,
                     methodVersion,
                     offset,
-                    localSignatureToken);
+                    localSignatureToken
+                );
             }
 
             var contextId = MetadataContextId.GetContextId(moduleVersionId, kind);
             var previous = getMetadataContext(appDomain);
-            var assemblyContexts = previous.Matches(metadataBlocks) ? previous.AssemblyContexts : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
+            var assemblyContexts = previous.Matches(metadataBlocks)
+                ? previous.AssemblyContexts
+                : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
             CSharpMetadataContext previousMetadataContext;
             assemblyContexts.TryGetValue(contextId, out previousMetadataContext);
 
@@ -165,9 +183,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 // Re-use entire context if method scope has not changed.
                 var previousContext = previousMetadataContext.EvaluationContext;
-                if (previousContext != null &&
-                    previousContext.MethodContextReuseConstraints.HasValue &&
-                    previousContext.MethodContextReuseConstraints.GetValueOrDefault().AreSatisfied(moduleVersionId, methodToken, methodVersion, offset))
+                if (
+                    previousContext != null
+                    && previousContext.MethodContextReuseConstraints.HasValue
+                    && previousContext
+                        .MethodContextReuseConstraints.GetValueOrDefault()
+                        .AreSatisfied(moduleVersionId, methodToken, methodVersion, offset)
+                )
                 {
                     return previousContext;
                 }
@@ -184,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 methodToken,
                 methodVersion,
                 offset,
-                localSignatureToken);
+                localSignatureToken
+            );
 
             if (context != previousMetadataContext.EvaluationContext)
             {
@@ -192,8 +215,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     appDomain,
                     new MetadataContext<CSharpMetadataContext>(
                         metadataBlocks,
-                        assemblyContexts.SetItem(contextId, new CSharpMetadataContext(context.Compilation, context))),
-                    report: kind == MakeAssemblyReferencesKind.AllReferences);
+                        assemblyContexts.SetItem(
+                            contextId,
+                            new CSharpMetadataContext(context.Compilation, context)
+                        )
+                    ),
+                    report: kind == MakeAssemblyReferencesKind.AllReferences
+                );
             }
 
             return context;
@@ -204,7 +232,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             appDomain.RemoveMetadataContext<CSharpMetadataContext>();
         }
 
-        internal override ImmutableArray<MetadataBlock> GetMetadataBlocks(DkmClrAppDomain appDomain, DkmClrRuntimeInstance runtimeInstance)
+        internal override ImmutableArray<MetadataBlock> GetMetadataBlocks(
+            DkmClrAppDomain appDomain,
+            DkmClrRuntimeInstance runtimeInstance
+        )
         {
             var previous = appDomain.GetMetadataContext<CSharpMetadataContext>();
             return runtimeInstance.GetMetadataBlocks(appDomain, previous.MetadataBlocks);

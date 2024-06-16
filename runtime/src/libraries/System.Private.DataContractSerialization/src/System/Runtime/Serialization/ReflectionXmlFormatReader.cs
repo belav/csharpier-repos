@@ -29,9 +29,20 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public object ReflectionReadClass(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext? context, XmlDictionaryString[]? memberNames, XmlDictionaryString[]? memberNamespaces)
+        public object ReflectionReadClass(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext? context,
+            XmlDictionaryString[]? memberNames,
+            XmlDictionaryString[]? memberNamespaces
+        )
         {
-            return _reflectionReader.ReflectionReadClass(xmlReader, context, memberNames, memberNamespaces, _classContract);
+            return _reflectionReader.ReflectionReadClass(
+                xmlReader,
+                context,
+                memberNames,
+                memberNamespaces,
+                _classContract
+            );
         }
     }
 
@@ -41,16 +52,41 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public object ReflectionReadCollection(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString itemName, XmlDictionaryString itemNamespace, CollectionDataContract collectionContract)
+        public object ReflectionReadCollection(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            CollectionDataContract collectionContract
+        )
         {
-            return _reflectionReader.ReflectionReadCollection(xmlReader, context, itemName, itemNamespace/*itemNamespace*/, collectionContract);
+            return _reflectionReader.ReflectionReadCollection(
+                xmlReader,
+                context,
+                itemName,
+                itemNamespace /*itemNamespace*/
+                ,
+                collectionContract
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public void ReflectionReadGetOnlyCollection(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString itemName, XmlDictionaryString itemNs, CollectionDataContract collectionContract)
+        public void ReflectionReadGetOnlyCollection(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNs,
+            CollectionDataContract collectionContract
+        )
         {
-            _reflectionReader.ReflectionReadGetOnlyCollection(xmlReader, context, itemName, itemNs, collectionContract);
+            _reflectionReader.ReflectionReadGetOnlyCollection(
+                xmlReader,
+                context,
+                itemName,
+                itemNs,
+                collectionContract
+            );
         }
     }
 
@@ -58,7 +94,14 @@ namespace System.Runtime.Serialization
     {
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        protected override void ReflectionReadMembers(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString[] memberNames, XmlDictionaryString[]? memberNamespaces, ClassDataContract classContract, ref object obj)
+        protected override void ReflectionReadMembers(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString[] memberNames,
+            XmlDictionaryString[]? memberNamespaces,
+            ClassDataContract classContract,
+            ref object obj
+        )
         {
             Debug.Assert(memberNamespaces != null);
 
@@ -71,7 +114,10 @@ namespace System.Runtime.Serialization
             int requiredIndex = hasRequiredMembers ? firstRequiredMember : -1;
             DataMember[] members = new DataMember[memberCount];
             int reflectedMemberCount = ReflectionGetMembers(classContract, members);
-            Debug.Assert(reflectedMemberCount == memberCount, "The value returned by ReflectionGetMembers() should equal to memberCount.");
+            Debug.Assert(
+                reflectedMemberCount == memberCount,
+                "The value returned by ReflectionGetMembers() should equal to memberCount."
+            );
             ExtensionDataObject? extensionData = null;
 
             if (classContract.HasExtensionData)
@@ -88,17 +134,37 @@ namespace System.Runtime.Serialization
                 }
                 if (hasRequiredMembers)
                 {
-                    memberIndex = context.GetMemberIndexWithRequiredMembers(xmlReader, memberNames, memberNamespaces, memberIndex, requiredIndex, extensionData);
+                    memberIndex = context.GetMemberIndexWithRequiredMembers(
+                        xmlReader,
+                        memberNames,
+                        memberNamespaces,
+                        memberIndex,
+                        requiredIndex,
+                        extensionData
+                    );
                 }
                 else
                 {
-                    memberIndex = context.GetMemberIndex(xmlReader, memberNames, memberNamespaces, memberIndex, extensionData);
+                    memberIndex = context.GetMemberIndex(
+                        xmlReader,
+                        memberNames,
+                        memberNamespaces,
+                        memberIndex,
+                        extensionData
+                    );
                 }
 
                 // GetMemberIndex returns memberNames.Length if member not found
                 if (memberIndex < members.Length)
                 {
-                    ReflectionReadMember(xmlReader, context, classContract, ref obj, memberIndex, members);
+                    ReflectionReadMember(
+                        xmlReader,
+                        context,
+                        classContract,
+                        ref obj,
+                        memberIndex,
+                        members
+                    );
                     requiredIndex = memberIndex + 1;
                 }
             }
@@ -109,26 +175,40 @@ namespace System.Runtime.Serialization
             return classContract.XmlName!.Namespace;
         }
 
-        protected override string GetCollectionContractItemName(CollectionDataContract collectionContract)
+        protected override string GetCollectionContractItemName(
+            CollectionDataContract collectionContract
+        )
         {
             return collectionContract.ItemName;
         }
 
-        protected override string GetCollectionContractNamespace(CollectionDataContract collectionContract)
+        protected override string GetCollectionContractNamespace(
+            CollectionDataContract collectionContract
+        )
         {
             return collectionContract.XmlName.Namespace;
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        protected override object? ReflectionReadDictionaryItem(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, CollectionDataContract collectionContract)
+        protected override object? ReflectionReadDictionaryItem(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            CollectionDataContract collectionContract
+        )
         {
-            Debug.Assert(collectionContract.Kind == CollectionKind.Dictionary || collectionContract.Kind == CollectionKind.GenericDictionary);
+            Debug.Assert(
+                collectionContract.Kind == CollectionKind.Dictionary
+                    || collectionContract.Kind == CollectionKind.GenericDictionary
+            );
             context.ReadAttributes(xmlReader);
             return collectionContract.ItemContract.ReadXmlValue(xmlReader, context);
         }
 
-        private static bool[] GetRequiredMembers(ClassDataContract contract, out int firstRequiredMember)
+        private static bool[] GetRequiredMembers(
+            ClassDataContract contract,
+            out int firstRequiredMember
+        )
         {
             int memberCount = contract.MemberNames!.Length;
             bool[] requiredMembers = new bool[memberCount];
@@ -141,7 +221,10 @@ namespace System.Runtime.Serialization
 
         private static int GetRequiredMembers(ClassDataContract contract, bool[] requiredMembers)
         {
-            int memberCount = (contract.BaseClassContract == null) ? 0 : GetRequiredMembers(contract.BaseClassContract, requiredMembers);
+            int memberCount =
+                (contract.BaseClassContract == null)
+                    ? 0
+                    : GetRequiredMembers(contract.BaseClassContract, requiredMembers);
             List<DataMember> members = contract.Members!;
             for (int i = 0; i < members.Count; i++, memberCount++)
             {

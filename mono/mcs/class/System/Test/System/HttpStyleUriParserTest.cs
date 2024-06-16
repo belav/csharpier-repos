@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,159 +27,168 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
+using NUnit.Framework;
 
-namespace MonoTests.System {
+namespace MonoTests.System
+{
+    public class UnitTestHttpStyleUriParser : HttpStyleUriParser
+    {
+        static bool registered;
 
-	public class UnitTestHttpStyleUriParser: HttpStyleUriParser {
+        public static bool Registered
+        {
+            get { return registered; }
+        }
 
-		static bool registered;
+        public void _InitializeAndValidate(Uri uri, out UriFormatException parsingError)
+        {
+            InitializeAndValidate(uri, out parsingError);
+        }
 
-		public static bool Registered {
-			get { return registered; }
-		}
+        public bool _IsWellFormedOriginalString(Uri uri)
+        {
+            // note that "this" version of this method is overriden.
+            return base.IsWellFormedOriginalString(uri);
+        }
 
-		public void _InitializeAndValidate (Uri uri, out UriFormatException parsingError)
-		{
-			InitializeAndValidate (uri, out parsingError);
-		}
+        protected override string GetComponents(Uri uri, UriComponents components, UriFormat format)
+        {
+            throw new UriFormatException();
+        }
 
-		public bool _IsWellFormedOriginalString (Uri uri)
-		{
-			// note that "this" version of this method is overriden.
-			return base.IsWellFormedOriginalString (uri);
-		}
+        protected override void InitializeAndValidate(Uri uri, out UriFormatException parsingError)
+        {
+            if (uri.Scheme == "httpx")
+                parsingError = null;
+            else
+                base.InitializeAndValidate(uri, out parsingError);
+        }
 
-		protected override string GetComponents (Uri uri, UriComponents components, UriFormat format)
-		{
-			throw new UriFormatException ();
-		}
+        protected override bool IsBaseOf(Uri baseUri, Uri relativeUri)
+        {
+            throw new NotSupportedException();
+            // return base.IsBaseOf (baseUri, relativeUri);
+        }
 
-		protected override void InitializeAndValidate (Uri uri, out UriFormatException parsingError)
-		{
-			if (uri.Scheme == "httpx")
-				parsingError = null;
-			else
-				base.InitializeAndValidate (uri, out parsingError);
-		}
+        protected override bool IsWellFormedOriginalString(Uri uri)
+        {
+            throw new FormatException();
+            // return base.IsWellFormedOriginalString (uri);
+        }
 
-		protected override bool IsBaseOf (Uri baseUri, Uri relativeUri)
-		{
-			throw new NotSupportedException ();
-			// return base.IsBaseOf (baseUri, relativeUri);
-		}
+        protected override UriParser OnNewUri()
+        {
+            throw new OverflowException();
+            // return base.OnNewUri ();
+        }
 
-		protected override bool IsWellFormedOriginalString (Uri uri)
-		{
-			throw new FormatException ();
-			// return base.IsWellFormedOriginalString (uri);
-		}
+        protected override void OnRegister(string schemeName, int defaultPort)
+        {
+            registered = true;
+            // try to mess up registration
+            base.OnRegister(schemeName, 4040);
+            base.OnRegister("s" + schemeName, 4444);
+        }
 
-		protected override UriParser OnNewUri ()
-		{
-			throw new OverflowException ();
-			// return base.OnNewUri ();
-		}
+        protected override string Resolve(
+            Uri baseUri,
+            Uri relativeUri,
+            out UriFormatException parsingError
+        )
+        {
+            throw new OutOfMemoryException();
+            // return base.Resolve (baseUri, relativeUri, out parsingError);
+        }
+    }
 
-		protected override void OnRegister (string schemeName, int defaultPort)
-		{
-			registered = true;
-			// try to mess up registration
-			base.OnRegister (schemeName, 4040);
-			base.OnRegister ("s" + schemeName, 4444);
-		}
+    [TestFixture]
+    public class HttpStyleUriParserTest
+    {
+        private UnitTestHttpStyleUriParser parser;
 
-		protected override string Resolve (Uri baseUri, Uri relativeUri, out UriFormatException parsingError)
-		{
-			throw new OutOfMemoryException ();
-			// return base.Resolve (baseUri, relativeUri, out parsingError);
-		}
-	}
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            parser = new UnitTestHttpStyleUriParser();
+            // unit tests are being reused in CAS tests
+            if (!UriParser.IsKnownScheme("httpx"))
+                UriParser.Register(parser, "httpx", 8080);
 
-	[TestFixture]
-	public class HttpStyleUriParserTest {
+            Assert.IsTrue(UnitTestHttpStyleUriParser.Registered, "Registered");
+            // our parser code was called
+        }
 
-		private UnitTestHttpStyleUriParser parser;
+        [Test]
+        public void Httpx()
+        {
+            Uri uri = new Uri("httpx://www.example.com/CAS");
+            Assert.AreEqual(8080, uri.Port, "Port");
+            // OnRegister cannot be used to change the registering informations
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			parser = new UnitTestHttpStyleUriParser ();
-			// unit tests are being reused in CAS tests
-			if (!UriParser.IsKnownScheme ("httpx"))
-				UriParser.Register (parser, "httpx", 8080);
+        [Test]
+        public void Httpx_Methods()
+        {
+            Uri uri = new Uri("httpx://www.example.com/CAS");
+            Assert.AreEqual(
+                "CAS",
+                uri.GetComponents(UriComponents.Path, UriFormat.SafeUnescaped),
+                "GetComponents"
+            );
+            Assert.IsTrue(uri.IsBaseOf(uri), "IsBaseOf");
+            Assert.IsTrue(uri.IsWellFormedOriginalString(), "IsWellFormedOriginalString");
+            // ??? our parser doesn't seems to be called :(
+        }
 
-			Assert.IsTrue (UnitTestHttpStyleUriParser.Registered, "Registered");
-			// our parser code was called
-		}
+        [Test]
+        public void SecureHttpx()
+        {
+            Uri uri = new Uri("shttpx://www.example.com/CAS");
+            Assert.AreEqual(-1, uri.Port, "Port");
+            // OnRegister cannot be used to change the registering informations
+        }
 
-		[Test]
-		public void Httpx ()
-		{
-			Uri uri = new Uri ("httpx://www.example.com/CAS");
-			Assert.AreEqual (8080, uri.Port, "Port");
-			// OnRegister cannot be used to change the registering informations
-		}
+        [Test]
+        public void InitializeAndValidate()
+        {
+            Assert.IsTrue(UriParser.IsKnownScheme("httpx"), "premise1");
 
-		[Test]
-		public void Httpx_Methods ()
-		{
-			Uri uri = new Uri ("httpx://www.example.com/CAS");
-			Assert.AreEqual ("CAS", uri.GetComponents (UriComponents.Path, UriFormat.SafeUnescaped), "GetComponents");
-			Assert.IsTrue (uri.IsBaseOf (uri), "IsBaseOf");
-			Assert.IsTrue (uri.IsWellFormedOriginalString (), "IsWellFormedOriginalString");
-			// ??? our parser doesn't seems to be called :(
-		}
+            Uri uri = new Uri("httpx://localhost");
+            UriFormatException error;
+            parser._InitializeAndValidate(uri, out error);
+            Assert.AreEqual(null, error);
+        }
 
-		[Test]
-		public void SecureHttpx ()
-		{
-			Uri uri = new Uri ("shttpx://www.example.com/CAS");
-			Assert.AreEqual (-1, uri.Port, "Port");
-			// OnRegister cannot be used to change the registering informations
-		}
+        [Test]
+        public void InitializeAndValidate2()
+        {
+            Assert.IsTrue(UriParser.IsKnownScheme("httpx"), "premise1");
 
-		[Test]
-		public void InitializeAndValidate ()
-		{
-			Assert.IsTrue (UriParser.IsKnownScheme ("httpx"), "premise1");
+            Uri uri = new Uri("file:///usr/local/bin");
+            // It results in UriFormatException since it tries
+            // to parse file URI with http Uri parser.
+            UriFormatException error;
+            parser._InitializeAndValidate(uri, out error);
+            Assert.IsNotNull(error);
+        }
 
-			Uri uri = new Uri ("httpx://localhost");
-			UriFormatException error;
-			parser._InitializeAndValidate (uri, out error);
-			Assert.AreEqual (null, error);
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))] // hmm, bad boy
+        public void IsWellFormedOriginalStringNull()
+        {
+            Assert.IsTrue(parser._IsWellFormedOriginalString(null));
+        }
 
-		[Test]
-		public void InitializeAndValidate2 ()
-		{
-			Assert.IsTrue (UriParser.IsKnownScheme ("httpx"), "premise1");
-
-			Uri uri = new Uri ("file:///usr/local/bin");
-			// It results in UriFormatException since it tries
-			// to parse file URI with http Uri parser.
-			UriFormatException error;
-			parser._InitializeAndValidate (uri, out error);
-			Assert.IsNotNull (error);
-		}
-
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))] // hmm, bad boy
-		public void IsWellFormedOriginalStringNull ()
-		{
-			Assert.IsTrue (parser._IsWellFormedOriginalString (null));
-		}
-
-		[Test]
-		public void IsWellFormedOriginalString ()
-		{
-			// hmm, it does not seem to check scheme.
-			Assert.IsTrue (parser._IsWellFormedOriginalString (new Uri ("file:///usr/local/src")));
-			Assert.IsFalse (parser._IsWellFormedOriginalString (new Uri ("file:///usr/local/src dst")));
-		}
-	}
+        [Test]
+        public void IsWellFormedOriginalString()
+        {
+            // hmm, it does not seem to check scheme.
+            Assert.IsTrue(parser._IsWellFormedOriginalString(new Uri("file:///usr/local/src")));
+            Assert.IsFalse(
+                parser._IsWellFormedOriginalString(new Uri("file:///usr/local/src dst"))
+            );
+        }
+    }
 }
-

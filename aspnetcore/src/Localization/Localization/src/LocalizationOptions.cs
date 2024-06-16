@@ -11,8 +11,7 @@ public class LocalizationOptions
     /// <summary>
     /// Creates a new <see cref="LocalizationOptions" />.
     /// </summary>
-    public LocalizationOptions()
-    { }
+    public LocalizationOptions() { }
 
     /// <summary>
     /// The relative path under application root where resource files are located.

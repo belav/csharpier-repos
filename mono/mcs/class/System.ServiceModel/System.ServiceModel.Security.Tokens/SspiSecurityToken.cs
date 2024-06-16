@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,55 +27,64 @@
 //
 using System;
 using System.Collections.ObjectModel;
-using System.Net;
-using System.Xml;
-using System.Security.Principal;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Security.Principal;
+using System.Xml;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public class SspiSecurityToken : SecurityToken
-	{
-		string id;
-		DateTime valid_from = DateTime.Now.ToUniversalTime ();
-		DateTime valid_to;
-		ReadOnlyCollection<SecurityKey> keys;
-		bool extract_groups, allow_unauth;
+    public class SspiSecurityToken : SecurityToken
+    {
+        string id;
+        DateTime valid_from = DateTime.Now.ToUniversalTime();
+        DateTime valid_to;
+        ReadOnlyCollection<SecurityKey> keys;
+        bool extract_groups,
+            allow_unauth;
 
-		[MonoTODO]
-		public SspiSecurityToken (NetworkCredential networkCredential,
-			bool extractGroupsForWindowsAccounts,
-			bool allowUnauthenticatedCallers)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SspiSecurityToken(
+            NetworkCredential networkCredential,
+            bool extractGroupsForWindowsAccounts,
+            bool allowUnauthenticatedCallers
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public SspiSecurityToken (
-			TokenImpersonationLevel impersonationLevel,
-			bool allowNtlm, NetworkCredential networkCredential)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SspiSecurityToken(
+            TokenImpersonationLevel impersonationLevel,
+            bool allowNtlm,
+            NetworkCredential networkCredential
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override DateTime ValidFrom {
-			get { return valid_from; }
-		}
+        public override DateTime ValidFrom
+        {
+            get { return valid_from; }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidTo {
-			get { return valid_to; }
-		}
+        [MonoTODO]
+        public override DateTime ValidTo
+        {
+            get { return valid_to; }
+        }
 
-		[MonoTODO]
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override string Id
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

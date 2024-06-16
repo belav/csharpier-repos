@@ -10,7 +10,6 @@
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     // This enum identifies for which side we are generating the view
     internal enum ViewTarget
     {
@@ -21,11 +20,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     // Different operations that are used in the CellTreeNode nodes
     internal enum CellTreeOpType
     {
-        Leaf,  // Leaf Node
+        Leaf, // Leaf Node
         Union, // union all
-        FOJ,   // full outerjoin
-        LOJ,   // left outerjoin
-        IJ,    // inner join
-        LASJ   // left antisemijoin
+        FOJ, // full outerjoin
+        LOJ, // left outerjoin
+        IJ, // inner join
+        LASJ // left antisemijoin
     }
 }

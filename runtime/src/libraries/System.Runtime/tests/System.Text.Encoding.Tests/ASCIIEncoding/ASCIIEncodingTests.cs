@@ -30,6 +30,7 @@ namespace System.Text.Tests
         {
             Assert.Equal("us-ascii", encoding.WebName);
         }
+
         [Theory]
         [MemberData(nameof(Encodings_TestData))]
         public void CodePage(ASCIIEncoding encoding)

@@ -31,10 +31,12 @@ namespace System.ServiceModel.Channels
 
     class HttpChannelFactory<TChannel>
         : TransportChannelFactory<TChannel>,
-        IHttpTransportFactorySettings
+            IHttpTransportFactorySettings
     {
         static bool httpWebRequestWebPermissionDenied = false;
-        static RequestCachePolicy requestCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+        static RequestCachePolicy requestCachePolicy = new RequestCachePolicy(
+            RequestCacheLevel.BypassCache
+        );
         static long connectionGroupNamePrefix = 0;
 
         readonly ClientWebSocketFactory clientWebSocketFactory;
@@ -48,11 +50,15 @@ namespace System.ServiceModel.Channels
         bool decompressionEnabled;
 
         // Double-checked locking pattern requires volatile for read/write synchronization
-        [Fx.Tag.SecurityNote(Critical = "This cache stores strings that contain domain/user name/password. Must not be settable from PT code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This cache stores strings that contain domain/user name/password. Must not be settable from PT code."
+        )]
         [SecurityCritical]
         volatile MruCache<string, string> credentialHashCache;
 
-        [Fx.Tag.SecurityNote(Critical = "This hash algorithm takes strings that contain domain/user name/password. Must not be settable from PT code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This hash algorithm takes strings that contain domain/user name/password. Must not be settable from PT code."
+        )]
         [SecurityCritical]
         HashAlgorithm hashAlgorithm;
         bool keepAliveEnabled;
@@ -68,7 +74,10 @@ namespace System.ServiceModel.Channels
         Lazy<string> webSocketSoapContentType;
         string uniqueConnectionGroupNamePrefix;
 
-        internal HttpChannelFactory(HttpTransportBindingElement bindingElement, BindingContext context)
+        internal HttpChannelFactory(
+            HttpTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context, HttpTransportDefaults.GetDefaultMessageEncoderFactory())
         {
             // validate setting interactions
@@ -77,40 +86,59 @@ namespace System.ServiceModel.Channels
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("bindingElement.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)));
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
                 }
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
+                    );
                 }
             }
             else
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
+                    );
                 }
             }
 
-            if (TransferModeHelper.IsRequestStreamed(bindingElement.TransferMode) &&
-                bindingElement.AuthenticationScheme != AuthenticationSchemes.Anonymous)
+            if (
+                TransferModeHelper.IsRequestStreamed(bindingElement.TransferMode)
+                && bindingElement.AuthenticationScheme != AuthenticationSchemes.Anonymous
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement", SR.GetString(
-                    SR.HttpAuthDoesNotSupportRequestStreaming));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "bindingElement",
+                    SR.GetString(SR.HttpAuthDoesNotSupportRequestStreaming)
+                );
             }
 
             this.allowCookies = bindingElement.AllowCookies;
 #pragma warning disable 618
             if (!this.allowCookies)
             {
-                Collection<HttpCookieContainerBindingElement> httpCookieContainerBindingElements = context.BindingParameters.FindAll<HttpCookieContainerBindingElement>();
+                Collection<HttpCookieContainerBindingElement> httpCookieContainerBindingElements =
+                    context.BindingParameters.FindAll<HttpCookieContainerBindingElement>();
                 if (httpCookieContainerBindingElements.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleCCbesInParameters, typeof(HttpCookieContainerBindingElement))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.MultipleCCbesInParameters,
+                                typeof(HttpCookieContainerBindingElement)
+                            )
+                        )
+                    );
                 }
                 if (httpCookieContainerBindingElements.Count == 1)
                 {
@@ -127,8 +155,13 @@ namespace System.ServiceModel.Channels
 
             if (!bindingElement.AuthenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.HttpRequiresSingleAuthScheme,
-                    bindingElement.AuthenticationScheme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(
+                        SR.HttpRequiresSingleAuthScheme,
+                        bindingElement.AuthenticationScheme
+                    )
+                );
             }
 
             this.authenticationScheme = bindingElement.AuthenticationScheme;
@@ -145,19 +178,28 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.UseDefaultWebProxy)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UseDefaultWebProxyCantBeUsedWithExplicitProxyAddress)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UseDefaultWebProxyCantBeUsedWithExplicitProxyAddress)
+                        )
+                    );
                 }
 
                 if (bindingElement.ProxyAuthenticationScheme == AuthenticationSchemes.Anonymous)
                 {
-                    this.proxy = new WebProxy(bindingElement.ProxyAddress, bindingElement.BypassProxyOnLocal);
+                    this.proxy = new WebProxy(
+                        bindingElement.ProxyAddress,
+                        bindingElement.BypassProxyOnLocal
+                    );
                 }
                 else
                 {
                     this.proxy = null;
-                    this.proxyFactory =
-                        new WebProxyFactory(bindingElement.ProxyAddress, bindingElement.BypassProxyOnLocal,
-                        bindingElement.ProxyAuthenticationScheme);
+                    this.proxyFactory = new WebProxyFactory(
+                        bindingElement.ProxyAddress,
+                        bindingElement.BypassProxyOnLocal,
+                        bindingElement.ProxyAuthenticationScheme
+                    );
                 }
             }
             else if (!bindingElement.UseDefaultWebProxy)
@@ -167,28 +209,47 @@ namespace System.ServiceModel.Channels
 
             this.channelCredentials = context.BindingParameters.Find<SecurityCredentialsManager>();
             this.securityCapabilities = bindingElement.GetProperty<ISecurityCapabilities>(context);
-            this.webSocketSettings = WebSocketHelper.GetRuntimeWebSocketSettings(bindingElement.WebSocketSettings);
+            this.webSocketSettings = WebSocketHelper.GetRuntimeWebSocketSettings(
+                bindingElement.WebSocketSettings
+            );
 
-            int webSocketBufferSize = WebSocketHelper.ComputeClientBufferSize(this.MaxReceivedMessageSize);
+            int webSocketBufferSize = WebSocketHelper.ComputeClientBufferSize(
+                this.MaxReceivedMessageSize
+            );
             this.bufferPool = new ConnectionBufferPool(webSocketBufferSize);
 
-            Collection<ClientWebSocketFactory> clientWebSocketFactories = context.BindingParameters.FindAll<ClientWebSocketFactory>();
+            Collection<ClientWebSocketFactory> clientWebSocketFactories =
+                context.BindingParameters.FindAll<ClientWebSocketFactory>();
             if (clientWebSocketFactories.Count > 1)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "context", 
-                    SR.GetString(SR.MultipleClientWebSocketFactoriesSpecified, typeof(BindingContext).Name, typeof(ClientWebSocketFactory).Name));
+                    "context",
+                    SR.GetString(
+                        SR.MultipleClientWebSocketFactoriesSpecified,
+                        typeof(BindingContext).Name,
+                        typeof(ClientWebSocketFactory).Name
+                    )
+                );
             }
             else
             {
-                this.clientWebSocketFactory = clientWebSocketFactories.Count == 0 ? null : clientWebSocketFactories[0];
+                this.clientWebSocketFactory =
+                    clientWebSocketFactories.Count == 0 ? null : clientWebSocketFactories[0];
             }
 
-            this.webSocketSoapContentType = new Lazy<string>(() => { return this.MessageEncoderFactory.CreateSessionEncoder().ContentType; }, LazyThreadSafetyMode.ExecutionAndPublication);
+            this.webSocketSoapContentType = new Lazy<string>(
+                () =>
+                {
+                    return this.MessageEncoderFactory.CreateSessionEncoder().ContentType;
+                },
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
 
             if (ServiceModelAppSettings.HttpTransportPerFactoryConnectionPool)
             {
-                this.uniqueConnectionGroupNamePrefix = Interlocked.Increment(ref connectionGroupNamePrefix).ToString();
+                this.uniqueConnectionGroupNamePrefix = Interlocked
+                    .Increment(ref connectionGroupNamePrefix)
+                    .ToString();
             }
             else
             {
@@ -198,82 +259,52 @@ namespace System.ServiceModel.Channels
 
         public bool AllowCookies
         {
-            get
-            {
-                return this.allowCookies;
-            }
+            get { return this.allowCookies; }
         }
 
         public AuthenticationSchemes AuthenticationScheme
         {
-            get
-            {
-                return this.authenticationScheme;
-            }
+            get { return this.authenticationScheme; }
         }
 
         public bool DecompressionEnabled
         {
-            get
-            {
-                return this.decompressionEnabled;
-            }
+            get { return this.decompressionEnabled; }
         }
 
         public virtual bool IsChannelBindingSupportEnabled
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool KeepAliveEnabled
         {
-            get
-            {
-                return this.keepAliveEnabled;
-            }
+            get { return this.keepAliveEnabled; }
         }
 
         public SecurityTokenManager SecurityTokenManager
         {
-            get
-            {
-                return this.securityTokenManager;
-            }
+            get { return this.securityTokenManager; }
         }
 
         public int MaxBufferSize
         {
-            get
-            {
-                return maxBufferSize;
-            }
+            get { return maxBufferSize; }
         }
 
         public IWebProxy Proxy
         {
-            get
-            {
-                return this.proxy;
-            }
+            get { return this.proxy; }
         }
 
         public TransferMode TransferMode
         {
-            get
-            {
-                return transferMode;
-            }
+            get { return transferMode; }
         }
 
         public override string Scheme
         {
-            get
-            {
-                return Uri.UriSchemeHttp;
-            }
+            get { return Uri.UriSchemeHttp; }
         }
 
         public WebSocketTransportSettings WebSocketSettings
@@ -283,10 +314,7 @@ namespace System.ServiceModel.Channels
 
         internal string WebSocketSoapContentType
         {
-            get
-            {
-                return this.webSocketSoapContentType.Value;
-            }
+            get { return this.webSocketSoapContentType.Value; }
         }
 
         protected ConnectionBufferPool WebSocketBufferPool
@@ -302,7 +330,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.hashAlgorithm == null)
                 {
-                    this.hashAlgorithm = CryptoHelper.CreateHashAlgorithm(SecurityAlgorithms.Sha256Digest);
+                    this.hashAlgorithm = CryptoHelper.CreateHashAlgorithm(
+                        SecurityAlgorithms.Sha256Digest
+                    );
                 }
                 else
                 {
@@ -325,10 +355,7 @@ namespace System.ServiceModel.Channels
 
         protected ClientWebSocketFactory ClientWebSocketFactory
         {
-            get
-            {
-                return this.clientWebSocketFactory;
-            }
+            get { return this.clientWebSocketFactory; }
         }
 
         public override T GetProperty<T>()
@@ -352,8 +379,10 @@ namespace System.ServiceModel.Channels
             return this.httpCookieContainerManager;
         }
 
-        internal virtual SecurityMessageProperty CreateReplySecurityProperty(HttpWebRequest request,
-            HttpWebResponse response)
+        internal virtual SecurityMessageProperty CreateReplySecurityProperty(
+            HttpWebRequest request,
+            HttpWebResponse response
+        )
         {
             // Don't pull in System.Authorization if we don't need to!
             if (!response.IsMutuallyAuthenticated)
@@ -370,15 +399,23 @@ namespace System.ServiceModel.Channels
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        SecurityMessageProperty CreateMutuallyAuthenticatedReplySecurityProperty(HttpWebResponse response)
+        SecurityMessageProperty CreateMutuallyAuthenticatedReplySecurityProperty(
+            HttpWebResponse response
+        )
         {
-            string spn = AuthenticationManager.CustomTargetNameDictionary[response.ResponseUri.AbsoluteUri];
+            string spn = AuthenticationManager.CustomTargetNameDictionary[
+                response.ResponseUri.AbsoluteUri
+            ];
             if (spn == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.HttpSpnNotFound,
-                    response.ResponseUri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.HttpSpnNotFound, response.ResponseUri)
+                    )
+                );
             }
-            ReadOnlyCollection<IAuthorizationPolicy> spnPolicies = SecurityUtils.CreatePrincipalNameAuthorizationPolicies(spn);
+            ReadOnlyCollection<IAuthorizationPolicy> spnPolicies =
+                SecurityUtils.CreatePrincipalNameAuthorizationPolicies(spn);
             SecurityMessageProperty remoteSecurity = new SecurityMessageProperty();
             remoteSecurity.TransportToken = new SecurityTokenSpecification(null, spnPolicies);
             remoteSecurity.ServiceSecurityContext = new ServiceSecurityContext(spnPolicies);
@@ -390,8 +427,13 @@ namespace System.ServiceModel.Channels
             return MaxBufferSize;
         }
 
-        SecurityTokenProviderContainer CreateAndOpenTokenProvider(TimeSpan timeout, AuthenticationSchemes authenticationScheme,
-            EndpointAddress target, Uri via, ChannelParameterCollection channelParameters)
+        SecurityTokenProviderContainer CreateAndOpenTokenProvider(
+            TimeSpan timeout,
+            AuthenticationSchemes authenticationScheme,
+            EndpointAddress target,
+            Uri via,
+            ChannelParameterCollection channelParameters
+        )
         {
             SecurityTokenProvider tokenProvider = null;
             switch (authenticationScheme)
@@ -399,18 +441,41 @@ namespace System.ServiceModel.Channels
                 case AuthenticationSchemes.Anonymous:
                     break;
                 case AuthenticationSchemes.Basic:
-                    tokenProvider = TransportSecurityHelpers.GetUserNameTokenProvider(this.SecurityTokenManager, target, via, this.Scheme, authenticationScheme, channelParameters);
+                    tokenProvider = TransportSecurityHelpers.GetUserNameTokenProvider(
+                        this.SecurityTokenManager,
+                        target,
+                        via,
+                        this.Scheme,
+                        authenticationScheme,
+                        channelParameters
+                    );
                     break;
                 case AuthenticationSchemes.Negotiate:
                 case AuthenticationSchemes.Ntlm:
-                    tokenProvider = TransportSecurityHelpers.GetSspiTokenProvider(this.SecurityTokenManager, target, via, this.Scheme, authenticationScheme, channelParameters);
+                    tokenProvider = TransportSecurityHelpers.GetSspiTokenProvider(
+                        this.SecurityTokenManager,
+                        target,
+                        via,
+                        this.Scheme,
+                        authenticationScheme,
+                        channelParameters
+                    );
                     break;
                 case AuthenticationSchemes.Digest:
-                    tokenProvider = TransportSecurityHelpers.GetDigestTokenProvider(this.SecurityTokenManager, target, via, this.Scheme, authenticationScheme, channelParameters);
+                    tokenProvider = TransportSecurityHelpers.GetDigestTokenProvider(
+                        this.SecurityTokenManager,
+                        target,
+                        via,
+                        this.Scheme,
+                        authenticationScheme,
+                        channelParameters
+                    );
                     break;
                 default:
                     // The setter for this property should prevent this.
-                    throw Fx.AssertAndThrow("CreateAndOpenTokenProvider: Invalid authentication scheme");
+                    throw Fx.AssertAndThrow(
+                        "CreateAndOpenTokenProvider: Invalid authentication scheme"
+                    );
             }
             SecurityTokenProviderContainer result;
             if (tokenProvider != null)
@@ -425,23 +490,37 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        protected virtual void ValidateCreateChannelParameters(EndpointAddress remoteAddress, Uri via)
+        protected virtual void ValidateCreateChannelParameters(
+            EndpointAddress remoteAddress,
+            Uri via
+        )
         {
             base.ValidateScheme(via);
 
-            if (this.MessageVersion.Addressing == AddressingVersion.None && remoteAddress.Uri != via)
+            if (
+                this.MessageVersion.Addressing == AddressingVersion.None
+                && remoteAddress.Uri != via
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateToMustEqualViaException(remoteAddress.Uri, via));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateToMustEqualViaException(remoteAddress.Uri, via)
+                );
             }
         }
 
         protected override TChannel OnCreateChannel(EndpointAddress remoteAddress, Uri via)
         {
-            EndpointAddress httpRemoteAddress = remoteAddress != null && WebSocketHelper.IsWebSocketUri(remoteAddress.Uri) ?
-                new EndpointAddress(WebSocketHelper.NormalizeWsSchemeWithHttpScheme(remoteAddress.Uri), remoteAddress) :
-                remoteAddress;
+            EndpointAddress httpRemoteAddress =
+                remoteAddress != null && WebSocketHelper.IsWebSocketUri(remoteAddress.Uri)
+                    ? new EndpointAddress(
+                        WebSocketHelper.NormalizeWsSchemeWithHttpScheme(remoteAddress.Uri),
+                        remoteAddress
+                    )
+                    : remoteAddress;
 
-            Uri httpVia = WebSocketHelper.IsWebSocketUri(via) ? WebSocketHelper.NormalizeWsSchemeWithHttpScheme(via) : via;
+            Uri httpVia = WebSocketHelper.IsWebSocketUri(via)
+                ? WebSocketHelper.NormalizeWsSchemeWithHttpScheme(via)
+                : via;
             return this.OnCreateChannelCore(httpRemoteAddress, httpVia);
         }
 
@@ -452,41 +531,78 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) == typeof(IRequestChannel))
             {
-                return (TChannel)(object)new HttpRequestChannel((HttpChannelFactory<IRequestChannel>)(object)this, remoteAddress, via, ManualAddressing);
+                return (TChannel)
+                    (object)
+                        new HttpRequestChannel(
+                            (HttpChannelFactory<IRequestChannel>)(object)this,
+                            remoteAddress,
+                            via,
+                            ManualAddressing
+                        );
             }
             else
             {
-                return (TChannel)(object)new ClientWebSocketTransportDuplexSessionChannel((HttpChannelFactory<IDuplexSessionChannel>)(object)this, this.clientWebSocketFactory, remoteAddress, via, this.WebSocketBufferPool);
+                return (TChannel)
+                    (object)
+                        new ClientWebSocketTransportDuplexSessionChannel(
+                            (HttpChannelFactory<IDuplexSessionChannel>)(object)this,
+                            this.clientWebSocketFactory,
+                            remoteAddress,
+                            via,
+                            this.WebSocketBufferPool
+                        );
             }
         }
 
         protected void ValidateWebSocketTransportUsage()
         {
             Type channelType = typeof(TChannel);
-            if (channelType == typeof(IRequestChannel) && this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always)
+            if (
+                channelType == typeof(IRequestChannel)
+                && this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
                             SR.WebSocketCannotCreateRequestClientChannelWithCertainWebSocketTransportUsage,
                             typeof(TChannel),
                             WebSocketTransportSettings.TransportUsageMethodName,
                             typeof(WebSocketTransportSettings).Name,
-                            this.WebSocketSettings.TransportUsage)));
-
+                            this.WebSocketSettings.TransportUsage
+                        )
+                    )
+                );
             }
             else if (channelType == typeof(IDuplexSessionChannel))
             {
                 if (this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Never)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
                                 SR.WebSocketCannotCreateRequestClientChannelWithCertainWebSocketTransportUsage,
                                 typeof(TChannel),
                                 WebSocketTransportSettings.TransportUsageMethodName,
                                 typeof(WebSocketTransportSettings).Name,
-                                this.WebSocketSettings.TransportUsage)));
+                                this.WebSocketSettings.TransportUsage
+                            )
+                        )
+                    );
                 }
-                else if (!WebSocketHelper.OSSupportsWebSockets() && this.ClientWebSocketFactory == null)
+                else if (
+                    !WebSocketHelper.OSSupportsWebSockets()
+                    && this.ClientWebSocketFactory == null
+                )
                 {
-                    throw FxTrace.Exception.AsError(new PlatformNotSupportedException(SR.GetString(SR.WebSocketsClientSideNotSupported, typeof(ClientWebSocketFactory).FullName)));
+                    throw FxTrace.Exception.AsError(
+                        new PlatformNotSupportedException(
+                            SR.GetString(
+                                SR.WebSocketsClientSideNotSupported,
+                                typeof(ClientWebSocketFactory).FullName
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -507,7 +623,10 @@ namespace System.ServiceModel.Channels
             {
                 return true;
             }
-            if (this.proxyFactory != null && this.proxyFactory.AuthenticationScheme != AuthenticationSchemes.Anonymous)
+            if (
+                this.proxyFactory != null
+                && this.proxyFactory.AuthenticationScheme != AuthenticationSchemes.Anonymous
+            )
             {
                 return true;
             }
@@ -517,7 +636,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnOpen(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -535,9 +658,8 @@ namespace System.ServiceModel.Channels
                 this.InitializeSecurityTokenManager();
             }
 
-            if (this.AllowCookies &&
-                !this.httpCookieContainerManager.IsInitialized) // We don't want to overwrite the CookieContainer if someone has set it already.
-            {                
+            if (this.AllowCookies && !this.httpCookieContainerManager.IsInitialized) // We don't want to overwrite the CookieContainer if someone has set it already.
+            {
                 this.httpCookieContainerManager.CookieContainer = new CookieContainer();
             }
 
@@ -545,7 +667,10 @@ namespace System.ServiceModel.Channels
             // Their value is in Kbytes and ours is in bytes. We round up so that the KB value is large enough to
             // encompass our MaxReceivedMessageSize. See MB#20860 and related for details
 
-            if (!httpWebRequestWebPermissionDenied && HttpWebRequest.DefaultMaximumErrorResponseLength != -1)
+            if (
+                !httpWebRequestWebPermissionDenied
+                && HttpWebRequest.DefaultMaximumErrorResponseLength != -1
+            )
             {
                 int MaxReceivedMessageSizeKbytes;
                 if (MaxBufferSize >= (int.MaxValue - 1024)) // make sure NCL doesn't overflow
@@ -561,17 +686,21 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                if (MaxReceivedMessageSizeKbytes == -1
-                    || MaxReceivedMessageSizeKbytes > HttpWebRequest.DefaultMaximumErrorResponseLength)
+                if (
+                    MaxReceivedMessageSizeKbytes == -1
+                    || MaxReceivedMessageSizeKbytes
+                        > HttpWebRequest.DefaultMaximumErrorResponseLength
+                )
                 {
                     try
                     {
-                        HttpWebRequest.DefaultMaximumErrorResponseLength = MaxReceivedMessageSizeKbytes;
+                        HttpWebRequest.DefaultMaximumErrorResponseLength =
+                            MaxReceivedMessageSizeKbytes;
                     }
                     catch (SecurityException exception)
                     {
                         // CSDMain\33725 - setting DefaultMaximumErrorResponseLength should not fail HttpChannelFactory.OnOpen
-                        // if the user does not have the permission to do so. 
+                        // if the user does not have the permission to do so.
                         httpWebRequestWebPermissionDenied = true;
 
                         DiagnosticUtility.TraceHandledException(exception, TraceEventType.Warning);
@@ -589,49 +718,91 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static internal void TraceResponseReceived(HttpWebResponse response, Message message, object receiver)
+        internal static void TraceResponseReceived(
+            HttpWebResponse response,
+            Message message,
+            object receiver
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
                 if (response != null && response.ResponseUri != null)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.HttpResponseReceived, SR.GetString(SR.TraceCodeHttpResponseReceived), new StringTraceRecord("ResponseUri", response.ResponseUri.ToString()), receiver, null, message);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.HttpResponseReceived,
+                        SR.GetString(SR.TraceCodeHttpResponseReceived),
+                        new StringTraceRecord("ResponseUri", response.ResponseUri.ToString()),
+                        receiver,
+                        null,
+                        message
+                    );
                 }
                 else
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.HttpResponseReceived, SR.GetString(SR.TraceCodeHttpResponseReceived), receiver, message);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.HttpResponseReceived,
+                        SR.GetString(SR.TraceCodeHttpResponseReceived),
+                        receiver,
+                        message
+                    );
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses unsafe critical method AppendWindowsAuthenticationInfo to access the credential domain/user name/password.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses unsafe critical method AppendWindowsAuthenticationInfo to access the credential domain/user name/password."
+        )]
         [SecurityCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        string AppendWindowsAuthenticationInfo(string inputString, NetworkCredential credential,
-            AuthenticationLevel authenticationLevel, TokenImpersonationLevel impersonationLevel)
+        string AppendWindowsAuthenticationInfo(
+            string inputString,
+            NetworkCredential credential,
+            AuthenticationLevel authenticationLevel,
+            TokenImpersonationLevel impersonationLevel
+        )
         {
-            return SecurityUtils.AppendWindowsAuthenticationInfo(inputString, credential, authenticationLevel, impersonationLevel);
+            return SecurityUtils.AppendWindowsAuthenticationInfo(
+                inputString,
+                credential,
+                authenticationLevel,
+                impersonationLevel
+            );
         }
 
-        protected virtual string OnGetConnectionGroupPrefix(HttpWebRequest httpWebRequest, SecurityTokenContainer clientCertificateToken)
+        protected virtual string OnGetConnectionGroupPrefix(
+            HttpWebRequest httpWebRequest,
+            SecurityTokenContainer clientCertificateToken
+        )
         {
             return string.Empty;
         }
 
         internal static bool IsWindowsAuth(AuthenticationSchemes authScheme)
         {
-            Fx.Assert(authScheme.IsSingleton(), "authenticationScheme used in an Http(s)ChannelFactory must be a singleton value.");
+            Fx.Assert(
+                authScheme.IsSingleton(),
+                "authenticationScheme used in an Http(s)ChannelFactory must be a singleton value."
+            );
 
-            return authScheme == AuthenticationSchemes.Negotiate ||
-                authScheme == AuthenticationSchemes.Ntlm;
+            return authScheme == AuthenticationSchemes.Negotiate
+                || authScheme == AuthenticationSchemes.Ntlm;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses unsafe critical method AppendWindowsAuthenticationInfo to access the credential domain/user name/password.",
-            Safe = "Uses the domain/user name/password to store and compute a hash. The store is SecurityCritical. The hash leaks but" +
-            "the hash cannot be reversed to the domain/user name/password.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses unsafe critical method AppendWindowsAuthenticationInfo to access the credential domain/user name/password.",
+            Safe = "Uses the domain/user name/password to store and compute a hash. The store is SecurityCritical. The hash leaks but"
+                + "the hash cannot be reversed to the domain/user name/password."
+        )]
         [SecuritySafeCritical]
-        string GetConnectionGroupName(HttpWebRequest httpWebRequest, NetworkCredential credential, AuthenticationLevel authenticationLevel,
-            TokenImpersonationLevel impersonationLevel, SecurityTokenContainer clientCertificateToken)
+        string GetConnectionGroupName(
+            HttpWebRequest httpWebRequest,
+            NetworkCredential credential,
+            AuthenticationLevel authenticationLevel,
+            TokenImpersonationLevel impersonationLevel,
+            SecurityTokenContainer clientCertificateToken
+        )
         {
             if (this.credentialHashCache == null)
             {
@@ -644,15 +815,17 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            // The following line is a work-around for VSWhidbey 558605.  In particular, we need to isolate our 
+            // The following line is a work-around for VSWhidbey 558605.  In particular, we need to isolate our
             // connection groups based on whether we are streaming the request.
-            string inputString = TransferModeHelper.IsRequestStreamed(this.TransferMode) ? "streamed" : string.Empty;
+            string inputString = TransferModeHelper.IsRequestStreamed(this.TransferMode)
+                ? "streamed"
+                : string.Empty;
 
             if (IsWindowsAuth(this.AuthenticationScheme))
             {
                 // for NTLM & Negotiate, System.Net doesn't pool connections by default. This is because
                 // IIS doesn't re-authenticate NTLM connections (made for a perf reason), and HttpWebRequest
-                // shared connections among multiple callers. 
+                // shared connections among multiple callers.
                 // This causes Indigo a performance problem in turn. We mitigate this by (1) enabling
                 // connection sharing for NTLM connections on our pool, and (2) scoping the pool we use
                 // to be based on the NetworkCredential that is being used to authenticate the connection.
@@ -672,7 +845,12 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                inputString = AppendWindowsAuthenticationInfo(inputString, credential, authenticationLevel, impersonationLevel);
+                inputString = AppendWindowsAuthenticationInfo(
+                    inputString,
+                    credential,
+                    authenticationLevel,
+                    impersonationLevel
+                );
             }
 
             string prefix = this.OnGetConnectionGroupPrefix(httpWebRequest, clientCertificateToken);
@@ -728,13 +906,24 @@ namespace System.ServiceModel.Channels
         }
 
         // core code for creating an HttpWebRequest
-        HttpWebRequest GetWebRequest(EndpointAddress to, Uri via, NetworkCredential credential,
-            TokenImpersonationLevel impersonationLevel, AuthenticationLevel authenticationLevel,
-            SecurityTokenProviderContainer proxyTokenProvider, SecurityTokenContainer clientCertificateToken, TimeSpan timeout, bool isWebSocketRequest)
+        HttpWebRequest GetWebRequest(
+            EndpointAddress to,
+            Uri via,
+            NetworkCredential credential,
+            TokenImpersonationLevel impersonationLevel,
+            AuthenticationLevel authenticationLevel,
+            SecurityTokenProviderContainer proxyTokenProvider,
+            SecurityTokenContainer clientCertificateToken,
+            TimeSpan timeout,
+            bool isWebSocketRequest
+        )
         {
             Uri httpWebRequestUri = isWebSocketRequest ? WebSocketHelper.GetWebSocketUri(via) : via;
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(httpWebRequestUri);
-            Fx.Assert(httpWebRequest.Method.Equals("GET", StringComparison.OrdinalIgnoreCase), "the default HTTP method of HttpWebRequest should be 'Get'.");
+            Fx.Assert(
+                httpWebRequest.Method.Equals("GET", StringComparison.OrdinalIgnoreCase),
+                "the default HTTP method of HttpWebRequest should be 'Get'."
+            );
 
             if (!isWebSocketRequest)
             {
@@ -756,7 +945,8 @@ namespace System.ServiceModel.Channels
 
             if (this.decompressionEnabled)
             {
-                httpWebRequest.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                httpWebRequest.AutomaticDecompression =
+                    DecompressionMethods.GZip | DecompressionMethods.Deflate;
             }
             else
             {
@@ -766,19 +956,34 @@ namespace System.ServiceModel.Channels
             if (credential != null)
             {
                 CredentialCache credentials = new CredentialCache();
-                credentials.Add(this.GetCredentialCacheUriPrefix(via),
-                    AuthenticationSchemesHelper.ToString(this.authenticationScheme), credential);
+                credentials.Add(
+                    this.GetCredentialCacheUriPrefix(via),
+                    AuthenticationSchemesHelper.ToString(this.authenticationScheme),
+                    credential
+                );
                 httpWebRequest.Credentials = credentials;
             }
             httpWebRequest.AuthenticationLevel = authenticationLevel;
             httpWebRequest.ImpersonationLevel = impersonationLevel;
 
-            string connectionGroupName = GetConnectionGroupName(httpWebRequest, credential, authenticationLevel, impersonationLevel, clientCertificateToken);
+            string connectionGroupName = GetConnectionGroupName(
+                httpWebRequest,
+                credential,
+                authenticationLevel,
+                impersonationLevel,
+                clientCertificateToken
+            );
 
-            X509CertificateEndpointIdentity remoteCertificateIdentity = to.Identity as X509CertificateEndpointIdentity;
+            X509CertificateEndpointIdentity remoteCertificateIdentity =
+                to.Identity as X509CertificateEndpointIdentity;
             if (remoteCertificateIdentity != null)
             {
-                connectionGroupName = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}[{1}]", connectionGroupName, remoteCertificateIdentity.Certificates[0].Thumbprint);
+                connectionGroupName = string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "{0}[{1}]",
+                    connectionGroupName,
+                    remoteCertificateIdentity.Certificates[0].Thumbprint
+                );
             }
 
             if (!string.IsNullOrEmpty(connectionGroupName))
@@ -797,7 +1002,11 @@ namespace System.ServiceModel.Channels
             }
             else if (this.proxyFactory != null)
             {
-                httpWebRequest.Proxy = this.proxyFactory.CreateWebProxy(httpWebRequest, proxyTokenProvider, timeout);
+                httpWebRequest.Proxy = this.proxyFactory.CreateWebProxy(
+                    httpWebRequest,
+                    proxyTokenProvider,
+                    timeout
+                );
             }
 
             if (this.AllowCookies)
@@ -818,7 +1027,12 @@ namespace System.ServiceModel.Channels
                 Uri toHeader = message.Headers.To;
                 if (toHeader == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ManualAddressingRequiresAddressedMessages)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ManualAddressingRequiresAddressedMessages)
+                        ),
+                        message
+                    );
                 }
 
                 to = new EndpointAddress(toHeader);
@@ -853,13 +1067,32 @@ namespace System.ServiceModel.Channels
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        void CreateAndOpenTokenProvidersCore(EndpointAddress to, Uri via, ChannelParameterCollection channelParameters, TimeSpan timeout, out SecurityTokenProviderContainer tokenProvider, out SecurityTokenProviderContainer proxyTokenProvider)
+        void CreateAndOpenTokenProvidersCore(
+            EndpointAddress to,
+            Uri via,
+            ChannelParameterCollection channelParameters,
+            TimeSpan timeout,
+            out SecurityTokenProviderContainer tokenProvider,
+            out SecurityTokenProviderContainer proxyTokenProvider
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            tokenProvider = CreateAndOpenTokenProvider(timeoutHelper.RemainingTime(), this.AuthenticationScheme, to, via, channelParameters);
+            tokenProvider = CreateAndOpenTokenProvider(
+                timeoutHelper.RemainingTime(),
+                this.AuthenticationScheme,
+                to,
+                via,
+                channelParameters
+            );
             if (this.proxyFactory != null)
             {
-                proxyTokenProvider = CreateAndOpenTokenProvider(timeoutHelper.RemainingTime(), this.proxyFactory.AuthenticationScheme, to, via, channelParameters);
+                proxyTokenProvider = CreateAndOpenTokenProvider(
+                    timeoutHelper.RemainingTime(),
+                    this.proxyFactory.AuthenticationScheme,
+                    to,
+                    via,
+                    channelParameters
+                );
             }
             else
             {
@@ -867,7 +1100,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal void CreateAndOpenTokenProviders(EndpointAddress to, Uri via, ChannelParameterCollection channelParameters, TimeSpan timeout, out SecurityTokenProviderContainer tokenProvider, out SecurityTokenProviderContainer proxyTokenProvider)
+        internal void CreateAndOpenTokenProviders(
+            EndpointAddress to,
+            Uri via,
+            ChannelParameterCollection channelParameters,
+            TimeSpan timeout,
+            out SecurityTokenProviderContainer tokenProvider,
+            out SecurityTokenProviderContainer proxyTokenProvider
+        )
         {
             if (!IsSecurityTokenManagerRequired())
             {
@@ -876,23 +1116,55 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                CreateAndOpenTokenProvidersCore(to, via, channelParameters, timeout, out tokenProvider, out proxyTokenProvider);
+                CreateAndOpenTokenProvidersCore(
+                    to,
+                    via,
+                    channelParameters,
+                    timeout,
+                    out tokenProvider,
+                    out proxyTokenProvider
+                );
             }
         }
 
-        internal HttpWebRequest GetWebRequest(EndpointAddress to, Uri via, SecurityTokenProviderContainer tokenProvider,
-            SecurityTokenProviderContainer proxyTokenProvider, SecurityTokenContainer clientCertificateToken, TimeSpan timeout, bool isWebSocketRequest)
+        internal HttpWebRequest GetWebRequest(
+            EndpointAddress to,
+            Uri via,
+            SecurityTokenProviderContainer tokenProvider,
+            SecurityTokenProviderContainer proxyTokenProvider,
+            SecurityTokenContainer clientCertificateToken,
+            TimeSpan timeout,
+            bool isWebSocketRequest
+        )
         {
             TokenImpersonationLevel impersonationLevel;
             AuthenticationLevel authenticationLevel;
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            NetworkCredential credential = HttpChannelUtilities.GetCredential(this.authenticationScheme,
-                tokenProvider, timeoutHelper.RemainingTime(), out impersonationLevel, out authenticationLevel);
+            NetworkCredential credential = HttpChannelUtilities.GetCredential(
+                this.authenticationScheme,
+                tokenProvider,
+                timeoutHelper.RemainingTime(),
+                out impersonationLevel,
+                out authenticationLevel
+            );
 
-            return GetWebRequest(to, via, credential, impersonationLevel, authenticationLevel, proxyTokenProvider, clientCertificateToken, timeoutHelper.RemainingTime(), isWebSocketRequest);
+            return GetWebRequest(
+                to,
+                via,
+                credential,
+                impersonationLevel,
+                authenticationLevel,
+                proxyTokenProvider,
+                clientCertificateToken,
+                timeoutHelper.RemainingTime(),
+                isWebSocketRequest
+            );
         }
 
-        internal static bool MapIdentity(EndpointAddress target, AuthenticationSchemes authenticationScheme)
+        internal static bool MapIdentity(
+            EndpointAddress target,
+            AuthenticationSchemes authenticationScheme
+        )
         {
             if ((target.Identity == null) || (target.Identity is X509CertificateEndpointIdentity))
             {
@@ -917,7 +1189,12 @@ namespace System.ServiceModel.Channels
             ServiceModelActivity activity = null;
             ChannelParameterCollection channelParameters;
 
-            public HttpRequestChannel(HttpChannelFactory<IRequestChannel> factory, EndpointAddress to, Uri via, bool manualAddressing)
+            public HttpRequestChannel(
+                HttpChannelFactory<IRequestChannel> factory,
+                EndpointAddress to,
+                Uri via,
+                bool manualAddressing
+            )
                 : base(factory, to, via, manualAddressing)
             {
                 this.factory = factory;
@@ -935,10 +1212,7 @@ namespace System.ServiceModel.Channels
 
             protected ChannelParameterCollection ChannelParameters
             {
-                get
-                {
-                    return this.channelParameters;
-                }
+                get { return this.channelParameters; }
             }
 
             public override T GetProperty<T>()
@@ -969,7 +1243,10 @@ namespace System.ServiceModel.Channels
                 {
                     lock (ThisLock)
                     {
-                        cleanupIdentity = HttpTransportSecurityHelpers.AddIdentityMapping(Via, RemoteAddress);
+                        cleanupIdentity = HttpTransportSecurityHelpers.AddIdentityMapping(
+                            Via,
+                            RemoteAddress
+                        );
                     }
                 }
             }
@@ -979,7 +1256,14 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 if (!ManualAddressing)
                 {
-                    Factory.CreateAndOpenTokenProviders(this.RemoteAddress, this.Via, this.channelParameters, timeoutHelper.RemainingTime(), out this.tokenProvider, out this.proxyTokenProvider);
+                    Factory.CreateAndOpenTokenProviders(
+                        this.RemoteAddress,
+                        this.Via,
+                        this.channelParameters,
+                        timeoutHelper.RemainingTime(),
+                        out this.tokenProvider,
+                        out this.proxyTokenProvider
+                    );
                 }
             }
 
@@ -1008,7 +1292,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 PrepareOpen();
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -1036,7 +1324,11 @@ namespace System.ServiceModel.Channels
                         if (cleanupIdentity)
                         {
                             cleanupIdentity = false;
-                            HttpTransportSecurityHelpers.RemoveIdentityMapping(Via, RemoteAddress, !aborting);
+                            HttpTransportSecurityHelpers.RemoveIdentityMapping(
+                                Via,
+                                RemoteAddress,
+                                !aborting
+                            );
                         }
                     }
                 }
@@ -1049,7 +1341,11 @@ namespace System.ServiceModel.Channels
                 base.OnAbort();
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 IAsyncResult retval = null;
                 using (ServiceModelActivity.BoundOperation(this.activity))
@@ -1057,7 +1353,11 @@ namespace System.ServiceModel.Channels
                     PrepareClose(false);
                     TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                     CloseTokenProviders(timeoutHelper.RemainingTime());
-                    retval = base.BeginWaitForPendingRequests(timeoutHelper.RemainingTime(), callback, state);
+                    retval = base.BeginWaitForPendingRequests(
+                        timeoutHelper.RemainingTime(),
+                        callback,
+                        state
+                    );
                 }
                 ServiceModelActivity.Stop(this.activity);
                 return retval;
@@ -1084,7 +1384,11 @@ namespace System.ServiceModel.Channels
                 ServiceModelActivity.Stop(this.activity);
             }
 
-            protected override IAsyncRequest CreateAsyncRequest(Message message, AsyncCallback callback, object state)
+            protected override IAsyncRequest CreateAsyncRequest(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity && this.activity == null)
                 {
@@ -1093,7 +1397,11 @@ namespace System.ServiceModel.Channels
                     {
                         FxTrace.Trace.TraceTransfer(this.activity.Id);
                     }
-                    ServiceModelActivity.Start(this.activity, SR.GetString(SR.ActivityReceiveBytes, this.RemoteAddress.Uri.ToString()), ActivityType.ReceiveBytes);
+                    ServiceModelActivity.Start(
+                        this.activity,
+                        SR.GetString(SR.ActivityReceiveBytes, this.RemoteAddress.Uri.ToString()),
+                        ActivityType.ReceiveBytes
+                    );
                 }
 
                 return new HttpChannelAsyncRequest(this, callback, state);
@@ -1104,19 +1412,34 @@ namespace System.ServiceModel.Channels
                 return new HttpChannelRequest(this, Factory);
             }
 
-            public virtual HttpWebRequest GetWebRequest(EndpointAddress to, Uri via, ref TimeoutHelper timeoutHelper)
+            public virtual HttpWebRequest GetWebRequest(
+                EndpointAddress to,
+                Uri via,
+                ref TimeoutHelper timeoutHelper
+            )
             {
                 return GetWebRequest(to, via, null, ref timeoutHelper);
             }
 
-            protected HttpWebRequest GetWebRequest(EndpointAddress to, Uri via, SecurityTokenContainer clientCertificateToken, ref TimeoutHelper timeoutHelper)
+            protected HttpWebRequest GetWebRequest(
+                EndpointAddress to,
+                Uri via,
+                SecurityTokenContainer clientCertificateToken,
+                ref TimeoutHelper timeoutHelper
+            )
             {
                 SecurityTokenProviderContainer webRequestTokenProvider;
                 SecurityTokenProviderContainer webRequestProxyTokenProvider;
                 if (this.ManualAddressing)
                 {
-                    this.Factory.CreateAndOpenTokenProviders(to, via, this.channelParameters, timeoutHelper.RemainingTime(),
-                        out webRequestTokenProvider, out webRequestProxyTokenProvider);
+                    this.Factory.CreateAndOpenTokenProviders(
+                        to,
+                        via,
+                        this.channelParameters,
+                        timeoutHelper.RemainingTime(),
+                        out webRequestTokenProvider,
+                        out webRequestProxyTokenProvider
+                    );
                 }
                 else
                 {
@@ -1125,7 +1448,15 @@ namespace System.ServiceModel.Channels
                 }
                 try
                 {
-                    return this.Factory.GetWebRequest(to, via, webRequestTokenProvider, webRequestProxyTokenProvider, clientCertificateToken, timeoutHelper.RemainingTime(), false);
+                    return this.Factory.GetWebRequest(
+                        to,
+                        via,
+                        webRequestTokenProvider,
+                        webRequestProxyTokenProvider,
+                        clientCertificateToken,
+                        timeoutHelper.RemainingTime(),
+                        false
+                    );
                 }
                 finally
                 {
@@ -1144,13 +1475,32 @@ namespace System.ServiceModel.Channels
             }
 
             protected IAsyncResult BeginGetWebRequest(
-                EndpointAddress to, Uri via, SecurityTokenContainer clientCertificateToken, ref TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+                EndpointAddress to,
+                Uri via,
+                SecurityTokenContainer clientCertificateToken,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new GetWebRequestAsyncResult(this, to, via, clientCertificateToken, ref timeoutHelper, callback, state);
+                return new GetWebRequestAsyncResult(
+                    this,
+                    to,
+                    via,
+                    clientCertificateToken,
+                    ref timeoutHelper,
+                    callback,
+                    state
+                );
             }
 
             public virtual IAsyncResult BeginGetWebRequest(
-                EndpointAddress to, Uri via, ref TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+                EndpointAddress to,
+                Uri via,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return BeginGetWebRequest(to, via, null, ref timeoutHelper, callback, state);
             }
@@ -1181,9 +1531,13 @@ namespace System.ServiceModel.Channels
                 ChannelBinding channelBinding;
                 int webRequestCompleted;
                 EventTraceActivity eventTraceActivity;
-                const string ConnectionGroupPrefixMessagePropertyName = "HttpTransportConnectionGroupNamePrefix";
+                const string ConnectionGroupPrefixMessagePropertyName =
+                    "HttpTransportConnectionGroupNamePrefix";
 
-                public HttpChannelRequest(HttpRequestChannel channel, HttpChannelFactory<IRequestChannel> factory)
+                public HttpChannelRequest(
+                    HttpRequestChannel channel,
+                    HttpChannelFactory<IRequestChannel> factory
+                )
                 {
                     this.channel = channel;
                     this.to = channel.RemoteAddress;
@@ -1194,7 +1548,12 @@ namespace System.ServiceModel.Channels
                 private string GetConnectionGroupPrefix(Message message)
                 {
                     object property;
-                    if (message.Properties.TryGetValue(ConnectionGroupPrefixMessagePropertyName, out property))
+                    if (
+                        message.Properties.TryGetValue(
+                            ConnectionGroupPrefixMessagePropertyName,
+                            out property
+                        )
+                    )
                     {
                         string prefix = property as string;
                         if (prefix != null)
@@ -1211,7 +1570,8 @@ namespace System.ServiceModel.Channels
                     TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                     factory.ApplyManualAddressing(ref this.to, ref this.via, message);
                     this.webRequest = channel.GetWebRequest(this.to, this.via, ref timeoutHelper);
-                    this.webRequest.ConnectionGroupName = GetConnectionGroupPrefix(message) + this.webRequest.ConnectionGroupName;
+                    this.webRequest.ConnectionGroupName =
+                        GetConnectionGroupPrefix(message) + this.webRequest.ConnectionGroupName;
 
                     Message request = message;
 
@@ -1219,19 +1579,26 @@ namespace System.ServiceModel.Channels
                     {
                         if (channel.State != CommunicationState.Opened)
                         {
-                            // if we were aborted while getting our request or doing correlation, 
+                            // if we were aborted while getting our request or doing correlation,
                             // we need to abort the web request and bail
                             Cleanup();
                             channel.ThrowIfDisposedOrNotOpen();
                         }
 
-                        HttpChannelUtilities.SetRequestTimeout(this.webRequest, timeoutHelper.RemainingTime());
-                        HttpOutput httpOutput = HttpOutput.CreateHttpOutput(this.webRequest, this.factory, request, this.factory.IsChannelBindingSupportEnabled);
+                        HttpChannelUtilities.SetRequestTimeout(
+                            this.webRequest,
+                            timeoutHelper.RemainingTime()
+                        );
+                        HttpOutput httpOutput = HttpOutput.CreateHttpOutput(
+                            this.webRequest,
+                            this.factory,
+                            request,
+                            this.factory.IsChannelBindingSupportEnabled
+                        );
 
                         bool success = false;
                         try
                         {
-
                             httpOutput.Send(timeoutHelper.RemainingTime());
 
                             this.channelBinding = httpOutput.TakeChannelBinding();
@@ -1240,10 +1607,14 @@ namespace System.ServiceModel.Channels
 
                             if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled)
                             {
-                                this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
+                                this.eventTraceActivity =
+                                    EventTraceActivityHelper.TryExtractActivity(message);
                                 if (TD.MessageSentByTransportIsEnabled())
                                 {
-                                    TD.MessageSentByTransport(eventTraceActivity, this.to.Uri.AbsoluteUri);
+                                    TD.MessageSentByTransport(
+                                        eventTraceActivity,
+                                        this.to.Uri.AbsoluteUri
+                                    );
                                 }
                             }
                         }
@@ -1286,8 +1657,11 @@ namespace System.ServiceModel.Channels
                     Cleanup();
                 }
 
-                [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104",
-                            Justification = "This is an old method from previous release.")]
+                [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                    FxCop.Category.ReliabilityBasic,
+                    "Reliability104",
+                    Justification = "This is an old method from previous release."
+                )]
                 public Message WaitForReply(TimeSpan timeout)
                 {
                     if (TD.HttpResponseReceiveStartIsEnabled())
@@ -1309,32 +1683,51 @@ namespace System.ServiceModel.Channels
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
                                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    HttpChannelUtilities.CreateNullReferenceResponseException(nullReferenceException));
+                                    HttpChannelUtilities.CreateNullReferenceResponseException(
+                                        nullReferenceException
+                                    )
+                                );
                             }
                             throw;
                         }
 
                         if (TD.MessageReceivedByTransportIsEnabled())
                         {
-                            TD.MessageReceivedByTransport(this.eventTraceActivity ?? EventTraceActivity.Empty,
-                                response.ResponseUri != null ? response.ResponseUri.AbsoluteUri : string.Empty,
-                                EventTraceActivity.GetActivityIdFromThread());
+                            TD.MessageReceivedByTransport(
+                                this.eventTraceActivity ?? EventTraceActivity.Empty,
+                                response.ResponseUri != null
+                                    ? response.ResponseUri.AbsoluteUri
+                                    : string.Empty,
+                                EventTraceActivity.GetActivityIdFromThread()
+                            );
                         }
 
                         if (DiagnosticUtility.ShouldTraceVerbose)
                         {
-                            HttpChannelFactory<TChannel>.TraceResponseReceived(response, null, this);
+                            HttpChannelFactory<TChannel>.TraceResponseReceived(
+                                response,
+                                null,
+                                this
+                            );
                         }
                     }
                     catch (WebException webException)
                     {
                         responseException = webException;
-                        response = HttpChannelUtilities.ProcessGetResponseWebException(webException, this.webRequest,
-                            abortReason);
+                        response = HttpChannelUtilities.ProcessGetResponseWebException(
+                            webException,
+                            this.webRequest,
+                            abortReason
+                        );
                     }
 
-                    HttpInput httpInput = HttpChannelUtilities.ValidateRequestReplyResponse(this.webRequest, response,
-                        this.factory, responseException, this.channelBinding);
+                    HttpInput httpInput = HttpChannelUtilities.ValidateRequestReplyResponse(
+                        this.webRequest,
+                        response,
+                        this.factory,
+                        responseException,
+                        this.channelBinding
+                    );
                     this.channelBinding = null;
 
                     Message replyMessage = null;
@@ -1342,16 +1735,29 @@ namespace System.ServiceModel.Channels
                     {
                         Exception exception = null;
                         replyMessage = httpInput.ParseIncomingMessage(out exception);
-                        Fx.Assert(exception == null, "ParseIncomingMessage should not set an exception after parsing a response message.");
+                        Fx.Assert(
+                            exception == null,
+                            "ParseIncomingMessage should not set an exception after parsing a response message."
+                        );
 
                         if (replyMessage != null)
                         {
-                            HttpChannelUtilities.AddReplySecurityProperty(this.factory, this.webRequest, response,
-                                replyMessage);
+                            HttpChannelUtilities.AddReplySecurityProperty(
+                                this.factory,
+                                this.webRequest,
+                                response,
+                                replyMessage
+                            );
 
-                            if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled && (eventTraceActivity != null))
+                            if (
+                                FxTrace.Trace.IsEnd2EndActivityTracingEnabled
+                                && (eventTraceActivity != null)
+                            )
                             {
-                                EventTraceActivityHelper.TryAttachActivity(replyMessage, eventTraceActivity);
+                                EventTraceActivityHelper.TryAttachActivity(
+                                    replyMessage,
+                                    eventTraceActivity
+                                );
                             }
                         }
                     }
@@ -1381,8 +1787,12 @@ namespace System.ServiceModel.Channels
 
             class HttpChannelAsyncRequest : TraceAsyncResult, IAsyncRequest
             {
-                static AsyncCallback onProcessIncomingMessage = Fx.ThunkCallback(new AsyncCallback(OnParseIncomingMessage));
-                static AsyncCallback onGetResponse = Fx.ThunkCallback(new AsyncCallback(OnGetResponse));
+                static AsyncCallback onProcessIncomingMessage = Fx.ThunkCallback(
+                    new AsyncCallback(OnParseIncomingMessage)
+                );
+                static AsyncCallback onGetResponse = Fx.ThunkCallback(
+                    new AsyncCallback(OnGetResponse)
+                );
                 static AsyncCallback onGetWebRequestCompleted;
                 static AsyncCallback onSend = Fx.ThunkCallback(new AsyncCallback(OnSend));
                 static Action<object> onSendTimeout;
@@ -1406,7 +1816,11 @@ namespace System.ServiceModel.Channels
                 int webRequestCompleted;
                 EventTraceActivity eventTraceActivity;
 
-                public HttpChannelAsyncRequest(HttpRequestChannel channel, AsyncCallback callback, object state)
+                public HttpChannelAsyncRequest(
+                    HttpRequestChannel channel,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.channel = channel;
@@ -1445,13 +1859,17 @@ namespace System.ServiceModel.Channels
 
                     if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled)
                     {
-                        this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
+                        this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                            message
+                        );
                     }
 
                     factory.ApplyManualAddressing(ref this.to, ref this.via, this.requestMessage);
                     if (this.channel.WillGetWebRequestCompleteSynchronously())
                     {
-                        SetWebRequest(channel.GetWebRequest(this.to, this.via, ref this.timeoutHelper));
+                        SetWebRequest(
+                            channel.GetWebRequest(this.to, this.via, ref this.timeoutHelper)
+                        );
                         if (this.SendWebRequest())
                         {
                             base.Complete(true);
@@ -1462,17 +1880,26 @@ namespace System.ServiceModel.Channels
                         if (onGetWebRequestCompleted == null)
                         {
                             onGetWebRequestCompleted = Fx.ThunkCallback(
-                                new AsyncCallback(OnGetWebRequestCompletedCallback));
+                                new AsyncCallback(OnGetWebRequestCompletedCallback)
+                            );
                         }
 
                         IAsyncResult result = channel.BeginGetWebRequest(
-                            to, via, ref this.timeoutHelper, onGetWebRequestCompleted, this);
+                            to,
+                            via,
+                            ref this.timeoutHelper,
+                            onGetWebRequestCompleted,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
                             if (TD.MessageSentByTransportIsEnabled())
                             {
-                                TD.MessageSentByTransport(this.eventTraceActivity, this.to.Uri.AbsoluteUri);
+                                TD.MessageSentByTransport(
+                                    this.eventTraceActivity,
+                                    this.to.Uri.AbsoluteUri
+                                );
                             }
                             if (this.OnGetWebRequestCompleted(result))
                             {
@@ -1543,14 +1970,23 @@ namespace System.ServiceModel.Channels
 
                 bool SendWebRequest()
                 {
-                    this.httpOutput = HttpOutput.CreateHttpOutput(this.request, this.factory, this.requestMessage, this.factory.IsChannelBindingSupportEnabled);
+                    this.httpOutput = HttpOutput.CreateHttpOutput(
+                        this.request,
+                        this.factory,
+                        this.requestMessage,
+                        this.factory.IsChannelBindingSupportEnabled
+                    );
 
                     bool success = false;
                     try
                     {
                         bool result = false;
                         SetSendTimeout(timeoutHelper.RemainingTime());
-                        IAsyncResult asyncResult = httpOutput.BeginSend(timeoutHelper.RemainingTime(), onSend, this);
+                        IAsyncResult asyncResult = httpOutput.BeginSend(
+                            timeoutHelper.RemainingTime(),
+                            onSend,
+                            this
+                        );
                         success = true;
 
                         if (asyncResult.CompletedSynchronously)
@@ -1585,7 +2021,10 @@ namespace System.ServiceModel.Channels
                         success = true;
                         if (TD.MessageSentByTransportIsEnabled())
                         {
-                            TD.MessageSentByTransport(this.eventTraceActivity, this.to.Uri.AbsoluteUri);
+                            TD.MessageSentByTransport(
+                                this.eventTraceActivity,
+                                this.to.Uri.AbsoluteUri
+                            );
                         }
                     }
                     finally
@@ -1614,11 +2053,13 @@ namespace System.ServiceModel.Channels
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
                                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    HttpChannelUtilities.CreateNullReferenceResponseException(nullReferenceException));
+                                    HttpChannelUtilities.CreateNullReferenceResponseException(
+                                        nullReferenceException
+                                    )
+                                );
                             }
                             throw;
                         }
-
 
                         if (getResponseResult.CompletedSynchronously)
                         {
@@ -1629,29 +2070,50 @@ namespace System.ServiceModel.Channels
                     }
                     catch (IOException ioException)
                     {
-                        throw TraceUtility.ThrowHelperError(new CommunicationException(ioException.Message,
-                            ioException), this.requestMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new CommunicationException(ioException.Message, ioException),
+                            this.requestMessage
+                        );
                     }
                     catch (WebException webException)
                     {
-                        throw TraceUtility.ThrowHelperError(new CommunicationException(webException.Message,
-                            webException), this.requestMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new CommunicationException(webException.Message, webException),
+                            this.requestMessage
+                        );
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
                         if (abortReason == HttpAbortReason.Aborted)
                         {
-                            throw TraceUtility.ThrowHelperError(new CommunicationObjectAbortedException(SR.GetString(SR.HttpRequestAborted, to.Uri),
-                                objectDisposedException), this.requestMessage);
+                            throw TraceUtility.ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.HttpRequestAborted, to.Uri),
+                                    objectDisposedException
+                                ),
+                                this.requestMessage
+                            );
                         }
 
-                        throw TraceUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.HttpRequestTimedOut,
-                            to.Uri, this.timeoutHelper.OriginalTimeout), objectDisposedException), this.requestMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(
+                                    SR.HttpRequestTimedOut,
+                                    to.Uri,
+                                    this.timeoutHelper.OriginalTimeout
+                                ),
+                                objectDisposedException
+                            ),
+                            this.requestMessage
+                        );
                     }
                 }
 
-                [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104",
-                            Justification = "This is an old method from previous release.")]
+                [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                    FxCop.Category.ReliabilityBasic,
+                    "Reliability104",
+                    Justification = "This is an old method from previous release."
+                )]
                 bool CompleteGetResponse(IAsyncResult result)
                 {
                     using (ServiceModelActivity.BoundOperation(this.channel.Activity))
@@ -1671,7 +2133,10 @@ namespace System.ServiceModel.Channels
                                 if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                                 {
                                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        HttpChannelUtilities.CreateNullReferenceResponseException(nullReferenceException));
+                                        HttpChannelUtilities.CreateNullReferenceResponseException(
+                                            nullReferenceException
+                                        )
+                                    );
                                 }
                                 throw;
                             }
@@ -1681,19 +2146,27 @@ namespace System.ServiceModel.Channels
                                 TD.MessageReceivedByTransport(
                                     this.eventTraceActivity ?? EventTraceActivity.Empty,
                                     this.to.Uri.AbsoluteUri,
-                                    EventTraceActivity.GetActivityIdFromThread());
+                                    EventTraceActivity.GetActivityIdFromThread()
+                                );
                             }
 
                             if (DiagnosticUtility.ShouldTraceVerbose)
                             {
-                                HttpChannelFactory<TChannel>.TraceResponseReceived(response, this.message, this);
+                                HttpChannelFactory<TChannel>.TraceResponseReceived(
+                                    response,
+                                    this.message,
+                                    this
+                                );
                             }
                         }
                         catch (WebException webException)
                         {
                             responseException = webException;
-                            response = HttpChannelUtilities.ProcessGetResponseWebException(webException, request,
-                                abortReason);
+                            response = HttpChannelUtilities.ProcessGetResponseWebException(
+                                webException,
+                                request,
+                                abortReason
+                            );
                         }
 
                         return ProcessResponse(response, responseException);
@@ -1713,7 +2186,7 @@ namespace System.ServiceModel.Channels
 
                 void SetSendTimeout(TimeSpan timeout)
                 {
-                    // We also set the timeout on the HttpWebRequest so that we can subsequently use it in the 
+                    // We also set the timeout on the HttpWebRequest so that we can subsequently use it in the
                     // exception message in the event of a timeout.
                     HttpChannelUtilities.SetRequestTimeout(this.request, timeout);
 
@@ -1758,15 +2231,22 @@ namespace System.ServiceModel.Channels
 
                 bool ProcessResponse(HttpWebResponse response, WebException responseException)
                 {
-                    this.httpInput = HttpChannelUtilities.ValidateRequestReplyResponse(this.request, response,
-                        this.factory, responseException, this.channelBinding);
+                    this.httpInput = HttpChannelUtilities.ValidateRequestReplyResponse(
+                        this.request,
+                        response,
+                        this.factory,
+                        responseException,
+                        this.channelBinding
+                    );
                     this.channelBinding = null;
 
                     if (httpInput != null)
                     {
                         this.response = response;
-                        IAsyncResult result =
-                            httpInput.BeginParseIncomingMessage(onProcessIncomingMessage, this);
+                        IAsyncResult result = httpInput.BeginParseIncomingMessage(
+                            onProcessIncomingMessage,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             return false;
@@ -1786,13 +2266,23 @@ namespace System.ServiceModel.Channels
                 void CompleteParseIncomingMessage(IAsyncResult result)
                 {
                     Exception exception = null;
-                    this.replyMessage = this.httpInput.EndParseIncomingMessage(result, out exception);
-                    Fx.Assert(exception == null, "ParseIncomingMessage should not set an exception after parsing a response message.");
+                    this.replyMessage = this.httpInput.EndParseIncomingMessage(
+                        result,
+                        out exception
+                    );
+                    Fx.Assert(
+                        exception == null,
+                        "ParseIncomingMessage should not set an exception after parsing a response message."
+                    );
 
                     if (this.replyMessage != null)
                     {
-                        HttpChannelUtilities.AddReplySecurityProperty(this.factory, this.request, this.response,
-                            this.replyMessage);
+                        HttpChannelUtilities.AddReplySecurityProperty(
+                            this.factory,
+                            this.request,
+                            this.response,
+                            this.replyMessage
+                        );
                     }
                 }
 
@@ -1860,8 +2350,11 @@ namespace System.ServiceModel.Channels
                     thisPtr.AbortSend();
                 }
 
-                [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104",
-                            Justification = "This is an old method from previous release.")]
+                [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                    FxCop.Category.ReliabilityBasic,
+                    "Reliability104",
+                    Justification = "This is an old method from previous release."
+                )]
                 static void OnGetResponse(IAsyncResult result)
                 {
                     if (result.CompletedSynchronously)
@@ -1880,7 +2373,10 @@ namespace System.ServiceModel.Channels
                     catch (WebException webException)
                     {
                         completeSelf = true;
-                        completionException = new CommunicationException(webException.Message, webException);
+                        completionException = new CommunicationException(
+                            webException.Message,
+                            webException
+                        );
                     }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                     catch (Exception e)
@@ -1931,9 +2427,15 @@ namespace System.ServiceModel.Channels
                 SecurityTokenProviderContainer tokenProvider;
                 Uri via;
 
-                public GetWebRequestAsyncResult(HttpRequestChannel channel,
-                    EndpointAddress to, Uri via, SecurityTokenContainer clientCertificateToken, ref TimeoutHelper timeoutHelper,
-                    AsyncCallback callback, object state)
+                public GetWebRequestAsyncResult(
+                    HttpRequestChannel channel,
+                    EndpointAddress to,
+                    Uri via,
+                    SecurityTokenContainer clientCertificateToken,
+                    ref TimeoutHelper timeoutHelper,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.to = to;
@@ -1945,26 +2447,42 @@ namespace System.ServiceModel.Channels
                     this.proxyTokenProvider = channel.proxyTokenProvider;
                     if (factory.ManualAddressing)
                     {
-                        this.factory.CreateAndOpenTokenProviders(to, via, channel.channelParameters, timeoutHelper.RemainingTime(),
-                            out this.tokenProvider, out this.proxyTokenProvider);
+                        this.factory.CreateAndOpenTokenProviders(
+                            to,
+                            via,
+                            channel.channelParameters,
+                            timeoutHelper.RemainingTime(),
+                            out this.tokenProvider,
+                            out this.proxyTokenProvider
+                        );
                     }
 
                     bool completeSelf = false;
                     IAsyncResult result = null;
                     if (factory.AuthenticationScheme == AuthenticationSchemes.Anonymous)
                     {
-                        SetupWebRequest(AuthenticationLevel.None, TokenImpersonationLevel.None, null);
+                        SetupWebRequest(
+                            AuthenticationLevel.None,
+                            TokenImpersonationLevel.None,
+                            null
+                        );
                         completeSelf = true;
                     }
                     else if (factory.AuthenticationScheme == AuthenticationSchemes.Basic)
                     {
                         if (onGetUserNameCredential == null)
                         {
-                            onGetUserNameCredential = Fx.ThunkCallback(new AsyncCallback(OnGetUserNameCredential));
+                            onGetUserNameCredential = Fx.ThunkCallback(
+                                new AsyncCallback(OnGetUserNameCredential)
+                            );
                         }
 
                         result = TransportSecurityHelpers.BeginGetUserNameCredential(
-                            tokenProvider, timeoutHelper.RemainingTime(), onGetUserNameCredential, this);
+                            tokenProvider,
+                            timeoutHelper.RemainingTime(),
+                            onGetUserNameCredential,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -1976,11 +2494,17 @@ namespace System.ServiceModel.Channels
                     {
                         if (onGetSspiCredential == null)
                         {
-                            onGetSspiCredential = Fx.ThunkCallback(new AsyncCallback(OnGetSspiCredential));
+                            onGetSspiCredential = Fx.ThunkCallback(
+                                new AsyncCallback(OnGetSspiCredential)
+                            );
                         }
 
                         result = TransportSecurityHelpers.BeginGetSspiCredential(
-                            tokenProvider, timeoutHelper.RemainingTime(), onGetSspiCredential, this);
+                            tokenProvider,
+                            timeoutHelper.RemainingTime(),
+                            onGetSspiCredential,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -1998,7 +2522,9 @@ namespace System.ServiceModel.Channels
 
                 public static HttpWebRequest End(IAsyncResult result)
                 {
-                    GetWebRequestAsyncResult thisPtr = AsyncResult.End<GetWebRequestAsyncResult>(result);
+                    GetWebRequestAsyncResult thisPtr = AsyncResult.End<GetWebRequestAsyncResult>(
+                        result
+                    );
                     return thisPtr.request;
                 }
 
@@ -2006,36 +2532,62 @@ namespace System.ServiceModel.Channels
                 {
                     NetworkCredential credential =
                         TransportSecurityHelpers.EndGetUserNameCredential(result);
-                    SetupWebRequest(AuthenticationLevel.None, TokenImpersonationLevel.None, credential);
+                    SetupWebRequest(
+                        AuthenticationLevel.None,
+                        TokenImpersonationLevel.None,
+                        credential
+                    );
                 }
 
                 void CompleteGetSspiCredential(IAsyncResult result)
                 {
                     AuthenticationLevel authenticationLevel;
                     TokenImpersonationLevel impersonationLevel;
-                    NetworkCredential credential =
-                        TransportSecurityHelpers.EndGetSspiCredential(result, out impersonationLevel, out authenticationLevel);
+                    NetworkCredential credential = TransportSecurityHelpers.EndGetSspiCredential(
+                        result,
+                        out impersonationLevel,
+                        out authenticationLevel
+                    );
 
                     if (factory.AuthenticationScheme == AuthenticationSchemes.Digest)
                     {
-                        HttpChannelUtilities.ValidateDigestCredential(ref credential, impersonationLevel);
+                        HttpChannelUtilities.ValidateDigestCredential(
+                            ref credential,
+                            impersonationLevel
+                        );
                     }
                     else if (factory.AuthenticationScheme == AuthenticationSchemes.Ntlm)
                     {
                         if (authenticationLevel == AuthenticationLevel.MutualAuthRequired)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                SR.GetString(SR.CredentialDisallowsNtlm)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CredentialDisallowsNtlm)
+                                )
+                            );
                         }
                     }
 
                     SetupWebRequest(authenticationLevel, impersonationLevel, credential);
                 }
 
-                void SetupWebRequest(AuthenticationLevel authenticationLevel, TokenImpersonationLevel impersonationLevel, NetworkCredential credential)
+                void SetupWebRequest(
+                    AuthenticationLevel authenticationLevel,
+                    TokenImpersonationLevel impersonationLevel,
+                    NetworkCredential credential
+                )
                 {
-                    this.request = factory.GetWebRequest(to, via, credential, impersonationLevel,
-                        authenticationLevel, this.proxyTokenProvider, this.clientCertificateToken, timeoutHelper.RemainingTime(), false);
+                    this.request = factory.GetWebRequest(
+                        to,
+                        via,
+                        credential,
+                        impersonationLevel,
+                        authenticationLevel,
+                        this.proxyTokenProvider,
+                        this.clientCertificateToken,
+                        timeoutHelper.RemainingTime(),
+                        false
+                    );
                 }
 
                 void CloseTokenProvidersIfRequired()
@@ -2117,15 +2669,21 @@ namespace System.ServiceModel.Channels
             bool bypassOnLocal;
             AuthenticationSchemes authenticationScheme;
 
-            public WebProxyFactory(Uri address, bool bypassOnLocal, AuthenticationSchemes authenticationScheme)
+            public WebProxyFactory(
+                Uri address,
+                bool bypassOnLocal,
+                AuthenticationSchemes authenticationScheme
+            )
             {
                 this.address = address;
                 this.bypassOnLocal = bypassOnLocal;
 
                 if (!authenticationScheme.IsSingleton())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.HttpRequiresSingleAuthScheme,
-                        authenticationScheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpRequiresSingleAuthScheme, authenticationScheme)
+                    );
                 }
 
                 this.authenticationScheme = authenticationScheme;
@@ -2133,13 +2691,14 @@ namespace System.ServiceModel.Channels
 
             internal AuthenticationSchemes AuthenticationScheme
             {
-                get
-                {
-                    return authenticationScheme;
-                }
+                get { return authenticationScheme; }
             }
 
-            public IWebProxy CreateWebProxy(HttpWebRequest request, SecurityTokenProviderContainer tokenProvider, TimeSpan timeout)
+            public IWebProxy CreateWebProxy(
+                HttpWebRequest request,
+                SecurityTokenProviderContainer tokenProvider,
+                TimeSpan timeout
+            )
             {
                 WebProxy result = new WebProxy(this.address, this.bypassOnLocal);
 
@@ -2147,29 +2706,58 @@ namespace System.ServiceModel.Channels
                 {
                     TokenImpersonationLevel impersonationLevel;
                     AuthenticationLevel authenticationLevel;
-                    NetworkCredential credential = HttpChannelUtilities.GetCredential(this.authenticationScheme,
-                        tokenProvider, timeout, out impersonationLevel, out authenticationLevel);
+                    NetworkCredential credential = HttpChannelUtilities.GetCredential(
+                        this.authenticationScheme,
+                        tokenProvider,
+                        timeout,
+                        out impersonationLevel,
+                        out authenticationLevel
+                    );
 
                     // The impersonation level for target auth is also used for proxy auth (by System.Net).  Therefore,
                     // fail if the level stipulated for proxy auth is more restrictive than that for target auth.
-                    if (!TokenImpersonationLevelHelper.IsGreaterOrEqual(impersonationLevel, request.ImpersonationLevel))
+                    if (
+                        !TokenImpersonationLevelHelper.IsGreaterOrEqual(
+                            impersonationLevel,
+                            request.ImpersonationLevel
+                        )
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                            SR.ProxyImpersonationLevelMismatch, impersonationLevel, request.ImpersonationLevel)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ProxyImpersonationLevelMismatch,
+                                    impersonationLevel,
+                                    request.ImpersonationLevel
+                                )
+                            )
+                        );
                     }
 
-                    // The authentication level for target auth is also used for proxy auth (by System.Net).  
+                    // The authentication level for target auth is also used for proxy auth (by System.Net).
                     // Therefore, fail if proxy auth requires mutual authentication but target auth does not.
-                    if ((authenticationLevel == AuthenticationLevel.MutualAuthRequired) &&
-                        (request.AuthenticationLevel != AuthenticationLevel.MutualAuthRequired))
+                    if (
+                        (authenticationLevel == AuthenticationLevel.MutualAuthRequired)
+                        && (request.AuthenticationLevel != AuthenticationLevel.MutualAuthRequired)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                            SR.ProxyAuthenticationLevelMismatch, authenticationLevel, request.AuthenticationLevel)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ProxyAuthenticationLevelMismatch,
+                                    authenticationLevel,
+                                    request.AuthenticationLevel
+                                )
+                            )
+                        );
                     }
 
                     CredentialCache credentials = new CredentialCache();
-                    credentials.Add(this.address, AuthenticationSchemesHelper.ToString(this.authenticationScheme),
-                        credential);
+                    credentials.Add(
+                        this.address,
+                        AuthenticationSchemesHelper.ToString(this.authenticationScheme),
+                        credential
+                    );
                     result.Credentials = credentials;
                 }
 

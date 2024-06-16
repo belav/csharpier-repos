@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging.Testing
 
         public TestSink(
             Func<WriteContext, bool> writeEnabled = null,
-            Func<BeginScopeContext, bool> beginEnabled = null)
+            Func<BeginScopeContext, bool> beginEnabled = null
+        )
         {
             WriteEnabled = writeEnabled;
             BeginEnabled = beginEnabled;
@@ -26,9 +27,17 @@ namespace Microsoft.Extensions.Logging.Testing
 
         public Func<BeginScopeContext, bool> BeginEnabled { get; set; }
 
-        public IProducerConsumerCollection<BeginScopeContext> Scopes { get => _scopes; set => _scopes = new ConcurrentQueue<BeginScopeContext>(value); }
+        public IProducerConsumerCollection<BeginScopeContext> Scopes
+        {
+            get => _scopes;
+            set => _scopes = new ConcurrentQueue<BeginScopeContext>(value);
+        }
 
-        public IProducerConsumerCollection<WriteContext> Writes { get => _writes; set => _writes = new ConcurrentQueue<WriteContext>(value); }
+        public IProducerConsumerCollection<WriteContext> Writes
+        {
+            get => _writes;
+            set => _writes = new ConcurrentQueue<WriteContext>(value);
+        }
 
         public event Action<WriteContext> MessageLogged;
 

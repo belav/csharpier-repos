@@ -14,7 +14,10 @@ public class CloseMessage : HubMessage
     /// <summary>
     /// An empty close message with no error and <see cref="AllowReconnect"/> set to <see langword="false"/>.
     /// </summary>
-    public static readonly CloseMessage Empty = new CloseMessage(error: null, allowReconnect: false);
+    public static readonly CloseMessage Empty = new CloseMessage(
+        error: null,
+        allowReconnect: false
+    );
 
     /// <summary>
     /// Gets the optional error message.
@@ -31,9 +34,7 @@ public class CloseMessage : HubMessage
     /// </summary>
     /// <param name="error">An optional error message.</param>
     public CloseMessage(string? error)
-        : this(error, allowReconnect: false)
-    {
-    }
+        : this(error, allowReconnect: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CloseMessage"/> class with an optional error message and a <see cref="bool"/> indicating whether or not a client with

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.E2ETesting;
 public class BrowserFixture : IAsyncLifetime
 {
     public static string StreamingContext { get; } = "streaming";
-    private readonly ConcurrentDictionary<string, (IWebDriver browser, ILogs log)> _browsers = new();
+    private readonly ConcurrentDictionary<string, (IWebDriver browser, ILogs log)> _browsers =
+        new();
 
     public BrowserFixture(IMessageSink diagnosticsMessageSink)
     {
@@ -33,23 +34,31 @@ public class BrowserFixture : IAsyncLifetime
     {
         // Do not change the current platform support without explicit approval.
         Assert.False(
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && RuntimeInformation.ProcessArchitecture == Architecture.X64,
-            "Selenium tests should be running in this platform.");
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64,
+            "Selenium tests should be running in this platform."
+        );
     }
 
     public static bool IsHostAutomationSupported()
     {
         // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at build
         // time and we use that to conditionally skip Selenium tests parts.
-        var attribute = typeof(BrowserFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-            .SingleOrDefault(a => a.Key == "Microsoft.AspNetCore.InternalTesting.Selenium.Supported");
+        var attribute = typeof(BrowserFixture)
+            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            .SingleOrDefault(a =>
+                a.Key == "Microsoft.AspNetCore.InternalTesting.Selenium.Supported"
+            );
         var attributeValue = attribute != null ? bool.Parse(attribute.Value) : false;
 
         // The environment variable below can be set up before running the tests so as to override the default
         // value provided in the attribute.
-        var environmentOverride = Environment
-            .GetEnvironmentVariable("MICROSOFT_ASPNETCORE_TESTING_SELENIUM_SUPPORTED");
-        var environmentOverrideValue = !string.IsNullOrWhiteSpace(environmentOverride) ? bool.Parse(attribute.Value) : false;
+        var environmentOverride = Environment.GetEnvironmentVariable(
+            "MICROSOFT_ASPNETCORE_TESTING_SELENIUM_SUPPORTED"
+        );
+        var environmentOverrideValue = !string.IsNullOrWhiteSpace(environmentOverride)
+            ? bool.Parse(attribute.Value)
+            : false;
 
         if (environmentOverride != null)
         {
@@ -78,7 +87,10 @@ public class BrowserFixture : IAsyncLifetime
         foreach (var context in _browsers.Keys)
         {
             var userProfileDirectory = UserProfileDirectory(context);
-            if (!string.IsNullOrEmpty(userProfileDirectory) && Directory.Exists(userProfileDirectory))
+            if (
+                !string.IsNullOrEmpty(userProfileDirectory)
+                && Directory.Exists(userProfileDirectory)
+            )
             {
                 var attemptCount = 0;
                 while (true)
@@ -93,7 +105,9 @@ public class BrowserFixture : IAsyncLifetime
                         attemptCount++;
                         if (attemptCount < 5)
                         {
-                            Console.WriteLine($"Failed to delete browser profile directory '{userProfileDirectory}': '{ex}'. Will retry.");
+                            Console.WriteLine(
+                                $"Failed to delete browser profile directory '{userProfileDirectory}': '{ex}'. Will retry."
+                            );
                             await Task.Delay(2000);
                         }
                         else
@@ -106,11 +120,16 @@ public class BrowserFixture : IAsyncLifetime
         }
     }
 
-    public (IWebDriver, ILogs) GetOrCreateBrowser(ITestOutputHelper output, string isolationContext = "")
+    public (IWebDriver, ILogs) GetOrCreateBrowser(
+        ITestOutputHelper output,
+        string isolationContext = ""
+    )
     {
         if (!IsHostAutomationSupported())
         {
-            output.WriteLine($"{nameof(BrowserFixture)}: Host does not support browser automation.");
+            output.WriteLine(
+                $"{nameof(BrowserFixture)}: Host does not support browser automation."
+            );
             return default;
         }
 
@@ -132,9 +151,15 @@ public class BrowserFixture : IAsyncLifetime
         // Force language to english for tests
         opts.AddUserProfilePreference("intl.accept_languages", "en");
 
-        if (!EnsureNotHeadless &&
-            !Debugger.IsAttached &&
-            !string.Equals(Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"), "true", StringComparison.OrdinalIgnoreCase))
+        if (
+            !EnsureNotHeadless
+            && !Debugger.IsAttached
+            && !string.Equals(
+                Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"),
+                "true",
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             opts.AddArgument("--headless=new");
         }
@@ -152,7 +177,9 @@ public class BrowserFixture : IAsyncLifetime
         if (!string.IsNullOrEmpty(binaryLocation))
         {
             opts.BinaryLocation = binaryLocation;
-            output.WriteLine($"Set {nameof(ChromeOptions)}.{nameof(opts.BinaryLocation)} to {binaryLocation}");
+            output.WriteLine(
+                $"Set {nameof(ChromeOptions)}.{nameof(opts.BinaryLocation)} to {binaryLocation}"
+            );
         }
 
         var userProfileDirectory = UserProfileDirectory(context);
@@ -161,7 +188,10 @@ public class BrowserFixture : IAsyncLifetime
         {
             Directory.CreateDirectory(userProfileDirectory);
             opts.AddArgument($"--user-data-dir={userProfileDirectory}");
-            opts.AddUserProfilePreference("download.default_directory", Path.Combine(userProfileDirectory, "Downloads"));
+            opts.AddUserProfilePreference(
+                "download.default_directory",
+                Path.Combine(userProfileDirectory, "Downloads")
+            );
         }
 
         var attempt = 0;
@@ -183,7 +213,8 @@ public class BrowserFixture : IAsyncLifetime
                 var driver = new ChromeDriver(
                     CreateChromeDriverService(output),
                     opts,
-                    TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60)));
+                    TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60))
+                );
 
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
                 var logs = driver.Manage().Logs;
@@ -197,10 +228,12 @@ public class BrowserFixture : IAsyncLifetime
             }
 
             attempt++;
-
         } while (attempt < maxAttempts);
 
-        throw new InvalidOperationException("Couldn't create a Selenium remote driver client. The server is irresponsive", innerException);
+        throw new InvalidOperationException(
+            "Couldn't create a Selenium remote driver client. The server is irresponsive",
+            innerException
+        );
     }
 
     private static ChromeDriverService CreateChromeDriverService(ITestOutputHelper output)

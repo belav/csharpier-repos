@@ -32,18 +32,22 @@ public abstract class RawSqlQueryTests
     {
         var fixture = CreateFixture();
         fixture.Initialize(
-            1000, 1000, 2, 2,
+            1000,
+            1000,
+            2,
+            2,
             ctx =>
             {
                 if (!string.IsNullOrEmpty(StoredProcedureCreationScript))
                 {
 #if OLD_FROM_SQL
-                        ctx.Database.ExecuteSqlCommand(StoredProcedureCreationScript);
+                    ctx.Database.ExecuteSqlCommand(StoredProcedureCreationScript);
 #else
                     ctx.Database.ExecuteSqlRaw(StoredProcedureCreationScript);
 #endif
                 }
-            });
+            }
+        );
 
         _context = fixture.CreateContext();
 
@@ -54,8 +58,7 @@ public abstract class RawSqlQueryTests
     }
 
     [GlobalCleanup]
-    public virtual void CleanupContext()
-        => _context.Dispose();
+    public virtual void CleanupContext() => _context.Dispose();
 
     [Benchmark]
     public virtual async Task SelectAll()
@@ -63,11 +66,11 @@ public abstract class RawSqlQueryTests
         var sql = @"SELECT * FROM ""Products""";
         var query = _context.Products
 #if OLD_FROM_SQL
-                .FromSql(sql)
+        .FromSql(sql)
 #else
-            .FromSqlRaw(sql)
+        .FromSqlRaw(sql)
 #endif
-            .ApplyTracking(Tracking);
+        .ApplyTracking(Tracking);
 
         if (Async)
         {
@@ -82,14 +85,15 @@ public abstract class RawSqlQueryTests
     [Benchmark]
     public virtual async Task SelectParameterized()
     {
-        var sql = @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
+        var sql =
+            @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
         var query = _context.Products
 #if OLD_FROM_SQL
-                .FromSql(sql, 10, 14)
+        .FromSql(sql, 10, 14)
 #else
-            .FromSqlRaw(sql, 10, 14)
+        .FromSqlRaw(sql, 10, 14)
 #endif
-            .ApplyTracking(Tracking);
+        .ApplyTracking(Tracking);
 
         if (Async)
         {
@@ -105,9 +109,10 @@ public abstract class RawSqlQueryTests
     public virtual async Task SelectComposed()
     {
         var sql = @"SELECT * FROM ""Products""";
-        var query = _context.Products
+        var query = _context
+            .Products
 #if OLD_FROM_SQL
-                .FromSql(sql)
+            .FromSql(sql)
 #else
             .FromSqlRaw(sql)
 #endif
@@ -131,11 +136,11 @@ public abstract class RawSqlQueryTests
         var sql = @"EXECUTE dbo.SearchProducts @p0, @p1";
         var query = _context.Products
 #if OLD_FROM_SQL
-                .FromSql(sql, 10, 14)
+        .FromSql(sql, 10, 14)
 #else
-            .FromSqlRaw(sql, 10, 14)
+        .FromSqlRaw(sql, 10, 14)
 #endif
-            .ApplyTracking(Tracking);
+        .ApplyTracking(Tracking);
 
         if (Async)
         {

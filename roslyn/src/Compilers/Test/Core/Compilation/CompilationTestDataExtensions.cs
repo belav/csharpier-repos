@@ -26,7 +26,8 @@ namespace Roslyn.Test.Utilities
             this CompilationTestData.MethodData method,
             string expectedIL,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
+            [CallerFilePath] string expectedValueSourcePath = null
+        )
         {
             const string moduleNamePlaceholder = "{#Module#}";
             string actualIL = GetMethodIL(method);
@@ -37,15 +38,27 @@ namespace Roslyn.Test.Utilities
                 expectedIL = expectedIL.Replace(moduleNamePlaceholder, moduleName);
             }
 
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(expectedIL, actualIL, escapeQuotes: false, expectedValueSourcePath: expectedValueSourcePath, expectedValueSourceLine: expectedValueSourceLine);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                expectedIL,
+                actualIL,
+                escapeQuotes: false,
+                expectedValueSourcePath: expectedValueSourcePath,
+                expectedValueSourceLine: expectedValueSourceLine
+            );
         }
 
-        internal static ImmutableArray<KeyValuePair<IMethodSymbolInternal, CompilationTestData.MethodData>> GetExplicitlyDeclaredMethods(this CompilationTestData data)
+        internal static ImmutableArray<
+            KeyValuePair<IMethodSymbolInternal, CompilationTestData.MethodData>
+        > GetExplicitlyDeclaredMethods(this CompilationTestData data)
         {
             return data.Methods.Where(m => !m.Key.IsImplicitlyDeclared).ToImmutableArray();
         }
 
-        private static bool TryGetMethodData(ImmutableDictionary<string, CompilationTestData.MethodData> map, string qualifiedMethodName, out CompilationTestData.MethodData methodData)
+        private static bool TryGetMethodData(
+            ImmutableDictionary<string, CompilationTestData.MethodData> map,
+            string qualifiedMethodName,
+            out CompilationTestData.MethodData methodData
+        )
         {
             if (map.TryGetValue(qualifiedMethodName, out methodData))
             {
@@ -59,7 +72,9 @@ namespace Roslyn.Test.Utilities
             }
 
             // now try to match single method with any parameter list
-            var keys = map.Keys.Where(k => k.StartsWith(qualifiedMethodName + "(", StringComparison.Ordinal));
+            var keys = map.Keys.Where(k =>
+                k.StartsWith(qualifiedMethodName + "(", StringComparison.Ordinal)
+            );
             if (keys.Count() == 1)
             {
                 methodData = map[keys.First()];
@@ -68,8 +83,12 @@ namespace Roslyn.Test.Utilities
             else if (keys.Count() > 1)
             {
                 throw new AmbiguousMatchException(
-                    "Could not determine best match for method named: " + qualifiedMethodName + Environment.NewLine +
-                    string.Join(Environment.NewLine, keys.Select(s => "    " + s)) + Environment.NewLine);
+                    "Could not determine best match for method named: "
+                        + qualifiedMethodName
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, keys.Select(s => "    " + s))
+                        + Environment.NewLine
+                );
             }
             else
             {
@@ -77,20 +96,32 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        internal static bool TryGetMethodData(this CompilationTestData data, string qualifiedMethodName, out CompilationTestData.MethodData methodData)
+        internal static bool TryGetMethodData(
+            this CompilationTestData data,
+            string qualifiedMethodName,
+            out CompilationTestData.MethodData methodData
+        )
         {
             var map = data.GetMethodsByName();
             return TryGetMethodData(map, qualifiedMethodName, out methodData);
         }
 
-        internal static CompilationTestData.MethodData GetMethodData(this CompilationTestData data, string qualifiedMethodName)
+        internal static CompilationTestData.MethodData GetMethodData(
+            this CompilationTestData data,
+            string qualifiedMethodName
+        )
         {
             var map = data.GetMethodsByName();
             TryGetMethodData(data, qualifiedMethodName, out var methodData);
 
             if (methodData.ILBuilder == null)
             {
-                throw new KeyNotFoundException("Could not find ILBuilder matching method '" + qualifiedMethodName + "'. Existing methods:\r\n" + string.Join("\r\n", map.Keys));
+                throw new KeyNotFoundException(
+                    "Could not find ILBuilder matching method '"
+                        + qualifiedMethodName
+                        + "'. Existing methods:\r\n"
+                        + string.Join("\r\n", map.Keys)
+                );
             }
 
             return methodData;
@@ -101,18 +132,26 @@ namespace Roslyn.Test.Utilities
             return ILBuilderVisualizer.ILBuilderToString(method.ILBuilder);
         }
 
-        internal static EditAndContinueMethodDebugInformation GetEncDebugInfo(this CompilationTestData.MethodData methodData)
+        internal static EditAndContinueMethodDebugInformation GetEncDebugInfo(
+            this CompilationTestData.MethodData methodData
+        )
         {
             // TODO:
             return new EditAndContinueMethodDebugInformation(
                 0,
-                Cci.MetadataWriter.GetLocalSlotDebugInfos(methodData.ILBuilder.LocalSlotManager.LocalsInOrder()),
+                Cci.MetadataWriter.GetLocalSlotDebugInfos(
+                    methodData.ILBuilder.LocalSlotManager.LocalsInOrder()
+                ),
                 closures: ImmutableArray<ClosureDebugInfo>.Empty,
                 lambdas: ImmutableArray<LambdaDebugInfo>.Empty,
-                stateMachineStates: ImmutableArray<StateMachineStateDebugInfo>.Empty);
+                stateMachineStates: ImmutableArray<StateMachineStateDebugInfo>.Empty
+            );
         }
 
-        internal static Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> EncDebugInfoProvider(this CompilationTestData.MethodData methodData)
+        internal static Func<
+            MethodDefinitionHandle,
+            EditAndContinueMethodDebugInformation
+        > EncDebugInfoProvider(this CompilationTestData.MethodData methodData)
         {
             return _ => methodData.GetEncDebugInfo();
         }

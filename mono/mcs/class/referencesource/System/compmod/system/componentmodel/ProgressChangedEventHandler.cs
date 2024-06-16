@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
     using System.Security.Permissions;
 

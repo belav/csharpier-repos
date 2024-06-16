@@ -19,15 +19,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 {
     public partial class DocumentChangesTests : AbstractLanguageServerProtocolTests
     {
-        public DocumentChangesTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public DocumentChangesTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task DocumentChanges_EndToEnd(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -35,14 +34,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
         // hi there
     }
 }";
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
@@ -70,14 +70,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidOpen_DocumentIsTracked(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
         {|type:|}
     }
 }";
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
@@ -94,20 +95,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task MultipleDidOpen_Errors(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
         {|type:|}
     }
 }";
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
                 await DidOpen(testLspServer, locationTyped.Uri);
 
-                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(() => DidOpen(testLspServer, locationTyped.Uri));
+                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
+                    () => DidOpen(testLspServer, locationTyped.Uri)
+                );
             }
         }
 
@@ -115,18 +119,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidCloseWithoutDidOpen_Errors(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
         {|type:|}
     }
 }";
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
-                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(() => DidClose(testLspServer, locationTyped.Uri));
+                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
+                    () => DidClose(testLspServer, locationTyped.Uri)
+                );
             }
         }
 
@@ -134,18 +141,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidChangeWithoutDidOpen_Errors(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
         {|type:|}
     }
 }";
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
-                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(() => DidChange(testLspServer, locationTyped.Uri, (0, 0, "goo")));
+                await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
+                    () => DidChange(testLspServer, locationTyped.Uri, (0, 0, "goo"))
+                );
             }
         }
 
@@ -153,7 +163,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidClose_StopsTrackingDocument(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -161,7 +171,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
 
-            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(
+                source,
+                mutatingLspWorkspace
+            );
 
             await using (testLspServer)
             {
@@ -177,7 +190,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidChange_AppliesChanges(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -185,7 +198,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
             var expected =
-  @"class A
+                @"class A
 {
     void M()
     {
@@ -193,7 +206,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
 
-            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(
+                source,
+                mutatingLspWorkspace
+            );
 
             await using (testLspServer)
             {
@@ -212,7 +228,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task DidChange_DoesntUpdateWorkspace(bool mutatingLspWorkspace)
         {
             var source =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -220,7 +236,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
             var expected =
-  @"class A
+                @"class A
 {
     void M()
     {
@@ -228,7 +244,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
 
-            var (testLspServer, locationTyped, documentText) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, documentText) =
+                await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
 
             await using (testLspServer)
             {
@@ -236,7 +253,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
                 await DidChange(testLspServer, locationTyped.Uri, (4, 8, "// hi there"));
 
-                var documentTextFromWorkspace = (await testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single().GetTextAsync()).ToString();
+                var documentTextFromWorkspace = (
+                    await testLspServer
+                        .GetCurrentSolution()
+                        .GetDocuments(locationTyped.Uri)
+                        .Single()
+                        .GetTextAsync()
+                ).ToString();
 
                 Assert.NotNull(documentTextFromWorkspace);
                 Assert.Equal(documentText, documentTextFromWorkspace);
@@ -249,8 +272,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         [Theory, CombinatorialData]
         public async Task DidChange_MultipleChanges1(bool mutatingLspWorkspace)
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     void M()
@@ -259,8 +281,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class A
                 {
                     void M()
@@ -271,13 +292,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                 }
                 """;
 
-            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(
+                source,
+                mutatingLspWorkspace
+            );
 
             await using (testLspServer)
             {
                 await DidOpen(testLspServer, locationTyped.Uri);
 
-                await DidChange(testLspServer, locationTyped.Uri, (4, 8, "// hi there"), (5, 0, "        // this builds on that\r\n"));
+                await DidChange(
+                    testLspServer,
+                    locationTyped.Uri,
+                    (4, 8, "// hi there"),
+                    (5, 0, "        // this builds on that\r\n")
+                );
 
                 var document = testLspServer.GetTrackedTexts().FirstOrDefault();
 
@@ -289,8 +318,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         [Theory, CombinatorialData]
         public async Task DidChange_MultipleChanges2(bool mutatingLspWorkspace)
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     void M()
@@ -299,8 +327,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class A
                 {
                     void M()
@@ -310,13 +337,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                 }
                 """;
 
-            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(
+                source,
+                mutatingLspWorkspace
+            );
 
             await using (testLspServer)
             {
                 await DidOpen(testLspServer, locationTyped.Uri);
 
-                await DidChange(testLspServer, locationTyped.Uri, (4, 8, "// there"), (4, 11, "hi "));
+                await DidChange(
+                    testLspServer,
+                    locationTyped.Uri,
+                    (4, 8, "// there"),
+                    (4, 11, "hi ")
+                );
 
                 var document = testLspServer.GetTrackedTexts().FirstOrDefault();
 
@@ -328,8 +363,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         [Theory, CombinatorialData]
         public async Task DidChange_MultipleRequests(bool mutatingLspWorkspace)
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     void M()
@@ -338,8 +372,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class A
                 {
                     void M()
@@ -350,14 +383,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                 }
                 """;
 
-            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(source, mutatingLspWorkspace);
+            var (testLspServer, locationTyped, _) = await GetTestLspServerAndLocationAsync(
+                source,
+                mutatingLspWorkspace
+            );
 
             await using (testLspServer)
             {
                 await DidOpen(testLspServer, locationTyped.Uri);
 
                 await DidChange(testLspServer, locationTyped.Uri, (4, 8, "// hi there"));
-                await DidChange(testLspServer, locationTyped.Uri, (5, 0, "        // this builds on that\r\n"));
+                await DidChange(
+                    testLspServer,
+                    locationTyped.Uri,
+                    (5, 0, "        // this builds on that\r\n")
+                );
 
                 var document = testLspServer.GetTrackedTexts().FirstOrDefault();
 
@@ -366,20 +406,36 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             }
         }
 
-        private async Task<(TestLspServer, LSP.Location, string)> GetTestLspServerAndLocationAsync(string source, bool mutatingLspWorkspace)
+        private async Task<(TestLspServer, LSP.Location, string)> GetTestLspServerAndLocationAsync(
+            string source,
+            bool mutatingLspWorkspace
+        )
         {
-            var testLspServer = await CreateTestLspServerAsync(source, mutatingLspWorkspace, CapabilitiesWithVSExtensions);
+            var testLspServer = await CreateTestLspServerAsync(
+                source,
+                mutatingLspWorkspace,
+                CapabilitiesWithVSExtensions
+            );
             var locationTyped = testLspServer.GetLocations("type").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(locationTyped.Uri)
+                .Single()
+                .GetTextAsync();
 
             return (testLspServer, locationTyped, documentText.ToString());
         }
 
-        private static Task DidOpen(TestLspServer testLspServer, Uri uri) => testLspServer.OpenDocumentAsync(uri);
+        private static Task DidOpen(TestLspServer testLspServer, Uri uri) =>
+            testLspServer.OpenDocumentAsync(uri);
 
-        private static async Task DidChange(TestLspServer testLspServer, Uri uri, params (int line, int column, string text)[] changes)
-            => await testLspServer.InsertTextAsync(uri, changes);
+        private static async Task DidChange(
+            TestLspServer testLspServer,
+            Uri uri,
+            params (int line, int column, string text)[] changes
+        ) => await testLspServer.InsertTextAsync(uri, changes);
 
-        private static async Task DidClose(TestLspServer testLspServer, Uri uri) => await testLspServer.CloseDocumentAsync(uri);
+        private static async Task DidClose(TestLspServer testLspServer, Uri uri) =>
+            await testLspServer.CloseDocumentAsync(uri);
     }
 }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected override bool DefaultValueAllowed => true;
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_WrapStructural_Int : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_WrapStructural_Int
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_WrapStructural_SimpleInt : SegmentedHashSet_Generic_Tests<SimpleInt>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_WrapStructural_SimpleInt
+        : SegmentedHashSet_Generic_Tests<SimpleInt>
     {
         protected override IEqualityComparer<SimpleInt> GetIEqualityComparer()
         {
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_EquatableBackwardsOrder : SegmentedHashSet_Generic_Tests<EquatableBackwardsOrder>
+    public class SegmentedHashSet_Generic_Tests_EquatableBackwardsOrder
+        : SegmentedHashSet_Generic_Tests<EquatableBackwardsOrder>
     {
         protected override EquatableBackwardsOrder CreateT(int seed)
         {
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -118,7 +122,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_ModOfInt : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_ModOfInt
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -161,7 +167,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_AbsOfInt : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_AbsOfInt
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -180,7 +187,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
     }
 
-    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_BadIntEqualityComparer : SegmentedHashSet_Generic_Tests<int>
+    public class SegmentedHashSet_Generic_Tests_int_With_Comparer_BadIntEqualityComparer
+        : SegmentedHashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {

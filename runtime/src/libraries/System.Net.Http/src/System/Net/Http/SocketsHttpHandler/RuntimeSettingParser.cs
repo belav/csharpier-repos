@@ -10,7 +10,11 @@ namespace System.Net.Http
         /// <summary>
         /// Parse a <see cref="bool"/> value from an AppContext switch or an environment variable.
         /// </summary>
-        public static bool QueryRuntimeSettingSwitch(string appCtxSettingName, string environmentVariableSettingName, bool defaultValue)
+        public static bool QueryRuntimeSettingSwitch(
+            string appCtxSettingName,
+            string environmentVariableSettingName,
+            bool defaultValue
+        )
         {
             bool value;
 
@@ -54,7 +58,11 @@ namespace System.Net.Http
         /// <summary>
         /// Parse a <see cref="int"/> value from an AppContext data or an environment variable.
         /// </summary>
-        public static int QueryRuntimeSettingInt32(string appCtxSettingName, string environmentVariableSettingName, int defaultValue)
+        public static int QueryRuntimeSettingInt32(
+            string appCtxSettingName,
+            string environmentVariableSettingName,
+            int defaultValue
+        )
         {
             // First check for the AppContext data, giving it priority over the environment variable.
             switch (AppContext.GetData(appCtxSettingName))
@@ -74,7 +82,10 @@ namespace System.Net.Http
         /// <summary>
         /// Parse an environment variable for an <see cref="int"/> value.
         /// </summary>
-        public static int ParseInt32EnvironmentVariableValue(string environmentVariableSettingName, int defaultValue)
+        public static int ParseInt32EnvironmentVariableValue(
+            string environmentVariableSettingName,
+            int defaultValue
+        )
         {
             string? envVar = Environment.GetEnvironmentVariable(environmentVariableSettingName);
 
@@ -88,10 +99,20 @@ namespace System.Net.Http
         /// <summary>
         /// Parse an environment variable for a <see cref="double"/> value.
         /// </summary>
-        public static double ParseDoubleEnvironmentVariableValue(string environmentVariableSettingName, double defaultValue)
+        public static double ParseDoubleEnvironmentVariableValue(
+            string environmentVariableSettingName,
+            double defaultValue
+        )
         {
             string? envVar = Environment.GetEnvironmentVariable(environmentVariableSettingName);
-            if (double.TryParse(envVar, NumberStyles.Any, CultureInfo.InvariantCulture, out double value))
+            if (
+                double.TryParse(
+                    envVar,
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out double value
+                )
+            )
             {
                 return value;
             }

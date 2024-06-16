@@ -26,7 +26,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             this.InspectionContext = inspectionContext;
         }
 
-        public static DkmEvaluationResultEnumContext Create(int Count, DkmStackWalkFrame StackFrame, DkmInspectionContext InspectionContext, DkmDataItem DataItem)
+        public static DkmEvaluationResultEnumContext Create(
+            int Count,
+            DkmStackWalkFrame StackFrame,
+            DkmInspectionContext InspectionContext,
+            DkmDataItem DataItem
+        )
         {
             var enumContext = new DkmEvaluationResultEnumContext(Count, InspectionContext);
             if (DataItem != null)
@@ -36,7 +41,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             return enumContext;
         }
 
-        public void GetItems(DkmWorkList workList, int startIndex, int count, DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine)
+        public void GetItems(
+            DkmWorkList workList,
+            int startIndex,
+            int count,
+            DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine
+        )
         {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
@@ -45,7 +55,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 {
                     r.GetItems(this, workList, startIndex, count, completionRoutine);
                     return (object)null;
-                });
+                }
+            );
         }
     }
 }

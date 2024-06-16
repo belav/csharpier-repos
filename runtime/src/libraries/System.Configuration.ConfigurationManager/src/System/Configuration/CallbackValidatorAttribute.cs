@@ -18,25 +18,35 @@ namespace System.Configuration
             {
                 if (_callbackMethod == null)
                 {
-                    if (_type == null) throw new ArgumentNullException(nameof(Type));
+                    if (_type == null)
+                        throw new ArgumentNullException(nameof(Type));
 
                     if (!string.IsNullOrEmpty(_callbackMethodName))
                     {
-                        MethodInfo methodInfo = _type.GetMethod(_callbackMethodName, BindingFlags.Public | BindingFlags.Static);
+                        MethodInfo methodInfo = _type.GetMethod(
+                            _callbackMethodName,
+                            BindingFlags.Public | BindingFlags.Static
+                        );
 
                         if (methodInfo != null)
                         {
                             ParameterInfo[] parameters = methodInfo.GetParameters();
-                            if ((parameters.Length == 1) && (parameters[0].ParameterType == typeof(object)))
+                            if (
+                                (parameters.Length == 1)
+                                && (parameters[0].ParameterType == typeof(object))
+                            )
                             {
-                                _callbackMethod = (ValidatorCallback)Delegate.CreateDelegate(typeof(ValidatorCallback), methodInfo);
+                                _callbackMethod = (ValidatorCallback)
+                                    Delegate.CreateDelegate(typeof(ValidatorCallback), methodInfo);
                             }
                         }
                     }
                 }
 
                 if (_callbackMethod == null)
-                    throw new ArgumentException(SR.Format(SR.Validator_method_not_found, _callbackMethodName));
+                    throw new ArgumentException(
+                        SR.Format(SR.Validator_method_not_found, _callbackMethodName)
+                    );
 
                 return new CallbackValidator(_callbackMethod);
             }

@@ -12,17 +12,16 @@ namespace System.Runtime.Serialization
     static class SerializationTrace
 #endif
     {
-        [Fx.Tag.SecurityNote(Critical = "Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         static TraceSource codeGen;
 
         internal static SourceSwitch CodeGenerationSwitch
         {
-            get
-            {
-                return CodeGenerationTraceSource.Switch;
-            }
+            get { return CodeGenerationTraceSource.Switch; }
         }
 
         internal static void WriteInstruction(int lineNumber, string instruction)
@@ -41,8 +40,10 @@ namespace System.Runtime.Serialization
 
         static TraceSource CodeGenerationTraceSource
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical codeGen field.",
-                Safe = "Get-only properties only needs to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical codeGen field.",
+                Safe = "Get-only properties only needs to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -53,5 +54,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-
-

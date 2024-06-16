@@ -44,7 +44,10 @@ namespace System.Globalization.Tests
         [InlineData("\u0061\u0062\u002E\u0063\u0064\u002D", true)] // Trailing hyphen minus in second label
         [InlineData("\u002D", true)] // Leading and trailing hyphen minus
         [InlineData("\u002D\u0062\u002D", true)] // Leading and trailing hyphen minus
-        public void UseStd3AsciiRules_ChangesGetAsciiBehavior(string unicode, bool containsInvalidHyphen)
+        public void UseStd3AsciiRules_ChangesGetAsciiBehavior(
+            string unicode,
+            bool containsInvalidHyphen
+        )
         {
             var idnStd3False = new IdnMapping { UseStd3AsciiRules = false };
             var idnStd3True = new IdnMapping { UseStd3AsciiRules = true };
@@ -52,14 +55,20 @@ namespace System.Globalization.Tests
             if (containsInvalidHyphen && PlatformDetection.IsIcuGlobalization)
             {
                 // ICU always fails on leading/trailing hyphens regardless of the Std3 rules option.
-                AssertExtensions.Throws<ArgumentException>("unicode", () => idnStd3False.GetAscii(unicode));
+                AssertExtensions.Throws<ArgumentException>(
+                    "unicode",
+                    () => idnStd3False.GetAscii(unicode)
+                );
             }
             else
             {
                 Assert.Equal(unicode, idnStd3False.GetAscii(unicode));
             }
 
-            AssertExtensions.Throws<ArgumentException>("unicode", () => idnStd3True.GetAscii(unicode));
+            AssertExtensions.Throws<ArgumentException>(
+                "unicode",
+                () => idnStd3True.GetAscii(unicode)
+            );
         }
 
         [Fact]

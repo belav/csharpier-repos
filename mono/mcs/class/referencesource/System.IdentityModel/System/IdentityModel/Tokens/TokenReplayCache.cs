@@ -8,7 +8,7 @@ using System.Xml;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class defines the API for a cache that stores tokens for and purges them 
+    /// This class defines the API for a cache that stores tokens for and purges them
     /// on a schedule time interval.
     /// </summary>
     public abstract class TokenReplayCache : ICustomIdentityConfiguration
@@ -19,7 +19,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         /// <summary>
@@ -28,7 +32,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="key">Key to use when adding item</param>
         /// <param name="securityToken">SecurityToken to add to cache, can be null</param>
         /// <param name="expirationTime">The expiration time of the entry.</param>
-        public abstract void AddOrUpdate(string key, SecurityToken securityToken, DateTime expirationTime);
+        public abstract void AddOrUpdate(
+            string key,
+            SecurityToken securityToken,
+            DateTime expirationTime
+        );
 
         /// <summary>
         /// Attempt to find if a matching entry exists in the cache.
@@ -51,4 +59,3 @@ namespace System.IdentityModel.Tokens
         public abstract void Remove(string key);
     }
 }
-
