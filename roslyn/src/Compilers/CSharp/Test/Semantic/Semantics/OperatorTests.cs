@@ -3544,20 +3544,20 @@ class C
                             + (
                                 child.Text switch
                                 {
-                                    "@operator"
-                                        => ((BinaryOperatorSignature)child.Value).Kind.ToString(),
+                                    "@operator" =>
+                                        ((BinaryOperatorSignature)child.Value).Kind.ToString(),
                                     "leftConversion"
-                                    or "finalConversion"
-                                        => (
+                                    or "finalConversion" =>
+                                        (
                                             child.Children.SingleOrDefault() is TreeDumperNode node
                                                 ? (
                                                     node.Text switch
                                                     {
-                                                        "conversion"
-                                                            => node.Children.ElementAt(1).Value,
+                                                        "conversion" =>
+                                                            node.Children.ElementAt(1).Value,
                                                         "valuePlaceholder" => Conversion.Identity,
-                                                        _
-                                                            => throw ExceptionUtilities.UnexpectedValue(
+                                                        _ =>
+                                                            throw ExceptionUtilities.UnexpectedValue(
                                                                 node.Text
                                                             )
                                                     }

@@ -2340,8 +2340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundImplicitIndexerAccess
                 {
                     IndexerOrSliceAccess: BoundIndexerAccess indexerAccess
-                }
-                    => indexerAccess.Indexer,
+                } =>
+                    indexerAccess.Indexer,
                 // array[Index]
                 BoundImplicitIndexerAccess { IndexerOrSliceAccess: BoundArrayAccess } => null,
                 // array[int or Range]
@@ -2689,8 +2689,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             node switch
             {
                 LambdaExpressionSyntax lambda => lambda.ArrowToken.GetLocation(),
-                AnonymousMethodExpressionSyntax anonymousMethod
-                    => anonymousMethod.DelegateKeyword.GetLocation(),
+                AnonymousMethodExpressionSyntax anonymousMethod =>
+                    anonymousMethod.DelegateKeyword.GetLocation(),
                 _ => node.Location,
             };
 
@@ -4893,8 +4893,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var messageId = expressionBody.Parent switch
             {
                 ConstructorDeclarationSyntax
-                or DestructorDeclarationSyntax
-                    => MessageID.IDS_FeatureExpressionBodiedDeOrConstructor,
+                or DestructorDeclarationSyntax =>
+                    MessageID.IDS_FeatureExpressionBodiedDeOrConstructor,
                 AccessorDeclarationSyntax => MessageID.IDS_FeatureExpressionBodiedAccessor,
                 BaseMethodDeclarationSyntax => MessageID.IDS_FeatureExpressionBodiedMethod,
                 IndexerDeclarationSyntax => MessageID.IDS_FeatureExpressionBodiedIndexer,

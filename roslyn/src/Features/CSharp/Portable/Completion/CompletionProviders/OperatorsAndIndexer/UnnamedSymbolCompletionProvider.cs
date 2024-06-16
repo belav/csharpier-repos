@@ -205,24 +205,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var kind = item.GetProperty(KindName);
             return kind switch
             {
-                IndexerKindName
-                    => await GetIndexerDescriptionAsync(
+                IndexerKindName =>
+                    await GetIndexerDescriptionAsync(
                             document,
                             item,
                             displayOptions,
                             cancellationToken
                         )
                         .ConfigureAwait(false),
-                OperatorKindName
-                    => await GetOperatorDescriptionAsync(
+                OperatorKindName =>
+                    await GetOperatorDescriptionAsync(
                             document,
                             item,
                             displayOptions,
                             cancellationToken
                         )
                         .ConfigureAwait(false),
-                ConversionKindName
-                    => await GetConversionDescriptionAsync(
+                ConversionKindName =>
+                    await GetConversionDescriptionAsync(
                             document,
                             item,
                             displayOptions,

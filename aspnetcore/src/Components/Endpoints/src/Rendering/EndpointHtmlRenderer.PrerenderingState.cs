@@ -44,8 +44,8 @@ internal partial class EndpointHtmlRenderer
             {
                 store = renderModesMetadata.ConfiguredRenderModes[0] switch
                 {
-                    InteractiveServerRenderMode
-                        => new ProtectedPrerenderComponentApplicationStore(
+                    InteractiveServerRenderMode =>
+                        new ProtectedPrerenderComponentApplicationStore(
                             _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()
                         ),
                     InteractiveWebAssemblyRenderMode => new PrerenderComponentApplicationStore(),
@@ -59,10 +59,10 @@ internal partial class EndpointHtmlRenderer
             await manager.PersistStateAsync(store, this);
             return store switch
             {
-                ProtectedPrerenderComponentApplicationStore protectedStore
-                    => new ComponentStateHtmlContent(protectedStore, null),
-                PrerenderComponentApplicationStore prerenderStore
-                    => new ComponentStateHtmlContent(null, prerenderStore),
+                ProtectedPrerenderComponentApplicationStore protectedStore =>
+                    new ComponentStateHtmlContent(protectedStore, null),
+                PrerenderComponentApplicationStore prerenderStore =>
+                    new ComponentStateHtmlContent(null, prerenderStore),
                 _ => throw new InvalidOperationException("Invalid store."),
             };
         }
@@ -185,12 +185,12 @@ internal partial class EndpointHtmlRenderer
             {
                 InteractiveServerRenderMode => InvokedRenderModes.Mode.Server,
                 InteractiveWebAssemblyRenderMode => InvokedRenderModes.Mode.WebAssembly,
-                InteractiveAutoRenderMode
-                    => throw new NotImplementedException(
+                InteractiveAutoRenderMode =>
+                    throw new NotImplementedException(
                         "TODO: To be able to support InteractiveAutoRenderMode, we have to serialize persisted state in both WebAssembly and Server formats, or unify the two formats."
                     ),
-                _
-                    => throw new ArgumentException(
+                _ =>
+                    throw new ArgumentException(
                         Resources.FormatUnsupportedRenderMode(mode),
                         nameof(mode)
                     ),

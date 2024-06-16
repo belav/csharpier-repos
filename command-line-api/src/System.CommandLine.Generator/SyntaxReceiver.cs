@@ -220,8 +220,8 @@ namespace System.CommandLine.Generator
                 ILocalSymbol local => FromTypeSymbol(local.Type),
                 INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
                 IMethodSymbol methodSymbol => FromTypeSymbol(methodSymbol.ReturnType),
-                _
-                    => throw new NotImplementedException(
+                _ =>
+                    throw new NotImplementedException(
                         $"Cannot convert from '{argumentSymbol?.Kind}' {argumentSymbol?.ToDisplayString()}"
                     )
             };
@@ -257,8 +257,8 @@ namespace System.CommandLine.Generator
                 return typeSymbol switch
                 {
                     INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
-                    _
-                        => throw new NotImplementedException(
+                    _ =>
+                        throw new NotImplementedException(
                             $"Cannot convert from type symbol '{typeSymbol?.Kind}' {typeSymbol?.ToDisplayString()}"
                         )
                 };

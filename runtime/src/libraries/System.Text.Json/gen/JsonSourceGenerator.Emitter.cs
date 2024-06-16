@@ -793,24 +793,24 @@ namespace System.Text.Json.SourceGeneration
                     string getterValue = property switch
                     {
                         { DefaultIgnoreCondition: JsonIgnoreCondition.Always } => "null",
-                        { CanUseGetter: true }
-                            => $"static obj => (({declaringTypeFQN})obj).{propertyName}",
-                        { CanUseGetter: false, HasJsonInclude: true }
-                            => $"""static _ => throw new {InvalidOperationExceptionTypeRef}("{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.TypeRef.Name, propertyName)}")""",
+                        { CanUseGetter: true } =>
+                            $"static obj => (({declaringTypeFQN})obj).{propertyName}",
+                        { CanUseGetter: false, HasJsonInclude: true } =>
+                            $"""static _ => throw new {InvalidOperationExceptionTypeRef}("{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.TypeRef.Name, propertyName)}")""",
                         _ => "null"
                     };
 
                     string setterValue = property switch
                     {
                         { DefaultIgnoreCondition: JsonIgnoreCondition.Always } => "null",
-                        { CanUseSetter: true, IsInitOnlySetter: true }
-                            => $"""static (obj, value) => throw new {InvalidOperationExceptionTypeRef}("{ExceptionMessages.InitOnlyPropertySetterNotSupported}")""",
-                        { CanUseSetter: true } when typeGenerationSpec.TypeRef.IsValueType
-                            => $"""static (obj, value) => {UnsafeTypeRef}.Unbox<{declaringTypeFQN}>(obj).{propertyName} = value!""",
-                        { CanUseSetter: true }
-                            => $"""static (obj, value) => (({declaringTypeFQN})obj).{propertyName} = value!""",
-                        { CanUseSetter: false, HasJsonInclude: true }
-                            => $"""static (obj, value) => throw new {InvalidOperationExceptionTypeRef}("{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.TypeRef.Name, property.MemberName)}")""",
+                        { CanUseSetter: true, IsInitOnlySetter: true } =>
+                            $"""static (obj, value) => throw new {InvalidOperationExceptionTypeRef}("{ExceptionMessages.InitOnlyPropertySetterNotSupported}")""",
+                        { CanUseSetter: true } when typeGenerationSpec.TypeRef.IsValueType =>
+                            $"""static (obj, value) => {UnsafeTypeRef}.Unbox<{declaringTypeFQN}>(obj).{propertyName} = value!""",
+                        { CanUseSetter: true } =>
+                            $"""static (obj, value) => (({declaringTypeFQN})obj).{propertyName} = value!""",
+                        { CanUseSetter: false, HasJsonInclude: true } =>
+                            $"""static (obj, value) => throw new {InvalidOperationExceptionTypeRef}("{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.TypeRef.Name, property.MemberName)}")""",
                         _ => "null",
                     };
 
@@ -1304,12 +1304,12 @@ namespace System.Text.Json.SourceGeneration
                     ?? contextSpec.GeneratedOptionsSpec?.DefaultIgnoreCondition
                 ) switch
                 {
-                    JsonIgnoreCondition.WhenWritingNull
-                        => propertySpec.PropertyType.CanBeNull
+                    JsonIgnoreCondition.WhenWritingNull =>
+                        propertySpec.PropertyType.CanBeNull
                             ? DefaultCheckType.Null
                             : DefaultCheckType.None,
-                    JsonIgnoreCondition.WhenWritingDefault
-                        => propertySpec.PropertyType.CanBeNull
+                    JsonIgnoreCondition.WhenWritingDefault =>
+                        propertySpec.PropertyType.CanBeNull
                             ? DefaultCheckType.Null
                             : DefaultCheckType.Default,
                     _ => DefaultCheckType.None,
@@ -1546,14 +1546,14 @@ namespace System.Text.Json.SourceGeneration
                     string? policyName = knownNamingPolicy switch
                     {
                         JsonKnownNamingPolicy.CamelCase => nameof(JsonNamingPolicy.CamelCase),
-                        JsonKnownNamingPolicy.SnakeCaseLower
-                            => nameof(JsonNamingPolicy.SnakeCaseLower),
-                        JsonKnownNamingPolicy.SnakeCaseUpper
-                            => nameof(JsonNamingPolicy.SnakeCaseUpper),
-                        JsonKnownNamingPolicy.KebabCaseLower
-                            => nameof(JsonNamingPolicy.KebabCaseLower),
-                        JsonKnownNamingPolicy.KebabCaseUpper
-                            => nameof(JsonNamingPolicy.KebabCaseUpper),
+                        JsonKnownNamingPolicy.SnakeCaseLower =>
+                            nameof(JsonNamingPolicy.SnakeCaseLower),
+                        JsonKnownNamingPolicy.SnakeCaseUpper =>
+                            nameof(JsonNamingPolicy.SnakeCaseUpper),
+                        JsonKnownNamingPolicy.KebabCaseLower =>
+                            nameof(JsonNamingPolicy.KebabCaseLower),
+                        JsonKnownNamingPolicy.KebabCaseUpper =>
+                            nameof(JsonNamingPolicy.KebabCaseUpper),
                         _ => null,
                     };
 
@@ -1776,12 +1776,12 @@ namespace System.Text.Json.SourceGeneration
             {
                 return typeSpec switch
                 {
-                    { RuntimeTypeRef: TypeRef runtimeType }
-                        => $"() => new {runtimeType.FullyQualifiedName}()",
-                    { IsValueTuple: true }
-                        => $"() => default({typeSpec.TypeRef.FullyQualifiedName})",
-                    { ConstructionStrategy: ObjectConstructionStrategy.ParameterlessConstructor }
-                        => $"() => new {typeSpec.TypeRef.FullyQualifiedName}()",
+                    { RuntimeTypeRef: TypeRef runtimeType } =>
+                        $"() => new {runtimeType.FullyQualifiedName}()",
+                    { IsValueTuple: true } =>
+                        $"() => default({typeSpec.TypeRef.FullyQualifiedName})",
+                    { ConstructionStrategy: ObjectConstructionStrategy.ParameterlessConstructor } =>
+                        $"() => new {typeSpec.TypeRef.FullyQualifiedName}()",
                     _ => "null",
                 };
             }
@@ -1795,8 +1795,8 @@ namespace System.Text.Json.SourceGeneration
                     CollectionType.IListOfT or CollectionType.IList => "CreateIListInfo",
                     CollectionType.ICollectionOfT => "CreateICollectionInfo",
                     CollectionType.IEnumerableOfT
-                    or CollectionType.IEnumerable
-                        => "CreateIEnumerableInfo",
+                    or CollectionType.IEnumerable =>
+                        "CreateIEnumerableInfo",
                     CollectionType.StackOfT or CollectionType.Stack => "CreateStackInfo",
                     CollectionType.QueueOfT or CollectionType.Queue => "CreateQueueInfo",
                     CollectionType.ConcurrentStack => "CreateConcurrentStackInfo",
@@ -1809,8 +1809,8 @@ namespace System.Text.Json.SourceGeneration
 
                     CollectionType.Dictionary => "CreateDictionaryInfo",
                     CollectionType.IDictionaryOfTKeyTValue
-                    or CollectionType.IDictionary
-                        => "CreateIDictionaryInfo",
+                    or CollectionType.IDictionary =>
+                        "CreateIDictionaryInfo",
                     CollectionType.IReadOnlyDictionary => "CreateIReadOnlyDictionaryInfo",
                     CollectionType.ImmutableDictionary => "CreateImmutableDictionaryInfo",
 

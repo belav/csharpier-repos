@@ -3220,10 +3220,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var alias = (AliasSymbol)symbol;
                     return alias.Target switch
                     {
-                        TypeSymbol typeSymbol
-                            => new BoundTypeExpression(node, alias, typeSymbol, hasErrors: isError),
-                        NamespaceSymbol namespaceSymbol
-                            => new BoundNamespaceExpression(
+                        TypeSymbol typeSymbol =>
+                            new BoundTypeExpression(node, alias, typeSymbol, hasErrors: isError),
+                        NamespaceSymbol namespaceSymbol =>
+                            new BoundNamespaceExpression(
                                 node,
                                 namespaceSymbol,
                                 alias,
@@ -7065,20 +7065,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ExpressionElementSyntax
                     {
                         Expression: CollectionExpressionSyntax nestedCollectionExpression
-                    }
-                        => @this.BindCollectionExpression(
+                    } =>
+                        @this.BindCollectionExpression(
                             nestedCollectionExpression,
                             diagnostics,
                             nestingLevel + 1
                         ),
-                    ExpressionElementSyntax expressionElementSyntax
-                        => @this.BindValue(
+                    ExpressionElementSyntax expressionElementSyntax =>
+                        @this.BindValue(
                             expressionElementSyntax.Expression,
                             diagnostics,
                             BindValueKind.RValue
                         ),
-                    SpreadElementSyntax spreadElementSyntax
-                        => bindSpreadElement(spreadElementSyntax, diagnostics, @this),
+                    SpreadElementSyntax spreadElementSyntax =>
+                        bindSpreadElement(spreadElementSyntax, diagnostics, @this),
                     _ => throw ExceptionUtilities.UnexpectedValue(syntax.Kind())
                 };
             }
@@ -8422,8 +8422,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Location location = creationSyntax switch
                 {
                     ObjectCreationExpressionSyntax { Type: { } type } => type.Location,
-                    BaseObjectCreationExpressionSyntax { NewKeyword: { } newKeyword }
-                        => newKeyword.GetLocation(),
+                    BaseObjectCreationExpressionSyntax { NewKeyword: { } newKeyword } =>
+                        newKeyword.GetLocation(),
                     AttributeSyntax { Name: { } name } => name.Location,
                     _ => creationSyntax.Location
                 };

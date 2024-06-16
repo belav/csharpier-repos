@@ -430,12 +430,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     : testData.ExistingContext switch
                     {
                         ExistingContextType.FrameworkDependent => sharedState.AppPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks
-                            => sharedState.SelfContainedApp.AppDll,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks
-                            => sharedState.SelfContainedApp_IncludedFrameworks.AppDll,
-                        _
-                            => throw new Exception(
+                        ExistingContextType.SelfContained_NoIncludedFrameworks =>
+                            sharedState.SelfContainedApp.AppDll,
+                        ExistingContextType.SelfContained_WithIncludedFrameworks =>
+                            sharedState.SelfContainedApp_IncludedFrameworks.AppDll,
+                        _ =>
+                            throw new Exception(
                                 $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
                             )
                     };
@@ -446,12 +446,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     : testData.ExistingContext switch
                     {
                         ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks
-                            => sharedState.SelfContainedApp.HostFxrDll,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks
-                            => sharedState.SelfContainedApp_IncludedFrameworks.HostFxrDll,
-                        _
-                            => throw new Exception(
+                        ExistingContextType.SelfContained_NoIncludedFrameworks =>
+                            sharedState.SelfContainedApp.HostFxrDll,
+                        ExistingContextType.SelfContained_WithIncludedFrameworks =>
+                            sharedState.SelfContainedApp_IncludedFrameworks.HostFxrDll,
+                        _ =>
+                            throw new Exception(
                                 $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
                             )
                     };

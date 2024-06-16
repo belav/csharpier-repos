@@ -2150,8 +2150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return (synthesizedIfMissing, hasAnyRequiredMembers) switch
             {
-                (false, _)
-                    => ConstructorConstraintError.NoPublicParameterlessConstructorOrAbstractType,
+                (false, _) =>
+                    ConstructorConstraintError.NoPublicParameterlessConstructorOrAbstractType,
                 (true, true) => ConstructorConstraintError.HasRequiredMembers,
                 (true, false) => ConstructorConstraintError.None,
             };

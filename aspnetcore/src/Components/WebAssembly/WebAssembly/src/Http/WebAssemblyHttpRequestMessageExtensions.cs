@@ -41,10 +41,8 @@ public static class WebAssemblyHttpRequestMessageExtensions
             BrowserRequestCredentials.Omit => "omit",
             BrowserRequestCredentials.SameOrigin => "same-origin",
             BrowserRequestCredentials.Include => "include",
-            _
-                => throw new InvalidOperationException(
-                    $"Unsupported enum value {requestCredentials}."
-                )
+            _ =>
+                throw new InvalidOperationException($"Unsupported enum value {requestCredentials}.")
         };
 
         return SetBrowserRequestOption(requestMessage, "credentials", stringOption);

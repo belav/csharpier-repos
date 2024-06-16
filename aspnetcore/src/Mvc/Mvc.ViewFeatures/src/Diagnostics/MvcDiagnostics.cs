@@ -58,8 +58,8 @@ public sealed class BeforeViewComponentEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(ViewComponentContext),
                     ViewComponentContext
                 ),
@@ -126,8 +126,8 @@ public sealed class AfterViewComponentEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(ViewComponentContext),
                     ViewComponentContext
                 ),
@@ -187,8 +187,8 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(ViewComponentContext),
                     ViewComponentContext
                 ),
@@ -247,8 +247,8 @@ public sealed class ViewComponentAfterViewExecuteEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(ViewComponentContext),
                     ViewComponentContext
                 ),
@@ -415,8 +415,8 @@ public sealed class ViewFoundEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(IsMainPage),
                     IsMainPage ? BoxedTrue : BoxedFalse
                 ),
@@ -497,8 +497,8 @@ public sealed class ViewNotFoundEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(IsMainPage),
                     IsMainPage ? BoxedTrue : BoxedFalse
                 ),

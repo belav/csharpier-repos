@@ -39,18 +39,18 @@ namespace System.Text.RegularExpressions
             {
                 FindMode = (LeadingAnchor, _rightToLeft) switch
                 {
-                    (RegexNodeKind.Beginning, false)
-                        => FindNextStartingPositionMode.LeadingAnchor_LeftToRight_Beginning,
-                    (RegexNodeKind.Beginning, true)
-                        => FindNextStartingPositionMode.LeadingAnchor_RightToLeft_Beginning,
-                    (RegexNodeKind.Start, false)
-                        => FindNextStartingPositionMode.LeadingAnchor_LeftToRight_Start,
-                    (RegexNodeKind.Start, true)
-                        => FindNextStartingPositionMode.LeadingAnchor_RightToLeft_Start,
-                    (RegexNodeKind.End, false)
-                        => FindNextStartingPositionMode.LeadingAnchor_LeftToRight_End,
-                    (RegexNodeKind.End, true)
-                        => FindNextStartingPositionMode.LeadingAnchor_RightToLeft_End,
+                    (RegexNodeKind.Beginning, false) =>
+                        FindNextStartingPositionMode.LeadingAnchor_LeftToRight_Beginning,
+                    (RegexNodeKind.Beginning, true) =>
+                        FindNextStartingPositionMode.LeadingAnchor_RightToLeft_Beginning,
+                    (RegexNodeKind.Start, false) =>
+                        FindNextStartingPositionMode.LeadingAnchor_LeftToRight_Start,
+                    (RegexNodeKind.Start, true) =>
+                        FindNextStartingPositionMode.LeadingAnchor_RightToLeft_Start,
+                    (RegexNodeKind.End, false) =>
+                        FindNextStartingPositionMode.LeadingAnchor_LeftToRight_End,
+                    (RegexNodeKind.End, true) =>
+                        FindNextStartingPositionMode.LeadingAnchor_RightToLeft_End,
                     (_, false) => FindNextStartingPositionMode.LeadingAnchor_LeftToRight_EndZ,
                     (_, true) => FindNextStartingPositionMode.LeadingAnchor_RightToLeft_EndZ,
                 };

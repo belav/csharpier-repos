@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             {
                 "csc" => LanguageNames.CSharp,
                 "vbc" => LanguageNames.VisualBasic,
-                _
-                    => throw new NotSupportedException(
+                _ =>
+                    throw new NotSupportedException(
                         $"Tool '{invocationInfo.Tool}' is not supported."
                     ),
             };

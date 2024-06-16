@@ -178,8 +178,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             // CompareTo(a, b) != 0 -> a != b
             // CompareTo(a, b) != 1 -> a <= b
             // CompareTo(a, b) != -1 -> a >= b
-            ExpressionType.NotEqual
-                => (SqlExpression)Visit(
+            ExpressionType.NotEqual =>
+                (SqlExpression)Visit(
                     intValue switch
                     {
                         0 => _sqlExpressionFactory.NotEqual(testLeft, testRight),
@@ -190,8 +190,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             // CompareTo(a, b) > 0 -> a > b
             // CompareTo(a, b) > 1 -> false
             // CompareTo(a, b) > -1 -> a >= b
-            ExpressionType.GreaterThan
-                => (SqlExpression)Visit(
+            ExpressionType.GreaterThan =>
+                (SqlExpression)Visit(
                     intValue switch
                     {
                         0 => _sqlExpressionFactory.GreaterThan(testLeft, testRight),
@@ -202,8 +202,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             // CompareTo(a, b) >= 0 -> a >= b
             // CompareTo(a, b) >= 1 -> a > b
             // CompareTo(a, b) >= -1 -> true
-            ExpressionType.GreaterThanOrEqual
-                => (SqlExpression)Visit(
+            ExpressionType.GreaterThanOrEqual =>
+                (SqlExpression)Visit(
                     intValue switch
                     {
                         0 => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
@@ -214,8 +214,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             // CompareTo(a, b) < 0 -> a < b
             // CompareTo(a, b) < 1 -> a <= b
             // CompareTo(a, b) < -1 -> false
-            ExpressionType.LessThan
-                => (SqlExpression)Visit(
+            ExpressionType.LessThan =>
+                (SqlExpression)Visit(
                     intValue switch
                     {
                         0 => _sqlExpressionFactory.LessThan(testLeft, testRight),
@@ -224,8 +224,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                     }
                 ),
 
-            _
-                => (SqlExpression)Visit(
+            _ =>
+                (SqlExpression)Visit(
                     intValue switch
                     {
                         0 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
@@ -301,16 +301,16 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 var leftValues = leftCandidateInfo.ValueOrValues switch
                 {
                     IReadOnlyList<SqlExpression> v => v,
-                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null
-                        => new[] { c },
+                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null =>
+                        new[] { c },
                     _ => null
                 };
 
                 var rightValues = rightCandidateInfo.ValueOrValues switch
                 {
                     IReadOnlyList<SqlExpression> v => v,
-                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null
-                        => new[] { c },
+                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null =>
+                        new[] { c },
                     _ => null
                 };
 

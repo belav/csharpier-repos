@@ -273,8 +273,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
-                        null
-                            => _sqlExpressionFactory.Like(
+                        null =>
+                            _sqlExpressionFactory.Like(
                                 translatedInstance,
                                 _sqlExpressionFactory.Constant(null, stringTypeMapping)
                             ),
@@ -283,28 +283,28 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                         // Return % which always matches instead.
                         // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
-                        ""
-                            => _sqlExpressionFactory.Like(
+                        "" =>
+                            _sqlExpressionFactory.Like(
                                 translatedInstance,
                                 _sqlExpressionFactory.Constant("%")
                             ),
 
-                        string s
-                            => s.Any(IsLikeWildChar)
+                        string s =>
+                            s.Any(IsLikeWildChar)
                                 ? _sqlExpressionFactory.Like(
                                     translatedInstance,
                                     _sqlExpressionFactory.Constant(
                                         methodType switch
                                         {
-                                            StartsEndsWithContains.StartsWith
-                                                => EscapeLikePattern(s) + '%',
-                                            StartsEndsWithContains.EndsWith
-                                                => '%' + EscapeLikePattern(s),
-                                            StartsEndsWithContains.Contains
-                                                => $"%{EscapeLikePattern(s)}%",
+                                            StartsEndsWithContains.StartsWith =>
+                                                EscapeLikePattern(s) + '%',
+                                            StartsEndsWithContains.EndsWith =>
+                                                '%' + EscapeLikePattern(s),
+                                            StartsEndsWithContains.Contains =>
+                                                $"%{EscapeLikePattern(s)}%",
 
-                                            _
-                                                => throw new ArgumentOutOfRangeException(
+                                            _ =>
+                                                throw new ArgumentOutOfRangeException(
                                                     nameof(methodType),
                                                     methodType,
                                                     null
@@ -322,8 +322,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                                             StartsEndsWithContains.EndsWith => '%' + s,
                                             StartsEndsWithContains.Contains => $"%{s}%",
 
-                                            _
-                                                => throw new ArgumentOutOfRangeException(
+                                            _ =>
+                                                throw new ArgumentOutOfRangeException(
                                                     nameof(methodType),
                                                     methodType,
                                                     null
@@ -385,8 +385,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                         // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
                         StartsEndsWithContains.StartsWith
-                        or StartsEndsWithContains.EndsWith
-                            => _sqlExpressionFactory.AndAlso(
+                        or StartsEndsWithContains.EndsWith =>
+                            _sqlExpressionFactory.AndAlso(
                                 _sqlExpressionFactory.IsNotNull(translatedInstance),
                                 _sqlExpressionFactory.AndAlso(
                                     _sqlExpressionFactory.IsNotNull(translatedPattern),
@@ -418,8 +418,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
 
                         // For Contains, just use CHARINDEX and check if the result is greater than 0.
                         // Add a check to return null when the pattern is an empty string (and the string isn't null)
-                        StartsEndsWithContains.Contains
-                            => _sqlExpressionFactory.AndAlso(
+                        StartsEndsWithContains.Contains =>
+                            _sqlExpressionFactory.AndAlso(
                                 _sqlExpressionFactory.IsNotNull(translatedInstance),
                                 _sqlExpressionFactory.AndAlso(
                                     _sqlExpressionFactory.IsNotNull(translatedPattern),
@@ -466,8 +466,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             // Return % which always matches instead.
             "" => "%",
 
-            string s
-                => methodType switch
+            string s =>
+                methodType switch
                 {
                     StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
                     StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),

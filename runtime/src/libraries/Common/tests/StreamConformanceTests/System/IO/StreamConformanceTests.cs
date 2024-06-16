@@ -161,14 +161,14 @@ namespace System.IO.Tests
             {
                 ReadWriteMode.SyncArray => stream.Read(buffer, offset, count),
                 ReadWriteMode.SyncSpan => stream.Read(buffer.AsSpan(offset, count)),
-                ReadWriteMode.AsyncArray
-                    => await stream.ReadAsync(buffer, offset, count, cancellationToken),
-                ReadWriteMode.AsyncMemory
-                    => await stream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken),
-                ReadWriteMode.SyncAPM
-                    => stream.EndRead(stream.BeginRead(buffer, offset, count, null, null)),
-                ReadWriteMode.AsyncAPM
-                    => await Task.Factory.FromAsync(
+                ReadWriteMode.AsyncArray =>
+                    await stream.ReadAsync(buffer, offset, count, cancellationToken),
+                ReadWriteMode.AsyncMemory =>
+                    await stream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken),
+                ReadWriteMode.SyncAPM =>
+                    stream.EndRead(stream.BeginRead(buffer, offset, count, null, null)),
+                ReadWriteMode.AsyncAPM =>
+                    await Task.Factory.FromAsync(
                         stream.BeginRead,
                         stream.EndRead,
                         buffer,
@@ -1877,8 +1877,8 @@ namespace System.IO.Tests
                     origin switch
                     {
                         SeekOrigin.Begin => rand.Next(0, (int)stream.Length - bytesToRead),
-                        SeekOrigin.Current
-                            => rand.Next(
+                        SeekOrigin.Current =>
+                            rand.Next(
                                 -(int)stream.Position + bytesToRead,
                                 (int)stream.Length - (int)stream.Position - bytesToRead
                             ),

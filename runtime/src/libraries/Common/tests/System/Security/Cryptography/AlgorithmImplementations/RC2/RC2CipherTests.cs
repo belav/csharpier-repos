@@ -183,8 +183,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     byte[] oneShotEncrypt = cipherMode switch
                     {
                         CipherMode.ECB => alg.EncryptEcb(textHex.HexToByteArray(), paddingMode),
-                        CipherMode.CBC
-                            => alg.EncryptCbc(
+                        CipherMode.CBC =>
+                            alg.EncryptCbc(
                                 textHex.HexToByteArray(),
                                 iv.HexToByteArray(),
                                 paddingMode

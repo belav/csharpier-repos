@@ -48,8 +48,8 @@ internal readonly record struct RouteUsageContext(
         UsageType switch
         {
             RouteUsageType.MvcAction
-            or RouteUsageType.MvcController
-                => RoutePatternOptions.MvcAttributeRoute,
+            or RouteUsageType.MvcController =>
+                RoutePatternOptions.MvcAttributeRoute,
             RouteUsageType.Component => RoutePatternOptions.ComponentsRoute,
             _ => RoutePatternOptions.DefaultRoute,
         };

@@ -416,8 +416,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 _pattern._info.ContainsSomeAnchor
             ) switch
             {
-                (true, true, true)
-                    => FindEndPosition<
+                (true, true, true) =>
+                    FindEndPosition<
                         FullInputReader,
                         InitialStateFindOptimizationsHandler,
                         FullNullabilityHandler
@@ -430,8 +430,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (true, true, false)
-                    => FindEndPosition<
+                (true, true, false) =>
+                    FindEndPosition<
                         FullInputReader,
                         InitialStateFindOptimizationsHandler,
                         NoAnchorsNullabilityHandler
@@ -444,8 +444,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (true, false, true)
-                    => FindEndPosition<
+                (true, false, true) =>
+                    FindEndPosition<
                         FullInputReader,
                         NoOptimizationsInitialStateHandler,
                         FullNullabilityHandler
@@ -458,8 +458,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (true, false, false)
-                    => FindEndPosition<
+                (true, false, false) =>
+                    FindEndPosition<
                         FullInputReader,
                         NoOptimizationsInitialStateHandler,
                         NoAnchorsNullabilityHandler
@@ -472,8 +472,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (false, true, true)
-                    => FindEndPosition<
+                (false, true, true) =>
+                    FindEndPosition<
                         NoZAnchorInputReader,
                         InitialStateFindOptimizationsHandler,
                         FullNullabilityHandler
@@ -486,8 +486,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (false, true, false)
-                    => FindEndPosition<
+                (false, true, false) =>
+                    FindEndPosition<
                         NoZAnchorInputReader,
                         InitialStateFindOptimizationsHandler,
                         NoAnchorsNullabilityHandler
@@ -500,8 +500,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (false, false, true)
-                    => FindEndPosition<
+                (false, false, true) =>
+                    FindEndPosition<
                         NoZAnchorInputReader,
                         NoOptimizationsInitialStateHandler,
                         FullNullabilityHandler
@@ -514,8 +514,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         out matchStartLengthMarker,
                         perThreadData
                     ),
-                (false, false, false)
-                    => FindEndPosition<
+                (false, false, false) =>
+                    FindEndPosition<
                         NoZAnchorInputReader,
                         NoOptimizationsInitialStateHandler,
                         NoAnchorsNullabilityHandler
@@ -565,29 +565,29 @@ namespace System.Text.RegularExpressions.Symbolic
                             _pattern._info.ContainsSomeAnchor
                         ) switch
                         {
-                            (true, true)
-                                => FindStartPosition<FullInputReader, FullNullabilityHandler>(
+                            (true, true) =>
+                                FindStartPosition<FullInputReader, FullNullabilityHandler>(
                                     input,
                                     matchEnd,
                                     matchStartLowBoundary,
                                     perThreadData
                                 ),
-                            (true, false)
-                                => FindStartPosition<FullInputReader, NoAnchorsNullabilityHandler>(
+                            (true, false) =>
+                                FindStartPosition<FullInputReader, NoAnchorsNullabilityHandler>(
                                     input,
                                     matchEnd,
                                     matchStartLowBoundary,
                                     perThreadData
                                 ),
-                            (false, true)
-                                => FindStartPosition<NoZAnchorInputReader, FullNullabilityHandler>(
+                            (false, true) =>
+                                FindStartPosition<NoZAnchorInputReader, FullNullabilityHandler>(
                                     input,
                                     matchEnd,
                                     matchStartLowBoundary,
                                     perThreadData
                                 ),
-                            (false, false)
-                                => FindStartPosition<
+                            (false, false) =>
+                                FindStartPosition<
                                     NoZAnchorInputReader,
                                     NoAnchorsNullabilityHandler
                                 >(input, matchEnd, matchStartLowBoundary, perThreadData),

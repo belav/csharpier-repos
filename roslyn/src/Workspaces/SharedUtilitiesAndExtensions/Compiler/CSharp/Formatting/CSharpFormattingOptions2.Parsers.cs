@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             {
                 NewLineBeforeOpenBracePlacement.None => "none",
                 NewLineBeforeOpenBracePlacement.All => "all",
-                _
-                    => ToEditorConfigFlagList(
+                _ =>
+                    ToEditorConfigFlagList(
                         (int)value,
                         static v =>
                             s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]

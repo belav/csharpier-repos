@@ -2174,8 +2174,8 @@ namespace Microsoft.CodeAnalysis
             {
                 SolutionOptionSet serializableOptions => WithOptions(serializableOptions),
                 null => throw new ArgumentNullException(nameof(options)),
-                _
-                    => throw new ArgumentException(
+                _ =>
+                    throw new ArgumentException(
                         WorkspacesResources.Options_did_not_come_from_specified_Solution,
                         paramName: nameof(options)
                     )

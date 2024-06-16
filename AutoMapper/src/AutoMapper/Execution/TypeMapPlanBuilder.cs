@@ -367,8 +367,8 @@ public ref struct TypeMapPlanBuilder
         static Expression GetSetter(MemberExpression memberExpression) =>
             memberExpression.Member switch
             {
-                PropertyInfo { CanWrite: true } property
-                    => Property(memberExpression.Expression, property),
+                PropertyInfo { CanWrite: true } property =>
+                    Property(memberExpression.Expression, property),
                 FieldInfo { IsInitOnly: false } field => Field(memberExpression.Expression, field),
                 _ => null,
             };
@@ -407,15 +407,15 @@ public ref struct TypeMapPlanBuilder
     private Expression CreateNewDestinationFunc() =>
         _typeMap switch
         {
-            { CustomCtorFunction: LambdaExpression constructUsingFunc }
-                => _configuration.ReplaceParameters(
+            { CustomCtorFunction: LambdaExpression constructUsingFunc } =>
+                _configuration.ReplaceParameters(
                     constructUsingFunc,
                     GetParameters(second: ContextParameter)
                 ),
-            { ConstructorMap: { CanResolve: true } constructorMap }
-                => ConstructorMapping(constructorMap),
-            { DestinationType: { IsInterface: true } interfaceType }
-                => Throw(
+            { ConstructorMap: { CanResolve: true } constructorMap } =>
+                ConstructorMapping(constructorMap),
+            { DestinationType: { IsInterface: true } interfaceType } =>
+                Throw(
                     Constant(
                         new AutoMapperMappingException(
                             "Cannot create interface " + interfaceType,
@@ -811,11 +811,11 @@ public class ValueConverter : ValueResolverConfig, IValueResolver
         var sourceMemberType = InterfaceType.GenericTypeArguments[0];
         var sourceMember = this switch
         {
-            { SourceMemberLambda: { } }
-                => configuration.ReplaceParameters(SourceMemberLambda, source),
+            { SourceMemberLambda: { } } =>
+                configuration.ReplaceParameters(SourceMemberLambda, source),
             { SourceMemberName: { } } => PropertyOrField(source, SourceMemberName),
-            _ when memberMap.SourceMembers.Length > 0
-                => memberMap.ChainSourceMembers(configuration, source, destinationMember),
+            _ when memberMap.SourceMembers.Length > 0 =>
+                memberMap.ChainSourceMembers(configuration, source, destinationMember),
             _ => Throw(Constant(BuildExceptionMessage()), sourceMemberType)
         };
         return Call(

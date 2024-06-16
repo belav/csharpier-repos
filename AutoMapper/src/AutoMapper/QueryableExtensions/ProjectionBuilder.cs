@@ -235,10 +235,10 @@ public class ProjectionBuilder : IProjectionBuilder
                     var customSource = memberMap.IncludedMember?.ProjectToCustomSource;
                     var resolvedSource = memberMap switch
                     {
-                        { CustomMapExpression: LambdaExpression mapFrom }
-                            => MapFromExpression(mapFrom),
-                        { SourceMembers.Length: > 0 }
-                            => memberMap.ChainSourceMembers(CheckCustomSource()),
+                        { CustomMapExpression: LambdaExpression mapFrom } =>
+                            MapFromExpression(mapFrom),
+                        { SourceMembers.Length: > 0 } =>
+                            memberMap.ChainSourceMembers(CheckCustomSource()),
                         _ => defaultSource ?? throw CannotMap(memberMap, request.SourceType)
                     };
                     if (NullSubstitute())
@@ -300,10 +300,10 @@ public class ProjectionBuilder : IProjectionBuilder
         NewExpression CreateDestination() =>
             typeMap switch
             {
-                { CustomCtorExpression: LambdaExpression ctorExpression }
-                    => (NewExpression)ctorExpression.ReplaceParameters(instanceParameter),
-                { ConstructorMap: { CanResolve: true } constructorMap }
-                    => New(
+                { CustomCtorExpression: LambdaExpression ctorExpression } =>
+                    (NewExpression)ctorExpression.ReplaceParameters(instanceParameter),
+                { ConstructorMap: { CanResolve: true } constructorMap } =>
+                    New(
                         constructorMap.Ctor,
                         constructorMap.CtorParams.Select(map =>
                             TryProjectMember(map, map.DefaultValue(null))

@@ -34,23 +34,23 @@ internal sealed class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<str
 
             return index switch
             {
-                0
-                    => new KeyValuePair<string, object?>(
+                0 =>
+                    new KeyValuePair<string, object?>(
                         "ElapsedMilliseconds",
                         Elapsed.TotalMilliseconds
                     ),
-                1
-                    => new KeyValuePair<string, object?>(
+                1 =>
+                    new KeyValuePair<string, object?>(
                         nameof(response.StatusCode),
                         response.StatusCode
                     ),
-                2
-                    => new KeyValuePair<string, object?>(
+                2 =>
+                    new KeyValuePair<string, object?>(
                         nameof(response.ContentType),
                         response.ContentType
                     ),
-                3
-                    => new KeyValuePair<string, object?>(
+                3 =>
+                    new KeyValuePair<string, object?>(
                         nameof(response.ContentLength),
                         response.ContentLength
                     ),
@@ -58,14 +58,14 @@ internal sealed class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<str
                 5 => new KeyValuePair<string, object?>(nameof(request.Method), request.Method),
                 6 => new KeyValuePair<string, object?>(nameof(request.Scheme), request.Scheme),
                 7 => new KeyValuePair<string, object?>(nameof(request.Host), request.Host.Value),
-                8
-                    => new KeyValuePair<string, object?>(
+                8 =>
+                    new KeyValuePair<string, object?>(
                         nameof(request.PathBase),
                         request.PathBase.Value
                     ),
                 9 => new KeyValuePair<string, object?>(nameof(request.Path), request.Path.Value),
-                10
-                    => new KeyValuePair<string, object?>(
+                10 =>
+                    new KeyValuePair<string, object?>(
                         nameof(request.QueryString),
                         request.QueryString.Value
                     ),

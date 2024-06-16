@@ -139,10 +139,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             static string GetFrameworkForTitle(InteractiveHostPlatform platform) =>
                 platform switch
                 {
-                    InteractiveHostPlatform.Desktop64
-                        => " (.NET Framework " + ServicesVSResources.Bitness64 + ")",
-                    InteractiveHostPlatform.Desktop32
-                        => " (.NET Framework " + ServicesVSResources.Bitness32 + ")",
+                    InteractiveHostPlatform.Desktop64 =>
+                        " (.NET Framework " + ServicesVSResources.Bitness64 + ")",
+                    InteractiveHostPlatform.Desktop32 =>
+                        " (.NET Framework " + ServicesVSResources.Bitness32 + ")",
                     InteractiveHostPlatform.Core => " (.NET Core)",
                     _ => throw ExceptionUtilities.Unreachable()
                 };

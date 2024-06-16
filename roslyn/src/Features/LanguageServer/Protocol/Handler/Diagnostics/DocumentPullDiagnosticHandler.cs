@@ -115,11 +115,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             var diagnosticKind = category switch
             {
                 PullDiagnosticCategories.DocumentCompilerSyntax => DiagnosticKind.CompilerSyntax,
-                PullDiagnosticCategories.DocumentCompilerSemantic
-                    => DiagnosticKind.CompilerSemantic,
+                PullDiagnosticCategories.DocumentCompilerSemantic =>
+                    DiagnosticKind.CompilerSemantic,
                 PullDiagnosticCategories.DocumentAnalyzerSyntax => DiagnosticKind.AnalyzerSyntax,
-                PullDiagnosticCategories.DocumentAnalyzerSemantic
-                    => DiagnosticKind.AnalyzerSemantic,
+                PullDiagnosticCategories.DocumentAnalyzerSemantic =>
+                    DiagnosticKind.AnalyzerSemantic,
                 // if this request doesn't have a category at all (legacy behavior, assume they're asking about everything).
                 null => DiagnosticKind.All,
                 // if it's a category we don't recognize, return nothing.

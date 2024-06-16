@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 bool val => GenerateBooleanLiteralExpression(val),
                 string val => GenerateStringLiteralExpression(val),
                 char val => GenerateCharLiteralExpression(val),
-                sbyte val
-                    => GenerateLiteralExpression(
+                sbyte val =>
+                    GenerateLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.SByteSpecialValues,
@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         x => (sbyte)-x,
                         "128"
                     ),
-                short val
-                    => GenerateLiteralExpression(
+                short val =>
+                    GenerateLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.Int16SpecialValues,
@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         x => (short)-x,
                         "32768"
                     ),
-                int val
-                    => GenerateLiteralExpression(
+                int val =>
+                    GenerateLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.Int32SpecialValues,
@@ -144,8 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         x => -x,
                         "2147483648"
                     ),
-                long val
-                    => GenerateLiteralExpression(
+                long val =>
+                    GenerateLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.Int64SpecialValues,
@@ -156,8 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         x => -x,
                         "9223372036854775808"
                     ),
-                byte val
-                    => GenerateNonNegativeLiteralExpression(
+                byte val =>
+                    GenerateNonNegativeLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.ByteSpecialValues,
@@ -165,8 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         canUseFieldReference,
                         (s, v) => SyntaxFactory.Literal(s, v)
                     ),
-                ushort val
-                    => GenerateNonNegativeLiteralExpression(
+                ushort val =>
+                    GenerateNonNegativeLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.UInt16SpecialValues,
@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         canUseFieldReference,
                         (s, v) => SyntaxFactory.Literal(s, (uint)v)
                     ),
-                uint val
-                    => GenerateNonNegativeLiteralExpression(
+                uint val =>
+                    GenerateNonNegativeLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.UInt32SpecialValues,
@@ -183,8 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         canUseFieldReference,
                         SyntaxFactory.Literal
                     ),
-                ulong val
-                    => GenerateNonNegativeLiteralExpression(
+                ulong val =>
+                    GenerateNonNegativeLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.UInt64SpecialValues,
@@ -194,8 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     ),
                 float val => GenerateSingleLiteralExpression(type, val, canUseFieldReference),
                 double val => GenerateDoubleLiteralExpression(type, val, canUseFieldReference),
-                decimal val
-                    => GenerateLiteralExpression(
+                decimal val =>
+                    GenerateLiteralExpression(
                         type,
                         val,
                         LiteralSpecialValues.DecimalSpecialValues,
@@ -206,8 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         x => -x,
                         integerMinValueString: null
                     ),
-                _
-                    => type == null
+                _ =>
+                    type == null
                     || type.IsReferenceType
                     || type is IPointerTypeSymbol
                     || type.IsNullable()

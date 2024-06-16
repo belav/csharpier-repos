@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
 
             var type = document.Project.Language switch
             {
-                LanguageNames.CSharp
-                    => semanticModel
+                LanguageNames.CSharp =>
+                    semanticModel
                         .GetSpeculativeTypeInfo(
                             0,
                             CSharp.SyntaxFactory.ParseTypeName(
@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                             SpeculativeBindingOption.BindAsTypeOrNamespace
                         )
                         .Type,
-                LanguageNames.VisualBasic
-                    => semanticModel
+                LanguageNames.VisualBasic =>
+                    semanticModel
                         .GetSpeculativeTypeInfo(
                             0,
                             VisualBasic.SyntaxFactory.ParseTypeName(

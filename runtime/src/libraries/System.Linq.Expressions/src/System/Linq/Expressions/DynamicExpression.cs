@@ -1607,16 +1607,16 @@ namespace System.Linq.Expressions
             return n switch
             {
                 1 => DynamicExpression.Make(returnType, delegateType, binder, arguments[0]),
-                2
-                    => DynamicExpression.Make(
+                2 =>
+                    DynamicExpression.Make(
                         returnType,
                         delegateType,
                         binder,
                         arguments[0],
                         arguments[1]
                     ),
-                3
-                    => DynamicExpression.Make(
+                3 =>
+                    DynamicExpression.Make(
                         returnType,
                         delegateType,
                         binder,
@@ -1624,8 +1624,8 @@ namespace System.Linq.Expressions
                         arguments[1],
                         arguments[2]
                     ),
-                4
-                    => DynamicExpression.Make(
+                4 =>
+                    DynamicExpression.Make(
                         returnType,
                         delegateType,
                         binder,

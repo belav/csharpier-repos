@@ -173,12 +173,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return (symbol) switch
             {
-                ParameterSymbol parameter
-                    =>
+                ParameterSymbol parameter =>
                     // in Debug build hoist all parameters that can be hoisted:
                     !parameter.Type.IsRestrictedType(),
-                LocalSymbol { IsConst: false, IsPinned: false, IsRef: false } local
-                    =>
+                LocalSymbol { IsConst: false, IsPinned: false, IsRef: false } local =>
                     // hoist all user-defined locals and long-lived temps that can be hoisted:
                     local.SynthesizedKind.MustSurviveStateMachineSuspension()
                         && !local.Type.IsRestrictedType(),

@@ -43,8 +43,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 MethodIL il = md switch
                 {
                     EcmaMethod em => EcmaMethodIL.Create(em),
-                    _
-                        => new InstantiatedMethodIL(
+                    _ =>
+                        new InstantiatedMethodIL(
                             md,
                             EcmaMethodIL.Create((EcmaMethod)md.GetTypicalMethodDefinition())
                         ),

@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 4000,
                 (8, ExecutionConfiguration.Debug) => 4000,
                 (8, ExecutionConfiguration.Release) => 4000,
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
                     )
             };
@@ -197,8 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release, true) => 1_600,
                 (8, ExecutionConfiguration.Debug, true) => 1_100,
                 (8, ExecutionConfiguration.Release, true) => 3_300,
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}, Desktop: {RuntimeUtilities.IsDesktopRuntime}"
                     )
             };
@@ -284,8 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 1290, // 1290
                 (8, ExecutionConfiguration.Debug) => 270, // 170
                 (8, ExecutionConfiguration.Release) => 730, // 730
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
                     )
             };
@@ -457,8 +457,8 @@ public class Test
                 (4, ExecutionConfiguration.Release) => 1650,
                 (8, ExecutionConfiguration.Debug) => 200,
                 (8, ExecutionConfiguration.Release) => 780,
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
                     )
             };
@@ -512,8 +512,8 @@ public class Test
                 (4, ExecutionConfiguration.Release) => 1100,
                 (8, ExecutionConfiguration.Debug) => 180,
                 (8, ExecutionConfiguration.Release) => 400,
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
                     )
             };

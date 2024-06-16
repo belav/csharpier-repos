@@ -441,19 +441,19 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             // and we want to display the most specific message possible.
             string? message = ex switch
             {
-                SecurityTokenInvalidAudienceException stia
-                    => $"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid",
-                SecurityTokenInvalidIssuerException stii
-                    => $"The issuer '{stii.InvalidIssuer ?? "(null)"}' is invalid",
+                SecurityTokenInvalidAudienceException stia =>
+                    $"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid",
+                SecurityTokenInvalidIssuerException stii =>
+                    $"The issuer '{stii.InvalidIssuer ?? "(null)"}' is invalid",
                 SecurityTokenNoExpirationException _ => "The token has no expiration",
-                SecurityTokenInvalidLifetimeException stil
-                    => "The token lifetime is invalid; NotBefore: "
+                SecurityTokenInvalidLifetimeException stil =>
+                    "The token lifetime is invalid; NotBefore: "
                         + $"'{stil.NotBefore?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
                         + $", Expires: '{stil.Expires?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'",
-                SecurityTokenNotYetValidException stnyv
-                    => $"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'",
-                SecurityTokenExpiredException ste
-                    => $"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'",
+                SecurityTokenNotYetValidException stnyv =>
+                    $"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'",
+                SecurityTokenExpiredException ste =>
+                    $"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'",
                 SecurityTokenSignatureKeyNotFoundException _ => "The signature key was not found",
                 SecurityTokenInvalidSignatureException _ => "The signature is invalid",
                 _ => null,

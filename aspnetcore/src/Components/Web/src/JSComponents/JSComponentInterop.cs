@@ -114,29 +114,29 @@ public class JSComponentInterop
                 // It's a statically-declared parameter, so we can parse it into a known .NET type.
                 parameterValue = parameterInfo.Kind switch
                 {
-                    ParameterKind.Value
-                        => JsonSerializer.Deserialize(
+                    ParameterKind.Value =>
+                        JsonSerializer.Deserialize(
                             parameterJsonValue,
                             parameterInfo.Type,
                             jsonOptions
                         ),
-                    ParameterKind.EventCallbackWithNoParameters
-                        => CreateEventCallbackWithNoParameters(
+                    ParameterKind.EventCallbackWithNoParameters =>
+                        CreateEventCallbackWithNoParameters(
                             JsonSerializer.Deserialize<IJSObjectReference>(
                                 parameterJsonValue,
                                 jsonOptions
                             )
                         ),
-                    ParameterKind.EventCallbackWithSingleParameter
-                        => CreateEventCallbackWithSingleParameter(
+                    ParameterKind.EventCallbackWithSingleParameter =>
+                        CreateEventCallbackWithSingleParameter(
                             parameterInfo.Type,
                             JsonSerializer.Deserialize<IJSObjectReference>(
                                 parameterJsonValue,
                                 jsonOptions
                             )
                         ),
-                    var x
-                        => throw new InvalidOperationException(
+                    var x =>
+                        throw new InvalidOperationException(
                             $"Invalid {nameof(ParameterKind)} '{x}'."
                         )
                 };
@@ -197,8 +197,8 @@ public class JSComponentInterop
         type switch
         {
             var x when x == typeof(EventCallback) => ParameterKind.EventCallbackWithNoParameters,
-            var x when x.IsGenericType && x.GetGenericTypeDefinition() == typeof(EventCallback<>)
-                => ParameterKind.EventCallbackWithSingleParameter,
+            var x when x.IsGenericType && x.GetGenericTypeDefinition() == typeof(EventCallback<>) =>
+                ParameterKind.EventCallbackWithSingleParameter,
             _ => ParameterKind.Value,
         };
 

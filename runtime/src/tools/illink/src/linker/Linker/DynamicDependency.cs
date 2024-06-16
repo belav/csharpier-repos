@@ -104,30 +104,30 @@ namespace Mono.Linker
 
             DynamicDependency? result = args[0].Value switch
             {
-                string stringMemberSignature
-                    => args.Count switch
+                string stringMemberSignature =>
+                    args.Count switch
                     {
                         1 => new DynamicDependency(stringMemberSignature),
-                        2 when args[1].Value is TypeReference type
-                            => new DynamicDependency(stringMemberSignature, type),
+                        2 when args[1].Value is TypeReference type =>
+                            new DynamicDependency(stringMemberSignature, type),
                         3
                             when args[1].Value is string typeName
-                                && args[2].Value is string assemblyName
-                            => new DynamicDependency(stringMemberSignature, typeName, assemblyName),
+                                && args[2].Value is string assemblyName =>
+                            new DynamicDependency(stringMemberSignature, typeName, assemblyName),
                         _ => null,
                     },
-                int memberTypes
-                    => args.Count switch
+                int memberTypes =>
+                    args.Count switch
                     {
-                        2 when args[1].Value is TypeReference type
-                            => new DynamicDependency(
+                        2 when args[1].Value is TypeReference type =>
+                            new DynamicDependency(
                                 (DynamicallyAccessedMemberTypes)memberTypes,
                                 type
                             ),
                         3
                             when args[1].Value is string typeName
-                                && args[2].Value is string assemblyName
-                            => new DynamicDependency(
+                                && args[2].Value is string assemblyName =>
+                            new DynamicDependency(
                                 (DynamicallyAccessedMemberTypes)memberTypes,
                                 typeName,
                                 assemblyName

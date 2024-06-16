@@ -1737,8 +1737,8 @@ public partial class TestDbContext : DbContext
             ) =>
                 annotation.Name switch
                 {
-                    "Test:TestModelAnnotation"
-                        => new MethodCallCodeFragment(_testFluentApiCallMethodInfo),
+                    "Test:TestModelAnnotation" =>
+                        new MethodCallCodeFragment(_testFluentApiCallMethodInfo),
                     _ => base.GenerateFluentApi(model, annotation)
                 };
         }

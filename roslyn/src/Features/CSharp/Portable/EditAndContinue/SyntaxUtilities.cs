@@ -20,37 +20,35 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         public static MemberBody? TryGetDeclarationBody(SyntaxNode node, ISymbol? symbol) =>
             node switch
             {
-                MethodDeclarationSyntax methodDeclaration
-                    => CreateSimpleBody(
+                MethodDeclarationSyntax methodDeclaration =>
+                    CreateSimpleBody(
                         BlockOrExpression(methodDeclaration.Body, methodDeclaration.ExpressionBody)
                     ),
-                ConversionOperatorDeclarationSyntax conversionDeclaration
-                    => CreateSimpleBody(
+                ConversionOperatorDeclarationSyntax conversionDeclaration =>
+                    CreateSimpleBody(
                         BlockOrExpression(
                             conversionDeclaration.Body,
                             conversionDeclaration.ExpressionBody
                         )
                     ),
-                OperatorDeclarationSyntax operatorDeclaration
-                    => CreateSimpleBody(
+                OperatorDeclarationSyntax operatorDeclaration =>
+                    CreateSimpleBody(
                         BlockOrExpression(
                             operatorDeclaration.Body,
                             operatorDeclaration.ExpressionBody
                         )
                     ),
-                DestructorDeclarationSyntax destructorDeclaration
-                    => CreateSimpleBody(
+                DestructorDeclarationSyntax destructorDeclaration =>
+                    CreateSimpleBody(
                         BlockOrExpression(
                             destructorDeclaration.Body,
                             destructorDeclaration.ExpressionBody
                         )
                     ),
 
-                AccessorDeclarationSyntax accessorDeclaration
-                    => BlockOrExpression(
-                        accessorDeclaration.Body,
-                        accessorDeclaration.ExpressionBody
-                    ) != null
+                AccessorDeclarationSyntax accessorDeclaration =>
+                    BlockOrExpression(accessorDeclaration.Body, accessorDeclaration.ExpressionBody)
+                    != null
                         ? new PropertyOrIndexerAccessorWithExplicitBodyDeclarationBody(
                             accessorDeclaration
                         )
@@ -67,18 +65,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         (kind: SyntaxKind.PropertyDeclaration)
                         or
                         (kind: SyntaxKind.IndexerDeclaration)
-                } arrowExpression
-                    => new PropertyOrIndexerWithExplicitBodyDeclarationBody(
+                } arrowExpression =>
+                    new PropertyOrIndexerWithExplicitBodyDeclarationBody(
                         (BasePropertyDeclarationSyntax)arrowExpression.Parent!
                     ),
 
-                PropertyDeclarationSyntax { Initializer: { } propertyInitializer }
-                    => CreateSimpleBody(propertyInitializer.Value),
+                PropertyDeclarationSyntax { Initializer: { } propertyInitializer } =>
+                    CreateSimpleBody(propertyInitializer.Value),
 
                 ConstructorDeclarationSyntax constructorDeclaration
                     when constructorDeclaration.Body != null
-                        || constructorDeclaration.ExpressionBody != null
-                    => constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+                        || constructorDeclaration.ExpressionBody != null =>
+                    constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
                         ? CreateSimpleBody(
                             BlockOrExpression(
                                 constructorDeclaration.Body,
@@ -93,18 +91,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                                 constructorDeclaration
                             ),
 
-                CompilationUnitSyntax unit when unit.ContainsGlobalStatements()
-                    => new TopLevelCodeDeclarationBody(unit),
+                CompilationUnitSyntax unit when unit.ContainsGlobalStatements() =>
+                    new TopLevelCodeDeclarationBody(unit),
 
                 VariableDeclaratorSyntax
                 {
                     Parent.Parent: BaseFieldDeclarationSyntax fieldDeclaration,
                     Initializer: { }
-                } variableDeclarator when !fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
-                    => new FieldWithInitializerDeclarationBody(variableDeclarator),
+                } variableDeclarator
+                    when !fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword) =>
+                    new FieldWithInitializerDeclarationBody(variableDeclarator),
 
-                ParameterListSyntax { Parent: TypeDeclarationSyntax typeDeclaration }
-                    => typeDeclaration
+                ParameterListSyntax { Parent: TypeDeclarationSyntax typeDeclaration } =>
+                    typeDeclaration
                         is { BaseList.Types: [PrimaryConstructorBaseTypeSyntax { }, ..] }
                         ? new PrimaryConstructorWithExplicitInitializerDeclarationBody(
                             typeDeclaration
@@ -114,13 +113,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         ),
 
                 // Record type itself does not have a body, create body only when the declaration represents copy constructor:
-                RecordDeclarationSyntax recordDeclarationSyntax when symbol is not INamedTypeSymbol
-                    => new CopyConstructorDeclarationBody(recordDeclarationSyntax),
+                RecordDeclarationSyntax recordDeclarationSyntax
+                    when symbol is not INamedTypeSymbol =>
+                    new CopyConstructorDeclarationBody(recordDeclarationSyntax),
 
                 // Parameters themselves do not have a body, the synthesized property accessors do:
                 ParameterSyntax { Parent.Parent: RecordDeclarationSyntax } parameterSyntax
-                    when symbol is not IParameterSymbol
-                    => new RecordParameterDeclarationBody(parameterSyntax),
+                    when symbol is not IParameterSymbol =>
+                    new RecordParameterDeclarationBody(parameterSyntax),
 
                 _ => null
             };
@@ -285,8 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return declaration switch
             {
                 MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                LocalFunctionStatementSyntax localFunction
-                    => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
+                LocalFunctionStatementSyntax localFunction =>
+                    localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
                 _ => false
             };
         }

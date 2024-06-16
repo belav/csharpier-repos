@@ -641,8 +641,8 @@ namespace System.Text.Unicode.Tests
                     10 => b.AppendFormatted(new FormattableStringWrapper(" ")),
                     11 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0),
                     12 => b.AppendFormatted(new FormattableStringWrapper(" "), format: "X2"),
-                    13
-                        => b.AppendFormatted(
+                    13 =>
+                        b.AppendFormatted(
                             new FormattableStringWrapper(" "),
                             alignment: 0,
                             format: "X2"
@@ -650,8 +650,8 @@ namespace System.Text.Unicode.Tests
                     14 => b.AppendFormatted(new SpanFormattableStringWrapper(" ")),
                     15 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0),
                     16 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), format: "X2"),
-                    17
-                        => b.AppendFormatted(
+                    17 =>
+                        b.AppendFormatted(
                             new SpanFormattableStringWrapper(" "),
                             alignment: 0,
                             format: "X2"
@@ -659,8 +659,8 @@ namespace System.Text.Unicode.Tests
                     18 => b.AppendFormatted(new FormattableInt32Wrapper(1)),
                     19 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0),
                     20 => b.AppendFormatted(new FormattableInt32Wrapper(1), format: "X2"),
-                    21
-                        => b.AppendFormatted(
+                    21 =>
+                        b.AppendFormatted(
                             new FormattableInt32Wrapper(1),
                             alignment: 0,
                             format: "X2"
@@ -668,8 +668,8 @@ namespace System.Text.Unicode.Tests
                     22 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1)),
                     23 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0),
                     24 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), format: "X2"),
-                    25
-                        => b.AppendFormatted(
+                    25 =>
+                        b.AppendFormatted(
                             new SpanFormattableInt32Wrapper(1),
                             alignment: 0,
                             format: "X2"

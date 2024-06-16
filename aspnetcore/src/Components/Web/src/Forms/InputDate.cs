@@ -78,8 +78,8 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             InputDateType.DateTimeLocal => ("datetime-local", DateTimeLocalFormat, "date and time"),
             InputDateType.Month => ("month", MonthFormat, "year and month"),
             InputDateType.Time => ("time", TimeFormat, "time"),
-            _
-                => throw new InvalidOperationException(
+            _ =>
+                throw new InvalidOperationException(
                     $"Unsupported {nameof(InputDateType)} '{Type}'."
                 )
         };
@@ -116,18 +116,18 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     protected override string FormatValueAsString(TValue? value) =>
         value switch
         {
-            DateTime dateTimeValue
-                => BindConverter.FormatValue(dateTimeValue, _format, CultureInfo.InvariantCulture),
-            DateTimeOffset dateTimeOffsetValue
-                => BindConverter.FormatValue(
+            DateTime dateTimeValue =>
+                BindConverter.FormatValue(dateTimeValue, _format, CultureInfo.InvariantCulture),
+            DateTimeOffset dateTimeOffsetValue =>
+                BindConverter.FormatValue(
                     dateTimeOffsetValue,
                     _format,
                     CultureInfo.InvariantCulture
                 ),
-            DateOnly dateOnlyValue
-                => BindConverter.FormatValue(dateOnlyValue, _format, CultureInfo.InvariantCulture),
-            TimeOnly timeOnlyValue
-                => BindConverter.FormatValue(timeOnlyValue, _format, CultureInfo.InvariantCulture),
+            DateOnly dateOnlyValue =>
+                BindConverter.FormatValue(dateOnlyValue, _format, CultureInfo.InvariantCulture),
+            TimeOnly timeOnlyValue =>
+                BindConverter.FormatValue(timeOnlyValue, _format, CultureInfo.InvariantCulture),
             _ => string.Empty, // Handles null for Nullable<DateTime>, etc.
         };
 

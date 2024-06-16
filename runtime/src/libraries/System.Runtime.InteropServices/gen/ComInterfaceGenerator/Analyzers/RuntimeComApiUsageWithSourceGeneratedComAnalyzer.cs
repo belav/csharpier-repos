@@ -366,11 +366,8 @@ namespace Microsoft.Interop.Analyzers
                     invocation =>
                         invocation.GetArgumentByOrdinal(ordinal).Value switch
                         {
-                            IConversionOperation conversion
-                                => (
-                                    conversion.Operand.Type,
-                                    conversion.Operand.Syntax.GetLocation()
-                                ),
+                            IConversionOperation conversion =>
+                                (conversion.Operand.Type, conversion.Operand.Syntax.GetLocation()),
                             IOperation op => (op.Type, op.Syntax.GetLocation())
                         };
 
@@ -416,8 +413,8 @@ namespace Microsoft.Interop.Analyzers
                     invocation =>
                         invocation.GetArgumentByOrdinal(ordinal).Value switch
                         {
-                            ITypeOfOperation typeOf
-                                => (
+                            ITypeOfOperation typeOf =>
+                                (
                                     typeOf.TypeOperand,
                                     ((TypeOfExpressionSyntax)typeOf.Syntax).Type.GetLocation()
                                 ),

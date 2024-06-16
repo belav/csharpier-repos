@@ -103,18 +103,18 @@ namespace Internal.TypeSystem
                 (_, EffectiveVisibility.Public) => visibility,
                 (EffectiveVisibility.FamilyOrAssembly, _) => enclosingVisibility,
                 (_, EffectiveVisibility.FamilyOrAssembly) => visibility,
-                (EffectiveVisibility.Family, EffectiveVisibility.Assembly)
-                    => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly)
-                    => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.Family)
-                    => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly)
-                    => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family)
-                    => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly)
-                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.Assembly) =>
+                    EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly) =>
+                    EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.Family) =>
+                    EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly) =>
+                    EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family) =>
+                    EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly) =>
+                    EffectiveVisibility.FamilyAndAssembly,
 #if NETSTANDARD2_0
                 _ => throw new Exception(),
 #else

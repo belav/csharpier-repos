@@ -1421,16 +1421,16 @@ namespace System.Security.AccessControl
             //
             qualifier switch
             {
-                AceQualifier.AccessAllowed
-                    => isCallback ? AceType.AccessAllowedCallback : AceType.AccessAllowed,
-                AceQualifier.AccessDenied
-                    => isCallback ? AceType.AccessDeniedCallback : AceType.AccessDenied,
-                AceQualifier.SystemAudit
-                    => isCallback ? AceType.SystemAuditCallback : AceType.SystemAudit,
-                AceQualifier.SystemAlarm
-                    => isCallback ? AceType.SystemAlarmCallback : AceType.SystemAlarm,
-                _
-                    => throw new ArgumentOutOfRangeException(
+                AceQualifier.AccessAllowed =>
+                    isCallback ? AceType.AccessAllowedCallback : AceType.AccessAllowed,
+                AceQualifier.AccessDenied =>
+                    isCallback ? AceType.AccessDeniedCallback : AceType.AccessDenied,
+                AceQualifier.SystemAudit =>
+                    isCallback ? AceType.SystemAuditCallback : AceType.SystemAudit,
+                AceQualifier.SystemAlarm =>
+                    isCallback ? AceType.SystemAlarmCallback : AceType.SystemAlarm,
+                _ =>
+                    throw new ArgumentOutOfRangeException(
                         nameof(qualifier),
                         SR.ArgumentOutOfRange_Enum
                     ),
@@ -1820,18 +1820,16 @@ namespace System.Security.AccessControl
         private static AceType TypeFromQualifier(bool isCallback, AceQualifier qualifier) =>
             qualifier switch
             {
-                AceQualifier.AccessAllowed
-                    => isCallback
-                        ? AceType.AccessAllowedCallbackObject
-                        : AceType.AccessAllowedObject,
-                AceQualifier.AccessDenied
-                    => isCallback ? AceType.AccessDeniedCallbackObject : AceType.AccessDeniedObject,
-                AceQualifier.SystemAudit
-                    => isCallback ? AceType.SystemAuditCallbackObject : AceType.SystemAuditObject,
-                AceQualifier.SystemAlarm
-                    => isCallback ? AceType.SystemAlarmCallbackObject : AceType.SystemAlarmObject,
-                _
-                    => throw new ArgumentOutOfRangeException(
+                AceQualifier.AccessAllowed =>
+                    isCallback ? AceType.AccessAllowedCallbackObject : AceType.AccessAllowedObject,
+                AceQualifier.AccessDenied =>
+                    isCallback ? AceType.AccessDeniedCallbackObject : AceType.AccessDeniedObject,
+                AceQualifier.SystemAudit =>
+                    isCallback ? AceType.SystemAuditCallbackObject : AceType.SystemAuditObject,
+                AceQualifier.SystemAlarm =>
+                    isCallback ? AceType.SystemAlarmCallbackObject : AceType.SystemAlarmObject,
+                _ =>
+                    throw new ArgumentOutOfRangeException(
                         nameof(qualifier),
                         SR.ArgumentOutOfRange_Enum
                     ),

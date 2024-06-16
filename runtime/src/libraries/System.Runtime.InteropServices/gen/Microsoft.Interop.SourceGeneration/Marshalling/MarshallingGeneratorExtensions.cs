@@ -26,8 +26,8 @@ namespace Microsoft.Interop
             {
                 SignatureBehavior.ManagedTypeAndAttributes => info.ManagedType.Syntax,
                 SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                SignatureBehavior.PointerToNativeType
-                    => PointerType(generator.AsNativeType(info).Syntax),
+                SignatureBehavior.PointerToNativeType =>
+                    PointerType(generator.AsNativeType(info).Syntax),
                 _ => throw new InvalidOperationException()
             };
         }
@@ -102,8 +102,8 @@ namespace Microsoft.Interop
                 {
                     ValueBoundaryBehavior.ManagedIdentifier => info.IsByRef ? param : managed,
                     ValueBoundaryBehavior.NativeIdentifier
-                    or ValueBoundaryBehavior.CastNativeIdentifier
-                        => native,
+                    or ValueBoundaryBehavior.CastNativeIdentifier =>
+                        native,
                     ValueBoundaryBehavior.AddressOfNativeIdentifier => param,
                     _ => throw new UnreachableException()
                 };
@@ -119,8 +119,8 @@ namespace Microsoft.Interop
                     behavior switch
                     {
                         SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                        SignatureBehavior.PointerToNativeType
-                            => PointerType(generator.AsNativeType(info).Syntax),
+                        SignatureBehavior.PointerToNativeType =>
+                            PointerType(generator.AsNativeType(info).Syntax),
                         _ => throw new InvalidOperationException()
                     }
                 );
@@ -181,22 +181,22 @@ namespace Microsoft.Interop
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             return generator.GetValueBoundaryBehavior(info, context) switch
             {
-                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef
-                    => Argument(IdentifierName(managedIdentifier)),
-                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef
-                    => Argument(IdentifierName(managedIdentifier))
+                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef =>
+                    Argument(IdentifierName(managedIdentifier)),
+                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef =>
+                    Argument(IdentifierName(managedIdentifier))
                         .WithRefKindKeyword(Token(info.RefKindSyntax)),
-                ValueBoundaryBehavior.NativeIdentifier
-                    => Argument(IdentifierName(nativeIdentifier)),
-                ValueBoundaryBehavior.AddressOfNativeIdentifier
-                    => Argument(
+                ValueBoundaryBehavior.NativeIdentifier =>
+                    Argument(IdentifierName(nativeIdentifier)),
+                ValueBoundaryBehavior.AddressOfNativeIdentifier =>
+                    Argument(
                         PrefixUnaryExpression(
                             SyntaxKind.AddressOfExpression,
                             IdentifierName(nativeIdentifier)
                         )
                     ),
-                ValueBoundaryBehavior.CastNativeIdentifier
-                    => Argument(
+                ValueBoundaryBehavior.CastNativeIdentifier =>
+                    Argument(
                         CastExpression(
                             generator.AsParameter(info, context).Type,
                             IdentifierName(nativeIdentifier)

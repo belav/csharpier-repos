@@ -95,18 +95,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         ) =>
             refType switch
             {
-                ReferenceType.None
-                    => CreateMarkupForSingleProject(current, referenced, currentLanguage),
-                ReferenceType.Project
-                    => GetMarkupWithReference(
+                ReferenceType.None =>
+                    CreateMarkupForSingleProject(current, referenced, currentLanguage),
+                ReferenceType.Project =>
+                    GetMarkupWithReference(
                         current,
                         referenced,
                         currentLanguage,
                         referencedLanguage,
                         true
                     ),
-                ReferenceType.Metadata
-                    => GetMarkupWithReference(
+                ReferenceType.Metadata =>
+                    GetMarkupWithReference(
                         current,
                         referenced,
                         currentLanguage,
@@ -1370,15 +1370,15 @@ namespace Foo
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1586,15 +1586,15 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1665,15 +1665,15 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1727,15 +1727,15 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1785,15 +1785,15 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1849,15 +1849,15 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1905,15 +1905,15 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -1968,15 +1968,15 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -2037,15 +2037,15 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project
-                    => CreateMarkupForProjectWithProjectReference(
+                ReferenceType.Project =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                ReferenceType.Metadata
-                    => CreateMarkupForProjectWithMetadataReference(
+                ReferenceType.Metadata =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -2096,8 +2096,8 @@ namespace NS1
 
             var (markup, shouldContainItem) = refType switch
             {
-                ReferenceType.Project
-                    => (
+                ReferenceType.Project =>
+                    (
                         CreateMarkupForProjectWithProjectReference(
                             srcDoc,
                             refDoc,
@@ -2106,8 +2106,8 @@ namespace NS1
                         ),
                         true
                     ),
-                ReferenceType.Metadata
-                    => (
+                ReferenceType.Metadata =>
+                    (
                         CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,
@@ -2172,8 +2172,8 @@ namespace NS1
 
             var (markup, shouldContainItem) = (refType, hideAdvanced) switch
             {
-                (ReferenceType.Project, _)
-                    => (
+                (ReferenceType.Project, _) =>
+                    (
                         CreateMarkupForProjectWithProjectReference(
                             srcDoc,
                             refDoc,
@@ -2182,8 +2182,8 @@ namespace NS1
                         ),
                         true
                     ),
-                (ReferenceType.Metadata, true)
-                    => (
+                (ReferenceType.Metadata, true) =>
+                    (
                         CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,
@@ -2192,8 +2192,8 @@ namespace NS1
                         ),
                         false
                     ),
-                (ReferenceType.Metadata, false)
-                    => (
+                (ReferenceType.Metadata, false) =>
+                    (
                         CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,

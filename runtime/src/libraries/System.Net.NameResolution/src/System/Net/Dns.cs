@@ -845,22 +845,22 @@ namespace System.Net
                     static (s, startingTimestamp) =>
                         s switch
                         {
-                            string h
-                                => GetHostAddressesCore(
+                            string h =>
+                                GetHostAddressesCore(
                                     h,
                                     AddressFamily.Unspecified,
                                     startingTimestamp
                                 ),
-                            KeyValuePair<string, AddressFamily> t
-                                => GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
-                            IPAddress a
-                                => GetHostAddressesCore(
+                            KeyValuePair<string, AddressFamily> t =>
+                                GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
+                            IPAddress a =>
+                                GetHostAddressesCore(
                                     a,
                                     AddressFamily.Unspecified,
                                     startingTimestamp
                                 ),
-                            KeyValuePair<IPAddress, AddressFamily> t
-                                => GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
+                            KeyValuePair<IPAddress, AddressFamily> t =>
+                                GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
                             _ => null
                         },
                     asyncState,
@@ -873,22 +873,14 @@ namespace System.Net
                     static (s, startingTimestamp) =>
                         s switch
                         {
-                            string h
-                                => GetHostEntryCore(
-                                    h,
-                                    AddressFamily.Unspecified,
-                                    startingTimestamp
-                                ),
-                            KeyValuePair<string, AddressFamily> t
-                                => GetHostEntryCore(t.Key, t.Value, startingTimestamp),
-                            IPAddress a
-                                => GetHostEntryCore(
-                                    a,
-                                    AddressFamily.Unspecified,
-                                    startingTimestamp
-                                ),
-                            KeyValuePair<IPAddress, AddressFamily> t
-                                => GetHostEntryCore(t.Key, t.Value, startingTimestamp),
+                            string h =>
+                                GetHostEntryCore(h, AddressFamily.Unspecified, startingTimestamp),
+                            KeyValuePair<string, AddressFamily> t =>
+                                GetHostEntryCore(t.Key, t.Value, startingTimestamp),
+                            IPAddress a =>
+                                GetHostEntryCore(a, AddressFamily.Unspecified, startingTimestamp),
+                            KeyValuePair<IPAddress, AddressFamily> t =>
+                                GetHostEntryCore(t.Key, t.Value, startingTimestamp),
                             _ => null
                         },
                     asyncState,

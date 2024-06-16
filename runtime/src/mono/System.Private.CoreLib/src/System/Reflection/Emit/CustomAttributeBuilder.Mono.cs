@@ -612,8 +612,8 @@ namespace System.Reflection.Emit
                 0x0c => typeof(float),
                 0x0d => typeof(double),
                 0x0e => typeof(string),
-                _
-                    => throw new Exception(
+                _ =>
+                    throw new Exception(
                         SR.Format(SR.ArgumentException_InvalidTypeArgument, elementType)
                     ),
             };

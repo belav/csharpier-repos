@@ -127,8 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             return pattern switch
             {
-                Binary p
-                    => BinaryPattern(
+                Binary p =>
+                    BinaryPattern(
                         p.IsDisjunctive ? SyntaxKind.OrPattern : SyntaxKind.AndPattern,
                         AsPatternSyntax(p.Left).Parenthesize(),
                         Token(
@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 Constant p => ConstantPattern(AsExpressionSyntax(p.ExpressionSyntax, p)),
                 Source p => p.PatternSyntax,
                 Type p => TypePattern(p.TypeSyntax),
-                Relational p
-                    => RelationalPattern(
+                Relational p =>
+                    RelationalPattern(
                         Token(MapToSyntaxKind(p.OperatorKind)),
                         AsExpressionSyntax(p.Value, p)
                     ),

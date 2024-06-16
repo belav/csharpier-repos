@@ -1239,16 +1239,16 @@ namespace Internal.Reflection.Execution
                             fieldOffset = fieldAccessMetadata.Offset;
                             staticsBase = fieldBase switch
                             {
-                                FieldTableFlags.GCStatic
-                                    => TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(
+                                FieldTableFlags.GCStatic =>
+                                    TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(
                                         declaringTypeHandle
                                     ),
-                                FieldTableFlags.NonGCStatic
-                                    => TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
+                                FieldTableFlags.NonGCStatic =>
+                                    TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
                                         declaringTypeHandle
                                     ),
-                                _
-                                    => TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(
+                                _ =>
+                                    TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(
                                         declaringTypeHandle
                                     ),
                             };

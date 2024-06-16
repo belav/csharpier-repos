@@ -92,15 +92,15 @@ namespace System.Management
 
             int status = qualifierSetType switch
             {
-                QualifierType.ObjectQualifier
-                    => parent.wbemObject.GetQualifierSet_(out qualifierSet),
-                QualifierType.PropertyQualifier
-                    => parent.wbemObject.GetPropertyQualifierSet_(
+                QualifierType.ObjectQualifier =>
+                    parent.wbemObject.GetQualifierSet_(out qualifierSet),
+                QualifierType.PropertyQualifier =>
+                    parent.wbemObject.GetPropertyQualifierSet_(
                         propertyOrMethodName,
                         out qualifierSet
                     ),
-                QualifierType.MethodQualifier
-                    => parent.wbemObject.GetMethodQualifierSet_(
+                QualifierType.MethodQualifier =>
+                    parent.wbemObject.GetMethodQualifierSet_(
                         propertyOrMethodName,
                         out qualifierSet
                     ),
@@ -354,15 +354,15 @@ namespace System.Management
 
                 status = qualifierType switch
                 {
-                    QualifierType.ObjectQualifier
-                        => parent.wbemObject.GetQualifierSet_(out qualifierSet),
-                    QualifierType.PropertyQualifier
-                        => parent.wbemObject.GetPropertyQualifierSet_(
+                    QualifierType.ObjectQualifier =>
+                        parent.wbemObject.GetQualifierSet_(out qualifierSet),
+                    QualifierType.PropertyQualifier =>
+                        parent.wbemObject.GetPropertyQualifierSet_(
                             propertyOrMethodName,
                             out qualifierSet
                         ),
-                    QualifierType.MethodQualifier
-                        => parent.wbemObject.GetMethodQualifierSet_(
+                    QualifierType.MethodQualifier =>
+                        parent.wbemObject.GetMethodQualifierSet_(
                             propertyOrMethodName,
                             out qualifierSet
                         ),

@@ -1823,8 +1823,8 @@ namespace Microsoft.Win32
         private static void Win32ErrorStatic(int errorCode, string? str) =>
             throw errorCode switch
             {
-                Interop.Errors.ERROR_ACCESS_DENIED
-                    => str != null
+                Interop.Errors.ERROR_ACCESS_DENIED =>
+                    str != null
                         ? new UnauthorizedAccessException(
                             SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
                         )

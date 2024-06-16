@@ -1160,12 +1160,12 @@ namespace ILLink.Shared.TrimAnalysis
         internal SingleValue GetFieldValue(FieldDefinition field) =>
             field.Name switch
             {
-                "EmptyTypes" when field.DeclaringType.IsTypeOf(WellKnownType.System_Type)
-                    => ArrayValue.Create(0, field.DeclaringType),
-                "Empty" when field.DeclaringType.IsTypeOf(WellKnownType.System_String)
-                    => new KnownStringValue(string.Empty),
-                _
-                    => new FieldValue(
+                "EmptyTypes" when field.DeclaringType.IsTypeOf(WellKnownType.System_Type) =>
+                    ArrayValue.Create(0, field.DeclaringType),
+                "Empty" when field.DeclaringType.IsTypeOf(WellKnownType.System_String) =>
+                    new KnownStringValue(string.Empty),
+                _ =>
+                    new FieldValue(
                         field.FieldType.ResolveToTypeDefinition(_context),
                         field,
                         GetFieldAnnotation(field)

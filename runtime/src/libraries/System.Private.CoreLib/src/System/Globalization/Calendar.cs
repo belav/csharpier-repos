@@ -529,12 +529,12 @@ namespace System.Globalization
             return rule switch
             {
                 CalendarWeekRule.FirstDay => GetFirstDayWeekOfYear(time, (int)firstDayOfWeek),
-                CalendarWeekRule.FirstFullWeek
-                    => GetWeekOfYearFullDays(time, (int)firstDayOfWeek, 7),
-                CalendarWeekRule.FirstFourDayWeek
-                    => GetWeekOfYearFullDays(time, (int)firstDayOfWeek, 4),
-                _
-                    => throw new ArgumentOutOfRangeException(
+                CalendarWeekRule.FirstFullWeek =>
+                    GetWeekOfYearFullDays(time, (int)firstDayOfWeek, 7),
+                CalendarWeekRule.FirstFourDayWeek =>
+                    GetWeekOfYearFullDays(time, (int)firstDayOfWeek, 4),
+                _ =>
+                    throw new ArgumentOutOfRangeException(
                         nameof(rule),
                         rule,
                         SR.Format(

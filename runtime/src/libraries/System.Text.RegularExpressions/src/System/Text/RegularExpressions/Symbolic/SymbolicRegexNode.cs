@@ -1461,8 +1461,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     {
                         // If the left side is a concatenation, then we bring it to right associative form to expose
                         // the first element of the concatenation for the cases below.
-                        SymbolicRegexNodeKind.Concat
-                            => CreateConcat(
+                        SymbolicRegexNodeKind.Concat =>
+                            CreateConcat(
                                     builder,
                                     _left._left!,
                                     CreateConcat(builder, _left._right!, _right)
@@ -1473,8 +1473,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         // when X is nullable (observe that XZ is nullable because this=(X|Y)Z is nullable).
                         // If X is not nullable then XZ is maintaned as is, and YZ is pruned. For example,
                         // (a{0,5}?|abc|b+)c* reduces to c*.
-                        SymbolicRegexNodeKind.Alternate
-                            => (
+                        SymbolicRegexNodeKind.Alternate =>
+                            (
                                 _left._left!.IsNullableFor(context)
                                     ? CreateConcat(builder, _left._left, _right)
                                         .PruneLowerPriorityThanNullability(builder, context)
@@ -1490,8 +1490,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         SymbolicRegexNodeKind.Loop => PruneLoop(builder, context, _left, _right),
                         // The previous cases handle all the ways that the left side of the concatenation could
                         // contain branching. Thus if we get here it is safe to only prune the right side.
-                        _
-                            => CreateConcat(
+                        _ =>
+                            CreateConcat(
                                 builder,
                                 _left,
                                 _right.PruneLowerPriorityThanNullability(builder, context)

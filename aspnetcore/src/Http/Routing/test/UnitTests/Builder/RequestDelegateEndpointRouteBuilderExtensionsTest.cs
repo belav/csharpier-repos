@@ -26,8 +26,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
     ) =>
         GetBuilderEndpointDataSource(endpointRouteBuilder) switch
         {
-            RouteEndpointDataSource routeDataSource
-                => routeDataSource.GetSingleRouteEndpointBuilder(),
+            RouteEndpointDataSource routeDataSource =>
+                routeDataSource.GetSingleRouteEndpointBuilder(),
             _ => throw new InvalidOperationException($"Unknown EndointDataSource type!"),
         };
 

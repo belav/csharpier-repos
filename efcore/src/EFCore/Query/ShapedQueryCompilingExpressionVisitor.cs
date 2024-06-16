@@ -98,8 +98,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
             {
                 ResultCardinality.Enumerable => serverEnumerable,
 
-                ResultCardinality.Single
-                    => QueryCompilationContext.IsAsync
+                ResultCardinality.Single =>
+                    QueryCompilationContext.IsAsync
                         ? Call(
                             SingleAsyncMethodInfo.MakeGenericMethod(
                                 serverEnumerable.Type.GetSequenceType()
@@ -114,8 +114,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             serverEnumerable
                         ),
 
-                ResultCardinality.SingleOrDefault
-                    => QueryCompilationContext.IsAsync
+                ResultCardinality.SingleOrDefault =>
+                    QueryCompilationContext.IsAsync
                         ? Call(
                             SingleOrDefaultAsyncMethodInfo.MakeGenericMethod(
                                 serverEnumerable.Type.GetSequenceType()

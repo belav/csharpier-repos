@@ -740,15 +740,15 @@ namespace System.Xml
             Debug.Assert(xntInt != -1);
             return xntInt switch
             {
-                (int)XPathNodeType.Root
-                    => (
+                (int)XPathNodeType.Root =>
+                    (
                         xntChildInt == (int)XPathNodeType.Element
                         || xntChildInt == (int)XPathNodeType.Comment
                         || xntChildInt == (int)XPathNodeType.ProcessingInstruction
                     ),
 
-                (int)XPathNodeType.Element
-                    => (
+                (int)XPathNodeType.Element =>
+                    (
                         xntChildInt == (int)XPathNodeType.Element
                         || xntChildInt == (int)XPathNodeType.Text
                         || xntChildInt == (int)XPathNodeType.Comment
@@ -768,8 +768,8 @@ namespace System.Xml
             return xntInt switch
             {
                 (int)XPathNodeType.Root => c.ColumnMapping == MappingType.Element,
-                (int)XPathNodeType.Element
-                    => (
+                (int)XPathNodeType.Element =>
+                    (
                         c.ColumnMapping == MappingType.Element
                         || c.ColumnMapping == MappingType.SimpleContent
                     ),

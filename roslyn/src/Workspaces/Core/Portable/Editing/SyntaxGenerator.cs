@@ -337,8 +337,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 WellKnownMemberNames.ExclusiveOrOperatorName => OperatorKind.ExclusiveOr,
                 WellKnownMemberNames.FalseOperatorName => OperatorKind.False,
                 WellKnownMemberNames.GreaterThanOperatorName => OperatorKind.GreaterThan,
-                WellKnownMemberNames.GreaterThanOrEqualOperatorName
-                    => OperatorKind.GreaterThanOrEqual,
+                WellKnownMemberNames.GreaterThanOrEqualOperatorName =>
+                    OperatorKind.GreaterThanOrEqual,
                 WellKnownMemberNames.IncrementOperatorName => OperatorKind.Increment,
                 WellKnownMemberNames.InequalityOperatorName => OperatorKind.Inequality,
                 WellKnownMemberNames.LeftShiftOperatorName => OperatorKind.LeftShift,
@@ -349,8 +349,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 WellKnownMemberNames.MultiplyOperatorName => OperatorKind.Multiply,
                 WellKnownMemberNames.OnesComplementOperatorName => OperatorKind.OnesComplement,
                 WellKnownMemberNames.RightShiftOperatorName => OperatorKind.RightShift,
-                WellKnownMemberNames.UnsignedRightShiftOperatorName
-                    => OperatorKind.UnsignedRightShift,
+                WellKnownMemberNames.UnsignedRightShiftOperatorName =>
+                    OperatorKind.UnsignedRightShift,
                 WellKnownMemberNames.SubtractionOperatorName => OperatorKind.Subtraction,
                 WellKnownMemberNames.TrueOperatorName => OperatorKind.True,
                 WellKnownMemberNames.UnaryNegationOperatorName => OperatorKind.UnaryNegation,
@@ -953,8 +953,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
                     var declaration = type.TypeKind switch
                     {
-                        TypeKind.Class
-                            => ClassDeclaration(
+                        TypeKind.Class =>
+                            ClassDeclaration(
                                 type.IsRecord,
                                 type.Name,
                                 type.TypeParameters.Select(TypeParameter),
@@ -966,8 +966,8 @@ namespace Microsoft.CodeAnalysis.Editing
                                 interfaceTypes: type.Interfaces.Select(TypeExpression),
                                 members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
                             ),
-                        TypeKind.Struct
-                            => StructDeclaration(
+                        TypeKind.Struct =>
+                            StructDeclaration(
                                 type.IsRecord,
                                 type.Name,
                                 type.TypeParameters.Select(TypeParameter),
@@ -976,16 +976,16 @@ namespace Microsoft.CodeAnalysis.Editing
                                 interfaceTypes: type.Interfaces.Select(TypeExpression),
                                 members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
                             ),
-                        TypeKind.Interface
-                            => InterfaceDeclaration(
+                        TypeKind.Interface =>
+                            InterfaceDeclaration(
                                 type.Name,
                                 type.TypeParameters.Select(TypeParameter),
                                 accessibility: type.DeclaredAccessibility,
                                 interfaceTypes: type.Interfaces.Select(TypeExpression),
                                 members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
                             ),
-                        TypeKind.Enum
-                            => EnumDeclaration(
+                        TypeKind.Enum =>
+                            EnumDeclaration(
                                 type.Name,
                                 underlyingType: type.EnumUnderlyingType
                                     is null
@@ -997,8 +997,8 @@ namespace Microsoft.CodeAnalysis.Editing
                                     .Where(s => s.Kind == SymbolKind.Field)
                                     .Select(Declaration)
                             ),
-                        TypeKind.Delegate
-                            => type.GetMembers(WellKnownMemberNames.DelegateInvokeName)
+                        TypeKind.Delegate =>
+                            type.GetMembers(WellKnownMemberNames.DelegateInvokeName)
                                 is [IMethodSymbol invoke, ..]
                                 ? DelegateDeclaration(
                                     type.Name,

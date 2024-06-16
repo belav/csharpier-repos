@@ -112,13 +112,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             return number switch
             {
-                double @double
-                    => @double.ToString(
+                double @double =>
+                    @double.ToString(
                         JsonTestHelper.DoubleFormatString,
                         CultureInfo.InvariantCulture
                     ),
-                float @float
-                    => @float.ToString(
+                float @float =>
+                    @float.ToString(
                         JsonTestHelper.SingleFormatString,
                         CultureInfo.InvariantCulture
                     ),

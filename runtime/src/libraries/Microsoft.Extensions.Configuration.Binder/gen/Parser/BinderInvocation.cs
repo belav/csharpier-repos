@@ -79,14 +79,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             return (containingTypeName) switch
             {
-                "ConfigurationBinder"
-                    => containingNamespaceName is "Microsoft.Extensions.Configuration"
+                "ConfigurationBinder" =>
+                    containingNamespaceName is "Microsoft.Extensions.Configuration"
                         && IsValidMethodName_ConfigurationBinder(methodName),
-                "OptionsBuilderConfigurationExtensions"
-                    => containingNamespaceName is "Microsoft.Extensions.DependencyInjection"
+                "OptionsBuilderConfigurationExtensions" =>
+                    containingNamespaceName is "Microsoft.Extensions.DependencyInjection"
                         && IsValidMethodName_OptionsBuilderConfigurationExtensions(methodName),
-                "OptionsConfigurationServiceCollectionExtensions"
-                    => containingNamespaceName is "Microsoft.Extensions.DependencyInjection"
+                "OptionsConfigurationServiceCollectionExtensions" =>
+                    containingNamespaceName is "Microsoft.Extensions.DependencyInjection"
                         && IsValidMethodName_OptionsConfigurationServiceCollectionExtensions(
                             methodName
                         ),

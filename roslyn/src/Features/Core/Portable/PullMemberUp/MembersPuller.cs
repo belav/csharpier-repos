@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             return pullMembersUpOptions.Destination.TypeKind switch
             {
-                TypeKind.Interface
-                    => PullMembersIntoInterfaceAsync(
+                TypeKind.Interface =>
+                    PullMembersIntoInterfaceAsync(
                         document,
                         pullMembersUpOptions,
                         fallbackOptions,
@@ -94,8 +94,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     ),
                 // We can treat VB modules as a static class
                 TypeKind.Class
-                or TypeKind.Module
-                    => PullMembersIntoClassAsync(
+                or TypeKind.Module =>
+                    PullMembersIntoClassAsync(
                         document,
                         pullMembersUpOptions,
                         fallbackOptions,

@@ -562,8 +562,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             compilerDiagnosticsScope ??= analyzerDiagnosticsScope switch
             {
                 BackgroundAnalysisScope.None => CompilerDiagnosticsScope.None,
-                BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics
-                    => CompilerDiagnosticsScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
+                BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics =>
+                    CompilerDiagnosticsScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                 BackgroundAnalysisScope.OpenFiles => CompilerDiagnosticsScope.OpenFiles,
                 BackgroundAnalysisScope.FullSolution => CompilerDiagnosticsScope.FullSolution,
                 _ => throw ExceptionUtilities.UnexpectedValue(analyzerDiagnosticsScope),

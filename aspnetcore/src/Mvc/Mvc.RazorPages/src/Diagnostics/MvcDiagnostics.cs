@@ -66,8 +66,8 @@ public sealed class BeforeHandlerMethodEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
             1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
-            2
-                => new KeyValuePair<string, object>(
+            2 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerMethodDescriptor),
                     HandlerMethodDescriptor
                 ),
@@ -143,8 +143,8 @@ public sealed class AfterHandlerMethodEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
             1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
-            2
-                => new KeyValuePair<string, object>(
+            2 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerMethodDescriptor),
                     HandlerMethodDescriptor
                 ),
@@ -204,8 +204,8 @@ public sealed class BeforePageFilterOnPageHandlerExecutionEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutionContext),
                     HandlerExecutionContext
                 ),
@@ -264,8 +264,8 @@ public sealed class AfterPageFilterOnPageHandlerExecutionEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutedContext),
                     HandlerExecutedContext
                 ),
@@ -324,8 +324,8 @@ public sealed class BeforePageFilterOnPageHandlerExecutingEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutingContext),
                     HandlerExecutingContext
                 ),
@@ -384,8 +384,8 @@ public sealed class AfterPageFilterOnPageHandlerExecutingEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutingContext),
                     HandlerExecutingContext
                 ),
@@ -444,8 +444,8 @@ public sealed class BeforePageFilterOnPageHandlerExecutedEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutedContext),
                     HandlerExecutedContext
                 ),
@@ -504,8 +504,8 @@ public sealed class AfterPageFilterOnPageHandlerExecutedEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerExecutedContext),
                     HandlerExecutedContext
                 ),
@@ -564,8 +564,8 @@ public sealed class BeforePageFilterOnPageHandlerSelectionEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerSelectedContext),
                     HandlerSelectedContext
                 ),
@@ -624,8 +624,8 @@ public sealed class AfterPageFilterOnPageHandlerSelectionEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerSelectedContext),
                     HandlerSelectedContext
                 ),
@@ -684,8 +684,8 @@ public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerSelectedContext),
                     HandlerSelectedContext
                 ),
@@ -744,8 +744,8 @@ public sealed class AfterPageFilterOnPageHandlerSelectedEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1
-                => new KeyValuePair<string, object>(
+            1 =>
+                new KeyValuePair<string, object>(
                     nameof(HandlerSelectedContext),
                     HandlerSelectedContext
                 ),

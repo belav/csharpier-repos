@@ -24629,8 +24629,8 @@ public class C2 : C1<int>, I1
             {
                 ">>" => WellKnownMemberNames.RightShiftOperatorName,
                 ">>>" => WellKnownMemberNames.UnsignedRightShiftOperatorName,
-                _
-                    => OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
+                _ =>
+                    OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
                         SyntaxFactory.ParseToken(op).Kind(),
                         isChecked: isChecked
                     )

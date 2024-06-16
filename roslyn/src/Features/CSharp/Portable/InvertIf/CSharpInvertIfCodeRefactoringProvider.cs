@@ -104,16 +104,16 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 SwitchSectionSyntax => SyntaxKind.BreakStatement,
                 LocalFunctionStatementSyntax
                 or AccessorDeclarationSyntax
-                or MemberDeclarationSyntax
-                    => node.ContainsYield()
+                or MemberDeclarationSyntax =>
+                    node.ContainsYield()
                         ? SyntaxKind.YieldBreakStatement
                         : SyntaxKind.ReturnStatement,
                 AnonymousFunctionExpressionSyntax => SyntaxKind.ReturnStatement,
                 CommonForEachStatementSyntax
                 or DoStatementSyntax
                 or WhileStatementSyntax
-                or ForStatementSyntax
-                    => SyntaxKind.ContinueStatement,
+                or ForStatementSyntax =>
+                    SyntaxKind.ContinueStatement,
                 _ => null,
             };
 
@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 SyntaxKind.ContinueStatement => SyntaxFactory.ContinueStatement(),
                 SyntaxKind.BreakStatement => SyntaxFactory.BreakStatement(),
                 SyntaxKind.ReturnStatement => SyntaxFactory.ReturnStatement(),
-                SyntaxKind.YieldBreakStatement
-                    => SyntaxFactory.YieldStatement(SyntaxKind.YieldBreakStatement),
+                SyntaxKind.YieldBreakStatement =>
+                    SyntaxFactory.YieldStatement(SyntaxKind.YieldBreakStatement),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 

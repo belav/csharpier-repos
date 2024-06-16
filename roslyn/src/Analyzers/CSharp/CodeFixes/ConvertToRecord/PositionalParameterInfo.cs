@@ -71,20 +71,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             ShouldConvertProperty(syntax, symbol, type) switch
                             {
                                 ConvertStatus.DoNotConvert => null,
-                                ConvertStatus.Override
-                                    => new PositionalParameterInfo(
+                                ConvertStatus.Override =>
+                                    new PositionalParameterInfo(
                                         syntax,
                                         symbol,
                                         KeepAsOverride: true
                                     ),
-                                ConvertStatus.OverrideIfConvertingSetToInit
-                                    => new PositionalParameterInfo(
+                                ConvertStatus.OverrideIfConvertingSetToInit =>
+                                    new PositionalParameterInfo(
                                         syntax,
                                         symbol,
                                         !allowSetToInitConversion
                                     ),
-                                ConvertStatus.AlwaysConvert
-                                    => new PositionalParameterInfo(
+                                ConvertStatus.AlwaysConvert =>
+                                    new PositionalParameterInfo(
                                         syntax,
                                         symbol,
                                         KeepAsOverride: false

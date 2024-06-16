@@ -58,8 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 currentBinary = currentBinary switch
                 {
-                    BoundBinaryOperator binary
-                        => binary.Update(
+                    BoundBinaryOperator binary =>
+                        binary.Update(
                             binary.OperatorKind,
                             binary.Data?.WithUpdatedMethod(GetUpdatedSymbol(binary, binary.Method)),
                             binary.ResultKind,
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             type!
                         ),
                     // https://github.com/dotnet/roslyn/issues/35031: We'll need to update logical.LogicalOperator
-                    BoundUserDefinedConditionalLogicalOperator logical
-                        => logical.Update(
+                    BoundUserDefinedConditionalLogicalOperator logical =>
+                        logical.Update(
                             logical.OperatorKind,
                             logical.LogicalOperator,
                             logical.TrueOperator,

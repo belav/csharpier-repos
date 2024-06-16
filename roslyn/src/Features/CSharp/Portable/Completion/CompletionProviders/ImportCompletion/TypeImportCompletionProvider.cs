@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return directive switch
             {
                 UsingDirectiveSyntax usingDirective => usingDirective.SemicolonToken == token,
-                ExternAliasDirectiveSyntax externAliasDirective
-                    => externAliasDirective.SemicolonToken == token,
+                ExternAliasDirectiveSyntax externAliasDirective =>
+                    externAliasDirective.SemicolonToken == token,
                 _ => false,
             };
         }

@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
             {
                 PrecedenceKind.Arithmetic
                 or PrecedenceKind.Shift
-                or PrecedenceKind.Bitwise
-                    => "ArithmeticBinary",
+                or PrecedenceKind.Bitwise =>
+                    "ArithmeticBinary",
                 PrecedenceKind.Relational or PrecedenceKind.Equality => "RelationalBinary",
                 PrecedenceKind.Logical or PrecedenceKind.Coalesce => "OtherBinary",
                 PrecedenceKind.Other => "Other",

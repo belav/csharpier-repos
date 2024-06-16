@@ -294,8 +294,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     OutputFileType.Module => OutputKind.NetModule,
                     OutputFileType.AppContainer => OutputKind.WindowsRuntimeApplication,
                     OutputFileType.WinMDObj => OutputKind.WindowsRuntimeMetadata,
-                    _
-                        => throw new ArgumentException(
+                    _ =>
+                        throw new ArgumentException(
                             "fileType was not a valid OutputFileType",
                             nameof(fileType)
                         ),

@@ -80,8 +80,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 { Major: 2, Minor: 2 } => Binaries.HostFxr.MockPath_2_2,
                 { Major: 5, Minor: 0 } => Binaries.HostFxr.MockPath_5_0,
-                _
-                    => throw new InvalidOperationException(
+                _ =>
+                    throw new InvalidOperationException(
                         $"Unsupported version {version} of mockhostfxr."
                     )
             };

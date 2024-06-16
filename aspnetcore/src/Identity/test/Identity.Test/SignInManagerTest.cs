@@ -1903,8 +1903,8 @@ public class SignInManagerTest
 
         return typeName switch
         {
-            nameof(SignInManager<PocoUser>)
-                => new SignInManager<PocoUser>(
+            nameof(SignInManager<PocoUser>) =>
+                new SignInManager<PocoUser>(
                     manager,
                     contextAccessor.Object,
                     claimsFactory,
@@ -1913,22 +1913,22 @@ public class SignInManagerTest
                     Mock.Of<IAuthenticationSchemeProvider>(),
                     new DefaultUserConfirmation<PocoUser>()
                 ),
-            nameof(NoOverridesSignInManager<PocoUser>)
-                => new NoOverridesSignInManager<PocoUser>(
+            nameof(NoOverridesSignInManager<PocoUser>) =>
+                new NoOverridesSignInManager<PocoUser>(
                     manager,
                     contextAccessor.Object,
                     claimsFactory,
                     options
                 ),
-            nameof(OverrideAndAwaitBaseResetSignInManager<PocoUser>)
-                => new OverrideAndAwaitBaseResetSignInManager<PocoUser>(
+            nameof(OverrideAndAwaitBaseResetSignInManager<PocoUser>) =>
+                new OverrideAndAwaitBaseResetSignInManager<PocoUser>(
                     manager,
                     contextAccessor.Object,
                     claimsFactory,
                     options
                 ),
-            nameof(OverrideAndPassThroughUserManagerResetSignInManager<PocoUser>)
-                => new OverrideAndPassThroughUserManagerResetSignInManager<PocoUser>(
+            nameof(OverrideAndPassThroughUserManagerResetSignInManager<PocoUser>) =>
+                new OverrideAndPassThroughUserManagerResetSignInManager<PocoUser>(
                     manager,
                     contextAccessor.Object,
                     claimsFactory,

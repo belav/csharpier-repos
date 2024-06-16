@@ -2501,8 +2501,8 @@ namespace Mono.Linker.Steps
                 var cctorReason = reason.Kind switch
                 {
                     // Report an edge directly from the method accessing the field to the static ctor it triggers
-                    DependencyKind.FieldAccess
-                        => new DependencyInfo(
+                    DependencyKind.FieldAccess =>
+                        new DependencyInfo(
                             DependencyKind.TriggersCctorThroughFieldAccess,
                             reason.Source
                         ),
@@ -5273,16 +5273,16 @@ namespace Mono.Linker.Steps
                 or
                 // Field address loads (as those can be used to store values to annotated field and thus must be checked)
                 Code.Ldflda
-                or Code.Ldsflda
-                    => ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
+                or Code.Ldsflda =>
+                    ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
                         Context,
                         (FieldReference)instruction.Operand
                     ),
                 // For ref fields, ldfld loads an address which can be used to store values to annotated fields
                 Code.Ldfld
                 or Code.Ldsfld
-                    when ((FieldReference)instruction.Operand).FieldType.IsByRefOrPointer()
-                    => ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
+                    when ((FieldReference)instruction.Operand).FieldType.IsByRefOrPointer() =>
+                    ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
                         Context,
                         (FieldReference)instruction.Operand
                     ),
@@ -5322,8 +5322,8 @@ namespace Mono.Linker.Steps
                         Code.Newobj => (DependencyKind.Newobj, false),
                         Code.Ldvirtftn => (DependencyKind.Ldvirtftn, true),
                         Code.Ldftn => (DependencyKind.Ldftn, true),
-                        _
-                            => throw new InvalidOperationException(
+                        _ =>
+                            throw new InvalidOperationException(
                                 $"unexpected opcode {instruction.OpCode}"
                             )
                     };

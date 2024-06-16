@@ -215,8 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     { ValueText: "Fastcall" } => CallingConvention.FastCall,
 
                                     // Unknown identifier case
-                                    _
-                                        => handleSingleConvention(
+                                    _ =>
+                                        handleSingleConvention(
                                             specifiers[0],
                                             compilation,
                                             customModifiers,
@@ -448,12 +448,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var attributeType = refKind switch
             {
-                RefKind.In
-                    => compilation.GetWellKnownType(
+                RefKind.In =>
+                    compilation.GetWellKnownType(
                         WellKnownType.System_Runtime_InteropServices_InAttribute
                     ),
-                RefKind.Out
-                    => compilation.GetWellKnownType(
+                RefKind.Out =>
+                    compilation.GetWellKnownType(
                         WellKnownType.System_Runtime_InteropServices_OutAttribute
                     ),
                 _ => null
@@ -831,16 +831,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return param.IsByRef switch
                 {
                     false => RefKind.None,
-                    true when CustomModifierUtils.HasInAttributeModifier(paramRefCustomMods)
-                        => hasInRefKind,
-                    true when CustomModifierUtils.HasOutAttributeModifier(paramRefCustomMods)
-                        => hasOutRefKind,
+                    true when CustomModifierUtils.HasInAttributeModifier(paramRefCustomMods) =>
+                        hasInRefKind,
+                    true when CustomModifierUtils.HasOutAttributeModifier(paramRefCustomMods) =>
+                        hasOutRefKind,
                     true
                         when requiresLocationAllowed
                             && CustomModifierUtils.HasRequiresLocationAttributeModifier(
                                 paramRefCustomMods
-                            )
-                        => RefKind.RefReadOnlyParameter,
+                            ) =>
+                        RefKind.RefReadOnlyParameter,
                     true => RefKind.Ref,
                 };
             }

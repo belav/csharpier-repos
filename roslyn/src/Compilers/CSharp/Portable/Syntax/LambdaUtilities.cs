@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxNode GetNestedFunctionBody(SyntaxNode nestedFunction) =>
             nestedFunction switch
             {
-                AnonymousFunctionExpressionSyntax anonymousFunctionExpressionSyntax
-                    => anonymousFunctionExpressionSyntax.Body,
-                LocalFunctionStatementSyntax localFunctionStatementSyntax
-                    => (CSharpSyntaxNode?)localFunctionStatementSyntax.Body
+                AnonymousFunctionExpressionSyntax anonymousFunctionExpressionSyntax =>
+                    anonymousFunctionExpressionSyntax.Body,
+                LocalFunctionStatementSyntax localFunctionStatementSyntax =>
+                    (CSharpSyntaxNode?)localFunctionStatementSyntax.Body
                         ?? localFunctionStatementSyntax.ExpressionBody!.Expression,
                 _ => throw ExceptionUtilities.UnexpectedValue(nestedFunction),
             };

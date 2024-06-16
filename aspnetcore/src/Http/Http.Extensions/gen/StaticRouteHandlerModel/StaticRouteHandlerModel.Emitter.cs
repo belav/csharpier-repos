@@ -68,8 +68,8 @@ internal static class StaticRouteHandlerModelEmitter
             "MapMethods" => ("httpMethods", null),
             "Map" => ("null", null),
             "MapFallback" => ("null", null),
-            _
-                => throw new ArgumentException(
+            _ =>
+                throw new ArgumentException(
                     $"Received unexpected HTTP method: {endpoint.HttpMethod}"
                 )
         };

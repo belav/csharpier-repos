@@ -120,16 +120,16 @@ internal sealed class VSTypeScriptNavigateToSearchService(
                 VSTypeScriptNavigateToMatchKind.Substring => NavigateToMatchKind.Substring,
                 VSTypeScriptNavigateToMatchKind.Regular => NavigateToMatchKind.Regular,
                 VSTypeScriptNavigateToMatchKind.None => NavigateToMatchKind.None,
-                VSTypeScriptNavigateToMatchKind.CamelCaseExact
-                    => NavigateToMatchKind.CamelCaseExact,
-                VSTypeScriptNavigateToMatchKind.CamelCasePrefix
-                    => NavigateToMatchKind.CamelCasePrefix,
-                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix
-                    => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
-                VSTypeScriptNavigateToMatchKind.CamelCaseSubstring
-                    => NavigateToMatchKind.CamelCaseSubstring,
-                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring
-                    => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
+                VSTypeScriptNavigateToMatchKind.CamelCaseExact =>
+                    NavigateToMatchKind.CamelCaseExact,
+                VSTypeScriptNavigateToMatchKind.CamelCasePrefix =>
+                    NavigateToMatchKind.CamelCasePrefix,
+                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix =>
+                    NavigateToMatchKind.CamelCaseNonContiguousPrefix,
+                VSTypeScriptNavigateToMatchKind.CamelCaseSubstring =>
+                    NavigateToMatchKind.CamelCaseSubstring,
+                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring =>
+                    NavigateToMatchKind.CamelCaseNonContiguousSubstring,
                 VSTypeScriptNavigateToMatchKind.Fuzzy => NavigateToMatchKind.Fuzzy,
                 _ => throw ExceptionUtilities.UnexpectedValue(_result.MatchKind),
             };

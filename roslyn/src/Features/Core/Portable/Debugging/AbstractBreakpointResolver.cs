@@ -342,10 +342,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         ) =>
             container switch
             {
-                INamespaceSymbol namespaceSymbol
-                    => namespaceSymbol.GetMembers().SelectMany(GetTypeMembersRecursive),
-                INamedTypeSymbol typeSymbol
-                    => typeSymbol
+                INamespaceSymbol namespaceSymbol =>
+                    namespaceSymbol.GetMembers().SelectMany(GetTypeMembersRecursive),
+                INamedTypeSymbol typeSymbol =>
+                    typeSymbol
                         .GetTypeMembers()
                         .SelectMany(GetTypeMembersRecursive)
                         .Concat(typeSymbol),

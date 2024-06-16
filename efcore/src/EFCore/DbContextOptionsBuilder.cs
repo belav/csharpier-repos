@@ -177,20 +177,20 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
         return eventsArray.Length switch
         {
             0 => this,
-            1
-                => LogTo(
+            1 =>
+                LogTo(
                     action,
                     (eventId, level) => level >= minimumLevel && eventId == eventsArray[0],
                     options
                 ),
-            < 6
-                => LogTo(
+            < 6 =>
+                LogTo(
                     action,
                     (eventId, level) => level >= minimumLevel && eventsArray.Contains(eventId),
                     options
                 ),
-            _
-                => LogTo(
+            _ =>
+                LogTo(
                     action,
                     (eventId, level) =>
                         level >= minimumLevel && eventsArray.ToHashSet().Contains(eventId),

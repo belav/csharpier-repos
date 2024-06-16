@@ -355,8 +355,8 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
-                        null
-                            => _sqlExpressionFactory.Like(
+                        null =>
+                            _sqlExpressionFactory.Like(
                                 translatedInstance,
                                 _sqlExpressionFactory.Constant(null, stringTypeMapping)
                             ),
@@ -365,14 +365,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                         // Return % which always matches instead.
                         // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
-                        ""
-                            => _sqlExpressionFactory.Like(
+                        "" =>
+                            _sqlExpressionFactory.Like(
                                 translatedInstance,
                                 _sqlExpressionFactory.Constant("%")
                             ),
 
-                        string s
-                            => s.Any(IsLikeWildChar)
+                        string s =>
+                            s.Any(IsLikeWildChar)
                                 ? _sqlExpressionFactory.Like(
                                     translatedInstance,
                                     _sqlExpressionFactory.Constant(
@@ -611,17 +611,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
 
         return op switch
         {
-            ExpressionType.GreaterThan
-                => Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
-            ExpressionType.GreaterThanOrEqual
-                => Dependencies.SqlExpressionFactory.GreaterThanOrEqual(
-                    left: actual,
-                    right: oracle
-                ),
-            ExpressionType.LessThan
-                => Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
-            ExpressionType.LessThanOrEqual
-                => Dependencies.SqlExpressionFactory.LessThanOrEqual(left: actual, right: oracle),
+            ExpressionType.GreaterThan =>
+                Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
+            ExpressionType.GreaterThanOrEqual =>
+                Dependencies.SqlExpressionFactory.GreaterThanOrEqual(left: actual, right: oracle),
+            ExpressionType.LessThan =>
+                Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
+            ExpressionType.LessThanOrEqual =>
+                Dependencies.SqlExpressionFactory.LessThanOrEqual(left: actual, right: oracle),
             _ => visitedExpression
         };
     }
@@ -645,20 +642,20 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     {
         return op switch
         {
-            ExpressionType.Add
-                => DecimalArithmeticExpressionFactoryMethod(
+            ExpressionType.Add =>
+                DecimalArithmeticExpressionFactoryMethod(
                     ResolveFunctionNameFromExpressionType(op),
                     left,
                     right
                 ),
-            ExpressionType.Divide
-                => DecimalArithmeticExpressionFactoryMethod(
+            ExpressionType.Divide =>
+                DecimalArithmeticExpressionFactoryMethod(
                     ResolveFunctionNameFromExpressionType(op),
                     left,
                     right
                 ),
-            ExpressionType.Multiply
-                => DecimalArithmeticExpressionFactoryMethod(
+            ExpressionType.Multiply =>
+                DecimalArithmeticExpressionFactoryMethod(
                     ResolveFunctionNameFromExpressionType(op),
                     left,
                     right

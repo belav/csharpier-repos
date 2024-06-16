@@ -28,11 +28,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
             {
                 PrecedenceKind.Arithmetic
                 or PrecedenceKind.Shift
-                or PrecedenceKind.Bitwise
-                    => options.ArithmeticBinaryParentheses,
+                or PrecedenceKind.Bitwise =>
+                    options.ArithmeticBinaryParentheses,
                 PrecedenceKind.Relational
-                or PrecedenceKind.Equality
-                    => options.RelationalBinaryParentheses,
+                or PrecedenceKind.Equality =>
+                    options.RelationalBinaryParentheses,
                 PrecedenceKind.Logical or PrecedenceKind.Coalesce => options.OtherBinaryParentheses,
                 PrecedenceKind.Other => options.OtherParentheses,
                 _ => throw ExceptionUtilities.UnexpectedValue(precedenceKind),

@@ -59,8 +59,8 @@ namespace System.Text.Json.Nodes
             {
                 JsonValueKind.Null => null,
                 JsonValueKind.Object => new JsonObject(element, options),
-                _
-                    => throw new InvalidOperationException(
+                _ =>
+                    throw new InvalidOperationException(
                         SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object))
                     )
             };

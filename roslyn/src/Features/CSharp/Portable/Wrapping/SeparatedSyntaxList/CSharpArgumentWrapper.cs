@@ -50,14 +50,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
         protected override BaseArgumentListSyntax? TryGetApplicableList(SyntaxNode node) =>
             node switch
             {
-                InvocationExpressionSyntax invocationExpression
-                    => invocationExpression.ArgumentList,
-                ElementAccessExpressionSyntax elementAccessExpression
-                    => elementAccessExpression.ArgumentList,
-                BaseObjectCreationExpressionSyntax objectCreationExpression
-                    => objectCreationExpression.ArgumentList,
-                ConstructorInitializerSyntax constructorInitializer
-                    => constructorInitializer.ArgumentList,
+                InvocationExpressionSyntax invocationExpression =>
+                    invocationExpression.ArgumentList,
+                ElementAccessExpressionSyntax elementAccessExpression =>
+                    elementAccessExpression.ArgumentList,
+                BaseObjectCreationExpressionSyntax objectCreationExpression =>
+                    objectCreationExpression.ArgumentList,
+                ConstructorInitializerSyntax constructorInitializer =>
+                    constructorInitializer.ArgumentList,
                 _ => null,
             };
 

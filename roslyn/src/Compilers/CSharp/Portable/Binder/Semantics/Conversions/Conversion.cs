@@ -445,28 +445,28 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return nestedConversion.Kind switch
             {
-                ConversionKind.Identity
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.Identity =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithIdentityUnderlying
                         : ExplicitNullableWithIdentityUnderlying,
-                ConversionKind.ImplicitConstant
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.ImplicitConstant =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithImplicitConstantUnderlying
                         : ExplicitNullableWithImplicitConstantUnderlying,
-                ConversionKind.ImplicitNumeric
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.ImplicitNumeric =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithImplicitNumericUnderlying
                         : ExplicitNullableWithImplicitNumericUnderlying,
-                ConversionKind.ExplicitNumeric
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.ExplicitNumeric =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithExplicitNumericUnderlying
                         : ExplicitNullableWithExplicitNumericUnderlying,
-                ConversionKind.ExplicitEnumeration
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.ExplicitEnumeration =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithExplicitEnumerationUnderlying
                         : ExplicitNullableWithExplicitEnumerationUnderlying,
-                ConversionKind.ExplicitPointerToInteger
-                    => kind == ConversionKind.ImplicitNullable
+                ConversionKind.ExplicitPointerToInteger =>
+                    kind == ConversionKind.ImplicitNullable
                         ? ImplicitNullableWithPointerToIntegerUnderlying
                         : ExplicitNullableWithPointerToIntegerUnderlying,
                 _ => new Conversion(kind, ImmutableArray.Create(nestedConversion)),

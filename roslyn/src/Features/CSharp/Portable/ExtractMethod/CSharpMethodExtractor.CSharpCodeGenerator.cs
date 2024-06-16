@@ -865,10 +865,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SyntaxNode newMethodDefinition = methodDefinition switch
                 {
                     MethodDeclarationSyntax method => TweakNewLinesInMethod(method),
-                    LocalFunctionStatementSyntax localFunction
-                        => TweakNewLinesInMethod(localFunction),
-                    _
-                        => throw new NotSupportedException(
+                    LocalFunctionStatementSyntax localFunction =>
+                        TweakNewLinesInMethod(localFunction),
+                    _ =>
+                        throw new NotSupportedException(
                             "SyntaxNode expected to be MethodDeclarationSyntax or LocalFunctionStatementSyntax."
                         ),
                 };

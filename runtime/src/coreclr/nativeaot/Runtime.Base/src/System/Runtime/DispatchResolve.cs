@@ -321,8 +321,8 @@ namespace System.Runtime
             {
                 StaticVirtualMethodContextSource.None => null,
                 StaticVirtualMethodContextSource.ContextFromThisClass => pTgtType,
-                _
-                    => pTgtType->InterfaceMap[
+                _ =>
+                    pTgtType->InterfaceMap[
                         usEncodedValue - StaticVirtualMethodContextSource.ContextFromFirstInterface
                     ]
             };

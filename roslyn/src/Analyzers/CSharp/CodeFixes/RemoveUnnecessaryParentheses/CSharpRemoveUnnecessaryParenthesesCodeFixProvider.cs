@@ -38,16 +38,16 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
         ) =>
             current switch
             {
-                ParenthesizedExpressionSyntax p
-                    => CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
+                ParenthesizedExpressionSyntax p =>
+                    CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
                         p,
                         semanticModel,
                         cancellationToken,
                         out _,
                         out _
                     ),
-                ParenthesizedPatternSyntax p
-                    => CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
+                ParenthesizedPatternSyntax p =>
+                    CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
                         p,
                         out _,
                         out _

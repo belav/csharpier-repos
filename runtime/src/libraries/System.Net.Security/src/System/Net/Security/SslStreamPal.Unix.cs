@@ -143,17 +143,17 @@ namespace System.Net.Security
         private static SecurityStatusPal MapNativeErrorCode(Interop.Ssl.SslErrorCode errorCode) =>
             errorCode switch
             {
-                Interop.Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
-                    => new SecurityStatusPal(SecurityStatusPalErrorCode.Renegotiate),
-                Interop.Ssl.SslErrorCode.SSL_ERROR_ZERO_RETURN
-                    => new SecurityStatusPal(SecurityStatusPalErrorCode.ContextExpired),
-                Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_X509_LOOKUP
-                    => new SecurityStatusPal(SecurityStatusPalErrorCode.CredentialsNeeded),
+                Interop.Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE =>
+                    new SecurityStatusPal(SecurityStatusPalErrorCode.Renegotiate),
+                Interop.Ssl.SslErrorCode.SSL_ERROR_ZERO_RETURN =>
+                    new SecurityStatusPal(SecurityStatusPalErrorCode.ContextExpired),
+                Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_X509_LOOKUP =>
+                    new SecurityStatusPal(SecurityStatusPalErrorCode.CredentialsNeeded),
                 Interop.Ssl.SslErrorCode.SSL_ERROR_NONE
-                or Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_READ
-                    => new SecurityStatusPal(SecurityStatusPalErrorCode.OK),
-                _
-                    => new SecurityStatusPal(
+                or Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_READ =>
+                    new SecurityStatusPal(SecurityStatusPalErrorCode.OK),
+                _ =>
+                    new SecurityStatusPal(
                         SecurityStatusPalErrorCode.InternalError,
                         new Interop.OpenSsl.SslException((int)errorCode)
                     )

@@ -17,8 +17,8 @@ internal static class EmitterExtensions
             EndpointParameterSource.Route => "route",
             EndpointParameterSource.RouteOrQuery => "route or query string",
             EndpointParameterSource.FormBody => "form",
-            EndpointParameterSource.BindAsync
-                => endpointParameter.BindMethod == BindabilityMethod.BindAsync
+            EndpointParameterSource.BindAsync =>
+                endpointParameter.BindMethod == BindabilityMethod.BindAsync
                     ? $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext)"
                     : $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext, ParameterInfo)",
             _ => "unknown"
@@ -48,14 +48,14 @@ internal static class EmitterExtensions
             or EndpointParameterSource.Route
             or EndpointParameterSource.RouteOrQuery
             or EndpointParameterSource.JsonBodyOrService
-            or EndpointParameterSource.FormBody
-                => endpointParameter.IsOptional
+            or EndpointParameterSource.FormBody =>
+                endpointParameter.IsOptional
                     ? endpointParameter.EmitHandlerArgument()
                     : $"{endpointParameter.EmitHandlerArgument()}!",
             // When a BindAsync parameter is required, make sure that we are using `.Value` to access
             // the underlying value for a nullable value type instead of using the non-nullable reference type modifier.
-            EndpointParameterSource.BindAsync
-                => endpointParameter.IsOptional
+            EndpointParameterSource.BindAsync =>
+                endpointParameter.IsOptional
                     ? endpointParameter.EmitHandlerArgument()
                     : endpointParameter.Type.IsValueType
                     && endpointParameter.GetBindAsyncReturnType().IsNullableOfT()

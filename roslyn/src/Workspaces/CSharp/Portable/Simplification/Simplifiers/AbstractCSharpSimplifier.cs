@@ -303,8 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 var (usings, members) = syntax switch
                 {
                     BaseNamespaceDeclarationSyntax ns => (ns.Usings, ns.Members),
-                    CompilationUnitSyntax compilationUnit
-                        => (compilationUnit.Usings, compilationUnit.Members),
+                    CompilationUnitSyntax compilationUnit =>
+                        (compilationUnit.Usings, compilationUnit.Members),
                     _ => default,
                 };
 

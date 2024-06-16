@@ -405,13 +405,13 @@ namespace System.Xml.Schema
                 XsdDateTimeKind.Zulu => new DateTime(_dt.Ticks, DateTimeKind.Utc),
 
                 // Adjust to UTC and then convert to local in the current time zone
-                XsdDateTimeKind.LocalEastOfZulu
-                    => new DateTime(
+                XsdDateTimeKind.LocalEastOfZulu =>
+                    new DateTime(
                         _dt.Subtract(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
                         DateTimeKind.Utc
                     ),
-                XsdDateTimeKind.LocalWestOfZulu
-                    => new DateTime(
+                XsdDateTimeKind.LocalWestOfZulu =>
+                    new DateTime(
                         _dt.Add(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
                         DateTimeKind.Utc
                     ),

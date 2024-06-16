@@ -240,8 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(currentBinary.Left is TInterpolatedStringType || result != null);
                     TResult rewrittenLeft = currentBinary.Left switch
                     {
-                        TInterpolatedStringType interpolatedString
-                            => interpolatedStringFactory(interpolatedString, i++, arg),
+                        TInterpolatedStringType interpolatedString =>
+                            interpolatedStringFactory(interpolatedString, i++, arg),
                         BoundBinaryOperator => result!,
                         _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind)
                     };
@@ -252,10 +252,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     var rewrittenRight = currentBinary.Right switch
                     {
-                        TInterpolatedStringType interpolatedString
-                            => interpolatedStringFactory(interpolatedString, i++, arg),
-                        BoundBinaryOperator binaryOperator
-                            => doRewrite(
+                        TInterpolatedStringType interpolatedString =>
+                            interpolatedStringFactory(interpolatedString, i++, arg),
+                        BoundBinaryOperator binaryOperator =>
+                            doRewrite(
                                 binaryOperator,
                                 arg,
                                 interpolatedStringFactory,
@@ -307,8 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundInterpolatedString { InterpolationData: { } d } => d,
                 BoundBinaryOperator or BoundInterpolatedString when !throwOnMissing => default,
                 BoundBinaryOperator
-                or BoundInterpolatedString
-                    => throw ExceptionUtilities.Unreachable(),
+                or BoundInterpolatedString =>
+                    throw ExceptionUtilities.Unreachable(),
                 _ => throw ExceptionUtilities.UnexpectedValue(e.Kind),
             };
     }

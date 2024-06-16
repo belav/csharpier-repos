@@ -18,8 +18,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 var underlyingType = (type as INamedTypeSymbol)?.TypeArguments.FirstOrDefault();
                 return underlyingType?.TypeKind switch
                 {
-                    TypeKind.TypeParameter
-                        => new NullableValueWithDynamicallyAccessedMembers(
+                    TypeKind.TypeParameter =>
+                        new NullableValueWithDynamicallyAccessedMembers(
                             new TypeProxy(type),
                             new GenericParameterValue((ITypeParameterSymbol)underlyingType)
                         ),
@@ -27,8 +27,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                     TypeKind.Error => new SystemTypeValue(new TypeProxy(type)),
                     TypeKind.Class
                     or TypeKind.Struct
-                    or TypeKind.Interface
-                        => new NullableSystemTypeValue(
+                    or TypeKind.Interface =>
+                        new NullableSystemTypeValue(
                             new TypeProxy(type),
                             new SystemTypeValue(new TypeProxy(underlyingType))
                         ),

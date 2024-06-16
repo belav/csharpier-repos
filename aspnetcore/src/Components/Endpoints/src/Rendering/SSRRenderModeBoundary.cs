@@ -46,8 +46,8 @@ internal class SSRRenderModeBoundary : IComponent
             InteractiveServerRenderMode mode => mode.Prerender,
             InteractiveWebAssemblyRenderMode mode => mode.Prerender,
             InteractiveAutoRenderMode mode => mode.Prerender,
-            _
-                => throw new ArgumentException(
+            _ =>
+                throw new ArgumentException(
                     $"Server-side rendering does not support the render mode '{renderMode}'.",
                     nameof(renderMode)
                 )
@@ -203,26 +203,22 @@ internal class SSRRenderModeBoundary : IComponent
 
         var marker = RenderMode switch
         {
-            InteractiveServerRenderMode server
-                => ComponentMarker.Create(
+            InteractiveServerRenderMode server =>
+                ComponentMarker.Create(
                     ComponentMarker.ServerMarkerType,
                     server.Prerender,
                     _markerKey
                 ),
-            InteractiveWebAssemblyRenderMode webAssembly
-                => ComponentMarker.Create(
+            InteractiveWebAssemblyRenderMode webAssembly =>
+                ComponentMarker.Create(
                     ComponentMarker.WebAssemblyMarkerType,
                     webAssembly.Prerender,
                     _markerKey
                 ),
-            InteractiveAutoRenderMode auto
-                => ComponentMarker.Create(
-                    ComponentMarker.AutoMarkerType,
-                    auto.Prerender,
-                    _markerKey
-                ),
-            _
-                => throw new UnreachableException(
+            InteractiveAutoRenderMode auto =>
+                ComponentMarker.Create(ComponentMarker.AutoMarkerType, auto.Prerender, _markerKey),
+            _ =>
+                throw new UnreachableException(
                     $"Unknown render mode {RenderMode.GetType().FullName}"
                 ),
         };

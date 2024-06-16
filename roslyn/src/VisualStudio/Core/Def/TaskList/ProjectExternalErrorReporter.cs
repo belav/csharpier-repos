@@ -281,8 +281,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 VSTASKPRIORITY.TP_HIGH => DiagnosticSeverity.Error,
                 VSTASKPRIORITY.TP_NORMAL => DiagnosticSeverity.Warning,
                 VSTASKPRIORITY.TP_LOW => DiagnosticSeverity.Info,
-                _
-                    => throw new ArgumentException(
+                _ =>
+                    throw new ArgumentException(
                         ServicesVSResources.Not_a_valid_value,
                         nameof(nPriority)
                     )

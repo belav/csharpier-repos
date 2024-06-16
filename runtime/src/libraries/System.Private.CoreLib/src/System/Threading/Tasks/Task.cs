@@ -3428,15 +3428,15 @@ namespace System.Threading.Tasks
 
                 bool set = completingTask.Status switch
                 {
-                    TaskStatus.Canceled
-                        => TrySetCanceled(
+                    TaskStatus.Canceled =>
+                        TrySetCanceled(
                             completingTask.CancellationToken,
                             completingTask.GetCancellationExceptionDispatchInfo()
                         ),
-                    TaskStatus.Faulted
-                        => TrySetException(completingTask.GetExceptionDispatchInfos()),
-                    _
-                        => completingTask is Task<TResult> taskTResult
+                    TaskStatus.Faulted =>
+                        TrySetException(completingTask.GetExceptionDispatchInfos()),
+                    _ =>
+                        completingTask is Task<TResult> taskTResult
                             ? TrySetResult(taskTResult.Result)
                             : TrySetResult(),
                 };

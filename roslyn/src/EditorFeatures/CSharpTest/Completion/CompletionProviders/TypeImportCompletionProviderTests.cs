@@ -2025,15 +2025,15 @@ namespace Foo
 
             var markup = isProjectReference switch
             {
-                true
-                    => CreateMarkupForProjectWithProjectReference(
+                true =>
+                    CreateMarkupForProjectWithProjectReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
                         LanguageNames.CSharp
                     ),
-                false
-                    => CreateMarkupForProjectWithMetadataReference(
+                false =>
+                    CreateMarkupForProjectWithMetadataReference(
                         srcDoc,
                         refDoc,
                         LanguageNames.CSharp,
@@ -2074,8 +2074,8 @@ namespace Foo
 
             var (markup, shouldContainItem) = isProjectReference switch
             {
-                true
-                    => (
+                true =>
+                    (
                         CreateMarkupForProjectWithProjectReference(
                             srcDoc,
                             refDoc,
@@ -2084,8 +2084,8 @@ namespace Foo
                         ),
                         true
                     ),
-                false
-                    => (
+                false =>
+                    (
                         CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,
@@ -2145,8 +2145,8 @@ namespace Foo
 
             var (markup, shouldContainItem) = isProjectReference switch
             {
-                true
-                    => (
+                true =>
+                    (
                         CreateMarkupForProjectWithProjectReference(
                             srcDoc,
                             refDoc,
@@ -2155,8 +2155,8 @@ namespace Foo
                         ),
                         true
                     ),
-                false
-                    => (
+                false =>
+                    (
                         CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,
@@ -2462,15 +2462,15 @@ namespace Foo
             {
                 markup = isProjectReference switch
                 {
-                    true
-                        => CreateMarkupForProjectWithProjectReference(
+                    true =>
+                        CreateMarkupForProjectWithProjectReference(
                             srcDoc,
                             refDoc,
                             LanguageNames.CSharp,
                             LanguageNames.CSharp
                         ),
-                    false
-                        => CreateMarkupForProjectWithMetadataReference(
+                    false =>
+                        CreateMarkupForProjectWithMetadataReference(
                             srcDoc,
                             refDoc,
                             LanguageNames.CSharp,

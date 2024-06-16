@@ -76,14 +76,14 @@ namespace Microsoft.Interop
                 // No marshalling info was computed, but a character encoding was provided.
                 return _defaultMarshallingInfo.CharEncoding switch
                 {
-                    CharEncoding.Utf16
-                        => CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
+                    CharEncoding.Utf16 =>
+                        CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
                             _compilation,
                             type,
                             TypeNames.Utf16StringMarshaller
                         ),
-                    CharEncoding.Utf8
-                        => CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
+                    CharEncoding.Utf8 =>
+                        CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
                             _compilation,
                             type,
                             TypeNames.Utf8StringMarshaller

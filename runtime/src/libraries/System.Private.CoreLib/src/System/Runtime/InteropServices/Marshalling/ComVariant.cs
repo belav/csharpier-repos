@@ -495,10 +495,10 @@ namespace System.Runtime.InteropServices.Marshalling
                         or VarEnum.VT_INT
                         or VarEnum.VT_UINT,
                     4
-                )
-                    => rawValue,
-                (VarEnum.VT_I8 or VarEnum.VT_UI8 or VarEnum.VT_R8 or VarEnum.VT_DATE, 8)
-                    => rawValue,
+                ) =>
+                    rawValue,
+                (VarEnum.VT_I8 or VarEnum.VT_UI8 or VarEnum.VT_R8 or VarEnum.VT_DATE, 8) =>
+                    rawValue,
                 (
                     VarEnum.VT_UNKNOWN
                         or VarEnum.VT_DISPATCH
@@ -514,18 +514,18 @@ namespace System.Runtime.InteropServices.Marshalling
                         or VarEnum.VT_CF
                         or VT_VERSIONED_STREAM,
                     _
-                ) when sizeof(T) == nint.Size
-                    => rawValue,
+                ) when sizeof(T) == nint.Size =>
+                    rawValue,
                 (VarEnum.VT_CY or VarEnum.VT_FILETIME, 8) => rawValue,
                 (VarEnum.VT_RECORD, _) when sizeof(T) == sizeof(Record) => rawValue,
                 _ when vt.HasFlag(VarEnum.VT_BYREF) && sizeof(T) == nint.Size => rawValue,
-                _ when vt.HasFlag(VarEnum.VT_VECTOR) && sizeof(T) == sizeof(Vector<byte>)
-                    => rawValue,
+                _ when vt.HasFlag(VarEnum.VT_VECTOR) && sizeof(T) == sizeof(Vector<byte>) =>
+                    rawValue,
                 _ when vt.HasFlag(VarEnum.VT_ARRAY) && sizeof(T) == nint.Size => rawValue,
-                (VarEnum.VT_BLOB or VarEnum.VT_BLOB_OBJECT, _) when sizeof(T) == sizeof(Blob)
-                    => rawValue,
-                _
-                    => throw new ArgumentException(
+                (VarEnum.VT_BLOB or VarEnum.VT_BLOB_OBJECT, _) when sizeof(T) == sizeof(Blob) =>
+                    rawValue,
+                _ =>
+                    throw new ArgumentException(
                         SR.Format(SR.ComVariant_SizeMustMatchVariantSize, nameof(T), nameof(vt))
                     )
             };

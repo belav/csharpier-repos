@@ -248,15 +248,11 @@ public abstract class BlazorWasmTestBase : WasmTemplateTestBase
     public Task BlazorRunTest(BlazorRunOptions runOptions) =>
         runOptions.Host switch
         {
-            BlazorRunHost.DotnetRun
-                => BlazorRunTest(
-                    $"run -c {runOptions.Config} --no-build",
-                    _projectDir!,
-                    runOptions
-                ),
+            BlazorRunHost.DotnetRun =>
+                BlazorRunTest($"run -c {runOptions.Config} --no-build", _projectDir!, runOptions),
 
-            BlazorRunHost.WebServer
-                => BlazorRunTest(
+            BlazorRunHost.WebServer =>
+                BlazorRunTest(
                     $"{s_xharnessRunnerCommand} wasm webserver --app=. --web-server-use-default-files",
                     Path.GetFullPath(
                         Path.Combine(

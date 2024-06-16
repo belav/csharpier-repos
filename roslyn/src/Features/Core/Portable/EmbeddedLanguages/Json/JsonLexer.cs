@@ -149,8 +149,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             {
                 'b' or 't' or 'n' or 'f' or 'r' or '\\' or '"' or '\'' or '/' => null,
                 'u' => ScanUnicodeChars(escapeStart, Position),
-                _
-                    => new EmbeddedDiagnostic(
+                _ =>
+                    new EmbeddedDiagnostic(
                         FeaturesResources.Invalid_escape_sequence,
                         GetSpan(GetCharsToCurrentPosition(escapeStart))
                     ),

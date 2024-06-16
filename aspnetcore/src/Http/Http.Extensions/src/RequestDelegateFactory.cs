@@ -2713,8 +2713,8 @@ public static partial class RequestDelegateFactory
         var fullParamCheckBlock = (parameter.ParameterType.IsArray, isOptional) switch
         {
             // (isArray: true, optional: true)
-            (true, true)
-                => Expression.Block(
+            (true, true) =>
+                Expression.Block(
                     new[] { index, stringArrayExpr! },
                     // values = httpContext.Request.Query["id"];
                     Expression.Assign(stringArrayExpr!, valueExpression),
@@ -2725,8 +2725,8 @@ public static partial class RequestDelegateFactory
                 ),
 
             // (isArray: true, optional: false)
-            (true, false)
-                => Expression.Block(
+            (true, false) =>
+                Expression.Block(
                     new[] { index, stringArrayExpr! },
                     // values = httpContext.Request.Query["id"];
                     Expression.Assign(stringArrayExpr!, valueExpression),
@@ -2738,8 +2738,8 @@ public static partial class RequestDelegateFactory
                 ),
 
             // (isArray: false, optional: false)
-            (false, false)
-                => Expression.Block(
+            (false, false) =>
+                Expression.Block(
                     // tempSourceString = httpContext.RequestValue["id"];
                     Expression.Assign(TempSourceStringExpr, valueExpression),
                     // if (tempSourceString == null) { ... } only produced when parameter is required
@@ -2749,8 +2749,8 @@ public static partial class RequestDelegateFactory
                 ),
 
             // (isArray: false, optional: true)
-            (false, true)
-                => Expression.Block(
+            (false, true) =>
+                Expression.Block(
                     // tempSourceString = httpContext.RequestValue["id"];
                     Expression.Assign(TempSourceStringExpr, valueExpression),
                     // if (tempSourceString != null) { ... }

@@ -2140,8 +2140,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     "BranchName" => _branchName,
                     "LeafType" => _leafAType,
                     "LeafBType" => _leafBType,
-                    _
-                        => throw new InvalidOperationException(
+                    _ =>
+                        throw new InvalidOperationException(
                             $"Indexer property with key {name} is not defined on {nameof(OwnedPerson)}."
                         ),
                 };

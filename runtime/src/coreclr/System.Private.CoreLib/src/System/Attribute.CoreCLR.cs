@@ -506,10 +506,10 @@ namespace System
 
             return element.MemberType switch
             {
-                MemberTypes.Property
-                    => InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
-                MemberTypes.Event
-                    => InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
+                MemberTypes.Property =>
+                    InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
+                MemberTypes.Event =>
+                    InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
                 _ => (Attribute[])element.GetCustomAttributes(attributeType, inherit)
             };
         }
@@ -525,14 +525,10 @@ namespace System
 
             return element.MemberType switch
             {
-                MemberTypes.Property
-                    => InternalGetCustomAttributes(
-                        (PropertyInfo)element,
-                        typeof(Attribute),
-                        inherit
-                    ),
-                MemberTypes.Event
-                    => InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
+                MemberTypes.Property =>
+                    InternalGetCustomAttributes((PropertyInfo)element, typeof(Attribute), inherit),
+                MemberTypes.Event =>
+                    InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
                 _ => (Attribute[])element.GetCustomAttributes(typeof(Attribute), inherit)
             };
         }
@@ -556,8 +552,8 @@ namespace System
 
             return element.MemberType switch
             {
-                MemberTypes.Property
-                    => InternalIsDefined((PropertyInfo)element, attributeType, inherit),
+                MemberTypes.Property =>
+                    InternalIsDefined((PropertyInfo)element, attributeType, inherit),
                 MemberTypes.Event => InternalIsDefined((EventInfo)element, attributeType, inherit),
                 _ => element.IsDefined(attributeType, inherit),
             };

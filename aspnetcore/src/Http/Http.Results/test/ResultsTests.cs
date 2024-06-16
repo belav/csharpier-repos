@@ -278,8 +278,8 @@ public partial class ResultsTests
         var result =
             bytesOrFile switch
             {
-                0
-                    => Results.Bytes(
+                0 =>
+                    Results.Bytes(
                         contents,
                         contentType,
                         fileDownloadName,
@@ -287,8 +287,8 @@ public partial class ResultsTests
                         lastModified,
                         entityTag
                     ),
-                _
-                    => Results.File(
+                _ =>
+                    Results.File(
                         contents,
                         contentType,
                         fileDownloadName,
@@ -365,8 +365,8 @@ public partial class ResultsTests
         // Act
         var result = overload switch
         {
-            0
-                => Results.Stream(
+            0 =>
+                Results.Stream(
                     stream,
                     contentType,
                     fileDownloadName,
@@ -374,8 +374,8 @@ public partial class ResultsTests
                     entityTag,
                     enableRangeProcessing
                 ),
-            1
-                => Results.Stream(
+            1 =>
+                Results.Stream(
                     PipeReader.Create(stream),
                     contentType,
                     fileDownloadName,
@@ -383,8 +383,8 @@ public partial class ResultsTests
                     entityTag,
                     enableRangeProcessing
                 ),
-            _
-                => Results.Stream(
+            _ =>
+                Results.Stream(
                     (s) => Task.CompletedTask,
                     contentType,
                     fileDownloadName,

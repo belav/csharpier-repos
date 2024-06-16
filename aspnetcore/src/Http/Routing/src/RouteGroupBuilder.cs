@@ -84,8 +84,8 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
             return _routeGroupBuilder._dataSources.Count switch
             {
                 0 => Array.Empty<Endpoint>(),
-                1
-                    => _routeGroupBuilder
+                1 =>
+                    _routeGroupBuilder
                         ._dataSources[0]
                         .GetGroupedEndpoints(
                             GetNextRouteGroupContext(
@@ -95,8 +95,8 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
                                 applicationServices
                             )
                         ),
-                _
-                    => SelectEndpointsFromAllDataSources(
+                _ =>
+                    SelectEndpointsFromAllDataSources(
                         GetNextRouteGroupContext(
                             prefix,
                             conventions,

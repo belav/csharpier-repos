@@ -166,8 +166,11 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
         {
             // This is the case of a structural type getting projected out via Select (possibly also an owned entity one day, if we stop
             // expanding them in pre-visitation)
-            StructuralTypeReferenceExpression { Parameter: StructuralTypeShaperExpression shaper }
-                => shaper,
+            StructuralTypeReferenceExpression
+            {
+                Parameter: StructuralTypeShaperExpression shaper
+            } =>
+                shaper,
 
             StructuralTypeReferenceExpression { Subquery: not null } => null, // TODO: think about this - probably unsupported (if so, message)
 
@@ -2716,8 +2719,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     ) =>
         target switch
         {
-            SqlConstantExpression constant
-                => Expression.Constant(
+            SqlConstantExpression constant =>
+                Expression.Constant(
                     constant.Value is null
                         ? null
                         : complexProperty.GetGetter().GetClrValue(constant.Value),
@@ -2728,8 +2731,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 when sqlParameterExpression.Name.StartsWith(
                     QueryCompilationContext.QueryParameterPrefix,
                     StringComparison.Ordinal
-                )
-                => new ParameterBasedComplexPropertyChainExpression(
+                ) =>
+                new ParameterBasedComplexPropertyChainExpression(
                     sqlParameterExpression,
                     complexProperty
                 ),
@@ -2738,8 +2741,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 when memberInitExpression.Bindings.SingleOrDefault(mb =>
                     mb.Member.Name == complexProperty.Name
                 )
-                    is MemberAssignment memberAssignment
-                => memberAssignment.Expression,
+                    is MemberAssignment memberAssignment =>
+                memberAssignment.Expression,
 
             // For non-constant/parameter complex property accesses, BindComplexProperty is called instead of this method
             // TODO: possibly refactor, folding this method into BindComplexProperty to have it handle the constant/parameter cases as well
@@ -2814,8 +2817,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             ConstantExpression => true,
             NewExpression e => e.Arguments.All(CanEvaluate),
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
-            MemberInitExpression e
-                => CanEvaluate(e.NewExpression)
+            MemberInitExpression e =>
+                CanEvaluate(e.NewExpression)
                     && e.Bindings.All(mb =>
                         mb is MemberAssignment memberAssignment
                         && CanEvaluate(memberAssignment.Expression)

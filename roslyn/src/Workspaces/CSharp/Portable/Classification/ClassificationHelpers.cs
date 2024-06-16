@@ -286,12 +286,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 var varDecl = variableDeclarator.Parent as VariableDeclarationSyntax;
                 return varDecl?.Parent switch
                 {
-                    FieldDeclarationSyntax fieldDeclaration
-                        => fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                    FieldDeclarationSyntax fieldDeclaration =>
+                        fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
                             ? ClassificationTypeNames.ConstantName
                             : ClassificationTypeNames.FieldName,
-                    LocalDeclarationStatementSyntax localDeclarationStatement
-                        => localDeclarationStatement.IsConst
+                    LocalDeclarationStatementSyntax localDeclarationStatement =>
+                        localDeclarationStatement.IsConst
                             ? ClassificationTypeNames.ConstantName
                             : ClassificationTypeNames.LocalName,
                     EventFieldDeclarationSyntax _ => ClassificationTypeNames.EventName,

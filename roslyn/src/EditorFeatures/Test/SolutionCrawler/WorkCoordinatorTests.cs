@@ -1454,15 +1454,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 (
                     BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                )
-                    => 1,
+                ) =>
+                    1,
                 (
                     BackgroundAnalysisScope.OpenFiles
                         or BackgroundAnalysisScope.FullSolution
                         or BackgroundAnalysisScope.None,
                     _
-                )
-                    => 0,
+                ) =>
+                    0,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -1471,15 +1471,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 (
                     BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                )
-                    => 1,
+                ) =>
+                    1,
                 (
                     BackgroundAnalysisScope.OpenFiles
                         or BackgroundAnalysisScope.FullSolution
                         or BackgroundAnalysisScope.None,
                     _
-                )
-                    => 0,
+                ) =>
+                    0,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 

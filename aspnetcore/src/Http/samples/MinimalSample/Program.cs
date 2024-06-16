@@ -107,18 +107,18 @@ app.MapGet(
         problemType switch
         {
             "plain" => Results.Problem(statusCode: 500, extensions: extensions),
-            "object"
-                => Results.Problem(
+            "object" =>
+                Results.Problem(
                     new ProblemDetails()
                     {
                         Status = 500,
                         Extensions = { { "traceId", "traceId123" } }
                     }
                 ),
-            "validation"
-                => Results.ValidationProblem(errors, statusCode: 400, extensions: extensions),
-            "objectValidation"
-                => Results.Problem(
+            "validation" =>
+                Results.ValidationProblem(errors, statusCode: 400, extensions: extensions),
+            "objectValidation" =>
+                Results.Problem(
                     new HttpValidationProblemDetails(errors)
                     {
                         Status = 400,

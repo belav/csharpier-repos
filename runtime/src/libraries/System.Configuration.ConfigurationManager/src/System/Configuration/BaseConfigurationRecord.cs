@@ -2658,14 +2658,14 @@ namespace System.Configuration
             allowExeDefinition switch
             {
                 AllowDefinitionMachineOnly => ConfigurationAllowExeDefinition.MachineOnly,
-                AllowDefinitionMachineToApplication
-                    => ConfigurationAllowExeDefinition.MachineToApplication,
-                AllowExeDefinitionMachineToRoaming
-                    => ConfigurationAllowExeDefinition.MachineToRoamingUser,
-                AllowExeDefinitionMachineToLocal
-                    => ConfigurationAllowExeDefinition.MachineToLocalUser,
-                _
-                    => throw new ConfigurationErrorsException(
+                AllowDefinitionMachineToApplication =>
+                    ConfigurationAllowExeDefinition.MachineToApplication,
+                AllowExeDefinitionMachineToRoaming =>
+                    ConfigurationAllowExeDefinition.MachineToRoamingUser,
+                AllowExeDefinitionMachineToLocal =>
+                    ConfigurationAllowExeDefinition.MachineToLocalUser,
+                _ =>
+                    throw new ConfigurationErrorsException(
                         SR.Config_section_allow_exe_definition_attribute_invalid,
                         xmlUtil
                     ),
@@ -2676,11 +2676,11 @@ namespace System.Configuration
             {
                 AllowDefinitionEverywhere => ConfigurationAllowDefinition.Everywhere,
                 AllowDefinitionMachineOnly => ConfigurationAllowDefinition.MachineOnly,
-                AllowDefinitionMachineToApplication
-                    => ConfigurationAllowDefinition.MachineToApplication,
+                AllowDefinitionMachineToApplication =>
+                    ConfigurationAllowDefinition.MachineToApplication,
                 AllowDefinitionMachineToWebRoot => ConfigurationAllowDefinition.MachineToWebRoot,
-                _
-                    => throw new ConfigurationErrorsException(
+                _ =>
+                    throw new ConfigurationErrorsException(
                         SR.Config_section_allow_definition_attribute_invalid,
                         xmlUtil
                     ),
