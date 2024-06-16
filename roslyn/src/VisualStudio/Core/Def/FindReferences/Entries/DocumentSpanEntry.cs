@@ -161,7 +161,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 var propertyId =
                     _spanKind == HighlightSpanKind.Definition ? DefinitionHighlightTag.TagId
                     : _spanKind == HighlightSpanKind.WrittenReference
-                    ? WrittenReferenceHighlightTag.TagId
+                        ? WrittenReferenceHighlightTag.TagId
                     : ReferenceHighlightTag.TagId;
 
                 var properties = Presenter
@@ -316,9 +316,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // Create an appropriate highlight span on that buffer for the reference.
                 var key =
                     spanKind == HighlightSpanKind.Definition
-                    ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
+                        ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
                     : spanKind == HighlightSpanKind.WrittenReference
-                    ? PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey
+                        ? PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey
                     : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
 
                 textBuffer.Properties.RemoveProperty(key);

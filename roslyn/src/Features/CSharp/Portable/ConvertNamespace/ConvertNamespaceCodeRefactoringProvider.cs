@@ -89,14 +89,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                     namespaceDecl,
                     forAnalyzer: false
                 )
-                ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
+                    ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
                 : CanOfferUseFileScoped(
                     options.NamespaceDeclarations,
                     root,
                     namespaceDecl,
                     forAnalyzer: false
                 )
-                ? GetInfo(NamespaceDeclarationPreference.FileScoped)
+                    ? GetInfo(NamespaceDeclarationPreference.FileScoped)
                 : null;
 
             return info != null;

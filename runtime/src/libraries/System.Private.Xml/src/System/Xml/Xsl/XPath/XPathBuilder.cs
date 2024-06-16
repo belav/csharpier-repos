@@ -367,10 +367,10 @@ namespace System.Xml.Xsl.XPath
                 XmlTypeCode compType = (
                     leftType.TypeCode == XmlTypeCode.Boolean
                     || rightType.TypeCode == XmlTypeCode.Boolean
-                    ? XmlTypeCode.Boolean
+                        ? XmlTypeCode.Boolean
                     : leftType.TypeCode == XmlTypeCode.Double
                     || rightType.TypeCode == XmlTypeCode.Double
-                    ? XmlTypeCode.Double
+                        ? XmlTypeCode.Double
                     :
                     /*default:*/XmlTypeCode.String
                 );

@@ -346,7 +346,7 @@ namespace System.Net
             m_SslStatus =
                 memoryBlob.RequestBlob->pSslInfo == null ? SslStatus.Insecure
                 : memoryBlob.RequestBlob->pSslInfo->SslClientCertNegotiated == 0
-                ? SslStatus.NoClientCert
+                    ? SslStatus.NoClientCert
                 : SslStatus.ClientCert;
             if (memoryBlob.RequestBlob->pRawUrl != null && memoryBlob.RequestBlob->RawUrlLength > 0)
             {

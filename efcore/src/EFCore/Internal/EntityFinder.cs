@@ -984,13 +984,13 @@ public class EntityFinder<TEntity> : IEntityFinder<TEntity>
 
     private IQueryable BuildQueryRoot(IEntityType entityType) =>
         entityType.FindOwnership() is IForeignKey ownership
-        ? BuildQueryRoot(
-            ownership.PrincipalEntityType,
-            entityType,
-            ownership.PrincipalToDependent!.Name
-        )
+            ? BuildQueryRoot(
+                ownership.PrincipalEntityType,
+                entityType,
+                ownership.PrincipalToDependent!.Name
+            )
         : entityType.HasSharedClrType
-        ? (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
+            ? (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
         : (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.ClrType);
 
     private IQueryable BuildQueryRoot(

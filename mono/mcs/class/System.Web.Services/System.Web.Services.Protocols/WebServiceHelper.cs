@@ -351,9 +351,9 @@ namespace System.Web.Services.Protocols
             XmlNode detail =
                 (fault.Detail == null) ? null
                 : (fault.Detail.Children != null && fault.Detail.Children.Length > 0)
-                ? (XmlNode)fault.Detail.Children[0]
+                    ? (XmlNode)fault.Detail.Children[0]
                 : (fault.Detail.Attributes != null && fault.Detail.Attributes.Length > 0)
-                ? fault.Detail.Attributes[0]
+                    ? fault.Detail.Attributes[0]
                 : null;
             SoapFaultSubCode subcode = Soap12Fault.GetSoapFaultSubCode(fault.Code.Subcode);
             return new SoapException(

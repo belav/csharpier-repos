@@ -2053,27 +2053,30 @@ public class BufferedDataReader : DbDataReader
 
                 message =
                     exception is NullReferenceException || Equals(value, DBNull.Value)
-                    ? RelationalStrings.ErrorMaterializingPropertyNullReference(
-                        entityType,
-                        propertyName,
-                        expectedType
-                    )
+                        ? RelationalStrings.ErrorMaterializingPropertyNullReference(
+                            entityType,
+                            propertyName,
+                            expectedType
+                        )
                     : exception is InvalidCastException
-                    ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                        entityType,
-                        propertyName,
-                        expectedType,
-                        actualType
-                    )
+                        ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                            entityType,
+                            propertyName,
+                            expectedType,
+                            actualType
+                        )
                     : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
             }
             else
             {
                 message =
                     exception is NullReferenceException || Equals(value, DBNull.Value)
-                    ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
+                        ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
                     : exception is InvalidCastException
-                    ? RelationalStrings.ErrorMaterializingValueInvalidCast(expectedType, actualType)
+                        ? RelationalStrings.ErrorMaterializingValueInvalidCast(
+                            expectedType,
+                            actualType
+                        )
                     : RelationalStrings.ErrorMaterializingValue;
             }
 

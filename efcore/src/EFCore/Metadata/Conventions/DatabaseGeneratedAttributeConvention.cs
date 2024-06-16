@@ -36,9 +36,9 @@ public class DatabaseGeneratedAttributeConvention
     {
         var valueGenerated =
             attribute.DatabaseGeneratedOption == DatabaseGeneratedOption.Identity
-            ? ValueGenerated.OnAdd
+                ? ValueGenerated.OnAdd
             : attribute.DatabaseGeneratedOption == DatabaseGeneratedOption.Computed
-            ? ValueGenerated.OnAddOrUpdate
+                ? ValueGenerated.OnAddOrUpdate
             : ValueGenerated.Never;
 
         propertyBuilder.ValueGenerated(valueGenerated, fromDataAnnotation: true);

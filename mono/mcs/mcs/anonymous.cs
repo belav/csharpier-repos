@@ -70,7 +70,7 @@ namespace Mono.CSharp
             string host_name =
                 host == null ? null
                 : host is InterfaceMemberBase
-                ? ((InterfaceMemberBase)host).GetFullName(host.MemberName)
+                    ? ((InterfaceMemberBase)host).GetFullName(host.MemberName)
                 : host.MemberName.Name;
             string tname = MakeName(host_name, "c", name, unique_id);
             TypeParameters args = null;

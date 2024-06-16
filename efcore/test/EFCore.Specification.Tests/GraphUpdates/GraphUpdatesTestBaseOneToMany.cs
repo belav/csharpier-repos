@@ -786,9 +786,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                         testCode =
                             deleteOrphansTiming == CascadeTiming.Immediate
-                            ? () => context.ChangeTracker.DetectChanges()
+                                ? () => context.ChangeTracker.DetectChanges()
                             : deleteOrphansTiming == null
-                            ? () => context.ChangeTracker.CascadeChanges()
+                                ? () => context.ChangeTracker.CascadeChanges()
                             : () => context.SaveChanges();
                     }
 

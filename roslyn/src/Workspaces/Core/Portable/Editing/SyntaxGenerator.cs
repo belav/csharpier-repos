@@ -404,11 +404,11 @@ namespace Microsoft.CodeAnalysis.Editing
                 TypeExpression(symbol.Type),
                 initializer is not null ? initializer
                 : symbol.HasExplicitDefaultValue
-                ? GenerateExpression(
-                    symbol.Type,
-                    symbol.ExplicitDefaultValue,
-                    canUseFieldReference: true
-                )
+                    ? GenerateExpression(
+                        symbol.Type,
+                        symbol.ExplicitDefaultValue,
+                        canUseFieldReference: true
+                    )
                 : null,
                 symbol.RefKind,
                 isExtension: symbol

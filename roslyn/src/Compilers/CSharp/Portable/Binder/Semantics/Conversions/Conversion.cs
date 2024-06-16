@@ -153,7 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _kind =
                 conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
-                ? ConversionKind.NoConversion
+                    ? ConversionKind.NoConversion
                 : isImplicit ? ConversionKind.ImplicitUserDefined
                 : ConversionKind.ExplicitUserDefined;
 

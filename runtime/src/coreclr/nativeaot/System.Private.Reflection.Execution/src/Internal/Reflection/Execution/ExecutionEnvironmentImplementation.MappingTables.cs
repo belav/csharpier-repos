@@ -1201,22 +1201,22 @@ namespace Internal.Reflection.Execution
                         : 0;
 
                     return RuntimeAugments.IsValueType(fieldTypeHandle)
-                        ? (FieldAccessor)
-                            new ValueTypeFieldAccessorForInstanceFields(
-                                fieldAccessMetadata.Offset + fieldOffsetDelta,
-                                declaringTypeHandle,
-                                fieldTypeHandle
-                            )
+                            ? (FieldAccessor)
+                                new ValueTypeFieldAccessorForInstanceFields(
+                                    fieldAccessMetadata.Offset + fieldOffsetDelta,
+                                    declaringTypeHandle,
+                                    fieldTypeHandle
+                                )
                         : (
                             RuntimeAugments.IsUnmanagedPointerType(fieldTypeHandle)
                             || RuntimeAugments.IsFunctionPointerType(fieldTypeHandle)
                         )
-                        ? (FieldAccessor)
-                            new PointerTypeFieldAccessorForInstanceFields(
-                                fieldAccessMetadata.Offset + fieldOffsetDelta,
-                                declaringTypeHandle,
-                                fieldTypeHandle
-                            )
+                            ? (FieldAccessor)
+                                new PointerTypeFieldAccessorForInstanceFields(
+                                    fieldAccessMetadata.Offset + fieldOffsetDelta,
+                                    declaringTypeHandle,
+                                    fieldTypeHandle
+                                )
                         : (FieldAccessor)
                             new ReferenceTypeFieldAccessorForInstanceFields(
                                 fieldAccessMetadata.Offset + fieldOffsetDelta,
@@ -1280,26 +1280,26 @@ namespace Internal.Reflection.Execution
                     );
 
                     return RuntimeAugments.IsValueType(fieldTypeHandle)
-                        ? (FieldAccessor)
-                            new ValueTypeFieldAccessorForStaticFields(
-                                cctorContext,
-                                staticsBase,
-                                fieldOffset,
-                                fieldAccessMetadata.Flags,
-                                fieldTypeHandle
-                            )
+                            ? (FieldAccessor)
+                                new ValueTypeFieldAccessorForStaticFields(
+                                    cctorContext,
+                                    staticsBase,
+                                    fieldOffset,
+                                    fieldAccessMetadata.Flags,
+                                    fieldTypeHandle
+                                )
                         : (
                             RuntimeAugments.IsUnmanagedPointerType(fieldTypeHandle)
                             || RuntimeAugments.IsFunctionPointerType(fieldTypeHandle)
                         )
-                        ? (FieldAccessor)
-                            new PointerTypeFieldAccessorForStaticFields(
-                                cctorContext,
-                                staticsBase,
-                                fieldOffset,
-                                fieldAccessMetadata.Flags,
-                                fieldTypeHandle
-                            )
+                            ? (FieldAccessor)
+                                new PointerTypeFieldAccessorForStaticFields(
+                                    cctorContext,
+                                    staticsBase,
+                                    fieldOffset,
+                                    fieldAccessMetadata.Flags,
+                                    fieldTypeHandle
+                                )
                         : (FieldAccessor)
                             new ReferenceTypeFieldAccessorForStaticFields(
                                 cctorContext,

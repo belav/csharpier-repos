@@ -553,9 +553,9 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
         return TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
             || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
-            ? QueryCompilationContext.NotTranslatedExpression
+                ? QueryCompilationContext.NotTranslatedExpression
             : uncheckedNodeTypeVariant == ExpressionType.Coalesce
-            ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
+                ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
             : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft!, sqlRight!, null)
                 ?? QueryCompilationContext.NotTranslatedExpression;
 
@@ -2411,7 +2411,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                             condition =
                                 condition == null ? optionalPropertiesCondition
                                 : nodeType == ExpressionType.Equal
-                                ? Expression.OrElse(condition, optionalPropertiesCondition)
+                                    ? Expression.OrElse(condition, optionalPropertiesCondition)
                                 : Expression.AndAlso(condition, optionalPropertiesCondition);
                         }
 
@@ -2581,7 +2581,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     comparisons =
                         comparisons is null ? comparison
                         : nodeType == ExpressionType.Equal
-                        ? Expression.AndAlso(comparisons, comparison)
+                            ? Expression.AndAlso(comparisons, comparison)
                         : Expression.OrElse(comparisons, comparison);
                 }
 

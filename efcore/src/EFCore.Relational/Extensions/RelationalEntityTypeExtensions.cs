@@ -1723,9 +1723,9 @@ public static class RelationalEntityTypeExtensions
         ?? (
             entityType.BaseType != null ? entityType.GetRootType().GetMappingStrategy()
             : entityType.GetDiscriminatorPropertyName() != null
-            ? RelationalAnnotationNames.TphMappingStrategy
+                ? RelationalAnnotationNames.TphMappingStrategy
             : entityType.FindPrimaryKey() == null || !entityType.GetDirectlyDerivedTypes().Any()
-            ? null
+                ? null
             : RelationalAnnotationNames.TptMappingStrategy
         );
 

@@ -1429,7 +1429,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
-                        ? () => context.ChangeTracker.DetectChanges()
+                            ? () => context.ChangeTracker.DetectChanges()
                         : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
                         : (Action)(() => context.SaveChanges());
 
@@ -1682,7 +1682,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
-                        ? () => context.ChangeTracker.DetectChanges()
+                            ? () => context.ChangeTracker.DetectChanges()
                         : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
                         : (Action)(() => context.SaveChanges());
 

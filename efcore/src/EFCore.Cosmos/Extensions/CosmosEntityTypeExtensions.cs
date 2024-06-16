@@ -471,7 +471,7 @@ public static class CosmosEntityTypeExtensions
                     CosmosAnnotationNames.Throughput,
                     throughput == null || autoscale == null ? null
                     : autoscale.Value
-                    ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
                     : ThroughputProperties.CreateManualThroughput(throughput.Value),
                     fromDataAnnotation
                 )

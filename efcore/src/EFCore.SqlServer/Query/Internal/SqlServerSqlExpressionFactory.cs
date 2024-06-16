@@ -64,11 +64,11 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
             typeMapping is null ? null
             : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset) ? typeMapping
             : atTimeZoneExpression.Operand.Type == typeof(DateTime)
-            ? _typeMappingSource.FindMapping(
-                typeof(DateTime),
-                "datetime2",
-                precision: typeMapping.Precision
-            )
+                ? _typeMappingSource.FindMapping(
+                    typeof(DateTime),
+                    "datetime2",
+                    precision: typeMapping.Precision
+                )
             : null;
 
         return new AtTimeZoneExpression(

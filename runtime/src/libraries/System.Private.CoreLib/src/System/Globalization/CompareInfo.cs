@@ -1321,7 +1321,7 @@ namespace System.Globalization
                 :
 #if TARGET_BROWSER
             GlobalizationMode.Hybrid
-            ? JsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
+                ? JsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
             :
 #endif
                 IcuIndexOfCore(source, target, options, matchLengthPtr, fromBeginning);
@@ -1691,7 +1691,7 @@ namespace System.Globalization
             :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             GlobalizationMode.Hybrid
-            ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
             :
 #endif
             IcuCreateSortKey(source, options);
@@ -1746,7 +1746,7 @@ namespace System.Globalization
             :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             GlobalizationMode.Hybrid
-            ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
             :
 #endif
             IcuGetSortKey(source, destination, options);
@@ -1790,7 +1790,7 @@ namespace System.Globalization
             :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             GlobalizationMode.Hybrid
-            ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
             :
 #endif
             IcuGetSortKeyLength(source, options);
@@ -1870,7 +1870,7 @@ namespace System.Globalization
             :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             GlobalizationMode.Hybrid
-            ? throw new PlatformNotSupportedException(GetPNSEText("HashCode"))
+                ? throw new PlatformNotSupportedException(GetPNSEText("HashCode"))
             :
 #endif
             IcuGetHashCodeOfString(source, options);

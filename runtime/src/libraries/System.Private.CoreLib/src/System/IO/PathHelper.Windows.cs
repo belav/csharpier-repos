@@ -33,7 +33,7 @@ namespace System.IO
             // TryExpandShortName does this input identity check.
             string result =
                 builder.AsSpan().IndexOf('~') >= 0
-                ? TryExpandShortFileName(ref builder, originalPath: path)
+                    ? TryExpandShortFileName(ref builder, originalPath: path)
                 : builder.AsSpan().Equals(path.AsSpan(), StringComparison.Ordinal) ? path
                 : builder.ToString();
 

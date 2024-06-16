@@ -658,20 +658,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ((object)methodOpt == null) ? ExprFactory(opName, loweredLeft, loweredRight)
                 : requiresLifted
-                ? ExprFactory(
-                    opName,
-                    loweredLeft,
-                    loweredRight,
-                    _bound.Literal(
-                        isLifted
-                            && !TypeSymbol.Equals(
-                                methodOpt.ReturnType,
-                                type,
-                                TypeCompareKind.ConsiderEverything2
-                            )
-                    ),
-                    _bound.MethodInfo(methodOpt)
-                )
+                    ? ExprFactory(
+                        opName,
+                        loweredLeft,
+                        loweredRight,
+                        _bound.Literal(
+                            isLifted
+                                && !TypeSymbol.Equals(
+                                    methodOpt.ReturnType,
+                                    type,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
+                        ),
+                        _bound.MethodInfo(methodOpt)
+                    )
                 : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
         }
 

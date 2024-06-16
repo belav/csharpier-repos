@@ -938,17 +938,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
                 var members =
                     withFields
-                    ? SyntaxGeneratorExtensions.CreateFieldsForParameters(
-                        _parameters,
-                        ParameterToNewFieldMap,
-                        IsContainedInUnsafeType
-                    )
+                        ? SyntaxGeneratorExtensions.CreateFieldsForParameters(
+                            _parameters,
+                            ParameterToNewFieldMap,
+                            IsContainedInUnsafeType
+                        )
                     : withProperties
-                    ? SyntaxGeneratorExtensions.CreatePropertiesForParameters(
-                        _parameters,
-                        ParameterToNewPropertyMap,
-                        IsContainedInUnsafeType
-                    )
+                        ? SyntaxGeneratorExtensions.CreatePropertiesForParameters(
+                            _parameters,
+                            ParameterToNewPropertyMap,
+                            IsContainedInUnsafeType
+                        )
                     : ImmutableArray<ISymbol>.Empty;
 
                 var semanticModel = await document

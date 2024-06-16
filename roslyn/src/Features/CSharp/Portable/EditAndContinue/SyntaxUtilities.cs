@@ -79,16 +79,16 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     when constructorDeclaration.Body != null
                         || constructorDeclaration.ExpressionBody != null
                     => constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
-                    ? CreateSimpleBody(
-                        BlockOrExpression(
-                            constructorDeclaration.Body,
-                            constructorDeclaration.ExpressionBody
+                        ? CreateSimpleBody(
+                            BlockOrExpression(
+                                constructorDeclaration.Body,
+                                constructorDeclaration.ExpressionBody
+                            )
                         )
-                    )
                     : (constructorDeclaration.Initializer != null)
-                    ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
-                        constructorDeclaration
-                    )
+                        ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
+                            constructorDeclaration
+                        )
                     : new OrdinaryInstanceConstructorWithImplicitInitializerDeclarationBody(
                         constructorDeclaration
                     ),

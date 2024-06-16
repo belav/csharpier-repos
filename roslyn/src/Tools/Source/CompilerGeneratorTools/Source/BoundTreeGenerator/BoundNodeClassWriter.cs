@@ -1204,9 +1204,9 @@ namespace BoundTreeGenerator
             {
                 var format =
                     TypeIsTypeSymbol(field)
-                    ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
+                        ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
                     : TypeIsSymbol(field)
-                    ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
+                        ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
                     : IsValueType(field.Type) && field.Type[^1] == '?' ? "!{0}.Equals(this.{1})"
                     : "{0} != this.{1}";
 

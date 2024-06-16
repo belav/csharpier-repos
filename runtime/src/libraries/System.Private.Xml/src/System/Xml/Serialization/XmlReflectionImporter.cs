@@ -2404,7 +2404,7 @@ namespace System.Xml.Serialization
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
                         Type targetType =
                             typeof(IXmlSerializable).IsAssignableFrom(arrayElementType)
-                            ? arrayElementType
+                                ? arrayElementType
                             : typeof(XmlNode).IsAssignableFrom(arrayElementType) ? arrayElementType
                             : typeof(XmlElement);
                         if (!arrayElementType.IsAssignableFrom(targetType))

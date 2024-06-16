@@ -1271,9 +1271,9 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
             {
                 var valueExpression =
                     IsPartitionKeyPropertyAccess(binaryExpression.Left, entityType)
-                    ? binaryExpression.Right
+                        ? binaryExpression.Right
                     : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
-                    ? binaryExpression.Left
+                        ? binaryExpression.Left
                     : null;
 
                 if (

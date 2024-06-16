@@ -555,7 +555,7 @@ namespace System.Globalization
                     CAL_ITWODIGITYEARMAX,
                     out int twoDigitYearMax
                 )
-                ? twoDigitYearMax
+                    ? twoDigitYearMax
                 : -1;
         }
     }

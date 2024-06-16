@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             return type is INamedTypeSymbol ? (INamedTypeSymbol)type
                 : type is ITypeParameterSymbol
-                ? GetNamedTypeSymbolConstraint((ITypeParameterSymbol)type)
+                    ? GetNamedTypeSymbolConstraint((ITypeParameterSymbol)type)
                 : null;
         }
     }

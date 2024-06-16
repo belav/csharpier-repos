@@ -7431,7 +7431,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var resultType =
                 oldType.IsVoidType() || oldType.IsErrorType() ? oldType
                 : oldType.IsNullableType() && !accessType.IsNullableType()
-                ? MakeNullableOf(accessTypeWithAnnotations)
+                    ? MakeNullableOf(accessTypeWithAnnotations)
                 : accessType;
 
             // Per LDM 2019-02-13 decision, the result of a conditional access "may be null" even if

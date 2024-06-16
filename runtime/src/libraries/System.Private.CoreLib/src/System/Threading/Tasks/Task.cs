@@ -6679,7 +6679,11 @@ namespace System.Threading.Tasks
             cancellationToken.IsCancellationRequested ? FromCanceled(cancellationToken)
             : millisecondsDelay == 0 ? CompletedTask
             : cancellationToken.CanBeCanceled
-            ? new DelayPromiseWithCancellation(millisecondsDelay, timeProvider, cancellationToken)
+                ? new DelayPromiseWithCancellation(
+                    millisecondsDelay,
+                    timeProvider,
+                    cancellationToken
+                )
             : new DelayPromise(millisecondsDelay, timeProvider);
 
         internal static uint ValidateTimeout(TimeSpan timeout, ExceptionArgument argument)

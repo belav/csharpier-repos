@@ -365,11 +365,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result =
                 !expression.NeedsToBeConverted() ? expression
                 : type is null
-                ? BindToNaturalType(
-                    expression,
-                    BindingDiagnosticBag.Discarded,
-                    reportNoTargetType: false
-                )
+                    ? BindToNaturalType(
+                        expression,
+                        BindingDiagnosticBag.Discarded,
+                        reportNoTargetType: false
+                    )
                 : GenerateConversionForAssignment(type, expression, BindingDiagnosticBag.Discarded);
             return result;
         }
@@ -13872,13 +13872,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Compilation.GetWellKnownType(WellKnownType.System_Index),
                     TypeCompareKind.ConsiderEverything
                 )
-                ? ThreeState.True
+                    ? ThreeState.True
                 : TypeSymbol.Equals(
                     argType,
                     Compilation.GetWellKnownType(WellKnownType.System_Range),
                     TypeCompareKind.ConsiderEverything
                 )
-                ? ThreeState.False
+                    ? ThreeState.False
                 : ThreeState.Unknown;
 
             Debug.Assert(receiver.Type is not null);

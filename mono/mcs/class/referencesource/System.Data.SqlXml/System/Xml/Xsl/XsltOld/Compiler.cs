@@ -947,23 +947,24 @@ namespace System.Xml.Xsl.XsltOld
         {
             return (
                 lang == ScriptingLanguage.JScript
-                ? (CodeDomProvider)
-                    Activator.CreateInstance(
-                        Type.GetType(
-                            "Microsoft.JScript.JScriptCodeProvider, " + AssemblyRef.MicrosoftJScript
-                        ),
-                        BindingFlags.Instance
-                            | BindingFlags.Public
-                            | BindingFlags.NonPublic
-                            | BindingFlags.CreateInstance,
-                        null,
-                        null,
-                        null
-                    )
+                    ? (CodeDomProvider)
+                        Activator.CreateInstance(
+                            Type.GetType(
+                                "Microsoft.JScript.JScriptCodeProvider, "
+                                    + AssemblyRef.MicrosoftJScript
+                            ),
+                            BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.CreateInstance,
+                            null,
+                            null,
+                            null
+                        )
                 :
 #if !FEATURE_PAL // visualbasic
                 lang == ScriptingLanguage.VisualBasic
-                ? (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()
+                    ? (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()
                 :
 #endif
                 /*CSharp | default */(CodeDomProvider)new Microsoft.CSharp.CSharpCodeProvider()

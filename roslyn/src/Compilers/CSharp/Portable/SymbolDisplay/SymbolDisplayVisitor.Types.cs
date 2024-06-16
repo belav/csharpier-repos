@@ -238,7 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var fileDescription =
                     identifier.DisplayFilePath is { Length: not 0 } path ? path
                     : internalSymbol2.GetFirstLocationOrNone().SourceTree is { } tree
-                    ? $"<tree {internalSymbol2.DeclaringCompilation.GetSyntaxTreeOrdinal(tree)}>"
+                        ? $"<tree {internalSymbol2.DeclaringCompilation.GetSyntaxTreeOrdinal(tree)}>"
                     : "<unknown>";
 
                 Builder.Add(CreatePart(SymbolDisplayPartKind.Punctuation, symbol, "@"));

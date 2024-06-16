@@ -512,9 +512,9 @@ namespace System.Web.Http.Tracing
                         visibleMemberName,
                         isOverrideable ? "Override this virtual in the tracer"
                         : isGetter
-                        ? "Capture this value from inner in the tracer's ctor, and add to it to the exclude list"
+                            ? "Capture this value from inner in the tracer's ctor, and add to it to the exclude list"
                         : isSetter
-                        ? "Ensure this non-virtual setter cannot be called after the tracer has captured it, and add it to the exclude list"
+                            ? "Ensure this non-virtual setter cannot be called after the tracer has captured it, and add it to the exclude list"
                         : "Make this member virtual and override it, or add it to the exclude list"
                     )
                 );

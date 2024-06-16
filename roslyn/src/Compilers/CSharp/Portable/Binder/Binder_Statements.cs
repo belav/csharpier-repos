@@ -4598,7 +4598,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && s.Catches.Count == 1
                         && s.Finally == null
                     )
-                    ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
+                        ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
                     : ErrorCode.WRN_FilterIsConstantFalse;
 
                 // Since the expression is a constant, the name can be retrieved from the first token

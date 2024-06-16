@@ -86,12 +86,12 @@ namespace System.Globalization.Tests
                             PlatformDetection.IsNlsGlobalization
                             && PlatformDetection.WindowsVersion < 10
                         )
-                        ? new int[] { 14 }
+                            ? new int[] { 14 }
                         :
                         // Mac OSX used to return 1 which is the format "-$n". OSX Version 12 (Monterey) started
                         // to return a different value 12 "$ -n".
                         PlatformDetection.IsOSX
-                        ? new int[] { 1, 12 }
+                            ? new int[] { 1, 12 }
                         : new int[] { 1 };
 
                 case "fr-CA":

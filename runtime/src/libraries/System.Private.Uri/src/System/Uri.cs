@@ -1047,9 +1047,9 @@ namespace System
                             && _info.Offset.Host == (IsDosPath ? 0 : 2)
                             && _info.Offset.Query == _info.Offset.End
                         )
-                        ? _string
+                            ? _string
                         : (IsDosPath && (_string[start] == '/' || _string[start] == '\\'))
-                        ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
+                            ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
                         : _string.Substring(start, _info.Offset.Query - start);
 
                     // Should be a rare case, convert c|\ into c:\

@@ -332,17 +332,17 @@ namespace System.Threading.Channels
             {
                 Exception? doneWriting = _parent._doneWriting;
                 return cancellationToken.IsCancellationRequested
-                    ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
+                        ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
                     : doneWriting == null ? new ValueTask<bool>(true)
                     : // unbounded writing can always be done if we haven't completed
                     doneWriting != ChannelUtilities.s_doneWritingSentinel
-                    ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
+                        ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
                     : default;
             }
 
             public override ValueTask WriteAsync(T item, CancellationToken cancellationToken) =>
                 cancellationToken.IsCancellationRequested
-                ? new ValueTask(Task.FromCanceled(cancellationToken))
+                    ? new ValueTask(Task.FromCanceled(cancellationToken))
                 : TryWrite(item) ? default
                 : new ValueTask(
                     Task.FromException(

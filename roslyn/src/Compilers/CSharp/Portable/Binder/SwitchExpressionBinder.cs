@@ -136,9 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     ErrorCode warningCode =
                         requiresFalseWhenClause
-                        ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen
+                            ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen
                         : unnamedEnumValue
-                        ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue
+                            ? ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue
                         : ErrorCode.WRN_SwitchExpressionNotExhaustive;
                     diagnostics.Add(warningCode, node.SwitchKeyword.GetLocation(), samplePattern);
                     return true;

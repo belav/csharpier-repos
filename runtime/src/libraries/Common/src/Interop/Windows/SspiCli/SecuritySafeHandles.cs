@@ -1220,7 +1220,7 @@ namespace System.Net.Security
                 // Use the unmanaged token if it's not null; otherwise use the managed buffer.
                 inUnmanagedBuffer.pvBuffer =
                     inSecBuffer.unmanagedToken != null
-                    ? inSecBuffer.unmanagedToken.DangerousGetHandle()
+                        ? inSecBuffer.unmanagedToken.DangerousGetHandle()
                     : inSecBuffer.token == null || inSecBuffer.token.Length == 0 ? IntPtr.Zero
                     : (IntPtr)(pinnedInSecBufferToken + inSecBuffer.offset);
 

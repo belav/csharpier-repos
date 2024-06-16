@@ -42,7 +42,7 @@ namespace ILLink.Shared.TypeSystemProxy
         public partial string GetDisplayName() =>
             IsImplicitThis ? "this"
             : !string.IsNullOrEmpty(Method.Method.Parameters[MetadataIndex].Name)
-            ? Method.Method.Parameters[MetadataIndex].Name
+                ? Method.Method.Parameters[MetadataIndex].Name
             : $"#{Index}";
 #pragma warning restore RS0030 // Do not used banned APIs
 

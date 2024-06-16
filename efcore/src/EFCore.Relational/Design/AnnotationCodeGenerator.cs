@@ -403,19 +403,19 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         {
             methodCallCodeFragments.Add(
                 computedColumnSql.Length == 0
-                ? new MethodCallCodeFragment(
-                    nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)
-                )
+                    ? new MethodCallCodeFragment(
+                        nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)
+                    )
                 : TryGetAndRemove(
                     annotations,
                     RelationalAnnotationNames.IsStored,
                     out bool isStored
                 )
-                ? new MethodCallCodeFragment(
-                    nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
-                    computedColumnSql,
-                    isStored
-                )
+                    ? new MethodCallCodeFragment(
+                        nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                        computedColumnSql,
+                        isStored
+                    )
                 : new MethodCallCodeFragment(
                     nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
                     computedColumnSql

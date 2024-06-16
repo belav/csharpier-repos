@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         )
         {
             return parentOfStatementsToSurround is BlockSyntax block
-                ? block.WithStatements(statements) as SyntaxNode
+                    ? block.WithStatements(statements) as SyntaxNode
                 : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
-                ? switchSection.WithStatements(statements)
+                    ? switchSection.WithStatements(statements)
                 : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
         }
 

@@ -437,7 +437,7 @@ namespace MS.Internal.Xml.XPath
                             : this.scanner.Name == "text" ? XPathNodeType.Text
                             : this.scanner.Name == "node" ? XPathNodeType.All
                             : this.scanner.Name == "processing-instruction"
-                            ? XPathNodeType.ProcessingInstruction
+                                ? XPathNodeType.ProcessingInstruction
                             :
                             /* default: */XPathNodeType.Root
                         );

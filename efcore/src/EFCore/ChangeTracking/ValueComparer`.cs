@@ -251,7 +251,7 @@ public class ValueComparer<
             || unwrappedType == typeof(ushort)
             || unwrappedType == typeof(sbyte)
             || unwrappedType == typeof(char)
-            ? (Expression)Expression.Convert(param, typeof(int))
+                ? (Expression)Expression.Convert(param, typeof(int))
             : Expression.Call(param, ObjectGetHashCodeMethod);
 
         return Expression.Lambda<Func<T, int>>(expression, param);

@@ -506,9 +506,9 @@ namespace System
             CachedData cachedData = s_cachedData;
             DateTime adjustedTime =
                 dateTime.Kind == DateTimeKind.Local
-                ? ConvertTime(dateTime, cachedData.Local, this, flags, cachedData)
+                    ? ConvertTime(dateTime, cachedData.Local, this, flags, cachedData)
                 : dateTime.Kind == DateTimeKind.Utc
-                ? ConvertTime(dateTime, s_utcTimeZone, this, flags, cachedData)
+                    ? ConvertTime(dateTime, s_utcTimeZone, this, flags, cachedData)
                 : dateTime;
 
             AdjustmentRule? rule = GetAdjustmentRuleForTime(adjustedTime, out int? ruleIndex);

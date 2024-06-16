@@ -95,9 +95,9 @@ namespace System.Speech.Internal.SrgsCompiler
                 {
                     _specialTransitionIndex =
                         (specialRule == CfgGrammar.SPRULETRANS_WILDCARD)
-                        ? CfgGrammar.SPWILDCARDTRANSITION
+                            ? CfgGrammar.SPWILDCARDTRANSITION
                         : (specialRule == CfgGrammar.SPRULETRANS_DICTATION)
-                        ? CfgGrammar.SPDICTATIONTRANSITION
+                            ? CfgGrammar.SPDICTATIONTRANSITION
                         : CfgGrammar.SPTEXTBUFFERTRANSITION;
                 }
                 else

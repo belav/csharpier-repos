@@ -67,7 +67,7 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         return annotation != null ? annotation.Value
             : !ClrType.IsInstantiable()
             || (BaseType == null && GetDirectlyDerivedTypes().Count() == 0)
-            ? null
+                ? null
             : (object?)GetDefaultDiscriminatorValue();
     }
 

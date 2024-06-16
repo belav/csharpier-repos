@@ -39,9 +39,9 @@ internal partial class DbContextListCommand
         {
             var safeName =
                 nameGroups.Count(g => g.Key == contextTypes[i]["Name"]) == 1
-                ? contextTypes[i]["Name"]
+                    ? contextTypes[i]["Name"]
                 : fullNameGroups.Count(g => g.Key == contextTypes[i]["FullName"]) == 1
-                ? contextTypes[i]["FullName"]
+                    ? contextTypes[i]["FullName"]
                 : contextTypes[i]["AssemblyQualifiedName"];
 
             Reporter.WriteData("  {");

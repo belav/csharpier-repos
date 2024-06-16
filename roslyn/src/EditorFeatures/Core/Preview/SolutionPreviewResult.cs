@@ -48,10 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor
                     {
                         return i1.DocumentId == preferredDocumentId
                             && i2.DocumentId != preferredDocumentId
-                            ? -1
+                                ? -1
                             : i1.DocumentId != preferredDocumentId
                             && i2.DocumentId == preferredDocumentId
-                            ? 1
+                                ? 1
                             : _previews.IndexOf(i1) - _previews.IndexOf(i2);
                     }
                 )
@@ -60,10 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor
                     {
                         return i1.ProjectId == preferredProjectId
                             && i2.ProjectId != preferredProjectId
-                            ? -1
+                                ? -1
                             : i1.ProjectId != preferredProjectId
                             && i2.ProjectId == preferredProjectId
-                            ? 1
+                                ? 1
                             : _previews.IndexOf(i1) - _previews.IndexOf(i2);
                     }
                 )

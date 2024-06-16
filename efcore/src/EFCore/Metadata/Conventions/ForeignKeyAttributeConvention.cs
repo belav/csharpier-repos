@@ -429,14 +429,14 @@ public class ForeignKeyAttributeConvention
                 fromDataAnnotation: true
             )
                 is null
-            ? null
+                ? null
             : foreignKey.PrincipalEntityType.Builder.HasRelationship(
                 foreignKey.DeclaringEntityType,
                 principalToDependentNavigationName,
                 null,
                 fromDataAnnotation: true
             ) == null
-            ? null
+                ? null
             : relationshipBuilder;
     }
 

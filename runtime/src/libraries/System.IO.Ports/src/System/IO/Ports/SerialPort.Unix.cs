@@ -21,7 +21,7 @@ namespace System.IO.Ports
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? GetPortNames_Linux()
                 : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? GetPortNames_OSX()
                 : RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"))
-                ? GetPortNames_FreeBSD()
+                    ? GetPortNames_FreeBSD()
 #endif
                 : throw new PlatformNotSupportedException(
                     SR.PlatformNotSupported_SerialPort_GetPortNames

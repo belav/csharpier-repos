@@ -140,7 +140,7 @@ namespace System.Text.RegularExpressions.Tests
 
             return options is null ? new Regex(pattern, OptionsFromEngine(engine))
                 : matchTimeout is null
-                ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                    ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
                 : new Regex(pattern, options.Value | OptionsFromEngine(engine), matchTimeout.Value);
         }
 
@@ -176,7 +176,7 @@ namespace System.Text.RegularExpressions.Tests
                         results[i] =
                             options is null ? new Regex(pattern, OptionsFromEngine(engine))
                             : matchTimeout is null
-                            ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                                ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
                             : new Regex(
                                 pattern,
                                 options.Value | OptionsFromEngine(engine),

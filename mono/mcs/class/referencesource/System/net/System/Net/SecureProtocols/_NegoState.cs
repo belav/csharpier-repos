@@ -375,7 +375,7 @@ namespace System.Net.Security
                         _Context.IsDelegationFlag
                         && _Context.ProtocolName != NegotiationInfoClass.NTLM
                     )
-                    ? TokenImpersonationLevel.Delegation
+                        ? TokenImpersonationLevel.Delegation
                     : _Context.IsIdentifyFlag ? TokenImpersonationLevel.Identification
                     : TokenImpersonationLevel.Impersonation;
             }

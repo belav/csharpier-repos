@@ -1864,17 +1864,17 @@ namespace System.Data
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorAdded,
-                    new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
                 : e.Action == CollectionChangeAction.Refresh
-                ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
                 : e.Action == CollectionChangeAction.Remove
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorDeleted,
-                    new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
                 :
                 /*default*/null! // TODO: This will cause an NRE
             );
@@ -1885,17 +1885,17 @@ namespace System.Data
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorAdded,
-                    new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
                 : e.Action == CollectionChangeAction.Refresh
-                ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
                 : e.Action == CollectionChangeAction.Remove
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorDeleted,
-                    new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
                 :
                 /*default*/null! // TODO: This will cause an NRE
             );
@@ -1906,17 +1906,17 @@ namespace System.Data
             DataColumnPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorAdded,
-                    new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
+                    )
                 : e.Action == CollectionChangeAction.Refresh
-                ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
                 : e.Action == CollectionChangeAction.Remove
-                ? new ListChangedEventArgs(
-                    ListChangedType.PropertyDescriptorDeleted,
-                    new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
-                )
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
+                    )
                 :
                 /*default*/null! // TODO: This will cause an NRE
             );

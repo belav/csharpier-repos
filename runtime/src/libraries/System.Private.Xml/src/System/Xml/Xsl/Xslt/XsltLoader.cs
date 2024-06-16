@@ -1686,11 +1686,11 @@ namespace System.Xml.Xsl.Xslt
                                 {
                                     string? error = (
                                         (flags & instrFlag) == 0
-                                        ? /*[XT_013]*/
-                                        SR.Xslt_UnexpectedElement
+                                            ? /*[XT_013]*/
+                                            SR.Xslt_UnexpectedElement
                                         : !atTop
-                                        ? /*[XT_014]*/
-                                        SR.Xslt_NotAtTop
+                                            ? /*[XT_014]*/
+                                            SR.Xslt_NotAtTop
                                         :
                                         /*else*/null
                                     );
@@ -1721,7 +1721,7 @@ namespace System.Xml.Xsl.Xslt
                                     : Ref.Equal(name, _atoms.ValueOf) ? XslValueOf()
                                     : Ref.Equal(name, _atoms.Comment) ? XslComment()
                                     : Ref.Equal(name, _atoms.ProcessingInstruction)
-                                    ? XslProcessingInstruction()
+                                        ? XslProcessingInstruction()
                                     : Ref.Equal(name, _atoms.Text) ? XslText()
                                     : Ref.Equal(name, _atoms.Element) ? XslElement()
                                     : Ref.Equal(name, _atoms.Attribute) ? XslAttribute()
@@ -1731,7 +1731,7 @@ namespace System.Xml.Xsl.Xslt
                                     :
 #if XSLT2
                                     V2 && Ref.Equal(name, atoms.AnalyzeString)
-                                    ? XslAnalyzeString()
+                                        ? XslAnalyzeString()
                                     : V2 && Ref.Equal(name, "namespace") ? XslNamespace()
                                     : V2 && Ref.Equal(name, atoms.PerformSort) ? XslPerformSort()
                                     : V2 && Ref.Equal(name, atoms.Document) ? XslDocument()
@@ -1739,7 +1739,7 @@ namespace System.Xml.Xsl.Xslt
                                     : V2 && Ref.Equal(name, atoms.NextMatch) ? XslNextMatch()
                                     : V2 && Ref.Equal(name, atoms.Sequence) ? XslSequence()
                                     : V2 && Ref.Equal(name, atoms.ResultDocument)
-                                    ? XslResultDocument()
+                                        ? XslResultDocument()
                                     :
 #endif
                                     /*default:*/LoadUnknownXsltInstruction(parentName)

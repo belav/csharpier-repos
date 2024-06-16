@@ -1079,23 +1079,23 @@ namespace System.Numerics
             {
                 uint bits =
                     trivialValue && trivialExponent
-                    ? BigIntegerCalculator.Pow(
-                        NumericsHelpers.Abs(value._sign),
-                        NumericsHelpers.Abs(exponent._sign),
-                        NumericsHelpers.Abs(modulus._sign)
-                    )
+                        ? BigIntegerCalculator.Pow(
+                            NumericsHelpers.Abs(value._sign),
+                            NumericsHelpers.Abs(exponent._sign),
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
                     : trivialValue
-                    ? BigIntegerCalculator.Pow(
-                        NumericsHelpers.Abs(value._sign),
-                        exponent._bits!,
-                        NumericsHelpers.Abs(modulus._sign)
-                    )
+                        ? BigIntegerCalculator.Pow(
+                            NumericsHelpers.Abs(value._sign),
+                            exponent._bits!,
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
                     : trivialExponent
-                    ? BigIntegerCalculator.Pow(
-                        value._bits!,
-                        NumericsHelpers.Abs(exponent._sign),
-                        NumericsHelpers.Abs(modulus._sign)
-                    )
+                        ? BigIntegerCalculator.Pow(
+                            value._bits!,
+                            NumericsHelpers.Abs(exponent._sign),
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
                     : BigIntegerCalculator.Pow(
                         value._bits!,
                         exponent._bits!,
@@ -5040,9 +5040,9 @@ namespace System.Numerics
             {
                 decimal actualResult =
                     (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
-                    ? decimal.MaxValue
+                        ? decimal.MaxValue
                     : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
-                    ? decimal.MinValue
+                        ? decimal.MinValue
                     : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
@@ -5274,9 +5274,9 @@ namespace System.Numerics
             {
                 decimal actualResult =
                     (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
-                    ? decimal.MaxValue
+                        ? decimal.MaxValue
                     : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
-                    ? decimal.MinValue
+                        ? decimal.MinValue
                     : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;

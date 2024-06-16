@@ -731,8 +731,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     info.Kind =
                         TextWindow.TryAdvance('=') ? SyntaxKind.LessThanEqualsToken
                         : TextWindow.TryAdvance('<')
-                        ? TextWindow.TryAdvance('=') ? SyntaxKind.LessThanLessThanEqualsToken
-                            : SyntaxKind.LessThanLessThanToken
+                            ? TextWindow.TryAdvance('=') ? SyntaxKind.LessThanLessThanEqualsToken
+                                : SyntaxKind.LessThanLessThanToken
                         : SyntaxKind.LessThanToken;
                     break;
 

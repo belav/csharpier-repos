@@ -166,9 +166,9 @@ namespace CSharpSyntaxGenerator.Grammar
                 delim,
                 children.Select(child =>
                     child is Choice c
-                    ? HandleChildren(c.Children, delim: " | ")
-                        .Parenthesize()
-                        .Suffix("?", when: c.Optional)
+                        ? HandleChildren(c.Children, delim: " | ")
+                            .Parenthesize()
+                            .Suffix("?", when: c.Optional)
                     : child is Sequence s ? HandleChildren(s.Children).Parenthesize()
                     : child is Field f ? HandleField(f).Suffix("?", when: f.IsOptional)
                     : throw new InvalidOperationException()
@@ -182,9 +182,9 @@ namespace CSharpSyntaxGenerator.Grammar
             field.Type == "bool" ? new Production("")
             : field.Type == "CSharpSyntaxNode" ? RuleReference(field.Kinds.Single().Name + "Syntax")
             : field.Type.StartsWith("SeparatedSyntaxList")
-            ? HandleSeparatedList(field, field.Type[("SeparatedSyntaxList".Length + 1)..^1])
+                ? HandleSeparatedList(field, field.Type[("SeparatedSyntaxList".Length + 1)..^1])
             : field.Type.StartsWith("SyntaxList")
-            ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
+                ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
             : field.IsToken ? HandleTokenField(field)
             : RuleReference(field.Type);
 
@@ -214,9 +214,9 @@ namespace CSharpSyntaxGenerator.Grammar
 
         private static Production HandleTokenName(string tokenName) =>
             GetSyntaxKind(tokenName) is var kind && kind == SyntaxKind.None
-            ? RuleReference("SyntaxToken")
+                ? RuleReference("SyntaxToken")
             : SyntaxFacts.GetText(kind) is var text && text != ""
-            ? new Production(text == "'" ? "'\\''" : $"'{text}'")
+                ? new Production(text == "'" ? "'\\''" : $"'{text}'")
             : tokenName.StartsWith("EndOf") ? new Production("")
             : tokenName.StartsWith("Omitted") ? new Production("/* epsilon */")
             : RuleReference(tokenName);

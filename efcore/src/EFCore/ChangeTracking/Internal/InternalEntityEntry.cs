@@ -892,9 +892,9 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
     private CurrentValueType GetValueType(IProperty property) =>
         _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.IsStoreGenerated)
-        ? CurrentValueType.StoreGenerated
+            ? CurrentValueType.StoreGenerated
         : _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.IsTemporary)
-        ? CurrentValueType.Temporary
+            ? CurrentValueType.Temporary
         : CurrentValueType.Normal;
 
     /// <summary>

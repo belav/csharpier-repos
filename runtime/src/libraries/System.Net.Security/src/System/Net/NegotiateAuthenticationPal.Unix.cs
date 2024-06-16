@@ -187,10 +187,10 @@ namespace System.Net
                     return (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG)
                             != 0
                         && Package != NegotiationInfoClass.NTLM
-                        ? TokenImpersonationLevel.Delegation
+                            ? TokenImpersonationLevel.Delegation
                         : (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_IDENTIFY_FLAG)
                         != 0
-                        ? TokenImpersonationLevel.Identification
+                            ? TokenImpersonationLevel.Identification
                         : TokenImpersonationLevel.Impersonation;
                 }
             }

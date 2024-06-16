@@ -975,7 +975,7 @@ namespace System.Text.RegularExpressions
                 // set, as then we can't know for certain where the set loop ends.
                 return RegexCharClass.CharInClass(prefix[0], firstChild.Str!) ? null
                     : prefix.Length == 1
-                    ? (firstChild, (prefix[0], null, StringComparison.Ordinal, null))
+                        ? (firstChild, (prefix[0], null, StringComparison.Ordinal, null))
                     : (firstChild, ('\0', prefix, StringComparison.Ordinal, null));
             }
 

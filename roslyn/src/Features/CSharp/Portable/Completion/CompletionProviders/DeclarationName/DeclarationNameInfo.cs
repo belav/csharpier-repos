@@ -577,7 +577,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                 typeSyntaxGetter: f =>
                     f is ForEachStatementSyntax forEachStatement ? forEachStatement.Type
                     : f is ForEachVariableStatementSyntax forEachVariableStatement
-                    ? forEachVariableStatement.Variable
+                        ? forEachVariableStatement.Variable
                     : null, // Return null to bail out.
                 modifierGetter: f => default,
                 possibleDeclarationComputer: d =>
@@ -750,9 +750,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
         )
         {
             return modifiers.IsConst
-                ? ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
+                    ? ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
                 : modifiers.IsAsync || modifiers.IsUnsafe
-                ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
+                    ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
                 : ImmutableArray.Create(
                     new SymbolKindOrTypeKind(SymbolKind.Local),
                     new SymbolKindOrTypeKind(MethodKind.LocalFunction)

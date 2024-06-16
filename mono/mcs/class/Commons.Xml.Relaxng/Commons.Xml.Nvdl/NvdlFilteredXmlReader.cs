@@ -322,7 +322,7 @@ namespace Commons.Xml.Nvdl
             {
                 return initial ? ReadState.Initial
                     : placeHolder != XmlNodeType.None && reader.ReadState != ReadState.Error
-                    ? ReadState.Interactive
+                        ? ReadState.Interactive
                     : reader.ReadState;
             }
         }

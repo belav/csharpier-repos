@@ -1240,31 +1240,31 @@ namespace Microsoft.CodeAnalysis
 
             dependentDocumentVersion =
                 recalculateDocumentVersion
-                ? AsyncLazy.Create(c =>
-                    ComputeLatestDocumentVersionAsync(
-                        newDocumentStates,
-                        newAdditionalDocumentStates,
-                        c
+                    ? AsyncLazy.Create(c =>
+                        ComputeLatestDocumentVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        )
                     )
-                )
                 : contentChanged ? AsyncLazy.Create(newDocument.GetTextVersionAsync)
                 : _lazyLatestDocumentVersion;
 
             dependentSemanticVersion =
                 recalculateSemanticVersion
-                ? AsyncLazy.Create(c =>
-                    ComputeLatestDocumentTopLevelChangeVersionAsync(
-                        newDocumentStates,
-                        newAdditionalDocumentStates,
-                        c
+                    ? AsyncLazy.Create(c =>
+                        ComputeLatestDocumentTopLevelChangeVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        )
                     )
-                )
                 : contentChanged
-                ? CreateLazyLatestDocumentTopLevelChangeVersion(
-                    newDocument,
-                    newDocumentStates,
-                    newAdditionalDocumentStates
-                )
+                    ? CreateLazyLatestDocumentTopLevelChangeVersion(
+                        newDocument,
+                        newDocumentStates,
+                        newAdditionalDocumentStates
+                    )
                 : _lazyLatestDocumentTopLevelChangeVersion;
         }
     }

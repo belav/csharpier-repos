@@ -21,7 +21,7 @@ namespace ILLink.Shared.TypeSystemProxy
         public partial string GetDisplayName() =>
             IsImplicitThis ? "this"
             : (Method.Method is EcmaMethod ecmaMethod)
-            ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
+                ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
             : $"#{Index}";
 
         public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);

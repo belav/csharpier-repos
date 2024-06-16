@@ -441,9 +441,9 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                     {
                         var kind =
                             fieldDeclaration is EventFieldDeclarationSyntax
-                            ? DeclaredSymbolInfoKind.Event
+                                ? DeclaredSymbolInfoKind.Event
                             : fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
-                            ? DeclaredSymbolInfoKind.Constant
+                                ? DeclaredSymbolInfoKind.Constant
                             : DeclaredSymbolInfoKind.Field;
 
                         declaredSymbolInfos.Add(

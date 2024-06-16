@@ -208,7 +208,7 @@ namespace System.Net
                 {
                     return (_contextFlags & Interop.SspiCli.ContextFlags.Delegate) != 0
                         && Package != NegotiationInfoClass.NTLM
-                        ? TokenImpersonationLevel.Delegation
+                            ? TokenImpersonationLevel.Delegation
                         : (
                             _contextFlags
                             & (
@@ -217,7 +217,7 @@ namespace System.Net
                                     : Interop.SspiCli.ContextFlags.InitIdentify
                             )
                         ) != 0
-                        ? TokenImpersonationLevel.Identification
+                            ? TokenImpersonationLevel.Identification
                         : TokenImpersonationLevel.Impersonation;
                 }
             }

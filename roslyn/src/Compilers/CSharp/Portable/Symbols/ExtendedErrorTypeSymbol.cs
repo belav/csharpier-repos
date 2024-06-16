@@ -361,9 +361,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return (
                     (object)this.ContainingType != null
-                    ? this.ContainingType.Equals(other.ContainingType, comparison)
+                        ? this.ContainingType.Equals(other.ContainingType, comparison)
                     : (object?)this.ContainingSymbol == null
-                    ? (object?)other.ContainingSymbol == null
+                        ? (object?)other.ContainingSymbol == null
                     : this.ContainingSymbol.Equals(other.ContainingSymbol)
                 )
                 && this.Name == other.Name

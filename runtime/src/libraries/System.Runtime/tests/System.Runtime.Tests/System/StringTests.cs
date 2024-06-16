@@ -2658,7 +2658,7 @@ namespace System.Tests
             string result =
                 values.Length == 2 ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
                 : values.Length == 3
-                ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
+                    ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
                 : string.Concat(
                     values[0].AsSpan(),
                     values[1].AsSpan(),

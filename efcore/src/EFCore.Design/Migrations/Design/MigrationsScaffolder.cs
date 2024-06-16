@@ -91,7 +91,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
 
         var migrationNamespace =
             (!string.IsNullOrEmpty(rootNamespace) && !string.IsNullOrEmpty(subNamespace))
-            ? rootNamespace + "." + subNamespace
+                ? rootNamespace + "." + subNamespace
             : !string.IsNullOrEmpty(rootNamespace) ? rootNamespace
             : subNamespace;
 
@@ -224,7 +224,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
 
         return @namespace == rootNamespace ? string.Empty
             : @namespace.StartsWith(rootNamespace + '.', StringComparison.Ordinal)
-            ? @namespace[(rootNamespace.Length + 1)..]
+                ? @namespace[(rootNamespace.Length + 1)..]
             : @namespace;
     }
 
