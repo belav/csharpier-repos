@@ -39,10 +39,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveToNamespace
             var namespaceDeclarationStart = baseNamespace.NamespaceKeyword.SpanStart;
             var namespaceDeclarationEnd = baseNamespace switch
             {
-                NamespaceDeclarationSyntax namespaceDeclaration
-                    => namespaceDeclaration.OpenBraceToken.SpanStart,
-                FileScopedNamespaceDeclarationSyntax fileScopedNamespace
-                    => fileScopedNamespace.SemicolonToken.Span.End,
+                NamespaceDeclarationSyntax namespaceDeclaration => namespaceDeclaration
+                    .OpenBraceToken
+                    .SpanStart,
+                FileScopedNamespaceDeclarationSyntax fileScopedNamespace => fileScopedNamespace
+                    .SemicolonToken
+                    .Span
+                    .End,
                 _ => throw ExceptionUtilities.UnexpectedValue(baseNamespace.Kind()),
             };
 

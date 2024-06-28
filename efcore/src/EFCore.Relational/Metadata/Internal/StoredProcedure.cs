@@ -288,12 +288,12 @@ public class StoredProcedure
     private static string GetAnnotationName(StoreObjectType sprocType) =>
         sprocType switch
         {
-            StoreObjectType.InsertStoredProcedure
-                => RelationalAnnotationNames.InsertStoredProcedure,
-            StoreObjectType.DeleteStoredProcedure
-                => RelationalAnnotationNames.DeleteStoredProcedure,
-            StoreObjectType.UpdateStoredProcedure
-                => RelationalAnnotationNames.UpdateStoredProcedure,
+            StoreObjectType.InsertStoredProcedure =>
+                RelationalAnnotationNames.InsertStoredProcedure,
+            StoreObjectType.DeleteStoredProcedure =>
+                RelationalAnnotationNames.DeleteStoredProcedure,
+            StoreObjectType.UpdateStoredProcedure =>
+                RelationalAnnotationNames.UpdateStoredProcedure,
             _ => throw new InvalidOperationException("Unsopported sproc type " + sprocType),
         };
 

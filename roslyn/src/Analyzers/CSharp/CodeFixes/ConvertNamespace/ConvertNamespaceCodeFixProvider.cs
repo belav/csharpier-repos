@@ -46,10 +46,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             var (title, equivalenceKey) = ConvertNamespaceAnalysis.GetInfo(
                 diagnostic.Id switch
                 {
-                    IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId
-                        => NamespaceDeclarationPreference.BlockScoped,
-                    IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId
-                        => NamespaceDeclarationPreference.FileScoped,
+                    IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId =>
+                        NamespaceDeclarationPreference.BlockScoped,
+                    IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId =>
+                        NamespaceDeclarationPreference.FileScoped,
                     _ => throw ExceptionUtilities.UnexpectedValue(diagnostic.Id),
                 }
             );

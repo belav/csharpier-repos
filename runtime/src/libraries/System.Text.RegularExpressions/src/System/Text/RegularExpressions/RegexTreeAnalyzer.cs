@@ -111,15 +111,13 @@ namespace System.Text.RegularExpressions
                             // of the Atomic node, and lookarounds are also implicitly atomic.
                             RegexNodeKind.Atomic
                             or RegexNodeKind.NegativeLookaround
-                            or RegexNodeKind.PositiveLookaround
-                                => true,
+                            or RegexNodeKind.PositiveLookaround => true,
 
                             // Each branch is considered independently, so any atomicity applied to the alternation also applies
                             // to each individual branch.  This is true as well for conditionals.
                             RegexNodeKind.Alternate
                             or RegexNodeKind.BackreferenceConditional
-                            or RegexNodeKind.ExpressionConditional
-                                => true,
+                            or RegexNodeKind.ExpressionConditional => true,
 
                             // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also atomic.
                             RegexNodeKind.Capture => true,

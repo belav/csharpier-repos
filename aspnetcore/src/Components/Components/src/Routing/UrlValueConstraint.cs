@@ -73,28 +73,35 @@ internal abstract class UrlValueConstraint
         {
             var x when x == typeof(string) => new TypedUrlValueConstraint<string>(TryParse),
             var x when x == typeof(bool) => new TypedUrlValueConstraint<bool>(bool.TryParse),
-            var x when x == typeof(bool?)
-                => new NullableTypedUrlValueConstraint<bool>(bool.TryParse),
+            var x when x == typeof(bool?) => new NullableTypedUrlValueConstraint<bool>(
+                bool.TryParse
+            ),
             var x when x == typeof(DateTime) => new TypedUrlValueConstraint<DateTime>(TryParse),
-            var x when x == typeof(DateTime?)
-                => new NullableTypedUrlValueConstraint<DateTime>(TryParse),
+            var x when x == typeof(DateTime?) => new NullableTypedUrlValueConstraint<DateTime>(
+                TryParse
+            ),
             var x when x == typeof(DateOnly) => new TypedUrlValueConstraint<DateOnly>(TryParse),
-            var x when x == typeof(DateOnly?)
-                => new NullableTypedUrlValueConstraint<DateOnly>(TryParse),
+            var x when x == typeof(DateOnly?) => new NullableTypedUrlValueConstraint<DateOnly>(
+                TryParse
+            ),
             var x when x == typeof(TimeOnly) => new TypedUrlValueConstraint<TimeOnly>(TryParse),
-            var x when x == typeof(TimeOnly?)
-                => new NullableTypedUrlValueConstraint<TimeOnly>(TryParse),
+            var x when x == typeof(TimeOnly?) => new NullableTypedUrlValueConstraint<TimeOnly>(
+                TryParse
+            ),
             var x when x == typeof(decimal) => new TypedUrlValueConstraint<decimal>(TryParse),
-            var x when x == typeof(decimal?)
-                => new NullableTypedUrlValueConstraint<decimal>(TryParse),
+            var x when x == typeof(decimal?) => new NullableTypedUrlValueConstraint<decimal>(
+                TryParse
+            ),
             var x when x == typeof(double) => new TypedUrlValueConstraint<double>(TryParse),
-            var x when x == typeof(double?)
-                => new NullableTypedUrlValueConstraint<double>(TryParse),
+            var x when x == typeof(double?) => new NullableTypedUrlValueConstraint<double>(
+                TryParse
+            ),
             var x when x == typeof(float) => new TypedUrlValueConstraint<float>(TryParse),
             var x when x == typeof(float?) => new NullableTypedUrlValueConstraint<float>(TryParse),
             var x when x == typeof(Guid) => new TypedUrlValueConstraint<Guid>(Guid.TryParse),
-            var x when x == typeof(Guid?)
-                => new NullableTypedUrlValueConstraint<Guid>(Guid.TryParse),
+            var x when x == typeof(Guid?) => new NullableTypedUrlValueConstraint<Guid>(
+                Guid.TryParse
+            ),
             var x when x == typeof(int) => new TypedUrlValueConstraint<int>(TryParse),
             var x when x == typeof(int?) => new NullableTypedUrlValueConstraint<int>(TryParse),
             var x when x == typeof(long) => new TypedUrlValueConstraint<long>(TryParse),

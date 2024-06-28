@@ -147,8 +147,9 @@ namespace System.Xml.Xsl.Qil
 
                 QilNodeType.XsltGenerateId => CheckXsltGenerateId((QilUnary)n),
                 QilNodeType.XsltInvokeLateBound => CheckXsltInvokeLateBound((QilInvokeLateBound)n),
-                QilNodeType.XsltInvokeEarlyBound
-                    => CheckXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
+                QilNodeType.XsltInvokeEarlyBound => CheckXsltInvokeEarlyBound(
+                    (QilInvokeEarlyBound)n
+                ),
                 QilNodeType.XsltCopy => CheckXsltCopy((QilBinary)n),
                 QilNodeType.XsltCopyOf => CheckXsltCopyOf((QilUnary)n),
                 QilNodeType.XsltConvert => CheckXsltConvert((QilTargetType)n),

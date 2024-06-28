@@ -17,10 +17,10 @@ internal static class EmitterExtensions
             EndpointParameterSource.Route => "route",
             EndpointParameterSource.RouteOrQuery => "route or query string",
             EndpointParameterSource.FormBody => "form",
-            EndpointParameterSource.BindAsync
-                => endpointParameter.BindMethod == BindabilityMethod.BindAsync
-                    ? $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext)"
-                    : $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext, ParameterInfo)",
+            EndpointParameterSource.BindAsync => endpointParameter.BindMethod
+            == BindabilityMethod.BindAsync
+                ? $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext)"
+                : $"{endpointParameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)}.BindAsync(HttpContext, ParameterInfo)",
             _ => "unknown",
         };
 
@@ -48,18 +48,17 @@ internal static class EmitterExtensions
             or EndpointParameterSource.Route
             or EndpointParameterSource.RouteOrQuery
             or EndpointParameterSource.JsonBodyOrService
-            or EndpointParameterSource.FormBody
-                => endpointParameter.IsOptional
-                    ? endpointParameter.EmitHandlerArgument()
-                    : $"{endpointParameter.EmitHandlerArgument()}!",
+            or EndpointParameterSource.FormBody => endpointParameter.IsOptional
+                ? endpointParameter.EmitHandlerArgument()
+                : $"{endpointParameter.EmitHandlerArgument()}!",
             // When a BindAsync parameter is required, make sure that we are using `.Value` to access
             // the underlying value for a nullable value type instead of using the non-nullable reference type modifier.
-            EndpointParameterSource.BindAsync
-                => endpointParameter.IsOptional ? endpointParameter.EmitHandlerArgument()
-                : endpointParameter.Type.IsValueType
-                && endpointParameter.GetBindAsyncReturnType().IsNullableOfT()
-                    ? $"{endpointParameter.EmitHandlerArgument()}.HasValue ? {endpointParameter.EmitHandlerArgument()}.Value : default"
-                : $"{endpointParameter.EmitHandlerArgument()}",
+            EndpointParameterSource.BindAsync => endpointParameter.IsOptional
+                ? endpointParameter.EmitHandlerArgument()
+            : endpointParameter.Type.IsValueType
+            && endpointParameter.GetBindAsyncReturnType().IsNullableOfT()
+                ? $"{endpointParameter.EmitHandlerArgument()}.HasValue ? {endpointParameter.EmitHandlerArgument()}.Value : default"
+            : $"{endpointParameter.EmitHandlerArgument()}",
             EndpointParameterSource.Unknown => throw new NotImplementedException("Unreachable!"),
             _ => endpointParameter.EmitHandlerArgument(),
         };

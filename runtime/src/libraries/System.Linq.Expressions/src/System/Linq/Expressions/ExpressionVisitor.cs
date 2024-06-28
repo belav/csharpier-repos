@@ -606,8 +606,9 @@ namespace System.Linq.Expressions
             node.BindingType switch
             {
                 MemberBindingType.Assignment => VisitMemberAssignment((MemberAssignment)node),
-                MemberBindingType.MemberBinding
-                    => VisitMemberMemberBinding((MemberMemberBinding)node),
+                MemberBindingType.MemberBinding => VisitMemberMemberBinding(
+                    (MemberMemberBinding)node
+                ),
                 MemberBindingType.ListBinding => VisitMemberListBinding((MemberListBinding)node),
                 _ => throw Error.UnhandledBindingType(node.BindingType),
             };

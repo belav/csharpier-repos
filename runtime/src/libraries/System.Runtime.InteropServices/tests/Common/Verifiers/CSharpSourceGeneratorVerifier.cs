@@ -112,10 +112,13 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 {
                     ReferenceAssemblies = targetFramework switch
                     {
-                        TestTargetFramework.Framework
-                            => ReferenceAssemblies.NetFramework.Net48.Default,
-                        TestTargetFramework.Standard
-                            => ReferenceAssemblies.NetStandard.NetStandard21,
+                        TestTargetFramework.Framework => ReferenceAssemblies
+                            .NetFramework
+                            .Net48
+                            .Default,
+                        TestTargetFramework.Standard => ReferenceAssemblies
+                            .NetStandard
+                            .NetStandard21,
                         TestTargetFramework.Core => ReferenceAssemblies.NetCore.NetCoreApp31,
                         TestTargetFramework.Net6 => ReferenceAssemblies.Net.Net60,
                         _ => ReferenceAssemblies.Default,

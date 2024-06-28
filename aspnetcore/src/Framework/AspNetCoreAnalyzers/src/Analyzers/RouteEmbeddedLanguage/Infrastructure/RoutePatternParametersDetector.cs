@@ -100,12 +100,11 @@ internal static class RoutePatternParametersDetector
     {
         return symbol switch
         {
-            ITypeSymbol typeSymbol
-                => typeSymbol
-                    .GetMembers()
-                    .OfType<IPropertySymbol>()
-                    .ToImmutableArray()
-                    .As<ISymbol>(),
+            ITypeSymbol typeSymbol => typeSymbol
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .ToImmutableArray()
+                .As<ISymbol>(),
             IMethodSymbol methodSymbol => methodSymbol.Parameters.As<ISymbol>(),
             _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol),
         };

@@ -128,16 +128,16 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     reason switch
                     {
                         NotSupportedReason.UnknownType => TypeNotSupported,
-                        NotSupportedReason.MissingPublicInstanceConstructor
-                            => MissingPublicInstanceConstructor,
+                        NotSupportedReason.MissingPublicInstanceConstructor =>
+                            MissingPublicInstanceConstructor,
                         NotSupportedReason.CollectionNotSupported => CollectionNotSupported,
                         NotSupportedReason.DictionaryKeyNotSupported => DictionaryKeyNotSupported,
                         NotSupportedReason.ElementTypeNotSupported => ElementTypeNotSupported,
-                        NotSupportedReason.MultipleParameterizedConstructors
-                            => MultipleParameterizedConstructors,
+                        NotSupportedReason.MultipleParameterizedConstructors =>
+                            MultipleParameterizedConstructors,
                         NotSupportedReason.MultiDimArraysNotSupported => MultiDimArraysNotSupported,
-                        NotSupportedReason.NullableUnderlyingTypeNotSupported
-                            => NullableUnderlyingTypeNotSupported,
+                        NotSupportedReason.NullableUnderlyingTypeNotSupported =>
+                            NullableUnderlyingTypeNotSupported,
                         _ => throw new InvalidOperationException(),
                     };
             }

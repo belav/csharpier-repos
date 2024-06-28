@@ -429,18 +429,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN,
                 ExpressionKind.Modulo => PREDEFMETH.PM_EXPRESSION_MODULO,
                 ExpressionKind.Divide => PREDEFMETH.PM_EXPRESSION_DIVIDE,
-                ExpressionKind.Multiply
-                    => expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
-                ExpressionKind.Subtract
-                    => expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
-                ExpressionKind.Add
-                    => expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_ADD,
+                ExpressionKind.Multiply => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
+                ExpressionKind.Subtract => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
+                ExpressionKind.Add => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_ADD,
 
                 _ => throw Error.InternalCompilerError(),
             };
@@ -738,11 +735,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.DelegateNotEq => PREDEFMETH.PM_EXPRESSION_NOTEQUAL_USER_DEFINED,
                 ExpressionKind.Eq => PREDEFMETH.PM_EXPRESSION_EQUAL_USER_DEFINED,
                 ExpressionKind.NotEq => PREDEFMETH.PM_EXPRESSION_NOTEQUAL_USER_DEFINED,
-                ExpressionKind.LessThanOrEqual
-                    => PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
+                ExpressionKind.LessThanOrEqual =>
+                    PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.LessThan => PREDEFMETH.PM_EXPRESSION_LESSTHAN_USER_DEFINED,
-                ExpressionKind.GreaterThanOrEqual
-                    => PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
+                ExpressionKind.GreaterThanOrEqual =>
+                    PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN_USER_DEFINED,
                 _ => throw Error.InternalCompilerError(),
             };

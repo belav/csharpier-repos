@@ -114,14 +114,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     originalToken.GetLeadingTrivia(),
                     kind switch
                     {
-                        Lexer.InterpolatedStringKind.Normal
-                            => SyntaxKind.InterpolatedStringStartToken,
-                        Lexer.InterpolatedStringKind.Verbatim
-                            => SyntaxKind.InterpolatedVerbatimStringStartToken,
-                        Lexer.InterpolatedStringKind.SingleLineRaw
-                            => SyntaxKind.InterpolatedSingleLineRawStringStartToken,
-                        Lexer.InterpolatedStringKind.MultiLineRaw
-                            => SyntaxKind.InterpolatedMultiLineRawStringStartToken,
+                        Lexer.InterpolatedStringKind.Normal =>
+                            SyntaxKind.InterpolatedStringStartToken,
+                        Lexer.InterpolatedStringKind.Verbatim =>
+                            SyntaxKind.InterpolatedVerbatimStringStartToken,
+                        Lexer.InterpolatedStringKind.SingleLineRaw =>
+                            SyntaxKind.InterpolatedSingleLineRawStringStartToken,
+                        Lexer.InterpolatedStringKind.MultiLineRaw =>
+                            SyntaxKind.InterpolatedMultiLineRawStringStartToken,
                         _ => throw ExceptionUtilities.UnexpectedValue(kind),
                     },
                     originalText[openQuoteRange],
@@ -352,14 +352,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     leading: null,
                     kind switch
                     {
-                        Lexer.InterpolatedStringKind.Normal
-                            => SyntaxKind.InterpolatedStringEndToken,
-                        Lexer.InterpolatedStringKind.Verbatim
-                            => SyntaxKind.InterpolatedStringEndToken,
-                        Lexer.InterpolatedStringKind.SingleLineRaw
-                            => SyntaxKind.InterpolatedRawStringEndToken,
-                        Lexer.InterpolatedStringKind.MultiLineRaw
-                            => SyntaxKind.InterpolatedRawStringEndToken,
+                        Lexer.InterpolatedStringKind.Normal =>
+                            SyntaxKind.InterpolatedStringEndToken,
+                        Lexer.InterpolatedStringKind.Verbatim =>
+                            SyntaxKind.InterpolatedStringEndToken,
+                        Lexer.InterpolatedStringKind.SingleLineRaw =>
+                            SyntaxKind.InterpolatedRawStringEndToken,
+                        Lexer.InterpolatedStringKind.MultiLineRaw =>
+                            SyntaxKind.InterpolatedRawStringEndToken,
                         _ => throw ExceptionUtilities.UnexpectedValue(kind),
                     },
                     originalText[closeQuoteRange],

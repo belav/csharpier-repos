@@ -295,21 +295,17 @@ namespace Roslyn.Test.Utilities
                 // Note: NetCoreApp should behave like latest Core TFM
                 TargetFramework.Empty => ImmutableArray<MetadataReference>.Empty,
                 TargetFramework.NetStandard20 => NetStandard20References,
-                TargetFramework.Net50
-                    => ImmutableArray.CreateRange<MetadataReference>(
-                        LoadDynamicReferences("Net50")
-                    ),
-                TargetFramework.Net60
-                    => ImmutableArray.CreateRange<MetadataReference>(
-                        LoadDynamicReferences("Net60")
-                    ),
-                TargetFramework.NetCoreApp
-                or TargetFramework.Net70
-                    => ImmutableArray.CreateRange<MetadataReference>(Net70.All),
-                TargetFramework.Net80
-                    => ImmutableArray.CreateRange<MetadataReference>(
-                        LoadDynamicReferences("Net80")
-                    ),
+                TargetFramework.Net50 => ImmutableArray.CreateRange<MetadataReference>(
+                    LoadDynamicReferences("Net50")
+                ),
+                TargetFramework.Net60 => ImmutableArray.CreateRange<MetadataReference>(
+                    LoadDynamicReferences("Net60")
+                ),
+                TargetFramework.NetCoreApp or TargetFramework.Net70 =>
+                    ImmutableArray.CreateRange<MetadataReference>(Net70.All),
+                TargetFramework.Net80 => ImmutableArray.CreateRange<MetadataReference>(
+                    LoadDynamicReferences("Net80")
+                ),
                 TargetFramework.NetFramework => NetFramework.References,
                 TargetFramework.NetLatest => NetLatest,
                 TargetFramework.Standard => StandardReferences,
@@ -333,10 +329,9 @@ namespace Roslyn.Test.Utilities
                 TargetFramework.DefaultVb => DefaultVbReferences,
                 TargetFramework.Minimal => MinimalReferences,
                 TargetFramework.MinimalAsync => MinimalAsyncReferences,
-                _
-                    => throw new InvalidOperationException(
-                        $"Unexpected target framework {targetFramework}"
-                    ),
+                _ => throw new InvalidOperationException(
+                    $"Unexpected target framework {targetFramework}"
+                ),
             };
 
         public static ImmutableArray<MetadataReference> GetReferences(

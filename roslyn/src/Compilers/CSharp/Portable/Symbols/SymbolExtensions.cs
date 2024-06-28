@@ -646,11 +646,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SymbolKind.Property => ((PropertySymbol)symbol).RequiresInstanceReceiver,
                 SymbolKind.Field => ((FieldSymbol)symbol).RequiresInstanceReceiver,
                 SymbolKind.Event => ((EventSymbol)symbol).RequiresInstanceReceiver,
-                _
-                    => throw new ArgumentException(
-                        "only methods, properties, fields and events can take a receiver",
-                        nameof(symbol)
-                    ),
+                _ => throw new ArgumentException(
+                    "only methods, properties, fields and events can take a receiver",
+                    nameof(symbol)
+                ),
             };
         }
 

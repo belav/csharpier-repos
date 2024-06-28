@@ -638,8 +638,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             categoryName switch
             {
                 UnifiedPredefinedSuggestedActionCategoryNames.CodeFix => CodeActionKind.QuickFix,
-                UnifiedPredefinedSuggestedActionCategoryNames.Refactoring
-                    => CodeActionKind.Refactor,
+                UnifiedPredefinedSuggestedActionCategoryNames.Refactoring =>
+                    CodeActionKind.Refactor,
                 UnifiedPredefinedSuggestedActionCategoryNames.StyleFix => CodeActionKind.QuickFix,
                 UnifiedPredefinedSuggestedActionCategoryNames.ErrorFix => CodeActionKind.QuickFix,
                 _ => throw ExceptionUtilities.UnexpectedValue(categoryName),

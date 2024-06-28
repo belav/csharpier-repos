@@ -23,36 +23,30 @@ internal sealed class HostingRequestUnhandledLog : IReadOnlyList<KeyValuePair<st
     public KeyValuePair<string, object?> this[int index] =>
         index switch
         {
-            0
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Request.Method),
-                    _httpContext.Request.Method
-                ),
-            1
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Request.Scheme),
-                    _httpContext.Request.Scheme
-                ),
-            2
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Request.Host),
-                    _httpContext.Request.Host
-                ),
-            3
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Request.PathBase),
-                    _httpContext.Request.PathBase
-                ),
-            4
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Request.Path),
-                    _httpContext.Request.Path
-                ),
-            5
-                => new KeyValuePair<string, object?>(
-                    nameof(_httpContext.Response.StatusCode),
-                    _httpContext.Response.StatusCode
-                ),
+            0 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Request.Method),
+                _httpContext.Request.Method
+            ),
+            1 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Request.Scheme),
+                _httpContext.Request.Scheme
+            ),
+            2 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Request.Host),
+                _httpContext.Request.Host
+            ),
+            3 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Request.PathBase),
+                _httpContext.Request.PathBase
+            ),
+            4 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Request.Path),
+                _httpContext.Request.Path
+            ),
+            5 => new KeyValuePair<string, object?>(
+                nameof(_httpContext.Response.StatusCode),
+                _httpContext.Response.StatusCode
+            ),
             6 => new KeyValuePair<string, object?>("{OriginalFormat}", OriginalFormat),
             _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };

@@ -918,8 +918,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 {
                     ILocalSymbol local => local.Type,
                     IParameterSymbol parameter => parameter.Type,
-                    IRangeVariableSymbol rangeVariable
-                        => GetRangeVariableType(model, rangeVariable),
+                    IRangeVariableSymbol rangeVariable => GetRangeVariableType(
+                        model,
+                        rangeVariable
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(symbol),
                 };
 
@@ -1276,26 +1278,18 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 return symbol switch
                 {
-                    ILocalSymbol local
-                        => new VariableInfo(
-                            new LocalVariableSymbol<T>(
-                                compilation,
-                                local,
-                                type,
-                                nonNoisySyntaxKindSet
-                            ),
-                            style
-                        ),
-                    IParameterSymbol parameter
-                        => new VariableInfo(
-                            new ParameterVariableSymbol(compilation, parameter, type),
-                            style
-                        ),
-                    IRangeVariableSymbol rangeVariable
-                        => new VariableInfo(
-                            new QueryVariableSymbol(compilation, rangeVariable, type),
-                            style
-                        ),
+                    ILocalSymbol local => new VariableInfo(
+                        new LocalVariableSymbol<T>(compilation, local, type, nonNoisySyntaxKindSet),
+                        style
+                    ),
+                    IParameterSymbol parameter => new VariableInfo(
+                        new ParameterVariableSymbol(compilation, parameter, type),
+                        style
+                    ),
+                    IRangeVariableSymbol rangeVariable => new VariableInfo(
+                        new QueryVariableSymbol(compilation, rangeVariable, type),
+                        style
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(symbol),
                 };
             }

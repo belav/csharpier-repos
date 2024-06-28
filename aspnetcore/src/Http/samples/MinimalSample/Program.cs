@@ -107,24 +107,21 @@ app.MapGet(
         problemType switch
         {
             "plain" => Results.Problem(statusCode: 500, extensions: extensions),
-            "object"
-                => Results.Problem(
-                    new ProblemDetails()
-                    {
-                        Status = 500,
-                        Extensions = { { "traceId", "traceId123" } },
-                    }
-                ),
-            "validation"
-                => Results.ValidationProblem(errors, statusCode: 400, extensions: extensions),
-            "objectValidation"
-                => Results.Problem(
-                    new HttpValidationProblemDetails(errors)
-                    {
-                        Status = 400,
-                        Extensions = { { "traceId", "traceId123" } },
-                    }
-                ),
+            "object" => Results.Problem(
+                new ProblemDetails() { Status = 500, Extensions = { { "traceId", "traceId123" } } }
+            ),
+            "validation" => Results.ValidationProblem(
+                errors,
+                statusCode: 400,
+                extensions: extensions
+            ),
+            "objectValidation" => Results.Problem(
+                new HttpValidationProblemDetails(errors)
+                {
+                    Status = 400,
+                    Extensions = { { "traceId", "traceId123" } },
+                }
+            ),
             "validationTyped" => TypedResults.ValidationProblem(errors, extensions: extensions),
             _ => TypedResults.NotFound(),
         }

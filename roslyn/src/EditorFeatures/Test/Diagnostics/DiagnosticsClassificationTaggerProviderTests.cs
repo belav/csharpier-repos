@@ -228,10 +228,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         private static PerLanguageOption2<bool> GetFadingOptionForDiagnostic(string diagnosticId) =>
             diagnosticId switch
             {
-                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
-                    => FadingOptions.FadeOutUnusedImports,
-                IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId
-                    => FadingOptions.FadeOutUnreachableCode,
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId =>
+                    FadingOptions.FadeOutUnusedImports,
+                IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId =>
+                    FadingOptions.FadeOutUnreachableCode,
                 _ => throw ExceptionUtilities.UnexpectedValue(diagnosticId),
             };
     }

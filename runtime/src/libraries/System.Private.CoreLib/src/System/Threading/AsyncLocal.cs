@@ -463,41 +463,36 @@ namespace System.Threading
                             // without the matching element.
                             return i switch
                             {
-                                0
-                                    => new FourElementAsyncLocalValueMap(
-                                        _keyValues[1],
-                                        _keyValues[2],
-                                        _keyValues[3],
-                                        _keyValues[4]
-                                    ),
-                                1
-                                    => new FourElementAsyncLocalValueMap(
-                                        _keyValues[0],
-                                        _keyValues[2],
-                                        _keyValues[3],
-                                        _keyValues[4]
-                                    ),
-                                2
-                                    => new FourElementAsyncLocalValueMap(
-                                        _keyValues[0],
-                                        _keyValues[1],
-                                        _keyValues[3],
-                                        _keyValues[4]
-                                    ),
-                                3
-                                    => new FourElementAsyncLocalValueMap(
-                                        _keyValues[0],
-                                        _keyValues[1],
-                                        _keyValues[2],
-                                        _keyValues[4]
-                                    ),
-                                _
-                                    => new FourElementAsyncLocalValueMap(
-                                        _keyValues[0],
-                                        _keyValues[1],
-                                        _keyValues[2],
-                                        _keyValues[3]
-                                    ),
+                                0 => new FourElementAsyncLocalValueMap(
+                                    _keyValues[1],
+                                    _keyValues[2],
+                                    _keyValues[3],
+                                    _keyValues[4]
+                                ),
+                                1 => new FourElementAsyncLocalValueMap(
+                                    _keyValues[0],
+                                    _keyValues[2],
+                                    _keyValues[3],
+                                    _keyValues[4]
+                                ),
+                                2 => new FourElementAsyncLocalValueMap(
+                                    _keyValues[0],
+                                    _keyValues[1],
+                                    _keyValues[3],
+                                    _keyValues[4]
+                                ),
+                                3 => new FourElementAsyncLocalValueMap(
+                                    _keyValues[0],
+                                    _keyValues[1],
+                                    _keyValues[2],
+                                    _keyValues[4]
+                                ),
+                                _ => new FourElementAsyncLocalValueMap(
+                                    _keyValues[0],
+                                    _keyValues[1],
+                                    _keyValues[2],
+                                    _keyValues[3]
+                                ),
                             };
                         }
                         else

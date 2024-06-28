@@ -322,20 +322,20 @@ namespace Microsoft.Interop
                 StubCodeContext.Stage.Setup => "Perform required setup.",
                 StubCodeContext.Stage.Marshal => "Convert managed data to native data.",
                 StubCodeContext.Stage.Pin => "Pin data in preparation for calling the P/Invoke.",
-                StubCodeContext.Stage.PinnedMarshal
-                    => "Convert managed data to native data that requires the managed data to be pinned.",
+                StubCodeContext.Stage.PinnedMarshal =>
+                    "Convert managed data to native data that requires the managed data to be pinned.",
                 StubCodeContext.Stage.Invoke => "Call the P/Invoke.",
-                StubCodeContext.Stage.UnmarshalCapture
-                    => "Capture the native data into marshaller instances in case conversion to managed data throws an exception.",
+                StubCodeContext.Stage.UnmarshalCapture =>
+                    "Capture the native data into marshaller instances in case conversion to managed data throws an exception.",
                 StubCodeContext.Stage.Unmarshal => "Convert native data to managed data.",
-                StubCodeContext.Stage.CleanupCallerAllocated
-                    => "Perform cleanup of caller allocated resources.",
-                StubCodeContext.Stage.CleanupCalleeAllocated
-                    => "Perform cleanup of callee allocated resources.",
-                StubCodeContext.Stage.NotifyForSuccessfulInvoke
-                    => "Keep alive any managed objects that need to stay alive across the call.",
-                StubCodeContext.Stage.GuaranteedUnmarshal
-                    => "Convert native data to managed data even in the case of an exception during the non-cleanup phases.",
+                StubCodeContext.Stage.CleanupCallerAllocated =>
+                    "Perform cleanup of caller allocated resources.",
+                StubCodeContext.Stage.CleanupCalleeAllocated =>
+                    "Perform cleanup of callee allocated resources.",
+                StubCodeContext.Stage.NotifyForSuccessfulInvoke =>
+                    "Keep alive any managed objects that need to stay alive across the call.",
+                StubCodeContext.Stage.GuaranteedUnmarshal =>
+                    "Convert native data to managed data even in the case of an exception during the non-cleanup phases.",
                 _ => throw new ArgumentOutOfRangeException(nameof(stage)),
             };
 

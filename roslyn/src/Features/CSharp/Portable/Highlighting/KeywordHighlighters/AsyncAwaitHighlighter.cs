@@ -79,21 +79,33 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
         private static bool HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans) =>
             node switch
             {
-                MethodDeclarationSyntax methodDeclaration
-                    => TryAddAsyncModifier(methodDeclaration.Modifiers, spans),
-                LocalFunctionStatementSyntax localFunction
-                    => TryAddAsyncModifier(localFunction.Modifiers, spans),
-                AnonymousFunctionExpressionSyntax anonymousFunction
-                    => TryAddAsyncOrAwaitKeyword(anonymousFunction.AsyncKeyword, spans),
-                UsingStatementSyntax usingStatement
-                    => TryAddAsyncOrAwaitKeyword(usingStatement.AwaitKeyword, spans),
-                LocalDeclarationStatementSyntax localDeclaration
-                    => localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
+                MethodDeclarationSyntax methodDeclaration => TryAddAsyncModifier(
+                    methodDeclaration.Modifiers,
+                    spans
+                ),
+                LocalFunctionStatementSyntax localFunction => TryAddAsyncModifier(
+                    localFunction.Modifiers,
+                    spans
+                ),
+                AnonymousFunctionExpressionSyntax anonymousFunction => TryAddAsyncOrAwaitKeyword(
+                    anonymousFunction.AsyncKeyword,
+                    spans
+                ),
+                UsingStatementSyntax usingStatement => TryAddAsyncOrAwaitKeyword(
+                    usingStatement.AwaitKeyword,
+                    spans
+                ),
+                LocalDeclarationStatementSyntax localDeclaration =>
+                    localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
                         && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
-                CommonForEachStatementSyntax forEachStatement
-                    => TryAddAsyncOrAwaitKeyword(forEachStatement.AwaitKeyword, spans),
-                AwaitExpressionSyntax awaitExpression
-                    => TryAddAsyncOrAwaitKeyword(awaitExpression.AwaitKeyword, spans),
+                CommonForEachStatementSyntax forEachStatement => TryAddAsyncOrAwaitKeyword(
+                    forEachStatement.AwaitKeyword,
+                    spans
+                ),
+                AwaitExpressionSyntax awaitExpression => TryAddAsyncOrAwaitKeyword(
+                    awaitExpression.AwaitKeyword,
+                    spans
+                ),
                 _ => false,
             };
 

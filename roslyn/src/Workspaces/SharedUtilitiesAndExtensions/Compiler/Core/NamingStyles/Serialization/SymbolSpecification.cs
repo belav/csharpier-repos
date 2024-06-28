@@ -451,10 +451,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 _category switch
                 {
                     SymbolCategory.Other => symbol.IsKind((SymbolKind)_kind),
-                    SymbolCategory.Type
-                        => symbol is ITypeSymbol type && type.TypeKind == (TypeKind)_kind,
-                    SymbolCategory.Method
-                        => symbol is IMethodSymbol method && method.MethodKind == (MethodKind)_kind,
+                    SymbolCategory.Type => symbol is ITypeSymbol type
+                        && type.TypeKind == (TypeKind)_kind,
+                    SymbolCategory.Method => symbol is IMethodSymbol method
+                        && method.MethodKind == (MethodKind)_kind,
                     _ => false,
                 };
 
@@ -462,10 +462,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 _category switch
                 {
                     SymbolCategory.Other => new XElement(nameof(SymbolKind), (SymbolKind)_kind),
-                    SymbolCategory.Type
-                        => new XElement(nameof(TypeKind), GetTypeKindString((TypeKind)_kind)),
-                    SymbolCategory.Method
-                        => new XElement(nameof(MethodKind), GetMethodKindString((MethodKind)_kind)),
+                    SymbolCategory.Type => new XElement(
+                        nameof(TypeKind),
+                        GetTypeKindString((TypeKind)_kind)
+                    ),
+                    SymbolCategory.Method => new XElement(
+                        nameof(MethodKind),
+                        GetMethodKindString((MethodKind)_kind)
+                    ),
                     _ => throw ExceptionUtilities.Unreachable(),
                 };
 
@@ -488,10 +492,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 // change if other MethodKinds are added. This ensures we keep using the same string consistently.
                 return methodKind switch
                 {
-                    CodeAnalysis.MethodKind.SharedConstructor
-                        => nameof(CodeAnalysis.MethodKind.StaticConstructor),
-                    CodeAnalysis.MethodKind.AnonymousFunction
-                        => nameof(CodeAnalysis.MethodKind.LambdaMethod),
+                    CodeAnalysis.MethodKind.SharedConstructor => nameof(
+                        CodeAnalysis.MethodKind.StaticConstructor
+                    ),
+                    CodeAnalysis.MethodKind.AnonymousFunction => nameof(
+                        CodeAnalysis.MethodKind.LambdaMethod
+                    ),
                     _ => methodKind.ToString(),
                 };
             }

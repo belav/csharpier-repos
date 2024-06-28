@@ -235,12 +235,11 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static Func<string, T> GetParser(string type) =>
             type switch
             {
-                nameof(Boolean)
-                    =>
-                    // Try to map a boolean value.  Either map it to true/false if we're a
-                    // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
-                    // a CodeStyleOption<SomeEnumType>.
-                    v => Convert(bool.Parse(v)),
+                nameof(Boolean) =>
+                // Try to map a boolean value.  Either map it to true/false if we're a
+                // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
+                // a CodeStyleOption<SomeEnumType>.
+                v => Convert(bool.Parse(v)),
                 nameof(Int32) => v => Convert(int.Parse(v)),
                 nameof(String) => v => (T)(object)v,
                 _ => throw new ArgumentException(nameof(type)),

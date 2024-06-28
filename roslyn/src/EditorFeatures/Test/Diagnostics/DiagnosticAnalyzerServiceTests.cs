@@ -1005,10 +1005,12 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                     BackgroundAnalysisScope.None
                         or BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                )
-                    => 0,
-                (BackgroundAnalysisScope.OpenFiles or BackgroundAnalysisScope.FullSolution, false)
-                    => 1,
+                ) => 0,
+                (
+                    BackgroundAnalysisScope.OpenFiles
+                        or BackgroundAnalysisScope.FullSolution,
+                    false
+                ) => 1,
                 (BackgroundAnalysisScope.OpenFiles, true) => 2,
                 (BackgroundAnalysisScope.FullSolution, true) => 4,
                 _ => throw ExceptionUtilities.Unreachable(),

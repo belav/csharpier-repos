@@ -97,19 +97,19 @@ internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
                     static e =>
                         e switch
                         {
-                            ArrayCreationExpressionSyntax arrayCreation
-                                => arrayCreation.Initializer,
-                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation
-                                => implicitArrayCreation.Initializer,
+                            ArrayCreationExpressionSyntax arrayCreation =>
+                                arrayCreation.Initializer,
+                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation =>
+                                implicitArrayCreation.Initializer,
                             _ => throw ExceptionUtilities.Unreachable(),
                         },
                     static (e, i) =>
                         e switch
                         {
-                            ArrayCreationExpressionSyntax arrayCreation
-                                => arrayCreation.WithInitializer(i),
-                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation
-                                => implicitArrayCreation.WithInitializer(i),
+                            ArrayCreationExpressionSyntax arrayCreation =>
+                                arrayCreation.WithInitializer(i),
+                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation =>
+                                implicitArrayCreation.WithInitializer(i),
                             _ => throw ExceptionUtilities.Unreachable(),
                         },
                     cancellationToken
@@ -132,15 +132,15 @@ internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
         ) =>
             expression switch
             {
-                ImplicitArrayCreationExpressionSyntax arrayCreation
-                    => CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
+                ImplicitArrayCreationExpressionSyntax arrayCreation =>
+                    CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
                         semanticModel,
                         arrayCreation,
                         cancellationToken
                     ),
 
-                ArrayCreationExpressionSyntax arrayCreation
-                    => CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
+                ArrayCreationExpressionSyntax arrayCreation =>
+                    CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
                         semanticModel,
                         arrayCreation,
                         cancellationToken

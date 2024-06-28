@@ -332,10 +332,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return expressionElement switch
                 {
-                    BoundCollectionElementInitializer collectionInitializer
-                        => MakeCollectionInitializer(rewrittenReceiver, collectionInitializer),
-                    BoundDynamicCollectionElementInitializer dynamicInitializer
-                        => MakeDynamicCollectionInitializer(rewrittenReceiver, dynamicInitializer),
+                    BoundCollectionElementInitializer collectionInitializer =>
+                        MakeCollectionInitializer(rewrittenReceiver, collectionInitializer),
+                    BoundDynamicCollectionElementInitializer dynamicInitializer =>
+                        MakeDynamicCollectionInitializer(rewrittenReceiver, dynamicInitializer),
                     var e => throw ExceptionUtilities.UnexpectedValue(e),
                 };
             }

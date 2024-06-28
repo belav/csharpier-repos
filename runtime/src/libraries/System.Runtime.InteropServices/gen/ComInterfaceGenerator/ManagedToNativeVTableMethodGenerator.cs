@@ -73,9 +73,8 @@ namespace Microsoft.Interop
                         {
                             NativeIndex = arg.NativeIndex switch
                             {
-                                TypePositionInfo.UnsetIndex
-                                or TypePositionInfo.ReturnIndex
-                                    => arg.NativeIndex,
+                                TypePositionInfo.UnsetIndex or TypePositionInfo.ReturnIndex =>
+                                    arg.NativeIndex,
                                 int index => index + 1,
                             },
                         }

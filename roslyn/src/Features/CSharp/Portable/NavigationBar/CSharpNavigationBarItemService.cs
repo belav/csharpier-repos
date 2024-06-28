@@ -235,10 +235,14 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
         ) =>
             node switch
             {
-                BaseTypeDeclarationSyntax t
-                    => semanticModel.GetDeclaredSymbol(t, cancellationToken),
-                DelegateDeclarationSyntax d
-                    => semanticModel.GetDeclaredSymbol(d, cancellationToken),
+                BaseTypeDeclarationSyntax t => semanticModel.GetDeclaredSymbol(
+                    t,
+                    cancellationToken
+                ),
+                DelegateDeclarationSyntax d => semanticModel.GetDeclaredSymbol(
+                    d,
+                    cancellationToken
+                ),
                 _ => null,
             };
 

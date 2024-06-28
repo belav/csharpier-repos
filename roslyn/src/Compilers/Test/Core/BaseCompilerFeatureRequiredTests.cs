@@ -25,8 +25,8 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
         {
             true => "01 00 54 02 0a 49 73 4f 70 74 69 6f 6e 61 6c 01", // One optional parameter, "IsOptional", true
             false => "01 00 54 02 0a 49 73 4f 70 74 69 6f 6e 61 6c 00", // One optional parameter, "IsOptional", false
-            null
-                => "00 00" // No optional parameters
+            null =>
+                "00 00" // No optional parameters
             ,
         };
 

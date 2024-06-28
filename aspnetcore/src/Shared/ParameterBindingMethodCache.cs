@@ -213,10 +213,10 @@ internal sealed class ParameterBindingMethodCache
                 // default to `DateTimeStyles.AllowWhiteSpaces`.
                 var dateTimeStyles = type switch
                 {
-                    Type t when t == typeof(DateTime)
-                        => DateTimeStyles.AdjustToUniversal | DateTimeStyles.AllowWhiteSpaces,
-                    Type t when t == typeof(DateTimeOffset)
-                        => DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces,
+                    Type t when t == typeof(DateTime) => DateTimeStyles.AdjustToUniversal
+                        | DateTimeStyles.AllowWhiteSpaces,
+                    Type t when t == typeof(DateTimeOffset) => DateTimeStyles.AssumeUniversal
+                        | DateTimeStyles.AllowWhiteSpaces,
                     _ => DateTimeStyles.AllowWhiteSpaces,
                 };
 

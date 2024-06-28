@@ -323,8 +323,8 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     {
         var direction = columnModification.Column switch
         {
-            IStoreStoredProcedureParameter storedProcedureParameter
-                => storedProcedureParameter.Direction,
+            IStoreStoredProcedureParameter storedProcedureParameter =>
+                storedProcedureParameter.Direction,
             IStoreStoredProcedureReturnValue => ParameterDirection.Output,
             _ => ParameterDirection.Input,
         };

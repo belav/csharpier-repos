@@ -557,8 +557,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         {
             var parameterList = node switch
             {
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambdaExpression
-                    => parenthesizedLambdaExpression.ParameterList,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambdaExpression =>
+                    parenthesizedLambdaExpression.ParameterList,
                 MethodDeclarationSyntax methodDeclaration => methodDeclaration.ParameterList,
                 _ => null,
             };

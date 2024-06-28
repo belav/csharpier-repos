@@ -93,22 +93,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var (body, expressionBody, semicolonToken) = GetResolverElements(method);
                 return location switch
                 {
-                    TriviaLocation.BeforeBeginningOfSpan
-                        => callsite
-                            .GetFirstToken(includeZeroWidth: true)
-                            .GetPreviousToken(includeZeroWidth: true),
-                    TriviaLocation.AfterEndOfSpan
-                        => callsite
-                            .GetLastToken(includeZeroWidth: true)
-                            .GetNextToken(includeZeroWidth: true),
-                    TriviaLocation.AfterBeginningOfSpan
-                        => body != null
-                            ? body.OpenBraceToken.GetNextToken(includeZeroWidth: true)
-                            : expressionBody.ArrowToken.GetNextToken(includeZeroWidth: true),
-                    TriviaLocation.BeforeEndOfSpan
-                        => body != null
-                            ? body.CloseBraceToken.GetPreviousToken(includeZeroWidth: true)
-                            : semicolonToken,
+                    TriviaLocation.BeforeBeginningOfSpan => callsite
+                        .GetFirstToken(includeZeroWidth: true)
+                        .GetPreviousToken(includeZeroWidth: true),
+                    TriviaLocation.AfterEndOfSpan => callsite
+                        .GetLastToken(includeZeroWidth: true)
+                        .GetNextToken(includeZeroWidth: true),
+                    TriviaLocation.AfterBeginningOfSpan => body != null
+                        ? body.OpenBraceToken.GetNextToken(includeZeroWidth: true)
+                        : expressionBody.ArrowToken.GetNextToken(includeZeroWidth: true),
+                    TriviaLocation.BeforeEndOfSpan => body != null
+                        ? body.CloseBraceToken.GetPreviousToken(includeZeroWidth: true)
+                        : semicolonToken,
                     _ => throw ExceptionUtilities.UnexpectedValue(location),
                 };
             }
@@ -170,22 +166,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 return location switch
                 {
-                    TriviaLocation.BeforeBeginningOfSpan
-                        => FilterBeforeBeginningOfSpan(tokenPair, list),
-                    TriviaLocation.AfterEndOfSpan
-                        => FilterTriviaList(list.Concat(tokenPair.NextToken.LeadingTrivia)),
-                    TriviaLocation.AfterBeginningOfSpan
-                        => FilterTriviaList(
-                            AppendTrailingTrivia(tokenPair)
-                                .Concat(list)
-                                .Concat(tokenPair.NextToken.LeadingTrivia)
-                        ),
-                    TriviaLocation.BeforeEndOfSpan
-                        => FilterTriviaList(
-                            tokenPair
-                                .PreviousToken.TrailingTrivia.Concat(list)
-                                .Concat(tokenPair.NextToken.LeadingTrivia)
-                        ),
+                    TriviaLocation.BeforeBeginningOfSpan => FilterBeforeBeginningOfSpan(
+                        tokenPair,
+                        list
+                    ),
+                    TriviaLocation.AfterEndOfSpan => FilterTriviaList(
+                        list.Concat(tokenPair.NextToken.LeadingTrivia)
+                    ),
+                    TriviaLocation.AfterBeginningOfSpan => FilterTriviaList(
+                        AppendTrailingTrivia(tokenPair)
+                            .Concat(list)
+                            .Concat(tokenPair.NextToken.LeadingTrivia)
+                    ),
+                    TriviaLocation.BeforeEndOfSpan => FilterTriviaList(
+                        tokenPair
+                            .PreviousToken.TrailingTrivia.Concat(list)
+                            .Concat(tokenPair.NextToken.LeadingTrivia)
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(location),
                 };
             }
@@ -198,18 +195,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 return method switch
                 {
-                    MethodDeclarationSyntax methodDeclaration
-                        => (
-                            methodDeclaration.Body,
-                            methodDeclaration.ExpressionBody,
-                            methodDeclaration.SemicolonToken
-                        ),
-                    LocalFunctionStatementSyntax localFunctionDeclaration
-                        => (
-                            localFunctionDeclaration.Body,
-                            localFunctionDeclaration.ExpressionBody,
-                            localFunctionDeclaration.SemicolonToken
-                        ),
+                    MethodDeclarationSyntax methodDeclaration => (
+                        methodDeclaration.Body,
+                        methodDeclaration.ExpressionBody,
+                        methodDeclaration.SemicolonToken
+                    ),
+                    LocalFunctionStatementSyntax localFunctionDeclaration => (
+                        localFunctionDeclaration.Body,
+                        localFunctionDeclaration.ExpressionBody,
+                        localFunctionDeclaration.SemicolonToken
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(method),
                 };
             }

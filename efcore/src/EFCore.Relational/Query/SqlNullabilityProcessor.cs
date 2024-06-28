@@ -79,8 +79,9 @@ public class SqlNullabilityProcessor
         var result = queryExpression switch
         {
             SelectExpression selectExpression => (Expression)Visit(selectExpression),
-            DeleteExpression deleteExpression
-                => deleteExpression.Update(Visit(deleteExpression.SelectExpression)),
+            DeleteExpression deleteExpression => deleteExpression.Update(
+                Visit(deleteExpression.SelectExpression)
+            ),
             UpdateExpression updateExpression => VisitUpdate(updateExpression),
             _ => throw new InvalidOperationException(),
         };
@@ -440,46 +441,96 @@ public class SqlNullabilityProcessor
         var nullValueColumnsCount = _nullValueColumns.Count;
         var result = sqlExpression switch
         {
-            AtTimeZoneExpression sqlAtTimeZoneExpression
-                => VisitAtTimeZone(sqlAtTimeZoneExpression, allowOptimizedExpansion, out nullable),
-            CaseExpression caseExpression
-                => VisitCase(caseExpression, allowOptimizedExpansion, out nullable),
-            CollateExpression collateExpression
-                => VisitCollate(collateExpression, allowOptimizedExpansion, out nullable),
-            ColumnExpression columnExpression
-                => VisitColumn(columnExpression, allowOptimizedExpansion, out nullable),
-            DistinctExpression distinctExpression
-                => VisitDistinct(distinctExpression, allowOptimizedExpansion, out nullable),
-            ExistsExpression existsExpression
-                => VisitExists(existsExpression, allowOptimizedExpansion, out nullable),
-            InExpression inExpression
-                => VisitIn(inExpression, allowOptimizedExpansion, out nullable),
-            LikeExpression likeExpression
-                => VisitLike(likeExpression, allowOptimizedExpansion, out nullable),
-            RowNumberExpression rowNumberExpression
-                => VisitRowNumber(rowNumberExpression, allowOptimizedExpansion, out nullable),
-            RowValueExpression rowValueExpression
-                => VisitRowValue(rowValueExpression, allowOptimizedExpansion, out nullable),
-            ScalarSubqueryExpression scalarSubqueryExpression
-                => VisitScalarSubquery(
-                    scalarSubqueryExpression,
-                    allowOptimizedExpansion,
-                    out nullable
-                ),
-            SqlBinaryExpression sqlBinaryExpression
-                => VisitSqlBinary(sqlBinaryExpression, allowOptimizedExpansion, out nullable),
-            SqlConstantExpression sqlConstantExpression
-                => VisitSqlConstant(sqlConstantExpression, allowOptimizedExpansion, out nullable),
-            SqlFragmentExpression sqlFragmentExpression
-                => VisitSqlFragment(sqlFragmentExpression, allowOptimizedExpansion, out nullable),
-            SqlFunctionExpression sqlFunctionExpression
-                => VisitSqlFunction(sqlFunctionExpression, allowOptimizedExpansion, out nullable),
-            SqlParameterExpression sqlParameterExpression
-                => VisitSqlParameter(sqlParameterExpression, allowOptimizedExpansion, out nullable),
-            SqlUnaryExpression sqlUnaryExpression
-                => VisitSqlUnary(sqlUnaryExpression, allowOptimizedExpansion, out nullable),
-            JsonScalarExpression jsonScalarExpression
-                => VisitJsonScalar(jsonScalarExpression, allowOptimizedExpansion, out nullable),
+            AtTimeZoneExpression sqlAtTimeZoneExpression => VisitAtTimeZone(
+                sqlAtTimeZoneExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            CaseExpression caseExpression => VisitCase(
+                caseExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            CollateExpression collateExpression => VisitCollate(
+                collateExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            ColumnExpression columnExpression => VisitColumn(
+                columnExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            DistinctExpression distinctExpression => VisitDistinct(
+                distinctExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            ExistsExpression existsExpression => VisitExists(
+                existsExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            InExpression inExpression => VisitIn(
+                inExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            LikeExpression likeExpression => VisitLike(
+                likeExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            RowNumberExpression rowNumberExpression => VisitRowNumber(
+                rowNumberExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            RowValueExpression rowValueExpression => VisitRowValue(
+                rowValueExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            ScalarSubqueryExpression scalarSubqueryExpression => VisitScalarSubquery(
+                scalarSubqueryExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlBinaryExpression sqlBinaryExpression => VisitSqlBinary(
+                sqlBinaryExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlConstantExpression sqlConstantExpression => VisitSqlConstant(
+                sqlConstantExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlFragmentExpression sqlFragmentExpression => VisitSqlFragment(
+                sqlFragmentExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlFunctionExpression sqlFunctionExpression => VisitSqlFunction(
+                sqlFunctionExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlParameterExpression sqlParameterExpression => VisitSqlParameter(
+                sqlParameterExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            SqlUnaryExpression sqlUnaryExpression => VisitSqlUnary(
+                sqlUnaryExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
+            JsonScalarExpression jsonScalarExpression => VisitJsonScalar(
+                jsonScalarExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
             _ => VisitCustomSqlExpression(sqlExpression, allowOptimizedExpansion, out nullable),
         };
 

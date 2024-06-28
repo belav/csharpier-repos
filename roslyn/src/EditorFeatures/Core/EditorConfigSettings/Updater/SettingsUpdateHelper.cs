@@ -100,10 +100,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                         LanguageNames.CSharp => Language.CSharp,
                         LanguageNames.VisualBasic => Language.VisualBasic,
                         null => Language.CSharp | Language.VisualBasic,
-                        _
-                            => throw ExceptionUtilities.UnexpectedValue(
-                                singleValuedOption.LanguageName
-                            ),
+                        _ => throw ExceptionUtilities.UnexpectedValue(
+                            singleValuedOption.LanguageName
+                        ),
                     };
                 }
                 else if (option.IsPerLanguage)

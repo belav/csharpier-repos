@@ -359,10 +359,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 || parameterRefKind switch
                                 {
                                     RefKind.In => argumentRefKind == RefKindExtensions.StrictIn,
-                                    RefKind.RefReadOnlyParameter
-                                        => argumentRefKind
-                                            is RefKind.In
-                                                or RefKindExtensions.StrictIn,
+                                    RefKind.RefReadOnlyParameter => argumentRefKind
+                                        is RefKind.In
+                                            or RefKindExtensions.StrictIn,
                                     _ => false,
                                 }
                             ),

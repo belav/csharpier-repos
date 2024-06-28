@@ -583,19 +583,25 @@ internal static class UseCollectionExpressionHelpers
             CastExpressionSyntax castExpression => IsInTargetTypedCastExpression(castExpression),
             // a ? [1, 2, 3] : ...  is target typed if either the other side is *not* a collection,
             // or the entire ternary is target typed itself.
-            ConditionalExpressionSyntax conditionalExpression
-                => IsInTargetTypedConditionalExpression(conditionalExpression, topExpression),
+            ConditionalExpressionSyntax conditionalExpression =>
+                IsInTargetTypedConditionalExpression(conditionalExpression, topExpression),
             // Similar rules for switches.
-            SwitchExpressionArmSyntax switchExpressionArm
-                => IsInTargetTypedSwitchExpressionArm(switchExpressionArm),
-            InitializerExpressionSyntax initializerExpression
-                => IsInTargetTypedInitializerExpression(initializerExpression, topExpression),
-            CollectionElementSyntax collectionElement
-                => IsInTargetTypedCollectionElement(collectionElement),
-            AssignmentExpressionSyntax assignmentExpression
-                => IsInTargetTypedAssignmentExpression(assignmentExpression, topExpression),
-            BinaryExpressionSyntax binaryExpression
-                => IsInTargetTypedBinaryExpression(binaryExpression, topExpression),
+            SwitchExpressionArmSyntax switchExpressionArm => IsInTargetTypedSwitchExpressionArm(
+                switchExpressionArm
+            ),
+            InitializerExpressionSyntax initializerExpression =>
+                IsInTargetTypedInitializerExpression(initializerExpression, topExpression),
+            CollectionElementSyntax collectionElement => IsInTargetTypedCollectionElement(
+                collectionElement
+            ),
+            AssignmentExpressionSyntax assignmentExpression => IsInTargetTypedAssignmentExpression(
+                assignmentExpression,
+                topExpression
+            ),
+            BinaryExpressionSyntax binaryExpression => IsInTargetTypedBinaryExpression(
+                binaryExpression,
+                topExpression
+            ),
             ArgumentSyntax or AttributeArgumentSyntax => true,
             ReturnStatementSyntax => true,
             ArrowExpressionClauseSyntax => true,
@@ -1408,13 +1414,13 @@ internal static class UseCollectionExpressionHelpers
         var initializer = expression switch
         {
             ImplicitArrayCreationExpressionSyntax implicitArray => implicitArray.Initializer,
-            ImplicitStackAllocArrayCreationExpressionSyntax implicitStackAlloc
-                => implicitStackAlloc.Initializer,
+            ImplicitStackAllocArrayCreationExpressionSyntax implicitStackAlloc =>
+                implicitStackAlloc.Initializer,
             ArrayCreationExpressionSyntax arrayCreation => arrayCreation.Initializer,
-            StackAllocArrayCreationExpressionSyntax stackAllocCreation
-                => stackAllocCreation.Initializer,
-            ImplicitObjectCreationExpressionSyntax implicitObjectCreation
-                => implicitObjectCreation.Initializer,
+            StackAllocArrayCreationExpressionSyntax stackAllocCreation =>
+                stackAllocCreation.Initializer,
+            ImplicitObjectCreationExpressionSyntax implicitObjectCreation =>
+                implicitObjectCreation.Initializer,
             ObjectCreationExpressionSyntax objectCreation => objectCreation.Initializer,
             _ => throw ExceptionUtilities.Unreachable(),
         };

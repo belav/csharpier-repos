@@ -58,29 +58,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 currentBinary = currentBinary switch
                 {
-                    BoundBinaryOperator binary
-                        => binary.Update(
-                            binary.OperatorKind,
-                            binary.Data?.WithUpdatedMethod(GetUpdatedSymbol(binary, binary.Method)),
-                            binary.ResultKind,
-                            leftChild,
-                            right,
-                            type!
-                        ),
+                    BoundBinaryOperator binary => binary.Update(
+                        binary.OperatorKind,
+                        binary.Data?.WithUpdatedMethod(GetUpdatedSymbol(binary, binary.Method)),
+                        binary.ResultKind,
+                        leftChild,
+                        right,
+                        type!
+                    ),
                     // https://github.com/dotnet/roslyn/issues/35031: We'll need to update logical.LogicalOperator
-                    BoundUserDefinedConditionalLogicalOperator logical
-                        => logical.Update(
-                            logical.OperatorKind,
-                            logical.LogicalOperator,
-                            logical.TrueOperator,
-                            logical.FalseOperator,
-                            logical.ConstrainedToTypeOpt,
-                            logical.ResultKind,
-                            logical.OriginalUserDefinedOperatorsOpt,
-                            leftChild,
-                            right,
-                            type!
-                        ),
+                    BoundUserDefinedConditionalLogicalOperator logical => logical.Update(
+                        logical.OperatorKind,
+                        logical.LogicalOperator,
+                        logical.TrueOperator,
+                        logical.FalseOperator,
+                        logical.ConstrainedToTypeOpt,
+                        logical.ResultKind,
+                        logical.OriginalUserDefinedOperatorsOpt,
+                        leftChild,
+                        right,
+                        type!
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Kind),
                 };
 

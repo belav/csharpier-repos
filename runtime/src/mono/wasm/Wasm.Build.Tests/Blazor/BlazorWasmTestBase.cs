@@ -248,24 +248,22 @@ public abstract class BlazorWasmTestBase : WasmTemplateTestBase
     public Task BlazorRunTest(BlazorRunOptions runOptions) =>
         runOptions.Host switch
         {
-            BlazorRunHost.DotnetRun
-                => BlazorRunTest(
-                    $"run -c {runOptions.Config} --no-build",
-                    _projectDir!,
-                    runOptions
-                ),
+            BlazorRunHost.DotnetRun => BlazorRunTest(
+                $"run -c {runOptions.Config} --no-build",
+                _projectDir!,
+                runOptions
+            ),
 
-            BlazorRunHost.WebServer
-                => BlazorRunTest(
-                    $"{s_xharnessRunnerCommand} wasm webserver --app=. --web-server-use-default-files",
-                    Path.GetFullPath(
-                        Path.Combine(
-                            FindBlazorBinFrameworkDir(runOptions.Config, forPublish: true),
-                            ".."
-                        )
-                    ),
-                    runOptions
+            BlazorRunHost.WebServer => BlazorRunTest(
+                $"{s_xharnessRunnerCommand} wasm webserver --app=. --web-server-use-default-files",
+                Path.GetFullPath(
+                    Path.Combine(
+                        FindBlazorBinFrameworkDir(runOptions.Config, forPublish: true),
+                        ".."
+                    )
                 ),
+                runOptions
+            ),
 
             _ => throw new NotImplementedException(runOptions.Host.ToString()),
         };

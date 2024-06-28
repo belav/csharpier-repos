@@ -41,24 +41,21 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             return symbol1.Kind switch
             {
-                SymbolKind.Method
-                    => HaveSameSignature(
-                        (IMethodSymbol)symbol1,
-                        (IMethodSymbol)symbol2,
-                        caseSensitive
-                    ),
-                SymbolKind.Property
-                    => HaveSameSignature(
-                        (IPropertySymbol)symbol1,
-                        (IPropertySymbol)symbol2,
-                        caseSensitive
-                    ),
-                SymbolKind.Event
-                    => HaveSameSignature(
-                        (IEventSymbol)symbol1,
-                        (IEventSymbol)symbol2,
-                        caseSensitive
-                    ),
+                SymbolKind.Method => HaveSameSignature(
+                    (IMethodSymbol)symbol1,
+                    (IMethodSymbol)symbol2,
+                    caseSensitive
+                ),
+                SymbolKind.Property => HaveSameSignature(
+                    (IPropertySymbol)symbol1,
+                    (IPropertySymbol)symbol2,
+                    caseSensitive
+                ),
+                SymbolKind.Event => HaveSameSignature(
+                    (IEventSymbol)symbol1,
+                    (IEventSymbol)symbol2,
+                    caseSensitive
+                ),
                 _ => true,
             };
         }

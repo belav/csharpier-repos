@@ -685,21 +685,21 @@ public sealed partial class QuicStream
             Exception exception = (shutdownByApp, closedRemotely) switch
             {
                 // It's remote shutdown by app, peer's side called QuicConnection.CloseAsync, throw QuicError.ConnectionAborted.
-                (shutdownByApp: true, closedRemotely: true)
-                    => ThrowHelper.GetConnectionAbortedException((long)data.ConnectionErrorCode),
+                (shutdownByApp: true, closedRemotely: true) =>
+                    ThrowHelper.GetConnectionAbortedException((long)data.ConnectionErrorCode),
                 // It's local shutdown by app, this side called QuicConnection.CloseAsync, throw QuicError.OperationAborted.
-                (shutdownByApp: true, closedRemotely: false)
-                    => ThrowHelper.GetOperationAbortedException(),
+                (shutdownByApp: true, closedRemotely: false) =>
+                    ThrowHelper.GetOperationAbortedException(),
                 // It's remote shutdown by transport, we received a CONNECTION_CLOSE frame with a QUIC transport error code, throw error based on the status.
-                (shutdownByApp: false, closedRemotely: true)
-                    => ThrowHelper.GetExceptionForMsQuicStatus(
+                (shutdownByApp: false, closedRemotely: true) =>
+                    ThrowHelper.GetExceptionForMsQuicStatus(
                         data.ConnectionCloseStatus,
                         (long)data.ConnectionErrorCode,
                         $"Shutdown by transport {data.ConnectionErrorCode}"
                     ),
                 // It's local shutdown by transport, most likely due to a timeout, throw error based on the status.
-                (shutdownByApp: false, closedRemotely: false)
-                    => ThrowHelper.GetExceptionForMsQuicStatus(
+                (shutdownByApp: false, closedRemotely: false) =>
+                    ThrowHelper.GetExceptionForMsQuicStatus(
                         data.ConnectionCloseStatus,
                         (long)data.ConnectionErrorCode
                     ),
@@ -721,20 +721,26 @@ public sealed partial class QuicStream
     private unsafe int HandleStreamEvent(ref QUIC_STREAM_EVENT streamEvent) =>
         streamEvent.Type switch
         {
-            QUIC_STREAM_EVENT_TYPE.START_COMPLETE
-                => HandleEventStartComplete(ref streamEvent.START_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.START_COMPLETE => HandleEventStartComplete(
+                ref streamEvent.START_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.RECEIVE => HandleEventReceive(ref streamEvent.RECEIVE),
-            QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE
-                => HandleEventSendComplete(ref streamEvent.SEND_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE => HandleEventSendComplete(
+                ref streamEvent.SEND_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.PEER_SEND_SHUTDOWN => HandleEventPeerSendShutdown(),
-            QUIC_STREAM_EVENT_TYPE.PEER_SEND_ABORTED
-                => HandleEventPeerSendAborted(ref streamEvent.PEER_SEND_ABORTED),
-            QUIC_STREAM_EVENT_TYPE.PEER_RECEIVE_ABORTED
-                => HandleEventPeerReceiveAborted(ref streamEvent.PEER_RECEIVE_ABORTED),
-            QUIC_STREAM_EVENT_TYPE.SEND_SHUTDOWN_COMPLETE
-                => HandleEventSendShutdownComplete(ref streamEvent.SEND_SHUTDOWN_COMPLETE),
-            QUIC_STREAM_EVENT_TYPE.SHUTDOWN_COMPLETE
-                => HandleEventShutdownComplete(ref streamEvent.SHUTDOWN_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.PEER_SEND_ABORTED => HandleEventPeerSendAborted(
+                ref streamEvent.PEER_SEND_ABORTED
+            ),
+            QUIC_STREAM_EVENT_TYPE.PEER_RECEIVE_ABORTED => HandleEventPeerReceiveAborted(
+                ref streamEvent.PEER_RECEIVE_ABORTED
+            ),
+            QUIC_STREAM_EVENT_TYPE.SEND_SHUTDOWN_COMPLETE => HandleEventSendShutdownComplete(
+                ref streamEvent.SEND_SHUTDOWN_COMPLETE
+            ),
+            QUIC_STREAM_EVENT_TYPE.SHUTDOWN_COMPLETE => HandleEventShutdownComplete(
+                ref streamEvent.SHUTDOWN_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.PEER_ACCEPTED => HandleEventPeerAccepted(),
             _ => QUIC_STATUS_SUCCESS,
         };

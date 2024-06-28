@@ -231,9 +231,8 @@ namespace System.Net
                 contextFlags |= clientOptions.RequiredProtectionLevel switch
                 {
                     ProtectionLevel.Sign => Interop.SspiCli.ContextFlags.InitIntegrity,
-                    ProtectionLevel.EncryptAndSign
-                        => Interop.SspiCli.ContextFlags.InitIntegrity
-                            | Interop.SspiCli.ContextFlags.Confidentiality,
+                    ProtectionLevel.EncryptAndSign => Interop.SspiCli.ContextFlags.InitIntegrity
+                        | Interop.SspiCli.ContextFlags.Confidentiality,
                     _ => 0,
                 };
 
@@ -243,8 +242,10 @@ namespace System.Net
 
                 contextFlags |= clientOptions.AllowedImpersonationLevel switch
                 {
-                    TokenImpersonationLevel.Identification
-                        => Interop.SspiCli.ContextFlags.InitIdentify,
+                    TokenImpersonationLevel.Identification => Interop
+                        .SspiCli
+                        .ContextFlags
+                        .InitIdentify,
                     TokenImpersonationLevel.Delegation => Interop.SspiCli.ContextFlags.Delegate,
                     _ => 0,
                 };
@@ -293,9 +294,10 @@ namespace System.Net
                     serverOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.SspiCli.ContextFlags.AcceptIntegrity,
-                        ProtectionLevel.EncryptAndSign
-                            => Interop.SspiCli.ContextFlags.AcceptIntegrity
-                                | Interop.SspiCli.ContextFlags.Confidentiality,
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .SspiCli
+                            .ContextFlags
+                            .AcceptIntegrity | Interop.SspiCli.ContextFlags.Confidentiality,
                         _ => 0,
                     } | Interop.SspiCli.ContextFlags.Connection;
 
@@ -448,71 +450,71 @@ namespace System.Net
                 statusCode = platformStatusCode.ErrorCode switch
                 {
                     SecurityStatusPalErrorCode.OK => NegotiateAuthenticationStatusCode.Completed,
-                    SecurityStatusPalErrorCode.ContinueNeeded
-                        => NegotiateAuthenticationStatusCode.ContinueNeeded,
+                    SecurityStatusPalErrorCode.ContinueNeeded =>
+                        NegotiateAuthenticationStatusCode.ContinueNeeded,
 
                     // These code should never be returned and they should be handled internally
-                    SecurityStatusPalErrorCode.CompleteNeeded
-                        => NegotiateAuthenticationStatusCode.Completed,
-                    SecurityStatusPalErrorCode.CompAndContinue
-                        => NegotiateAuthenticationStatusCode.ContinueNeeded,
+                    SecurityStatusPalErrorCode.CompleteNeeded =>
+                        NegotiateAuthenticationStatusCode.Completed,
+                    SecurityStatusPalErrorCode.CompAndContinue =>
+                        NegotiateAuthenticationStatusCode.ContinueNeeded,
 
-                    SecurityStatusPalErrorCode.ContextExpired
-                        => NegotiateAuthenticationStatusCode.ContextExpired,
-                    SecurityStatusPalErrorCode.Unsupported
-                        => NegotiateAuthenticationStatusCode.Unsupported,
-                    SecurityStatusPalErrorCode.PackageNotFound
-                        => NegotiateAuthenticationStatusCode.Unsupported,
-                    SecurityStatusPalErrorCode.CannotInstall
-                        => NegotiateAuthenticationStatusCode.Unsupported,
-                    SecurityStatusPalErrorCode.InvalidToken
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.QopNotSupported
-                        => NegotiateAuthenticationStatusCode.QopNotSupported,
-                    SecurityStatusPalErrorCode.NoImpersonation
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.LogonDenied
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.UnknownCredentials
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.NoCredentials
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.MessageAltered
-                        => NegotiateAuthenticationStatusCode.MessageAltered,
-                    SecurityStatusPalErrorCode.OutOfSequence
-                        => NegotiateAuthenticationStatusCode.OutOfSequence,
-                    SecurityStatusPalErrorCode.NoAuthenticatingAuthority
-                        => NegotiateAuthenticationStatusCode.InvalidCredentials,
-                    SecurityStatusPalErrorCode.IncompleteCredentials
-                        => NegotiateAuthenticationStatusCode.InvalidCredentials,
-                    SecurityStatusPalErrorCode.IllegalMessage
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.CertExpired
-                        => NegotiateAuthenticationStatusCode.CredentialsExpired,
-                    SecurityStatusPalErrorCode.SecurityQosFailed
-                        => NegotiateAuthenticationStatusCode.QopNotSupported,
-                    SecurityStatusPalErrorCode.UnsupportedPreauth
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.BadBinding
-                        => NegotiateAuthenticationStatusCode.BadBinding,
-                    SecurityStatusPalErrorCode.UntrustedRoot
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.SmartcardLogonRequired
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.WrongPrincipal
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    SecurityStatusPalErrorCode.CannotPack
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.TimeSkew
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.AlgorithmMismatch
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
-                    SecurityStatusPalErrorCode.CertUnknown
-                        => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.ContextExpired =>
+                        NegotiateAuthenticationStatusCode.ContextExpired,
+                    SecurityStatusPalErrorCode.Unsupported =>
+                        NegotiateAuthenticationStatusCode.Unsupported,
+                    SecurityStatusPalErrorCode.PackageNotFound =>
+                        NegotiateAuthenticationStatusCode.Unsupported,
+                    SecurityStatusPalErrorCode.CannotInstall =>
+                        NegotiateAuthenticationStatusCode.Unsupported,
+                    SecurityStatusPalErrorCode.InvalidToken =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.QopNotSupported =>
+                        NegotiateAuthenticationStatusCode.QopNotSupported,
+                    SecurityStatusPalErrorCode.NoImpersonation =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.LogonDenied =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.UnknownCredentials =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.NoCredentials =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.MessageAltered =>
+                        NegotiateAuthenticationStatusCode.MessageAltered,
+                    SecurityStatusPalErrorCode.OutOfSequence =>
+                        NegotiateAuthenticationStatusCode.OutOfSequence,
+                    SecurityStatusPalErrorCode.NoAuthenticatingAuthority =>
+                        NegotiateAuthenticationStatusCode.InvalidCredentials,
+                    SecurityStatusPalErrorCode.IncompleteCredentials =>
+                        NegotiateAuthenticationStatusCode.InvalidCredentials,
+                    SecurityStatusPalErrorCode.IllegalMessage =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.CertExpired =>
+                        NegotiateAuthenticationStatusCode.CredentialsExpired,
+                    SecurityStatusPalErrorCode.SecurityQosFailed =>
+                        NegotiateAuthenticationStatusCode.QopNotSupported,
+                    SecurityStatusPalErrorCode.UnsupportedPreauth =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.BadBinding =>
+                        NegotiateAuthenticationStatusCode.BadBinding,
+                    SecurityStatusPalErrorCode.UntrustedRoot =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.SmartcardLogonRequired =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.WrongPrincipal =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
+                    SecurityStatusPalErrorCode.CannotPack =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.TimeSkew =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.AlgorithmMismatch =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.CertUnknown =>
+                        NegotiateAuthenticationStatusCode.UnknownCredentials,
 
                     // Processing partial inputs is not supported, so this is result of incorrect input
-                    SecurityStatusPalErrorCode.IncompleteMessage
-                        => NegotiateAuthenticationStatusCode.InvalidToken,
+                    SecurityStatusPalErrorCode.IncompleteMessage =>
+                        NegotiateAuthenticationStatusCode.InvalidToken,
 
                     _ => NegotiateAuthenticationStatusCode.GenericFailure,
                 };
@@ -630,10 +632,10 @@ namespace System.Net
                     {
                         return errorCode switch
                         {
-                            (int)Interop.SECURITY_STATUS.ContextExpired
-                                => NegotiateAuthenticationStatusCode.ContextExpired,
-                            (int)Interop.SECURITY_STATUS.QopNotSupported
-                                => NegotiateAuthenticationStatusCode.QopNotSupported,
+                            (int)Interop.SECURITY_STATUS.ContextExpired =>
+                                NegotiateAuthenticationStatusCode.ContextExpired,
+                            (int)Interop.SECURITY_STATUS.QopNotSupported =>
+                                NegotiateAuthenticationStatusCode.QopNotSupported,
                             _ => NegotiateAuthenticationStatusCode.GenericFailure,
                         };
                     }
@@ -738,8 +740,8 @@ namespace System.Net
                         wasEncrypted = false;
                         return errorCode switch
                         {
-                            (int)Interop.SECURITY_STATUS.MessageAltered
-                                => NegotiateAuthenticationStatusCode.MessageAltered,
+                            (int)Interop.SECURITY_STATUS.MessageAltered =>
+                                NegotiateAuthenticationStatusCode.MessageAltered,
                             _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }

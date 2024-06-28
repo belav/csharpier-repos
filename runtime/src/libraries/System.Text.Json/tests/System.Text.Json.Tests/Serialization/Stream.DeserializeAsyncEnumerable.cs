@@ -404,15 +404,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             return overload switch
             {
-                DeserializeAsyncEnumerableOverload.JsonTypeInfo
-                    => JsonSerializer.DeserializeAsyncEnumerable<T>(
+                DeserializeAsyncEnumerableOverload.JsonTypeInfo =>
+                    JsonSerializer.DeserializeAsyncEnumerable<T>(
                         stream,
                         ResolveJsonTypeInfo<T>(options),
                         cancellationToken
                     ),
-                DeserializeAsyncEnumerableOverload.JsonSerializerOptions
-                or _
-                    => JsonSerializer.DeserializeAsyncEnumerable<T>(
+                DeserializeAsyncEnumerableOverload.JsonSerializerOptions or _ =>
+                    JsonSerializer.DeserializeAsyncEnumerable<T>(
                         stream,
                         options,
                         cancellationToken

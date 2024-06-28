@@ -375,17 +375,12 @@ namespace System.Security.Cryptography.Cose
             {
                 CoseHeaderLabel label = reader.PeekState() switch
                 {
-                    CborReaderState.UnsignedInteger
-                    or CborReaderState.NegativeInteger
-                        => new CoseHeaderLabel(reader.ReadInt32()),
+                    CborReaderState.UnsignedInteger or CborReaderState.NegativeInteger =>
+                        new CoseHeaderLabel(reader.ReadInt32()),
                     CborReaderState.TextString => new CoseHeaderLabel(reader.ReadTextString()),
-                    _
-                        => throw new CryptographicException(
-                            SR.Format(
-                                SR.DecodeErrorWhileDecoding,
-                                SR.DecodeSign1MapLabelWasIncorrect
-                            )
-                        ),
+                    _ => throw new CryptographicException(
+                        SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1MapLabelWasIncorrect)
+                    ),
                 };
 
                 CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(
@@ -749,9 +744,8 @@ namespace System.Security.Cryptography.Cose
             {
                 CoseHeaderLabel label = reader.PeekState() switch
                 {
-                    CborReaderState.UnsignedInteger
-                    or CborReaderState.NegativeInteger
-                        => new CoseHeaderLabel(reader.ReadInt32()),
+                    CborReaderState.UnsignedInteger or CborReaderState.NegativeInteger =>
+                        new CoseHeaderLabel(reader.ReadInt32()),
                     CborReaderState.TextString => new CoseHeaderLabel(reader.ReadTextString()),
                     _ => throw new CryptographicException(SR.CriticalHeadersLabelWasIncorrect),
                 };

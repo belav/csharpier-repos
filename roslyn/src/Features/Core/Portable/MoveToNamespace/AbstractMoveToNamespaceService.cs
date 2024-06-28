@@ -264,22 +264,20 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
 
             return analysisResult.Container switch
             {
-                MoveToNamespaceAnalysisResult.ContainerType.Namespace
-                    => MoveItemsInNamespaceAsync(
-                        analysisResult.Document,
-                        analysisResult.SyntaxNode,
-                        targetNamespace,
-                        fallbackOptions,
-                        cancellationToken
-                    ),
-                MoveToNamespaceAnalysisResult.ContainerType.NamedType
-                    => MoveTypeToNamespaceAsync(
-                        analysisResult.Document,
-                        analysisResult.SyntaxNode,
-                        targetNamespace,
-                        fallbackOptions,
-                        cancellationToken
-                    ),
+                MoveToNamespaceAnalysisResult.ContainerType.Namespace => MoveItemsInNamespaceAsync(
+                    analysisResult.Document,
+                    analysisResult.SyntaxNode,
+                    targetNamespace,
+                    fallbackOptions,
+                    cancellationToken
+                ),
+                MoveToNamespaceAnalysisResult.ContainerType.NamedType => MoveTypeToNamespaceAsync(
+                    analysisResult.Document,
+                    analysisResult.SyntaxNode,
+                    targetNamespace,
+                    fallbackOptions,
+                    cancellationToken
+                ),
                 _ => throw new InvalidOperationException(),
             };
         }

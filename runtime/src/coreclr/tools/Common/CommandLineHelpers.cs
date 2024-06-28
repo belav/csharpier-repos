@@ -111,10 +111,9 @@ namespace System.CommandLine
                     "arm" or "armel" => TargetArchitecture.ARM,
                     "arm64" => TargetArchitecture.ARM64,
                     "loongarch64" => TargetArchitecture.LoongArch64,
-                    _
-                        => throw new CommandLineException(
-                            $"Target architecture '{token}' is not supported"
-                        ),
+                    _ => throw new CommandLineException(
+                        $"Target architecture '{token}' is not supported"
+                    ),
                 };
             }
         }

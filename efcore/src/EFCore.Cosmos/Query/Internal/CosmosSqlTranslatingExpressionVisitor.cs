@@ -941,10 +941,11 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
 
         return result switch
         {
-            EntityProjectionExpression entityProjectionExpression
-                => new EntityReferenceExpression(entityProjectionExpression),
-            ObjectArrayProjectionExpression objectArrayProjectionExpression
-                => new EntityReferenceExpression(objectArrayProjectionExpression.InnerProjection),
+            EntityProjectionExpression entityProjectionExpression => new EntityReferenceExpression(
+                entityProjectionExpression
+            ),
+            ObjectArrayProjectionExpression objectArrayProjectionExpression =>
+                new EntityReferenceExpression(objectArrayProjectionExpression.InnerProjection),
             _ => result,
         };
     }
@@ -1304,12 +1305,11 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
             ConstantExpression => true,
             NewExpression e => e.Arguments.All(CanEvaluate),
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
-            MemberInitExpression e
-                => CanEvaluate(e.NewExpression)
-                    && e.Bindings.All(mb =>
-                        mb is MemberAssignment memberAssignment
-                        && CanEvaluate(memberAssignment.Expression)
-                    ),
+            MemberInitExpression e => CanEvaluate(e.NewExpression)
+                && e.Bindings.All(mb =>
+                    mb is MemberAssignment memberAssignment
+                    && CanEvaluate(memberAssignment.Expression)
+                ),
             _ => false,
         };
 

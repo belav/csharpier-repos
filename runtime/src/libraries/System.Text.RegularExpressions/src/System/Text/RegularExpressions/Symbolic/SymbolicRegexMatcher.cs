@@ -416,118 +416,110 @@ namespace System.Text.RegularExpressions.Symbolic
                 _pattern._info.ContainsSomeAnchor
             ) switch
             {
-                (true, true, true)
-                    => FindEndPosition<
-                        FullInputReader,
-                        InitialStateFindOptimizationsHandler,
-                        FullNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (true, true, false)
-                    => FindEndPosition<
-                        FullInputReader,
-                        InitialStateFindOptimizationsHandler,
-                        NoAnchorsNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (true, false, true)
-                    => FindEndPosition<
-                        FullInputReader,
-                        NoOptimizationsInitialStateHandler,
-                        FullNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (true, false, false)
-                    => FindEndPosition<
-                        FullInputReader,
-                        NoOptimizationsInitialStateHandler,
-                        NoAnchorsNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (false, true, true)
-                    => FindEndPosition<
-                        NoZAnchorInputReader,
-                        InitialStateFindOptimizationsHandler,
-                        FullNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (false, true, false)
-                    => FindEndPosition<
-                        NoZAnchorInputReader,
-                        InitialStateFindOptimizationsHandler,
-                        NoAnchorsNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (false, false, true)
-                    => FindEndPosition<
-                        NoZAnchorInputReader,
-                        NoOptimizationsInitialStateHandler,
-                        FullNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
-                (false, false, false)
-                    => FindEndPosition<
-                        NoZAnchorInputReader,
-                        NoOptimizationsInitialStateHandler,
-                        NoAnchorsNullabilityHandler
-                    >(
-                        input,
-                        startat,
-                        timeoutOccursAt,
-                        mode,
-                        out matchStartLowBoundary,
-                        out matchStartLengthMarker,
-                        perThreadData
-                    ),
+                (true, true, true) => FindEndPosition<
+                    FullInputReader,
+                    InitialStateFindOptimizationsHandler,
+                    FullNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (true, true, false) => FindEndPosition<
+                    FullInputReader,
+                    InitialStateFindOptimizationsHandler,
+                    NoAnchorsNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (true, false, true) => FindEndPosition<
+                    FullInputReader,
+                    NoOptimizationsInitialStateHandler,
+                    FullNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (true, false, false) => FindEndPosition<
+                    FullInputReader,
+                    NoOptimizationsInitialStateHandler,
+                    NoAnchorsNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (false, true, true) => FindEndPosition<
+                    NoZAnchorInputReader,
+                    InitialStateFindOptimizationsHandler,
+                    FullNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (false, true, false) => FindEndPosition<
+                    NoZAnchorInputReader,
+                    InitialStateFindOptimizationsHandler,
+                    NoAnchorsNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (false, false, true) => FindEndPosition<
+                    NoZAnchorInputReader,
+                    NoOptimizationsInitialStateHandler,
+                    FullNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
+                (false, false, false) => FindEndPosition<
+                    NoZAnchorInputReader,
+                    NoOptimizationsInitialStateHandler,
+                    NoAnchorsNullabilityHandler
+                >(
+                    input,
+                    startat,
+                    timeoutOccursAt,
+                    mode,
+                    out matchStartLowBoundary,
+                    out matchStartLengthMarker,
+                    perThreadData
+                ),
             };
 
             // If there wasn't a match, we're done.
@@ -565,32 +557,22 @@ namespace System.Text.RegularExpressions.Symbolic
                             _pattern._info.ContainsSomeAnchor
                         ) switch
                         {
-                            (true, true)
-                                => FindStartPosition<FullInputReader, FullNullabilityHandler>(
-                                    input,
-                                    matchEnd,
-                                    matchStartLowBoundary,
-                                    perThreadData
-                                ),
-                            (true, false)
-                                => FindStartPosition<FullInputReader, NoAnchorsNullabilityHandler>(
-                                    input,
-                                    matchEnd,
-                                    matchStartLowBoundary,
-                                    perThreadData
-                                ),
-                            (false, true)
-                                => FindStartPosition<NoZAnchorInputReader, FullNullabilityHandler>(
-                                    input,
-                                    matchEnd,
-                                    matchStartLowBoundary,
-                                    perThreadData
-                                ),
-                            (false, false)
-                                => FindStartPosition<
-                                    NoZAnchorInputReader,
-                                    NoAnchorsNullabilityHandler
-                                >(input, matchEnd, matchStartLowBoundary, perThreadData),
+                            (true, true) => FindStartPosition<
+                                FullInputReader,
+                                FullNullabilityHandler
+                            >(input, matchEnd, matchStartLowBoundary, perThreadData),
+                            (true, false) => FindStartPosition<
+                                FullInputReader,
+                                NoAnchorsNullabilityHandler
+                            >(input, matchEnd, matchStartLowBoundary, perThreadData),
+                            (false, true) => FindStartPosition<
+                                NoZAnchorInputReader,
+                                FullNullabilityHandler
+                            >(input, matchEnd, matchStartLowBoundary, perThreadData),
+                            (false, false) => FindStartPosition<
+                                NoZAnchorInputReader,
+                                NoAnchorsNullabilityHandler
+                            >(input, matchEnd, matchStartLowBoundary, perThreadData),
                         };
             }
 

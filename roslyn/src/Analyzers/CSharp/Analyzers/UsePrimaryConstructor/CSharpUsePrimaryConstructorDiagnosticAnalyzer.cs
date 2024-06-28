@@ -443,22 +443,22 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
 
                 return primaryConstructorDeclaration switch
                 {
-                    { ExpressionBody.Expression: AssignmentExpressionSyntax assignmentExpression }
-                        => IsAssignmentToInstanceMember(
-                            namedType,
-                            semanticModel,
-                            assignmentExpression,
-                            candidateMembersToRemove,
-                            orderedParameterAssignments: null,
-                            out _
-                        ),
-                    { Body: { } block }
-                        => AnalyzeBlockBody(
-                            namedType,
-                            semanticModel,
-                            block,
-                            candidateMembersToRemove
-                        ),
+                    {
+                        ExpressionBody.Expression: AssignmentExpressionSyntax assignmentExpression
+                    } => IsAssignmentToInstanceMember(
+                        namedType,
+                        semanticModel,
+                        assignmentExpression,
+                        candidateMembersToRemove,
+                        orderedParameterAssignments: null,
+                        out _
+                    ),
+                    { Body: { } block } => AnalyzeBlockBody(
+                        namedType,
+                        semanticModel,
+                        block,
+                        candidateMembersToRemove
+                    ),
                     _ => false,
                 };
             }
@@ -575,8 +575,7 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                     {
                         Expression: (kind: SyntaxKind.ThisExpression),
                         Name: IdentifierNameSyntax identifierName
-                    }
-                        => identifierName,
+                    } => identifierName,
                     _ => null,
                 };
 

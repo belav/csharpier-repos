@@ -422,10 +422,10 @@ internal sealed class Program
         reporter.Output(
             certificates.Count switch
             {
-                1
-                    => $"A {certificateState} certificate was found: {CertificateManager.GetDescription(certificates[0])}",
-                _
-                    => $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}",
+                1 =>
+                    $"A {certificateState} certificate was found: {CertificateManager.GetDescription(certificates[0])}",
+                _ =>
+                    $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}",
             }
         );
     }

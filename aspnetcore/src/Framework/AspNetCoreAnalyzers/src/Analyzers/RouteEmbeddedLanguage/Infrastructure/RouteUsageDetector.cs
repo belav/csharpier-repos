@@ -47,9 +47,8 @@ internal readonly record struct RouteUsageContext(
     public RoutePatternOptions RoutePatternOptions =>
         UsageType switch
         {
-            RouteUsageType.MvcAction
-            or RouteUsageType.MvcController
-                => RoutePatternOptions.MvcAttributeRoute,
+            RouteUsageType.MvcAction or RouteUsageType.MvcController =>
+                RoutePatternOptions.MvcAttributeRoute,
             RouteUsageType.Component => RoutePatternOptions.ComponentsRoute,
             _ => RoutePatternOptions.DefaultRoute,
         };

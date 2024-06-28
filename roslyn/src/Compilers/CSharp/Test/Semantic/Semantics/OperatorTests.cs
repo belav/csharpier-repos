@@ -3544,26 +3544,25 @@ class C
                             + (
                                 child.Text switch
                                 {
-                                    "@operator"
-                                        => ((BinaryOperatorSignature)child.Value).Kind.ToString(),
-                                    "leftConversion"
-                                    or "finalConversion"
-                                        => (
-                                            child.Children.SingleOrDefault() is TreeDumperNode node
-                                                ? (
-                                                    node.Text switch
-                                                    {
-                                                        "conversion"
-                                                            => node.Children.ElementAt(1).Value,
-                                                        "valuePlaceholder" => Conversion.Identity,
-                                                        _
-                                                            => throw ExceptionUtilities.UnexpectedValue(
-                                                                node.Text
-                                                            ),
-                                                    }
-                                                )
-                                                : Conversion.NoConversion
-                                        ).ToString(),
+                                    "@operator" => (
+                                        (BinaryOperatorSignature)child.Value
+                                    ).Kind.ToString(),
+                                    "leftConversion" or "finalConversion" => (
+                                        child.Children.SingleOrDefault() is TreeDumperNode node
+                                            ? (
+                                                node.Text switch
+                                                {
+                                                    "conversion" => node
+                                                        .Children.ElementAt(1)
+                                                        .Value,
+                                                    "valuePlaceholder" => Conversion.Identity,
+                                                    _ => throw ExceptionUtilities.UnexpectedValue(
+                                                        node.Text
+                                                    ),
+                                                }
+                                            )
+                                            : Conversion.NoConversion
+                                    ).ToString(),
                                     _ => child.Value.ToString(),
                                 }
                             )

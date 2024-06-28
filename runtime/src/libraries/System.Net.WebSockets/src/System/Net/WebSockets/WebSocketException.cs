@@ -133,20 +133,19 @@ namespace System.Net.WebSockets
             // Provide a canned message for the error type.
             error switch
             {
-                WebSocketError.InvalidMessageType
-                    => SR.Format(
-                        SR.net_WebSockets_InvalidMessageType_Generic,
-                        $"{nameof(WebSocket)}.{nameof(WebSocket.CloseAsync)}",
-                        $"{nameof(WebSocket)}.{nameof(WebSocket.CloseOutputAsync)}"
-                    ),
+                WebSocketError.InvalidMessageType => SR.Format(
+                    SR.net_WebSockets_InvalidMessageType_Generic,
+                    $"{nameof(WebSocket)}.{nameof(WebSocket.CloseAsync)}",
+                    $"{nameof(WebSocket)}.{nameof(WebSocket.CloseOutputAsync)}"
+                ),
                 WebSocketError.Faulted => SR.net_Websockets_WebSocketBaseFaulted,
                 WebSocketError.NotAWebSocket => SR.net_WebSockets_NotAWebSocket_Generic,
-                WebSocketError.UnsupportedVersion
-                    => SR.net_WebSockets_UnsupportedWebSocketVersion_Generic,
+                WebSocketError.UnsupportedVersion =>
+                    SR.net_WebSockets_UnsupportedWebSocketVersion_Generic,
                 WebSocketError.UnsupportedProtocol => SR.net_WebSockets_UnsupportedProtocol_Generic,
                 WebSocketError.HeaderError => SR.net_WebSockets_HeaderError_Generic,
-                WebSocketError.ConnectionClosedPrematurely
-                    => SR.net_WebSockets_ConnectionClosedPrematurely_Generic,
+                WebSocketError.ConnectionClosedPrematurely =>
+                    SR.net_WebSockets_ConnectionClosedPrematurely_Generic,
                 WebSocketError.InvalidState => SR.net_WebSockets_InvalidState_Generic,
                 _ => SR.net_WebSockets_Generic,
             };

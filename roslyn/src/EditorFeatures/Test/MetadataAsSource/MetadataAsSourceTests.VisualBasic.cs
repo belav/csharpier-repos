@@ -34,8 +34,8 @@ End Module";
 
                 var expected = signaturesOnly switch
                 {
-                    true
-                        => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -44,8 +44,8 @@ Friend Module M
         Public Sub New()
     End Class
 End Module",
-                    false
-                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion
@@ -121,8 +121,8 @@ End Module";
             {
                 var expected = signaturesOnly switch
                 {
-                    true
-                        => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
 ' mscorlib.v4_6_1038_0.dll
 #End Region
 
@@ -141,8 +141,8 @@ Namespace System
         Public ReadOnly Property IsError As Boolean
     End Class
 End Namespace",
-                    false
-                        => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion
@@ -233,8 +233,8 @@ public sealed class [|ObsoleteAttribute|] : Attribute
 
                 var expected = signaturesOnly switch
                 {
-                    true
-                        => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
 ' System.ValueTuple.dll
 #End Region
 
@@ -260,8 +260,8 @@ Namespace System
         Public Overrides Function ToString() As String
     End Structure
 End Namespace",
-                    false
-                        => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion

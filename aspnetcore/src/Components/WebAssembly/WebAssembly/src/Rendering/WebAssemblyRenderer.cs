@@ -208,13 +208,11 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
     ) =>
         renderMode switch
         {
-            InteractiveWebAssemblyRenderMode
-            or InteractiveAutoRenderMode
-                => componentActivator.CreateInstance(componentType),
-            _
-                => throw new NotSupportedException(
-                    $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by WebAssembly rendering."
-                ),
+            InteractiveWebAssemblyRenderMode or InteractiveAutoRenderMode =>
+                componentActivator.CreateInstance(componentType),
+            _ => throw new NotSupportedException(
+                $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by WebAssembly rendering."
+            ),
         };
 
     private static partial class Log

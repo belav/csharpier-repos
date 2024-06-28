@@ -541,10 +541,9 @@ namespace System.Security.Cryptography.Xml
                 "SHA512" => SignedXml.XmlDsigMoreHMACSHA512Url,
                 "MD5" => SignedXml.XmlDsigMoreHMACMD5Url,
                 "RIPEMD160" => SignedXml.XmlDsigMoreHMACRIPEMD160Url,
-                _
-                    => throw new CryptographicException(
-                        SR.Cryptography_Xml_SignatureMethodKeyMismatch
-                    ),
+                _ => throw new CryptographicException(
+                    SR.Cryptography_Xml_SignatureMethodKeyMismatch
+                ),
             };
             byte[] hashValue = GetC14NDigest(hash);
 

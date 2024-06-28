@@ -26,8 +26,10 @@ public static class ObjectFactory
             { IsValueType: true } => configuration.Default(type),
             Type stringType when stringType == typeof(string) => EmptyString,
             { IsInterface: true } => CreateInterfaceExpression(type),
-            { IsAbstract: true }
-                => InvalidType(type, $"Cannot create an instance of abstract type {type}."),
+            { IsAbstract: true } => InvalidType(
+                type,
+                $"Cannot create an instance of abstract type {type}."
+            ),
             _ => CallConstructor(type, configuration),
         };
 

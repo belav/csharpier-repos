@@ -1398,13 +1398,11 @@ namespace ILLink.Shared.TrimAnalysis
                 "EmptyTypes"
                     when field.OwningType.IsTypeOf(
                         ILLink.Shared.TypeSystemProxy.WellKnownType.System_Type
-                    )
-                    => ArrayValue.Create(0, field.OwningType),
+                    ) => ArrayValue.Create(0, field.OwningType),
                 "Empty"
                     when field.OwningType.IsTypeOf(
                         ILLink.Shared.TypeSystemProxy.WellKnownType.System_String
-                    )
-                    => new KnownStringValue(string.Empty),
+                    ) => new KnownStringValue(string.Empty),
                 _ => new FieldValue(field, GetFieldAnnotation(field)),
             };
 

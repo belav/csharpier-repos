@@ -80,22 +80,20 @@ namespace ILCompiler.DependencyAnalysis
                 (TypeDesc owningType, IEnumerable<CustomAttributeValue<TypeDesc>> attributes) =
                     _entity switch
                     {
-                        EcmaMethod method
-                            => (
-                                method.OwningType,
-                                method.GetDecodedCustomAttributes(
-                                    "System.Diagnostics.CodeAnalysis",
-                                    "DynamicDependencyAttribute"
-                                )
-                            ),
-                        _
-                            => (
-                                ((EcmaField)_entity).OwningType,
-                                ((EcmaField)_entity).GetDecodedCustomAttributes(
-                                    "System.Diagnostics.CodeAnalysis",
-                                    "DynamicDependencyAttribute"
-                                )
-                            ),
+                        EcmaMethod method => (
+                            method.OwningType,
+                            method.GetDecodedCustomAttributes(
+                                "System.Diagnostics.CodeAnalysis",
+                                "DynamicDependencyAttribute"
+                            )
+                        ),
+                        _ => (
+                            ((EcmaField)_entity).OwningType,
+                            ((EcmaField)_entity).GetDecodedCustomAttributes(
+                                "System.Diagnostics.CodeAnalysis",
+                                "DynamicDependencyAttribute"
+                            )
+                        ),
                     };
 
                 foreach (CustomAttributeValue<TypeDesc> attribute in attributes)

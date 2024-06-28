@@ -270,17 +270,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var errorCode = (message: data.Message, isError: data.IsError, isColInit) switch
                 {
                     // dev11 had a bug in this area (i.e. always produce a warning when there's no message) and we have to match it.
-                    (message: null, isError: _, isColInit: true)
-                        => ErrorCode.WRN_DeprecatedCollectionInitAdd,
+                    (message: null, isError: _, isColInit: true) =>
+                        ErrorCode.WRN_DeprecatedCollectionInitAdd,
                     (message: null, isError: _, isColInit: false) => ErrorCode.WRN_DeprecatedSymbol,
-                    (message: { }, isError: true, isColInit: true)
-                        => ErrorCode.ERR_DeprecatedCollectionInitAddStr,
-                    (message: { }, isError: true, isColInit: false)
-                        => ErrorCode.ERR_DeprecatedSymbolStr,
-                    (message: { }, isError: false, isColInit: true)
-                        => ErrorCode.WRN_DeprecatedCollectionInitAddStr,
-                    (message: { }, isError: false, isColInit: false)
-                        => ErrorCode.WRN_DeprecatedSymbolStr,
+                    (message: { }, isError: true, isColInit: true) =>
+                        ErrorCode.ERR_DeprecatedCollectionInitAddStr,
+                    (message: { }, isError: true, isColInit: false) =>
+                        ErrorCode.ERR_DeprecatedSymbolStr,
+                    (message: { }, isError: false, isColInit: true) =>
+                        ErrorCode.WRN_DeprecatedCollectionInitAddStr,
+                    (message: { }, isError: false, isColInit: false) =>
+                        ErrorCode.WRN_DeprecatedSymbolStr,
                 };
 
                 var arguments = data.Message is string message

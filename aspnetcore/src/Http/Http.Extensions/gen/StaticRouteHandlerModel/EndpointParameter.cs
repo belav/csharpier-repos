@@ -543,26 +543,23 @@ internal class EndpointParameter
         // which method was encountered.
         Func<string, string, string>? preferredTryParseInvocation = parsabilityMethod switch
         {
-            ParsabilityMethod.IParsable
-                => (string inputArgument, string outputArgument) =>
-                    $$"""GeneratedRouteBuilderExtensionsCore.TryParseExplicit<{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}>({{inputArgument}}!, CultureInfo.InvariantCulture, out var {{outputArgument}})""",
-            ParsabilityMethod.TryParseWithFormatProvider
-                => (string inputArgument, string outputArgument) =>
-                    $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, CultureInfo.InvariantCulture, out var {{outputArgument}})""",
-            ParsabilityMethod.TryParse
-                => (string inputArgument, string outputArgument) =>
-                    $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, out var {{outputArgument}})""",
-            ParsabilityMethod.Enum
-                => (string inputArgument, string outputArgument) =>
-                    $$"""Enum.TryParse<{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}>({{inputArgument}}!, out var {{outputArgument}})""",
-            ParsabilityMethod.Uri
-                => (string inputArgument, string outputArgument) =>
-                    $$"""Uri.TryCreate({{inputArgument}}!, UriKind.RelativeOrAbsolute, out var {{outputArgument}})""",
+            ParsabilityMethod.IParsable => (string inputArgument, string outputArgument) =>
+                $$"""GeneratedRouteBuilderExtensionsCore.TryParseExplicit<{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}>({{inputArgument}}!, CultureInfo.InvariantCulture, out var {{outputArgument}})""",
+            ParsabilityMethod.TryParseWithFormatProvider => (
+                string inputArgument,
+                string outputArgument
+            ) =>
+                $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, CultureInfo.InvariantCulture, out var {{outputArgument}})""",
+            ParsabilityMethod.TryParse => (string inputArgument, string outputArgument) =>
+                $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, out var {{outputArgument}})""",
+            ParsabilityMethod.Enum => (string inputArgument, string outputArgument) =>
+                $$"""Enum.TryParse<{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}>({{inputArgument}}!, out var {{outputArgument}})""",
+            ParsabilityMethod.Uri => (string inputArgument, string outputArgument) =>
+                $$"""Uri.TryCreate({{inputArgument}}!, UriKind.RelativeOrAbsolute, out var {{outputArgument}})""",
             ParsabilityMethod.String => null, // string parameters don't require parsing
-            _
-                => throw new NotImplementedException(
-                    $"Unreachable! Unexpected {nameof(ParsabilityMethod)}: {parsabilityMethod}"
-                ),
+            _ => throw new NotImplementedException(
+                $"Unreachable! Unexpected {nameof(ParsabilityMethod)}: {parsabilityMethod}"
+            ),
         };
 
         // Special case handling for specific types

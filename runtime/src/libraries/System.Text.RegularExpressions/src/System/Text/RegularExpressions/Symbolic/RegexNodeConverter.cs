@@ -241,22 +241,22 @@ namespace System.Text.RegularExpressions.Symbolic
                                         RegexNodeKind.Atomic
                                         or RegexNodeKind.Setloopatomic
                                         or RegexNodeKind.Oneloopatomic
-                                        or RegexNodeKind.Notoneloopatomic
-                                            => SR.ExpressionDescription_AtomicSubexpressions,
-                                        RegexNodeKind.Backreference
-                                            => SR.ExpressionDescription_Backreference,
-                                        RegexNodeKind.BackreferenceConditional
-                                            => SR.ExpressionDescription_Conditional,
-                                        RegexNodeKind.Capture
-                                            => SR.ExpressionDescription_BalancingGroup,
-                                        RegexNodeKind.ExpressionConditional
-                                            => SR.ExpressionDescription_IfThenElse,
-                                        RegexNodeKind.NegativeLookaround
-                                            => SR.ExpressionDescription_NegativeLookaround,
-                                        RegexNodeKind.PositiveLookaround
-                                            => SR.ExpressionDescription_PositiveLookaround,
-                                        RegexNodeKind.Start
-                                            => SR.ExpressionDescription_ContiguousMatches,
+                                        or RegexNodeKind.Notoneloopatomic =>
+                                            SR.ExpressionDescription_AtomicSubexpressions,
+                                        RegexNodeKind.Backreference =>
+                                            SR.ExpressionDescription_Backreference,
+                                        RegexNodeKind.BackreferenceConditional =>
+                                            SR.ExpressionDescription_Conditional,
+                                        RegexNodeKind.Capture =>
+                                            SR.ExpressionDescription_BalancingGroup,
+                                        RegexNodeKind.ExpressionConditional =>
+                                            SR.ExpressionDescription_IfThenElse,
+                                        RegexNodeKind.NegativeLookaround =>
+                                            SR.ExpressionDescription_NegativeLookaround,
+                                        RegexNodeKind.PositiveLookaround =>
+                                            SR.ExpressionDescription_PositiveLookaround,
+                                        RegexNodeKind.Start =>
+                                            SR.ExpressionDescription_ContiguousMatches,
                                         _ => UnexpectedNodeType(node),
                                     }
                                 )

@@ -2025,20 +2025,18 @@ namespace Foo
 
             var markup = isProjectReference switch
             {
-                true
-                    => CreateMarkupForProjectWithProjectReference(
-                        srcDoc,
-                        refDoc,
-                        LanguageNames.CSharp,
-                        LanguageNames.CSharp
-                    ),
-                false
-                    => CreateMarkupForProjectWithMetadataReference(
-                        srcDoc,
-                        refDoc,
-                        LanguageNames.CSharp,
-                        LanguageNames.CSharp
-                    ),
+                true => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                false => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
             };
 
             await VerifyTypeImportItemExistsAsync(
@@ -2074,26 +2072,24 @@ namespace Foo
 
             var (markup, shouldContainItem) = isProjectReference switch
             {
-                true
-                    => (
-                        CreateMarkupForProjectWithProjectReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
-                        true
+                true => (
+                    CreateMarkupForProjectWithProjectReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
                     ),
-                false
-                    => (
-                        CreateMarkupForProjectWithMetadataReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
-                        false
+                    true
+                ),
+                false => (
+                    CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
                     ),
+                    false
+                ),
             };
 
             if (shouldContainItem)
@@ -2145,26 +2141,24 @@ namespace Foo
 
             var (markup, shouldContainItem) = isProjectReference switch
             {
-                true
-                    => (
-                        CreateMarkupForProjectWithProjectReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
-                        true
+                true => (
+                    CreateMarkupForProjectWithProjectReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
                     ),
-                false
-                    => (
-                        CreateMarkupForProjectWithMetadataReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
-                        !hideAdvancedMembers
+                    true
+                ),
+                false => (
+                    CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
                     ),
+                    !hideAdvancedMembers
+                ),
             };
 
             if (shouldContainItem)
@@ -2462,20 +2456,18 @@ namespace Foo
             {
                 markup = isProjectReference switch
                 {
-                    true
-                        => CreateMarkupForProjectWithProjectReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
-                    false
-                        => CreateMarkupForProjectWithMetadataReference(
-                            srcDoc,
-                            refDoc,
-                            LanguageNames.CSharp,
-                            LanguageNames.CSharp
-                        ),
+                    true => CreateMarkupForProjectWithProjectReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    false => CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
                 };
             }
             else

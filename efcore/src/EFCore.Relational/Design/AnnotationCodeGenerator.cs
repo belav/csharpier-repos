@@ -245,12 +245,15 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         {
             var strategyCall = mappingStrategy switch
             {
-                RelationalAnnotationNames.TpcMappingStrategy
-                    => nameof(RelationalEntityTypeBuilderExtensions.UseTpcMappingStrategy),
-                RelationalAnnotationNames.TptMappingStrategy
-                    => nameof(RelationalEntityTypeBuilderExtensions.UseTptMappingStrategy),
-                RelationalAnnotationNames.TphMappingStrategy
-                    => nameof(RelationalEntityTypeBuilderExtensions.UseTphMappingStrategy),
+                RelationalAnnotationNames.TpcMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTpcMappingStrategy
+                ),
+                RelationalAnnotationNames.TptMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTptMappingStrategy
+                ),
+                RelationalAnnotationNames.TphMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTphMappingStrategy
+                ),
                 _ => null,
             };
 

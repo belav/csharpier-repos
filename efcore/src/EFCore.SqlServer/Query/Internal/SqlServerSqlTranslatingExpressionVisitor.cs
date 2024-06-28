@@ -273,64 +273,59 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
-                        null
-                            => _sqlExpressionFactory.Like(
-                                translatedInstance,
-                                _sqlExpressionFactory.Constant(null, stringTypeMapping)
-                            ),
+                        null => _sqlExpressionFactory.Like(
+                            translatedInstance,
+                            _sqlExpressionFactory.Constant(null, stringTypeMapping)
+                        ),
 
                         // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for empty patterns.
                         // Return % which always matches instead.
                         // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
-                        ""
-                            => _sqlExpressionFactory.Like(
+                        "" => _sqlExpressionFactory.Like(
+                            translatedInstance,
+                            _sqlExpressionFactory.Constant("%")
+                        ),
+
+                        string s => s.Any(IsLikeWildChar)
+                            ? _sqlExpressionFactory.Like(
                                 translatedInstance,
-                                _sqlExpressionFactory.Constant("%")
-                            ),
+                                _sqlExpressionFactory.Constant(
+                                    methodType switch
+                                    {
+                                        StartsEndsWithContains.StartsWith => EscapeLikePattern(s)
+                                            + '%',
+                                        StartsEndsWithContains.EndsWith => '%'
+                                            + EscapeLikePattern(s),
+                                        StartsEndsWithContains.Contains =>
+                                            $"%{EscapeLikePattern(s)}%",
 
-                        string s
-                            => s.Any(IsLikeWildChar)
-                                ? _sqlExpressionFactory.Like(
-                                    translatedInstance,
-                                    _sqlExpressionFactory.Constant(
-                                        methodType switch
-                                        {
-                                            StartsEndsWithContains.StartsWith
-                                                => EscapeLikePattern(s) + '%',
-                                            StartsEndsWithContains.EndsWith
-                                                => '%' + EscapeLikePattern(s),
-                                            StartsEndsWithContains.Contains
-                                                => $"%{EscapeLikePattern(s)}%",
-
-                                            _
-                                                => throw new ArgumentOutOfRangeException(
-                                                    nameof(methodType),
-                                                    methodType,
-                                                    null
-                                                ),
-                                        }
-                                    ),
-                                    _sqlExpressionFactory.Constant(LikeEscapeString)
-                                )
-                                : _sqlExpressionFactory.Like(
-                                    translatedInstance,
-                                    _sqlExpressionFactory.Constant(
-                                        methodType switch
-                                        {
-                                            StartsEndsWithContains.StartsWith => s + '%',
-                                            StartsEndsWithContains.EndsWith => '%' + s,
-                                            StartsEndsWithContains.Contains => $"%{s}%",
-
-                                            _
-                                                => throw new ArgumentOutOfRangeException(
-                                                    nameof(methodType),
-                                                    methodType,
-                                                    null
-                                                ),
-                                        }
-                                    )
+                                        _ => throw new ArgumentOutOfRangeException(
+                                            nameof(methodType),
+                                            methodType,
+                                            null
+                                        ),
+                                    }
                                 ),
+                                _sqlExpressionFactory.Constant(LikeEscapeString)
+                            )
+                            : _sqlExpressionFactory.Like(
+                                translatedInstance,
+                                _sqlExpressionFactory.Constant(
+                                    methodType switch
+                                    {
+                                        StartsEndsWithContains.StartsWith => s + '%',
+                                        StartsEndsWithContains.EndsWith => '%' + s,
+                                        StartsEndsWithContains.Contains => $"%{s}%",
+
+                                        _ => throw new ArgumentOutOfRangeException(
+                                            nameof(methodType),
+                                            methodType,
+                                            null
+                                        ),
+                                    }
+                                )
+                            ),
 
                         _ => throw new UnreachableException(),
                     };
@@ -384,9 +379,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                         // This is less efficient than LIKE (i.e. StartsWith does an index scan instead of seek), but we have no choice.
                         // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
-                        StartsEndsWithContains.StartsWith
-                        or StartsEndsWithContains.EndsWith
-                            => _sqlExpressionFactory.AndAlso(
+                        StartsEndsWithContains.StartsWith or StartsEndsWithContains.EndsWith =>
+                            _sqlExpressionFactory.AndAlso(
                                 _sqlExpressionFactory.IsNotNull(translatedInstance),
                                 _sqlExpressionFactory.AndAlso(
                                     _sqlExpressionFactory.IsNotNull(translatedPattern),
@@ -418,32 +412,31 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
 
                         // For Contains, just use CHARINDEX and check if the result is greater than 0.
                         // Add a check to return null when the pattern is an empty string (and the string isn't null)
-                        StartsEndsWithContains.Contains
-                            => _sqlExpressionFactory.AndAlso(
-                                _sqlExpressionFactory.IsNotNull(translatedInstance),
-                                _sqlExpressionFactory.AndAlso(
-                                    _sqlExpressionFactory.IsNotNull(translatedPattern),
-                                    _sqlExpressionFactory.OrElse(
-                                        _sqlExpressionFactory.GreaterThan(
-                                            _sqlExpressionFactory.Function(
-                                                "CHARINDEX",
-                                                new[] { translatedPattern, translatedInstance },
-                                                nullable: true,
-                                                argumentsPropagateNullability: new[] { true, true },
-                                                typeof(int)
-                                            ),
-                                            _sqlExpressionFactory.Constant(0)
+                        StartsEndsWithContains.Contains => _sqlExpressionFactory.AndAlso(
+                            _sqlExpressionFactory.IsNotNull(translatedInstance),
+                            _sqlExpressionFactory.AndAlso(
+                                _sqlExpressionFactory.IsNotNull(translatedPattern),
+                                _sqlExpressionFactory.OrElse(
+                                    _sqlExpressionFactory.GreaterThan(
+                                        _sqlExpressionFactory.Function(
+                                            "CHARINDEX",
+                                            new[] { translatedPattern, translatedInstance },
+                                            nullable: true,
+                                            argumentsPropagateNullability: new[] { true, true },
+                                            typeof(int)
                                         ),
-                                        _sqlExpressionFactory.Like(
-                                            translatedPattern,
-                                            _sqlExpressionFactory.Constant(
-                                                string.Empty,
-                                                stringTypeMapping
-                                            )
+                                        _sqlExpressionFactory.Constant(0)
+                                    ),
+                                    _sqlExpressionFactory.Like(
+                                        translatedPattern,
+                                        _sqlExpressionFactory.Constant(
+                                            string.Empty,
+                                            stringTypeMapping
                                         )
                                     )
                                 )
-                            ),
+                            )
+                        ),
 
                         _ => throw new UnreachableException(),
                     };
@@ -466,19 +459,13 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             // Return % which always matches instead.
             "" => "%",
 
-            string s
-                => methodType switch
-                {
-                    StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
-                    StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),
-                    StartsEndsWithContains.Contains => $"%{EscapeLikePattern(s)}%",
-                    _
-                        => throw new ArgumentOutOfRangeException(
-                            nameof(methodType),
-                            methodType,
-                            null
-                        ),
-                },
+            string s => methodType switch
+            {
+                StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
+                StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),
+                StartsEndsWithContains.Contains => $"%{EscapeLikePattern(s)}%",
+                _ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, null),
+            },
 
             _ => throw new UnreachableException(),
         };

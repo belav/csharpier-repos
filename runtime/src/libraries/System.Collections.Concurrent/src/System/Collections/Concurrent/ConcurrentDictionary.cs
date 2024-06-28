@@ -273,8 +273,10 @@ namespace System.Collections.Concurrent
             collection switch
             {
                 ICollection<KeyValuePair<TKey, TValue>> c => Math.Max(DefaultCapacity, c.Count),
-                IReadOnlyCollection<KeyValuePair<TKey, TValue>> rc
-                    => Math.Max(DefaultCapacity, rc.Count),
+                IReadOnlyCollection<KeyValuePair<TKey, TValue>> rc => Math.Max(
+                    DefaultCapacity,
+                    rc.Count
+                ),
                 _ => DefaultCapacity,
             };
 

@@ -160,8 +160,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // A value type may be oblivious or not annotated depending on whether the type reference
                 // is from source or metadata. (Binding using the #nullable context only when setting the annotation
                 // to avoid checking IsValueType early.) The annotation is normalized here in the public API.
-                NullableAnnotation.Oblivious when type?.IsValueType == true
-                    => CodeAnalysis.NullableAnnotation.NotAnnotated,
+                NullableAnnotation.Oblivious when type?.IsValueType == true => CodeAnalysis
+                    .NullableAnnotation
+                    .NotAnnotated,
                 NullableAnnotation.Oblivious => CodeAnalysis.NullableAnnotation.None,
 
                 NullableAnnotation.Ignored => CodeAnalysis.NullableAnnotation.None,
@@ -178,8 +179,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             annotation switch
             {
                 CodeAnalysis.NullableAnnotation.None => CSharp.NullableAnnotation.Oblivious,
-                CodeAnalysis.NullableAnnotation.NotAnnotated
-                    => CSharp.NullableAnnotation.NotAnnotated,
+                CodeAnalysis.NullableAnnotation.NotAnnotated => CSharp
+                    .NullableAnnotation
+                    .NotAnnotated,
                 CodeAnalysis.NullableAnnotation.Annotated => CSharp.NullableAnnotation.Annotated,
                 _ => throw ExceptionUtilities.UnexpectedValue(annotation),
             };

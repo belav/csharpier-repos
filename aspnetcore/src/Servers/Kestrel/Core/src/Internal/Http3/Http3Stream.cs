@@ -882,21 +882,17 @@ internal abstract partial class Http3Stream
             Http3FrameType.Settings
             or Http3FrameType.CancelPush
             or Http3FrameType.GoAway
-            or Http3FrameType.MaxPushId
-                => throw new Http3ConnectionErrorException(
-                    CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
-                        _incomingFrame.FormattedType
-                    ),
-                    Http3ErrorCode.UnexpectedFrame
+            or Http3FrameType.MaxPushId => throw new Http3ConnectionErrorException(
+                CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
+                    _incomingFrame.FormattedType
                 ),
+                Http3ErrorCode.UnexpectedFrame
+            ),
             // The server should never receive push promise
-            Http3FrameType.PushPromise
-                => throw new Http3ConnectionErrorException(
-                    CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(
-                        _incomingFrame.FormattedType
-                    ),
-                    Http3ErrorCode.UnexpectedFrame
-                ),
+            Http3FrameType.PushPromise => throw new Http3ConnectionErrorException(
+                CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(_incomingFrame.FormattedType),
+                Http3ErrorCode.UnexpectedFrame
+            ),
             _ => ProcessUnknownFrameAsync(),
         };
     }

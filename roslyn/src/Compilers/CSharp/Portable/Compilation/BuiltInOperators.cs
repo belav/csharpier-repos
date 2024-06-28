@@ -998,12 +998,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind.Long => _compilation.GetSpecialType(SpecialType.System_Int64),
                 BinaryOperatorKind.ULong => _compilation.GetSpecialType(SpecialType.System_UInt64),
                 BinaryOperatorKind.NInt => _compilation.CreateNativeIntegerTypeSymbol(signed: true),
-                BinaryOperatorKind.NUInt
-                    => _compilation.CreateNativeIntegerTypeSymbol(signed: false),
+                BinaryOperatorKind.NUInt => _compilation.CreateNativeIntegerTypeSymbol(
+                    signed: false
+                ),
                 BinaryOperatorKind.Float => _compilation.GetSpecialType(SpecialType.System_Single),
                 BinaryOperatorKind.Double => _compilation.GetSpecialType(SpecialType.System_Double),
-                BinaryOperatorKind.Decimal
-                    => _compilation.GetSpecialType(SpecialType.System_Decimal),
+                BinaryOperatorKind.Decimal => _compilation.GetSpecialType(
+                    SpecialType.System_Decimal
+                ),
                 BinaryOperatorKind.Bool => _compilation.GetSpecialType(SpecialType.System_Boolean),
                 var v => throw ExceptionUtilities.UnexpectedValue(v),
             };

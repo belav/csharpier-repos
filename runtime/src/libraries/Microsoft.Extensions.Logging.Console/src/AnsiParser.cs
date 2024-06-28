@@ -150,8 +150,8 @@ namespace Microsoft.Extensions.Logging.Console
                 ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
                 ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
                 ConsoleColor.White => "\x1B[1m\x1B[37m",
-                _
-                    => DefaultForegroundColor // default foreground color
+                _ =>
+                    DefaultForegroundColor // default foreground color
                 ,
             };
         }
@@ -168,8 +168,8 @@ namespace Microsoft.Extensions.Logging.Console
                 ConsoleColor.DarkMagenta => "\x1B[45m",
                 ConsoleColor.DarkCyan => "\x1B[46m",
                 ConsoleColor.Gray => "\x1B[47m",
-                _
-                    => DefaultBackgroundColor // Use default background color
+                _ =>
+                    DefaultBackgroundColor // Use default background color
                 ,
             };
         }

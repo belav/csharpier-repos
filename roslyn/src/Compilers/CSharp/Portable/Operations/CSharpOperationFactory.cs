@@ -2139,12 +2139,12 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             return element switch
             {
-                BoundCollectionElementInitializer collectionInitializer
-                    => collectionInitializer.Arguments[
+                BoundCollectionElementInitializer collectionInitializer =>
+                    collectionInitializer.Arguments[
                         collectionInitializer.InvokedAsExtensionMethod ? 1 : 0
                     ],
-                BoundDynamicCollectionElementInitializer dynamicInitializer
-                    => dynamicInitializer.Arguments[0],
+                BoundDynamicCollectionElementInitializer dynamicInitializer =>
+                    dynamicInitializer.Arguments[0],
                 _ => element,
             };
         }
@@ -2552,10 +2552,13 @@ namespace Microsoft.CodeAnalysis.Operations
                 IOperation right = Create(currentBinary.Right);
                 left = currentBinary switch
                 {
-                    BoundBinaryOperator binaryOp
-                        => CreateBoundBinaryOperatorOperation(binaryOp, left, right),
-                    BoundUserDefinedConditionalLogicalOperator logicalOp
-                        => createBoundUserDefinedConditionalLogicalOperator(logicalOp, left, right),
+                    BoundBinaryOperator binaryOp => CreateBoundBinaryOperatorOperation(
+                        binaryOp,
+                        left,
+                        right
+                    ),
+                    BoundUserDefinedConditionalLogicalOperator logicalOp =>
+                        createBoundUserDefinedConditionalLogicalOperator(logicalOp, left, right),
                     { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
             }
@@ -4012,8 +4015,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         IOperation valueOperation = value switch
                         {
                             BoundLiteral l => CreateBoundLiteralOperation(l, @implicit: true),
-                            BoundConversion { Operand: BoundLiteral } c
-                                => CreateBoundConversionOperation(
+                            BoundConversion { Operand: BoundLiteral } c =>
+                                CreateBoundConversionOperation(
                                     c,
                                     forceOperandImplicitLiteral: true
                                 ),
@@ -4161,8 +4164,7 @@ namespace Microsoft.CodeAnalysis.Operations
                                     BoundDynamicInvocation
                                     {
                                         Expression: BoundMethodGroup { Name: var name }
-                                    }
-                                        => name,
+                                    } => name,
                                     { HasErrors: true } => "",
                                     _ => throw ExceptionUtilities.UnexpectedValue(part.Kind),
                                 };
@@ -4170,10 +4172,10 @@ namespace Microsoft.CodeAnalysis.Operations
                                 var operationKind = methodName switch
                                 {
                                     "" => OperationKind.InterpolatedStringAppendInvalid,
-                                    BoundInterpolatedString.AppendLiteralMethod
-                                        => OperationKind.InterpolatedStringAppendLiteral,
-                                    BoundInterpolatedString.AppendFormattedMethod
-                                        => OperationKind.InterpolatedStringAppendFormatted,
+                                    BoundInterpolatedString.AppendLiteralMethod =>
+                                        OperationKind.InterpolatedStringAppendLiteral,
+                                    BoundInterpolatedString.AppendFormattedMethod =>
+                                        OperationKind.InterpolatedStringAppendFormatted,
                                     _ => throw ExceptionUtilities.UnexpectedValue(methodName),
                                 };
 
@@ -4230,19 +4232,18 @@ namespace Microsoft.CodeAnalysis.Operations
 
             var (placeholderKind, argumentIndex) = placeholder.ArgumentIndex switch
             {
-                >= 0
-                and var index
-                    => (InterpolatedStringArgumentPlaceholderKind.CallsiteArgument, index),
-                BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
-                    => (
-                        InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver,
-                        NonArgumentIndex
-                    ),
-                BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
-                    => (
-                        InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
-                        NonArgumentIndex
-                    ),
+                >= 0 and var index => (
+                    InterpolatedStringArgumentPlaceholderKind.CallsiteArgument,
+                    index
+                ),
+                BoundInterpolatedStringArgumentPlaceholder.InstanceParameter => (
+                    InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver,
+                    NonArgumentIndex
+                ),
+                BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter => (
+                    InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
+                    NonArgumentIndex
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(placeholder.ArgumentIndex),
             };
 

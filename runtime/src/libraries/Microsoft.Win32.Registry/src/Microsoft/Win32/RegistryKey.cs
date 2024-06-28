@@ -1821,12 +1821,11 @@ namespace Microsoft.Win32
         private static void Win32ErrorStatic(int errorCode, string? str) =>
             throw errorCode switch
             {
-                Interop.Errors.ERROR_ACCESS_DENIED
-                    => str != null
-                        ? new UnauthorizedAccessException(
-                            SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
-                        )
-                        : new UnauthorizedAccessException(),
+                Interop.Errors.ERROR_ACCESS_DENIED => str != null
+                    ? new UnauthorizedAccessException(
+                        SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                    )
+                    : new UnauthorizedAccessException(),
 
                 _ => new IOException(Interop.Kernel32.GetMessage(errorCode), errorCode),
             };

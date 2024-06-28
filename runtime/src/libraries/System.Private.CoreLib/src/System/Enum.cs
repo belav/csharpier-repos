@@ -290,22 +290,17 @@ namespace System
 
             return InternalGetCorElementType(enumType) switch
             {
-                CorElementType.ELEMENT_TYPE_I1
-                or CorElementType.ELEMENT_TYPE_U1
-                    => GetEnumInfo<byte>(enumType).Names,
-                CorElementType.ELEMENT_TYPE_I2
-                or CorElementType.ELEMENT_TYPE_U2
-                    => GetEnumInfo<ushort>(enumType).Names,
-                CorElementType.ELEMENT_TYPE_I4
-                or CorElementType.ELEMENT_TYPE_U4
-                    => GetEnumInfo<uint>(enumType).Names,
-                CorElementType.ELEMENT_TYPE_I8
-                or CorElementType.ELEMENT_TYPE_U8
-                    => GetEnumInfo<ulong>(enumType).Names,
+                CorElementType.ELEMENT_TYPE_I1 or CorElementType.ELEMENT_TYPE_U1 =>
+                    GetEnumInfo<byte>(enumType).Names,
+                CorElementType.ELEMENT_TYPE_I2 or CorElementType.ELEMENT_TYPE_U2 =>
+                    GetEnumInfo<ushort>(enumType).Names,
+                CorElementType.ELEMENT_TYPE_I4 or CorElementType.ELEMENT_TYPE_U4 =>
+                    GetEnumInfo<uint>(enumType).Names,
+                CorElementType.ELEMENT_TYPE_I8 or CorElementType.ELEMENT_TYPE_U8 =>
+                    GetEnumInfo<ulong>(enumType).Names,
 #if RARE_ENUMS
-                CorElementType.ELEMENT_TYPE_I
-                or CorElementType.ELEMENT_TYPE_U
-                    => GetEnumInfo<nuint>(enumType).Names,
+                CorElementType.ELEMENT_TYPE_I or CorElementType.ELEMENT_TYPE_U =>
+                    GetEnumInfo<nuint>(enumType).Names,
                 CorElementType.ELEMENT_TYPE_R4 => GetEnumInfo<float>(enumType).Names,
                 CorElementType.ELEMENT_TYPE_R8 => GetEnumInfo<double>(enumType).Names,
                 CorElementType.ELEMENT_TYPE_CHAR => GetEnumInfo<char>(enumType).Names,
@@ -386,33 +381,33 @@ namespace System
 
             return InternalGetCorElementType(enumType) switch
             {
-                CorElementType.ELEMENT_TYPE_I1
-                    => GetEnumInfo<byte>(enumType, getNames: false).CloneValues<sbyte>(),
-                CorElementType.ELEMENT_TYPE_U1
-                    => GetEnumInfo<byte>(enumType, getNames: false).CloneValues<byte>(),
-                CorElementType.ELEMENT_TYPE_I2
-                    => GetEnumInfo<ushort>(enumType, getNames: false).CloneValues<short>(),
-                CorElementType.ELEMENT_TYPE_U2
-                    => GetEnumInfo<ushort>(enumType, getNames: false).CloneValues<ushort>(),
-                CorElementType.ELEMENT_TYPE_I4
-                    => GetEnumInfo<uint>(enumType, getNames: false).CloneValues<int>(),
-                CorElementType.ELEMENT_TYPE_U4
-                    => GetEnumInfo<uint>(enumType, getNames: false).CloneValues<uint>(),
-                CorElementType.ELEMENT_TYPE_I8
-                    => GetEnumInfo<ulong>(enumType, getNames: false).CloneValues<long>(),
-                CorElementType.ELEMENT_TYPE_U8
-                    => GetEnumInfo<ulong>(enumType, getNames: false).CloneValues<ulong>(),
+                CorElementType.ELEMENT_TYPE_I1 => GetEnumInfo<byte>(enumType, getNames: false)
+                    .CloneValues<sbyte>(),
+                CorElementType.ELEMENT_TYPE_U1 => GetEnumInfo<byte>(enumType, getNames: false)
+                    .CloneValues<byte>(),
+                CorElementType.ELEMENT_TYPE_I2 => GetEnumInfo<ushort>(enumType, getNames: false)
+                    .CloneValues<short>(),
+                CorElementType.ELEMENT_TYPE_U2 => GetEnumInfo<ushort>(enumType, getNames: false)
+                    .CloneValues<ushort>(),
+                CorElementType.ELEMENT_TYPE_I4 => GetEnumInfo<uint>(enumType, getNames: false)
+                    .CloneValues<int>(),
+                CorElementType.ELEMENT_TYPE_U4 => GetEnumInfo<uint>(enumType, getNames: false)
+                    .CloneValues<uint>(),
+                CorElementType.ELEMENT_TYPE_I8 => GetEnumInfo<ulong>(enumType, getNames: false)
+                    .CloneValues<long>(),
+                CorElementType.ELEMENT_TYPE_U8 => GetEnumInfo<ulong>(enumType, getNames: false)
+                    .CloneValues<ulong>(),
 #if RARE_ENUMS
-                CorElementType.ELEMENT_TYPE_I
-                    => GetEnumInfo<nuint>(enumType, getNames: false).CloneValues<nint>(),
-                CorElementType.ELEMENT_TYPE_U
-                    => GetEnumInfo<nuint>(enumType, getNames: false).CloneValues<nuint>(),
-                CorElementType.ELEMENT_TYPE_R4
-                    => GetEnumInfo<float>(enumType, getNames: false).CloneValues<float>(),
-                CorElementType.ELEMENT_TYPE_R8
-                    => GetEnumInfo<double>(enumType, getNames: false).CloneValues<double>(),
-                CorElementType.ELEMENT_TYPE_CHAR
-                    => GetEnumInfo<char>(enumType, getNames: false).CloneValues<char>(),
+                CorElementType.ELEMENT_TYPE_I => GetEnumInfo<nuint>(enumType, getNames: false)
+                    .CloneValues<nint>(),
+                CorElementType.ELEMENT_TYPE_U => GetEnumInfo<nuint>(enumType, getNames: false)
+                    .CloneValues<nuint>(),
+                CorElementType.ELEMENT_TYPE_R4 => GetEnumInfo<float>(enumType, getNames: false)
+                    .CloneValues<float>(),
+                CorElementType.ELEMENT_TYPE_R8 => GetEnumInfo<double>(enumType, getNames: false)
+                    .CloneValues<double>(),
+                CorElementType.ELEMENT_TYPE_CHAR => GetEnumInfo<char>(enumType, getNames: false)
+                    .CloneValues<char>(),
 #endif
                 _ => throw CreateUnknownEnumTypeException(),
             };
@@ -429,33 +424,59 @@ namespace System
 
             return InternalGetCorElementType(enumType) switch
             {
-                CorElementType.ELEMENT_TYPE_I1
-                    => GetEnumInfo<byte>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_U1
-                    => GetEnumInfo<byte>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_I2
-                    => GetEnumInfo<ushort>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_U2
-                    => GetEnumInfo<ushort>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_I4
-                    => GetEnumInfo<uint>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_U4
-                    => GetEnumInfo<uint>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_I8
-                    => GetEnumInfo<ulong>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_U8
-                    => GetEnumInfo<ulong>(enumType, getNames: false).Values,
+                CorElementType.ELEMENT_TYPE_I1 => GetEnumInfo<byte>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_U1 => GetEnumInfo<byte>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_I2 => GetEnumInfo<ushort>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_U2 => GetEnumInfo<ushort>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_I4 => GetEnumInfo<uint>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_U4 => GetEnumInfo<uint>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_I8 => GetEnumInfo<ulong>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_U8 => GetEnumInfo<ulong>(
+                    enumType,
+                    getNames: false
+                ).Values,
 #if RARE_ENUMS
-                CorElementType.ELEMENT_TYPE_I
-                    => GetEnumInfo<nuint>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_U
-                    => GetEnumInfo<nuint>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_R4
-                    => GetEnumInfo<float>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_R8
-                    => GetEnumInfo<double>(enumType, getNames: false).Values,
-                CorElementType.ELEMENT_TYPE_CHAR
-                    => GetEnumInfo<char>(enumType, getNames: false).Values,
+                CorElementType.ELEMENT_TYPE_I => GetEnumInfo<nuint>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_U => GetEnumInfo<nuint>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_R4 => GetEnumInfo<float>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_R8 => GetEnumInfo<double>(
+                    enumType,
+                    getNames: false
+                ).Values,
+                CorElementType.ELEMENT_TYPE_CHAR => GetEnumInfo<char>(
+                    enumType,
+                    getNames: false
+                ).Values,
 #endif
                 _ => throw CreateUnknownEnumTypeException(),
             };
@@ -1672,8 +1693,9 @@ namespace System
                 CorElementType.ELEMENT_TYPE_I => Unsafe.As<byte, IntPtr>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_U => Unsafe.As<byte, UIntPtr>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_CHAR => Unsafe.As<byte, char>(ref data).GetHashCode(),
-                CorElementType.ELEMENT_TYPE_BOOLEAN
-                    => Unsafe.As<byte, bool>(ref data).GetHashCode(),
+                CorElementType.ELEMENT_TYPE_BOOLEAN => Unsafe
+                    .As<byte, bool>(ref data)
+                    .GetHashCode(),
 #endif
                 _ => throw CreateUnknownEnumTypeException(),
             };
@@ -1782,8 +1804,10 @@ namespace System
             {
                 // Inlined for the most common base types
                 CorElementType.ELEMENT_TYPE_I1 => ToString<sbyte, byte>(enumType, ref rawData),
-                CorElementType.ELEMENT_TYPE_U1
-                    => ToStringInlined<byte, byte>(enumType, ref rawData),
+                CorElementType.ELEMENT_TYPE_U1 => ToStringInlined<byte, byte>(
+                    enumType,
+                    ref rawData
+                ),
                 CorElementType.ELEMENT_TYPE_I2 => ToString<short, ushort>(enumType, ref rawData),
                 CorElementType.ELEMENT_TYPE_U2 => ToString<ushort, ushort>(enumType, ref rawData),
                 CorElementType.ELEMENT_TYPE_I4 => ToStringInlined<int, uint>(enumType, ref rawData),
@@ -1799,8 +1823,10 @@ namespace System
                 InternalGetCorElementType(enumType) switch
                 {
                     CorElementType.ELEMENT_TYPE_R4 => ToString<float, float>(enumType, ref rawData),
-                    CorElementType.ELEMENT_TYPE_R8
-                        => ToString<double, double>(enumType, ref rawData),
+                    CorElementType.ELEMENT_TYPE_R8 => ToString<double, double>(
+                        enumType,
+                        ref rawData
+                    ),
                     CorElementType.ELEMENT_TYPE_I => ToString<nint, nuint>(enumType, ref rawData),
                     CorElementType.ELEMENT_TYPE_U => ToString<nuint, nuint>(enumType, ref rawData),
                     CorElementType.ELEMENT_TYPE_CHAR => ToString<char, char>(enumType, ref rawData),
@@ -1831,22 +1857,46 @@ namespace System
                 return InternalGetCorElementType() switch
                 {
                     // Inlined for the most common base types
-                    CorElementType.ELEMENT_TYPE_I1
-                        => ToString<sbyte, byte>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_U1
-                        => ToStringInlined<byte, byte>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_I2
-                        => ToString<short, ushort>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_U2
-                        => ToString<ushort, ushort>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_I4
-                        => ToStringInlined<int, uint>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_U4
-                        => ToString<uint, uint>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_I8
-                        => ToString<long, ulong>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_U8
-                        => ToString<ulong, ulong>(enumType, formatChar, ref rawData),
+                    CorElementType.ELEMENT_TYPE_I1 => ToString<sbyte, byte>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_U1 => ToStringInlined<byte, byte>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_I2 => ToString<short, ushort>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_U2 => ToString<ushort, ushort>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_I4 => ToStringInlined<int, uint>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_U4 => ToString<uint, uint>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_I8 => ToString<long, ulong>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_U8 => ToString<ulong, ulong>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
                     _ => HandleRareTypes(enumType, formatChar, ref rawData),
                 };
             }
@@ -1862,16 +1912,31 @@ namespace System
 #if RARE_ENUMS
                 InternalGetCorElementType(enumType) switch
                 {
-                    CorElementType.ELEMENT_TYPE_R4
-                        => ToString<float, float>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_R8
-                        => ToString<double, double>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_I
-                        => ToString<nint, nuint>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_U
-                        => ToString<nuint, nuint>(enumType, formatChar, ref rawData),
-                    CorElementType.ELEMENT_TYPE_CHAR
-                        => ToString<char, char>(enumType, formatChar, ref rawData),
+                    CorElementType.ELEMENT_TYPE_R4 => ToString<float, float>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_R8 => ToString<double, double>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_I => ToString<nint, nuint>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_U => ToString<nuint, nuint>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
+                    CorElementType.ELEMENT_TYPE_CHAR => ToString<char, char>(
+                        enumType,
+                        formatChar,
+                        ref rawData
+                    ),
                     _ => throw CreateUnknownEnumTypeException(),
                 };
 #else
@@ -2164,33 +2229,72 @@ namespace System
                     ref byte rawData = ref value.GetRawData();
                     return InternalGetCorElementType(rtType) switch
                     {
-                        CorElementType.ELEMENT_TYPE_I1
-                            => ToString<sbyte, byte>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_U1
-                            => ToString<byte, byte>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_I2
-                            => ToString<short, ushort>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_U2
-                            => ToString<ushort, ushort>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_I4
-                            => ToString<int, uint>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_U4
-                            => ToString<uint, uint>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_I8
-                            => ToString<long, ulong>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_U8
-                            => ToString<ulong, ulong>(rtType, formatChar, ref rawData),
+                        CorElementType.ELEMENT_TYPE_I1 => ToString<sbyte, byte>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_U1 => ToString<byte, byte>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_I2 => ToString<short, ushort>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_U2 => ToString<ushort, ushort>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_I4 => ToString<int, uint>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_U4 => ToString<uint, uint>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_I8 => ToString<long, ulong>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_U8 => ToString<ulong, ulong>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
 #if RARE_ENUMS
-                        CorElementType.ELEMENT_TYPE_R4
-                            => ToString<float, float>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_R8
-                            => ToString<double, double>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_I
-                            => ToString<nint, nuint>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_U
-                            => ToString<nuint, nuint>(rtType, formatChar, ref rawData),
-                        CorElementType.ELEMENT_TYPE_CHAR
-                            => ToString<char, char>(rtType, formatChar, ref rawData),
+                        CorElementType.ELEMENT_TYPE_R4 => ToString<float, float>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_R8 => ToString<double, double>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_I => ToString<nint, nuint>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_U => ToString<nuint, nuint>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
+                        CorElementType.ELEMENT_TYPE_CHAR => ToString<char, char>(
+                            rtType,
+                            formatChar,
+                            ref rawData
+                        ),
 #endif
                         _ => throw CreateUnknownEnumTypeException(),
                     };
@@ -2221,98 +2325,85 @@ namespace System
             {
                 return corElementType switch
                 {
-                    CorElementType.ELEMENT_TYPE_I1
-                        => TryFormatPrimitiveDefault<sbyte, byte>(
-                            enumType,
-                            (sbyte)rawData,
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_U1
-                        => TryFormatPrimitiveDefault<byte, byte>(
-                            enumType,
-                            rawData,
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_I2
-                        => TryFormatPrimitiveDefault<short, ushort>(
-                            enumType,
-                            Unsafe.As<byte, short>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_U2
-                        => TryFormatPrimitiveDefault<ushort, ushort>(
-                            enumType,
-                            Unsafe.As<byte, ushort>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_I4
-                        => TryFormatPrimitiveDefault<int, uint>(
-                            enumType,
-                            Unsafe.As<byte, int>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_U4
-                        => TryFormatPrimitiveDefault<uint, uint>(
-                            enumType,
-                            Unsafe.As<byte, uint>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_I8
-                        => TryFormatPrimitiveDefault<long, ulong>(
-                            enumType,
-                            Unsafe.As<byte, long>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_U8
-                        => TryFormatPrimitiveDefault<ulong, ulong>(
-                            enumType,
-                            Unsafe.As<byte, ulong>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
+                    CorElementType.ELEMENT_TYPE_I1 => TryFormatPrimitiveDefault<sbyte, byte>(
+                        enumType,
+                        (sbyte)rawData,
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_U1 => TryFormatPrimitiveDefault<byte, byte>(
+                        enumType,
+                        rawData,
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_I2 => TryFormatPrimitiveDefault<short, ushort>(
+                        enumType,
+                        Unsafe.As<byte, short>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_U2 => TryFormatPrimitiveDefault<ushort, ushort>(
+                        enumType,
+                        Unsafe.As<byte, ushort>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_I4 => TryFormatPrimitiveDefault<int, uint>(
+                        enumType,
+                        Unsafe.As<byte, int>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_U4 => TryFormatPrimitiveDefault<uint, uint>(
+                        enumType,
+                        Unsafe.As<byte, uint>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_I8 => TryFormatPrimitiveDefault<long, ulong>(
+                        enumType,
+                        Unsafe.As<byte, long>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_U8 => TryFormatPrimitiveDefault<ulong, ulong>(
+                        enumType,
+                        Unsafe.As<byte, ulong>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
 #if RARE_ENUMS
-                    CorElementType.ELEMENT_TYPE_R4
-                        => TryFormatPrimitiveDefault<float, float>(
-                            enumType,
-                            Unsafe.As<byte, float>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_R8
-                        => TryFormatPrimitiveDefault<double, double>(
-                            enumType,
-                            Unsafe.As<byte, double>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_I
-                        => TryFormatPrimitiveDefault<nint, nuint>(
-                            enumType,
-                            Unsafe.As<byte, nint>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_U
-                        => TryFormatPrimitiveDefault<nuint, nuint>(
-                            enumType,
-                            Unsafe.As<byte, nuint>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
-                    CorElementType.ELEMENT_TYPE_CHAR
-                        => TryFormatPrimitiveDefault<char, char>(
-                            enumType,
-                            Unsafe.As<byte, char>(ref rawData),
-                            destination,
-                            out charsWritten
-                        ),
+                    CorElementType.ELEMENT_TYPE_R4 => TryFormatPrimitiveDefault<float, float>(
+                        enumType,
+                        Unsafe.As<byte, float>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_R8 => TryFormatPrimitiveDefault<double, double>(
+                        enumType,
+                        Unsafe.As<byte, double>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_I => TryFormatPrimitiveDefault<nint, nuint>(
+                        enumType,
+                        Unsafe.As<byte, nint>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_U => TryFormatPrimitiveDefault<nuint, nuint>(
+                        enumType,
+                        Unsafe.As<byte, nuint>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
+                    CorElementType.ELEMENT_TYPE_CHAR => TryFormatPrimitiveDefault<char, char>(
+                        enumType,
+                        Unsafe.As<byte, char>(ref rawData),
+                        destination,
+                        out charsWritten
+                    ),
 #endif
                     _ => throw CreateUnknownEnumTypeException(),
                 };
@@ -2321,111 +2412,98 @@ namespace System
             {
                 return corElementType switch
                 {
-                    CorElementType.ELEMENT_TYPE_I1
-                        => TryFormatPrimitiveNonDefault<sbyte, byte>(
-                            enumType,
-                            (sbyte)rawData,
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_U1
-                        => TryFormatPrimitiveNonDefault<byte, byte>(
-                            enumType,
-                            rawData,
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_I2
-                        => TryFormatPrimitiveNonDefault<short, ushort>(
-                            enumType,
-                            Unsafe.As<byte, short>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_U2
-                        => TryFormatPrimitiveNonDefault<ushort, ushort>(
-                            enumType,
-                            Unsafe.As<byte, ushort>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_I4
-                        => TryFormatPrimitiveNonDefault<int, uint>(
-                            enumType,
-                            Unsafe.As<byte, int>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_U4
-                        => TryFormatPrimitiveNonDefault<uint, uint>(
-                            enumType,
-                            Unsafe.As<byte, uint>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_I8
-                        => TryFormatPrimitiveNonDefault<long, ulong>(
-                            enumType,
-                            Unsafe.As<byte, long>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_U8
-                        => TryFormatPrimitiveNonDefault<ulong, ulong>(
-                            enumType,
-                            Unsafe.As<byte, ulong>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
+                    CorElementType.ELEMENT_TYPE_I1 => TryFormatPrimitiveNonDefault<sbyte, byte>(
+                        enumType,
+                        (sbyte)rawData,
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_U1 => TryFormatPrimitiveNonDefault<byte, byte>(
+                        enumType,
+                        rawData,
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_I2 => TryFormatPrimitiveNonDefault<short, ushort>(
+                        enumType,
+                        Unsafe.As<byte, short>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_U2 => TryFormatPrimitiveNonDefault<ushort, ushort>(
+                        enumType,
+                        Unsafe.As<byte, ushort>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_I4 => TryFormatPrimitiveNonDefault<int, uint>(
+                        enumType,
+                        Unsafe.As<byte, int>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_U4 => TryFormatPrimitiveNonDefault<uint, uint>(
+                        enumType,
+                        Unsafe.As<byte, uint>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_I8 => TryFormatPrimitiveNonDefault<long, ulong>(
+                        enumType,
+                        Unsafe.As<byte, long>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_U8 => TryFormatPrimitiveNonDefault<ulong, ulong>(
+                        enumType,
+                        Unsafe.As<byte, ulong>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
 #if RARE_ENUMS
-                    CorElementType.ELEMENT_TYPE_R4
-                        => TryFormatPrimitiveNonDefault<float, float>(
-                            enumType,
-                            Unsafe.As<byte, float>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_R8
-                        => TryFormatPrimitiveNonDefault<double, double>(
-                            enumType,
-                            Unsafe.As<byte, double>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_I
-                        => TryFormatPrimitiveNonDefault<nint, nuint>(
-                            enumType,
-                            Unsafe.As<byte, nint>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_U
-                        => TryFormatPrimitiveNonDefault<nuint, nuint>(
-                            enumType,
-                            Unsafe.As<byte, nuint>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
-                    CorElementType.ELEMENT_TYPE_CHAR
-                        => TryFormatPrimitiveNonDefault<char, char>(
-                            enumType,
-                            Unsafe.As<byte, char>(ref rawData),
-                            destination,
-                            out charsWritten,
-                            format
-                        ),
+                    CorElementType.ELEMENT_TYPE_R4 => TryFormatPrimitiveNonDefault<float, float>(
+                        enumType,
+                        Unsafe.As<byte, float>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_R8 => TryFormatPrimitiveNonDefault<double, double>(
+                        enumType,
+                        Unsafe.As<byte, double>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_I => TryFormatPrimitiveNonDefault<nint, nuint>(
+                        enumType,
+                        Unsafe.As<byte, nint>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_U => TryFormatPrimitiveNonDefault<nuint, nuint>(
+                        enumType,
+                        Unsafe.As<byte, nuint>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
+                    CorElementType.ELEMENT_TYPE_CHAR => TryFormatPrimitiveNonDefault<char, char>(
+                        enumType,
+                        Unsafe.As<byte, char>(ref rawData),
+                        destination,
+                        out charsWritten,
+                        format
+                    ),
 #endif
                     _ => throw CreateUnknownEnumTypeException(),
                 };

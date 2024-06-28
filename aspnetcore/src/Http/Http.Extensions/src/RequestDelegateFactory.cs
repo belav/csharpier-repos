@@ -2713,49 +2713,45 @@ public static partial class RequestDelegateFactory
         var fullParamCheckBlock = (parameter.ParameterType.IsArray, isOptional) switch
         {
             // (isArray: true, optional: true)
-            (true, true)
-                => Expression.Block(
-                    new[] { index, stringArrayExpr! },
-                    // values = httpContext.Request.Query["id"];
-                    Expression.Assign(stringArrayExpr!, valueExpression),
-                    Expression.IfThen(
-                        Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
-                        arrayLoop!
-                    )
-                ),
+            (true, true) => Expression.Block(
+                new[] { index, stringArrayExpr! },
+                // values = httpContext.Request.Query["id"];
+                Expression.Assign(stringArrayExpr!, valueExpression),
+                Expression.IfThen(
+                    Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
+                    arrayLoop!
+                )
+            ),
 
             // (isArray: true, optional: false)
-            (true, false)
-                => Expression.Block(
-                    new[] { index, stringArrayExpr! },
-                    // values = httpContext.Request.Query["id"];
-                    Expression.Assign(stringArrayExpr!, valueExpression),
-                    Expression.IfThenElse(
-                        Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
-                        arrayLoop!,
-                        failBlock
-                    )
-                ),
+            (true, false) => Expression.Block(
+                new[] { index, stringArrayExpr! },
+                // values = httpContext.Request.Query["id"];
+                Expression.Assign(stringArrayExpr!, valueExpression),
+                Expression.IfThenElse(
+                    Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
+                    arrayLoop!,
+                    failBlock
+                )
+            ),
 
             // (isArray: false, optional: false)
-            (false, false)
-                => Expression.Block(
-                    // tempSourceString = httpContext.RequestValue["id"];
-                    Expression.Assign(TempSourceStringExpr, valueExpression),
-                    // if (tempSourceString == null) { ... } only produced when parameter is required
-                    checkRequiredParaseableParameterBlock,
-                    // if (tempSourceString != null) { ... }
-                    ifNotNullTryParse
-                ),
+            (false, false) => Expression.Block(
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString == null) { ... } only produced when parameter is required
+                checkRequiredParaseableParameterBlock,
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            ),
 
             // (isArray: false, optional: true)
-            (false, true)
-                => Expression.Block(
-                    // tempSourceString = httpContext.RequestValue["id"];
-                    Expression.Assign(TempSourceStringExpr, valueExpression),
-                    // if (tempSourceString != null) { ... }
-                    ifNotNullTryParse
-                ),
+            (false, true) => Expression.Block(
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            ),
         };
 
         factoryContext.ExtraLocals.Add(argument);

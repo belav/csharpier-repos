@@ -1626,50 +1626,62 @@ namespace Microsoft.CodeAnalysis.CSharp
                     refSafeToEscape
                 ) switch
                 {
-                    (checkingReceiver: true, isRefScoped: true, inUnsafeRegion: false, _)
-                        => (ErrorCode.ERR_RefReturnScopedParameter2, parameter.Syntax),
-                    (checkingReceiver: true, isRefScoped: true, inUnsafeRegion: true, _)
-                        => (ErrorCode.WRN_RefReturnScopedParameter2, parameter.Syntax),
+                    (checkingReceiver: true, isRefScoped: true, inUnsafeRegion: false, _) => (
+                        ErrorCode.ERR_RefReturnScopedParameter2,
+                        parameter.Syntax
+                    ),
+                    (checkingReceiver: true, isRefScoped: true, inUnsafeRegion: true, _) => (
+                        ErrorCode.WRN_RefReturnScopedParameter2,
+                        parameter.Syntax
+                    ),
                     (
                         checkingReceiver: true,
                         isRefScoped: false,
                         inUnsafeRegion: false,
                         ReturnOnlyScope
-                    )
-                        => (ErrorCode.ERR_RefReturnOnlyParameter2, parameter.Syntax),
+                    ) => (ErrorCode.ERR_RefReturnOnlyParameter2, parameter.Syntax),
                     (
                         checkingReceiver: true,
                         isRefScoped: false,
                         inUnsafeRegion: true,
                         ReturnOnlyScope
-                    )
-                        => (ErrorCode.WRN_RefReturnOnlyParameter2, parameter.Syntax),
-                    (checkingReceiver: true, isRefScoped: false, inUnsafeRegion: false, _)
-                        => (ErrorCode.ERR_RefReturnParameter2, parameter.Syntax),
-                    (checkingReceiver: true, isRefScoped: false, inUnsafeRegion: true, _)
-                        => (ErrorCode.WRN_RefReturnParameter2, parameter.Syntax),
-                    (checkingReceiver: false, isRefScoped: true, inUnsafeRegion: false, _)
-                        => (ErrorCode.ERR_RefReturnScopedParameter, node),
-                    (checkingReceiver: false, isRefScoped: true, inUnsafeRegion: true, _)
-                        => (ErrorCode.WRN_RefReturnScopedParameter, node),
+                    ) => (ErrorCode.WRN_RefReturnOnlyParameter2, parameter.Syntax),
+                    (checkingReceiver: true, isRefScoped: false, inUnsafeRegion: false, _) => (
+                        ErrorCode.ERR_RefReturnParameter2,
+                        parameter.Syntax
+                    ),
+                    (checkingReceiver: true, isRefScoped: false, inUnsafeRegion: true, _) => (
+                        ErrorCode.WRN_RefReturnParameter2,
+                        parameter.Syntax
+                    ),
+                    (checkingReceiver: false, isRefScoped: true, inUnsafeRegion: false, _) => (
+                        ErrorCode.ERR_RefReturnScopedParameter,
+                        node
+                    ),
+                    (checkingReceiver: false, isRefScoped: true, inUnsafeRegion: true, _) => (
+                        ErrorCode.WRN_RefReturnScopedParameter,
+                        node
+                    ),
                     (
                         checkingReceiver: false,
                         isRefScoped: false,
                         inUnsafeRegion: false,
                         ReturnOnlyScope
-                    )
-                        => (ErrorCode.ERR_RefReturnOnlyParameter, node),
+                    ) => (ErrorCode.ERR_RefReturnOnlyParameter, node),
                     (
                         checkingReceiver: false,
                         isRefScoped: false,
                         inUnsafeRegion: true,
                         ReturnOnlyScope
-                    )
-                        => (ErrorCode.WRN_RefReturnOnlyParameter, node),
-                    (checkingReceiver: false, isRefScoped: false, inUnsafeRegion: false, _)
-                        => (ErrorCode.ERR_RefReturnParameter, node),
-                    (checkingReceiver: false, isRefScoped: false, inUnsafeRegion: true, _)
-                        => (ErrorCode.WRN_RefReturnParameter, node),
+                    ) => (ErrorCode.WRN_RefReturnOnlyParameter, node),
+                    (checkingReceiver: false, isRefScoped: false, inUnsafeRegion: false, _) => (
+                        ErrorCode.ERR_RefReturnParameter,
+                        node
+                    ),
+                    (checkingReceiver: false, isRefScoped: false, inUnsafeRegion: true, _) => (
+                        ErrorCode.WRN_RefReturnParameter,
+                        node
+                    ),
                 };
 #pragma warning restore format
                 Error(diagnostics, errorCode, syntax, parameterSymbol.Name);
@@ -3396,8 +3408,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var symbol = argument switch
             {
                 BoundDeconstructValuePlaceholder p => p.VariableSymbol,
-                BoundLocal { DeclarationKind: not BoundLocalDeclarationKind.None } l
-                    => l.LocalSymbol,
+                BoundLocal { DeclarationKind: not BoundLocalDeclarationKind.None } l =>
+                    l.LocalSymbol,
                 _ => null,
             };
             if (
@@ -3699,9 +3711,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // we can determine the only accessors being called are readonly.
                 // For now we are pessimistic and check escape if any accessor is non-readonly.
                 // Tracking in https://github.com/dotnet/roslyn/issues/35606
-                PropertySymbol p
-                    => p.GetMethod?.IsEffectivelyReadOnly != false
-                        && p.SetMethod?.IsEffectivelyReadOnly != false,
+                PropertySymbol p => p.GetMethod?.IsEffectivelyReadOnly != false
+                    && p.SetMethod?.IsEffectivelyReadOnly != false,
                 _ => throw ExceptionUtilities.UnexpectedValue(methodOrPropertySymbol),
             };
 

@@ -2501,11 +2501,10 @@ namespace Mono.Linker.Steps
                 var cctorReason = reason.Kind switch
                 {
                     // Report an edge directly from the method accessing the field to the static ctor it triggers
-                    DependencyKind.FieldAccess
-                        => new DependencyInfo(
-                            DependencyKind.TriggersCctorThroughFieldAccess,
-                            reason.Source
-                        ),
+                    DependencyKind.FieldAccess => new DependencyInfo(
+                        DependencyKind.TriggersCctorThroughFieldAccess,
+                        reason.Source
+                    ),
                     _ => new DependencyInfo(DependencyKind.CctorForField, field),
                 };
                 MarkStaticConstructor(parent, cctorReason, ScopeStack.CurrentScope.Origin);
@@ -5273,16 +5272,16 @@ namespace Mono.Linker.Steps
                 or
                 // Field address loads (as those can be used to store values to annotated field and thus must be checked)
                 Code.Ldflda
-                or Code.Ldsflda
-                    => ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
+                or Code.Ldsflda =>
+                    ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
                         Context,
                         (FieldReference)instruction.Operand
                     ),
                 // For ref fields, ldfld loads an address which can be used to store values to annotated fields
                 Code.Ldfld
                 or Code.Ldsfld
-                    when ((FieldReference)instruction.Operand).FieldType.IsByRefOrPointer()
-                    => ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
+                    when ((FieldReference)instruction.Operand).FieldType.IsByRefOrPointer() =>
+                    ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
                         Context,
                         (FieldReference)instruction.Operand
                     ),
@@ -5322,10 +5321,9 @@ namespace Mono.Linker.Steps
                         Code.Newobj => (DependencyKind.Newobj, false),
                         Code.Ldvirtftn => (DependencyKind.Ldvirtftn, true),
                         Code.Ldftn => (DependencyKind.Ldftn, true),
-                        _
-                            => throw new InvalidOperationException(
-                                $"unexpected opcode {instruction.OpCode}"
-                            ),
+                        _ => throw new InvalidOperationException(
+                            $"unexpected opcode {instruction.OpCode}"
+                        ),
                     };
 
                     MethodReference methodReference = (MethodReference)instruction.Operand;

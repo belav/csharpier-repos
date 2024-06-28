@@ -173,38 +173,40 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 _ when type == typeof(int) => (int)value! == 0 ? 1 : 0,
                 _ when type == typeof(long) => (long)value! == 0 ? 1L : 0L,
                 _ when type.IsEnum => GetDifferentEnumValue(type, value!),
-                _ when Nullable.GetUnderlyingType(type) is { IsEnum: true } underlying
-                    => value is null ? Enum.ToObject(underlying, 1) : null,
-                ICodeStyleOption codeStyle
-                    => codeStyle
-                        .WithValue(
-                            GetDifferentValue(
-                                codeStyle.GetType().GetGenericArguments()[0],
-                                codeStyle.Value!
-                            )!
-                        )
-                        .WithNotification(
-                            (codeStyle.Notification == NotificationOption2.Error)
-                                ? NotificationOption2.Warning
-                                : NotificationOption2.Error
-                        ),
-                NamingStylePreferences namingPreference
-                    => namingPreference.IsEmpty
-                        ? NamingStylePreferences.Default
-                        : NamingStylePreferences.Empty,
+                _ when Nullable.GetUnderlyingType(type) is { IsEnum: true } underlying => value
+                    is null
+                    ? Enum.ToObject(underlying, 1)
+                    : null,
+                ICodeStyleOption codeStyle => codeStyle
+                    .WithValue(
+                        GetDifferentValue(
+                            codeStyle.GetType().GetGenericArguments()[0],
+                            codeStyle.Value!
+                        )!
+                    )
+                    .WithNotification(
+                        (codeStyle.Notification == NotificationOption2.Error)
+                            ? NotificationOption2.Warning
+                            : NotificationOption2.Error
+                    ),
+                NamingStylePreferences namingPreference => namingPreference.IsEmpty
+                    ? NamingStylePreferences.Default
+                    : NamingStylePreferences.Empty,
                 _ when type == typeof(bool?) => value is null ? true : null,
                 _ when type == typeof(int?) => value is null ? 1 : null,
                 _ when type == typeof(long?) => value is null ? 1L : null,
-                ImmutableArray<bool> array
-                    => array.IsEmpty ? ImmutableArray.Create(true) : ImmutableArray<bool>.Empty,
-                ImmutableArray<string> array
-                    => array is ["X"]
-                        ? ImmutableArray.Create("X", "Y")
-                        : ImmutableArray.Create("X"),
-                ImmutableArray<int> array
-                    => array.IsEmpty ? ImmutableArray.Create(1) : ImmutableArray<int>.Empty,
-                ImmutableArray<long> array
-                    => array.IsEmpty ? ImmutableArray.Create(1L) : ImmutableArray<long>.Empty,
+                ImmutableArray<bool> array => array.IsEmpty
+                    ? ImmutableArray.Create(true)
+                    : ImmutableArray<bool>.Empty,
+                ImmutableArray<string> array => array is ["X"]
+                    ? ImmutableArray.Create("X", "Y")
+                    : ImmutableArray.Create("X"),
+                ImmutableArray<int> array => array.IsEmpty
+                    ? ImmutableArray.Create(1)
+                    : ImmutableArray<int>.Empty,
+                ImmutableArray<long> array => array.IsEmpty
+                    ? ImmutableArray.Create(1L)
+                    : ImmutableArray<long>.Empty,
 
                 // Hit when a new option is introduced that uses type not handled above:
                 _ => throw ExceptionUtilities.UnexpectedValue(type),

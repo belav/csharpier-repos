@@ -1553,16 +1553,14 @@ Derived.Method(BASEREF List<int> a)
                         }
                         var (m1, m2) = i switch
                         {
-                            0
-                                => (
-                                    "Base<T, U>.Method(ref List<T> x, out List<U> y)",
-                                    "Derived.Method(ref List<int> a, out List<int> b)"
-                                ),
-                            _
-                                => (
-                                    "Derived.Method(ref List<int> a, out List<int> b)",
-                                    "Base<T, U>.Method(out List<U> y, ref List<T> x)"
-                                ),
+                            0 => (
+                                "Base<T, U>.Method(ref List<T> x, out List<U> y)",
+                                "Derived.Method(ref List<int> a, out List<int> b)"
+                            ),
+                            _ => (
+                                "Derived.Method(ref List<int> a, out List<int> b)",
+                                "Base<T, U>.Method(out List<U> y, ref List<T> x)"
+                            ),
                         };
                         expectedOutput =
                             $@"
