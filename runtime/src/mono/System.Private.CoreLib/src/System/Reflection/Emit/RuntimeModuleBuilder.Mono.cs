@@ -46,9 +46,9 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeModuleBuilder : ModuleBuilder
     {
-#region Sync with MonoReflectionModuleBuilder in object-internals.h
+        #region Sync with MonoReflectionModuleBuilder in object-internals.h
 
-#region This class inherits from Module, but the runtime expects it to have the same layout as RuntimeModule
+        #region This class inherits from Module, but the runtime expects it to have the same layout as RuntimeModule
         internal IntPtr _impl; /* a pointer to a MonoImage */
         internal Assembly assembly;
         internal string fqname;
@@ -56,7 +56,7 @@ namespace System.Reflection.Emit
         internal string scopename;
         internal bool is_resource;
         internal int token;
-#endregion
+        #endregion
 
         private UIntPtr dynamic_image; /* GC-tracked */
         private int num_types;
@@ -70,11 +70,12 @@ namespace System.Reflection.Emit
         private object? resources;
         private IntPtr unparented_classes;
         private int[]? table_indexes;
-#endregion
+        #endregion
 
         private byte[] guid;
         private RuntimeTypeBuilder? global_type;
         private bool global_type_created;
+
         // name_cache keys are display names
         private Dictionary<ITypeName, RuntimeTypeBuilder> name_cache;
         private Dictionary<string, int> us_string_cache;
@@ -86,7 +87,7 @@ namespace System.Reflection.Emit
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void set_wrappers_type(RuntimeModuleBuilder mb, Type? ab);
 
-        [DynamicDependency(nameof(table_indexes))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(table_indexes))] // Automatically keeps all previous fields too due to StructLayout
         internal RuntimeModuleBuilder(RuntimeAssemblyBuilder assb, string name)
         {
             this.name = this.scopename = name;
@@ -102,7 +103,11 @@ namespace System.Reflection.Emit
 
             CreateGlobalType();
 
-            RuntimeTypeBuilder tb = new RuntimeTypeBuilder(this, TypeAttributes.Abstract, 0xFFFFFF); /*last valid token*/
+            RuntimeTypeBuilder tb = new RuntimeTypeBuilder(
+                this,
+                TypeAttributes.Abstract,
+                0xFFFFFF
+            ); /*last valid token*/
             Type? type = tb.CreateTypeInfo();
             set_wrappers_type(this, type);
         }
@@ -131,24 +136,39 @@ namespace System.Reflection.Emit
             }
         }
 
-        protected override FieldBuilder DefineInitializedDataCore(string name, byte[] data, FieldAttributes attributes)
+        protected override FieldBuilder DefineInitializedDataCore(
+            string name,
+            byte[] data,
+            FieldAttributes attributes
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
 
             FieldAttributes maskedAttributes = attributes & ~FieldAttributes.ReservedMask;
-            RuntimeFieldBuilder fb = (RuntimeFieldBuilder)DefineDataImpl(name, data.Length, maskedAttributes | FieldAttributes.HasFieldRVA);
+            RuntimeFieldBuilder fb = (RuntimeFieldBuilder)DefineDataImpl(
+                name,
+                data.Length,
+                maskedAttributes | FieldAttributes.HasFieldRVA
+            );
             fb.SetRVAData(data);
 
             return fb;
         }
 
-        protected override FieldBuilder DefineUninitializedDataCore(string name, int size, FieldAttributes attributes)
+        protected override FieldBuilder DefineUninitializedDataCore(
+            string name,
+            int size,
+            FieldAttributes attributes
+        )
         {
             return DefineDataImpl(name, size, attributes & ~FieldAttributes.ReservedMask);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         private FieldBuilder DefineDataImpl(string name, int size, FieldAttributes attributes)
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
@@ -163,13 +183,22 @@ namespace System.Reflection.Emit
             Type? datablobtype = GetType(typeName, false, false);
             if (datablobtype == null)
             {
-                TypeBuilder tb = DefineType(typeName,
+                TypeBuilder tb = DefineType(
+                    typeName,
                     TypeAttributes.Public | TypeAttributes.ExplicitLayout | TypeAttributes.Sealed,
-                                             typeof(ValueType), null, RuntimeFieldBuilder.RVADataPackingSize(size), size);
+                    typeof(ValueType),
+                    null,
+                    RuntimeFieldBuilder.RVADataPackingSize(size),
+                    size
+                );
                 tb.CreateType();
                 datablobtype = tb;
             }
-            FieldBuilder fb = global_type!.DefineField(name, datablobtype, attributes | FieldAttributes.Static);
+            FieldBuilder fb = global_type!.DefineField(
+                name,
+                datablobtype,
+                attributes | FieldAttributes.Static
+            );
 
             if (global_fields != null)
             {
@@ -200,21 +229,53 @@ namespace System.Reflection.Emit
             }
         }
 
-        protected override MethodBuilder DefineGlobalMethodCore(string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? requiredReturnTypeCustomModifiers, Type[]? optionalReturnTypeCustomModifiers, Type[]? parameterTypes, Type[][]? requiredParameterTypeCustomModifiers, Type[][]? optionalParameterTypeCustomModifiers)
+        protected override MethodBuilder DefineGlobalMethodCore(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? requiredReturnTypeCustomModifiers,
+            Type[]? optionalReturnTypeCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? requiredParameterTypeCustomModifiers,
+            Type[][]? optionalParameterTypeCustomModifiers
+        )
         {
             if ((attributes & MethodAttributes.Static) == 0)
                 throw new ArgumentException(SR.Argument_GlobalMembersMustBeStatic);
             if (global_type_created)
                 throw new InvalidOperationException(SR.InvalidOperation_GlobalsHaveBeenCreated);
             CreateGlobalType();
-            MethodBuilder mb = global_type!.DefineMethod(name, attributes, callingConvention, returnType, requiredReturnTypeCustomModifiers, optionalReturnTypeCustomModifiers, parameterTypes, requiredParameterTypeCustomModifiers, optionalParameterTypeCustomModifiers);
+            MethodBuilder mb = global_type!.DefineMethod(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                requiredReturnTypeCustomModifiers,
+                optionalReturnTypeCustomModifiers,
+                parameterTypes,
+                requiredParameterTypeCustomModifiers,
+                optionalParameterTypeCustomModifiers
+            );
 
             addGlobalMethod(mb);
             return mb;
         }
 
-        [RequiresUnreferencedCode("P/Invoke marshalling may dynamically access members that could be trimmed.")]
-        protected override MethodBuilder DefinePInvokeMethodCore(string name, string dllName, string entryName, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, CallingConvention nativeCallConv, CharSet nativeCharSet)
+        [RequiresUnreferencedCode(
+            "P/Invoke marshalling may dynamically access members that could be trimmed."
+        )]
+        protected override MethodBuilder DefinePInvokeMethodCore(
+            string name,
+            string dllName,
+            string entryName,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            CallingConvention nativeCallConv,
+            CharSet nativeCharSet
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
             if ((attributes & MethodAttributes.Static) == 0)
@@ -222,7 +283,17 @@ namespace System.Reflection.Emit
             if (global_type_created)
                 throw new InvalidOperationException(SR.InvalidOperation_GlobalsHaveBeenCreated);
             CreateGlobalType();
-            MethodBuilder mb = global_type!.DefinePInvokeMethod(name, dllName, entryName, attributes, callingConvention, returnType, parameterTypes, nativeCallConv, nativeCharSet);
+            MethodBuilder mb = global_type!.DefinePInvokeMethod(
+                name,
+                dllName,
+                entryName,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                nativeCallConv,
+                nativeCharSet
+            );
 
             addGlobalMethod(mb);
             return mb;
@@ -247,13 +318,29 @@ namespace System.Reflection.Emit
             num_types++;
         }
 
-        private RuntimeTypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, Type[]? interfaces, PackingSize packingSize, int typesize)
+        private RuntimeTypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            Type[]? interfaces,
+            PackingSize packingSize,
+            int typesize
+        )
         {
             Debug.Assert(name is not null);
             ITypeIdentifier ident = TypeIdentifiers.FromInternal(name);
             if (name_cache.ContainsKey(ident))
                 throw new ArgumentException(SR.Argument_DuplicateTypeName);
-            RuntimeTypeBuilder res = new RuntimeTypeBuilder(this, name, attr, parent, interfaces, packingSize, typesize, null);
+            RuntimeTypeBuilder res = new RuntimeTypeBuilder(
+                this,
+                name,
+                attr,
+                parent,
+                interfaces,
+                packingSize,
+                typesize,
+                null
+            );
             AddType(res);
 
             name_cache.Add(ident, res);
@@ -273,17 +360,40 @@ namespace System.Reflection.Emit
             return result;
         }
 
-        protected override TypeBuilder DefineTypeCore(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, Type[]? interfaces, PackingSize packingSize, int typesize)
+        protected override TypeBuilder DefineTypeCore(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            Type[]? interfaces,
+            PackingSize packingSize,
+            int typesize
+        )
         {
             return DefineType(name, attr, parent, interfaces, packingSize, typesize);
         }
 
-        protected override MethodInfo GetArrayMethodCore(Type arrayClass, string methodName, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes)
+        protected override MethodInfo GetArrayMethodCore(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
-            return new MonoArrayMethod(arrayClass, methodName, callingConvention, returnType!, parameterTypes!); // FIXME: nulls should be allowed
+            return new MonoArrayMethod(
+                arrayClass,
+                methodName,
+                callingConvention,
+                returnType!,
+                parameterTypes!
+            ); // FIXME: nulls should be allowed
         }
 
-        protected override EnumBuilder DefineEnumCore(string name, TypeAttributes visibility, Type underlyingType)
+        protected override EnumBuilder DefineEnumCore(
+            string name,
+            TypeAttributes visibility,
+            Type underlyingType
+        )
         {
             ITypeIdentifier ident = TypeIdentifiers.FromInternal(name);
             if (name_cache.ContainsKey(ident))
@@ -296,24 +406,39 @@ namespace System.Reflection.Emit
             return eb;
         }
 
-        [RequiresUnreferencedCode("Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead.")]
+        [RequiresUnreferencedCode(
+            "Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead."
+        )]
         public override Type? GetType(string className)
         {
             return GetType(className, false, false);
         }
 
-        [RequiresUnreferencedCode("Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead.")]
+        [RequiresUnreferencedCode(
+            "Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead."
+        )]
         public override Type? GetType(string className, bool ignoreCase)
         {
             return GetType(className, false, ignoreCase);
         }
 
-        private static RuntimeTypeBuilder? search_in_array(RuntimeTypeBuilder[] arr, int validElementsInArray, ITypeName className)
+        private static RuntimeTypeBuilder? search_in_array(
+            RuntimeTypeBuilder[] arr,
+            int validElementsInArray,
+            ITypeName className
+        )
         {
             int i;
             for (i = 0; i < validElementsInArray; ++i)
             {
-                if (string.Compare(className.DisplayName, arr[i].FullName, true, CultureInfo.InvariantCulture) == 0)
+                if (
+                    string.Compare(
+                        className.DisplayName,
+                        arr[i].FullName,
+                        true,
+                        CultureInfo.InvariantCulture
+                    ) == 0
+                )
                 {
                     return arr[i];
                 }
@@ -321,18 +446,32 @@ namespace System.Reflection.Emit
             return null;
         }
 
-        private static RuntimeTypeBuilder? search_nested_in_array(RuntimeTypeBuilder[] arr, int validElementsInArray, ITypeName className)
+        private static RuntimeTypeBuilder? search_nested_in_array(
+            RuntimeTypeBuilder[] arr,
+            int validElementsInArray,
+            ITypeName className
+        )
         {
             int i;
             for (i = 0; i < validElementsInArray; ++i)
             {
-                if (string.Compare(className.DisplayName, arr[i].Name, true, CultureInfo.InvariantCulture) == 0)
+                if (
+                    string.Compare(
+                        className.DisplayName,
+                        arr[i].Name,
+                        true,
+                        CultureInfo.InvariantCulture
+                    ) == 0
+                )
                     return arr[i];
             }
             return null;
         }
 
-        private static RuntimeTypeBuilder? GetMaybeNested(RuntimeTypeBuilder t, IEnumerable<ITypeName> nested)
+        private static RuntimeTypeBuilder? GetMaybeNested(
+            RuntimeTypeBuilder t,
+            IEnumerable<ITypeName> nested
+        )
         {
             RuntimeTypeBuilder? result = t;
 
@@ -347,7 +486,9 @@ namespace System.Reflection.Emit
             return result;
         }
 
-        [RequiresUnreferencedCode("Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead.")]
+        [RequiresUnreferencedCode(
+            "Types might be removed by trimming. If the type name is a string literal, consider using Type.GetType instead."
+        )]
         public override Type? GetType(string className, bool throwOnError, bool ignoreCase)
         {
             ArgumentException.ThrowIfNullOrEmpty(className);
@@ -426,7 +567,10 @@ namespace System.Reflection.Emit
             return index;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             CustomAttributeBuilder customBuilder = new CustomAttributeBuilder(con, binaryAttribute);
             if (cattrs != null)
@@ -442,6 +586,7 @@ namespace System.Reflection.Emit
                 cattrs[0] = customBuilder;
             }
         }
+
         /*
                 internal ISymbolDocumentWriter? DefineDocument (string url, Guid language, Guid languageVendor, Guid documentType)
                 {
@@ -476,9 +621,23 @@ namespace System.Reflection.Emit
             return method.MetadataToken;
         }
 
-        internal int GetArrayMethodToken(Type arrayClass, string methodName, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes)
+        internal int GetArrayMethodToken(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
-            return GetMethodMetadataToken(GetArrayMethod(arrayClass, methodName, callingConvention, returnType, parameterTypes));
+            return GetMethodMetadataToken(
+                GetArrayMethod(
+                    arrayClass,
+                    methodName,
+                    callingConvention,
+                    returnType,
+                    parameterTypes
+                )
+            );
         }
 
         public override int GetMethodMetadataToken(ConstructorInfo constructor)
@@ -532,8 +691,11 @@ namespace System.Reflection.Emit
             return type.MetadataToken;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         internal int GetTypeToken(string name)
         {
             return GetTypeMetadataToken(GetType(name)!);
@@ -543,11 +705,18 @@ namespace System.Reflection.Emit
         private static extern int getUSIndex(RuntimeModuleBuilder mb, string str);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern int getToken(RuntimeModuleBuilder mb, object obj, bool create_open_instance);
+        private static extern int getToken(
+            RuntimeModuleBuilder mb,
+            object obj,
+            bool create_open_instance
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern int getMethodToken(RuntimeModuleBuilder mb, MethodBase method,
-                              Type[] opt_param_types);
+        private static extern int getMethodToken(
+            RuntimeModuleBuilder mb,
+            MethodBase method,
+            Type[] opt_param_types
+        );
 
         internal int GetToken(string str)
         {
@@ -566,7 +735,8 @@ namespace System.Reflection.Emit
         private static int typespec_tokengen = 0x1bffffff;
         private static int memberref_tokengen = 0x0affffff;
         private static int methoddef_tokengen = 0x06ffffff;
-        private Dictionary<MemberInfo, int>? inst_tokens, inst_tokens_open;
+        private Dictionary<MemberInfo, int>? inst_tokens,
+            inst_tokens_open;
 
         //
         // Assign a pseudo token to the various TypeBuilderInst objects, so the runtime
@@ -578,7 +748,9 @@ namespace System.Reflection.Emit
         private int GetPseudoToken(MemberInfo member, bool create_open_instance)
         {
             int token;
-            Dictionary<MemberInfo, int>? dict = create_open_instance ? inst_tokens_open : inst_tokens;
+            Dictionary<MemberInfo, int>? dict = create_open_instance
+                ? inst_tokens_open
+                : inst_tokens;
             if (dict == null)
             {
                 dict = new Dictionary<MemberInfo, int>(ReferenceEqualityComparer.Instance);
@@ -629,7 +801,11 @@ namespace System.Reflection.Emit
             }
             else if (member is RuntimeMethodBuilder mb)
             {
-                if (member.Module == this && !mb.TypeBuilder.ContainsGenericParameters && !mb.IsGenericMethodDefinition)
+                if (
+                    member.Module == this
+                    && !mb.TypeBuilder.ContainsGenericParameters
+                    && !mb.IsGenericMethodDefinition
+                )
                     token = methoddef_tokengen--;
                 else
                     token = memberref_tokengen--;
@@ -655,9 +831,19 @@ namespace System.Reflection.Emit
 
         internal int GetToken(MemberInfo member, bool create_open_instance)
         {
-            if (member is TypeBuilderInstantiation || member is FieldOnTypeBuilderInstantiation || member is ConstructorOnTypeBuilderInstantiation ||
-                member is MethodOnTypeBuilderInstantiation || member is SymbolType || member is FieldBuilder || member is TypeBuilder ||
-                member is ConstructorBuilder || member is MethodBuilder || member is GenericTypeParameterBuilder || member is EnumBuilder)
+            if (
+                member is TypeBuilderInstantiation
+                || member is FieldOnTypeBuilderInstantiation
+                || member is ConstructorOnTypeBuilderInstantiation
+                || member is MethodOnTypeBuilderInstantiation
+                || member is SymbolType
+                || member is FieldBuilder
+                || member is TypeBuilder
+                || member is ConstructorBuilder
+                || member is MethodBuilder
+                || member is GenericTypeParameterBuilder
+                || member is EnumBuilder
+            )
                 return GetPseudoToken(member, create_open_instance);
             return getToken(this, member, create_open_instance);
         }
@@ -699,7 +885,8 @@ namespace System.Reflection.Emit
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern object GetRegisteredToken(int token);
 
-        internal ITokenGenerator GetTokenGenerator() => token_gen ??= new ModuleBuilderTokenGenerator(this);
+        internal ITokenGenerator GetTokenGenerator() =>
+            token_gen ??= new ModuleBuilderTokenGenerator(this);
 
         // Called from the runtime to return the corresponding finished reflection object
         internal static object RuntimeResolve(object obj)
@@ -725,18 +912,12 @@ namespace System.Reflection.Emit
 
         internal string FileName
         {
-            get
-            {
-                return fqname;
-            }
+            get { return fqname; }
         }
 
         internal bool IsMain
         {
-            set
-            {
-                is_main = value;
-            }
+            set { is_main = value; }
         }
 
         internal void CreateGlobalType()
@@ -762,10 +943,7 @@ namespace System.Reflection.Emit
 
         public override Guid ModuleVersionId
         {
-            get
-            {
-                return new Guid(guid);
-            }
+            get { return new Guid(guid); }
         }
 
         public override bool IsResource()
@@ -775,50 +953,107 @@ namespace System.Reflection.Emit
 
         internal RuntimeModuleBuilder InternalModule => this;
 
-        internal IntPtr GetUnderlyingNativeHandle() { return _impl; }
+        internal IntPtr GetUnderlyingNativeHandle()
+        {
+            return _impl;
+        }
 
         private protected override ModuleHandle GetModuleHandleImpl() => new ModuleHandle(_impl);
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             if (!global_type_created)
                 return null;
             if (types == null)
                 return global_type!.AsType().GetMethod(name);
-            return global_type!.AsType().GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+            return global_type!
+                .AsType()
+                .GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override FieldInfo? ResolveField(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override FieldInfo? ResolveField(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return RuntimeModule.ResolveField(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+            return RuntimeModule.ResolveField(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override MemberInfo? ResolveMember(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override MemberInfo? ResolveMember(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return RuntimeModule.ResolveMember(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+            return RuntimeModule.ResolveMember(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        internal MemberInfo ResolveOrGetRegisteredToken(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments)
+        internal MemberInfo ResolveOrGetRegisteredToken(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
         {
             ResolveTokenError error;
-            MemberInfo? m = RuntimeModule.ResolveMemberToken(_impl, metadataToken, RuntimeModule.ptrs_from_types(genericTypeArguments), RuntimeModule.ptrs_from_types(genericMethodArguments), out error);
+            MemberInfo? m = RuntimeModule.ResolveMemberToken(
+                _impl,
+                metadataToken,
+                RuntimeModule.ptrs_from_types(genericTypeArguments),
+                RuntimeModule.ptrs_from_types(genericMethodArguments),
+                out error
+            );
             if (m != null)
                 return m;
 
             m = GetRegisteredToken(metadataToken) as MemberInfo;
             if (m == null)
-                throw RuntimeModule.resolve_token_exception(this, metadataToken, error, "MemberInfo");
+                throw RuntimeModule.resolve_token_exception(
+                    this,
+                    metadataToken,
+                    error,
+                    "MemberInfo"
+                );
             else
                 return m;
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override MethodBase? ResolveMethod(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override MethodBase? ResolveMethod(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return RuntimeModule.ResolveMethod(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+            return RuntimeModule.ResolveMethod(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
@@ -834,9 +1069,19 @@ namespace System.Reflection.Emit
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override Type ResolveType(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override Type ResolveType(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return RuntimeModule.ResolveType(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+            return RuntimeModule.ResolveType(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         public override bool Equals(object? obj)
@@ -854,7 +1099,8 @@ namespace System.Reflection.Emit
             return base.IsDefined(attributeType, inherit);
         }
 
-        public override object[] GetCustomAttributes(bool inherit) => CustomAttribute.GetCustomAttributes(this, inherit);
+        public override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttribute.GetCustomAttributes(this, inherit);
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
@@ -868,7 +1114,9 @@ namespace System.Reflection.Emit
         public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
             if (!global_type_created)
-                throw new InvalidOperationException(SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod
+                );
             return global_type!.AsType().GetField(name, bindingAttr);
         }
 
@@ -876,7 +1124,9 @@ namespace System.Reflection.Emit
         public override FieldInfo[] GetFields(BindingFlags bindingFlags)
         {
             if (!global_type_created)
-                throw new InvalidOperationException(SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod
+                );
             return global_type!.AsType().GetFields(bindingFlags);
         }
 
@@ -884,22 +1134,20 @@ namespace System.Reflection.Emit
         public override MethodInfo[] GetMethods(BindingFlags bindingFlags)
         {
             if (!global_type_created)
-                throw new InvalidOperationException(SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ModuleFieldsMethodsRelyOnCreateGlobalFunctionsMethod
+                );
             return global_type!.AsType().GetMethods(bindingFlags);
         }
 
         public override int MetadataToken
         {
-            get
-            {
-                return RuntimeModule.get_MetadataToken(this);
-            }
+            get { return RuntimeModule.get_MetadataToken(this); }
         }
     }
 
     internal sealed class ModuleBuilderTokenGenerator : ITokenGenerator
     {
-
         private RuntimeModuleBuilder mb;
 
         public ModuleBuilderTokenGenerator(RuntimeModuleBuilder mb)

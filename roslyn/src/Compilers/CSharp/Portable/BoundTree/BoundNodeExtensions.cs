@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        // Like HasErrors property, but also returns false for a null node. 
+        // Like HasErrors property, but also returns false for a null node.
         public static bool HasErrors([NotNullWhen(true)] this BoundNode? node)
         {
             return node != null && node.HasErrors;
@@ -42,13 +42,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (statement!.Kind == BoundKind.ExpressionStatement)
             {
                 BoundExpression expression = ((BoundExpressionStatement)statement).Expression;
-                if (expression.Kind == BoundKind.Sequence && ((BoundSequence)expression).SideEffects.IsDefaultOrEmpty)
+                if (
+                    expression.Kind == BoundKind.Sequence
+                    && ((BoundSequence)expression).SideEffects.IsDefaultOrEmpty
+                )
                 {
                     // in case there is a pattern variable declared in a ctor-initializer, it gets wrapped in a bound sequence.
                     expression = ((BoundSequence)expression).Value;
                 }
 
-                return expression.Kind == BoundKind.Call && ((BoundCall)expression).IsConstructorInitializer();
+                return expression.Kind == BoundKind.Call
+                    && ((BoundCall)expression).IsConstructorInitializer();
             }
 
             return false;
@@ -59,12 +63,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(call != null);
             MethodSymbol method = call!.Method;
             BoundExpression? receiverOpt = call!.ReceiverOpt;
-            return method.MethodKind == MethodKind.Constructor &&
-                receiverOpt != null &&
-                (receiverOpt.Kind == BoundKind.ThisReference || receiverOpt.Kind == BoundKind.BaseReference);
+            return method.MethodKind == MethodKind.Constructor
+                && receiverOpt != null
+                && (
+                    receiverOpt.Kind == BoundKind.ThisReference
+                    || receiverOpt.Kind == BoundKind.BaseReference
+                );
         }
 
-        public static T MakeCompilerGenerated<T>(this T node) where T : BoundNode
+        public static T MakeCompilerGenerated<T>(this T node)
+            where T : BoundNode
         {
             node.WasCompilerGenerated = true;
             return node;
@@ -85,11 +93,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private class ContainsAwaitVisitor : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        private class ContainsAwaitVisitor
+            : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
             public bool ContainsAwait = false;
 
-            public override BoundNode? Visit(BoundNode? node) => ContainsAwait ? null : base.Visit(node);
+            public override BoundNode? Visit(BoundNode? node) =>
+                ContainsAwait ? null : base.Visit(node);
 
             public override BoundNode? VisitAwaitExpression(BoundAwaitExpression node)
             {
@@ -108,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this BoundBinaryOperator binary,
             TArg arg,
             Func<TInterpolatedStringType, TArg, bool> stringCallback,
-            Action<BoundBinaryOperator, TArg>? binaryOperatorCallback = null)
+            Action<BoundBinaryOperator, TArg>? binaryOperatorCallback = null
+        )
             where TInterpolatedStringType : BoundInterpolatedStringBase
         {
             var stack = ArrayBuilder<BoundBinaryOperator>.GetInstance();
@@ -151,9 +162,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             stack.Free();
             return true;
 
-            static void pushLeftNodes(BoundBinaryOperator binary, ArrayBuilder<BoundBinaryOperator> stack, TArg arg, Action<BoundBinaryOperator, TArg>? binaryOperatorCallback)
+            static void pushLeftNodes(
+                BoundBinaryOperator binary,
+                ArrayBuilder<BoundBinaryOperator> stack,
+                TArg arg,
+                Action<BoundBinaryOperator, TArg>? binaryOperatorCallback
+            )
             {
-                Debug.Assert(typeof(TInterpolatedStringType) == typeof(BoundInterpolatedString) || binary.IsUnconvertedInterpolatedStringAddition);
+                Debug.Assert(
+                    typeof(TInterpolatedStringType) == typeof(BoundInterpolatedString)
+                        || binary.IsUnconvertedInterpolatedStringAddition
+                );
                 BoundBinaryOperator? current = binary;
                 while (current != null)
                 {
@@ -179,16 +198,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Rewriter for the BoundBinaryOperator parts fo the binary operator. Passed the callback parameter, the original binary operator, and
         /// the rewritten left and right components.
         /// </param>
-        public static TResult RewriteInterpolatedStringAddition<TInterpolatedStringType, TArg, TResult>(
+        public static TResult RewriteInterpolatedStringAddition<
+            TInterpolatedStringType,
+            TArg,
+            TResult
+        >(
             this BoundBinaryOperator binary,
             TArg arg,
             Func<TInterpolatedStringType, int, TArg, TResult> interpolatedStringFactory,
-            Func<BoundBinaryOperator, TResult, TResult, TArg, TResult> binaryOperatorFactory)
+            Func<BoundBinaryOperator, TResult, TResult, TArg, TResult> binaryOperatorFactory
+        )
             where TInterpolatedStringType : BoundInterpolatedStringBase
         {
             int i = 0;
 
-            var result = doRewrite(binary, arg, interpolatedStringFactory, binaryOperatorFactory, ref i);
+            var result = doRewrite(
+                binary,
+                arg,
+                interpolatedStringFactory,
+                binaryOperatorFactory,
+                ref i
+            );
 
             return result;
 
@@ -197,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TArg arg,
                 Func<TInterpolatedStringType, int, TArg, TResult> interpolatedStringFactory,
                 Func<BoundBinaryOperator, TResult, TResult, TArg, TResult> binaryOperatorFactory,
-                ref int i)
+                ref int i
+            )
             {
                 TResult? result = default;
                 var originalStack = ArrayBuilder<BoundBinaryOperator>.GetInstance();
@@ -209,9 +240,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(currentBinary.Left is TInterpolatedStringType || result != null);
                     TResult rewrittenLeft = currentBinary.Left switch
                     {
-                        TInterpolatedStringType interpolatedString => interpolatedStringFactory(interpolatedString, i++, arg),
+                        TInterpolatedStringType interpolatedString
+                            => interpolatedStringFactory(interpolatedString, i++, arg),
                         BoundBinaryOperator => result!,
-                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind)
+                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind),
                     };
 
                     // For simplicity, we use recursion for binary operators on the right side of the tree. We're not traditionally concerned
@@ -220,12 +252,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     var rewrittenRight = currentBinary.Right switch
                     {
-                        TInterpolatedStringType interpolatedString => interpolatedStringFactory(interpolatedString, i++, arg),
-                        BoundBinaryOperator binaryOperator => doRewrite(binaryOperator, arg, interpolatedStringFactory, binaryOperatorFactory, ref i),
-                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Right.Kind)
+                        TInterpolatedStringType interpolatedString
+                            => interpolatedStringFactory(interpolatedString, i++, arg),
+                        BoundBinaryOperator binaryOperator
+                            => doRewrite(
+                                binaryOperator,
+                                arg,
+                                interpolatedStringFactory,
+                                binaryOperatorFactory,
+                                ref i
+                            ),
+                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Right.Kind),
                     };
 
-                    result = binaryOperatorFactory(currentBinary, rewrittenLeft, rewrittenRight, arg);
+                    result = binaryOperatorFactory(
+                        currentBinary,
+                        rewrittenLeft,
+                        rewrittenRight,
+                        arg
+                    );
                 }
 
                 Debug.Assert(result != null);
@@ -234,25 +279,36 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
 
-            static void pushLeftNodes(BoundBinaryOperator binary, ArrayBuilder<BoundBinaryOperator> stack)
+            static void pushLeftNodes(
+                BoundBinaryOperator binary,
+                ArrayBuilder<BoundBinaryOperator> stack
+            )
             {
                 BoundBinaryOperator? current = binary;
                 while (current != null)
                 {
-                    Debug.Assert(typeof(TInterpolatedStringType) == typeof(BoundInterpolatedString) || binary.IsUnconvertedInterpolatedStringAddition);
+                    Debug.Assert(
+                        typeof(TInterpolatedStringType) == typeof(BoundInterpolatedString)
+                            || binary.IsUnconvertedInterpolatedStringAddition
+                    );
                     stack.Push(current);
                     current = current.Left as BoundBinaryOperator;
                 }
             }
         }
 
-        public static InterpolatedStringHandlerData GetInterpolatedStringHandlerData(this BoundExpression e, bool throwOnMissing = true)
-            => e switch
+        public static InterpolatedStringHandlerData GetInterpolatedStringHandlerData(
+            this BoundExpression e,
+            bool throwOnMissing = true
+        ) =>
+            e switch
             {
                 BoundBinaryOperator { InterpolatedStringHandlerData: { } d } => d,
                 BoundInterpolatedString { InterpolationData: { } d } => d,
                 BoundBinaryOperator or BoundInterpolatedString when !throwOnMissing => default,
-                BoundBinaryOperator or BoundInterpolatedString => throw ExceptionUtilities.Unreachable(),
+                BoundBinaryOperator
+                or BoundInterpolatedString
+                    => throw ExceptionUtilities.Unreachable(),
                 _ => throw ExceptionUtilities.UnexpectedValue(e.Kind),
             };
     }

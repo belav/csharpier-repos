@@ -15,11 +15,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NonGenericType_ReturnsExpected()
         {
-            var structure = new SequentialClass
-            {
-                i = 10,
-                s = "hello"
-            };
+            var structure = new SequentialClass { i = 10, s = "hello" };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -27,7 +23,9 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Marshal.StructureToPtr(structure, ptr, false);
 
-                SequentialClass result = Assert.IsType<SequentialClass>(Marshal.PtrToStructure(ptr, typeof(SequentialClass)));
+                SequentialClass result = Assert.IsType<SequentialClass>(
+                    Marshal.PtrToStructure(ptr, typeof(SequentialClass))
+                );
                 Assert.Equal(10, result.i);
                 Assert.Equal("hello", result.s);
             }
@@ -41,11 +39,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_GenericType_ReturnsExpected()
         {
-            var structure = new SomeTestStruct
-            {
-                i = 10,
-                s = "hello"
-            };
+            var structure = new SomeTestStruct { i = 10, s = "hello" };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -66,11 +60,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NonGenericObject_ReturnsExpected()
         {
-            var structure = new SomeTestStruct
-            {
-                i = 10,
-                s = "hello"
-            };
+            var structure = new SomeTestStruct { i = 10, s = "hello" };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -92,11 +82,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_GenericObject_ReturnsExpected()
         {
-            var structure = new SomeTestStruct
-            {
-                i = 10,
-                s = "hello"
-            };
+            var structure = new SomeTestStruct { i = 10, s = "hello" };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -121,29 +107,53 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Null(Marshal.PtrToStructure(IntPtr.Zero, typeof(SomeTestStruct)));
             Assert.Null(Marshal.PtrToStructure<NonGenericClass>(IntPtr.Zero));
-            Assert.Throws<NullReferenceException>(() => Marshal.PtrToStructure<SomeTestStruct>(IntPtr.Zero));
+            Assert.Throws<NullReferenceException>(
+                () => Marshal.PtrToStructure<SomeTestStruct>(IntPtr.Zero)
+            );
         }
 
         [Fact]
         public void PtrToStructure_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.PtrToStructure(IntPtr.Zero, (object)new SomeTestStruct()));
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.PtrToStructure(IntPtr.Zero, new SomeTestStruct()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.PtrToStructure(IntPtr.Zero, (object)new SomeTestStruct())
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.PtrToStructure(IntPtr.Zero, new SomeTestStruct())
+            );
         }
 
         [Fact]
         public void PtrToStructure_NullStructure_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.PtrToStructure((IntPtr)1, (object)null));
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.PtrToStructure<object>((IntPtr)1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, (object)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.PtrToStructure<object>((IntPtr)1, null)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public void PtrToStructure_AutoLayoutClass_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure((IntPtr)1, (object)new NonGenericClass()));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure((IntPtr)1, new NonGenericClass()));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, (object)new NonGenericClass())
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, new NonGenericClass())
+            );
         }
 
         [Fact]
@@ -176,8 +186,14 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(PtrToStructure_ObjectNotValueClass_TestData))]
         public void PtrToStructure_ObjectNotValueClass_ThrowsArgumentException(object structure)
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure((IntPtr)1, structure));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure<object>((IntPtr)1, structure));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, structure)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure<object>((IntPtr)1, structure)
+            );
         }
 
         public static IEnumerable<object[]> PtrToStructure_ObjectNotBlittable_TestData()
@@ -187,17 +203,30 @@ namespace System.Runtime.InteropServices.Tests
 
         [Theory]
         [MemberData(nameof(PtrToStructure_ObjectNotBlittable_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public void PtrToStructure_ObjectNoBlittable_ThrowsArgumentException(object structure)
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure((IntPtr)1, structure));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure<object>((IntPtr)1, structure));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, structure)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure<object>((IntPtr)1, structure)
+            );
         }
 
         [Fact]
         public void PtrToStructure_NullStructureType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structureType", () => Marshal.PtrToStructure((IntPtr)1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structureType",
+                () => Marshal.PtrToStructure((IntPtr)1, null)
+            );
         }
 
         public static IEnumerable<object[]> PtrToStructure_GenericType_TestData()
@@ -214,16 +243,29 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(PtrToStructure_GenericType_TestData))]
         public void PtrToStructure_GenericType_ThrowsArgumentException(Type structureType)
         {
-            AssertExtensions.Throws<ArgumentException>("structureType", () => Marshal.PtrToStructure((IntPtr)1, structureType));
+            AssertExtensions.Throws<ArgumentException>(
+                "structureType",
+                () => Marshal.PtrToStructure((IntPtr)1, structureType)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void PtrToStructure_NonRuntimeType_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>("structureType", "type", () => Marshal.PtrToStructure((IntPtr)1, (Type)typeBuilder));
+            AssertExtensions.Throws<ArgumentException>(
+                "structureType",
+                "type",
+                () => Marshal.PtrToStructure((IntPtr)1, (Type)typeBuilder)
+            );
         }
 
         public static IEnumerable<object[]> PtrToStructure_NonBlittableType_TestData()
@@ -234,23 +276,45 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [MemberData(nameof(PtrToStructure_NonBlittableType_TestData))]
         public void PtrToStructure_NonBlittablType_ThrowsArgumentException(Type structureType)
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.PtrToStructure((IntPtr)1, structureType));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.PtrToStructure((IntPtr)1, structureType)
+            );
         }
 
         public static IEnumerable<object[]> PtrToStructure_CantCreateType_TestData()
         {
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0], typeof(ArgumentException) };
-            yield return new object[] { typeof(int).MakePointerType(), typeof(MissingMethodException) };
-            yield return new object[] { typeof(int).MakeByRefType(), typeof(MissingMethodException) };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                typeof(int).MakePointerType(),
+                typeof(MissingMethodException),
+            };
+            yield return new object[]
+            {
+                typeof(int).MakeByRefType(),
+                typeof(MissingMethodException),
+            };
         }
 
         [Theory]
         [MemberData(nameof(PtrToStructure_CantCreateType_TestData))]
-        public void PtrToStructure_CantCreateType_ThrowsArgumentException(Type structureType, Type exceptionType)
+        public void PtrToStructure_CantCreateType_ThrowsArgumentException(
+            Type structureType,
+            Type exceptionType
+        )
         {
             Assert.Throws(exceptionType, () => Marshal.PtrToStructure((IntPtr)1, structureType));
         }
@@ -271,14 +335,16 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Sequential)]
         public class SequentialClass
         {
-            internal SequentialClass()
-            {
-            }
+            internal SequentialClass() { }
 
             public int i;
             public string s;
         }
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2,
+        }
     }
 }

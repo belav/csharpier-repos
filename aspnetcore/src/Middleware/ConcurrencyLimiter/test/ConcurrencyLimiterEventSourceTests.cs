@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Globalization;
 using System.Diagnostics.Tracing;
+using System.Globalization;
 using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests;
@@ -15,7 +15,10 @@ public class ConcurrencyLimiterEventSourceTests
         var eventSource = new ConcurrencyLimiterEventSource();
 
         Assert.Equal("Microsoft.AspNetCore.ConcurrencyLimiter", eventSource.Name);
-        Assert.Equal(Guid.Parse("a605548a-6963-55cf-f000-99a6013deb01", CultureInfo.InvariantCulture), eventSource.Guid);
+        Assert.Equal(
+            Guid.Parse("a605548a-6963-55cf-f000-99a6013deb01", CultureInfo.InvariantCulture),
+            eventSource.Guid
+        );
     }
 
     [Fact]
@@ -44,23 +47,24 @@ public class ConcurrencyLimiterEventSourceTests
     public async Task TracksQueueLength()
     {
         // Arrange
-        using var eventListener = new TestCounterListener(new[] {
-                "queue-length",
-                "queue-duration",
-                "requests-rejected",
-            });
+        using var eventListener = new TestCounterListener(
+            new[] { "queue-length", "queue-duration", "requests-rejected" }
+        );
 
         using var eventSource = GetConcurrencyLimiterEventSource();
 
         using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
-        var lengthValues = eventListener.GetCounterValues("queue-length", timeoutTokenSource.Token).GetAsyncEnumerator();
+        var lengthValues = eventListener
+            .GetCounterValues("queue-length", timeoutTokenSource.Token)
+            .GetAsyncEnumerator();
 
-        eventListener.EnableEvents(eventSource, EventLevel.Informational, EventKeywords.None,
-            new Dictionary<string, string>
-            {
-                    {"EventCounterIntervalSec", ".1" }
-            });
+        eventListener.EnableEvents(
+            eventSource,
+            EventLevel.Informational,
+            EventKeywords.None,
+            new Dictionary<string, string> { { "EventCounterIntervalSec", ".1" } }
+        );
 
         // Act
         eventSource.RequestRejected();
@@ -85,23 +89,24 @@ public class ConcurrencyLimiterEventSourceTests
     public async Task TracksDurationSpentInQueue()
     {
         // Arrange
-        using var eventListener = new TestCounterListener(new[] {
-                "queue-length",
-                "queue-duration",
-                "requests-rejected",
-            });
+        using var eventListener = new TestCounterListener(
+            new[] { "queue-length", "queue-duration", "requests-rejected" }
+        );
 
         using var eventSource = GetConcurrencyLimiterEventSource();
 
         using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
-        var durationValues = eventListener.GetCounterValues("queue-duration", timeoutTokenSource.Token).GetAsyncEnumerator();
+        var durationValues = eventListener
+            .GetCounterValues("queue-duration", timeoutTokenSource.Token)
+            .GetAsyncEnumerator();
 
-        eventListener.EnableEvents(eventSource, EventLevel.Informational, EventKeywords.None,
-            new Dictionary<string, string>
-            {
-                    {"EventCounterIntervalSec", ".1" }
-            });
+        eventListener.EnableEvents(
+            eventSource,
+            EventLevel.Informational,
+            EventKeywords.None,
+            new Dictionary<string, string> { { "EventCounterIntervalSec", ".1" } }
+        );
 
         // Act
         Assert.True(await UntilValueMatches(durationValues, 0));

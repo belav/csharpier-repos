@@ -20,9 +20,7 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     public SqlServerAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,9 +38,7 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         var maxSize = model.Model.GetDatabaseMaxSize();
         var serviceTier = model.Model.GetServiceTierSql();
         var performanceLevel = model.Model.GetPerformanceLevelSql();
-        if (maxSize != null
-            || serviceTier != null
-            || performanceLevel != null)
+        if (maxSize != null || serviceTier != null || performanceLevel != null)
         {
             var options = new StringBuilder();
 
@@ -69,10 +65,18 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
 
             options.Remove(options.Length - 2, 2);
 
-            yield return new Annotation(SqlServerAnnotationNames.EditionOptions, options.ToString());
+            yield return new Annotation(
+                SqlServerAnnotationNames.EditionOptions,
+                options.ToString()
+            );
         }
 
-        if (model.Tables.Any(t => !t.IsExcludedFromMigrations && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)))
+        if (
+            model.Tables.Any(t =>
+                !t.IsExcludedFromMigrations
+                && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
+            )
+        )
         {
             yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
         }
@@ -102,8 +106,14 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         if (entityType.IsTemporal())
         {
             yield return new Annotation(SqlServerAnnotationNames.IsTemporal, true);
-            yield return new Annotation(SqlServerAnnotationNames.TemporalHistoryTableName, entityType.GetHistoryTableName());
-            yield return new Annotation(SqlServerAnnotationNames.TemporalHistoryTableSchema, entityType.GetHistoryTableSchema());
+            yield return new Annotation(
+                SqlServerAnnotationNames.TemporalHistoryTableName,
+                entityType.GetHistoryTableName()
+            );
+            yield return new Annotation(
+                SqlServerAnnotationNames.TemporalHistoryTableSchema,
+                entityType.GetHistoryTableSchema()
+            );
 
             // for the RevEng path, we avoid adding period properties to the entity
             // because we don't want code for them to be generated - they need to be in shadow state
@@ -116,22 +126,30 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
             if (periodStartPropertyName != null)
             {
                 var periodStartProperty = entityType.FindProperty(periodStartPropertyName);
-                var periodStartColumnName = periodStartProperty != null
-                    ? periodStartProperty.GetColumnName(storeObjectIdentifier)
-                    : periodStartPropertyName;
+                var periodStartColumnName =
+                    periodStartProperty != null
+                        ? periodStartProperty.GetColumnName(storeObjectIdentifier)
+                        : periodStartPropertyName;
 
-                yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodStartColumnName, periodStartColumnName);
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalPeriodStartColumnName,
+                    periodStartColumnName
+                );
             }
 
             var periodEndPropertyName = entityType.GetPeriodEndPropertyName();
             if (periodEndPropertyName != null)
             {
                 var periodEndProperty = entityType.FindProperty(periodEndPropertyName);
-                var periodEndColumnName = periodEndProperty != null
-                    ? periodEndProperty.GetColumnName(storeObjectIdentifier)
-                    : periodEndPropertyName;
+                var periodEndColumnName =
+                    periodEndProperty != null
+                        ? periodEndProperty.GetColumnName(storeObjectIdentifier)
+                        : periodEndPropertyName;
 
-                yield return new Annotation(SqlServerAnnotationNames.TemporalPeriodEndColumnName, periodEndColumnName);
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalPeriodEndColumnName,
+                    periodEndColumnName
+                );
             }
         }
     }
@@ -154,7 +172,10 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
 
         var table = constraint.Table;
 
-        if (key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema)) is bool isClustered)
+        if (
+            key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
+            is bool isClustered
+        )
         {
             yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
         }
@@ -184,14 +205,14 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         if (modelIndex.GetIncludeProperties(table) is IReadOnlyList<string> includeProperties)
         {
             var includeColumns = includeProperties
-                .Select(
-                    p => modelIndex.DeclaringEntityType.FindProperty(p)!
-                        .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema)))
+                .Select(p =>
+                    modelIndex
+                        .DeclaringEntityType.FindProperty(p)!
+                        .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema))
+                )
                 .ToArray();
 
-            yield return new Annotation(
-                SqlServerAnnotationNames.Include,
-                includeColumns);
+            yield return new Annotation(SqlServerAnnotationNames.Include, includeColumns);
         }
 
         if (modelIndex.IsCreatedOnline(table) is bool isOnline)
@@ -211,7 +232,10 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
 
         if (modelIndex.GetDataCompression(table) is DataCompressionType dataCompressionType)
         {
-            yield return new Annotation(SqlServerAnnotationNames.DataCompression, dataCompressionType);
+            yield return new Annotation(
+                SqlServerAnnotationNames.DataCompression,
+                dataCompressionType
+            );
         }
     }
 
@@ -229,11 +253,12 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         }
 
         var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
-        var identityProperty = column.PropertyMappings
-            .Select(m => m.Property)
-            .FirstOrDefault(
-                p => p.GetValueGenerationStrategy(table)
-                    == SqlServerValueGenerationStrategy.IdentityColumn);
+        var identityProperty = column
+            .PropertyMappings.Select(m => m.Property)
+            .FirstOrDefault(p =>
+                p.GetValueGenerationStrategy(table)
+                == SqlServerValueGenerationStrategy.IdentityColumn
+            );
         if (identityProperty != null)
         {
             var seed = identityProperty.GetIdentitySeed(table);
@@ -241,12 +266,15 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
 
             yield return new Annotation(
                 SqlServerAnnotationNames.Identity,
-                string.Format(CultureInfo.InvariantCulture, "{0}, {1}", seed ?? 1, increment ?? 1));
+                string.Format(CultureInfo.InvariantCulture, "{0}, {1}", seed ?? 1, increment ?? 1)
+            );
         }
 
         // JSON columns have no property mappings so all annotations that rely on property mappings should be skipped for them
-        if (column is not JsonColumn
-            && column.PropertyMappings.FirstOrDefault()?.Property.IsSparse() is bool isSparse)
+        if (
+            column is not JsonColumn
+            && column.PropertyMappings.FirstOrDefault()?.Property.IsSparse() is bool isSparse
+        )
         {
             // Model validation ensures that these facets are the same on all mapped properties
             yield return new Annotation(SqlServerAnnotationNames.Sparse, isSparse);
@@ -266,22 +294,30 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
             // since in RevEng scenario there can't be custom column mapping
             // see #26007
             var periodStartProperty = entityType.FindProperty(periodStartPropertyName!);
-            var periodStartColumnName = periodStartProperty != null
-                ? periodStartProperty.GetColumnName(storeObjectIdentifier)
-                : periodStartPropertyName;
+            var periodStartColumnName =
+                periodStartProperty != null
+                    ? periodStartProperty.GetColumnName(storeObjectIdentifier)
+                    : periodStartPropertyName;
 
             var periodEndProperty = entityType.FindProperty(periodEndPropertyName!);
-            var periodEndColumnName = periodEndProperty != null
-                ? periodEndProperty.GetColumnName(storeObjectIdentifier)
-                : periodEndPropertyName;
+            var periodEndColumnName =
+                periodEndProperty != null
+                    ? periodEndProperty.GetColumnName(storeObjectIdentifier)
+                    : periodEndPropertyName;
 
             if (column.Name == periodStartColumnName)
             {
-                yield return new Annotation(SqlServerAnnotationNames.TemporalIsPeriodStartColumn, true);
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalIsPeriodStartColumn,
+                    true
+                );
             }
             else if (column.Name == periodEndColumnName)
             {
-                yield return new Annotation(SqlServerAnnotationNames.TemporalIsPeriodEndColumn, true);
+                yield return new Annotation(
+                    SqlServerAnnotationNames.TemporalIsPeriodEndColumn,
+                    true
+                );
             }
         }
     }

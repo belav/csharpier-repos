@@ -8,5 +8,8 @@ public interface I
 
 public class MyBase
 {
-    public virtual string Print<T>() { return "MyBase.Print<" + typeof(T) + "> called"; }
+    public virtual string Print<T>()
+    {
+        return "MyBase.Print<" + typeof(T) + "> called";
+    }
 }

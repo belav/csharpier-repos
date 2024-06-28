@@ -6,15 +6,15 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 using System.Xml.Xsl;
-using System.ComponentModel;
 
-namespace System.Xml.Xsl.Runtime {
-
+namespace System.Xml.Xsl.Runtime
+{
     /// <summary>
     /// This is a simple convenience wrapper internal class that contains static helper methods that get a value
     /// converter from XmlQueryRuntime and use it convert among several physical Clr representations for
@@ -23,57 +23,113 @@ namespace System.Xml.Xsl.Runtime {
     /// Decimal, a conversion to the desired storage type must take place.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static class XmlILStorageConverter {
-
+    public static class XmlILStorageConverter
+    {
         //-----------------------------------------------
         // ToAtomicValue
         //-----------------------------------------------
 
-        public static XmlAtomicValue StringToAtomicValue(string value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue StringToAtomicValue(
+            string value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DecimalToAtomicValue(decimal value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue DecimalToAtomicValue(
+            decimal value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue Int64ToAtomicValue(long value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue Int64ToAtomicValue(
+            long value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue Int32ToAtomicValue(int value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue Int32ToAtomicValue(
+            int value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue BooleanToAtomicValue(bool value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue BooleanToAtomicValue(
+            bool value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DoubleToAtomicValue(double value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue DoubleToAtomicValue(
+            double value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue SingleToAtomicValue(float value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue SingleToAtomicValue(
+            float value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DateTimeToAtomicValue(DateTime value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue DateTimeToAtomicValue(
+            DateTime value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue XmlQualifiedNameToAtomicValue(XmlQualifiedName value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue XmlQualifiedNameToAtomicValue(
+            XmlQualifiedName value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue TimeSpanToAtomicValue(TimeSpan value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue TimeSpanToAtomicValue(
+            TimeSpan value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue BytesToAtomicValue(byte[] value, int index, XmlQueryRuntime runtime) {
+        public static XmlAtomicValue BytesToAtomicValue(
+            byte[] value,
+            int index,
+            XmlQueryRuntime runtime
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static IList<XPathItem> NavigatorsToItems(IList<XPathNavigator> listNavigators) {
+        public static IList<XPathItem> NavigatorsToItems(IList<XPathNavigator> listNavigators)
+        {
             // Check to see if the navigator cache implements IList<XPathItem>
             IList<XPathItem> listItems = listNavigators as IList<XPathItem>;
             if (listItems != null)
@@ -83,7 +139,8 @@ namespace System.Xml.Xsl.Runtime {
             return new XmlQueryNodeSequence(listNavigators);
         }
 
-        public static IList<XPathNavigator> ItemsToNavigators(IList<XPathItem> listItems) {
+        public static IList<XPathNavigator> ItemsToNavigators(IList<XPathItem> listItems)
+        {
             // Check to see if the navigator cache implements IList<XPathNavigator>
             IList<XPathNavigator> listNavs = listItems as IList<XPathNavigator>;
             if (listNavs != null)
@@ -92,7 +149,7 @@ namespace System.Xml.Xsl.Runtime {
             // Create XmlQueryNodeSequence, which does implement IList<XPathNavigator>
             XmlQueryNodeSequence seq = new XmlQueryNodeSequence(listItems.Count);
             for (int i = 0; i < listItems.Count; i++)
-                seq.Add((XPathNavigator) listItems[i]);
+                seq.Add((XPathNavigator)listItems[i]);
 
             return seq;
         }

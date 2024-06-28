@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTextWriterStyle.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
-
 
     /// <devdoc>
     /// </devdoc>
-    public enum HtmlTextWriterStyle {
-
+    public enum HtmlTextWriterStyle
+    {
         BackgroundColor,
 
         BackgroundImage,
@@ -45,7 +45,6 @@ namespace System.Web.UI {
         ListStyleImage,
 
         ListStyleType,
-
 
         Cursor,
 
@@ -99,6 +98,6 @@ namespace System.Web.UI {
 
         WhiteSpace,
 
-        ZIndex
+        ZIndex,
     }
 }

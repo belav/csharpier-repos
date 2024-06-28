@@ -14,10 +14,7 @@ public class PrerenderComponentApplicationStoreTest
         // Arrange
         var expected = "eyJNeVZhbHVlIjoiQVFJREJBPT0ifQ==";
         var store = new PrerenderComponentApplicationStore();
-        var state = new Dictionary<string, byte[]>()
-        {
-            ["MyValue"] = new byte[] { 1, 2, 3, 4 }
-        };
+        var state = new Dictionary<string, byte[]>() { ["MyValue"] = new byte[] { 1, 2, 3, 4 } };
 
         // Act
         await store.PersistStateAsync(state);
@@ -34,7 +31,7 @@ public class PrerenderComponentApplicationStoreTest
         var store = new PrerenderComponentApplicationStore(persistedState);
         var expected = new Dictionary<string, ReadOnlySequence<byte>>()
         {
-            ["MyValue"] = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 })
+            ["MyValue"] = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 }),
         };
 
         // Act
@@ -43,6 +40,7 @@ public class PrerenderComponentApplicationStoreTest
         // Assert
         Assert.Equal(
             expected.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()),
-            state.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()));
+            state.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray())
+        );
     }
 }

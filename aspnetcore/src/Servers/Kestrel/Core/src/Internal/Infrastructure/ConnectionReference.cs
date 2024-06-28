@@ -11,7 +11,11 @@ internal sealed class ConnectionReference
     private readonly WeakReference<KestrelConnection> _weakReference;
     private readonly TransportConnectionManager _transportConnectionManager;
 
-    public ConnectionReference(long id, KestrelConnection connection, TransportConnectionManager transportConnectionManager)
+    public ConnectionReference(
+        long id,
+        KestrelConnection connection,
+        TransportConnectionManager transportConnectionManager
+    )
     {
         _id = id;
 

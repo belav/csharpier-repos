@@ -24,7 +24,12 @@ public sealed class BeforeHandlerMethodEventData : EventData
     /// <param name="arguments">The arguments to the method.</param>
     /// <param name="handlerMethodDescriptor">The method descriptor.</param>
     /// <param name="instance">The instance.</param>
-    public BeforeHandlerMethodEventData(ActionContext actionContext, IReadOnlyDictionary<string, object?> arguments, HandlerMethodDescriptor handlerMethodDescriptor, object instance)
+    public BeforeHandlerMethodEventData(
+        ActionContext actionContext,
+        IReadOnlyDictionary<string, object?> arguments,
+        HandlerMethodDescriptor handlerMethodDescriptor,
+        object instance
+    )
     {
         ActionContext = actionContext;
         Arguments = arguments;
@@ -56,14 +61,19 @@ public sealed class BeforeHandlerMethodEventData : EventData
     protected override int Count => 4;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
-        2 => new KeyValuePair<string, object>(nameof(HandlerMethodDescriptor), HandlerMethodDescriptor),
-        3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
+            2
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerMethodDescriptor),
+                    HandlerMethodDescriptor
+                ),
+            3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -84,7 +94,13 @@ public sealed class AfterHandlerMethodEventData : EventData
     /// <param name="handlerMethodDescriptor">The method descriptor.</param>
     /// <param name="instance">The instance.</param>
     /// <param name="result">The result of the handler method</param>
-    public AfterHandlerMethodEventData(ActionContext actionContext, IReadOnlyDictionary<string, object?> arguments, HandlerMethodDescriptor handlerMethodDescriptor, object instance, IActionResult? result)
+    public AfterHandlerMethodEventData(
+        ActionContext actionContext,
+        IReadOnlyDictionary<string, object?> arguments,
+        HandlerMethodDescriptor handlerMethodDescriptor,
+        object instance,
+        IActionResult? result
+    )
     {
         ActionContext = actionContext;
         Arguments = arguments;
@@ -122,15 +138,20 @@ public sealed class AfterHandlerMethodEventData : EventData
     protected override int Count => 5;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
-        2 => new KeyValuePair<string, object>(nameof(HandlerMethodDescriptor), HandlerMethodDescriptor),
-        3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
-        4 => new KeyValuePair<string, object>(nameof(Result), Result!),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
+            2
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerMethodDescriptor),
+                    HandlerMethodDescriptor
+                ),
+            3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
+            4 => new KeyValuePair<string, object>(nameof(Result), Result!),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -149,7 +170,11 @@ public sealed class BeforePageFilterOnPageHandlerExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutionContext">The <see cref="HandlerExecutionContext"/>.</param>
     /// <param name="filter">The <see cref="IAsyncPageFilter"/>.</param>
-    public BeforePageFilterOnPageHandlerExecutionEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutingContext handlerExecutionContext, IAsyncPageFilter filter)
+    public BeforePageFilterOnPageHandlerExecutionEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutingContext handlerExecutionContext,
+        IAsyncPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutionContext = handlerExecutionContext;
@@ -175,13 +200,18 @@ public sealed class BeforePageFilterOnPageHandlerExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutionContext), HandlerExecutionContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutionContext),
+                    HandlerExecutionContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -200,7 +230,11 @@ public sealed class AfterPageFilterOnPageHandlerExecutionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutedContext">The <see cref="HandlerExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IAsyncPageFilter"/>.</param>
-    public AfterPageFilterOnPageHandlerExecutionEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutedContext handlerExecutedContext, IAsyncPageFilter filter)
+    public AfterPageFilterOnPageHandlerExecutionEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IAsyncPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutedContext = handlerExecutedContext;
@@ -226,13 +260,18 @@ public sealed class AfterPageFilterOnPageHandlerExecutionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutedContext), HandlerExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -251,7 +290,11 @@ public sealed class BeforePageFilterOnPageHandlerExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutingContext">The <see cref="PageHandlerExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public BeforePageFilterOnPageHandlerExecutingEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+    public BeforePageFilterOnPageHandlerExecutingEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutingContext handlerExecutingContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutingContext = handlerExecutingContext;
@@ -277,13 +320,18 @@ public sealed class BeforePageFilterOnPageHandlerExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutingContext), HandlerExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutingContext),
+                    HandlerExecutingContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -302,7 +350,11 @@ public sealed class AfterPageFilterOnPageHandlerExecutingEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutingContext">The <see cref="PageHandlerExecutingContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public AfterPageFilterOnPageHandlerExecutingEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+    public AfterPageFilterOnPageHandlerExecutingEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutingContext handlerExecutingContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutingContext = handlerExecutingContext;
@@ -328,13 +380,18 @@ public sealed class AfterPageFilterOnPageHandlerExecutingEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutingContext), HandlerExecutingContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutingContext),
+                    HandlerExecutingContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -353,7 +410,11 @@ public sealed class BeforePageFilterOnPageHandlerExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutedContext">The <see cref="PageHandlerExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public BeforePageFilterOnPageHandlerExecutedEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+    public BeforePageFilterOnPageHandlerExecutedEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutedContext = handlerExecutedContext;
@@ -379,13 +440,18 @@ public sealed class BeforePageFilterOnPageHandlerExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutedContext), HandlerExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -404,7 +470,11 @@ public sealed class AfterPageFilterOnPageHandlerExecutedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerExecutedContext">The <see cref="PageHandlerExecutedContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public AfterPageFilterOnPageHandlerExecutedEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+    public AfterPageFilterOnPageHandlerExecutedEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerExecutedContext = handlerExecutedContext;
@@ -430,13 +500,18 @@ public sealed class AfterPageFilterOnPageHandlerExecutedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerExecutedContext), HandlerExecutedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -455,7 +530,11 @@ public sealed class BeforePageFilterOnPageHandlerSelectionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerSelectedContext">The <see cref="PageHandlerSelectedContext"/>.</param>
     /// <param name="filter">The <see cref="IAsyncPageFilter"/>.</param>
-    public BeforePageFilterOnPageHandlerSelectionEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+    public BeforePageFilterOnPageHandlerSelectionEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IAsyncPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerSelectedContext = handlerSelectedContext;
@@ -481,13 +560,18 @@ public sealed class BeforePageFilterOnPageHandlerSelectionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerSelectedContext), HandlerSelectedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -506,7 +590,11 @@ public sealed class AfterPageFilterOnPageHandlerSelectionEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerSelectedContext">The <see cref="PageHandlerSelectedContext"/>.</param>
     /// <param name="filter">The <see cref="IAsyncPageFilter"/>.</param>
-    public AfterPageFilterOnPageHandlerSelectionEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+    public AfterPageFilterOnPageHandlerSelectionEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IAsyncPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerSelectedContext = handlerSelectedContext;
@@ -532,13 +620,18 @@ public sealed class AfterPageFilterOnPageHandlerSelectionEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerSelectedContext), HandlerSelectedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -557,7 +650,11 @@ public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerSelectedContext">The <see cref="PageHandlerSelectedContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public BeforePageFilterOnPageHandlerSelectedEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+    public BeforePageFilterOnPageHandlerSelectedEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerSelectedContext = handlerSelectedContext;
@@ -583,13 +680,18 @@ public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerSelectedContext), HandlerSelectedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -608,7 +710,11 @@ public sealed class AfterPageFilterOnPageHandlerSelectedEventData : EventData
     /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <param name="handlerSelectedContext">The <see cref="PageHandlerSelectedContext"/>.</param>
     /// <param name="filter">The <see cref="IPageFilter"/>.</param>
-    public AfterPageFilterOnPageHandlerSelectedEventData(CompiledPageActionDescriptor actionDescriptor, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+    public AfterPageFilterOnPageHandlerSelectedEventData(
+        CompiledPageActionDescriptor actionDescriptor,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IPageFilter filter
+    )
     {
         ActionDescriptor = actionDescriptor;
         HandlerSelectedContext = handlerSelectedContext;
@@ -634,11 +740,16 @@ public sealed class AfterPageFilterOnPageHandlerSelectedEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(HandlerSelectedContext), HandlerSelectedContext),
-        2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }

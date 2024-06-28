@@ -5,7 +5,7 @@
 //
 //  File:      ValueSerializerAttribute.cs
 //
-//  Contents:  An attribute that allows associating a ValueSerializer 
+//  Contents:  An attribute that allows associating a ValueSerializer
 //             implementation with either a type or a property (or
 //             an attached property by setting it on the static accessor
 //             for the attachable property).
@@ -25,9 +25,20 @@ namespace System.Windows.Markup
     /// with an attached property by placing the attribute on the static accessor for the
     /// attached property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Property
+            | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
 #if !MOBILE
-    [TypeForwardedFrom("WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
 #endif
     public sealed class ValueSerializerAttribute : Attribute
     {

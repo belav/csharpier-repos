@@ -4,7 +4,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Http.Functional.Tests
@@ -25,7 +24,9 @@ namespace System.Net.Http.Functional.Tests
             MockHandler handler = new MockHandler();
             Assert.Null(handler.InnerHandler);
             handler.Dispose();
-            Assert.Throws<ObjectDisposedException>(() => handler.InnerHandler = new MockTransportHandler());
+            Assert.Throws<ObjectDisposedException>(
+                () => handler.InnerHandler = new MockTransportHandler()
+            );
         }
 
         [Fact]
@@ -47,7 +48,9 @@ namespace System.Net.Http.Functional.Tests
             MockHandler handler = new MockHandler();
 
             Assert.Throws<InvalidOperationException>(() =>
-                { Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None); });
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -57,7 +60,12 @@ namespace System.Net.Http.Functional.Tests
             var transport = new MockTransportHandler();
             handler.InnerHandler = transport;
 
-            using (HttpResponseMessage response = await handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None))
+            using (
+                HttpResponseMessage response = await handler.TestSendAsync(
+                    new HttpRequestMessage(),
+                    CancellationToken.None
+                )
+            )
             {
                 Assert.NotNull(response);
                 Assert.Equal(1, handler.SendAsyncCount);
@@ -77,7 +85,12 @@ namespace System.Net.Http.Functional.Tests
             handler.InnerHandler = transport1;
             handler.InnerHandler = transport2;
 
-            using (HttpResponseMessage response = await handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None))
+            using (
+                HttpResponseMessage response = await handler.TestSendAsync(
+                    new HttpRequestMessage(),
+                    CancellationToken.None
+                )
+            )
             {
                 Assert.NotNull(response);
                 Assert.Equal(1, handler.SendAsyncCount);
@@ -93,7 +106,9 @@ namespace System.Net.Http.Functional.Tests
             var handler = new MockHandler(transport);
 
             Assert.Throws<ArgumentNullException>(() =>
-                { Task t = handler.TestSendAsync(null, CancellationToken.None); });
+            {
+                Task t = handler.TestSendAsync(null, CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -104,7 +119,9 @@ namespace System.Net.Http.Functional.Tests
             handler.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                { Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None); });
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
             Assert.Throws<ObjectDisposedException>(() => handler.InnerHandler = new MockHandler());
             Assert.Equal(transport, handler.InnerHandler);
         }
@@ -127,7 +144,9 @@ namespace System.Net.Http.Functional.Tests
             var handler = new MockHandler();
 
             Assert.Throws<InvalidOperationException>(() =>
-                { Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None); });
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -174,21 +193,25 @@ namespace System.Net.Http.Functional.Tests
             public int SendAsyncCount { get; private set; }
             public int DisposeCount { get; private set; }
 
-            public MockHandler() : base()
-            {
-            }
+            public MockHandler()
+                : base() { }
 
-            public MockHandler(HttpMessageHandler innerHandler) : base(innerHandler)
-            {
-            }
+            public MockHandler(HttpMessageHandler innerHandler)
+                : base(innerHandler) { }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 SendAsyncCount++;
                 return base.SendAsync(request, cancellationToken);
             }
 
-            public Task<HttpResponseMessage> TestSendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            public Task<HttpResponseMessage> TestSendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return SendAsync(request, cancellationToken);
             }
@@ -205,13 +228,19 @@ namespace System.Net.Http.Functional.Tests
             public int SendAsyncCount { get; private set; }
             public int DisposeCount { get; private set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 SendAsyncCount++;
                 return Task.FromResult(new HttpResponseMessage());
             }
 
-            public Task<HttpResponseMessage> TestSendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            public Task<HttpResponseMessage> TestSendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return SendAsync(request, cancellationToken);
             }

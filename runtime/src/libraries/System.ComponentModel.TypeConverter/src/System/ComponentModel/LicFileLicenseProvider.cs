@@ -28,7 +28,6 @@ namespace System.ComponentModel
             return false;
         }
 
-
         /// <summary>
         /// Creates a key for the specified type.
         /// </summary>
@@ -41,11 +40,22 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a license for the instance of the component and determines if it is valid.
         /// </summary>
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:RequiresAssemblyFiles",
-            Justification = "Only used for when Location is non-empty")]
-        [UnconditionalSuppressMessage("SingleFile", "IL3000:RequiresAssemblyFiles",
-            Justification = "Location is checked for empty")]
-        public override License? GetLicense(LicenseContext context, Type type, object? instance, bool allowExceptions)
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3002:RequiresAssemblyFiles",
+            Justification = "Only used for when Location is non-empty"
+        )]
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3000:RequiresAssemblyFiles",
+            Justification = "Location is checked for empty"
+        )]
+        public override License? GetLicense(
+            LicenseContext context,
+            Type type,
+            object? instance,
+            bool allowExceptions
+        )
         {
             LicFileLicense? lic = null;
 
@@ -67,7 +77,8 @@ namespace System.ComponentModel
 
                     if (context != null)
                     {
-                        ITypeResolutionService? resolver = (ITypeResolutionService?)context.GetService(typeof(ITypeResolutionService));
+                        ITypeResolutionService? resolver = (ITypeResolutionService?)
+                            context.GetService(typeof(ITypeResolutionService));
                         if (resolver != null)
                         {
                             modulePath = resolver.GetPathOfAssembly(type.Assembly.GetName());
@@ -84,7 +95,12 @@ namespace System.ComponentModel
                         Debug.WriteLine($"Looking for license in: {licenseFile}");
                         if (File.Exists(licenseFile))
                         {
-                            Stream licStream = new FileStream(licenseFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+                            Stream licStream = new FileStream(
+                                licenseFile,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Read
+                            );
                             StreamReader sr = new StreamReader(licStream);
                             string? s = sr.ReadLine();
                             sr.Close();
@@ -113,6 +129,7 @@ namespace System.ComponentModel
                 _owner = owner;
                 LicenseKey = key;
             }
+
             public override string LicenseKey { get; }
 
             public override void Dispose()

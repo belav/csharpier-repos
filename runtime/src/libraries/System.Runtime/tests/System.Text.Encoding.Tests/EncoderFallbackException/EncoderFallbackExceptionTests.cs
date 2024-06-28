@@ -30,7 +30,9 @@ namespace System.Text.Tests
         [InlineData("Test message.")]
         public static void Ctor_String(string message)
         {
-            EncoderFallbackException encoderFallbackException = new EncoderFallbackException(message);
+            EncoderFallbackException encoderFallbackException = new EncoderFallbackException(
+                message
+            );
             Assert.Equal(default(char), encoderFallbackException.CharUnknown);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownHigh);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownLow);
@@ -45,7 +47,11 @@ namespace System.Text.Tests
 
         public static IEnumerable<object[]> Ctor_String_Exception_TestData()
         {
-            yield return new object[] { "Test message.", new InvalidOperationException("Inner exception message.") };
+            yield return new object[]
+            {
+                "Test message.",
+                new InvalidOperationException("Inner exception message."),
+            };
             yield return new object[] { "", null };
         }
 
@@ -53,7 +59,10 @@ namespace System.Text.Tests
         [MemberData(nameof(Ctor_String_Exception_TestData))]
         public static void Ctor_String_Exception(string message, Exception innerException)
         {
-            EncoderFallbackException encoderFallbackException = new EncoderFallbackException(message, innerException);
+            EncoderFallbackException encoderFallbackException = new EncoderFallbackException(
+                message,
+                innerException
+            );
             Assert.Equal(default(char), encoderFallbackException.CharUnknown);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownHigh);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownLow);

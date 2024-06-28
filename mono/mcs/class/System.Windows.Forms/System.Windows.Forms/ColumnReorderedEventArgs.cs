@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,34 +31,41 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	public class ColumnReorderedEventArgs : CancelEventArgs
-	{
+    public class ColumnReorderedEventArgs : CancelEventArgs
+    {
+        private ColumnHeader header;
+        private int new_display_index;
+        private int old_display_index;
 
-		private ColumnHeader header;
-		private int new_display_index;
-		private int old_display_index;
+        #region Public Constructors
+        public ColumnReorderedEventArgs(
+            int oldDisplayIndex,
+            int newDisplayIndex,
+            ColumnHeader header
+        )
+            : base()
+        {
+            this.old_display_index = oldDisplayIndex;
+            this.new_display_index = newDisplayIndex;
+            this.header = header;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Constructors
-		public ColumnReorderedEventArgs(int oldDisplayIndex, int newDisplayIndex, ColumnHeader header) : base ()
-		{
-			this.old_display_index = oldDisplayIndex;
-			this.new_display_index = newDisplayIndex;
-			this.header = header;
-		}
-		#endregion	// Public Constructors
+        #region Public Instance Properties
+        public int OldDisplayIndex
+        {
+            get { return this.old_display_index; }
+        }
 
-		#region Public Instance Properties
-		public int OldDisplayIndex {
-			get { return this.old_display_index; }
-		}
+        public int NewDisplayIndex
+        {
+            get { return this.new_display_index; }
+        }
 
-		public int NewDisplayIndex {
-			get { return this.new_display_index; }
-		}
-
-		public ColumnHeader Header {
-			get { return this.header; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public ColumnHeader Header
+        {
+            get { return this.header; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

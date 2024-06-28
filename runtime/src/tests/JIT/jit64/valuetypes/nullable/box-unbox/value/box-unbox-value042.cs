@@ -2,20 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((ImplementAllInterface<int>)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     [Fact]
@@ -29,5 +35,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

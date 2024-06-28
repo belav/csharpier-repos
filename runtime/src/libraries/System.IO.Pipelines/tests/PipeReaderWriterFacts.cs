@@ -17,7 +17,14 @@ namespace System.IO.Pipelines.Tests
         public PipelineReaderWriterFacts()
         {
             _pool = new TestMemoryPool();
-            _pipe = new Pipe(new PipeOptions(_pool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+            _pipe = new Pipe(
+                new PipeOptions(
+                    _pool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                )
+            );
         }
 
         public void Dispose()
@@ -157,7 +164,9 @@ namespace System.IO.Pipelines.Tests
 
             _pipe.Reader.Complete();
 
-            var exception = Assert.Throws<InvalidOperationException>(() => _pipe.Reader.AdvanceTo(buffer.End));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => _pipe.Reader.AdvanceTo(buffer.End)
+            );
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
         }
 
@@ -213,35 +222,59 @@ namespace System.IO.Pipelines.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public async Task ReadAsync_ThrowsIfWriterCompletedWithException()
         {
-            ThrowTestException(new InvalidOperationException("Writer exception"), e => _pipe.Writer.Complete(e));
+            ThrowTestException(
+                new InvalidOperationException("Writer exception"),
+                e => _pipe.Writer.Complete(e)
+            );
 
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await _pipe.Reader.ReadAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await _pipe.Reader.ReadAsync()
+                );
 
             Assert.Equal("Writer exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(async () => await _pipe.Reader.ReadAsync());
+            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await _pipe.Reader.ReadAsync()
+            );
             Assert.Equal("Writer exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public async Task WriteAsync_ThrowsIfReaderCompletedWithException()
         {
-            ThrowTestException(new InvalidOperationException("Reader exception"), e => _pipe.Reader.Complete(e));
+            ThrowTestException(
+                new InvalidOperationException("Reader exception"),
+                e => _pipe.Reader.Complete(e)
+            );
 
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await _pipe.Writer.WriteAsync(new byte[1]));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await _pipe.Writer.WriteAsync(new byte[1])
+                );
 
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(async () => await _pipe.Writer.WriteAsync(new byte[1]));
+            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await _pipe.Writer.WriteAsync(new byte[1])
+            );
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
         }
@@ -340,7 +373,13 @@ namespace System.IO.Pipelines.Tests
             // Write Hello to another pipeline and get the buffer
             byte[] bytes = "Hello"u8.ToArray();
 
-            var c2 = new Pipe(new PipeOptions(_pool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline));
+            var c2 = new Pipe(
+                new PipeOptions(
+                    _pool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline
+                )
+            );
             await c2.Writer.WriteAsync(bytes);
             ReadResult result = await c2.Reader.ReadAsync();
             ReadOnlySequence<byte> c2Buffer = result.Buffer;
@@ -384,12 +423,19 @@ namespace System.IO.Pipelines.Tests
             _pipe.Reader.AdvanceTo(reader.Start, reader.Start);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ReadAsyncOnCompletedCapturesTheExecutionContext(bool useSynchronizationContext)
+        public async Task ReadAsyncOnCompletedCapturesTheExecutionContext(
+            bool useSynchronizationContext
+        )
         {
-            var pipe = new Pipe(new PipeOptions(useSynchronizationContext: useSynchronizationContext));
+            var pipe = new Pipe(
+                new PipeOptions(useSynchronizationContext: useSynchronizationContext)
+            );
 
             SynchronizationContext previous = SynchronizationContext.Current;
             var sc = new CustomSynchronizationContext();
@@ -405,10 +451,12 @@ namespace System.IO.Pipelines.Tests
                 var tcs = new TaskCompletionSource<int>();
                 val.Value = 10;
 
-                pipe.Reader.ReadAsync().GetAwaiter().OnCompleted(() =>
-                {
-                    tcs.TrySetResult(val.Value);
-                });
+                pipe.Reader.ReadAsync()
+                    .GetAwaiter()
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -437,12 +485,23 @@ namespace System.IO.Pipelines.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task FlushAsyncOnCompletedCapturesTheExecutionContextAndSyncContext(bool useSynchronizationContext)
+        public async Task FlushAsyncOnCompletedCapturesTheExecutionContextAndSyncContext(
+            bool useSynchronizationContext
+        )
         {
-            var pipe = new Pipe(new PipeOptions(useSynchronizationContext: useSynchronizationContext, pauseWriterThreshold: 20, resumeWriterThreshold: 10));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    useSynchronizationContext: useSynchronizationContext,
+                    pauseWriterThreshold: 20,
+                    resumeWriterThreshold: 10
+                )
+            );
 
             SynchronizationContext previous = SynchronizationContext.Current;
             var sc = new CustomSynchronizationContext();
@@ -459,10 +518,12 @@ namespace System.IO.Pipelines.Tests
                 val.Value = 10;
 
                 pipe.Writer.WriteEmpty(20);
-                pipe.Writer.FlushAsync().GetAwaiter().OnCompleted(() =>
-                {
-                    tcs.TrySetResult(val.Value);
-                });
+                pipe.Writer.FlushAsync()
+                    .GetAwaiter()
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -495,21 +556,22 @@ namespace System.IO.Pipelines.Tests
         public async Task ReadingCanBeCanceled()
         {
             var cts = new CancellationTokenSource();
-            cts.Token.Register(() => { _pipe.Writer.Complete(new OperationCanceledException(cts.Token)); });
+            cts.Token.Register(() =>
+            {
+                _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
+            });
 
-            Task ignore = Task.Run(
-                async () =>
-                {
-                    await Task.Delay(1000);
-                    cts.Cancel();
-                });
+            Task ignore = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                cts.Cancel();
+            });
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () =>
-                {
-                    ReadResult result = await _pipe.Reader.ReadAsync();
-                    ReadOnlySequence<byte> buffer = result.Buffer;
-                });
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                ReadResult result = await _pipe.Reader.ReadAsync();
+                ReadOnlySequence<byte> buffer = result.Buffer;
+            });
         }
 
         [Fact]
@@ -575,7 +637,9 @@ namespace System.IO.Pipelines.Tests
         {
             _pipe.Reader.Complete();
 
-            Assert.Throws<InvalidOperationException>(() => _pipe.Reader.TryRead(out ReadResult result));
+            Assert.Throws<InvalidOperationException>(
+                () => _pipe.Reader.TryRead(out ReadResult result)
+            );
         }
 
         [Fact]
@@ -659,7 +723,9 @@ namespace System.IO.Pipelines.Tests
             ReadResult readResult = await _pipe.Reader.ReadAsync();
             _pipe.Reader.AdvanceTo(readResult.Buffer.Start);
 
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => _pipe.Reader.AdvanceTo(readResult.Buffer.End));
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () => _pipe.Reader.AdvanceTo(readResult.Buffer.End)
+            );
             Assert.Equal("No reading operation to complete.", exception.Message);
         }
 
@@ -764,7 +830,8 @@ namespace System.IO.Pipelines.Tests
 
         private sealed class CustomSynchronizationContext : SynchronizationContext
         {
-            public List<Tuple<SendOrPostCallback, object>> Callbacks = new List<Tuple<SendOrPostCallback, object>>();
+            public List<Tuple<SendOrPostCallback, object>> Callbacks =
+                new List<Tuple<SendOrPostCallback, object>>();
 
             public override void Post(SendOrPostCallback d, object state)
             {

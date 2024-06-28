@@ -18,22 +18,34 @@ namespace System.Threading
         internal ThreadPoolBoundHandle? _boundHandle;
         internal bool _completed;
 
-        public ThreadPoolBoundHandleOverlapped(IOCompletionCallback callback, object? state, object? pinData, PreAllocatedOverlapped? preAllocated, bool flowExecutionContext)
+        public ThreadPoolBoundHandleOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            PreAllocatedOverlapped? preAllocated,
+            bool flowExecutionContext
+        )
         {
             _userCallback = callback;
             _userState = state;
             _preAllocated = preAllocated;
 
-            _nativeOverlapped = flowExecutionContext ?
-                Pack(s_completionCallback, pinData) :
-                UnsafePack(s_completionCallback, pinData);
+            _nativeOverlapped = flowExecutionContext
+                ? Pack(s_completionCallback, pinData)
+                : UnsafePack(s_completionCallback, pinData);
             _nativeOverlapped->OffsetLow = 0; // CLR reuses NativeOverlapped instances and does not reset these
             _nativeOverlapped->OffsetHigh = 0;
         }
 
-        private static void CompletionCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+        private static void CompletionCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        )
         {
-            ThreadPoolBoundHandleOverlapped overlapped = (ThreadPoolBoundHandleOverlapped)Unpack(nativeOverlapped);
+            ThreadPoolBoundHandleOverlapped overlapped = (ThreadPoolBoundHandleOverlapped)Unpack(
+                nativeOverlapped
+            );
 
             //
             // The Win32 thread pool implementation of ThreadPoolBoundHandle does not permit reuse of NativeOverlapped

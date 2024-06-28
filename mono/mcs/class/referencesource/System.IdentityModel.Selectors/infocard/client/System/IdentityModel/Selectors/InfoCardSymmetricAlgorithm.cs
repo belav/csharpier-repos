@@ -4,8 +4,8 @@
 //
 // Presharp uses the c# pragma mechanism to supress its warnings.
 // These are not recognised by the base compiler so we need to explictly
-// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp 
-// for details. 
+// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp
+// for details.
 //
 #pragma warning disable 1634, 1691      // unknown message, unknown pragma
 
@@ -14,19 +14,17 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-    using DiagnosticUtility = Microsoft.InfoCards.Diagnostics.DiagnosticUtility;
-
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using DiagnosticUtility = Microsoft.InfoCards.Diagnostics.DiagnosticUtility;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
@@ -35,7 +33,6 @@ namespace System.IdentityModel.Selectors
     //
     internal class InfoCardSymmetricAlgorithm : SymmetricAlgorithm, IDisposable
     {
-
         //
         // Used to generate intialization vectors.
         //
@@ -63,7 +60,10 @@ namespace System.IdentityModel.Selectors
                 KeySizeValue = m_parameters.keySize;
                 BlockSizeValue = m_parameters.blockSize;
                 FeedbackSizeValue = m_parameters.feedbackSize;
-                LegalBlockSizesValue = new KeySizes[] { new KeySizes(BlockSizeValue, BlockSizeValue, 0) };
+                LegalBlockSizesValue = new KeySizes[]
+                {
+                    new KeySizes(BlockSizeValue, BlockSizeValue, 0),
+                };
                 LegalKeySizesValue = new KeySizes[] { new KeySizes(KeySizeValue, KeySizeValue, 0) };
             }
             catch
@@ -80,14 +80,8 @@ namespace System.IdentityModel.Selectors
 #pragma warning disable 56503       // do not throw from property getters.
         public override byte[] Key
         {
-            get
-            {
-                throw IDT.ThrowHelperError(new NotImplementedException());
-            }
-            set
-            {
-                throw IDT.ThrowHelperError(new NotImplementedException());
-            }
+            get { throw IDT.ThrowHelperError(new NotImplementedException()); }
+            set { throw IDT.ThrowHelperError(new NotImplementedException()); }
         }
 #pragma warning restore 56503
 
@@ -144,7 +138,7 @@ namespace System.IdentityModel.Selectors
             public enum Direction
             {
                 Encrypt = 1,
-                Decrypt = 2
+                Decrypt = 2,
             };
 
             TransformCryptoHandle m_transCryptoHandle;
@@ -169,14 +163,18 @@ namespace System.IdentityModel.Selectors
                     //
                     // Call native method to get a handle to a native transform.
                     //
-                    int status = CardSpaceSelector.GetShim().m_csShimGetCryptoTransform(symAlgo.m_cryptoHandle.InternalHandle,
-                                                                   (int)symAlgo.Mode,
-                                                                   (int)symAlgo.Padding,
-                                                                   symAlgo.FeedbackSize,
-                                                                   (int)cryptoDirection,
-                                                                   iv.Length,
-                                                                   pIV,
-                                                                   out nativeHandle);
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimGetCryptoTransform(
+                            symAlgo.m_cryptoHandle.InternalHandle,
+                            (int)symAlgo.Mode,
+                            (int)symAlgo.Padding,
+                            symAlgo.FeedbackSize,
+                            (int)cryptoDirection,
+                            iv.Length,
+                            pIV,
+                            out nativeHandle
+                        );
 
                     if (0 != status)
                     {
@@ -189,7 +187,6 @@ namespace System.IdentityModel.Selectors
 
                     m_param = (RpcTransformCryptoParameters)m_transCryptoHandle.Parameters;
                 }
-
             }
 
             public int InputBlockSize
@@ -227,20 +224,38 @@ namespace System.IdentityModel.Selectors
             // Returns:
             //  The number of bytes written.
             //
-            public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+            public int TransformBlock(
+                byte[] inputBuffer,
+                int inputOffset,
+                int inputCount,
+                byte[] outputBuffer,
+                int outputOffset
+            )
             {
                 GlobalAllocSafeHandle pOutData = null;
                 int cbOutData = 0;
-                IDT.DebugAssert(null != inputBuffer && 0 != inputBuffer.Length, "null input buffer");
+                IDT.DebugAssert(
+                    null != inputBuffer && 0 != inputBuffer.Length,
+                    "null input buffer"
+                );
                 IDT.DebugAssert(0 != inputCount, "0 input count");
                 using (HGlobalSafeHandle pInData = HGlobalSafeHandle.Construct(inputCount))
                 {
-                    Marshal.Copy(inputBuffer, inputOffset, pInData.DangerousGetHandle(), inputCount);
-                    int status = CardSpaceSelector.GetShim().m_csShimTransformBlock(m_transCryptoHandle.InternalHandle,
-                                                               inputCount,
-                                                               pInData,
-                                                               out cbOutData,
-                                                               out pOutData);
+                    Marshal.Copy(
+                        inputBuffer,
+                        inputOffset,
+                        pInData.DangerousGetHandle(),
+                        inputCount
+                    );
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimTransformBlock(
+                            m_transCryptoHandle.InternalHandle,
+                            inputCount,
+                            pInData,
+                            out cbOutData,
+                            out pOutData
+                        );
 
                     if (0 != status)
                     {
@@ -250,7 +265,12 @@ namespace System.IdentityModel.Selectors
                     pOutData.Length = cbOutData;
                     using (pOutData)
                     {
-                        Marshal.Copy(pOutData.DangerousGetHandle(), outputBuffer, outputOffset, pOutData.Length);
+                        Marshal.Copy(
+                            pOutData.DangerousGetHandle(),
+                            outputBuffer,
+                            outputOffset,
+                            pOutData.Length
+                        );
                     }
                 }
 
@@ -274,7 +294,10 @@ namespace System.IdentityModel.Selectors
             //
             public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
             {
-                IDT.DebugAssert(null != inputBuffer && 0 != inputBuffer.Length, "null input buffer");
+                IDT.DebugAssert(
+                    null != inputBuffer && 0 != inputBuffer.Length,
+                    "null input buffer"
+                );
                 IDT.DebugAssert(0 != inputCount, "0 input count");
                 GlobalAllocSafeHandle pOutData = null;
                 int cbOutData = 0;
@@ -282,13 +305,22 @@ namespace System.IdentityModel.Selectors
 
                 using (HGlobalSafeHandle pInData = HGlobalSafeHandle.Construct(inputCount))
                 {
-                    Marshal.Copy(inputBuffer, inputOffset, pInData.DangerousGetHandle(), inputCount);
+                    Marshal.Copy(
+                        inputBuffer,
+                        inputOffset,
+                        pInData.DangerousGetHandle(),
+                        inputCount
+                    );
 
-                    int status = CardSpaceSelector.GetShim().m_csShimTransformFinalBlock(m_transCryptoHandle.InternalHandle,
-                                                                    inputCount,
-                                                                    pInData,
-                                                                    out cbOutData,
-                                                                    out pOutData);
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimTransformFinalBlock(
+                            m_transCryptoHandle.InternalHandle,
+                            inputCount,
+                            pInData,
+                            out cbOutData,
+                            out pOutData
+                        );
 
                     if (0 != status)
                     {

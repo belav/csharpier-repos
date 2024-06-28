@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Operations;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -23,23 +23,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // most conversions are trivial and do not require additional data besides Kind
         // in uncommon cases an instance of this class is attached to the conversion.
-        private abstract class UncommonData
-        {
-        }
+        private abstract class UncommonData { }
 
         private sealed class MethodUncommonData : UncommonData
         {
-            public static readonly MethodUncommonData NoApplicableOperators = new MethodUncommonData(
-                isExtensionMethod: false,
-                isArrayIndex: false,
-                conversionResult: UserDefinedConversionResult.NoApplicableOperators(ImmutableArray<UserDefinedConversionAnalysis>.Empty),
-                conversionMethod: null);
+            public static readonly MethodUncommonData NoApplicableOperators =
+                new MethodUncommonData(
+                    isExtensionMethod: false,
+                    isArrayIndex: false,
+                    conversionResult: UserDefinedConversionResult.NoApplicableOperators(
+                        ImmutableArray<UserDefinedConversionAnalysis>.Empty
+                    ),
+                    conversionMethod: null
+                );
 
             public MethodUncommonData(
                 bool isExtensionMethod,
                 bool isArrayIndex,
                 UserDefinedConversionResult conversionResult,
-                MethodSymbol? conversionMethod)
+                MethodSymbol? conversionMethod
+            )
             {
                 _conversionMethod = conversionMethod;
                 _conversionResult = conversionResult;
@@ -62,19 +65,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             internal bool IsExtensionMethod
             {
-                get
-                {
-                    return (_flags & IsExtensionMethodMask) != 0;
-                }
+                get { return (_flags & IsExtensionMethodMask) != 0; }
             }
 
             // used by dynamic, which needs to know if a conversion is an array index conversion.
             internal bool IsArrayIndex
             {
-                get
-                {
-                    return (_flags & IsArrayIndexMask) != 0;
-                }
+                get { return (_flags & IsArrayIndexMask) != 0; }
             }
         }
 
@@ -93,7 +90,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private sealed class DeconstructionUncommonData : UncommonData
         {
-            internal DeconstructionUncommonData(DeconstructMethodInfo deconstructMethodInfoOpt, ImmutableArray<(BoundValuePlaceholder? placeholder, BoundExpression? conversion)> deconstructConversionInfo)
+            internal DeconstructionUncommonData(
+                DeconstructMethodInfo deconstructMethodInfoOpt,
+                ImmutableArray<(
+                    BoundValuePlaceholder? placeholder,
+                    BoundExpression? conversion
+                )> deconstructConversionInfo
+            )
             {
                 Debug.Assert(!deconstructConversionInfo.IsDefaultOrEmpty);
                 DeconstructMethodInfo = deconstructMethodInfoOpt;
@@ -101,13 +104,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             internal readonly DeconstructMethodInfo DeconstructMethodInfo;
-            internal readonly ImmutableArray<(BoundValuePlaceholder? placeholder, BoundExpression? conversion)> DeconstructConversionInfo;
+            internal readonly ImmutableArray<(
+                BoundValuePlaceholder? placeholder,
+                BoundExpression? conversion
+            )> DeconstructConversionInfo;
         }
 
         private sealed class CollectionExpressionUncommonData : NestedUncommonData
         {
-            internal CollectionExpressionUncommonData(CollectionExpressionTypeKind collectionExpressionTypeKind, TypeSymbol? elementType, ImmutableArray<Conversion> elementConversions) :
-                base(elementConversions)
+            internal CollectionExpressionUncommonData(
+                CollectionExpressionTypeKind collectionExpressionTypeKind,
+                TypeSymbol? elementType,
+                ImmutableArray<Conversion> elementConversions
+            )
+                : base(elementConversions)
             {
                 CollectionExpressionTypeKind = collectionExpressionTypeKind;
                 ElementType = elementType;
@@ -117,16 +127,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal readonly TypeSymbol? ElementType;
         }
 
-        internal static Conversion CreateCollectionExpressionConversion(CollectionExpressionTypeKind collectionExpressionTypeKind, TypeSymbol? elementType, ImmutableArray<Conversion> elementConversions)
+        internal static Conversion CreateCollectionExpressionConversion(
+            CollectionExpressionTypeKind collectionExpressionTypeKind,
+            TypeSymbol? elementType,
+            ImmutableArray<Conversion> elementConversions
+        )
         {
             return new Conversion(
                 ConversionKind.CollectionExpression,
-                new CollectionExpressionUncommonData(collectionExpressionTypeKind, elementType, elementConversions));
+                new CollectionExpressionUncommonData(
+                    collectionExpressionTypeKind,
+                    elementType,
+                    elementConversions
+                )
+            );
         }
 
-        private Conversion(
-            ConversionKind kind,
-            UncommonData? uncommonData = null)
+        private Conversion(ConversionKind kind, UncommonData? uncommonData = null)
         {
             _kind = kind;
             _uncommonData = uncommonData;
@@ -134,55 +151,84 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal Conversion(UserDefinedConversionResult conversionResult, bool isImplicit)
         {
-            _kind = conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
-                ? ConversionKind.NoConversion
-                : isImplicit ? ConversionKind.ImplicitUserDefined : ConversionKind.ExplicitUserDefined;
+            _kind =
+                conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
+                    ? ConversionKind.NoConversion
+                : isImplicit ? ConversionKind.ImplicitUserDefined
+                : ConversionKind.ExplicitUserDefined;
 
-            _uncommonData = conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators && conversionResult.Results.IsEmpty
-                ? MethodUncommonData.NoApplicableOperators
-                : new MethodUncommonData(
-                    isExtensionMethod: false,
-                    isArrayIndex: false,
-                    conversionResult: conversionResult,
-                    conversionMethod: null);
+            _uncommonData =
+                conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
+                && conversionResult.Results.IsEmpty
+                    ? MethodUncommonData.NoApplicableOperators
+                    : new MethodUncommonData(
+                        isExtensionMethod: false,
+                        isArrayIndex: false,
+                        conversionResult: conversionResult,
+                        conversionMethod: null
+                    );
         }
 
         // For the method group, lambda and anonymous method conversions
-        internal Conversion(ConversionKind kind, MethodSymbol conversionMethod, bool isExtensionMethod)
+        internal Conversion(
+            ConversionKind kind,
+            MethodSymbol conversionMethod,
+            bool isExtensionMethod
+        )
         {
             this._kind = kind;
             _uncommonData = new MethodUncommonData(
                 isExtensionMethod: isExtensionMethod,
                 isArrayIndex: false,
                 conversionResult: default,
-                conversionMethod: conversionMethod);
+                conversionMethod: conversionMethod
+            );
         }
 
         internal Conversion(ConversionKind kind, ImmutableArray<Conversion> nestedConversions)
         {
             this._kind = kind;
-            _uncommonData = new NestedUncommonData(
-                nestedConversions: nestedConversions);
+            _uncommonData = new NestedUncommonData(nestedConversions: nestedConversions);
         }
 
-        internal Conversion(ConversionKind kind, DeconstructMethodInfo deconstructMethodInfo, ImmutableArray<(BoundValuePlaceholder? placeholder, BoundExpression? conversion)> deconstructConversionInfo)
+        internal Conversion(
+            ConversionKind kind,
+            DeconstructMethodInfo deconstructMethodInfo,
+            ImmutableArray<(
+                BoundValuePlaceholder? placeholder,
+                BoundExpression? conversion
+            )> deconstructConversionInfo
+        )
         {
             Debug.Assert(kind == ConversionKind.Deconstruction);
 
             this._kind = kind;
-            _uncommonData = new DeconstructionUncommonData(deconstructMethodInfo, deconstructConversionInfo);
+            _uncommonData = new DeconstructionUncommonData(
+                deconstructMethodInfo,
+                deconstructConversionInfo
+            );
         }
 
         internal Conversion SetConversionMethod(MethodSymbol conversionMethod)
         {
-            // we use this method to patch up the conversion method only in two cases - 
+            // we use this method to patch up the conversion method only in two cases -
             // 1) when rewriting MethodGroup conversions and the method gets substituted.
             // 2) when lowering IntPtr conversion (a compat-related conversion which becomes a kind of a user-defined conversion)
             // 3) when rewriting user-defined conversions and the method gets substituted
             // in those cases it is ok to ignore existing _uncommonData.
-            Debug.Assert(_kind is ConversionKind.MethodGroup or ConversionKind.IntPtr or ConversionKind.ImplicitUserDefined or ConversionKind.ExplicitUserDefined);
+            Debug.Assert(
+                _kind
+                    is ConversionKind.MethodGroup
+                        or ConversionKind.IntPtr
+                        or ConversionKind.ImplicitUserDefined
+                        or ConversionKind.ExplicitUserDefined
+            );
 
-            return new Conversion(this.Kind, conversionMethod, isExtensionMethod: IsExtensionMethod);
+            return new Conversion(
+                this.Kind,
+                conversionMethod,
+                isExtensionMethod: IsExtensionMethod
+            );
         }
 
         internal Conversion SetArrayIndexConversionForDynamic()
@@ -196,7 +242,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isExtensionMethod: false,
                     isArrayIndex: true,
                     conversionResult: default,
-                    conversionMethod: null));
+                    conversionMethod: null
+                )
+            );
         }
 
         [Conditional("DEBUG")]
@@ -249,98 +297,177 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new Conversion(kind);
         }
 
-        internal static Conversion UnsetConversion => new Conversion(ConversionKind.UnsetConversionKind);
+        internal static Conversion UnsetConversion =>
+            new Conversion(ConversionKind.UnsetConversionKind);
         internal static Conversion NoConversion => new Conversion(ConversionKind.NoConversion);
         internal static Conversion Identity => new Conversion(ConversionKind.Identity);
-        internal static Conversion ImplicitConstant => new Conversion(ConversionKind.ImplicitConstant);
-        internal static Conversion ImplicitNumeric => new Conversion(ConversionKind.ImplicitNumeric);
-        internal static Conversion ImplicitReference => new Conversion(ConversionKind.ImplicitReference);
-        internal static Conversion ImplicitEnumeration => new Conversion(ConversionKind.ImplicitEnumeration);
+        internal static Conversion ImplicitConstant =>
+            new Conversion(ConversionKind.ImplicitConstant);
+        internal static Conversion ImplicitNumeric =>
+            new Conversion(ConversionKind.ImplicitNumeric);
+        internal static Conversion ImplicitReference =>
+            new Conversion(ConversionKind.ImplicitReference);
+        internal static Conversion ImplicitEnumeration =>
+            new Conversion(ConversionKind.ImplicitEnumeration);
         internal static Conversion ImplicitThrow => new Conversion(ConversionKind.ImplicitThrow);
         internal static Conversion ObjectCreation => new Conversion(ConversionKind.ObjectCreation);
-        internal static Conversion CollectionExpression => new Conversion(ConversionKind.CollectionExpression);
-        internal static Conversion AnonymousFunction => new Conversion(ConversionKind.AnonymousFunction);
+        internal static Conversion CollectionExpression =>
+            new Conversion(ConversionKind.CollectionExpression);
+        internal static Conversion AnonymousFunction =>
+            new Conversion(ConversionKind.AnonymousFunction);
         internal static Conversion Boxing => new Conversion(ConversionKind.Boxing);
         internal static Conversion NullLiteral => new Conversion(ConversionKind.NullLiteral);
         internal static Conversion DefaultLiteral => new Conversion(ConversionKind.DefaultLiteral);
-        internal static Conversion NullToPointer => new Conversion(ConversionKind.ImplicitNullToPointer);
-        internal static Conversion PointerToVoid => new Conversion(ConversionKind.ImplicitPointerToVoid);
-        internal static Conversion PointerToPointer => new Conversion(ConversionKind.ExplicitPointerToPointer);
-        internal static Conversion PointerToInteger => new Conversion(ConversionKind.ExplicitPointerToInteger);
-        internal static Conversion IntegerToPointer => new Conversion(ConversionKind.ExplicitIntegerToPointer);
+        internal static Conversion NullToPointer =>
+            new Conversion(ConversionKind.ImplicitNullToPointer);
+        internal static Conversion PointerToVoid =>
+            new Conversion(ConversionKind.ImplicitPointerToVoid);
+        internal static Conversion PointerToPointer =>
+            new Conversion(ConversionKind.ExplicitPointerToPointer);
+        internal static Conversion PointerToInteger =>
+            new Conversion(ConversionKind.ExplicitPointerToInteger);
+        internal static Conversion IntegerToPointer =>
+            new Conversion(ConversionKind.ExplicitIntegerToPointer);
         internal static Conversion Unboxing => new Conversion(ConversionKind.Unboxing);
-        internal static Conversion ExplicitReference => new Conversion(ConversionKind.ExplicitReference);
+        internal static Conversion ExplicitReference =>
+            new Conversion(ConversionKind.ExplicitReference);
         internal static Conversion IntPtr => new Conversion(ConversionKind.IntPtr);
-        internal static Conversion ExplicitEnumeration => new Conversion(ConversionKind.ExplicitEnumeration);
-        internal static Conversion ExplicitNumeric => new Conversion(ConversionKind.ExplicitNumeric);
-        internal static Conversion ImplicitDynamic => new Conversion(ConversionKind.ImplicitDynamic);
-        internal static Conversion ExplicitDynamic => new Conversion(ConversionKind.ExplicitDynamic);
-        internal static Conversion InterpolatedString => new Conversion(ConversionKind.InterpolatedString);
-        internal static Conversion InterpolatedStringHandler => new Conversion(ConversionKind.InterpolatedStringHandler);
+        internal static Conversion ExplicitEnumeration =>
+            new Conversion(ConversionKind.ExplicitEnumeration);
+        internal static Conversion ExplicitNumeric =>
+            new Conversion(ConversionKind.ExplicitNumeric);
+        internal static Conversion ImplicitDynamic =>
+            new Conversion(ConversionKind.ImplicitDynamic);
+        internal static Conversion ExplicitDynamic =>
+            new Conversion(ConversionKind.ExplicitDynamic);
+        internal static Conversion InterpolatedString =>
+            new Conversion(ConversionKind.InterpolatedString);
+        internal static Conversion InterpolatedStringHandler =>
+            new Conversion(ConversionKind.InterpolatedStringHandler);
         internal static Conversion Deconstruction => new Conversion(ConversionKind.Deconstruction);
-        internal static Conversion PinnedObjectToPointer => new Conversion(ConversionKind.PinnedObjectToPointer);
-        internal static Conversion ImplicitPointer => new Conversion(ConversionKind.ImplicitPointer);
+        internal static Conversion PinnedObjectToPointer =>
+            new Conversion(ConversionKind.PinnedObjectToPointer);
+        internal static Conversion ImplicitPointer =>
+            new Conversion(ConversionKind.ImplicitPointer);
         internal static Conversion FunctionType => new Conversion(ConversionKind.FunctionType);
         internal static Conversion InlineArray => new Conversion(ConversionKind.InlineArray);
 
         // trivial conversions that could be underlying in nullable conversion
-        // NOTE: tuple conversions can be underlying as well, but they are not trivial 
-        internal static ImmutableArray<Conversion> IdentityUnderlying => ConversionSingletons.IdentityUnderlying;
-        internal static ImmutableArray<Conversion> ImplicitConstantUnderlying => ConversionSingletons.ImplicitConstantUnderlying;
-        internal static ImmutableArray<Conversion> ImplicitNumericUnderlying => ConversionSingletons.ImplicitNumericUnderlying;
-        internal static ImmutableArray<Conversion> ExplicitNumericUnderlying => ConversionSingletons.ExplicitNumericUnderlying;
-        internal static ImmutableArray<Conversion> ExplicitEnumerationUnderlying => ConversionSingletons.ExplicitEnumerationUnderlying;
-        internal static ImmutableArray<Conversion> PointerToIntegerUnderlying => ConversionSingletons.PointerToIntegerUnderlying;
+        // NOTE: tuple conversions can be underlying as well, but they are not trivial
+        internal static ImmutableArray<Conversion> IdentityUnderlying =>
+            ConversionSingletons.IdentityUnderlying;
+        internal static ImmutableArray<Conversion> ImplicitConstantUnderlying =>
+            ConversionSingletons.ImplicitConstantUnderlying;
+        internal static ImmutableArray<Conversion> ImplicitNumericUnderlying =>
+            ConversionSingletons.ImplicitNumericUnderlying;
+        internal static ImmutableArray<Conversion> ExplicitNumericUnderlying =>
+            ConversionSingletons.ExplicitNumericUnderlying;
+        internal static ImmutableArray<Conversion> ExplicitEnumerationUnderlying =>
+            ConversionSingletons.ExplicitEnumerationUnderlying;
+        internal static ImmutableArray<Conversion> PointerToIntegerUnderlying =>
+            ConversionSingletons.PointerToIntegerUnderlying;
 
         // Common combinations to avoid allocations:
-        internal static readonly Conversion ExplicitNullableWithExplicitEnumerationUnderlying = new Conversion(ConversionKind.ExplicitNullable, ExplicitEnumerationUnderlying);
-        internal static readonly Conversion ExplicitNullableWithPointerToIntegerUnderlying = new Conversion(ConversionKind.ExplicitNullable, PointerToIntegerUnderlying);
-        internal static readonly Conversion ExplicitNullableWithIdentityUnderlying = new Conversion(ConversionKind.ExplicitNullable, IdentityUnderlying);
-        internal static readonly Conversion ExplicitNullableWithImplicitNumericUnderlying = new Conversion(ConversionKind.ExplicitNullable, ImplicitNumericUnderlying);
-        internal static readonly Conversion ExplicitNullableWithExplicitNumericUnderlying = new Conversion(ConversionKind.ExplicitNullable, ExplicitNumericUnderlying);
-        internal static readonly Conversion ExplicitNullableWithImplicitConstantUnderlying = new Conversion(ConversionKind.ExplicitNullable, ImplicitConstantUnderlying);
+        internal static readonly Conversion ExplicitNullableWithExplicitEnumerationUnderlying =
+            new Conversion(ConversionKind.ExplicitNullable, ExplicitEnumerationUnderlying);
+        internal static readonly Conversion ExplicitNullableWithPointerToIntegerUnderlying =
+            new Conversion(ConversionKind.ExplicitNullable, PointerToIntegerUnderlying);
+        internal static readonly Conversion ExplicitNullableWithIdentityUnderlying = new Conversion(
+            ConversionKind.ExplicitNullable,
+            IdentityUnderlying
+        );
+        internal static readonly Conversion ExplicitNullableWithImplicitNumericUnderlying =
+            new Conversion(ConversionKind.ExplicitNullable, ImplicitNumericUnderlying);
+        internal static readonly Conversion ExplicitNullableWithExplicitNumericUnderlying =
+            new Conversion(ConversionKind.ExplicitNullable, ExplicitNumericUnderlying);
+        internal static readonly Conversion ExplicitNullableWithImplicitConstantUnderlying =
+            new Conversion(ConversionKind.ExplicitNullable, ImplicitConstantUnderlying);
 
-        internal static readonly Conversion ImplicitNullableWithExplicitEnumerationUnderlying = new Conversion(ConversionKind.ImplicitNullable, ExplicitEnumerationUnderlying);
-        internal static readonly Conversion ImplicitNullableWithPointerToIntegerUnderlying = new Conversion(ConversionKind.ImplicitNullable, PointerToIntegerUnderlying);
-        internal static readonly Conversion ImplicitNullableWithIdentityUnderlying = new Conversion(ConversionKind.ImplicitNullable, IdentityUnderlying);
-        internal static readonly Conversion ImplicitNullableWithImplicitNumericUnderlying = new Conversion(ConversionKind.ImplicitNullable, ImplicitNumericUnderlying);
-        internal static readonly Conversion ImplicitNullableWithExplicitNumericUnderlying = new Conversion(ConversionKind.ImplicitNullable, ExplicitNumericUnderlying);
-        internal static readonly Conversion ImplicitNullableWithImplicitConstantUnderlying = new Conversion(ConversionKind.ImplicitNullable, ImplicitConstantUnderlying);
+        internal static readonly Conversion ImplicitNullableWithExplicitEnumerationUnderlying =
+            new Conversion(ConversionKind.ImplicitNullable, ExplicitEnumerationUnderlying);
+        internal static readonly Conversion ImplicitNullableWithPointerToIntegerUnderlying =
+            new Conversion(ConversionKind.ImplicitNullable, PointerToIntegerUnderlying);
+        internal static readonly Conversion ImplicitNullableWithIdentityUnderlying = new Conversion(
+            ConversionKind.ImplicitNullable,
+            IdentityUnderlying
+        );
+        internal static readonly Conversion ImplicitNullableWithImplicitNumericUnderlying =
+            new Conversion(ConversionKind.ImplicitNullable, ImplicitNumericUnderlying);
+        internal static readonly Conversion ImplicitNullableWithExplicitNumericUnderlying =
+            new Conversion(ConversionKind.ImplicitNullable, ExplicitNumericUnderlying);
+        internal static readonly Conversion ImplicitNullableWithImplicitConstantUnderlying =
+            new Conversion(ConversionKind.ImplicitNullable, ImplicitConstantUnderlying);
 
         // these static fields are not directly inside the Conversion
         // because that causes CLR loader failure.
         private static class ConversionSingletons
         {
-            internal static ImmutableArray<Conversion> IdentityUnderlying = ImmutableArray.Create(Identity);
-            internal static ImmutableArray<Conversion> ImplicitConstantUnderlying = ImmutableArray.Create(ImplicitConstant);
-            internal static ImmutableArray<Conversion> ImplicitNumericUnderlying = ImmutableArray.Create(ImplicitNumeric);
-            internal static ImmutableArray<Conversion> ExplicitNumericUnderlying = ImmutableArray.Create(ExplicitNumeric);
-            internal static ImmutableArray<Conversion> ExplicitEnumerationUnderlying = ImmutableArray.Create(ExplicitEnumeration);
-            internal static ImmutableArray<Conversion> PointerToIntegerUnderlying = ImmutableArray.Create(PointerToInteger);
+            internal static ImmutableArray<Conversion> IdentityUnderlying = ImmutableArray.Create(
+                Identity
+            );
+            internal static ImmutableArray<Conversion> ImplicitConstantUnderlying =
+                ImmutableArray.Create(ImplicitConstant);
+            internal static ImmutableArray<Conversion> ImplicitNumericUnderlying =
+                ImmutableArray.Create(ImplicitNumeric);
+            internal static ImmutableArray<Conversion> ExplicitNumericUnderlying =
+                ImmutableArray.Create(ExplicitNumeric);
+            internal static ImmutableArray<Conversion> ExplicitEnumerationUnderlying =
+                ImmutableArray.Create(ExplicitEnumeration);
+            internal static ImmutableArray<Conversion> PointerToIntegerUnderlying =
+                ImmutableArray.Create(PointerToInteger);
         }
 
         internal static Conversion MakeStackAllocToPointerType(Conversion underlyingConversion)
         {
-            return new Conversion(ConversionKind.StackAllocToPointerType, ImmutableArray.Create(underlyingConversion));
+            return new Conversion(
+                ConversionKind.StackAllocToPointerType,
+                ImmutableArray.Create(underlyingConversion)
+            );
         }
 
         internal static Conversion MakeStackAllocToSpanType(Conversion underlyingConversion)
         {
-            return new Conversion(ConversionKind.StackAllocToSpanType, ImmutableArray.Create(underlyingConversion));
+            return new Conversion(
+                ConversionKind.StackAllocToSpanType,
+                ImmutableArray.Create(underlyingConversion)
+            );
         }
 
-        internal static Conversion MakeNullableConversion(ConversionKind kind, Conversion nestedConversion)
+        internal static Conversion MakeNullableConversion(
+            ConversionKind kind,
+            Conversion nestedConversion
+        )
         {
-            Debug.Assert(kind == ConversionKind.ImplicitNullable || kind == ConversionKind.ExplicitNullable);
+            Debug.Assert(
+                kind == ConversionKind.ImplicitNullable || kind == ConversionKind.ExplicitNullable
+            );
 
             return nestedConversion.Kind switch
             {
-                ConversionKind.Identity => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithIdentityUnderlying : ExplicitNullableWithIdentityUnderlying,
-                ConversionKind.ImplicitConstant => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithImplicitConstantUnderlying : ExplicitNullableWithImplicitConstantUnderlying,
-                ConversionKind.ImplicitNumeric => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithImplicitNumericUnderlying : ExplicitNullableWithImplicitNumericUnderlying,
-                ConversionKind.ExplicitNumeric => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithExplicitNumericUnderlying : ExplicitNullableWithExplicitNumericUnderlying,
-                ConversionKind.ExplicitEnumeration => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithExplicitEnumerationUnderlying : ExplicitNullableWithExplicitEnumerationUnderlying,
-                ConversionKind.ExplicitPointerToInteger => kind == ConversionKind.ImplicitNullable ? ImplicitNullableWithPointerToIntegerUnderlying : ExplicitNullableWithPointerToIntegerUnderlying,
+                ConversionKind.Identity
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithIdentityUnderlying
+                        : ExplicitNullableWithIdentityUnderlying,
+                ConversionKind.ImplicitConstant
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithImplicitConstantUnderlying
+                        : ExplicitNullableWithImplicitConstantUnderlying,
+                ConversionKind.ImplicitNumeric
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithImplicitNumericUnderlying
+                        : ExplicitNullableWithImplicitNumericUnderlying,
+                ConversionKind.ExplicitNumeric
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithExplicitNumericUnderlying
+                        : ExplicitNullableWithExplicitNumericUnderlying,
+                ConversionKind.ExplicitEnumeration
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithExplicitEnumerationUnderlying
+                        : ExplicitNullableWithExplicitEnumerationUnderlying,
+                ConversionKind.ExplicitPointerToInteger
+                    => kind == ConversionKind.ImplicitNullable
+                        ? ImplicitNullableWithPointerToIntegerUnderlying
+                        : ExplicitNullableWithPointerToIntegerUnderlying,
                 _ => new Conversion(kind, ImmutableArray.Create(nestedConversion)),
             };
         }
@@ -350,42 +477,36 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new Conversion(ConversionKind.SwitchExpression, innerConversions);
         }
 
-        internal static Conversion MakeConditionalExpression(ImmutableArray<Conversion> innerConversions)
+        internal static Conversion MakeConditionalExpression(
+            ImmutableArray<Conversion> innerConversions
+        )
         {
             return new Conversion(ConversionKind.ConditionalExpression, innerConversions);
         }
 
         internal ConversionKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         internal bool IsExtensionMethod
         {
-            get
-            {
-                return _uncommonData is MethodUncommonData { IsExtensionMethod: true };
-            }
+            get { return _uncommonData is MethodUncommonData { IsExtensionMethod: true }; }
         }
 
         internal bool IsArrayIndex
         {
-            get
-            {
-                return _uncommonData is MethodUncommonData { IsArrayIndex: true };
-            }
+            get { return _uncommonData is MethodUncommonData { IsArrayIndex: true }; }
         }
 
         internal ImmutableArray<Conversion> UnderlyingConversions
         {
             get
             {
-                return _uncommonData is NestedUncommonData { _nestedConversionsOpt: var conversions } ?
-                    conversions :
-                    default(ImmutableArray<Conversion>);
+                return
+                    _uncommonData is NestedUncommonData { _nestedConversionsOpt: var conversions }
+                    ? conversions
+                    : default(ImmutableArray<Conversion>);
             }
         }
 
@@ -475,13 +596,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var conversionResult = methodUncommonData._conversionResult;
                         if (conversionResult.Kind == UserDefinedConversionResultKind.Valid)
                         {
-                            UserDefinedConversionAnalysis analysis = conversionResult.Results[conversionResult.Best];
+                            UserDefinedConversionAnalysis analysis = conversionResult.Results[
+                                conversionResult.Best
+                            ];
                             return analysis.Operator;
                         }
                         break;
 
                     case DeconstructionUncommonData deconstructionUncommonData:
-                        if (deconstructionUncommonData.DeconstructMethodInfo.Invocation is BoundCall call)
+                        if (
+                            deconstructionUncommonData.DeconstructMethodInfo.Invocation
+                            is BoundCall call
+                        )
                         {
                             return call.Method;
                         }
@@ -496,12 +622,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                if (_uncommonData is MethodUncommonData { _conversionMethod: null } methodUncommonData)
+                if (
+                    _uncommonData is MethodUncommonData
+                    {
+                        _conversionMethod: null
+                    } methodUncommonData
+                )
                 {
                     var conversionResult = methodUncommonData._conversionResult;
                     if (conversionResult.Kind == UserDefinedConversionResultKind.Valid)
                     {
-                        UserDefinedConversionAnalysis analysis = conversionResult.Results[conversionResult.Best];
+                        UserDefinedConversionAnalysis analysis = conversionResult.Results[
+                            conversionResult.Best
+                        ];
                         return analysis.ConstrainedToTypeOpt;
                     }
                 }
@@ -519,7 +652,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal ImmutableArray<(BoundValuePlaceholder? placeholder, BoundExpression? conversion)> DeconstructConversionInfo
+        internal ImmutableArray<(
+            BoundValuePlaceholder? placeholder,
+            BoundExpression? conversion
+        )> DeconstructConversionInfo
         {
             get
             {
@@ -528,7 +664,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal CollectionExpressionTypeKind GetCollectionExpressionTypeKind(out TypeSymbol? elementType)
+        internal CollectionExpressionTypeKind GetCollectionExpressionTypeKind(
+            out TypeSymbol? elementType
+        )
         {
             if (_uncommonData is CollectionExpressionUncommonData collectionExpressionData)
             {
@@ -549,7 +687,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
                 }
 
-                if (_uncommonData is NestedUncommonData { _nestedConversionsOpt: { IsDefault: false } nestedConversions })
+                if (
+                    _uncommonData is NestedUncommonData
+                    {
+                        _nestedConversionsOpt: { IsDefault: false } nestedConversions
+                    }
+                )
                 {
                     foreach (var conv in nestedConversions)
                     {
@@ -563,9 +706,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
 
-                return !this.IsUserDefined ||
-                    this.Method is object ||
-                    (_uncommonData as MethodUncommonData)?._conversionResult.Kind == UserDefinedConversionResultKind.Valid;
+                return !this.IsUserDefined
+                    || this.Method is object
+                    || (_uncommonData as MethodUncommonData)?._conversionResult.Kind
+                        == UserDefinedConversionResultKind.Valid;
             }
         }
 
@@ -578,10 +722,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool Exists
         {
-            get
-            {
-                return Kind != ConversionKind.NoConversion;
-            }
+            get { return Kind != ConversionKind.NoConversion; }
         }
 
         /// <summary>
@@ -592,10 +733,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsImplicit
         {
-            get
-            {
-                return Kind.IsImplicitConversion();
-            }
+            get { return Kind.IsImplicitConversion(); }
         }
 
         /// <summary>
@@ -621,10 +759,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsIdentity
         {
-            get
-            {
-                return Kind == ConversionKind.Identity;
-            }
+            get { return Kind == ConversionKind.Identity; }
         }
 
         /// <summary>
@@ -634,12 +769,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.StackAllocToPointerType || Kind == ConversionKind.StackAllocToSpanType;
+                return Kind == ConversionKind.StackAllocToPointerType
+                    || Kind == ConversionKind.StackAllocToSpanType;
             }
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit numeric conversion or explicit numeric conversion. 
+        /// Returns true if the conversion is an implicit numeric conversion or explicit numeric conversion.
         /// </summary>
         /// <remarks>
         /// Implicit and explicit numeric conversions are described in sections 6.1.2 and 6.2.1 of the C# language specification.
@@ -648,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.ImplicitNumeric || Kind == ConversionKind.ExplicitNumeric;
+                return Kind == ConversionKind.ImplicitNumeric
+                    || Kind == ConversionKind.ExplicitNumeric;
             }
         }
 
@@ -662,7 +799,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.ImplicitEnumeration || Kind == ConversionKind.ExplicitEnumeration;
+                return Kind == ConversionKind.ImplicitEnumeration
+                    || Kind == ConversionKind.ExplicitEnumeration;
             }
         }
 
@@ -671,10 +809,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsThrow
         {
-            get
-            {
-                return Kind == ConversionKind.ImplicitThrow;
-            }
+            get { return Kind == ConversionKind.ImplicitThrow; }
         }
 
         /// <summary>
@@ -682,10 +817,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsObjectCreation
         {
-            get
-            {
-                return Kind == ConversionKind.ObjectCreation;
-            }
+            get { return Kind == ConversionKind.ObjectCreation; }
         }
 
         /// <summary>
@@ -698,10 +830,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsSwitchExpression
         {
-            get
-            {
-                return Kind == ConversionKind.SwitchExpression;
-            }
+            get { return Kind == ConversionKind.SwitchExpression; }
         }
 
         /// <summary>
@@ -709,10 +838,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsConditionalExpression
         {
-            get
-            {
-                return Kind == ConversionKind.ConditionalExpression;
-            }
+            get { return Kind == ConversionKind.ConditionalExpression; }
         }
 
         // TODO: update the language reference section number below.
@@ -724,10 +850,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsInterpolatedString
         {
-            get
-            {
-                return Kind == ConversionKind.InterpolatedString;
-            }
+            get { return Kind == ConversionKind.InterpolatedString; }
         }
 
         /// <summary>
@@ -735,10 +858,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsInterpolatedStringHandler
         {
-            get
-            {
-                return Kind == ConversionKind.InterpolatedStringHandler;
-            }
+            get { return Kind == ConversionKind.InterpolatedStringHandler; }
         }
 
         /// <summary>
@@ -746,10 +866,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsInlineArray
         {
-            get
-            {
-                return Kind == ConversionKind.InlineArray;
-            }
+            get { return Kind == ConversionKind.InlineArray; }
         }
 
         /// <summary>
@@ -762,7 +879,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.ImplicitNullable || Kind == ConversionKind.ExplicitNullable;
+                return Kind == ConversionKind.ImplicitNullable
+                    || Kind == ConversionKind.ExplicitNullable;
             }
         }
 
@@ -773,7 +891,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.ImplicitTupleLiteral || Kind == ConversionKind.ExplicitTupleLiteral;
+                return Kind == ConversionKind.ImplicitTupleLiteral
+                    || Kind == ConversionKind.ExplicitTupleLiteral;
             }
         }
 
@@ -798,7 +917,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Kind == ConversionKind.ImplicitReference || Kind == ConversionKind.ExplicitReference;
+                return Kind == ConversionKind.ImplicitReference
+                    || Kind == ConversionKind.ExplicitReference;
             }
         }
 
@@ -810,10 +930,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsUserDefined
         {
-            get
-            {
-                return Kind.IsUserDefinedConversion();
-            }
+            get { return Kind.IsUserDefinedConversion(); }
         }
 
         /// <summary>
@@ -824,10 +941,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsBoxing
         {
-            get
-            {
-                return Kind == ConversionKind.Boxing;
-            }
+            get { return Kind == ConversionKind.Boxing; }
         }
 
         /// <summary>
@@ -838,10 +952,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsUnboxing
         {
-            get
-            {
-                return Kind == ConversionKind.Unboxing;
-            }
+            get { return Kind == ConversionKind.Unboxing; }
         }
 
         /// <summary>
@@ -852,10 +963,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsNullLiteral
         {
-            get
-            {
-                return Kind == ConversionKind.NullLiteral;
-            }
+            get { return Kind == ConversionKind.NullLiteral; }
         }
 
         /// <summary>
@@ -863,24 +971,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsDefaultLiteral
         {
-            get
-            {
-                return Kind == ConversionKind.DefaultLiteral;
-            }
+            get { return Kind == ConversionKind.DefaultLiteral; }
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit dynamic conversion. 
+        /// Returns true if the conversion is an implicit dynamic conversion.
         /// </summary>
         /// <remarks>
         /// Implicit dynamic conversions are described in section 6.1.8 of the C# language specification.
         /// </remarks>
         public bool IsDynamic
         {
-            get
-            {
-                return Kind.IsDynamic();
-            }
+            get { return Kind.IsDynamic(); }
         }
 
         /// <summary>
@@ -891,10 +993,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsConstantExpression
         {
-            get
-            {
-                return Kind == ConversionKind.ImplicitConstant;
-            }
+            get { return Kind == ConversionKind.ImplicitConstant; }
         }
 
         /// <summary>
@@ -905,10 +1004,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsAnonymousFunction
         {
-            get
-            {
-                return Kind == ConversionKind.AnonymousFunction;
-            }
+            get { return Kind == ConversionKind.AnonymousFunction; }
         }
 
         /// <summary>
@@ -919,35 +1015,29 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsMethodGroup
         {
-            get
-            {
-                return Kind == ConversionKind.MethodGroup;
-            }
+            get { return Kind == ConversionKind.MethodGroup; }
         }
 
         /// <summary>
-        /// Returns true if the conversion is a pointer conversion 
+        /// Returns true if the conversion is a pointer conversion
         /// </summary>
         /// <remarks>
         /// Pointer conversions are described in section 18.4 of the C# language specification.
-        /// 
-        /// Returns true if the conversion is a conversion 
-        ///  a) from a pointer type to void*, 
+        ///
+        /// Returns true if the conversion is a conversion
+        ///  a) from a pointer type to void*,
         ///  b) from a pointer type to another pointer type (other than void*),
         ///  c) from the null literal to a pointer type,
         ///  d) from an integral numeric type to a pointer type,
         ///  e) from a pointer type to an integral numeric type, or
         ///  d) from a function pointer type to a function pointer type.
-        /// 
+        ///
         /// Does not return true for user-defined conversions to/from pointer types.
         /// Does not return true for conversions between pointer types and IntPtr/UIntPtr.
         /// </remarks>
         public bool IsPointer
         {
-            get
-            {
-                return this.Kind.IsPointerConversion();
-            }
+            get { return this.Kind.IsPointerConversion(); }
         }
 
         /// <summary>
@@ -965,14 +1055,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public bool IsIntPtr
         {
-            get
-            {
-                return Kind == ConversionKind.IntPtr;
-            }
+            get { return Kind == ConversionKind.IntPtr; }
         }
 
         /// <summary>
-        /// Returns the method used to create the delegate for a method group conversion if <see cref="IsMethodGroup"/> is true 
+        /// Returns the method used to create the delegate for a method group conversion if <see cref="IsMethodGroup"/> is true
         /// or the method used to perform the conversion for a user-defined conversion if <see cref="IsUserDefined"/> is true.
         /// Otherwise, returns null.
         /// </summary>
@@ -982,10 +1069,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public IMethodSymbol? MethodSymbol
         {
-            get
-            {
-                return this.Method.GetPublicSymbol();
-            }
+            get { return this.Method.GetPublicSymbol(); }
         }
 
         /// <summary>
@@ -994,10 +1078,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public ITypeSymbol? ConstrainedToType
         {
-            get
-            {
-                return this.ConstrainedToTypeOpt.GetPublicSymbol();
-            }
+            get { return this.ConstrainedToTypeOpt.GetPublicSymbol(); }
         }
 
         /// <summary>
@@ -1010,7 +1091,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                var conversionResult = (_uncommonData as MethodUncommonData)?._conversionResult ?? default(UserDefinedConversionResult);
+                var conversionResult =
+                    (_uncommonData as MethodUncommonData)?._conversionResult
+                    ?? default(UserDefinedConversionResult);
 
                 switch (conversionResult.Kind)
                 {
@@ -1023,7 +1106,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case UserDefinedConversionResultKind.NoApplicableOperators:
                         if (conversionResult.Results.IsDefaultOrEmpty)
                         {
-                            return this.Kind == ConversionKind.NoConversion ? LookupResultKind.Empty : LookupResultKind.Viable;
+                            return this.Kind == ConversionKind.NoConversion
+                                ? LookupResultKind.Empty
+                                : LookupResultKind.Viable;
                         }
                         else
                         {
@@ -1070,13 +1155,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                // If overload resolution has failed then we want to stash away the original methods that we 
+                // If overload resolution has failed then we want to stash away the original methods that we
                 // considered so that the IDE can display tooltips or other information about them.
                 // However, if a method group contained a generic method that was type inferred then
                 // the IDE wants information about the *inferred* method, not the original unconstructed
                 // generic method.
 
-                if (_uncommonData is MethodUncommonData { _conversionResult: { Kind: not UserDefinedConversionResultKind.NoApplicableOperators } conversionResult })
+                if (
+                    _uncommonData is MethodUncommonData
+                    {
+                        _conversionResult:
+                        {
+                            Kind: not UserDefinedConversionResultKind.NoApplicableOperators
+                        } conversionResult
+                    }
+                )
                 {
                     var builder = ArrayBuilder<MethodSymbol>.GetInstance();
                     foreach (var analysis in conversionResult.Results)
@@ -1094,9 +1187,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                if (_uncommonData is MethodUncommonData { _conversionResult: { Kind: UserDefinedConversionResultKind.Valid } conversionResult })
+                if (
+                    _uncommonData is MethodUncommonData
+                    {
+                        _conversionResult:
+                        { Kind: UserDefinedConversionResultKind.Valid } conversionResult
+                    }
+                )
                 {
-                    UserDefinedConversionAnalysis analysis = conversionResult.Results[conversionResult.Best];
+                    UserDefinedConversionAnalysis analysis = conversionResult.Results[
+                        conversionResult.Best
+                    ];
                     return analysis;
                 }
 
@@ -1115,8 +1216,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CommonConversion ToCommonConversion()
         {
             // The MethodSymbol of CommonConversion only refers to UserDefined conversions, not method groups
-            var (methodSymbol, constrainedToType) = IsUserDefined ? (MethodSymbol, ConstrainedToType) : (null, null);
-            return new CommonConversion(Exists, IsIdentity, IsNumeric, IsReference, IsImplicit, IsNullable, methodSymbol, constrainedToType);
+            var (methodSymbol, constrainedToType) = IsUserDefined
+                ? (MethodSymbol, ConstrainedToType)
+                : (null, null);
+            return new CommonConversion(
+                Exists,
+                IsIdentity,
+                IsNumeric,
+                IsReference,
+                IsImplicit,
+                IsNullable,
+                methodSymbol,
+                constrainedToType
+            );
         }
 
         /// <summary>
@@ -1195,15 +1307,30 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!self.DeconstructionInfo.IsDefault)
                 {
-                    sub.Add(new TreeDumperNode("deconstructionInfo", null,
-                        new[] { BoundTreeDumperNodeProducer.MakeTree(self.DeconstructionInfo.Invocation) }));
+                    sub.Add(
+                        new TreeDumperNode(
+                            "deconstructionInfo",
+                            null,
+                            new[]
+                            {
+                                BoundTreeDumperNodeProducer.MakeTree(
+                                    self.DeconstructionInfo.Invocation
+                                ),
+                            }
+                        )
+                    );
                 }
 
                 var underlyingConversions = self.UnderlyingConversions;
                 if (!underlyingConversions.IsDefaultOrEmpty)
                 {
-                    sub.Add(new TreeDumperNode($"underlyingConversions[{underlyingConversions.Length}]", null,
-                        underlyingConversions.SelectAsArray(c => Dump(c))));
+                    sub.Add(
+                        new TreeDumperNode(
+                            $"underlyingConversions[{underlyingConversions.Length}]",
+                            null,
+                            underlyingConversions.SelectAsArray(c => Dump(c))
+                        )
+                    );
                 }
 
                 return new TreeDumperNode("conversion", self.Kind, sub);
@@ -1215,11 +1342,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>Stores all the information from binding for calling a Deconstruct method.</summary>
     internal readonly struct DeconstructMethodInfo
     {
-        internal DeconstructMethodInfo(BoundExpression invocation, BoundDeconstructValuePlaceholder inputPlaceholder,
-            ImmutableArray<BoundDeconstructValuePlaceholder> outputPlaceholders)
+        internal DeconstructMethodInfo(
+            BoundExpression invocation,
+            BoundDeconstructValuePlaceholder inputPlaceholder,
+            ImmutableArray<BoundDeconstructValuePlaceholder> outputPlaceholders
+        )
         {
             Debug.Assert(invocation is not BoundCall { Expanded: true });
-            (Invocation, InputPlaceholder, OutputPlaceholders) = (invocation, inputPlaceholder, outputPlaceholders);
+            (Invocation, InputPlaceholder, OutputPlaceholders) = (
+                invocation,
+                inputPlaceholder,
+                outputPlaceholders
+            );
         }
 
         internal readonly BoundExpression Invocation;

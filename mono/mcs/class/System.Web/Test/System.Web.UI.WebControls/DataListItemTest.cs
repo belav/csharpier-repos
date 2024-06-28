@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,285 +34,284 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestDataListItem : DataListItem
+    {
+        public TestDataListItem(int index, ListItemType type)
+            : base(index, type) { }
 
-	public class TestDataListItem : DataListItem {
+        public string Render(bool extractRows, bool tableLayout)
+        {
+            StringWriter sw = new StringWriter();
+            sw.NewLine = "\n";
+            HtmlTextWriter writer = new HtmlTextWriter(sw);
+            base.RenderItem(writer, extractRows, tableLayout);
+            return writer.InnerWriter.ToString();
+        }
 
-		public TestDataListItem (int index, ListItemType type)
-			: base (index, type)
-		{
-		}
+        public void SetType(ListItemType type)
+        {
+            base.SetItemType(type);
+        }
+    }
 
+    [TestFixture]
+    public class DataListItemTest
+    {
+        private void BaseTests(TestDataListItem dli)
+        {
+            Assert.IsNull(dli.DataItem, "DataItem");
+            Assert.AreEqual(String.Empty, dli.Render(true, true), "Render-Empty-T-T");
+            Assert.AreEqual(String.Empty, dli.Render(true, false), "Render-Empty-T-F");
+            Assert.AreEqual(String.Empty, dli.Render(false, true), "Render-Empty-F-T");
+            Assert.AreEqual("<span></span>", dli.Render(false, false), "Render-Empty-F-F");
 
-		public string Render (bool extractRows, bool tableLayout)
-		{
-			StringWriter sw = new StringWriter ();
-			sw.NewLine = "\n";
-			HtmlTextWriter writer = new HtmlTextWriter (sw);
-			base.RenderItem (writer, extractRows, tableLayout);
-			return writer.InnerWriter.ToString ();
-		}
+            dli.DataItem = (object)Int32.MaxValue;
+            Assert.AreEqual(Int32.MaxValue, dli.DataItem, "DataItem-Int32");
+            Assert.AreEqual(String.Empty, dli.Render(true, true), "Render-Int32-T-T");
+            Assert.AreEqual(String.Empty, dli.Render(true, false), "Render-Int32-T-F");
+            Assert.AreEqual(String.Empty, dli.Render(false, true), "Render-Int32-F-T");
+            Assert.AreEqual("<span></span>", dli.Render(false, false), "Render-Int32-F-F");
 
-		public void SetType (ListItemType type)
-		{
-			base.SetItemType (type);
-		}
-	}
+            dli.DataItem = (object)"mono";
+            Assert.AreEqual("mono", dli.DataItem, "DataItem-String");
+            Assert.AreEqual(String.Empty, dli.Render(true, true), "Render-String-T-T");
+            Assert.AreEqual(String.Empty, dli.Render(true, false), "Render-String-T-F");
+            Assert.AreEqual(String.Empty, dli.Render(false, true), "Render-String-F-T");
+            Assert.AreEqual("<span></span>", dli.Render(false, false), "Render-String-F-F");
+        }
 
-	[TestFixture]
-	public class DataListItemTest {
+        private void DataItemContainer(TestDataListItem dli, int index)
+        {
+            IDataItemContainer dic = (dli as IDataItemContainer);
+            Assert.IsNull(dic.DataItem, "IDataItemContainer-DataItem");
+            Assert.AreEqual(index, dic.DataItemIndex, "IDataItemContainer-DataItemIndex");
+            Assert.AreEqual(index, dic.DisplayIndex, "IDataItemContainer-DisplayIndex");
+        }
 
-		private void BaseTests (TestDataListItem dli)
-		{
-			Assert.IsNull (dli.DataItem, "DataItem");
-			Assert.AreEqual (String.Empty, dli.Render (true, true), "Render-Empty-T-T");
-			Assert.AreEqual (String.Empty, dli.Render (true, false), "Render-Empty-T-F");
-			Assert.AreEqual (String.Empty, dli.Render (false, true), "Render-Empty-F-T");
-			Assert.AreEqual ("<span></span>", dli.Render (false, false), "Render-Empty-F-F");
+        [Test]
+        public void AlternatingItem()
+        {
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.AlternatingItem);
+            Assert.AreEqual(0, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.AlternatingItem, dli.ItemType, "ItemType");
 
-			dli.DataItem = (object)Int32.MaxValue;
-			Assert.AreEqual (Int32.MaxValue, dli.DataItem, "DataItem-Int32");
-			Assert.AreEqual (String.Empty, dli.Render (true, true), "Render-Int32-T-T");
-			Assert.AreEqual (String.Empty, dli.Render (true, false), "Render-Int32-T-F");
-			Assert.AreEqual (String.Empty, dli.Render (false, true), "Render-Int32-F-T");
-			Assert.AreEqual ("<span></span>", dli.Render (false, false), "Render-Int32-F-F");
+            DataItemContainer(dli, 0);
+            BaseTests(dli);
 
-			dli.DataItem = (object)"mono";
-			Assert.AreEqual ("mono", dli.DataItem, "DataItem-String");
-			Assert.AreEqual (String.Empty, dli.Render (true, true), "Render-String-T-T");
-			Assert.AreEqual (String.Empty, dli.Render (true, false), "Render-String-T-F");
-			Assert.AreEqual (String.Empty, dli.Render (false, true), "Render-String-F-T");
-			Assert.AreEqual ("<span></span>", dli.Render (false, false), "Render-String-F-F");
-		}
+            dli.SetType(ListItemType.EditItem);
+            Assert.AreEqual(ListItemType.EditItem, dli.ItemType, "SetItemType");
+        }
 
-		private void DataItemContainer (TestDataListItem dli, int index)
-		{
-			IDataItemContainer dic = (dli as IDataItemContainer);
-			Assert.IsNull (dic.DataItem, "IDataItemContainer-DataItem");
-			Assert.AreEqual (index, dic.DataItemIndex, "IDataItemContainer-DataItemIndex");
-			Assert.AreEqual (index, dic.DisplayIndex, "IDataItemContainer-DisplayIndex");
-		}
+        [Test]
+        public void EditItem()
+        {
+            TestDataListItem dli = new TestDataListItem(Int32.MaxValue, ListItemType.EditItem);
+            Assert.AreEqual(Int32.MaxValue, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.EditItem, dli.ItemType, "ItemType");
 
-		[Test]
-		public void AlternatingItem ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.AlternatingItem);
-			Assert.AreEqual (0, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.AlternatingItem, dli.ItemType, "ItemType");
+            DataItemContainer(dli, Int32.MaxValue);
+            BaseTests(dli);
 
-			DataItemContainer (dli, 0);
-			BaseTests (dli);
+            dli.SetType(ListItemType.Footer);
+            Assert.AreEqual(ListItemType.Footer, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.EditItem);
-			Assert.AreEqual (ListItemType.EditItem, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Footer()
+        {
+            TestDataListItem dli = new TestDataListItem(Int32.MinValue, ListItemType.Footer);
+            Assert.AreEqual(Int32.MinValue, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.Footer, dli.ItemType, "ItemType");
 
-		[Test]
-		public void EditItem ()
-		{
-			TestDataListItem dli = new TestDataListItem (Int32.MaxValue, ListItemType.EditItem);
-			Assert.AreEqual (Int32.MaxValue, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.EditItem, dli.ItemType, "ItemType");
+            DataItemContainer(dli, Int32.MinValue);
+            BaseTests(dli);
 
-			DataItemContainer (dli, Int32.MaxValue);
-			BaseTests (dli);
+            dli.SetType(ListItemType.Header);
+            Assert.AreEqual(ListItemType.Header, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.Footer);
-			Assert.AreEqual (ListItemType.Footer, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Header()
+        {
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Header);
+            Assert.AreEqual(0, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.Header, dli.ItemType, "ItemType");
 
-		[Test]
-		public void Footer ()
-		{
-			TestDataListItem dli = new TestDataListItem (Int32.MinValue, ListItemType.Footer);
-			Assert.AreEqual (Int32.MinValue, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.Footer, dli.ItemType, "ItemType");
+            DataItemContainer(dli, 0);
+            BaseTests(dli);
 
-			DataItemContainer (dli, Int32.MinValue);
-			BaseTests (dli);
+            dli.SetType(ListItemType.Item);
+            Assert.AreEqual(ListItemType.Item, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.Header);
-			Assert.AreEqual (ListItemType.Header, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Item()
+        {
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Item);
+            Assert.AreEqual(0, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.Item, dli.ItemType, "ItemType");
 
-		[Test]
-		public void Header ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Header);
-			Assert.AreEqual (0, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.Header, dli.ItemType, "ItemType");
+            DataItemContainer(dli, 0);
+            BaseTests(dli);
 
-			DataItemContainer (dli, 0);
-			BaseTests (dli);
+            dli.SetType(ListItemType.Pager);
+            Assert.AreEqual(ListItemType.Pager, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.Item);
-			Assert.AreEqual (ListItemType.Item, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Pager()
+        {
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Pager);
+            Assert.AreEqual(0, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.Pager, dli.ItemType, "ItemType");
 
-		[Test]
-		public void Item ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Item);
-			Assert.AreEqual (0, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.Item, dli.ItemType, "ItemType");
+            DataItemContainer(dli, 0);
+            BaseTests(dli);
 
-			DataItemContainer (dli, 0);
-			BaseTests (dli);
+            dli.SetType(ListItemType.SelectedItem);
+            Assert.AreEqual(ListItemType.SelectedItem, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.Pager);
-			Assert.AreEqual (ListItemType.Pager, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void SelectedItem()
+        {
+            TestDataListItem dli = new TestDataListItem(1, ListItemType.SelectedItem);
+            Assert.AreEqual(1, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.SelectedItem, dli.ItemType, "ItemType");
 
-		[Test]
-		public void Pager ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Pager);
-			Assert.AreEqual (0, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.Pager, dli.ItemType, "ItemType");
+            DataItemContainer(dli, 1);
+            BaseTests(dli);
 
-			DataItemContainer (dli, 0);
-			BaseTests (dli);
+            dli.SetType(ListItemType.Separator);
+            Assert.AreEqual(ListItemType.Separator, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.SelectedItem);
-			Assert.AreEqual (ListItemType.SelectedItem, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Separator()
+        {
+            TestDataListItem dli = new TestDataListItem(-1, ListItemType.Separator);
+            Assert.AreEqual(-1, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual(ListItemType.Separator, dli.ItemType, "ItemType");
 
-		[Test]
-		public void SelectedItem ()
-		{
-			TestDataListItem dli = new TestDataListItem (1, ListItemType.SelectedItem);
-			Assert.AreEqual (1, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.SelectedItem, dli.ItemType, "ItemType");
+            DataItemContainer(dli, -1);
+            BaseTests(dli);
 
-			DataItemContainer (dli, 1);
-			BaseTests (dli);
+            dli.SetType(ListItemType.AlternatingItem);
+            Assert.AreEqual(ListItemType.AlternatingItem, dli.ItemType, "SetItemType");
+        }
 
-			dli.SetType (ListItemType.Separator);
-			Assert.AreEqual (ListItemType.Separator, dli.ItemType, "SetItemType");
-		}
+        [Test]
+        public void Bad_ListItemType()
+        {
+            TestDataListItem dli = new TestDataListItem(0, (ListItemType)Int32.MinValue);
+            Assert.AreEqual(0, dli.ItemIndex, "ItemIndex");
+            Assert.AreEqual((ListItemType)Int32.MinValue, dli.ItemType, "ItemType");
 
-		[Test]
-		public void Separator ()
-		{
-			TestDataListItem dli = new TestDataListItem (-1, ListItemType.Separator);
-			Assert.AreEqual (-1, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual (ListItemType.Separator, dli.ItemType, "ItemType");
+            DataItemContainer(dli, 0);
+            BaseTests(dli);
+        }
 
-			DataItemContainer (dli, -1);
-			BaseTests (dli);
+        private Table GetTable(string s)
+        {
+            LiteralControl lc = new LiteralControl(s);
+            TableCell td = new TableCell();
+            td.Controls.Add(lc);
+            TableRow tr = new TableRow();
+            tr.Cells.Add(td);
+            Table t = new Table();
+            t.Rows.Add(tr);
+            return t;
+        }
 
-			dli.SetType (ListItemType.AlternatingItem);
-			Assert.AreEqual (ListItemType.AlternatingItem, dli.ItemType, "SetItemType");
-		}
+        private string Adjust(string s)
+        {
+            // right now Mono doesn't generate the exact same indentation/lines as MS implementation
+            // and different fx versions have different casing for enums
+            return s.Replace("\n", "").Replace("\t", "").ToLower();
+        }
 
-		[Test]
-		public void Bad_ListItemType ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, (ListItemType)Int32.MinValue);
-			Assert.AreEqual (0, dli.ItemIndex, "ItemIndex");
-			Assert.AreEqual ((ListItemType)Int32.MinValue, dli.ItemType, "ItemType");
+        [Test]
+        public void Controls_Table()
+        {
+            string origHtml1 = "<tr>\n\t<td>mono</td>\n</tr>";
+            string origHtml2 = "<tr>\n\t<td>mono</td>\n</tr>";
+            string origHtml3 = "<table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table>";
+            string origHtml4 = "<span><table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table></span>";
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Item);
+            dli.Controls.Add(GetTable("mono"));
 
-			DataItemContainer (dli, 0);
-			BaseTests (dli);
-		}
+            string renderedHtml = dli.Render(true, true);
+            Assert.AreEqual(origHtml1, renderedHtml, "Render-Empty-T-T");
 
-		private Table GetTable (string s)
-		{
-			LiteralControl lc = new LiteralControl (s);
-			TableCell td = new TableCell ();
-			td.Controls.Add (lc);
-			TableRow tr = new TableRow ();
-			tr.Cells.Add (td);
-			Table t = new Table ();
-			t.Rows.Add (tr);
-			return t;
-		}
+            renderedHtml = dli.Render(true, false);
+            Assert.AreEqual(origHtml2, renderedHtml, "Render-Empty-T-F");
 
-		private string Adjust (string s)
-		{
-			// right now Mono doesn't generate the exact same indentation/lines as MS implementation
-			// and different fx versions have different casing for enums
-			return s.Replace ("\n", "").Replace ("\t", "").ToLower ();
-		}
+            renderedHtml = dli.Render(false, true);
+            Assert.AreEqual(Adjust(origHtml3), Adjust(renderedHtml), "Render-Empty-F-T");
 
-		[Test]
-		public void Controls_Table ()
-		{
-			string origHtml1 = "<tr>\n\t<td>mono</td>\n</tr>";
-			string origHtml2 = "<tr>\n\t<td>mono</td>\n</tr>";
-			string origHtml3 = "<table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table>";
-			string origHtml4 = "<span><table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table></span>";
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Item);
-			dli.Controls.Add (GetTable ("mono"));
+            renderedHtml = dli.Render(false, false);
+            Assert.AreEqual(Adjust(origHtml4), Adjust(renderedHtml), "Render-Empty-F-F");
+        }
 
-			string renderedHtml = dli.Render (true, true);
-			Assert.AreEqual (origHtml1, renderedHtml, "Render-Empty-T-T");
+        [Test]
+        public void Controls_Table_Dual()
+        {
+            string origHtml1 = "<tr>\n\t<td>mono</td>\n</tr>";
+            string origHtml2 = "<tr>\n\t<td>mono</td>\n</tr>";
+            string origHtml3 =
+                "<table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table><table>\n\t<tr>\n\t\t<td>monkey</td>\n\t</tr>\n</table>";
+            string origHtml4 =
+                "<span><table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table><table>\n\t<tr>\n\t\t<td>monkey</td>\n\t</tr>\n</table></span>";
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Item);
+            dli.Controls.Add(GetTable("mono"));
+            dli.Controls.Add(GetTable("monkey"));
 
-			renderedHtml = dli.Render (true, false);
-			Assert.AreEqual (origHtml2, renderedHtml, "Render-Empty-T-F");
+            // the second table is ignored if extractRows is true
+            string renderedHtml = dli.Render(true, true);
+            Assert.AreEqual(origHtml1, renderedHtml, "Render-Empty-T-T");
 
-			renderedHtml = dli.Render (false, true);
-			Assert.AreEqual (Adjust (origHtml3), Adjust (renderedHtml), "Render-Empty-F-T");
+            renderedHtml = dli.Render(true, false);
+            Assert.AreEqual(origHtml2, renderedHtml, "Render-Empty-T-F");
 
-			renderedHtml = dli.Render (false, false);
-			Assert.AreEqual (Adjust (origHtml4), Adjust (renderedHtml), "Render-Empty-F-F");
-		}
+            // but not if extractRows is false
+            renderedHtml = dli.Render(false, true);
+            Assert.AreEqual(Adjust(origHtml3), Adjust(renderedHtml), "Render-Empty-F-T");
 
-		[Test]
-		public void Controls_Table_Dual ()
-		{
-			string origHtml1 = "<tr>\n\t<td>mono</td>\n</tr>";
-			string origHtml2 = "<tr>\n\t<td>mono</td>\n</tr>";
-			string origHtml3 = "<table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table><table>\n\t<tr>\n\t\t<td>monkey</td>\n\t</tr>\n</table>";
-			string origHtml4 = "<span><table>\n\t<tr>\n\t\t<td>mono</td>\n\t</tr>\n</table><table>\n\t<tr>\n\t\t<td>monkey</td>\n\t</tr>\n</table></span>";
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Item);
-			dli.Controls.Add (GetTable ("mono"));
-			dli.Controls.Add (GetTable ("monkey"));
+            renderedHtml = dli.Render(false, false);
+            Assert.AreEqual(Adjust(origHtml4), Adjust(renderedHtml), "Render-Empty-F-F");
+        }
 
-			// the second table is ignored if extractRows is true
-			string renderedHtml = dli.Render (true, true);
-			Assert.AreEqual (origHtml1, renderedHtml, "Render-Empty-T-T");
+        [Test]
+        public void Controls_LiteralControl()
+        {
+            TestDataListItem dli = new TestDataListItem(0, ListItemType.Item);
+            LiteralControl lc = new LiteralControl("mono");
+            dli.Controls.Add(lc);
 
-			renderedHtml = dli.Render (true, false);
-			Assert.AreEqual (origHtml2, renderedHtml, "Render-Empty-T-F");
+            // there's no table here (but there are controls), so calling Render with true for
+            // extractRows cause a NullReferenceException on MS implementation
+            //Assert.AreEqual ("<tr>\n\t<td></td>\n<\tr>", dli.Render (true, true), "Render-Empty-T-T");
+            //Assert.AreEqual ("<tr>\n\t<td></td>\n<\tr>", dli.Render (true, false), "Render-Empty-T-F");
+            Assert.AreEqual("mono", dli.Render(false, true), "Render-Empty-F-T");
+            Assert.AreEqual("<span>mono</span>", dli.Render(false, false), "Render-Empty-F-F");
+        }
 
-			// but not if extractRows is false
-			renderedHtml = dli.Render (false, true);
-			Assert.AreEqual (Adjust (origHtml3), Adjust (renderedHtml), "Render-Empty-F-T");
+        [Test]
+        public void SupportsDisabledAttribute()
+        {
+            var ver40 = new Version(4, 0);
+            var ver35 = new Version(3, 5);
+            var p = new TestDataListItem(0, ListItemType.Item);
+            Assert.AreEqual(ver40, p.RenderingCompatibility, "#A1-1");
+            Assert.IsFalse(p.SupportsDisabledAttribute, "#A1-2");
 
-			renderedHtml = dli.Render (false, false);
-			Assert.AreEqual (Adjust (origHtml4), Adjust (renderedHtml), "Render-Empty-F-F");
-		}
-
-		[Test]
-		public void Controls_LiteralControl ()
-		{
-			TestDataListItem dli = new TestDataListItem (0, ListItemType.Item);
-			LiteralControl lc = new LiteralControl ("mono");
-			dli.Controls.Add (lc);
-
-			// there's no table here (but there are controls), so calling Render with true for 
-			// extractRows cause a NullReferenceException on MS implementation
-			//Assert.AreEqual ("<tr>\n\t<td></td>\n<\tr>", dli.Render (true, true), "Render-Empty-T-T");
-			//Assert.AreEqual ("<tr>\n\t<td></td>\n<\tr>", dli.Render (true, false), "Render-Empty-T-F");
-			Assert.AreEqual ("mono", dli.Render (false, true), "Render-Empty-F-T");
-			Assert.AreEqual ("<span>mono</span>", dli.Render (false, false), "Render-Empty-F-F");
-		}
-		[Test]
-		public void SupportsDisabledAttribute ()
-		{
-			var ver40 = new Version (4, 0);
-			var ver35 = new Version (3, 5);
-			var p = new TestDataListItem (0, ListItemType.Item);
-			Assert.AreEqual (ver40, p.RenderingCompatibility, "#A1-1");
-			Assert.IsFalse (p.SupportsDisabledAttribute, "#A1-2");
-
-			p.RenderingCompatibility = new Version (3, 5);
-			Assert.AreEqual (ver35, p.RenderingCompatibility, "#A2-1");
-			Assert.IsTrue (p.SupportsDisabledAttribute, "#A2-2");
-		}
-	}
+            p.RenderingCompatibility = new Version(3, 5);
+            Assert.AreEqual(ver35, p.RenderingCompatibility, "#A2-1");
+            Assert.IsTrue(p.SupportsDisabledAttribute, "#A2-2");
+        }
+    }
 }

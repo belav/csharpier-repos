@@ -11,7 +11,11 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        internal delegate int NegativeSizeReadMethod<in THandle>(THandle handle, byte[]? buf, int cBuf);
+        internal delegate int NegativeSizeReadMethod<in THandle>(
+            THandle handle,
+            byte[]? buf,
+            int cBuf
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioTell")]
         internal static partial int CryptoNative_BioTell(SafeBioHandle bio);
@@ -45,8 +49,15 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509Version")]
         internal static partial int GetX509Version(SafeX509Handle x509);
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509PublicKeyParameterBytes")]
-        private static partial int GetX509PublicKeyParameterBytes(SafeX509Handle x509, byte[]? buf, int cBuf);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetX509PublicKeyParameterBytes"
+        )]
+        private static partial int GetX509PublicKeyParameterBytes(
+            SafeX509Handle x509,
+            byte[]? buf,
+            int cBuf
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509EkuFieldCount")]
         internal static partial int GetX509EkuFieldCount(SafeEkuExtensionHandle eku);
@@ -55,18 +66,28 @@ internal static partial class Interop
         internal static partial IntPtr GetX509EkuField(SafeEkuExtensionHandle eku, int loc);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509NameInfo")]
-        internal static partial SafeBioHandle GetX509NameInfo(SafeX509Handle x509, int nameType, [MarshalAs(UnmanagedType.Bool)] bool forIssuer);
+        internal static partial SafeBioHandle GetX509NameInfo(
+            SafeX509Handle x509,
+            int nameType,
+            [MarshalAs(UnmanagedType.Bool)] bool forIssuer
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetAsn1StringBytes")]
         private static partial int GetAsn1StringBytes(IntPtr asn1, byte[]? buf, int cBuf);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_PushX509StackField")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PushX509StackField(SafeX509StackHandle stack, SafeX509Handle x509);
+        internal static partial bool PushX509StackField(
+            SafeX509StackHandle stack,
+            SafeX509Handle x509
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_PushX509StackField")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PushX509StackField(SafeSharedX509StackHandle stack, SafeX509Handle x509);
+        internal static partial bool PushX509StackField(
+            SafeSharedX509StackHandle stack,
+            SafeX509Handle x509
+        );
 
         internal static unsafe string? GetX509RootStorePath(out bool defaultPath)
         {
@@ -97,13 +118,32 @@ internal static partial class Interop
             int hour,
             int minute,
             int second,
-            [MarshalAs(UnmanagedType.Bool)] bool isDst);
+            [MarshalAs(UnmanagedType.Bool)] bool isDst
+        );
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CheckX509IpAddress", StringMarshalling = StringMarshalling.Utf8)]
-        internal static partial int CheckX509IpAddress(SafeX509Handle x509, byte[] addressBytes, int addressLen, string hostname, int cchHostname);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_CheckX509IpAddress",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        internal static partial int CheckX509IpAddress(
+            SafeX509Handle x509,
+            byte[] addressBytes,
+            int addressLen,
+            string hostname,
+            int cchHostname
+        );
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CheckX509Hostname", StringMarshalling = StringMarshalling.Utf8)]
-        internal static partial int CheckX509Hostname(SafeX509Handle x509, string hostname, int cchHostname);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_CheckX509Hostname",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        internal static partial int CheckX509Hostname(
+            SafeX509Handle x509,
+            string hostname,
+            int cchHostname
+        );
 
         internal static byte[] GetAsn1StringBytes(IntPtr asn1)
         {
@@ -132,7 +172,10 @@ internal static partial class Interop
         {
             // OpenSSL is going to convert our input time to universal, so we should be in Local or
             // Unspecified (local-assumed).
-            Debug.Assert(verifyTime.Kind != DateTimeKind.Utc, "UTC verifyTime should have been normalized to Local");
+            Debug.Assert(
+                verifyTime.Kind != DateTimeKind.Utc,
+                "UTC verifyTime should have been normalized to Local"
+            );
 
             int succeeded = CryptoNative_X509StoreSetVerifyTime(
                 ctx,
@@ -142,7 +185,8 @@ internal static partial class Interop
                 verifyTime.Hour,
                 verifyTime.Minute,
                 verifyTime.Second,
-                verifyTime.IsDaylightSavingTime());
+                verifyTime.IsDaylightSavingTime()
+            );
 
             if (succeeded != 1)
             {
@@ -150,7 +194,10 @@ internal static partial class Interop
             }
         }
 
-        internal static byte[] GetDynamicBuffer<THandle>(NegativeSizeReadMethod<THandle> method, THandle handle)
+        internal static byte[] GetDynamicBuffer<THandle>(
+            NegativeSizeReadMethod<THandle> method,
+            THandle handle
+        )
         {
             int negativeSize = method(handle, null, 0);
 

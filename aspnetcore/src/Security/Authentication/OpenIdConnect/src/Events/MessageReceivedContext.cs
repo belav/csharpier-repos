@@ -19,7 +19,8 @@ public class MessageReceivedContext : RemoteAuthenticationContext<OpenIdConnectO
         HttpContext context,
         AuthenticationScheme scheme,
         OpenIdConnectOptions options,
-        AuthenticationProperties? properties)
+        AuthenticationProperties? properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>

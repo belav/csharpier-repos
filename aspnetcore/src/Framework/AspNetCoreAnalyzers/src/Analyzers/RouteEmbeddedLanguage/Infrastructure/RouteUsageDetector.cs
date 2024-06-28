@@ -21,11 +21,15 @@ internal enum RouteUsageType
     MinimalApi,
     MvcAction,
     MvcController,
-    Component
+    Component,
 }
 
 // RouteParameterName can be different from parameter name using FromRouteAttribute. e.g. [FromRoute(Name = "custom_name")]
-internal record struct ParameterSymbol(string RouteParameterName, ISymbol Symbol, ISymbol? TopLevelSymbol = null)
+internal record struct ParameterSymbol(
+    string RouteParameterName,
+    ISymbol Symbol,
+    ISymbol? TopLevelSymbol = null
+)
 {
     public bool IsNested => TopLevelSymbol != null;
 }
@@ -37,24 +41,35 @@ internal readonly record struct RouteUsageContext(
     RouteUsageType UsageType,
     ImmutableArray<ISymbol> Parameters,
     ImmutableArray<ParameterSymbol> ResolvedParameters,
-    ImmutableArray<string> HttpMethods)
+    ImmutableArray<string> HttpMethods
+)
 {
-    public RoutePatternOptions RoutePatternOptions => UsageType switch
-    {
-        RouteUsageType.MvcAction or RouteUsageType.MvcController => RoutePatternOptions.MvcAttributeRoute,
-        RouteUsageType.Component => RoutePatternOptions.ComponentsRoute,
-        _ => RoutePatternOptions.DefaultRoute,
-    };
+    public RoutePatternOptions RoutePatternOptions =>
+        UsageType switch
+        {
+            RouteUsageType.MvcAction
+            or RouteUsageType.MvcController
+                => RoutePatternOptions.MvcAttributeRoute,
+            RouteUsageType.Component => RoutePatternOptions.ComponentsRoute,
+            _ => RoutePatternOptions.DefaultRoute,
+        };
 }
 
 internal readonly record struct MapMethodParts(
     IMethodSymbol Method,
     LiteralExpressionSyntax RouteStringExpression,
-    ExpressionSyntax DelegateExpression);
+    ExpressionSyntax DelegateExpression
+);
 
 internal static class RouteUsageDetector
 {
-    public static RouteUsageContext BuildContext(RouteOptions routeOptions, SyntaxToken token, SemanticModel semanticModel, WellKnownTypes wellKnownTypes, CancellationToken cancellationToken)
+    public static RouteUsageContext BuildContext(
+        RouteOptions routeOptions,
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        CancellationToken cancellationToken
+    )
     {
         if (routeOptions == RouteOptions.Component)
         {
@@ -65,7 +80,8 @@ internal static class RouteUsageDetector
                 UsageType: RouteUsageType.Component,
                 Parameters: ImmutableArray<ISymbol>.Empty,
                 ResolvedParameters: ImmutableArray<ParameterSymbol>.Empty,
-                HttpMethods: default);
+                HttpMethods: default
+            );
         }
 
         if (token.Parent is not LiteralExpressionSyntax)
@@ -82,21 +98,35 @@ internal static class RouteUsageDetector
         if (container.Parent.IsKind(SyntaxKind.Argument))
         {
             // We're an argument in a method call. See if we're a MapXXX method.
-            var mapMethodParts = FindMapMethodParts(semanticModel, wellKnownTypes, container, cancellationToken);
+            var mapMethodParts = FindMapMethodParts(
+                semanticModel,
+                wellKnownTypes,
+                container,
+                cancellationToken
+            );
             if (mapMethodParts == null)
             {
                 return default;
             }
 
             // Get the map method delegate.
-            var mapMethodSymbol = GetMethodInfo(semanticModel, mapMethodParts.Value.DelegateExpression, cancellationToken);
+            var mapMethodSymbol = GetMethodInfo(
+                semanticModel,
+                mapMethodParts.Value.DelegateExpression,
+                cancellationToken
+            );
             if (mapMethodSymbol == null)
             {
                 return default;
             }
 
-            var parameterSymbols = RoutePatternParametersDetector.GetParameterSymbols(mapMethodSymbol);
-            var resolvedParameterSymbols = RoutePatternParametersDetector.ResolvedParameters(mapMethodSymbol, wellKnownTypes);
+            var parameterSymbols = RoutePatternParametersDetector.GetParameterSymbols(
+                mapMethodSymbol
+            );
+            var resolvedParameterSymbols = RoutePatternParametersDetector.ResolvedParameters(
+                mapMethodSymbol,
+                wellKnownTypes
+            );
             return new(
                 RouteToken: token,
                 MethodSymbol: mapMethodSymbol,
@@ -104,7 +134,8 @@ internal static class RouteUsageDetector
                 UsageType: RouteUsageType.MinimalApi,
                 Parameters: parameterSymbols,
                 ResolvedParameters: resolvedParameterSymbols,
-                HttpMethods: CalculateHttpMethods(wellKnownTypes, mapMethodParts.Value.Method));
+                HttpMethods: CalculateHttpMethods(wellKnownTypes, mapMethodParts.Value.Method)
+            );
         }
         else if (container.Parent.IsKind(SyntaxKind.AttributeArgument))
         {
@@ -112,7 +143,10 @@ internal static class RouteUsageDetector
             var attributeParent = FindAttributeParent(container);
             if (attributeParent is MethodDeclarationSyntax methodDeclarationSyntax)
             {
-                var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclarationSyntax, cancellationToken);
+                var methodSymbol = semanticModel.GetDeclaredSymbol(
+                    methodDeclarationSyntax,
+                    cancellationToken
+                );
 
                 var actionMethodSymbol = FindMvcMethod(wellKnownTypes, methodSymbol);
                 if (actionMethodSymbol == null)
@@ -120,8 +154,13 @@ internal static class RouteUsageDetector
                     return default;
                 }
 
-                var parameterSymbols = RoutePatternParametersDetector.GetParameterSymbols(actionMethodSymbol);
-                var resolvedParameterSymbols = RoutePatternParametersDetector.ResolvedParameters(actionMethodSymbol, wellKnownTypes);
+                var parameterSymbols = RoutePatternParametersDetector.GetParameterSymbols(
+                    actionMethodSymbol
+                );
+                var resolvedParameterSymbols = RoutePatternParametersDetector.ResolvedParameters(
+                    actionMethodSymbol,
+                    wellKnownTypes
+                );
 
                 // TODO: Find HttpMethods for MVC actions.
                 return new(
@@ -131,12 +170,18 @@ internal static class RouteUsageDetector
                     UsageType: RouteUsageType.MvcAction,
                     Parameters: parameterSymbols,
                     ResolvedParameters: resolvedParameterSymbols,
-                    HttpMethods: default);
+                    HttpMethods: default
+                );
             }
             else if (attributeParent is ClassDeclarationSyntax classDeclarationSyntax)
             {
-                var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax, cancellationToken);
-                var usageType = MvcDetector.IsController(classSymbol, wellKnownTypes) ? RouteUsageType.MvcController : RouteUsageType.Other;
+                var classSymbol = semanticModel.GetDeclaredSymbol(
+                    classDeclarationSyntax,
+                    cancellationToken
+                );
+                var usageType = MvcDetector.IsController(classSymbol, wellKnownTypes)
+                    ? RouteUsageType.MvcController
+                    : RouteUsageType.Other;
                 return new(
                     RouteToken: token,
                     MethodSymbol: null,
@@ -144,16 +189,27 @@ internal static class RouteUsageDetector
                     UsageType: usageType,
                     Parameters: ImmutableArray<ISymbol>.Empty,
                     ResolvedParameters: ImmutableArray<ParameterSymbol>.Empty,
-                    HttpMethods: default);
+                    HttpMethods: default
+                );
             }
         }
 
         return default;
     }
 
-    private static ImmutableArray<string> CalculateHttpMethods(WellKnownTypes wellKnownTypes, IMethodSymbol mapMethodSymbol)
+    private static ImmutableArray<string> CalculateHttpMethods(
+        WellKnownTypes wellKnownTypes,
+        IMethodSymbol mapMethodSymbol
+    )
     {
-        if (SymbolEqualityComparer.Default.Equals(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions), mapMethodSymbol.ContainingType))
+        if (
+            SymbolEqualityComparer.Default.Equals(
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
+                ),
+                mapMethodSymbol.ContainingType
+            )
+        )
         {
             var httpMethodsBuilder = ImmutableArray.CreateBuilder<string>();
             // TODO: Support MapMethods.
@@ -209,7 +265,10 @@ internal static class RouteUsageDetector
         return attributeList.Parent;
     }
 
-    private static IMethodSymbol? FindMvcMethod(WellKnownTypes wellKnownTypes, IMethodSymbol? methodSymbol)
+    private static IMethodSymbol? FindMvcMethod(
+        WellKnownTypes wellKnownTypes,
+        IMethodSymbol? methodSymbol
+    )
     {
         if (methodSymbol?.ContainingType is not INamedTypeSymbol typeSymbol)
         {
@@ -229,24 +288,38 @@ internal static class RouteUsageDetector
         return methodSymbol;
     }
 
-    public static MapMethodParts? FindMapMethodParts(SemanticModel semanticModel, WellKnownTypes wellKnownTypes, SyntaxNode container, CancellationToken cancellationToken)
+    public static MapMethodParts? FindMapMethodParts(
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        SyntaxNode container,
+        CancellationToken cancellationToken
+    )
     {
         var argument = container.Parent;
-        if (argument?.Parent is not BaseArgumentListSyntax argumentList ||
-            argumentList.Parent is null)
+        if (
+            argument?.Parent is not BaseArgumentListSyntax argumentList
+            || argumentList.Parent is null
+        )
         {
             return null;
         }
 
         // Multiple overloads could be resolved, e.g. MapGet(string, RequestDelegate) and MapGet(string, Delegate)
         // Check each overload result to see whether it matches and return the first valid result.
-        var symbols = GetBestOrAllSymbols(semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken));
+        var symbols = GetBestOrAllSymbols(
+            semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken)
+        );
 
         foreach (var symbol in symbols)
         {
             if (symbol is IMethodSymbol methodSymbol)
             {
-                var mapMethodParts = FindValidMapMethodParts(semanticModel, wellKnownTypes, argumentList, methodSymbol);
+                var mapMethodParts = FindValidMapMethodParts(
+                    semanticModel,
+                    wellKnownTypes,
+                    argumentList,
+                    methodSymbol
+                );
                 if (mapMethodParts != null)
                 {
                     return mapMethodParts;
@@ -257,7 +330,12 @@ internal static class RouteUsageDetector
         return null;
     }
 
-    private static MapMethodParts? FindValidMapMethodParts(SemanticModel semanticModel, WellKnownTypes wellKnownTypes, BaseArgumentListSyntax argumentList, IMethodSymbol method)
+    private static MapMethodParts? FindValidMapMethodParts(
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        BaseArgumentListSyntax argumentList,
+        IMethodSymbol method
+    )
     {
         if (!method.Name.StartsWith("Map", StringComparison.Ordinal))
         {
@@ -266,16 +344,30 @@ internal static class RouteUsageDetector
 
         // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
-        if (!(method.ReducedFrom ?? method).Parameters.Any(
-            a => SymbolEqualityComparer.Default.Equals(a.Type, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder)) ||
-                a.Type.Implements(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder))))
+        if (
+            !(method.ReducedFrom ?? method).Parameters.Any(a =>
+                SymbolEqualityComparer.Default.Equals(
+                    a.Type,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                    )
+                )
+                || a.Type.Implements(
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                    )
+                )
+            )
+        )
         {
             return null;
         }
 
         // Method has a delegate parameter. Could be Delegate or something that inherits from it, e.g. RequestDelegate.
         var delegateSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_Delegate);
-        var delegateParameter = method.Parameters.FirstOrDefault(p => delegateSymbol.IsAssignableFrom(p.Type));
+        var delegateParameter = method.Parameters.FirstOrDefault(p =>
+            delegateSymbol.IsAssignableFrom(p.Type)
+        );
         if (delegateParameter == null)
         {
             return null;
@@ -288,9 +380,11 @@ internal static class RouteUsageDetector
         }
 
         var stringSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_String);
-        var routeStringParameter = method.Parameters.FirstOrDefault(p => SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type) &&
-            RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer) &&
-            identifer == "Route");
+        var routeStringParameter = method.Parameters.FirstOrDefault(p =>
+            SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
+            && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer)
+            && identifer == "Route"
+        );
         if (routeStringParameter == null)
         {
             return null;
@@ -305,7 +399,11 @@ internal static class RouteUsageDetector
         return new MapMethodParts(method, literalExpression, delegateArgument.Expression);
     }
 
-    private static ArgumentSyntax? GetArgumentSyntax(BaseArgumentListSyntax argumentList, IMethodSymbol methodSymbol, IParameterSymbol parameterSymbol)
+    private static ArgumentSyntax? GetArgumentSyntax(
+        BaseArgumentListSyntax argumentList,
+        IMethodSymbol methodSymbol,
+        IParameterSymbol parameterSymbol
+    )
     {
         foreach (var argument in argumentList.Arguments)
         {
@@ -330,7 +428,11 @@ internal static class RouteUsageDetector
         return argumentList.Arguments[index];
     }
 
-    private static IMethodSymbol? GetMethodInfo(SemanticModel semanticModel, SyntaxNode syntaxNode, CancellationToken cancellationToken)
+    private static IMethodSymbol? GetMethodInfo(
+        SemanticModel semanticModel,
+        SyntaxNode syntaxNode,
+        CancellationToken cancellationToken
+    )
     {
         var delegateSymbolInfo = semanticModel.GetSymbolInfo(syntaxNode, cancellationToken);
         var delegateSymbol = delegateSymbolInfo.Symbol;

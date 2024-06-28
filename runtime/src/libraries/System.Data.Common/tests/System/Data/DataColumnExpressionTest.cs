@@ -29,16 +29,12 @@ namespace System.Data.Tests
                     new DataColumn("ChildId", typeof(int)),
                     new DataColumn("ParentId", typeof(int)),
                     new DataColumn("Data", dataType),
-                }
+                },
             };
 
             var dataSet = new DataSet()
             {
-                Tables =
-                {
-                    parentTable,
-                    childTable,
-                },
+                Tables = { parentTable, childTable },
                 Relations =
                 {
                     new DataRelation("relation", parentTable.Columns[0], childTable.Columns[1]),
@@ -52,13 +48,23 @@ namespace System.Data.Tests
             }
             childTable.Rows.Add(11, 1, DBNull.Value);
 
-            parentTable.Columns.Add(new DataColumn("Aggregate", expectedResult.GetType(), expression));
+            parentTable.Columns.Add(
+                new DataColumn("Aggregate", expectedResult.GetType(), expression)
+            );
             Assert.Equal(expectedResult, parentTable.Rows[0][2]);
         }
 
         [Theory]
         [MemberData(nameof(BinaryOperators))]
-        public void BinaryOperator(Type operandType1, Type operandType2, Type resultType, string expression, object operand1, object operand2, object result)
+        public void BinaryOperator(
+            Type operandType1,
+            Type operandType2,
+            Type resultType,
+            string expression,
+            object operand1,
+            object operand2,
+            object result
+        )
         {
             var table = new DataTable();
             table.Columns.Add("Operand1", operandType1);
@@ -75,7 +81,7 @@ namespace System.Data.Tests
             if (type == typeof(SqlByte))
                 return new SqlByte((byte)value);
             if (type == typeof(SqlInt16))
-                return new SqlInt16((short) value);
+                return new SqlInt16((short)value);
             if (type == typeof(SqlInt32))
                 return new SqlInt32(value);
             if (type == typeof(SqlInt64))
@@ -103,8 +109,31 @@ namespace System.Data.Tests
                 ("max", 20),
             };
 
-            var types = new[] { typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(float), typeof(double), typeof(decimal) };
-            var sqlTypes = new[] { typeof(SqlByte), typeof(SqlInt16), typeof(SqlInt32), typeof(SqlInt64), typeof(SqlSingle), typeof(SqlDouble), typeof(SqlDecimal), typeof(SqlMoney) };
+            var types = new[]
+            {
+                typeof(byte),
+                typeof(sbyte),
+                typeof(short),
+                typeof(ushort),
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(ulong),
+                typeof(float),
+                typeof(double),
+                typeof(decimal),
+            };
+            var sqlTypes = new[]
+            {
+                typeof(SqlByte),
+                typeof(SqlInt16),
+                typeof(SqlInt32),
+                typeof(SqlInt64),
+                typeof(SqlSingle),
+                typeof(SqlDouble),
+                typeof(SqlDecimal),
+                typeof(SqlMoney),
+            };
 
             foreach (var type in types.Concat(sqlTypes))
             {
@@ -112,16 +141,31 @@ namespace System.Data.Tests
                 {
                     var resultType = type;
                     // BUG? sum(Column) is always promoted to SqlInt64
-                    if (aggregation.Operator == "sum" && (type == typeof(SqlByte) || type == typeof(SqlInt16) || type == typeof(SqlInt32)))
+                    if (
+                        aggregation.Operator == "sum"
+                        && (
+                            type == typeof(SqlByte)
+                            || type == typeof(SqlInt16)
+                            || type == typeof(SqlInt32)
+                        )
+                    )
                         resultType = typeof(SqlInt64);
 
-                    if (aggregation.Operator == "count" && (type == typeof(SqlByte) || type == typeof(SqlInt16)))
+                    if (
+                        aggregation.Operator == "count"
+                        && (type == typeof(SqlByte) || type == typeof(SqlInt16))
+                    )
                         resultType = typeof(SqlInt32);
                     // BUG? sum(SqlMoney) yields SqlDecimal, but SqlDecimal can't be converted to SqlMoney
                     if (aggregation.Operator == "sum" && type == typeof(SqlMoney))
                         resultType = typeof(SqlDecimal);
 
-                    yield return new object[] { type, aggregation.Operator + "(Child.Data)", ChangeType(aggregation.Result, resultType) };
+                    yield return new object[]
+                    {
+                        type,
+                        aggregation.Operator + "(Child.Data)",
+                        ChangeType(aggregation.Result, resultType),
+                    };
                 }
                 // BUG? Var() for SQL types can't convert to System.Double, but StDev can
                 if (type.Namespace == "System.Data.SqlTypes")
@@ -151,7 +195,19 @@ namespace System.Data.Tests
                 ("Operand1 <> Operand2", true),
             };
 
-            var types = new[] { typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(float), typeof(double), typeof(decimal) };
+            var types = new[]
+            {
+                typeof(byte),
+                typeof(sbyte),
+                typeof(short),
+                typeof(ushort),
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(float),
+                typeof(double),
+                typeof(decimal),
+            };
             foreach (var type1 in types)
             {
                 object operand1 = ChangeType(10, type1);
@@ -163,44 +219,139 @@ namespace System.Data.Tests
                     {
                         foreach (var equation in arithmeticEquations)
                         {
-                            yield return new object[] { type1, type2, type3, equation.Expression, operand1, operand2, ChangeType(equation.Result, type3) };
-                            yield return new object[] { type1, type2, type3, equation.Expression, operand1, DBNull.Value, DBNull.Value };
+                            yield return new object[]
+                            {
+                                type1,
+                                type2,
+                                type3,
+                                equation.Expression,
+                                operand1,
+                                operand2,
+                                ChangeType(equation.Result, type3),
+                            };
+                            yield return new object[]
+                            {
+                                type1,
+                                type2,
+                                type3,
+                                equation.Expression,
+                                operand1,
+                                DBNull.Value,
+                                DBNull.Value,
+                            };
                         }
                     }
 
                     foreach (var equation in comparisonEquations)
                     {
-                        yield return new object[] { type1, type2, typeof(bool), equation.Expression, operand1, operand2, equation.Result };
-                        yield return new object[] { type1, type2, typeof(bool), equation.Expression, operand1, DBNull.Value, DBNull.Value };
+                        yield return new object[]
+                        {
+                            type1,
+                            type2,
+                            typeof(bool),
+                            equation.Expression,
+                            operand1,
+                            operand2,
+                            equation.Result,
+                        };
+                        yield return new object[]
+                        {
+                            type1,
+                            type2,
+                            typeof(bool),
+                            equation.Expression,
+                            operand1,
+                            DBNull.Value,
+                            DBNull.Value,
+                        };
                     }
                 }
             }
 
             foreach (var equation in arithmeticEquations)
-                yield return new object[] { typeof(ulong), typeof(ulong), typeof(ulong), equation.Expression, 10ul, 2ul, ChangeType(equation.Result, typeof(ulong)) };
+                yield return new object[]
+                {
+                    typeof(ulong),
+                    typeof(ulong),
+                    typeof(ulong),
+                    equation.Expression,
+                    10ul,
+                    2ul,
+                    ChangeType(equation.Result, typeof(ulong)),
+                };
 
-            var sqlObjects = new object[] { new SqlByte(), new SqlInt16(), new SqlInt32(), new SqlInt64(), new SqlSingle(), new SqlDouble(), new SqlDecimal(), new SqlMoney() };
+            var sqlObjects = new object[]
+            {
+                new SqlByte(),
+                new SqlInt16(),
+                new SqlInt32(),
+                new SqlInt64(),
+                new SqlSingle(),
+                new SqlDouble(),
+                new SqlDecimal(),
+                new SqlMoney(),
+            };
             foreach (var sqlNull in sqlObjects)
             {
                 var type = sqlNull.GetType();
                 object operand1 = ChangeType(10, type);
                 object operand2 = ChangeType(2, type);
-                var isIntegral = sqlNull is SqlByte || sqlNull is SqlInt16 || sqlNull is SqlInt32 || sqlNull is SqlInt64;
+                var isIntegral =
+                    sqlNull is SqlByte
+                    || sqlNull is SqlInt16
+                    || sqlNull is SqlInt32
+                    || sqlNull is SqlInt64;
 
                 foreach (var equation in arithmeticEquations)
                 {
                     // BUG? Dividing two integral SQL types fails, even if the result is integral
                     if (!isIntegral || equation.Expression != "Operand1 / Operand2")
-                        yield return new object[] { type, type, type, equation.Expression, operand1, operand2, ChangeType(equation.Result, type) };
+                        yield return new object[]
+                        {
+                            type,
+                            type,
+                            type,
+                            equation.Expression,
+                            operand1,
+                            operand2,
+                            ChangeType(equation.Result, type),
+                        };
 
-                    yield return new object[] { type, type, type, equation.Expression, operand1, sqlNull, sqlNull };
+                    yield return new object[]
+                    {
+                        type,
+                        type,
+                        type,
+                        equation.Expression,
+                        operand1,
+                        sqlNull,
+                        sqlNull,
+                    };
                 }
 
                 foreach (var equation in comparisonEquations)
                 {
-                    yield return new object[] { type, type, typeof(SqlBoolean), equation.Expression, operand1, operand2,  new SqlBoolean(equation.Result) };
+                    yield return new object[]
+                    {
+                        type,
+                        type,
+                        typeof(SqlBoolean),
+                        equation.Expression,
+                        operand1,
+                        operand2,
+                        new SqlBoolean(equation.Result),
+                    };
                     // BUG? Result type of comparison of two SQL types (when one operard is Null) is the type itself, not SqlBoolean.
-                    yield return new object[] { type, type, type, equation.Expression, operand1, sqlNull, sqlNull };
+                    yield return new object[]
+                    {
+                        type,
+                        type,
+                        type,
+                        equation.Expression,
+                        operand1,
+                        sqlNull,
+                        sqlNull,
+                    };
                 }
             }
         }

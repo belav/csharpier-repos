@@ -5,7 +5,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public static class ModelBinderProviders
     {
-        private static readonly ModelBinderProviderCollection _providers = CreateDefaultCollection();
+        private static readonly ModelBinderProviderCollection _providers =
+            CreateDefaultCollection();
 
         public static ModelBinderProviderCollection Providers
         {
@@ -24,7 +25,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 new DictionaryModelBinderProvider(),
                 new CollectionModelBinderProvider(),
                 new TypeConverterModelBinderProvider(),
-                new MutableObjectModelBinderProvider()
+                new MutableObjectModelBinderProvider(),
             };
         }
     }

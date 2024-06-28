@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-/* 
+/*
  * Tests GC.KeepAlive(obj), where obj is the Object reference whose
  * finalizer you don't want called until after the call to KeepAlive.
  *
@@ -22,7 +22,6 @@ public class Test_KeepAlive
     public static bool visited1 = false;
     public static bool visited2 = false;
 
-
     public class Dummy
     {
         ~Dummy()
@@ -33,7 +32,6 @@ public class Test_KeepAlive
             visited1 = true;
         }
     }
-
 
     public class Dummy2
     {
@@ -46,14 +44,12 @@ public class Test_KeepAlive
         }
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void RunTest2()
     {
         Dummy2 obj2 = new Dummy2();
         obj2 = null;
     }
-
 
     public static bool RunTest()
     {
@@ -74,7 +70,7 @@ public class Test_KeepAlive
 
         success = (visited1 == false) && (visited2 == true);
 
-        GC.KeepAlive(obj);  // will keep obj alive until this point
+        GC.KeepAlive(obj); // will keep obj alive until this point
 
         return success;
     }

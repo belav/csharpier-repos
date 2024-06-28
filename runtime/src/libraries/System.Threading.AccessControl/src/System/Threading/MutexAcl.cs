@@ -20,7 +20,12 @@ namespace System.Threading
         /// <returns>An object that represents a system mutex, if named, or a local mutex, if nameless.</returns>
         /// <exception cref="ArgumentException">.NET Framework only: The length of the name exceeds the maximum limit.</exception>
         /// <exception cref="WaitHandleCannotBeOpenedException">A mutex handle with system-wide <paramref name="name" /> cannot be created. A mutex handle of a different type might have the same name.</exception>
-        public static unsafe Mutex Create(bool initiallyOwned, string? name, out bool createdNew, MutexSecurity? mutexSecurity)
+        public static unsafe Mutex Create(
+            bool initiallyOwned,
+            string? name,
+            out bool createdNew,
+            MutexSecurity? mutexSecurity
+        )
         {
             if (mutexSecurity == null)
             {
@@ -34,7 +39,7 @@ namespace System.Threading
                 var secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    lpSecurityDescriptor = pSecurityDescriptor
+                    lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
                 SafeWaitHandle handle = Interop.Kernel32.CreateMutexEx(
@@ -52,12 +57,20 @@ namespace System.Threading
 
                     if (errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE)
                     {
-                        throw new ArgumentException(SR.Argument_WaitHandleNameTooLong, nameof(name));
+                        throw new ArgumentException(
+                            SR.Argument_WaitHandleNameTooLong,
+                            nameof(name)
+                        );
                     }
 
                     if (errorCode == Interop.Errors.ERROR_INVALID_HANDLE)
                     {
-                        throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                        throw new WaitHandleCannotBeOpenedException(
+                            SR.Format(
+                                SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                                name
+                            )
+                        );
                     }
 
                     throw Win32Marshal.GetExceptionForWin32Error(errorCode, name);
@@ -89,7 +102,12 @@ namespace System.Threading
                     throw new WaitHandleCannotBeOpenedException();
 
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
 
                 case OpenExistingResult.PathNotFound:
                     throw new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, name));
@@ -112,10 +130,17 @@ namespace System.Threading
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
         /// <exception cref="UnauthorizedAccessException">The named mutex exists, but the user does not have the security access required to use it.</exception>
-        public static bool TryOpenExisting(string name, MutexRights rights, [NotNullWhen(returnValue: true)] out Mutex? result) =>
-            OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
+        public static bool TryOpenExisting(
+            string name,
+            MutexRights rights,
+            [NotNullWhen(returnValue: true)] out Mutex? result
+        ) => OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
 
-        private static OpenExistingResult OpenExistingWorker(string name, MutexRights rights, out Mutex? result)
+        private static OpenExistingResult OpenExistingWorker(
+            string name,
+            MutexRights rights,
+            out Mutex? result
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -133,10 +158,12 @@ namespace System.Threading
                 existingHandle.Dispose();
                 return errorCode switch
                 {
-                    Interop.Errors.ERROR_FILE_NOT_FOUND or Interop.Errors.ERROR_INVALID_NAME => OpenExistingResult.NameNotFound,
+                    Interop.Errors.ERROR_FILE_NOT_FOUND
+                    or Interop.Errors.ERROR_INVALID_NAME
+                        => OpenExistingResult.NameNotFound,
                     Interop.Errors.ERROR_PATH_NOT_FOUND => OpenExistingResult.PathNotFound,
                     Interop.Errors.ERROR_INVALID_HANDLE => OpenExistingResult.NameInvalid,
-                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, name)
+                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, name),
                 };
             }
 

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -31,7 +31,8 @@ public class CreatedAtActionResultTests
             actionName: expectedUrl,
             controllerName: null,
             routeValues: null,
-            value: null);
+            value: null
+        );
 
         result.UrlHelper = urlHelper;
         await result.ExecuteResultAsync(actionContext);
@@ -53,14 +54,16 @@ public class CreatedAtActionResultTests
             actionName: null,
             controllerName: null,
             routeValues: null,
-            value: null);
+            value: null
+        );
 
         result.UrlHelper = urlHelper;
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await result.ExecuteResultAsync(actionContext),
-        "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     private static ActionContext GetActionContext(HttpContext httpContext)
@@ -68,10 +71,9 @@ public class CreatedAtActionResultTests
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        return new ActionContext(httpContext,
-                                routeData,
-                                new ActionDescriptor());
+        return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
+
     private static HttpContext GetHttpContext()
     {
         var httpContext = new DefaultHttpContext();
@@ -85,14 +87,19 @@ public class CreatedAtActionResultTests
     {
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(new StringOutputFormatter());
-        options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+        options.Value.OutputFormatters.Add(
+            SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+        );
 
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         return services.BuildServiceProvider();
     }

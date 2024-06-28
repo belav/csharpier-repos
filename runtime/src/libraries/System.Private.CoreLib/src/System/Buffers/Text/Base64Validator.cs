@@ -53,10 +53,14 @@ namespace System.Buffers.Text
         public static bool IsValid(ReadOnlySpan<byte> base64TextUtf8, out int decodedLength) =>
             IsValid<byte, Base64ByteValidatable>(base64TextUtf8, out decodedLength);
 
-        private static bool IsValid<T, TBase64Validatable>(ReadOnlySpan<T> base64Text, out int decodedLength)
+        private static bool IsValid<T, TBase64Validatable>(
+            ReadOnlySpan<T> base64Text,
+            out int decodedLength
+        )
             where TBase64Validatable : IBase64Validatable<T>
         {
-            int length = 0, paddingCount = 0;
+            int length = 0,
+                paddingCount = 0;
 
             if (!base64Text.IsEmpty)
             {
@@ -78,7 +82,9 @@ namespace System.Buffers.Text
                     {
                         // It's common if there's whitespace for there to be multiple whitespace characters in a row,
                         // e.g. \r\n.  Optimize for that case by looping here.
-                        while (!base64Text.IsEmpty && TBase64Validatable.IsWhiteSpace(base64Text[0]))
+                        while (
+                            !base64Text.IsEmpty && TBase64Validatable.IsWhiteSpace(base64Text[0])
+                        )
                         {
                             base64Text = base64Text.Slice(1);
                         }
@@ -140,19 +146,29 @@ namespace System.Buffers.Text
 
         private readonly struct Base64CharValidatable : IBase64Validatable<char>
         {
-            private static readonly SearchValues<char> s_validBase64Chars = SearchValues.Create("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+            private static readonly SearchValues<char> s_validBase64Chars = SearchValues.Create(
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+            );
 
-            public static int IndexOfAnyExcept(ReadOnlySpan<char> span) => span.IndexOfAnyExcept(s_validBase64Chars);
+            public static int IndexOfAnyExcept(ReadOnlySpan<char> span) =>
+                span.IndexOfAnyExcept(s_validBase64Chars);
+
             public static bool IsWhiteSpace(char value) => Base64.IsWhiteSpace(value);
+
             public static bool IsEncodingPad(char value) => value == EncodingPad;
         }
 
         private readonly struct Base64ByteValidatable : IBase64Validatable<byte>
         {
-            private static readonly SearchValues<byte> s_validBase64Chars = SearchValues.Create(EncodingMap);
+            private static readonly SearchValues<byte> s_validBase64Chars = SearchValues.Create(
+                EncodingMap
+            );
 
-            public static int IndexOfAnyExcept(ReadOnlySpan<byte> span) => span.IndexOfAnyExcept(s_validBase64Chars);
+            public static int IndexOfAnyExcept(ReadOnlySpan<byte> span) =>
+                span.IndexOfAnyExcept(s_validBase64Chars);
+
             public static bool IsWhiteSpace(byte value) => Base64.IsWhiteSpace(value);
+
             public static bool IsEncodingPad(byte value) => value == EncodingPad;
         }
     }

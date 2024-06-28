@@ -19,9 +19,16 @@ namespace Microsoft.CodeAnalysis.Classification
             SyntaxNode? root,
             TextSpan textSpan,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            classificationService.AddSyntacticClassifications(services, root, ImmutableArray.Create(textSpan), result, cancellationToken);
+            classificationService.AddSyntacticClassifications(
+                services,
+                root,
+                ImmutableArray.Create(textSpan),
+                result,
+                cancellationToken
+            );
         }
 
         public static Task AddSyntacticClassificationsAsync(
@@ -29,9 +36,15 @@ namespace Microsoft.CodeAnalysis.Classification
             Document document,
             TextSpan textSpan,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return classificationService.AddSyntacticClassificationsAsync(document, ImmutableArray.Create(textSpan), result, cancellationToken);
+            return classificationService.AddSyntacticClassificationsAsync(
+                document,
+                ImmutableArray.Create(textSpan),
+                result,
+                cancellationToken
+            );
         }
 
         public static Task AddSemanticClassificationsAsync(
@@ -40,9 +53,16 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return classificationService.AddSemanticClassificationsAsync(document, ImmutableArray.Create(textSpan), options, result, cancellationToken);
+            return classificationService.AddSemanticClassificationsAsync(
+                document,
+                ImmutableArray.Create(textSpan),
+                options,
+                result,
+                cancellationToken
+            );
         }
 
         public static Task AddEmbeddedLanguageClassificationsAsync(
@@ -51,9 +71,16 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return classificationService.AddEmbeddedLanguageClassificationsAsync(document, ImmutableArray.Create(textSpan), options, result, cancellationToken);
+            return classificationService.AddEmbeddedLanguageClassificationsAsync(
+                document,
+                ImmutableArray.Create(textSpan),
+                options,
+                result,
+                cancellationToken
+            );
         }
     }
 }

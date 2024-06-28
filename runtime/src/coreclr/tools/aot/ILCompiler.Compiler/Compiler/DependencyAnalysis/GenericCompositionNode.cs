@@ -31,10 +31,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public int Offset
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override ObjectNodeSection GetSection(NodeFactory factory)
@@ -63,7 +60,10 @@ namespace ILCompiler.DependencyAnalysis
             foreach (var typeArg in _details)
             {
                 if (useRelativePointers)
-                    builder.EmitReloc(factory.NecessaryTypeSymbol(typeArg), RelocType.IMAGE_REL_BASED_RELPTR32);
+                    builder.EmitReloc(
+                        factory.NecessaryTypeSymbol(typeArg),
+                        RelocType.IMAGE_REL_BASED_RELPTR32
+                    );
                 else
                     builder.EmitPointerReloc(factory.NecessaryTypeSymbol(typeArg));
             }
@@ -71,9 +71,11 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -762680703;
+
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             var otherComposition = (GenericCompositionNode)other;

@@ -22,9 +22,9 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Get(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object id
+    ) { }
 
     /// <summary>
     /// Find convention.
@@ -36,9 +36,9 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Find(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object id
+    ) { }
     #endregion
 
     /// <summary>
@@ -52,9 +52,9 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Post(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object model
+    ) { }
 
     /// <summary>
     /// Create convention.
@@ -66,9 +66,9 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Create(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object model
+    ) { }
     #endregion
 
     #region PUT
@@ -84,13 +84,12 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Put(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object id,
-
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object model
+    ) { }
 
     /// <summary>
     /// Edit convention.
@@ -104,13 +103,12 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Edit(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object id,
-
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object model
+    ) { }
 
     /// <summary>
     /// Update convention.
@@ -124,13 +122,12 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Update(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object id,
-
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object model
+    ) { }
     #endregion
 
     #region DELETE
@@ -145,8 +142,8 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Delete(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id)
-    { }
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
+            object id
+    ) { }
     #endregion
 }

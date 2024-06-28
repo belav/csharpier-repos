@@ -18,11 +18,11 @@ namespace Microsoft.Interop.UnitTests.Verifiers
     public static class CSharpSourceGeneratorVerifier<TSourceGenerator>
         where TSourceGenerator : new()
     {
-        public static DiagnosticResult Diagnostic(string diagnosticId)
-            => new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error);
+        public static DiagnosticResult Diagnostic(string diagnosticId) =>
+            new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error);
 
-        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-            => new DiagnosticResult(descriptor);
+        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+            new DiagnosticResult(descriptor);
 
         /// <summary>
         /// Create a <see cref="DiagnosticResult"/> with the diagnostic message created with the provided arguments.
@@ -32,42 +32,58 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         /// <param name="descriptor">The diagnostic descriptor</param>
         /// <param name="arguments">The arguments to use to format the diagnostic message</param>
         /// <returns>A <see cref="DiagnosticResult"/> with a <see cref="DiagnosticResult.Message"/> set with the <paramref name="descriptor"/>'s message format and the <paramref name="arguments"/>.</returns>
-        public static DiagnosticResult DiagnosticWithArguments(DiagnosticDescriptor descriptor, params object[] arguments)
+        public static DiagnosticResult DiagnosticWithArguments(
+            DiagnosticDescriptor descriptor,
+            params object[] arguments
+        )
         {
             // Generate the specific message here to ensure a stronger match with the correct diagnostic.
-            return Diagnostic(descriptor).WithMessage(string.Format(descriptor.MessageFormat.ToString(), arguments)).WithArguments(arguments);
+            return Diagnostic(descriptor)
+                .WithMessage(string.Format(descriptor.MessageFormat.ToString(), arguments))
+                .WithArguments(arguments);
         }
 
-        public static async Task VerifySourceGeneratorAsync(string source, params DiagnosticResult[] expected)
+        public static async Task VerifySourceGeneratorAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
             var test = new Test(referenceAncillaryInterop: false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
-            test.DisabledDiagnostics.Add(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
+            test.DisabledDiagnostics.Add(
+                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
+            );
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
 
-        public static async Task VerifySourceGeneratorWithAncillaryInteropAsync(string source, params DiagnosticResult[] expected)
+        public static async Task VerifySourceGeneratorWithAncillaryInteropAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
             var test = new Test(referenceAncillaryInterop: true)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
 
-        public static async Task VerifySourceGeneratorAsync(string[] sources, params DiagnosticResult[] expected)
+        public static async Task VerifySourceGeneratorAsync(
+            string[] sources,
+            params DiagnosticResult[] expected
+        )
         {
             var test = new Test(referenceAncillaryInterop: false)
             {
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             foreach (var source in sources)
@@ -88,21 +104,30 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                     // Clear out the default reference assemblies. We explicitly add references from the live ref pack,
                     // so we don't want the Roslyn test infrastructure to resolve/add any default reference assemblies
                     ReferenceAssemblies = new ReferenceAssemblies(string.Empty);
-                    TestState.AdditionalReferences.AddRange(SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences());
+                    TestState.AdditionalReferences.AddRange(
+                        SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences()
+                    );
                 }
                 else
                 {
                     ReferenceAssemblies = targetFramework switch
                     {
-                        TestTargetFramework.Framework => ReferenceAssemblies.NetFramework.Net48.Default,
-                        TestTargetFramework.Standard => ReferenceAssemblies.NetStandard.NetStandard21,
+                        TestTargetFramework.Framework
+                            => ReferenceAssemblies.NetFramework.Net48.Default,
+                        TestTargetFramework.Standard
+                            => ReferenceAssemblies.NetStandard.NetStandard21,
                         TestTargetFramework.Core => ReferenceAssemblies.NetCore.NetCoreApp31,
                         TestTargetFramework.Net6 => ReferenceAssemblies.Net.Net60,
-                        _ => ReferenceAssemblies.Default
+                        _ => ReferenceAssemblies.Default,
                     };
                 }
-                SolutionTransforms.Add(CSharpVerifierHelper.GetTargetFrameworkAnalyzerOptionsProviderTransform(targetFramework));
+                SolutionTransforms.Add(
+                    CSharpVerifierHelper.GetTargetFrameworkAnalyzerOptionsProviderTransform(
+                        targetFramework
+                    )
+                );
             }
+
             public Test(bool referenceAncillaryInterop)
                 : this(TestTargetFramework.Net)
             {
@@ -110,12 +135,21 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 {
                     TestState.AdditionalReferences.Add(TestUtils.GetAncillaryReference());
                 }
-                DisabledDiagnostics.Add(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
+                DisabledDiagnostics.Add(
+                    GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
+                );
 
-                SolutionTransforms.Add(CSharpVerifierHelper.GetAllDiagonsticsEnabledTransform(GetDiagnosticAnalyzers()));
+                SolutionTransforms.Add(
+                    CSharpVerifierHelper.GetAllDiagonsticsEnabledTransform(GetDiagnosticAnalyzers())
+                );
             }
 
-            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions options, CancellationToken cancellationToken)
+            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(
+                Compilation compilation,
+                ImmutableArray<DiagnosticAnalyzer> analyzers,
+                AnalyzerOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 return new CompilationWithAnalyzers(
                     compilation,
@@ -136,10 +170,14 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                                 {
                                     System.Diagnostics.Debugger.Break();
                                 }
-                                Environment.FailFast($"Encountered a NullReferenceException while running an analyzer. Taking the process down to get an actionable crash dump. Exception information:{ex.ToString()}");
+                                Environment.FailFast(
+                                    $"Encountered a NullReferenceException while running an analyzer. Taking the process down to get an actionable crash dump. Exception information:{ex.ToString()}"
+                                );
                             }
                             return true;
-                        }));
+                        }
+                    )
+                );
             }
 
             protected override ParseOptions CreateParseOptions()
@@ -147,9 +185,20 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 return new CSharpParseOptions(LanguageVersion.Preview, DocumentationMode.Diagnose);
             }
 
-            protected async override Task<(Compilation compilation, ImmutableArray<Diagnostic> generatorDiagnostics)> GetProjectCompilationAsync(Project project, IVerifier verifier, CancellationToken cancellationToken)
+            protected override async Task<(
+                Compilation compilation,
+                ImmutableArray<Diagnostic> generatorDiagnostics
+            )> GetProjectCompilationAsync(
+                Project project,
+                IVerifier verifier,
+                CancellationToken cancellationToken
+            )
             {
-                var (compilation, diagnostics) = await base.GetProjectCompilationAsync(project, verifier, cancellationToken);
+                var (compilation, diagnostics) = await base.GetProjectCompilationAsync(
+                    project,
+                    verifier,
+                    cancellationToken
+                );
                 VerifyFinalCompilation(compilation);
                 return (compilation, diagnostics);
             }
@@ -161,9 +210,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             /// <remarks>
             /// This function is useful for basic semantic testing of the generated code and can be used instead of verification testing of an exact match to the expected source output.
             /// </remarks>
-            protected virtual void VerifyFinalCompilation(Compilation compilation)
-            {
-            }
+            protected virtual void VerifyFinalCompilation(Compilation compilation) { }
         }
     }
 }

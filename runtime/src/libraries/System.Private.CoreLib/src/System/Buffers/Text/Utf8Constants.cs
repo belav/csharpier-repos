@@ -16,7 +16,7 @@ namespace System.Buffers.Text
 
         public const int DateTimeMaxUtcOffsetHours = 14; // The UTC offset portion of a TimeSpan or DateTime can be no more than 14 hours and no less than -14 hours.
 
-        public const int DateTimeNumFractionDigits = 7;  // TimeSpan and DateTime formats allow exactly up to many digits for specifying the fraction after the seconds.
-        public const int MaxDateTimeFraction = 9999999;  // ... and hence, the largest fraction expressible is this.
+        public const int DateTimeNumFractionDigits = 7; // TimeSpan and DateTime formats allow exactly up to many digits for specifying the fraction after the seconds.
+        public const int MaxDateTimeFraction = 9999999; // ... and hence, the largest fraction expressible is this.
     }
 }

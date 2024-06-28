@@ -22,8 +22,10 @@ public class SerializableErrorWrapperProvider : IWrapperProvider
             throw new ArgumentException(
                 Resources.FormatWrapperProvider_MismatchType(
                     typeof(SerializableErrorWrapper).Name,
-                    original.GetType().Name),
-                nameof(original));
+                    original.GetType().Name
+                ),
+                nameof(original)
+            );
         }
 
         return new SerializableErrorWrapper(error);

@@ -30,11 +30,17 @@ namespace MS.Internal.Xml.XPath
             Preceding,
             PrecedingSibling,
             Self,
-            None
+            None,
         };
 
         // constructor
-        public Axis(AxisType axisType, AstNode? input, string prefix, string name, XPathNodeType nodetype)
+        public Axis(
+            AxisType axisType,
+            AstNode? input,
+            string prefix,
+            string name,
+            XPathNodeType nodetype
+        )
         {
             Debug.Assert(prefix != null);
             Debug.Assert(name != null);
@@ -52,9 +58,15 @@ namespace MS.Internal.Xml.XPath
             this.abbrAxis = true;
         }
 
-        public override AstType Type { get { return AstType.Axis; } }
+        public override AstType Type
+        {
+            get { return AstType.Axis; }
+        }
 
-        public override XPathResultType ReturnType { get { return XPathResultType.NodeSet; } }
+        public override XPathResultType ReturnType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
 
         public AstNode? Input
         {
@@ -62,11 +74,26 @@ namespace MS.Internal.Xml.XPath
             set { _input = value; }
         }
 
-        public string Prefix { get { return _prefix; } }
-        public string Name { get { return _name; } }
-        public XPathNodeType NodeType { get { return _nodeType; } }
-        public AxisType TypeOfAxis { get { return _axisType; } }
-        public bool AbbrAxis { get { return abbrAxis; } }
+        public string Prefix
+        {
+            get { return _prefix; }
+        }
+        public string Name
+        {
+            get { return _name; }
+        }
+        public XPathNodeType NodeType
+        {
+            get { return _nodeType; }
+        }
+        public AxisType TypeOfAxis
+        {
+            get { return _axisType; }
+        }
+        public bool AbbrAxis
+        {
+            get { return abbrAxis; }
+        }
 
         // Used by AstTree in Schema
         private string? _urn = string.Empty;

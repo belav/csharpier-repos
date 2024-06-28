@@ -118,6 +118,6 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// A TimeSpan value.
         /// </summary>
-        TimeSpan = 17
+        TimeSpan = 17,
     }
 }

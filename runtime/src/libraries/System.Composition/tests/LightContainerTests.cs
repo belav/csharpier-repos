@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
-using System.Text;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Composition;
-using System.Composition.Hosting;
 using System.Composition.Convention;
+using System.Composition.Hosting;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using TestLibrary;
 using Xunit;
 

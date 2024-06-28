@@ -16,7 +16,8 @@ internal static class ControllerBinderDelegateProvider
         IModelBinderFactory modelBinderFactory,
         IModelMetadataProvider modelMetadataProvider,
         ControllerActionDescriptor actionDescriptor,
-        MvcOptions mvcOptions)
+        MvcOptions mvcOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(parameterBinder);
         ArgumentNullException.ThrowIfNull(modelBinderFactory);
@@ -27,8 +28,13 @@ internal static class ControllerBinderDelegateProvider
         var parameterBindingInfo = GetParameterBindingInfo(
             modelBinderFactory,
             modelMetadataProvider,
-            actionDescriptor);
-        var propertyBindingInfo = GetPropertyBindingInfo(modelBinderFactory, modelMetadataProvider, actionDescriptor);
+            actionDescriptor
+        );
+        var propertyBindingInfo = GetPropertyBindingInfo(
+            modelBinderFactory,
+            modelMetadataProvider,
+            actionDescriptor
+        );
 
         if (parameterBindingInfo == null && propertyBindingInfo == null)
         {
@@ -38,20 +44,27 @@ internal static class ControllerBinderDelegateProvider
         var parameters = actionDescriptor.Parameters switch
         {
             List<ParameterDescriptor> list => list.ToArray(),
-            _ => actionDescriptor.Parameters.ToArray()
+            _ => actionDescriptor.Parameters.ToArray(),
         };
 
         var properties = actionDescriptor.BoundProperties switch
         {
             List<ParameterDescriptor> list => list.ToArray(),
-            _ => actionDescriptor.BoundProperties.ToArray()
+            _ => actionDescriptor.BoundProperties.ToArray(),
         };
 
         return Bind;
 
-        async Task Bind(ControllerContext controllerContext, object controller, Dictionary<string, object?> arguments)
+        async Task Bind(
+            ControllerContext controllerContext,
+            object controller,
+            Dictionary<string, object?> arguments
+        )
         {
-            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(controllerContext, controllerContext.ValueProviderFactories);
+            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+                controllerContext,
+                controllerContext.ValueProviderFactories
+            );
             if (!success)
             {
                 return;
@@ -77,7 +90,8 @@ internal static class ControllerBinderDelegateProvider
                     parameter,
                     modelMetadata,
                     value: null,
-                    container: null); // Parameters do not have containers.
+                    container: null
+                ); // Parameters do not have containers.
 
                 if (result.IsModelSet)
                 {
@@ -97,17 +111,22 @@ internal static class ControllerBinderDelegateProvider
                 }
 
                 var result = await parameterBinder.BindModelAsync(
-                   controllerContext,
-                   bindingInfo.ModelBinder,
-                   valueProvider,
-                   property,
-                   modelMetadata,
-                   value: null,
-                   container: controller);
+                    controllerContext,
+                    bindingInfo.ModelBinder,
+                    valueProvider,
+                    property,
+                    modelMetadata,
+                    value: null,
+                    container: controller
+                );
 
                 if (result.IsModelSet)
                 {
-                    PropertyValueSetter.SetValue(bindingInfo.ModelMetadata, controller, result.Model);
+                    PropertyValueSetter.SetValue(
+                        bindingInfo.ModelMetadata,
+                        controller,
+                        result.Model
+                    );
                 }
             }
         }
@@ -116,7 +135,8 @@ internal static class ControllerBinderDelegateProvider
     private static BinderItem[]? GetParameterBindingInfo(
         IModelBinderFactory modelBinderFactory,
         IModelMetadataProvider modelMetadataProvider,
-        ControllerActionDescriptor actionDescriptor)
+        ControllerActionDescriptor actionDescriptor
+    )
     {
         var parameters = actionDescriptor.Parameters;
         if (parameters.Count == 0)
@@ -130,12 +150,16 @@ internal static class ControllerBinderDelegateProvider
             var parameter = parameters[i];
 
             ModelMetadata metadata;
-            if (modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase &&
-                parameter is ControllerParameterDescriptor controllerParameterDescriptor)
+            if (
+                modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase
+                && parameter is ControllerParameterDescriptor controllerParameterDescriptor
+            )
             {
                 // The default model metadata provider derives from ModelMetadataProvider
                 // and can therefore supply information about attributes applied to parameters.
-                metadata = modelMetadataProviderBase.GetMetadataForParameter(controllerParameterDescriptor.ParameterInfo);
+                metadata = modelMetadataProviderBase.GetMetadataForParameter(
+                    controllerParameterDescriptor.ParameterInfo
+                );
             }
             else
             {
@@ -146,12 +170,14 @@ internal static class ControllerBinderDelegateProvider
                 metadata = modelMetadataProvider.GetMetadataForType(parameter.ParameterType);
             }
 
-            var binder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-            {
-                BindingInfo = parameter.BindingInfo,
-                Metadata = metadata,
-                CacheToken = parameter,
-            });
+            var binder = modelBinderFactory.CreateBinder(
+                new ModelBinderFactoryContext
+                {
+                    BindingInfo = parameter.BindingInfo,
+                    Metadata = metadata,
+                    CacheToken = parameter,
+                }
+            );
 
             parameterBindingInfo[i] = new BinderItem(binder, metadata);
         }
@@ -162,7 +188,8 @@ internal static class ControllerBinderDelegateProvider
     private static BinderItem[]? GetPropertyBindingInfo(
         IModelBinderFactory modelBinderFactory,
         IModelMetadataProvider modelMetadataProvider,
-        ControllerActionDescriptor actionDescriptor)
+        ControllerActionDescriptor actionDescriptor
+    )
     {
         var properties = actionDescriptor.BoundProperties;
         if (properties.Count == 0)
@@ -175,13 +202,18 @@ internal static class ControllerBinderDelegateProvider
         for (var i = 0; i < properties.Count; i++)
         {
             var property = properties[i];
-            var metadata = modelMetadataProvider.GetMetadataForProperty(controllerType, property.Name);
-            var binder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-            {
-                BindingInfo = property.BindingInfo,
-                Metadata = metadata,
-                CacheToken = property,
-            });
+            var metadata = modelMetadataProvider.GetMetadataForProperty(
+                controllerType,
+                property.Name
+            );
+            var binder = modelBinderFactory.CreateBinder(
+                new ModelBinderFactoryContext
+                {
+                    BindingInfo = property.BindingInfo,
+                    Metadata = metadata,
+                    CacheToken = property,
+                }
+            );
 
             propertyBindingInfo[i] = new BinderItem(binder, metadata);
         }

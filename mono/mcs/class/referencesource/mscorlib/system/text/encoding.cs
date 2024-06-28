@@ -7,19 +7,19 @@ namespace System.Text
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime;
-    using System.Runtime.Remoting;
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
-    using System.Text;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.InteropServices;
-#if FEATURE_CODEPAGES_FILE            
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+#if FEATURE_CODEPAGES_FILE
     using Win32Native = Microsoft.Win32.Win32Native;
 #endif
 
@@ -86,18 +86,18 @@ namespace System.Text
     // generally executes faster.
     //
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     public abstract class Encoding : ICloneable
     {
         private static volatile Encoding defaultEncoding;
         private static volatile Encoding unicodeEncoding;
         private static volatile Encoding bigEndianUnicode;
-#if FEATURE_UTF7        
+#if FEATURE_UTF7
         private static volatile Encoding utf7Encoding;
 #endif
         private static volatile Encoding utf8Encoding;
-#if FEATURE_UTF32        
+#if FEATURE_UTF32
         private static volatile Encoding utf32Encoding;
 #endif
 #if FEATURE_ASCII
@@ -112,73 +112,73 @@ namespace System.Text
         // The following values are from mlang.idl.  These values
         // should be in sync with those in mlang.idl.
         //
-        private const int MIMECONTF_MAILNEWS          = 0x00000001;
-        private const int MIMECONTF_BROWSER           = 0x00000002;
-        private const int MIMECONTF_SAVABLE_MAILNEWS  = 0x00000100;
-        private const int MIMECONTF_SAVABLE_BROWSER   = 0x00000200;
+        private const int MIMECONTF_MAILNEWS = 0x00000001;
+        private const int MIMECONTF_BROWSER = 0x00000002;
+        private const int MIMECONTF_SAVABLE_MAILNEWS = 0x00000100;
+        private const int MIMECONTF_SAVABLE_BROWSER = 0x00000200;
 
         // Special Case Code Pages
-        private const int CodePageDefault       = 0;
-        private const int CodePageNoOEM         = 1;        // OEM Code page not supported
-        private const int CodePageNoMac         = 2;        // MAC code page not supported
-        private const int CodePageNoThread      = 3;        // Thread code page not supported
-        private const int CodePageNoSymbol      = 42;       // Symbol code page not supported
-        private const int CodePageUnicode       = 1200;     // Unicode
-        private const int CodePageBigEndian     = 1201;     // Big Endian Unicode
-        private const int CodePageWindows1252   = 1252;     // Windows 1252 code page
+        private const int CodePageDefault = 0;
+        private const int CodePageNoOEM = 1; // OEM Code page not supported
+        private const int CodePageNoMac = 2; // MAC code page not supported
+        private const int CodePageNoThread = 3; // Thread code page not supported
+        private const int CodePageNoSymbol = 42; // Symbol code page not supported
+        private const int CodePageUnicode = 1200; // Unicode
+        private const int CodePageBigEndian = 1201; // Big Endian Unicode
+        private const int CodePageWindows1252 = 1252; // Windows 1252 code page
 
         // 20936 has same code page as 10008, so we'll special case it
         private const int CodePageMacGB2312 = 10008;
-        private const int CodePageGB2312    = 20936;
+        private const int CodePageGB2312 = 20936;
         private const int CodePageMacKorean = 10003;
         private const int CodePageDLLKorean = 20949;
 
         // ISO 2022 Code Pages
-        private const int ISO2022JP         = 50220;
-        private const int ISO2022JPESC      = 50221;
-        private const int ISO2022JPSISO     = 50222;
-        private const int ISOKorean         = 50225;
-        private const int ISOSimplifiedCN   = 50227;
-        private const int EUCJP             = 51932;
-        private const int ChineseHZ         = 52936;    // HZ has ~}~{~~ sequences
+        private const int ISO2022JP = 50220;
+        private const int ISO2022JPESC = 50221;
+        private const int ISO2022JPSISO = 50222;
+        private const int ISOKorean = 50225;
+        private const int ISOSimplifiedCN = 50227;
+        private const int EUCJP = 51932;
+        private const int ChineseHZ = 52936; // HZ has ~}~{~~ sequences
 
         // 51936 is the same as 936
-        private const int DuplicateEUCCN    = 51936;
-        private const int EUCCN             = 936;
+        private const int DuplicateEUCCN = 51936;
+        private const int EUCCN = 936;
 
-        private const int EUCKR             = 51949;
+        private const int EUCKR = 51949;
 
         // Latin 1 & ASCII Code Pages
-        internal const int CodePageASCII    = 20127;    // ASCII
-        internal const int ISO_8859_1       = 28591;    // Latin1
+        internal const int CodePageASCII = 20127; // ASCII
+        internal const int ISO_8859_1 = 28591; // Latin1
 
         // ISCII
-        private const int ISCIIAssemese     = 57006;
-        private const int ISCIIBengali      = 57003;
-        private const int ISCIIDevanagari   = 57002;
-        private const int ISCIIGujarathi    = 57010;
-        private const int ISCIIKannada      = 57008;
-        private const int ISCIIMalayalam    = 57009;
-        private const int ISCIIOriya        = 57007;
-        private const int ISCIIPanjabi      = 57011;
-        private const int ISCIITamil        = 57004;
-        private const int ISCIITelugu       = 57005;
+        private const int ISCIIAssemese = 57006;
+        private const int ISCIIBengali = 57003;
+        private const int ISCIIDevanagari = 57002;
+        private const int ISCIIGujarathi = 57010;
+        private const int ISCIIKannada = 57008;
+        private const int ISCIIMalayalam = 57009;
+        private const int ISCIIOriya = 57007;
+        private const int ISCIIPanjabi = 57011;
+        private const int ISCIITamil = 57004;
+        private const int ISCIITelugu = 57005;
 
         // GB18030
-        private const int GB18030           = 54936;
+        private const int GB18030 = 54936;
 
         // Other
-        private const int ISO_8859_8I       = 38598;
+        private const int ISO_8859_8I = 38598;
         private const int ISO_8859_8_Visual = 28598;
 
         // 50229 is currently unsupported // "Chinese Traditional (ISO-2022)"
-        private const int ENC50229          = 50229;
+        private const int ENC50229 = 50229;
 
         // Special code pages
-        private const int CodePageUTF7      = 65000;
-        private const int CodePageUTF8      = 65001;
-        private const int CodePageUTF32     = 12000;
-        private const int CodePageUTF32BE   = 12001;
+        private const int CodePageUTF7 = 65000;
+        private const int CodePageUTF8 = 65001;
+        private const int CodePageUTF32 = 12000;
+        private const int CodePageUTF32BE = 12001;
 
         internal int m_codePage = 0;
 
@@ -196,13 +196,12 @@ namespace System.Text
         // Encoding (encoder) fallback
         [OptionalField(VersionAdded = 2)]
         internal EncoderFallback encoderFallback = null;
+
         [OptionalField(VersionAdded = 2)]
         internal DecoderFallback decoderFallback = null;
 
-        protected Encoding() : this(0)
-        {
-        }
-
+        protected Encoding()
+            : this(0) { }
 
         protected Encoding(int codePage)
         {
@@ -220,10 +219,14 @@ namespace System.Text
             this.SetDefaultFallbacks();
         }
 
-        // This constructor is needed to allow any sub-classing implementation to provide encoder/decoder fallback objects 
-        // because the encoding object is always created as read-only object and don’t allow setting encoder/decoder fallback 
-        // after the creation is done. 
-        protected Encoding(int codePage, EncoderFallback encoderFallback, DecoderFallback decoderFallback)
+        // This constructor is needed to allow any sub-classing implementation to provide encoder/decoder fallback objects
+        // because the encoding object is always created as read-only object and don’t allow setting encoder/decoder fallback
+        // after the creation is done.
+        protected Encoding(
+            int codePage,
+            EncoderFallback encoderFallback,
+            DecoderFallback decoderFallback
+        )
         {
             // Validate code page
             if (codePage < 0)
@@ -248,14 +251,13 @@ namespace System.Text
             this.decoderFallback = new InternalDecoderBestFitFallback(this);
         }
 
-
-#region Serialization
+        #region Serialization
         internal void OnDeserializing()
         {
             // intialize the optional Whidbey fields
             encoderFallback = null;
             decoderFallback = null;
-            m_isReadOnly    = true;
+            m_isReadOnly = true;
         }
 
         internal void OnDeserialized()
@@ -267,7 +269,7 @@ namespace System.Text
             }
 
             // dataItem is always recalculated from the code page #
-            dataItem = null;              
+            dataItem = null;
         }
 
         [OnDeserializing]
@@ -275,7 +277,6 @@ namespace System.Text
         {
             OnDeserializing();
         }
-
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext ctx)
@@ -295,7 +296,8 @@ namespace System.Text
         internal void DeserializeEncoding(SerializationInfo info, StreamingContext context)
         {
             // Any info?
-            if (info==null) throw new ArgumentNullException("info");
+            if (info == null)
+                throw new ArgumentNullException("info");
             Contract.EndContractBlock();
 
             // All versions have a code page
@@ -303,7 +305,7 @@ namespace System.Text
 
             // We can get dataItem on the fly if needed, and the index is different between versions
             // so ignore whatever dataItem data we get from Everett.
-            this.dataItem   = null;
+            this.dataItem = null;
 
             // See if we have a code page
             try
@@ -314,8 +316,10 @@ namespace System.Text
 
                 this.m_isReadOnly = (bool)info.GetValue("m_isReadOnly", typeof(bool));
 
-                this.encoderFallback = (EncoderFallback)info.GetValue("encoderFallback", typeof(EncoderFallback));
-                this.decoderFallback = (DecoderFallback)info.GetValue("decoderFallback", typeof(DecoderFallback));
+                this.encoderFallback = (EncoderFallback)
+                    info.GetValue("encoderFallback", typeof(EncoderFallback));
+                this.decoderFallback = (DecoderFallback)
+                    info.GetValue("decoderFallback", typeof(DecoderFallback));
             }
             catch (SerializationException)
             {
@@ -334,7 +338,8 @@ namespace System.Text
         internal void SerializeEncoding(SerializationInfo info, StreamingContext context)
         {
             // Any Info?
-            if (info==null) throw new ArgumentNullException("info");
+            if (info == null)
+                throw new ArgumentNullException("info");
             Contract.EndContractBlock();
 
             // These are new V2.0 Whidbey stuff
@@ -353,7 +358,7 @@ namespace System.Text
             info.AddValue("Encoding+dataItem", null);
         }
 
-#endregion Serialization
+        #endregion Serialization
 
         // Converts a byte array from one encoding to another. The bytes in the
         // bytes array are converted from srcEncoding to
@@ -361,12 +366,12 @@ namespace System.Text
         // containing the result of the conversion.
         //
         [Pure]
-        public static byte[] Convert(Encoding srcEncoding, Encoding dstEncoding,
-            byte[] bytes) {
-            if (bytes==null)
+        public static byte[] Convert(Encoding srcEncoding, Encoding dstEncoding, byte[] bytes)
+        {
+            if (bytes == null)
                 throw new ArgumentNullException("bytes");
             Contract.Ensures(Contract.Result<byte[]>() != null);
-            
+
             return Convert(srcEncoding, dstEncoding, bytes, 0, bytes.Length);
         }
 
@@ -376,26 +381,41 @@ namespace System.Text
         // returns a new byte array containing the result of the conversion.
         //
         [Pure]
-        public static byte[] Convert(Encoding srcEncoding, Encoding dstEncoding,
-            byte[] bytes, int index, int count) {
-            if (srcEncoding == null || dstEncoding == null) {
-                throw new ArgumentNullException((srcEncoding == null ? "srcEncoding" : "dstEncoding"),
-                    Environment.GetResourceString("ArgumentNull_Array"));
+        public static byte[] Convert(
+            Encoding srcEncoding,
+            Encoding dstEncoding,
+            byte[] bytes,
+            int index,
+            int count
+        )
+        {
+            if (srcEncoding == null || dstEncoding == null)
+            {
+                throw new ArgumentNullException(
+                    (srcEncoding == null ? "srcEncoding" : "dstEncoding"),
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
-            if (bytes == null) {
-                throw new ArgumentNullException("bytes",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+            if (bytes == null)
+            {
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
             Contract.Ensures(Contract.Result<byte[]>() != null);
-            
+
             return dstEncoding.GetBytes(srcEncoding.GetChars(bytes, index, count));
         }
 
         // Private object for locking instead of locking on a public type for SQL reliability work.
         private static Object s_InternalSyncObject;
-        private static Object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        private static Object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange<Object>(ref s_InternalSyncObject, o, null);
                 }
@@ -406,7 +426,7 @@ namespace System.Text
 #if !FEATURE_CORECLR
         [System.Security.SecurityCritical]
 #endif
-        public static void RegisterProvider(EncodingProvider provider) 
+        public static void RegisterProvider(EncodingProvider provider)
         {
             // Parameters validated inside EncodingProvider
             EncodingProvider.AddProvider(provider);
@@ -414,7 +434,7 @@ namespace System.Text
 
         [Pure]
 #if !FEATURE_CORECLR
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #endif
         public static Encoding GetEncoding(int codepage)
         {
@@ -428,10 +448,12 @@ namespace System.Text
             // Otherwise, the code below will throw exception when trying to call
             // EncodingTable.GetDataItem().
             //
-            if (codepage < 0 || codepage > 65535) {
+            if (codepage < 0 || codepage > 65535)
+            {
                 throw new ArgumentOutOfRangeException(
-                    "codepage", Environment.GetResourceString("ArgumentOutOfRange_Range",
-                        0, 65535));
+                    "codepage",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0, 65535)
+                );
             }
 
             Contract.EndContractBlock();
@@ -440,7 +462,7 @@ namespace System.Text
 
             // See if we have a hash table with our encoding in it already.
             if (encodings != null)
-                encodings.TryGetValue (codepage, out result);
+                encodings.TryGetValue(codepage, out result);
 
             if (result == null)
             {
@@ -450,10 +472,10 @@ namespace System.Text
                     // Need a new hash table
                     // in case another thread beat us to creating the Dictionary
                     if (encodings == null)
-                        encodings = new Dictionary<int, Encoding> ();
+                        encodings = new Dictionary<int, Encoding>();
 
                     // Double check that we don't have one in the table (in case another thread beat us here)
-                    if (encodings.TryGetValue (codepage, out result))
+                    if (encodings.TryGetValue(codepage, out result))
                         return result;
 
                     // Special case the commonly used Encoding classes here, then call
@@ -461,49 +483,49 @@ namespace System.Text
                     // and ASCIIEncoding.  ASP.NET uses UTF-8 & ISO-8859-1.
                     switch (codepage)
                     {
-                        case CodePageDefault:                   // 0, default code page
+                        case CodePageDefault: // 0, default code page
                             result = Encoding.Default;
                             break;
-                        case CodePageUnicode:                   // 1200, Unicode
+                        case CodePageUnicode: // 1200, Unicode
                             result = Unicode;
                             break;
-                        case CodePageBigEndian:                 // 1201, big endian unicode
+                        case CodePageBigEndian: // 1201, big endian unicode
                             result = BigEndianUnicode;
                             break;
-#if FEATURE_CODEPAGES_FILE                            
-                        case CodePageWindows1252:               // 1252, Windows
+#if FEATURE_CODEPAGES_FILE
+                        case CodePageWindows1252: // 1252, Windows
                             result = new SBCSCodePageEncoding(codepage);
                             break;
 #else
 
 #if FEATURE_UTF7
-                            // on desktop, UTF7 is handled by GetEncodingRare.
-                            // On Coreclr, we handle this directly without bringing GetEncodingRare, so that we get real UTF-7 encoding.
-                        case CodePageUTF7:                      // 65000, UTF7
+                        // on desktop, UTF7 is handled by GetEncodingRare.
+                        // On Coreclr, we handle this directly without bringing GetEncodingRare, so that we get real UTF-7 encoding.
+                        case CodePageUTF7: // 65000, UTF7
                             result = UTF7;
                             break;
-#endif 
+#endif
 
-#if FEATURE_UTF32        
-                        case CodePageUTF32:             // 12000
+#if FEATURE_UTF32
+                        case CodePageUTF32: // 12000
                             result = UTF32;
                             break;
-                        case CodePageUTF32BE:           // 12001
+                        case CodePageUTF32BE: // 12001
                             result = new UTF32Encoding(true, true);
                             break;
 #endif
 
 #endif
-                        case CodePageUTF8:                      // 65001, UTF8
+                        case CodePageUTF8: // 65001, UTF8
                             result = UTF8;
                             break;
 
                         // These are (hopefully) not very common, but also shouldn't slow us down much and make default
                         // case able to handle more code pages by calling GetEncodingCodePage
-                        case CodePageNoOEM:             // 1
-                        case CodePageNoMac:             // 2
-                        case CodePageNoThread:          // 3
-                        case CodePageNoSymbol:          // 42
+                        case CodePageNoOEM: // 1
+                        case CodePageNoMac: // 2
+                        case CodePageNoThread: // 3
+                        case CodePageNoSymbol: // 42
                             // Win32 also allows the following special code page values.  We won't allow them except in the
                             // CP_ACP case.
                             // #define CP_ACP                    0           // default to ANSI code page
@@ -511,19 +533,24 @@ namespace System.Text
                             // #define CP_MACCP                  2           // default to MAC  code page
                             // #define CP_THREAD_ACP             3           // current thread's ANSI code page
                             // #define CP_SYMBOL                 42          // SYMBOL translations
-                            throw new ArgumentException(Environment.GetResourceString(
-                                "Argument_CodepageNotSupported", codepage), "codepage");
+                            throw new ArgumentException(
+                                Environment.GetResourceString(
+                                    "Argument_CodepageNotSupported",
+                                    codepage
+                                ),
+                                "codepage"
+                            );
 #if FEATURE_ASCII
                         // Have to do ASCII and Latin 1 first so they don't get loaded as code pages
-                        case CodePageASCII:             // 20127
+                        case CodePageASCII: // 20127
                             result = ASCII;
                             break;
 #endif
 #if FEATURE_LATIN1
-                        case ISO_8859_1:                // 28591
+                        case ISO_8859_1: // 28591
                             result = Latin1;
                             break;
-#endif                      
+#endif
                         default:
                         {
 #if FEATURE_CODEPAGES_FILE
@@ -537,21 +564,33 @@ namespace System.Text
                             if (EncodingTable.GetCodePageDataItem(codepage) == null)
                             {
                                 throw new NotSupportedException(
-                                    Environment.GetResourceString("NotSupported_NoCodepageData", codepage));
+                                    Environment.GetResourceString(
+                                        "NotSupported_NoCodepageData",
+                                        codepage
+                                    )
+                                );
                             }
 #if MONO_HYBRID_ENCODING_SUPPORT
-                            switch (codepage) {
-                            case CodePageUTF32:             // 12000
-                                result = UTF32;
-                                break;
-                            case CodePageUTF32BE:           // 12001
-                                result = new UTF32Encoding(true, true);
-                                break;
-                            default:
-                                result = (Encoding)(EncodingHelper.InvokeI18N ("GetEncoding", codepage));
-                                if (result == null)
-                                    throw new NotSupportedException(string.Format("Encoding {0} data could not be found. Make sure you have correct international codeset assembly installed and enabled.", codepage));
-                                break;
+                            switch (codepage)
+                            {
+                                case CodePageUTF32: // 12000
+                                    result = UTF32;
+                                    break;
+                                case CodePageUTF32BE: // 12001
+                                    result = new UTF32Encoding(true, true);
+                                    break;
+                                default:
+                                    result = (Encoding)(
+                                        EncodingHelper.InvokeI18N("GetEncoding", codepage)
+                                    );
+                                    if (result == null)
+                                        throw new NotSupportedException(
+                                            string.Format(
+                                                "Encoding {0} data could not be found. Make sure you have correct international codeset assembly installed and enabled.",
+                                                codepage
+                                            )
+                                        );
+                                    break;
                             }
 #else
                             result = UTF8;
@@ -562,16 +601,22 @@ namespace System.Text
                     }
                     encodings.Add(codepage, result);
                 }
-
             }
             return result;
         }
 
         [Pure]
-        public static Encoding GetEncoding(int codepage,
-            EncoderFallback encoderFallback, DecoderFallback decoderFallback)
+        public static Encoding GetEncoding(
+            int codepage,
+            EncoderFallback encoderFallback,
+            DecoderFallback decoderFallback
+        )
         {
-            Encoding baseEncoding = EncodingProvider.GetEncodingFromProvider(codepage, encoderFallback, decoderFallback);
+            Encoding baseEncoding = EncodingProvider.GetEncodingFromProvider(
+                codepage,
+                encoderFallback,
+                decoderFallback
+            );
 
             if (baseEncoding != null)
                 return baseEncoding;
@@ -586,22 +631,27 @@ namespace System.Text
 
             return fallbackEncoding;
         }
+
 #if FEATURE_CODEPAGES_FILE
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Encoding GetEncodingRare(int codepage)
         {
-            Contract.Assert(codepage != 0 && codepage != 1200 && codepage != 1201 && codepage != 65001,
-                "[Encoding.GetEncodingRare]This code page (" + codepage + ") isn't supported by GetEncodingRare!");
+            Contract.Assert(
+                codepage != 0 && codepage != 1200 && codepage != 1201 && codepage != 65001,
+                "[Encoding.GetEncodingRare]This code page ("
+                    + codepage
+                    + ") isn't supported by GetEncodingRare!"
+            );
             Encoding result;
             switch (codepage)
             {
-                case CodePageUTF7:              // 65000
+                case CodePageUTF7: // 65000
                     result = UTF7;
                     break;
-                case CodePageUTF32:             // 12000
+                case CodePageUTF32: // 12000
                     result = UTF32;
                     break;
-                case CodePageUTF32BE:           // 12001
+                case CodePageUTF32BE: // 12001
                     result = new UTF32Encoding(true, true);
                     break;
                 case ISCIIAssemese:
@@ -618,8 +668,8 @@ namespace System.Text
                     break;
                 // GB2312-80 uses same code page for 20936 and mac 10008
                 case CodePageMacGB2312:
-          //     case CodePageGB2312:
-          //        result = new DBCSCodePageEncoding(codepage, EUCCN);
+                    //     case CodePageGB2312:
+                    //        result = new DBCSCodePageEncoding(codepage, EUCCN);
                     result = new DBCSCodePageEncoding(CodePageMacGB2312, CodePageGB2312);
                     break;
 
@@ -633,50 +683,56 @@ namespace System.Text
                     break;
                 // ISO2022 Code Pages
                 case ISOKorean:
-            //    case ISOSimplifiedCN
+                //    case ISOSimplifiedCN
                 case ChineseHZ:
-                case ISO2022JP:         // JIS JP, full-width Katakana mode (no half-width Katakana)
-                case ISO2022JPESC:      // JIS JP, esc sequence to do Katakana.
-                case ISO2022JPSISO:     // JIS JP with Shift In/ Shift Out Katakana support
+                case ISO2022JP: // JIS JP, full-width Katakana mode (no half-width Katakana)
+                case ISO2022JPESC: // JIS JP, esc sequence to do Katakana.
+                case ISO2022JPSISO: // JIS JP with Shift In/ Shift Out Katakana support
                     result = new ISO2022Encoding(codepage);
                     break;
                 // Duplicate EUC-CN (51936) just calls a base code page 936,
                 // so does ISOSimplifiedCN (50227), which's gotta be broken
                 case DuplicateEUCCN:
                 case ISOSimplifiedCN:
-                    result = new DBCSCodePageEncoding(codepage, EUCCN);    // Just maps to 936
+                    result = new DBCSCodePageEncoding(codepage, EUCCN); // Just maps to 936
                     break;
                 case EUCJP:
                     result = new EUCJPEncoding();
                     break;
                 case EUCKR:
-                    result = new DBCSCodePageEncoding(codepage, CodePageDLLKorean);    // Maps to 20949
+                    result = new DBCSCodePageEncoding(codepage, CodePageDLLKorean); // Maps to 20949
                     break;
                 case ENC50229:
-                    throw new NotSupportedException(Environment.GetResourceString("NotSupported_CodePage50229"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString("NotSupported_CodePage50229")
+                    );
                 case ISO_8859_8I:
-                    result = new SBCSCodePageEncoding(codepage, ISO_8859_8_Visual);        // Hebrew maps to a different code page
+                    result = new SBCSCodePageEncoding(codepage, ISO_8859_8_Visual); // Hebrew maps to a different code page
                     break;
                 default:
                     // Not found, already tried codepage table code pages in GetEncoding()
                     throw new NotSupportedException(
-                        Environment.GetResourceString("NotSupported_NoCodepageData", codepage));
+                        Environment.GetResourceString("NotSupported_NoCodepageData", codepage)
+                    );
             }
             return result;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Encoding GetEncodingCodePage(int CodePage)
         {
             // Single Byte or Double Byte Code Page? (0 if not found)
             int i = BaseCodePageEncoding.GetCodePageByteSize(CodePage);
-            if (i == 1) return new SBCSCodePageEncoding(CodePage);
-            else if (i == 2) return new DBCSCodePageEncoding(CodePage);
+            if (i == 1)
+                return new SBCSCodePageEncoding(CodePage);
+            else if (i == 2)
+                return new DBCSCodePageEncoding(CodePage);
 
             // Return null if we didn't find one.
             return null;
         }
 #endif // FEATURE_CODEPAGES_FILE
+
         // Returns an Encoding object for a given name or a given code page value.
         //
         [Pure]
@@ -698,10 +754,17 @@ namespace System.Text
         // Returns an Encoding object for a given name or a given code page value.
         //
         [Pure]
-        public static Encoding GetEncoding(String name,
-            EncoderFallback encoderFallback, DecoderFallback decoderFallback)
+        public static Encoding GetEncoding(
+            String name,
+            EncoderFallback encoderFallback,
+            DecoderFallback decoderFallback
+        )
         {
-            Encoding baseEncoding = EncodingProvider.GetEncodingFromProvider(name, encoderFallback, decoderFallback);
+            Encoding baseEncoding = EncodingProvider.GetEncodingFromProvider(
+                name,
+                encoderFallback,
+                decoderFallback
+            );
             if (baseEncoding != null)
                 return baseEncoding;
 
@@ -711,7 +774,13 @@ namespace System.Text
             // Otherwise, the code below will throw exception when trying to call
             // EncodingTable.GetCodePageFromName().
             //
-            return (GetEncoding(EncodingTable.GetCodePageFromName(name), encoderFallback, decoderFallback));
+            return (
+                GetEncoding(
+                    EncodingTable.GetCodePageFromName(name),
+                    encoderFallback,
+                    decoderFallback
+                )
+            );
         }
 
         // Return a list of all EncodingInfo objects describing all of our encodings
@@ -731,12 +800,16 @@ namespace System.Text
         public virtual ReadOnlySpan<byte> Preamble => GetPreamble();
 #endif
 
-        private void GetDataItem() {
-            if (dataItem==null) {
+        private void GetDataItem()
+        {
+            if (dataItem == null)
+            {
                 dataItem = EncodingTable.GetCodePageDataItem(m_codePage);
-                if(dataItem==null) {
+                if (dataItem == null)
+                {
                     throw new NotSupportedException(
-                        Environment.GetResourceString("NotSupported_NoCodepageData", m_codePage));
+                        Environment.GetResourceString("NotSupported_NoCodepageData", m_codePage)
+                    );
                 }
             }
         }
@@ -748,7 +821,8 @@ namespace System.Text
         {
             get
             {
-                if (dataItem==null) {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return (dataItem.BodyName);
@@ -776,7 +850,8 @@ namespace System.Text
         {
             get
             {
-                if (dataItem==null) {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return (dataItem.HeaderName);
@@ -790,7 +865,8 @@ namespace System.Text
         {
             get
             {
-                if (dataItem==null) {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return (dataItem.WebName);
@@ -803,19 +879,22 @@ namespace System.Text
         {
             get
             {
-                if (dataItem==null) {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return (dataItem.UIFamilyCodePage);
             }
         }
 
-
         // True if and only if the encoding is used for display by browsers clients.
 
-        public virtual bool IsBrowserDisplay {
-            get {
-                if (dataItem==null) {
+        public virtual bool IsBrowserDisplay
+        {
+            get
+            {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return ((dataItem.Flags & MIMECONTF_BROWSER) != 0);
@@ -824,9 +903,12 @@ namespace System.Text
 
         // True if and only if the encoding is used for saving by browsers clients.
 
-        public virtual bool IsBrowserSave {
-            get {
-                if (dataItem==null) {
+        public virtual bool IsBrowserSave
+        {
+            get
+            {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return ((dataItem.Flags & MIMECONTF_SAVABLE_BROWSER) != 0);
@@ -835,22 +917,27 @@ namespace System.Text
 
         // True if and only if the encoding is used for display by mail and news clients.
 
-        public virtual bool IsMailNewsDisplay {
-            get {
-                if (dataItem==null) {
+        public virtual bool IsMailNewsDisplay
+        {
+            get
+            {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return ((dataItem.Flags & MIMECONTF_MAILNEWS) != 0);
             }
         }
 
-
         // True if and only if the encoding is used for saving documents by mail and
         // news clients
 
-        public virtual bool IsMailNewsSave {
-            get {
-                if (dataItem==null) {
+        public virtual bool IsMailNewsSave
+        {
+            get
+            {
+                if (dataItem == null)
+                {
                     GetDataItem();
                 }
                 return ((dataItem.Flags & MIMECONTF_SAVABLE_MAILNEWS) != 0);
@@ -862,25 +949,19 @@ namespace System.Text
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual bool IsSingleByte
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-
 
         [System.Runtime.InteropServices.ComVisible(false)]
         public EncoderFallback EncoderFallback
         {
-            get
-            {
-                return encoderFallback;
-            }
-
+            get { return encoderFallback; }
             set
             {
                 if (this.IsReadOnly)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ReadOnly"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_ReadOnly")
+                    );
 
                 if (value == null)
                     throw new ArgumentNullException("value");
@@ -890,19 +971,16 @@ namespace System.Text
             }
         }
 
-
         [System.Runtime.InteropServices.ComVisible(false)]
         public DecoderFallback DecoderFallback
         {
-            get
-            {
-                return decoderFallback;
-            }
-
+            get { return decoderFallback; }
             set
             {
                 if (this.IsReadOnly)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ReadOnly"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_ReadOnly")
+                    );
 
                 if (value == null)
                     throw new ArgumentNullException("value");
@@ -911,7 +989,6 @@ namespace System.Text
                 decoderFallback = value;
             }
         }
-
 
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual Object Clone()
@@ -923,14 +1000,10 @@ namespace System.Text
             return newEncoding;
         }
 
-
         [System.Runtime.InteropServices.ComVisible(false)]
         public bool IsReadOnly
         {
-            get
-            {
-                return (m_isReadOnly);
-            }
+            get { return (m_isReadOnly); }
         }
 
 #if FEATURE_ASCII
@@ -943,11 +1016,12 @@ namespace System.Text
         {
             get
             {
-                if (asciiEncoding == null) asciiEncoding = new ASCIIEncoding();
+                if (asciiEncoding == null)
+                    asciiEncoding = new ASCIIEncoding();
                 return asciiEncoding;
             }
         }
-#endif 
+#endif
 
 #if FEATURE_LATIN1
         // Returns an encoding for the Latin1 character set. The returned encoding
@@ -958,11 +1032,12 @@ namespace System.Text
         {
             get
             {
-                if (latin1Encoding == null) latin1Encoding = new Latin1Encoding();
+                if (latin1Encoding == null)
+                    latin1Encoding = new Latin1Encoding();
                 return latin1Encoding;
             }
         }
-#endif  
+#endif
 
         // Returns the number of bytes required to encode the given character
         // array.
@@ -972,8 +1047,10 @@ namespace System.Text
         {
             if (chars == null)
             {
-                throw new ArgumentNullException("chars",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "chars",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
             Contract.EndContractBlock();
 
@@ -983,13 +1060,12 @@ namespace System.Text
         [Pure]
         public virtual int GetByteCount(String s)
         {
-            if (s==null)
+            if (s == null)
                 throw new ArgumentNullException("s");
             Contract.EndContractBlock();
 
             char[] chars = s.ToCharArray();
             return GetByteCount(chars, 0, chars.Length);
-
         }
 
         // Returns the number of bytes required to encode a range of characters in
@@ -999,7 +1075,8 @@ namespace System.Text
         public abstract int GetByteCount(char[] chars, int index, int count);
 
 #if MONO
-        public int GetByteCount(string str, int index, int count) => GetByteCount(str.ToCharArray(), index, count);
+        public int GetByteCount(string str, int index, int count) =>
+            GetByteCount(str.ToCharArray(), index, count);
 #endif
 
         // We expect this to be the workhorse for NLS encodings
@@ -1007,19 +1084,23 @@ namespace System.Text
         // which is really slow, so this method should be avoided if you're calling
         // a 3rd party encoding.
         [Pure]
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual unsafe int GetByteCount(char* chars, int count)
         {
             // Validate input parameters
             if (chars == null)
-                throw new ArgumentNullException("chars",
-                      Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "chars",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count",
-                      Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "count",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             char[] arrChar = new char[count];
@@ -1033,7 +1114,7 @@ namespace System.Text
 
         // For NLS Encodings, workhorse takes an encoder (may be null)
         // Always validate parameters before calling internal version, which will only assert.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal virtual unsafe int GetByteCount(char* chars, int count, EncoderNLS encoder)
         {
             Contract.Requires(chars != null);
@@ -1050,8 +1131,10 @@ namespace System.Text
         {
             if (chars == null)
             {
-                throw new ArgumentNullException("chars",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "chars",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
             Contract.EndContractBlock();
             return GetBytes(chars, 0, chars.Length);
@@ -1077,8 +1160,13 @@ namespace System.Text
         // determine the maximum number of bytes that will be produced for a given
         // number of characters, regardless of the actual character values.
         //
-        public abstract int GetBytes(char[] chars, int charIndex, int charCount,
-            byte[] bytes, int byteIndex);
+        public abstract int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        );
 
         // Returns a byte array containing the encoded representation of the given
         // string.
@@ -1087,8 +1175,10 @@ namespace System.Text
         public virtual byte[] GetBytes(String s)
         {
             if (s == null)
-                throw new ArgumentNullException("s",
-                    Environment.GetResourceString("ArgumentNull_String"));
+                throw new ArgumentNullException(
+                    "s",
+                    Environment.GetResourceString("ArgumentNull_String")
+                );
             Contract.EndContractBlock();
 
             int byteCount = GetByteCount(s);
@@ -1098,10 +1188,15 @@ namespace System.Text
             return bytes;
         }
 
-        public virtual int GetBytes(String s, int charIndex, int charCount,
-                                       byte[] bytes, int byteIndex)
+        public virtual int GetBytes(
+            String s,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
-            if (s==null)
+            if (s == null)
                 throw new ArgumentNullException("s");
             Contract.EndContractBlock();
             return GetBytes(s.ToCharArray(), charIndex, charCount, bytes, byteIndex);
@@ -1109,9 +1204,14 @@ namespace System.Text
 
         // This is our internal workhorse
         // Always validate parameters before calling internal version, which will only assert.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal virtual unsafe int GetBytes(char* chars, int charCount,
-                                                byte* bytes, int byteCount, EncoderNLS encoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal virtual unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            EncoderNLS encoder
+        )
         {
             return GetBytes(chars, charCount, bytes, byteCount);
         }
@@ -1133,20 +1233,23 @@ namespace System.Text
         // could easily overflow our output buffer.  Therefore we do an extra test
         // when we copy the buffer so that we don't overflow byteCount either.
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public virtual unsafe int GetBytes(char* chars, int charCount,
-                                              byte* bytes, int byteCount)
+        public virtual unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             // Validate input parameters
             if (bytes == null || chars == null)
-                throw new ArgumentNullException(bytes == null ? "bytes" : "chars",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    bytes == null ? "bytes" : "chars",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
 
             if (charCount < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException((charCount<0 ? "charCount" : "byteCount"),
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    (charCount < 0 ? "charCount" : "byteCount"),
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             // Get the char array to convert
@@ -1163,7 +1266,10 @@ namespace System.Text
             int result = GetBytes(arrChar, 0, charCount, arrByte, 0);
 
             // The only way this could fail is a bug in GetBytes
-            Contract.Assert(result <= byteCount, "[Encoding.GetBytes]Returned more bytes than we have space for");
+            Contract.Assert(
+                result <= byteCount,
+                "[Encoding.GetBytes]Returned more bytes than we have space for"
+            );
 
             // Copy the byte array
             // WARNING: We MUST make sure that we don't copy too many bytes.  We can't
@@ -1188,8 +1294,10 @@ namespace System.Text
         {
             if (bytes == null)
             {
-                throw new ArgumentNullException("bytes",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
             Contract.EndContractBlock();
             return GetCharCount(bytes, 0, bytes.Length);
@@ -1204,19 +1312,23 @@ namespace System.Text
         // We expect this to be the workhorse for NLS Encodings, but for existing
         // ones we need a working (if slow) default implimentation)
         [Pure]
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual unsafe int GetCharCount(byte* bytes, int count)
         {
             // Validate input parameters
             if (bytes == null)
-                throw new ArgumentNullException("bytes",
-                      Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count",
-                      Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "count",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             byte[] arrbyte = new byte[count];
@@ -1230,7 +1342,7 @@ namespace System.Text
 
         // This is our internal workhorse
         // Always validate parameters before calling internal version, which will only assert.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal virtual unsafe int GetCharCount(byte* bytes, int count, DecoderNLS decoder)
         {
             return GetCharCount(bytes, count);
@@ -1244,8 +1356,10 @@ namespace System.Text
         {
             if (bytes == null)
             {
-                throw new ArgumentNullException("bytes",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             }
             Contract.EndContractBlock();
             return GetChars(bytes, 0, bytes.Length);
@@ -1272,9 +1386,13 @@ namespace System.Text
         // given number of bytes, regardless of the actual byte values.
         //
 
-        public abstract int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                       char[] chars, int charIndex);
-
+        public abstract int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        );
 
         // We expect this to be the workhorse for NLS Encodings, but for existing
         // ones we need a working (if slow) default implimentation)
@@ -1293,20 +1411,23 @@ namespace System.Text
         // could easily overflow our output buffer.  Therefore we do an extra test
         // when we copy the buffer so that we don't overflow charCount either.
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public virtual unsafe int GetChars(byte* bytes, int byteCount,
-                                              char* chars, int charCount)
+        public virtual unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             // Validate input parameters
             if (chars == null || bytes == null)
-                throw new ArgumentNullException(chars == null ? "chars" : "bytes",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    chars == null ? "chars" : "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
 
             if (byteCount < 0 || charCount < 0)
-                throw new ArgumentOutOfRangeException((byteCount<0 ? "byteCount" : "charCount"),
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    (byteCount < 0 ? "byteCount" : "charCount"),
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             // Get the byte array to convert
@@ -1323,7 +1444,10 @@ namespace System.Text
             int result = GetChars(arrByte, 0, byteCount, arrChar, 0);
 
             // The only way this could fail is a bug in GetChars
-            Contract.Assert(result <= charCount, "[Encoding.GetChars]Returned more chars than we have space for");
+            Contract.Assert(
+                result <= charCount,
+                "[Encoding.GetChars]Returned more chars than we have space for"
+            );
 
             // Copy the char array
             // WARNING: We MUST make sure that we don't copy too many chars.  We can't
@@ -1340,27 +1464,36 @@ namespace System.Text
             return charCount;
         }
 
-
         // This is our internal workhorse
         // Always validate parameters before calling internal version, which will only assert.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal virtual unsafe int GetChars(byte* bytes, int byteCount,
-                                                char* chars, int charCount, DecoderNLS decoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal virtual unsafe int GetChars(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            DecoderNLS decoder
+        )
         {
             return GetChars(bytes, byteCount, chars, charCount);
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
         public unsafe string GetString(byte* bytes, int byteCount)
         {
             if (bytes == null)
-                throw new ArgumentNullException("bytes", Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
 
             if (byteCount < 0)
-                throw new ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "byteCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             return String.CreateStringFromEncoding(bytes, byteCount, this);
@@ -1369,8 +1502,14 @@ namespace System.Text
 #if MONO
         public virtual unsafe int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars)
         {
-            fixed (byte* bytesPtr = &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(bytes))
-            fixed (char* charsPtr = &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(chars))
+            fixed (
+                byte* bytesPtr =
+                    &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(bytes)
+            )
+            fixed (
+                char* charsPtr =
+                    &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(chars)
+            )
             {
                 return GetChars(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
@@ -1378,7 +1517,10 @@ namespace System.Text
 
         public unsafe string GetString(ReadOnlySpan<byte> bytes)
         {
-            fixed (byte* bytesPtr = &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(bytes))
+            fixed (
+                byte* bytesPtr =
+                    &System.Runtime.InteropServices.MemoryMarshal.GetNonNullPinnableReference(bytes)
+            )
             {
                 return GetString(bytesPtr, bytes.Length);
             }
@@ -1392,10 +1534,7 @@ namespace System.Text
 
         public virtual int CodePage
         {
-            get
-            {
-                return m_codePage;
-            }
+            get { return m_codePage; }
         }
 
         // IsAlwaysNormalized
@@ -1404,7 +1543,7 @@ namespace System.Text
         [System.Runtime.InteropServices.ComVisible(false)]
         public bool IsAlwaysNormalized()
         {
-#if !FEATURE_NORM_IDNA_ONLY        
+#if !FEATURE_NORM_IDNA_ONLY
             return this.IsAlwaysNormalized(NormalizationForm.FormC);
 #else
             return this.IsAlwaysNormalized((NormalizationForm)ExtendedNormalizationForms.FormIdna);
@@ -1438,12 +1577,12 @@ namespace System.Text
             return new DefaultDecoder(this);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Encoding CreateDefaultEncoding()
         {
             Encoding enc;
 
-#if FEATURE_CODEPAGES_FILE            
+#if FEATURE_CODEPAGES_FILE
             int codePage = Win32Native.GetACP();
 
             // For US English, we can save some startup working set by not calling
@@ -1454,35 +1593,38 @@ namespace System.Text
                 enc = new SBCSCodePageEncoding(codePage);
             else
                 enc = GetEncoding(codePage);
-#else // FEATURE_CODEPAGES_FILE            
+#else // FEATURE_CODEPAGES_FILE
 
 #if MONO_HYBRID_ENCODING_SUPPORT
-            enc = EncodingHelper.GetDefaultEncoding ();
+            enc = EncodingHelper.GetDefaultEncoding();
             enc.m_isReadOnly = true;
 #else
             // For silverlight we use UTF8 since ANSI isn't available
             enc = UTF8;
 #endif
 
-#endif //FEATURE_CODEPAGES_FILE            
+#endif //FEATURE_CODEPAGES_FILE
 
             return (enc);
         }
 
 #if MONO_HYBRID_ENCODING_SUPPORT
-        internal void setReadOnly (bool value = true)
+        internal void setReadOnly(bool value = true)
         {
-                   m_isReadOnly = value;
+            m_isReadOnly = value;
         }
 #endif
 
         // Returns an encoding for the system's current ANSI code page.
         //
 
-        public static Encoding Default {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (defaultEncoding == null) {
+        public static Encoding Default
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (defaultEncoding == null)
+                {
                     defaultEncoding = CreateDefaultEncoding();
                 }
                 return defaultEncoding;
@@ -1540,8 +1682,10 @@ namespace System.Text
         public virtual String GetString(byte[] bytes)
         {
             if (bytes == null)
-                throw new ArgumentNullException("bytes",
-                    Environment.GetResourceString("ArgumentNull_Array"));
+                throw new ArgumentNullException(
+                    "bytes",
+                    Environment.GetResourceString("ArgumentNull_Array")
+                );
             Contract.EndContractBlock();
 
             return GetString(bytes, 0, bytes.Length);
@@ -1565,9 +1709,12 @@ namespace System.Text
         // input in big endian if it finds a byte order mark per Unicode 2.0.
         //
 
-        public static Encoding Unicode {
-            get {
-                if (unicodeEncoding == null) unicodeEncoding = new UnicodeEncoding(false, true);
+        public static Encoding Unicode
+        {
+            get
+            {
+                if (unicodeEncoding == null)
+                    unicodeEncoding = new UnicodeEncoding(false, true);
                 return unicodeEncoding;
             }
         }
@@ -1579,9 +1726,12 @@ namespace System.Text
         // input in little endian if it finds a byte order mark per Unicode 2.0.
         //
 
-        public static Encoding BigEndianUnicode {
-            get {
-                if (bigEndianUnicode == null) bigEndianUnicode = new UnicodeEncoding(true, true);
+        public static Encoding BigEndianUnicode
+        {
+            get
+            {
+                if (bigEndianUnicode == null)
+                    bigEndianUnicode = new UnicodeEncoding(true, true);
                 return bigEndianUnicode;
             }
         }
@@ -1590,20 +1740,27 @@ namespace System.Text
         // Returns an encoding for the UTF-7 format. The returned encoding will be
         // an instance of the UTF7Encoding class.
         //
-        public static Encoding UTF7 {
-            get {
-                if (utf7Encoding == null) utf7Encoding = new UTF7Encoding();
+        public static Encoding UTF7
+        {
+            get
+            {
+                if (utf7Encoding == null)
+                    utf7Encoding = new UTF7Encoding();
                 return utf7Encoding;
             }
         }
-#endif 
+#endif
+
         // Returns an encoding for the UTF-8 format. The returned encoding will be
         // an instance of the UTF8Encoding class.
         //
 
-        public static Encoding UTF8 {
-            get {
-                if (utf8Encoding == null) utf8Encoding = new UTF8Encoding(true);
+        public static Encoding UTF8
+        {
+            get
+            {
+                if (utf8Encoding == null)
+                    utf8Encoding = new UTF8Encoding(true);
                 return utf8Encoding;
             }
         }
@@ -1612,27 +1769,32 @@ namespace System.Text
         // an instance of the UTF32Encoding class.
         //
 #if FEATURE_UTF32
-        public static Encoding UTF32 {
-            get {
-                if (utf32Encoding == null) utf32Encoding = new UTF32Encoding(false, true);
+        public static Encoding UTF32
+        {
+            get
+            {
+                if (utf32Encoding == null)
+                    utf32Encoding = new UTF32Encoding(false, true);
                 return utf32Encoding;
             }
         }
 #endif
 
-
-        public override bool Equals(Object value) {
+        public override bool Equals(Object value)
+        {
             Encoding that = value as Encoding;
             if (that != null)
-                return (m_codePage == that.m_codePage) &&
-                       (EncoderFallback.Equals(that.EncoderFallback)) &&
-                       (DecoderFallback.Equals(that.DecoderFallback));
+                return (m_codePage == that.m_codePage)
+                    && (EncoderFallback.Equals(that.EncoderFallback))
+                    && (DecoderFallback.Equals(that.DecoderFallback));
             return (false);
         }
 
-
-        public override int GetHashCode() {
-            return m_codePage + this.EncoderFallback.GetHashCode() + this.DecoderFallback.GetHashCode();
+        public override int GetHashCode()
+        {
+            return m_codePage
+                + this.EncoderFallback.GetHashCode()
+                + this.DecoderFallback.GetHashCode();
         }
 
         internal virtual char[] GetBestFitUnicodeToBytesData()
@@ -1652,11 +1814,16 @@ namespace System.Text
             // Special message to include fallback type in case fallback's GetMaxCharCount is broken
             // This happens if user has implimented an encoder fallback with a broken GetMaxCharCount
             throw new ArgumentException(
-                Environment.GetResourceString("Argument_EncodingConversionOverflowBytes",
-                EncodingName, EncoderFallback.GetType()), "bytes");
+                Environment.GetResourceString(
+                    "Argument_EncodingConversionOverflowBytes",
+                    EncodingName,
+                    EncoderFallback.GetType()
+                ),
+                "bytes"
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void ThrowBytesOverflow(EncoderNLS encoder, bool nothingEncoded)
         {
             if (encoder == null || encoder._throwOnOverflow || nothingEncoded)
@@ -1677,11 +1844,16 @@ namespace System.Text
             // Special message to include fallback type in case fallback's GetMaxCharCount is broken
             // This happens if user has implimented a decoder fallback with a broken GetMaxCharCount
             throw new ArgumentException(
-                Environment.GetResourceString("Argument_EncodingConversionOverflowChars",
-                EncodingName, DecoderFallback.GetType()), "chars");
+                Environment.GetResourceString(
+                    "Argument_EncodingConversionOverflowChars",
+                    EncodingName,
+                    DecoderFallback.GetType()
+                ),
+                "chars"
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void ThrowCharsOverflow(DecoderNLS decoder, bool nothingDecoded)
         {
             if (decoder == null || decoder._throwOnOverflow || nothingDecoded)
@@ -1727,17 +1899,22 @@ namespace System.Text
         public byte[] GetBytes(string s, int index, int count)
         {
             if (s == null)
-                throw new ArgumentNullException(nameof(s),
-                    SR.ArgumentNull_String);
+                throw new ArgumentNullException(nameof(s), SR.ArgumentNull_String);
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index),
-                      SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count),
-                      SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (index > s.Length - count)
-                throw new ArgumentOutOfRangeException(nameof(index),
-                      SR.ArgumentOutOfRange_IndexCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexCount
+                );
 
             unsafe
             {
@@ -1763,9 +1940,12 @@ namespace System.Text
         internal class DefaultEncoder : Encoder, ISerializable, IObjectReference
         {
             private Encoding m_encoding;
-            [NonSerialized] private bool m_hasInitializedEncoding;
 
-            [NonSerialized] internal char charLeftOver;
+            [NonSerialized]
+            private bool m_hasInitializedEncoding;
+
+            [NonSerialized]
+            internal char charLeftOver;
 
             public DefaultEncoder(Encoding encoding)
             {
@@ -1776,29 +1956,29 @@ namespace System.Text
             // Constructor called by serialization, have to handle deserializing from Everett
             internal DefaultEncoder(SerializationInfo info, StreamingContext context)
             {
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 // All we have is our encoding
                 this.m_encoding = (Encoding)info.GetValue("encoding", typeof(Encoding));
 
-                try 
+                try
                 {
-                    this._fallback     = (EncoderFallback) info.GetValue("_fallback",   typeof(EncoderFallback));
-                    this.charLeftOver   = (Char)            info.GetValue("charLeftOver", typeof(Char));
+                    this._fallback = (EncoderFallback)
+                        info.GetValue("_fallback", typeof(EncoderFallback));
+                    this.charLeftOver = (Char)info.GetValue("charLeftOver", typeof(Char));
                 }
-                catch (SerializationException)
-                {
-                }
+                catch (SerializationException) { }
             }
 
             // Just get it from GetEncoding
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public Object GetRealObject(StreamingContext context)
             {
-                // upon deserialization since the DefaultEncoder implement IObjectReference the 
-                // serialization code tries to do the fixup. The fixup returns another 
-                // IObjectReference (the DefaultEncoder) class and hence so on and on. 
+                // upon deserialization since the DefaultEncoder implement IObjectReference the
+                // serialization code tries to do the fixup. The fixup returns another
+                // IObjectReference (the DefaultEncoder) class and hence so on and on.
                 // Finally the deserialization logics fails after following maximum references
                 // unless we short circuit with the following
                 if (m_hasInitializedEncoding)
@@ -1809,7 +1989,7 @@ namespace System.Text
                 Encoder encoder = m_encoding.GetEncoder();
                 if (_fallback != null)
                     encoder._fallback = _fallback;
-                if (charLeftOver != (char) 0)
+                if (charLeftOver != (char)0)
                 {
                     EncoderNLS encoderNls = encoder as EncoderNLS;
                     if (encoderNls != null)
@@ -1820,11 +2000,12 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
             // ISerializable implementation, get data for this object
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 // All we have is our encoding
@@ -1845,9 +2026,9 @@ namespace System.Text
                 return m_encoding.GetByteCount(chars, index, count);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
-            [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetByteCount(char* chars, int count, bool flush)
+            [System.Security.SecurityCritical] // auto-generated
+            [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
+            public override unsafe int GetByteCount(char* chars, int count, bool flush)
             {
                 return m_encoding.GetByteCount(chars, count);
             }
@@ -1872,16 +2053,27 @@ namespace System.Text
             // number of characters, regardless of the actual character values.
             //
 
-            public override int GetBytes(char[] chars, int charIndex, int charCount,
-                                          byte[] bytes, int byteIndex, bool flush)
+            public override int GetBytes(
+                char[] chars,
+                int charIndex,
+                int charCount,
+                byte[] bytes,
+                int byteIndex,
+                bool flush
+            )
             {
                 return m_encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
-            [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetBytes(char* chars, int charCount,
-                                                 byte* bytes, int byteCount, bool flush)
+            [System.Security.SecurityCritical] // auto-generated
+            [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
+            public override unsafe int GetBytes(
+                char* chars,
+                int charCount,
+                byte* bytes,
+                int byteCount,
+                bool flush
+            )
             {
                 return m_encoding.GetBytes(chars, charCount, bytes, byteCount);
             }
@@ -1891,6 +2083,7 @@ namespace System.Text
         internal class DefaultDecoder : Decoder, ISerializable, IObjectReference
         {
             private Encoding m_encoding;
+
             [NonSerialized]
             private bool m_hasInitializedEncoding;
 
@@ -1898,21 +2091,23 @@ namespace System.Text
             {
                 m_encoding = encoding;
                 m_hasInitializedEncoding = true;
-           }
+            }
 
             // Constructor called by serialization, have to handle deserializing from Everett
             internal DefaultDecoder(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 // All we have is our encoding
                 this.m_encoding = (Encoding)info.GetValue("encoding", typeof(Encoding));
-                
-                try 
+
+                try
                 {
-                    this._fallback = (DecoderFallback) info.GetValue("_fallback", typeof(DecoderFallback));
+                    this._fallback = (DecoderFallback)
+                        info.GetValue("_fallback", typeof(DecoderFallback));
                 }
                 catch (SerializationException)
                 {
@@ -1921,12 +2116,12 @@ namespace System.Text
             }
 
             // Just get it from GetEncoding
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public Object GetRealObject(StreamingContext context)
             {
-                // upon deserialization since the DefaultEncoder implement IObjectReference the 
-                // serialization code tries to do the fixup. The fixup returns another 
-                // IObjectReference (the DefaultEncoder) class and hence so on and on. 
+                // upon deserialization since the DefaultEncoder implement IObjectReference the
+                // serialization code tries to do the fixup. The fixup returns another
+                // IObjectReference (the DefaultEncoder) class and hence so on and on.
                 // Finally the deserialization logics fails after following maximum references
                 // unless we short circuit with the following
                 if (m_hasInitializedEncoding)
@@ -1943,11 +2138,12 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
             // ISerializable implementation, get data for this object
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 // All we have is our encoding
@@ -1972,9 +2168,9 @@ namespace System.Text
                 return m_encoding.GetCharCount(bytes, index, count);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
-            [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetCharCount(byte* bytes, int count, bool flush)
+            [System.Security.SecurityCritical] // auto-generated
+            [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
+            public override unsafe int GetCharCount(byte* bytes, int count, bool flush)
             {
                 // By default just call the encoding version, no flush by default
                 return m_encoding.GetCharCount(bytes, count);
@@ -1997,22 +2193,38 @@ namespace System.Text
             // byte values.
             //
 
-            public override int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                           char[] chars, int charIndex)
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            )
             {
                 return GetChars(bytes, byteIndex, byteCount, chars, charIndex, false);
             }
 
-            public override int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                           char[] chars, int charIndex, bool flush)
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex,
+                bool flush
+            )
             {
                 return m_encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
-            [SuppressMessage("Microsoft.Contracts", "CC1055")]  // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetChars(byte* bytes, int byteCount,
-                                                  char* chars, int charCount, bool flush)
+            [System.Security.SecurityCritical] // auto-generated
+            [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
+            public override unsafe int GetChars(
+                byte* bytes,
+                int byteCount,
+                char* chars,
+                int charCount,
+                bool flush
+            )
             {
                 // By default just call the encoding's version
                 return m_encoding.GetChars(bytes, byteCount, chars, charCount);
@@ -2023,24 +2235,35 @@ namespace System.Text
         {
             [SecurityCritical]
             unsafe char* chars;
+
             [SecurityCritical]
             unsafe char* charStart;
+
             [SecurityCritical]
             unsafe char* charEnd;
-            int          charCountResult = 0;
-            Encoding     enc;
-            DecoderNLS   decoder;
+            int charCountResult = 0;
+            Encoding enc;
+            DecoderNLS decoder;
+
             [SecurityCritical]
             unsafe byte* byteStart;
+
             [SecurityCritical]
             unsafe byte* byteEnd;
+
             [SecurityCritical]
             unsafe byte* bytes;
             DecoderFallbackBuffer fallbackBuffer;
 
-            [System.Security.SecurityCritical]  // auto-generated
-            internal unsafe EncodingCharBuffer(Encoding enc, DecoderNLS decoder, char* charStart, int charCount,
-                                                    byte* byteStart, int byteCount)
+            [System.Security.SecurityCritical] // auto-generated
+            internal unsafe EncodingCharBuffer(
+                Encoding enc,
+                DecoderNLS decoder,
+                char* charStart,
+                int charCount,
+                byte* byteStart,
+                int byteCount
+            )
             {
                 this.enc = enc;
                 this.decoder = decoder;
@@ -2060,12 +2283,14 @@ namespace System.Text
 
                 // If we're getting chars or getting char count we don't expect to have
                 // to remember fallbacks between calls (so it should be empty)
-                Contract.Assert(fallbackBuffer.Remaining == 0,
-                    "[Encoding.EncodingCharBuffer.EncodingCharBuffer]Expected empty fallback buffer for getchars/charcount");
+                Contract.Assert(
+                    fallbackBuffer.Remaining == 0,
+                    "[Encoding.EncodingCharBuffer.EncodingCharBuffer]Expected empty fallback buffer for getchars/charcount"
+                );
                 fallbackBuffer.InternalInitialize(bytes, charEnd);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddChar(char ch, int numBytes)
             {
                 if (chars != null)
@@ -2073,9 +2298,9 @@ namespace System.Text
                     if (chars >= charEnd)
                     {
                         // Throw maybe
-                        bytes-=numBytes;                                        // Didn't encode these bytes
-                        enc.ThrowCharsOverflow(decoder, bytes <= byteStart);    // Throw?
-                        return false;                                           // No throw, but no store either
+                        bytes -= numBytes; // Didn't encode these bytes
+                        enc.ThrowCharsOverflow(decoder, bytes <= byteStart); // Throw?
+                        return false; // No throw, but no store either
                     }
 
                     *(chars++) = ch;
@@ -2084,28 +2309,27 @@ namespace System.Text
                 return true;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddChar(char ch)
             {
-                return AddChar(ch,1);
+                return AddChar(ch, 1);
             }
 
-
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddChar(char ch1, char ch2, int numBytes)
             {
                 // Need room for 2 chars
                 if (chars >= charEnd - 1)
                 {
                     // Throw maybe
-                    bytes-=numBytes;                                        // Didn't encode these bytes
-                    enc.ThrowCharsOverflow(decoder, bytes <= byteStart);    // Throw?
-                    return false;                                           // No throw, but no store either
+                    bytes -= numBytes; // Didn't encode these bytes
+                    enc.ThrowCharsOverflow(decoder, bytes <= byteStart); // Throw?
+                    return false; // No throw, but no store either
                 }
                 return AddChar(ch1, numBytes) && AddChar(ch2, numBytes);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe void AdjustBytes(int count)
             {
                 bytes += count;
@@ -2113,15 +2337,12 @@ namespace System.Text
 
             internal unsafe bool MoreData
             {
-                [System.Security.SecurityCritical]  // auto-generated
-                get
-                {
-                    return bytes < byteEnd;
-                }
+                [System.Security.SecurityCritical] // auto-generated
+                get { return bytes < byteEnd; }
             }
 
             // Do we have count more bytes?
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool EvenMoreData(int count)
             {
                 return (bytes <= byteEnd - count);
@@ -2129,10 +2350,13 @@ namespace System.Text
 
             // GetNextByte shouldn't be called unless the caller's already checked more data or even more data,
             // but we'll double check just to make sure.
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe byte GetNextByte()
             {
-                Contract.Assert(bytes < byteEnd, "[EncodingCharBuffer.GetNextByte]Expected more date");
+                Contract.Assert(
+                    bytes < byteEnd,
+                    "[EncodingCharBuffer.GetNextByte]Expected more date"
+                );
                 if (bytes >= byteEnd)
                     return 0;
                 return *(bytes++);
@@ -2140,14 +2364,11 @@ namespace System.Text
 
             internal unsafe int BytesUsed
             {
-                [System.Security.SecurityCritical]  // auto-generated
-                get
-                {
-                    return (int)(bytes - byteStart);
-                }
+                [System.Security.SecurityCritical] // auto-generated
+                get { return (int)(bytes - byteStart); }
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool Fallback(byte fallbackByte)
             {
                 // Build our buffer
@@ -2157,7 +2378,7 @@ namespace System.Text
                 return Fallback(byteBuffer);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool Fallback(byte byte1, byte byte2)
             {
                 // Build our buffer
@@ -2167,7 +2388,7 @@ namespace System.Text
                 return Fallback(byteBuffer);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool Fallback(byte byte1, byte byte2, byte byte3, byte byte4)
             {
                 // Build our buffer
@@ -2177,7 +2398,7 @@ namespace System.Text
                 return Fallback(byteBuffer);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool Fallback(byte[] byteBuffer)
             {
                 // Do the fallback and add the data.
@@ -2187,10 +2408,10 @@ namespace System.Text
                     if (fallbackBuffer.InternalFallback(byteBuffer, bytes, ref chars) == false)
                     {
                         // Throw maybe
-                        bytes -= byteBuffer.Length;                             // Didn't use how many ever bytes we're falling back
-                        fallbackBuffer.InternalReset();                         // We didn't use this fallback.
-                        enc.ThrowCharsOverflow(decoder, chars == charStart);    // Throw?
-                        return false;                                           // No throw, but no store either
+                        bytes -= byteBuffer.Length; // Didn't use how many ever bytes we're falling back
+                        fallbackBuffer.InternalReset(); // We didn't use this fallback.
+                        enc.ThrowCharsOverflow(decoder, chars == charStart); // Throw?
+                        return false; // No throw, but no store either
                     }
                     charCountResult += unchecked((int)(chars - pTemp));
                 }
@@ -2204,10 +2425,7 @@ namespace System.Text
 
             internal unsafe int Count
             {
-                get
-                {
-                    return charCountResult;
-                }
+                get { return charCountResult; }
             }
         }
 
@@ -2215,24 +2433,35 @@ namespace System.Text
         {
             [SecurityCritical]
             unsafe byte* bytes;
+
             [SecurityCritical]
             unsafe byte* byteStart;
+
             [SecurityCritical]
             unsafe byte* byteEnd;
+
             [SecurityCritical]
             unsafe char* chars;
+
             [SecurityCritical]
             unsafe char* charStart;
+
             [SecurityCritical]
             unsafe char* charEnd;
-            int          byteCountResult = 0;
-            Encoding     enc;
-            EncoderNLS   encoder;
+            int byteCountResult = 0;
+            Encoding enc;
+            EncoderNLS encoder;
             internal EncoderFallbackBuffer fallbackBuffer;
 
-            [System.Security.SecurityCritical]  // auto-generated
-            internal unsafe EncodingByteBuffer(Encoding inEncoding, EncoderNLS inEncoder,
-                        byte* inByteStart, int inByteCount, char* inCharStart, int inCharCount)
+            [System.Security.SecurityCritical] // auto-generated
+            internal unsafe EncodingByteBuffer(
+                Encoding inEncoding,
+                EncoderNLS inEncoder,
+                byte* inByteStart,
+                int inByteCount,
+                char* inCharStart,
+                int inCharCount
+            )
             {
                 this.enc = inEncoding;
                 this.encoder = inEncoder;
@@ -2251,25 +2480,36 @@ namespace System.Text
                 {
                     this.fallbackBuffer = this.encoder.FallbackBuffer;
                     // If we're not converting we must not have data in our fallback buffer
-                    if (encoder._throwOnOverflow && encoder.InternalHasFallbackBuffer &&
-                        this.fallbackBuffer.Remaining > 0)
-                        throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
-                            encoder.Encoding.EncodingName, encoder.Fallback.GetType()));
+                    if (
+                        encoder._throwOnOverflow
+                        && encoder.InternalHasFallbackBuffer
+                        && this.fallbackBuffer.Remaining > 0
+                    )
+                        throw new ArgumentException(
+                            Environment.GetResourceString(
+                                "Argument_EncoderFallbackNotEmpty",
+                                encoder.Encoding.EncodingName,
+                                encoder.Fallback.GetType()
+                            )
+                        );
                 }
                 fallbackBuffer.InternalInitialize(chars, charEnd, encoder, bytes != null);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b, int moreBytesExpected)
             {
-                Contract.Assert(moreBytesExpected >= 0, "[EncodingByteBuffer.AddByte]expected non-negative moreBytesExpected");
+                Contract.Assert(
+                    moreBytesExpected >= 0,
+                    "[EncodingByteBuffer.AddByte]expected non-negative moreBytesExpected"
+                );
                 if (bytes != null)
                 {
                     if (bytes >= byteEnd - moreBytesExpected)
                     {
                         // Throw maybe.  Check which buffer to back up (only matters if Converting)
-                        this.MovePrevious(true);            // Throw if necessary
-                        return false;                       // No throw, but no store either
+                        this.MovePrevious(true); // Throw if necessary
+                        return false; // No throw, but no store either
                     }
 
                     *(bytes++) = b;
@@ -2278,66 +2518,66 @@ namespace System.Text
                 return true;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1)
             {
                 return (AddByte(b1, 0));
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1, byte b2)
             {
                 return (AddByte(b1, b2, 0));
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1, byte b2, int moreBytesExpected)
             {
                 return (AddByte(b1, 1 + moreBytesExpected) && AddByte(b2, moreBytesExpected));
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1, byte b2, byte b3)
             {
                 return AddByte(b1, b2, b3, (int)0);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1, byte b2, byte b3, int moreBytesExpected)
             {
-                return (AddByte(b1, 2 + moreBytesExpected) &&
-                        AddByte(b2, 1 + moreBytesExpected) &&
-                        AddByte(b3, moreBytesExpected));
+                return (
+                    AddByte(b1, 2 + moreBytesExpected)
+                    && AddByte(b2, 1 + moreBytesExpected)
+                    && AddByte(b3, moreBytesExpected)
+                );
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool AddByte(byte b1, byte b2, byte b3, byte b4)
             {
-                return (AddByte(b1, 3) &&
-                        AddByte(b2, 2) &&
-                        AddByte(b3, 1) &&
-                        AddByte(b4, 0));
+                return (AddByte(b1, 3) && AddByte(b2, 2) && AddByte(b3, 1) && AddByte(b4, 0));
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe void MovePrevious(bool bThrow)
             {
                 if (fallbackBuffer.bFallingBack)
-                    fallbackBuffer.MovePrevious();                      // don't use last fallback
+                    fallbackBuffer.MovePrevious(); // don't use last fallback
                 else
                 {
-                    Contract.Assert(chars > charStart || 
-                        ((bThrow == true) && (bytes == byteStart)), 
-                        "[EncodingByteBuffer.MovePrevious]expected previous data or throw");
+                    Contract.Assert(
+                        chars > charStart || ((bThrow == true) && (bytes == byteStart)),
+                        "[EncodingByteBuffer.MovePrevious]expected previous data or throw"
+                    );
                     if (chars > charStart)
-                        chars--;                                        // don't use last char
+                        chars--; // don't use last char
                 }
 
                 if (bThrow)
-                    enc.ThrowBytesOverflow(encoder, bytes == byteStart);    // Throw? (and reset fallback if not converting)
+                    enc.ThrowBytesOverflow(encoder, bytes == byteStart); // Throw? (and reset fallback if not converting)
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe bool Fallback(char charFallback)
             {
                 // Do the fallback
@@ -2346,7 +2586,7 @@ namespace System.Text
 
             internal unsafe bool MoreData
             {
-                [System.Security.SecurityCritical]  // auto-generated
+                [System.Security.SecurityCritical] // auto-generated
                 get
                 {
                     // See if fallbackBuffer is not empty or if there's data left in chars buffer.
@@ -2354,10 +2594,10 @@ namespace System.Text
                 }
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal unsafe char GetNextChar()
             {
-                 // See if there's something in our fallback buffer
+                // See if there's something in our fallback buffer
                 char cReturn = fallbackBuffer.InternalGetNextChar();
 
                 // Nothing in the fallback buffer, return our normal data.
@@ -2366,25 +2606,19 @@ namespace System.Text
                     if (chars < charEnd)
                         cReturn = *(chars++);
                 }
-                
+
                 return cReturn;
-             }
+            }
 
             internal unsafe int CharsUsed
             {
-                [System.Security.SecurityCritical]  // auto-generated
-                get
-                {
-                    return (int)(chars - charStart);
-                }
+                [System.Security.SecurityCritical] // auto-generated
+                get { return (int)(chars - charStart); }
             }
 
             internal unsafe int Count
             {
-                get
-                {
-                    return byteCountResult;
-                }
+                get { return byteCountResult; }
             }
         }
     }

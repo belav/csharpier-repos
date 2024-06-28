@@ -10,13 +10,15 @@ internal enum KeepAliveState
     None,
     SendPing,
     PingSent,
-    Timeout
+    Timeout,
 }
 
 internal sealed class Http2KeepAlive
 {
     // An empty ping payload
-    internal static readonly ReadOnlySequence<byte> PingPayload = new ReadOnlySequence<byte>(new byte[8]);
+    internal static readonly ReadOnlySequence<byte> PingPayload = new ReadOnlySequence<byte>(
+        new byte[8]
+    );
 
     private readonly long _keepAliveInterval;
     private readonly long _keepAliveTimeout;
@@ -27,11 +29,17 @@ internal sealed class Http2KeepAlive
     // Internal for testing
     internal KeepAliveState _state;
 
-    public Http2KeepAlive(TimeSpan keepAliveInterval, TimeSpan keepAliveTimeout, TimeProvider timeProvider)
+    public Http2KeepAlive(
+        TimeSpan keepAliveInterval,
+        TimeSpan keepAliveTimeout,
+        TimeProvider timeProvider
+    )
     {
         _keepAliveInterval = keepAliveInterval.ToTicks(timeProvider);
-        _keepAliveTimeout = keepAliveTimeout == TimeSpan.MaxValue ? long.MaxValue
-            : keepAliveTimeout.ToTicks(timeProvider);
+        _keepAliveTimeout =
+            keepAliveTimeout == TimeSpan.MaxValue
+                ? long.MaxValue
+                : keepAliveTimeout.ToTicks(timeProvider);
         _timeProvider = timeProvider;
     }
 

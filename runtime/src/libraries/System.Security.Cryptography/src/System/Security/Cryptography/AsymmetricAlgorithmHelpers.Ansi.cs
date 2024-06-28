@@ -15,7 +15,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> x,
             ReadOnlySpan<byte> y,
             ReadOnlySpan<byte> d,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             const byte UncompressedKeyPrefix = 0x04;
             if (x.Length != y.Length || (d.Length > 0 && d.Length != y.Length))
@@ -38,7 +39,8 @@ namespace System.Security.Cryptography
         public static void DecodeFromUncompressedAnsiX963Key(
             ReadOnlySpan<byte> ansiKey,
             bool hasPrivateKey,
-            out ECParameters ret)
+            out ECParameters ret
+        )
         {
             ret = default;
 
@@ -52,9 +54,10 @@ namespace System.Security.Cryptography
             if (ansiKey.Length != 1 + fieldSize * fieldCount)
                 throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
 
-            ret.Q = new ECPoint {
+            ret.Q = new ECPoint
+            {
                 X = ansiKey.Slice(1, fieldSize).ToArray(),
-                Y = ansiKey.Slice(1 + fieldSize, fieldSize).ToArray()
+                Y = ansiKey.Slice(1 + fieldSize, fieldSize).ToArray(),
             };
 
             if (hasPrivateKey)

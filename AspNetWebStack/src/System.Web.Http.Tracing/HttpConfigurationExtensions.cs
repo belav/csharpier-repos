@@ -21,19 +21,20 @@ namespace System.Web.Http
         /// to register the created trace writer.</param>
         /// <remarks>The returned SystemDiagnosticsTraceWriter may be further configured to change it's default settings.</remarks>
         /// <returns>The <see cref="SystemDiagnosticsTraceWriter"/> which was created and registered.</returns>
-        public static SystemDiagnosticsTraceWriter EnableSystemDiagnosticsTracing(this HttpConfiguration configuration)
+        public static SystemDiagnosticsTraceWriter EnableSystemDiagnosticsTracing(
+            this HttpConfiguration configuration
+        )
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
             }
 
-            SystemDiagnosticsTraceWriter traceWriter =
-                new SystemDiagnosticsTraceWriter()
-                {
-                    MinimumLevel = TraceLevel.Info,
-                    IsVerbose = false
-                };
+            SystemDiagnosticsTraceWriter traceWriter = new SystemDiagnosticsTraceWriter()
+            {
+                MinimumLevel = TraceLevel.Info,
+                IsVerbose = false,
+            };
 
             configuration.Services.Replace(typeof(ITraceWriter), traceWriter);
 

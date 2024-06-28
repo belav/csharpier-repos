@@ -11,9 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 /// </summary>
 public sealed class SkipNavigationComparer : IComparer<IReadOnlySkipNavigation>
 {
-    private SkipNavigationComparer()
-    {
-    }
+    private SkipNavigationComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,14 +27,18 @@ public sealed class SkipNavigationComparer : IComparer<IReadOnlySkipNavigation>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public int Compare(IReadOnlySkipNavigation? x, IReadOnlySkipNavigation? y)
-        => (x, y) switch
+    public int Compare(IReadOnlySkipNavigation? x, IReadOnlySkipNavigation? y) =>
+        (x, y) switch
         {
             (not null, null) => 1,
             (null, not null) => -1,
             (null, null) => 0,
-            (not null, not null) => StringComparer.Ordinal.Compare(x.Name, y.Name) is var compare && compare != 0
-                ? compare
-                : TypeBaseNameComparer.Instance.Compare(x.DeclaringEntityType, y.DeclaringEntityType)
+            (not null, not null)
+                => StringComparer.Ordinal.Compare(x.Name, y.Name) is var compare && compare != 0
+                    ? compare
+                    : TypeBaseNameComparer.Instance.Compare(
+                        x.DeclaringEntityType,
+                        y.DeclaringEntityType
+                    ),
         };
 }

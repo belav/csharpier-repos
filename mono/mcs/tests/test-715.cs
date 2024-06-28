@@ -2,9 +2,9 @@
 
 class C
 {
-	public static int Main ()
-	{
-		// TODO: check applied attributes
-		return 0;
-	}
+    public static int Main()
+    {
+        // TODO: check applied attributes
+        return 0;
+    }
 }

@@ -85,7 +85,10 @@ namespace MonoTests.System.Configuration
         {
             TypeNameConverter cv = new TypeNameConverter();
 
-            Assert.Equal(typeof(string).AssemblyQualifiedName, cv.ConvertTo(null, null, typeof(string), typeof(string)));
+            Assert.Equal(
+                typeof(string).AssemblyQualifiedName,
+                cv.ConvertTo(null, null, typeof(string), typeof(string))
+            );
         }
 
         [Fact]
@@ -101,7 +104,10 @@ namespace MonoTests.System.Configuration
         {
             TypeNameConverter cv = new TypeNameConverter();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cv.ConvertTo(null, null, 59, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cv.ConvertTo(null, null, 59, typeof(string))
+            );
         }
     }
 }

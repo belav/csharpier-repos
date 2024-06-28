@@ -10,12 +10,16 @@ namespace System.ServiceModel.Channels
     class TimeoutStream : DelegatingStream
     {
         TimeoutHelper timeoutHelper;
+
         public TimeoutStream(Stream stream, ref TimeoutHelper timeoutHelper)
             : base(stream)
         {
             if (!stream.CanTimeout)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("stream", SR.GetString(SR.StreamDoesNotSupportTimeout));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "stream",
+                    SR.GetString(SR.StreamDoesNotSupportTimeout)
+                );
             }
 
             this.timeoutHelper = timeoutHelper;
@@ -31,13 +35,25 @@ namespace System.ServiceModel.Channels
             this.WriteTimeout = TimeoutHelper.ToMilliseconds(this.timeoutHelper.RemainingTime());
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             UpdateReadTimeout();
             return base.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             UpdateWriteTimeout();
             return base.BeginWrite(buffer, offset, count, callback, state);

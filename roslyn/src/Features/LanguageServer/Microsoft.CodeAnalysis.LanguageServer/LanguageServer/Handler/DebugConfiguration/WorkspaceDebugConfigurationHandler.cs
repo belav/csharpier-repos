@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DebugConfiguration;
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(WorkspaceDebugConfigurationHandler)), Shared]
 [Method(MethodName)]
-internal class WorkspaceDebugConfigurationHandler : ILspServiceRequestHandler<WorkspaceDebugConfigurationParams, ProjectDebugConfiguration[]>
+internal class WorkspaceDebugConfigurationHandler
+    : ILspServiceRequestHandler<WorkspaceDebugConfigurationParams, ProjectDebugConfiguration[]>
 {
     private const string MethodName = "workspace/debugConfiguration";
 
@@ -32,14 +33,19 @@ internal class WorkspaceDebugConfigurationHandler : ILspServiceRequestHandler<Wo
 
     public bool RequiresLSPSolution => true;
 
-    public Task<ProjectDebugConfiguration[]> HandleRequestAsync(WorkspaceDebugConfigurationParams request, RequestContext context, CancellationToken cancellationToken)
+    public Task<ProjectDebugConfiguration[]> HandleRequestAsync(
+        WorkspaceDebugConfigurationParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         Contract.ThrowIfNull(context.Solution, nameof(context.Solution));
 
-        var projects = context.Solution.Projects
-            .Where(p => p.FilePath != null && p.OutputFilePath != null)
+        var projects = context
+            .Solution.Projects.Where(p => p.FilePath != null && p.OutputFilePath != null)
             .Where(p => IsProjectInWorkspace(request.WorkspacePath, p))
-            .Select(GetProjectDebugConfiguration).ToArray();
+            .Select(GetProjectDebugConfiguration)
+            .ToArray();
         return Task.FromResult(projects);
     }
 
@@ -50,9 +56,19 @@ internal class WorkspaceDebugConfigurationHandler : ILspServiceRequestHandler<Wo
 
     private ProjectDebugConfiguration GetProjectDebugConfiguration(Project project)
     {
-        var isExe = project.CompilationOptions?.OutputKind is OutputKind.ConsoleApplication or OutputKind.WindowsApplication;
+        var isExe =
+            project.CompilationOptions?.OutputKind
+                is OutputKind.ConsoleApplication
+                    or OutputKind.WindowsApplication;
         var targetsDotnetCore = _targetFrameworkManager.IsDotnetCoreProject(project.Id);
-        return new ProjectDebugConfiguration(project.FilePath!, project.OutputFilePath!, GetProjectName(project), targetsDotnetCore, isExe, project.Solution.FilePath);
+        return new ProjectDebugConfiguration(
+            project.FilePath!,
+            project.OutputFilePath!,
+            GetProjectName(project),
+            targetsDotnetCore,
+            isExe,
+            project.Solution.FilePath
+        );
     }
 
     private static string GetProjectName(Project project)

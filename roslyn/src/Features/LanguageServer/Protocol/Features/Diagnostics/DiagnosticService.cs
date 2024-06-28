@@ -29,7 +29,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly TaskQueue _eventQueue;
 
         private readonly object _gate = new();
-        private readonly Dictionary<IDiagnosticUpdateSource, Dictionary<Workspace, Dictionary<object, Data>>> _map = new();
+        private readonly Dictionary<
+            IDiagnosticUpdateSource,
+            Dictionary<Workspace, Dictionary<object, Data>>
+        > _map = new();
 
         private readonly EventListenerTracker<IDiagnosticService> _eventListenerTracker;
 
@@ -39,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DiagnosticService(
             IAsynchronousOperationListenerProvider listenerProvider,
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
             // we use registry service rather than doing MEF import since MEF import method can have race issue where
             // update source gets created before aggregator - diagnostic service - is created and we will lose events fired before
@@ -47,25 +51,27 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _updateSources = ImmutableHashSet<IDiagnosticUpdateSource>.Empty;
 
             // queue to serialize events.
-            _eventQueue = new TaskQueue(listenerProvider.GetListener(FeatureAttribute.DiagnosticService), TaskScheduler.Default);
+            _eventQueue = new TaskQueue(
+                listenerProvider.GetListener(FeatureAttribute.DiagnosticService),
+                TaskScheduler.Default
+            );
 
-            _eventListenerTracker = new EventListenerTracker<IDiagnosticService>(eventListeners, WellKnownEventListeners.DiagnosticService);
+            _eventListenerTracker = new EventListenerTracker<IDiagnosticService>(
+                eventListeners,
+                WellKnownEventListeners.DiagnosticService
+            );
         }
 
         public event EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>> DiagnosticsUpdated
         {
-            add
-            {
-                _eventMap.AddEventHandler(DiagnosticsUpdatedEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(DiagnosticsUpdatedEventName, value);
-            }
+            add { _eventMap.AddEventHandler(DiagnosticsUpdatedEventName, value); }
+            remove { _eventMap.RemoveEventHandler(DiagnosticsUpdatedEventName, value); }
         }
 
-        private void RaiseDiagnosticsUpdated(IDiagnosticUpdateSource source, ImmutableArray<DiagnosticsUpdatedArgs> argsCollection)
+        private void RaiseDiagnosticsUpdated(
+            IDiagnosticUpdateSource source,
+            ImmutableArray<DiagnosticsUpdatedArgs> argsCollection
+        )
         {
             Workspace? previousWorkspace = null;
             foreach (var args in argsCollection)
@@ -77,42 +83,63 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            var ev = _eventMap.GetEventHandlers<EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>>(DiagnosticsUpdatedEventName);
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>
+            >(DiagnosticsUpdatedEventName);
 
-            _eventQueue.ScheduleTask(DiagnosticsUpdatedEventName, () =>
-            {
-                var updatedArgsCollection = UpdateDataMap(source, argsCollection);
-                if (updatedArgsCollection.IsEmpty)
+            _eventQueue.ScheduleTask(
+                DiagnosticsUpdatedEventName,
+                () =>
                 {
-                    // there is no change, nothing to raise events for.
-                    return;
-                }
+                    var updatedArgsCollection = UpdateDataMap(source, argsCollection);
+                    if (updatedArgsCollection.IsEmpty)
+                    {
+                        // there is no change, nothing to raise events for.
+                        return;
+                    }
 
-                ev.RaiseEvent(static (handler, arg) => handler(arg.source, arg.updatedArgsCollection), (source, updatedArgsCollection));
-            }, CancellationToken.None);
+                    ev.RaiseEvent(
+                        static (handler, arg) => handler(arg.source, arg.updatedArgsCollection),
+                        (source, updatedArgsCollection)
+                    );
+                },
+                CancellationToken.None
+            );
         }
 
         private void RaiseDiagnosticsCleared(IDiagnosticUpdateSource source)
         {
-            var ev = _eventMap.GetEventHandlers<EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>>(DiagnosticsUpdatedEventName);
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>
+            >(DiagnosticsUpdatedEventName);
 
-            _eventQueue.ScheduleTask(DiagnosticsUpdatedEventName, () =>
-            {
-                using var argsBuilder = TemporaryArray<DiagnosticsUpdatedArgs>.Empty;
-
-                if (!ClearDiagnosticsReportedBySource(source, ref argsBuilder.AsRef()))
+            _eventQueue.ScheduleTask(
+                DiagnosticsUpdatedEventName,
+                () =>
                 {
-                    // there is no change, nothing to raise events for.
-                    return;
-                }
+                    using var argsBuilder = TemporaryArray<DiagnosticsUpdatedArgs>.Empty;
 
-                // don't create event listener if it haven't created yet. if there is a diagnostic to remove
-                // listener should have already created since all events are done in the serialized queue
-                ev.RaiseEvent(static (handler, arg) => handler(arg.source, arg.args), (source, args: argsBuilder.ToImmutableAndClear()));
-            }, CancellationToken.None);
+                    if (!ClearDiagnosticsReportedBySource(source, ref argsBuilder.AsRef()))
+                    {
+                        // there is no change, nothing to raise events for.
+                        return;
+                    }
+
+                    // don't create event listener if it haven't created yet. if there is a diagnostic to remove
+                    // listener should have already created since all events are done in the serialized queue
+                    ev.RaiseEvent(
+                        static (handler, arg) => handler(arg.source, arg.args),
+                        (source, args: argsBuilder.ToImmutableAndClear())
+                    );
+                },
+                CancellationToken.None
+            );
         }
 
-        private ImmutableArray<DiagnosticsUpdatedArgs> UpdateDataMap(IDiagnosticUpdateSource source, ImmutableArray<DiagnosticsUpdatedArgs> argsCollection)
+        private ImmutableArray<DiagnosticsUpdatedArgs> UpdateDataMap(
+            IDiagnosticUpdateSource source,
+            ImmutableArray<DiagnosticsUpdatedArgs> argsCollection
+        )
         {
             // we expect source who uses this ability to have small number of diagnostics.
             lock (_gate)
@@ -132,7 +159,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     // 2 different workspaces (ex, PreviewWorkspaces) can return same Args.Id, we need to
                     // distinguish them. so we separate diagnostics per workspace map.
-                    var workspaceMap = _map.GetOrAdd(source, _ => new Dictionary<Workspace, Dictionary<object, Data>>());
+                    var workspaceMap = _map.GetOrAdd(
+                        source,
+                        _ => new Dictionary<Workspace, Dictionary<object, Data>>()
+                    );
 
                     if (diagnostics.Length == 0 && !workspaceMap.ContainsKey(args.Workspace))
                     {
@@ -140,7 +170,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         return false;
                     }
 
-                    var diagnosticDataMap = workspaceMap.GetOrAdd(args.Workspace, _ => new Dictionary<object, Data>());
+                    var diagnosticDataMap = workspaceMap.GetOrAdd(
+                        args.Workspace,
+                        _ => new Dictionary<object, Data>()
+                    );
 
                     diagnosticDataMap.Remove(args.Id);
                     if (diagnosticDataMap.Count == 0 && diagnostics.Length == 0)
@@ -158,7 +191,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (diagnostics.Length > 0)
                     {
                         // save data only if there is a diagnostic
-                        var data = source.SupportGetDiagnostics ? new Data(args) : new Data(args, diagnostics);
+                        var data = source.SupportGetDiagnostics
+                            ? new Data(args)
+                            : new Data(args, diagnostics);
                         diagnosticDataMap.Add(args.Id, data);
                     }
 
@@ -169,7 +204,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        private bool ClearDiagnosticsReportedBySource(IDiagnosticUpdateSource source, ref TemporaryArray<DiagnosticsUpdatedArgs> removed)
+        private bool ClearDiagnosticsReportedBySource(
+            IDiagnosticUpdateSource source,
+            ref TemporaryArray<DiagnosticsUpdatedArgs> removed
+        )
         {
             // we expect source who uses this ability to have small number of diagnostics.
             lock (_gate)
@@ -187,7 +225,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     foreach (var (id, data) in map)
                     {
-                        removed.Add(DiagnosticsUpdatedArgs.DiagnosticsRemoved(id, data.Workspace, solution: null, data.ProjectId, data.DocumentId));
+                        removed.Add(
+                            DiagnosticsUpdatedArgs.DiagnosticsRemoved(
+                                id,
+                                data.Workspace,
+                                solution: null,
+                                data.ProjectId,
+                                data.DocumentId
+                            )
+                        );
                     }
                 }
 
@@ -217,19 +263,40 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId? documentId,
             object? id,
             bool includeSuppressedDiagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (id != null)
             {
                 // get specific one
-                return GetSpecificDiagnosticsAsync(workspace, projectId, documentId, id, includeSuppressedDiagnostics, cancellationToken);
+                return GetSpecificDiagnosticsAsync(
+                    workspace,
+                    projectId,
+                    documentId,
+                    id,
+                    includeSuppressedDiagnostics,
+                    cancellationToken
+                );
             }
 
             // get aggregated ones
-            return GetDiagnosticsAsync(workspace, projectId, documentId, includeSuppressedDiagnostics, cancellationToken);
+            return GetDiagnosticsAsync(
+                workspace,
+                projectId,
+                documentId,
+                includeSuppressedDiagnostics,
+                cancellationToken
+            );
         }
 
-        private async ValueTask<ImmutableArray<DiagnosticData>> GetSpecificDiagnosticsAsync(Workspace workspace, ProjectId? projectId, DocumentId? documentId, object id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
+        private async ValueTask<ImmutableArray<DiagnosticData>> GetSpecificDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<Data>.GetInstance(out var buffer);
 
@@ -240,7 +307,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 buffer.Clear();
                 if (source.SupportGetDiagnostics)
                 {
-                    var diagnostics = await source.GetDiagnosticsAsync(workspace, projectId, documentId, id, includeSuppressedDiagnostics, cancellationToken).ConfigureAwait(false);
+                    var diagnostics = await source
+                        .GetDiagnosticsAsync(
+                            workspace,
+                            projectId,
+                            documentId,
+                            id,
+                            includeSuppressedDiagnostics,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (diagnostics.Length > 0)
                         return diagnostics;
                 }
@@ -263,7 +339,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         private async ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        )
         {
             using var _1 = ArrayBuilder<DiagnosticData>.GetInstance(out var result);
             using var _2 = ArrayBuilder<Data>.GetInstance(out var buffer);
@@ -274,7 +355,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 buffer.Clear();
                 if (source.SupportGetDiagnostics)
                 {
-                    result.AddRange(await source.GetDiagnosticsAsync(workspace, projectId, documentId, id: null, includeSuppressedDiagnostics, cancellationToken).ConfigureAwait(false));
+                    result.AddRange(
+                        await source
+                            .GetDiagnosticsAsync(
+                                workspace,
+                                projectId,
+                                documentId,
+                                id: null,
+                                includeSuppressedDiagnostics,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    );
                 }
                 else
                 {
@@ -299,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Workspace workspace,
             ProjectId? projectId,
             DocumentId? documentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _1 = ArrayBuilder<DiagnosticBucket>.GetInstance(out var result);
             using var _2 = ArrayBuilder<Data>.GetInstance(out var buffer);
@@ -311,21 +404,36 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 AppendMatchingData(source, workspace, projectId, documentId, id: null, buffer);
                 foreach (var data in buffer)
-                    result.Add(new DiagnosticBucket(data.Id, data.Workspace, data.ProjectId, data.DocumentId));
+                    result.Add(
+                        new DiagnosticBucket(
+                            data.Id,
+                            data.Workspace,
+                            data.ProjectId,
+                            data.DocumentId
+                        )
+                    );
             }
 
             return result.ToImmutable();
         }
 
         private void AppendMatchingData(
-            IDiagnosticUpdateSource source, Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, ArrayBuilder<Data> list)
+            IDiagnosticUpdateSource source,
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            ArrayBuilder<Data> list
+        )
         {
             Contract.ThrowIfNull(workspace);
 
             lock (_gate)
             {
-                if (!_map.TryGetValue(source, out var workspaceMap) ||
-                    !workspaceMap.TryGetValue(workspace, out var current))
+                if (
+                    !_map.TryGetValue(source, out var workspaceMap)
+                    || !workspaceMap.TryGetValue(workspace, out var current)
+                )
                 {
                     return;
                 }
@@ -342,9 +450,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 foreach (var data in current.Values)
                 {
-                    if (TryAddData(workspace, documentId, data, d => d.DocumentId, list) ||
-                        TryAddData(workspace, projectId, data, d => d.ProjectId, list) ||
-                        TryAddData(workspace, workspace, data, d => d.Workspace, list))
+                    if (
+                        TryAddData(workspace, documentId, data, d => d.DocumentId, list)
+                        || TryAddData(workspace, projectId, data, d => d.ProjectId, list)
+                        || TryAddData(workspace, workspace, data, d => d.Workspace, list)
+                    )
                     {
                         continue;
                     }
@@ -352,7 +462,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        private static bool TryAddData<T>(Workspace workspace, [NotNullWhen(true)] T? key, Data data, Func<Data, T?> keyGetter, ArrayBuilder<Data> result)
+        private static bool TryAddData<T>(
+            Workspace workspace,
+            [NotNullWhen(true)] T? key,
+            Data data,
+            Func<Data, T?> keyGetter,
+            ArrayBuilder<Data> result
+        )
             where T : class
         {
             if (key == null)
@@ -402,9 +518,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public readonly ImmutableArray<DiagnosticData> Diagnostics;
 
             public Data(UpdatedEventArgs args)
-                : this(args, ImmutableArray<DiagnosticData>.Empty)
-            {
-            }
+                : this(args, ImmutableArray<DiagnosticData>.Empty) { }
 
             public Data(UpdatedEventArgs args, ImmutableArray<DiagnosticData> diagnostics)
             {
@@ -416,18 +530,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly DiagnosticService _diagnosticService;
 
-            internal TestAccessor(DiagnosticService diagnosticService)
-                => _diagnosticService = diagnosticService;
+            internal TestAccessor(DiagnosticService diagnosticService) =>
+                _diagnosticService = diagnosticService;
 
-            internal ref readonly EventListenerTracker<IDiagnosticService> EventListenerTracker
-                => ref _diagnosticService._eventListenerTracker;
+            internal ref readonly EventListenerTracker<IDiagnosticService> EventListenerTracker =>
+                ref _diagnosticService._eventListenerTracker;
         }
     }
 }

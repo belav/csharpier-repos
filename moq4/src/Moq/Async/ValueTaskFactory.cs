@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Moq.Async
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ValueTaskFactory : AwaitableFactory<ValueTask>
@@ -32,7 +31,6 @@ namespace Moq.Async
     {
         public static readonly ValueTaskFactory Instance = new ValueTaskFactory();
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private ValueTaskFactory()
@@ -53,9 +51,7 @@ namespace Moq.Async
         After:
                 ValueTaskFactory()
         */
-        ValueTaskFactory()
-        {
-        }
+        ValueTaskFactory() { }
 
         public override ValueTask CreateCompleted()
         {

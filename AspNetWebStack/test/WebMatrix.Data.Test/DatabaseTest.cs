@@ -21,13 +21,19 @@ namespace WebMatrix.Data.Test
         [Fact]
         public void OpenConnectionStringWithNullConnectionStringThrowsException()
         {
-            Assert.ThrowsArgumentNullOrEmptyString(() => Database.OpenConnectionString(null), "connectionString");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => Database.OpenConnectionString(null),
+                "connectionString"
+            );
         }
 
         [Fact]
         public void OpenConnectionStringWithEmptyConnectionStringThrowsException()
         {
-            Assert.ThrowsArgumentNullOrEmptyString(() => Database.OpenConnectionString(String.Empty), "connectionString");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => Database.OpenConnectionString(String.Empty),
+                "connectionString"
+            );
         }
 
         [Fact]
@@ -38,10 +44,15 @@ namespace WebMatrix.Data.Test
             Mock<DbConnection> mockConnection = new Mock<DbConnection>();
             mockConnection.Setup(m => m.ConnectionString).Returns("connection string");
             Mock<MockDbProviderFactory> mockProviderFactory = new Mock<MockDbProviderFactory>();
-            mockProviderFactory.Setup(m => m.CreateConnection("connection string")).Returns(mockConnection.Object);
-            mockConfigurationManager.AddConnection("foo", new ConnectionConfiguration(mockProviderFactory.Object, "connection string"));
+            mockProviderFactory
+                .Setup(m => m.CreateConnection("connection string"))
+                .Returns(mockConnection.Object);
+            mockConfigurationManager.AddConnection(
+                "foo",
+                new ConnectionConfiguration(mockProviderFactory.Object, "connection string")
+            );
 
-            // Act            
+            // Act
             Database db = Database.OpenNamedConnection("foo", mockConfigurationManager);
 
             // Assert
@@ -55,7 +66,10 @@ namespace WebMatrix.Data.Test
             IConfigurationManager mockConfigurationManager = new MockConfigurationManager();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => Database.OpenNamedConnection("foo", mockConfigurationManager), "Connection string \"foo\" was not found.");
+            Assert.Throws<InvalidOperationException>(
+                () => Database.OpenNamedConnection("foo", mockConfigurationManager),
+                "Connection string \"foo\" was not found."
+            );
         }
 
         [Fact]
@@ -63,14 +77,19 @@ namespace WebMatrix.Data.Test
         {
             // Arrange
             var mockHandler = new Mock<MockDbFileHandler>();
-            mockHandler.Setup(m => m.GetConnectionConfiguration("filename.foo")).Returns(new MockConnectionConfiguration("some file based connection"));
+            mockHandler
+                .Setup(m => m.GetConnectionConfiguration("filename.foo"))
+                .Returns(new MockConnectionConfiguration("some file based connection"));
             var handlers = new Dictionary<string, IDbFileHandler>
             {
-                { ".foo", mockHandler.Object }
+                { ".foo", mockHandler.Object },
             };
 
             // Act
-            IConnectionConfiguration configuration = Database.GetConnectionConfiguration("filename.foo", handlers);
+            IConnectionConfiguration configuration = Database.GetConnectionConfiguration(
+                "filename.foo",
+                handlers
+            );
 
             // Assert
             Assert.NotNull(configuration);
@@ -84,7 +103,10 @@ namespace WebMatrix.Data.Test
             var handlers = new Dictionary<string, IDbFileHandler>();
 
             // Act
-            Assert.Throws<InvalidOperationException>(() => Database.GetConnectionConfiguration("filename.foo", handlers), "Unable to determine the provider for the database file \"filename.foo\".");
+            Assert.Throws<InvalidOperationException>(
+                () => Database.GetConnectionConfiguration("filename.foo", handlers),
+                "Unable to determine the provider for the database file \"filename.foo\"."
+            );
         }
     }
 }

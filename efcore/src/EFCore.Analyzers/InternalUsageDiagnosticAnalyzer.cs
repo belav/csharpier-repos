@@ -16,17 +16,18 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
     private static readonly int EFLen = "EntityFrameworkCore".Length;
 
     private static readonly DiagnosticDescriptor Descriptor
-        // HACK: Work around dotnet/roslyn-analyzers#5890 by not using target-typed new
-        = new DiagnosticDescriptor(
-            Id,
-            title: AnalyzerStrings.InternalUsageTitle,
-            messageFormat: AnalyzerStrings.InternalUsageMessageFormat,
-            category: "Usage",
-            defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+    // HACK: Work around dotnet/roslyn-analyzers#5890 by not using target-typed new
+    = new DiagnosticDescriptor(
+        Id,
+        title: AnalyzerStrings.InternalUsageTitle,
+        messageFormat: AnalyzerStrings.InternalUsageMessageFormat,
+        category: "Usage",
+        defaultSeverity: DiagnosticSeverity.Warning,
+        isEnabledByDefault: true
+    );
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-        => ImmutableArray.Create(Descriptor);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(Descriptor);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -42,7 +43,8 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             OperationKind.Invocation,
             OperationKind.ObjectCreation,
             OperationKind.VariableDeclaration,
-            OperationKind.TypeOf);
+            OperationKind.TypeOf
+        );
 
         context.RegisterSymbolAction(
             AnalyzeSymbol,
@@ -50,7 +52,8 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             SymbolKind.Method,
             SymbolKind.Property,
             SymbolKind.Field,
-            SymbolKind.Event);
+            SymbolKind.Event
+        );
     }
 
     private static void AnalyzeNode(OperationAnalysisContext context)
@@ -96,7 +99,12 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
 
     private static void AnalyzeMember(OperationAnalysisContext context, ISymbol symbol)
     {
-        if (symbol.ContainingAssembly?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) == true)
+        if (
+            symbol.ContainingAssembly?.Equals(
+                context.Compilation.Assembly,
+                SymbolEqualityComparer.Default
+            ) == true
+        )
         {
             // Skip all methods inside the same assembly - internal access is fine
             return;
@@ -107,7 +115,11 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         if (HasInternalAttribute(symbol))
         {
             ReportDiagnostic(
-                context, symbol.Name == WellKnownMemberNames.InstanceConstructorName ? containingType : $"{containingType}.{symbol.Name}");
+                context,
+                symbol.Name == WellKnownMemberNames.InstanceConstructorName
+                    ? containingType
+                    : $"{containingType}.{symbol.Name}"
+            );
             return;
         }
 
@@ -117,14 +129,19 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static void AnalyzeInvocation(OperationAnalysisContext context, IInvocationOperation invocation)
+    private static void AnalyzeInvocation(
+        OperationAnalysisContext context,
+        IInvocationOperation invocation
+    )
     {
         // First check for any internal type parameters
         foreach (var a in invocation.TargetMethod.TypeArguments)
         {
             if (IsInternal(context, a))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Descriptor, context.Operation.Syntax.GetLocation(), a));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(Descriptor, context.Operation.Syntax.GetLocation(), a)
+                );
             }
         }
 
@@ -132,7 +149,10 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         AnalyzeMember(context, invocation.TargetMethod);
     }
 
-    private static void AnalyzeVariableDeclaration(OperationAnalysisContext context, IVariableDeclarationOperation variableDeclaration)
+    private static void AnalyzeVariableDeclaration(
+        OperationAnalysisContext context,
+        IVariableDeclarationOperation variableDeclaration
+    )
     {
         foreach (var declarator in variableDeclaration.Declarators)
         {
@@ -141,9 +161,11 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var syntax = context.Operation.Syntax switch
                 {
                     CSharpSyntax.VariableDeclarationSyntax s => s.Type,
-                    _ => context.Operation.Syntax
+                    _ => context.Operation.Syntax,
                 };
-                context.ReportDiagnostic(Diagnostic.Create(Descriptor, syntax.GetLocation(), declarator.Symbol.Type));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(Descriptor, syntax.GetLocation(), declarator.Symbol.Type)
+                );
                 return;
             }
         }
@@ -182,21 +204,26 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 break;
 
             default:
-                throw new ArgumentException($"Unexpected {nameof(ISymbol)}: {context.Symbol.GetType().Name}");
+                throw new ArgumentException(
+                    $"Unexpected {nameof(ISymbol)}: {context.Symbol.GetType().Name}"
+                );
         }
     }
 
-    private static void AnalyzeNamedTypeSymbol(SymbolAnalysisContext context, INamedTypeSymbol symbol)
+    private static void AnalyzeNamedTypeSymbol(
+        SymbolAnalysisContext context,
+        INamedTypeSymbol symbol
+    )
     {
-        if (symbol.BaseType is ITypeSymbol baseSymbol
-            && IsInternal(context, baseSymbol))
+        if (symbol.BaseType is ITypeSymbol baseSymbol && IsInternal(context, baseSymbol))
         {
             foreach (var declaringSyntax in symbol.DeclaringSyntaxReferences)
             {
                 var location = declaringSyntax.GetSyntax() switch
                 {
-                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s => s.BaseList.Types[0].GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s
+                        => s.BaseList.Types[0].GetLocation(),
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, baseSymbol));
@@ -210,7 +237,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var location = declaringSyntax.GetSyntax() switch
                 {
                     CSharpSyntax.ClassDeclarationSyntax s => s.Identifier.GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, @interface));
@@ -233,10 +260,12 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var location = declaringSyntax.GetSyntax() switch
                 {
                     CSharpSyntax.MethodDeclarationSyntax s => s.ReturnType.GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
-                context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, symbol.ReturnType));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(Descriptor, location, symbol.ReturnType)
+                );
             }
         }
 
@@ -248,7 +277,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 {
                     CSharpSyntax.ParameterSyntax { Type: not null } s => s.Type.GetLocation(),
 
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, paramSymbol.Type));
@@ -259,7 +288,8 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
     private static void AnalyzeMemberDeclarationTypeSymbol(
         SymbolAnalysisContext context,
         ISymbol declarationSymbol,
-        ITypeSymbol typeSymbol)
+        ITypeSymbol typeSymbol
+    )
     {
         if (IsInternal(context, typeSymbol))
         {
@@ -270,24 +300,36 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static void ReportDiagnostic(OperationAnalysisContext context, object messageArg)
-        => context.ReportDiagnostic(
-            Diagnostic.Create(Descriptor, NarrowDownSyntax(context.Operation.Syntax).GetLocation(), messageArg));
+    private static void ReportDiagnostic(OperationAnalysisContext context, object messageArg) =>
+        context.ReportDiagnostic(
+            Diagnostic.Create(
+                Descriptor,
+                NarrowDownSyntax(context.Operation.Syntax).GetLocation(),
+                messageArg
+            )
+        );
 
-    private static void ReportDiagnostic(SymbolAnalysisContext context, SyntaxNode syntax, object messageArg)
-        => context.ReportDiagnostic(Diagnostic.Create(Descriptor, NarrowDownSyntax(syntax).GetLocation(), messageArg));
+    private static void ReportDiagnostic(
+        SymbolAnalysisContext context,
+        SyntaxNode syntax,
+        object messageArg
+    ) =>
+        context.ReportDiagnostic(
+            Diagnostic.Create(Descriptor, NarrowDownSyntax(syntax).GetLocation(), messageArg)
+        );
 
     /// <summary>
     ///     Given a syntax node, pattern matches some known types and returns a narrowed-down node for the type syntax which
     ///     should be reported in diagnostics.
     /// </summary>
-    private static SyntaxNode NarrowDownSyntax(SyntaxNode syntax)
-        => syntax switch
+    private static SyntaxNode NarrowDownSyntax(SyntaxNode syntax) =>
+        syntax switch
         {
             CSharpSyntax.InvocationExpressionSyntax
             {
                 Expression: CSharpSyntax.MemberAccessExpressionSyntax memberAccessSyntax
-            } => memberAccessSyntax.Name,
+            }
+                => memberAccessSyntax.Name,
             CSharpSyntax.MemberAccessExpressionSyntax s => s.Name,
             CSharpSyntax.ObjectCreationExpressionSyntax s => s.Type,
             CSharpSyntax.PropertyDeclarationSyntax s => s.Type,
@@ -299,22 +341,30 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
 
             // TODO: VB syntax narrowing (#22085)
 
-            _ => syntax
+            _ => syntax,
         };
 
-    private static bool IsInternal(SymbolAnalysisContext context, ITypeSymbol symbol)
-        => symbol.ContainingAssembly?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) != true
-            && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
+    private static bool IsInternal(SymbolAnalysisContext context, ITypeSymbol symbol) =>
+        symbol.ContainingAssembly?.Equals(
+            context.Compilation.Assembly,
+            SymbolEqualityComparer.Default
+        ) != true
+        && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
 
-    private static bool IsInternal(OperationAnalysisContext context, ITypeSymbol symbol)
-        => symbol.ContainingAssembly?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) != true
-            && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
+    private static bool IsInternal(OperationAnalysisContext context, ITypeSymbol symbol) =>
+        symbol.ContainingAssembly?.Equals(
+            context.Compilation.Assembly,
+            SymbolEqualityComparer.Default
+        ) != true
+        && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
 
-    private static bool HasInternalAttribute(ISymbol symbol)
-        => symbol.GetAttributes().Any(
-            a =>
+    private static bool HasInternalAttribute(ISymbol symbol) =>
+        symbol
+            .GetAttributes()
+            .Any(a =>
                 a.AttributeClass!.ToDisplayString()
-                == "Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkInternalAttribute");
+                == "Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkInternalAttribute"
+            );
 
     private static bool IsInInternalNamespace(ISymbol symbol)
     {
@@ -322,8 +372,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         {
             var i = ns.IndexOf("EntityFrameworkCore", StringComparison.Ordinal);
 
-            return
-                i != -1
+            return i != -1
                 && (i == 0 || ns[i - 1] == '.')
                 && i + EFLen < ns.Length
                 && ns[i + EFLen] == '.'

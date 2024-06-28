@@ -9,8 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections.Internal.Transports;
-using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Tests;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
@@ -27,7 +27,11 @@ public class LongPollingTests : VerifiableLoggedTest
 
             var context = new DefaultHttpContext();
 
-            var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+            var poll = new LongPollingServerTransport(
+                CancellationToken.None,
+                connection.Application.Input,
+                LoggerFactory
+            );
 
             connection.Transport.Output.Complete();
 
@@ -47,9 +51,18 @@ public class LongPollingTests : VerifiableLoggedTest
             var context = new DefaultHttpContext();
 
             var timeoutToken = new CancellationToken(true);
-            var poll = new LongPollingServerTransport(timeoutToken, connection.Application.Input, LoggerFactory);
+            var poll = new LongPollingServerTransport(
+                timeoutToken,
+                connection.Application.Input,
+                LoggerFactory
+            );
 
-            using (var cts = CancellationTokenSource.CreateLinkedTokenSource(timeoutToken, context.RequestAborted))
+            using (
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                    timeoutToken,
+                    context.RequestAborted
+                )
+            )
             {
                 await poll.ProcessRequestAsync(context, cts.Token).DefaultTimeout();
 
@@ -68,7 +81,11 @@ public class LongPollingTests : VerifiableLoggedTest
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
-            var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+            var poll = new LongPollingServerTransport(
+                CancellationToken.None,
+                connection.Application.Input,
+                LoggerFactory
+            );
             var ms = new MemoryStream();
             context.Response.Body = ms;
 
@@ -91,7 +108,11 @@ public class LongPollingTests : VerifiableLoggedTest
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
-            var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+            var poll = new LongPollingServerTransport(
+                CancellationToken.None,
+                connection.Application.Input,
+                LoggerFactory
+            );
             var ms = new MemoryStream();
             context.Response.Body = ms;
 

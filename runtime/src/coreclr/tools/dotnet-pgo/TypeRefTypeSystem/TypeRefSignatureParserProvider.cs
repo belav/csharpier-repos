@@ -16,7 +16,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         {
             private TypeSystemContext _tsc;
             private Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> _resolver;
-            public TypeRefSignatureParserProvider(TypeSystemContext tsc, Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> resolver)
+
+            public TypeRefSignatureParserProvider(
+                TypeSystemContext tsc,
+                Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> resolver
+            )
             {
                 _tsc = tsc;
                 _resolver = resolver;
@@ -38,7 +42,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
             public TypeDesc GetFunctionPointerType(MethodSignature<TypeDesc> signature) => null;
 
-            public TypeDesc GetGenericInstantiation(TypeDesc genericType, ImmutableArray<TypeDesc> typeArguments)
+            public TypeDesc GetGenericInstantiation(
+                TypeDesc genericType,
+                ImmutableArray<TypeDesc> typeArguments
+            )
             {
                 if (genericType is TypeRefTypeSystemType typeRefType)
                 {
@@ -55,15 +62,31 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                         instance[i] = typeArguments[i];
                     }
 
-                    return _tsc.GetInstantiatedType((MetadataType)genericType, new Instantiation(instance));
+                    return _tsc.GetInstantiatedType(
+                        (MetadataType)genericType,
+                        new Instantiation(instance)
+                    );
                 }
                 return null;
             }
-            public TypeDesc GetGenericMethodParameter(object genericContext, int index) => _tsc.GetSignatureVariable(index, method: true);
-            public TypeDesc GetGenericTypeParameter(object genericContext, int index) => _tsc.GetSignatureVariable(index, method: false);
-            public TypeDesc GetModifiedType(TypeDesc modifier, TypeDesc unmodifiedType, bool isRequired) => unmodifiedType;
+
+            public TypeDesc GetGenericMethodParameter(object genericContext, int index) =>
+                _tsc.GetSignatureVariable(index, method: true);
+
+            public TypeDesc GetGenericTypeParameter(object genericContext, int index) =>
+                _tsc.GetSignatureVariable(index, method: false);
+
+            public TypeDesc GetModifiedType(
+                TypeDesc modifier,
+                TypeDesc unmodifiedType,
+                bool isRequired
+            ) => unmodifiedType;
+
             public TypeDesc GetPinnedType(TypeDesc elementType) => elementType;
-            public TypeDesc GetPointerType(TypeDesc elementType) => (elementType != null) ? elementType.MakePointerType() : null;
+
+            public TypeDesc GetPointerType(TypeDesc elementType) =>
+                (elementType != null) ? elementType.MakePointerType() : null;
+
             public TypeDesc GetPrimitiveType(PrimitiveTypeCode typeCode)
             {
                 WellKnownType wkt = 0;
@@ -127,9 +150,21 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
                 return _tsc.GetWellKnownType(wkt);
             }
-            public TypeDesc GetSZArrayType(TypeDesc elementType) => (elementType != null) ? elementType.MakeArrayType() : null;
-            public TypeDesc GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind) => null;
-            public TypeDesc GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+
+            public TypeDesc GetSZArrayType(TypeDesc elementType) =>
+                (elementType != null) ? elementType.MakeArrayType() : null;
+
+            public TypeDesc GetTypeFromDefinition(
+                MetadataReader reader,
+                TypeDefinitionHandle handle,
+                byte rawTypeKind
+            ) => null;
+
+            public TypeDesc GetTypeFromReference(
+                MetadataReader reader,
+                TypeReferenceHandle handle,
+                byte rawTypeKind
+            )
             {
                 bool isValueType = rawTypeKind == 0x11;
                 _resolver.TryGetValue(handle, out TypeRefTypeSystemType type);
@@ -139,7 +174,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 }
                 return type;
             }
-            public TypeDesc GetTypeFromSpecification(MetadataReader reader, object genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+
+            public TypeDesc GetTypeFromSpecification(
+                MetadataReader reader,
+                object genericContext,
+                TypeSpecificationHandle handle,
+                byte rawTypeKind
+            )
             {
                 var typeSpec = reader.GetTypeSpecification(handle);
                 return typeSpec.DecodeSignature(this, null);

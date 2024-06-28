@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
     internal record PositionalParameterInfo(
         PropertyDeclarationSyntax? Declaration,
         IPropertySymbol Symbol,
-        bool KeepAsOverride)
+        bool KeepAsOverride
+    )
     {
         /// <summary>
         /// Whether this property is inherited from another base record
@@ -36,50 +37,79 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             ImmutableArray<PropertyDeclarationSyntax> properties,
             INamedTypeSymbol type,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<PositionalParameterInfo>.GetInstance(out var resultBuilder);
 
             // get all declared property symbols, put inherited property symbols first
-            var symbols = properties.SelectAsArray(p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken));
+            var symbols = properties.SelectAsArray(p =>
+                semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
+            );
 
             // add inherited properties from a potential base record first
             var inheritedProperties = GetInheritedPositionalParams(type, cancellationToken);
-            resultBuilder.AddRange(inheritedProperties.Select(property => new PositionalParameterInfo(
-                Declaration: null,
-                property,
-                KeepAsOverride: false)));
+            resultBuilder.AddRange(
+                inheritedProperties.Select(property => new PositionalParameterInfo(
+                    Declaration: null,
+                    property,
+                    KeepAsOverride: false
+                ))
+            );
 
-            // The user may not know about init or be converting code from before init was introduced.
+            // The user may not know about init or be converting code from before init was introduced.
             // In this case we can convert set properties to init ones
-            var allowSetToInitConversion = !symbols
-                .Any(symbol => symbol.SetMethod is IMethodSymbol { IsInitOnly: true });
+            var allowSetToInitConversion = !symbols.Any(symbol =>
+                symbol.SetMethod is IMethodSymbol { IsInitOnly: true }
+            );
 
-            resultBuilder.AddRange(properties.Zip(symbols, (syntax, symbol)
-                => ShouldConvertProperty(syntax, symbol, type) switch
-                {
-                    ConvertStatus.DoNotConvert => null,
-                    ConvertStatus.Override
-                        => new PositionalParameterInfo(syntax, symbol, KeepAsOverride: true),
-                    ConvertStatus.OverrideIfConvertingSetToInit
-                        => new PositionalParameterInfo(syntax, symbol, !allowSetToInitConversion),
-                    ConvertStatus.AlwaysConvert
-                        => new PositionalParameterInfo(syntax, symbol, KeepAsOverride: false),
-                    _ => throw ExceptionUtilities.Unreachable(),
-                }).WhereNotNull());
+            resultBuilder.AddRange(
+                properties
+                    .Zip(
+                        symbols,
+                        (syntax, symbol) =>
+                            ShouldConvertProperty(syntax, symbol, type) switch
+                            {
+                                ConvertStatus.DoNotConvert => null,
+                                ConvertStatus.Override
+                                    => new PositionalParameterInfo(
+                                        syntax,
+                                        symbol,
+                                        KeepAsOverride: true
+                                    ),
+                                ConvertStatus.OverrideIfConvertingSetToInit
+                                    => new PositionalParameterInfo(
+                                        syntax,
+                                        symbol,
+                                        !allowSetToInitConversion
+                                    ),
+                                ConvertStatus.AlwaysConvert
+                                    => new PositionalParameterInfo(
+                                        syntax,
+                                        symbol,
+                                        KeepAsOverride: false
+                                    ),
+                                _ => throw ExceptionUtilities.Unreachable(),
+                            }
+                    )
+                    .WhereNotNull()
+            );
 
             return resultBuilder.ToImmutable();
         }
 
         public static ImmutableArray<IPropertySymbol> GetInheritedPositionalParams(
             INamedTypeSymbol currentType,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var baseType = currentType.BaseType;
             if (baseType != null && baseType.TryGetPrimaryConstructor(out var basePrimary))
             {
-                return basePrimary.Parameters
-                    .Select(param => param.GetAssociatedSynthesizedRecordProperty(cancellationToken))
+                return basePrimary
+                    .Parameters.Select(param =>
+                        param.GetAssociatedSynthesizedRecordProperty(cancellationToken)
+                    )
                     .WhereNotNull()
                     .AsImmutable();
             }
@@ -97,33 +127,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             /// no way we can convert this
             /// </summary>
             DoNotConvert,
+
             /// <summary>
             /// we can convert this because we feel it would be used in a primary constructor,
             /// but some accessibility is non-default and we want to override
             /// </summary>
             Override,
+
             /// <summary>
             /// we can convert this if we see that the user only ever uses set (not init)
             /// otherwise we should give an override
             /// </summary>
             OverrideIfConvertingSetToInit,
+
             /// <summary>
-            /// we can convert this without changing the meaning 
+            /// we can convert this without changing the meaning
             /// </summary>
-            AlwaysConvert
+            AlwaysConvert,
         }
 
         private static ConvertStatus ShouldConvertProperty(
             PropertyDeclarationSyntax property,
             IPropertySymbol propertySymbol,
-            INamedTypeSymbol containingType)
+            INamedTypeSymbol containingType
+        )
         {
             // properties with identifiers or expression bodies are too complex to move.
             // unimplemented or static properties shouldn't be in a constructor.
-            if (property.Initializer != null ||
-                property.ExpressionBody != null ||
-                propertySymbol.IsAbstract ||
-                propertySymbol.IsStatic)
+            if (
+                property.Initializer != null
+                || property.ExpressionBody != null
+                || propertySymbol.IsAbstract
+                || propertySymbol.IsStatic
+            )
             {
                 return ConvertStatus.DoNotConvert;
             }
@@ -159,10 +195,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             var getAccessor = propertySymbol.GetMethod;
             var setAccessor = propertySymbol.SetMethod;
             var accessors = property.AccessorList.Accessors;
-            if (accessors.Any(a => a.Body != null || a.ExpressionBody != null) ||
-                getAccessor == null ||
+            if (
+                accessors.Any(a => a.Body != null || a.ExpressionBody != null)
+                || getAccessor == null
+                ||
                 // private get means they probably don't want it seen from the constructor
-                getAccessor.DeclaredAccessibility < Accessibility.Internal)
+                getAccessor.DeclaredAccessibility < Accessibility.Internal
+            )
             {
                 return ConvertStatus.DoNotConvert;
             }
@@ -188,8 +227,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // if the user had their property as internal then we are fine with completely moving
                 // an internal (by default) set method, but if they explicitly mark the set as internal
                 // while the property is public we want to keep that behavior
-                if (setAccessor.DeclaredAccessibility != Accessibility.Public &&
-                        setAccessor.DeclaredAccessibility != propertySymbol.DeclaredAccessibility)
+                if (
+                    setAccessor.DeclaredAccessibility != Accessibility.Public
+                    && setAccessor.DeclaredAccessibility != propertySymbol.DeclaredAccessibility
+                )
                 {
                     return ConvertStatus.Override;
                 }
@@ -204,8 +245,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // either we are a class or readonly struct, the default is no set or init only set
                 if (setAccessor != null)
                 {
-                    if (setAccessor.DeclaredAccessibility != Accessibility.Public &&
-                        setAccessor.DeclaredAccessibility != propertySymbol.DeclaredAccessibility)
+                    if (
+                        setAccessor.DeclaredAccessibility != Accessibility.Public
+                        && setAccessor.DeclaredAccessibility != propertySymbol.DeclaredAccessibility
+                    )
                     {
                         return ConvertStatus.Override;
                     }

@@ -18,7 +18,7 @@ internal class CommandLineApplication
         Succeeded,
         ShowHelp,
         ShowVersion,
-        UnexpectedArgs
+        UnexpectedArgs,
     }
 
     // Indicates whether the parser should throw an exception when it runs into an unexpected argument.
@@ -58,24 +58,37 @@ internal class CommandLineApplication
     public bool HandleRemainingArguments { get; set; }
     public string? ArgumentSeparatorHelpText { get; set; }
 
-    public CommandLineApplication Command(string name, bool throwOnUnexpectedArg = true)
-        => Command(name, _ => { }, throwOnUnexpectedArg);
+    public CommandLineApplication Command(string name, bool throwOnUnexpectedArg = true) =>
+        Command(name, _ => { }, throwOnUnexpectedArg);
 
     public CommandLineApplication Command(
         string name,
         Action<CommandLineApplication> configuration,
-        bool throwOnUnexpectedArg = true)
+        bool throwOnUnexpectedArg = true
+    )
     {
-        var command = new CommandLineApplication(throwOnUnexpectedArg) { Name = name, Parent = this };
+        var command = new CommandLineApplication(throwOnUnexpectedArg)
+        {
+            Name = name,
+            Parent = this,
+        };
         Commands.Add(command);
         configuration(command);
         return command;
     }
 
-    public CommandOption Option(string template, string? description, CommandOptionType optionType)
-        => Option(template, description, optionType, _ => { });
+    public CommandOption Option(
+        string template,
+        string? description,
+        CommandOptionType optionType
+    ) => Option(template, description, optionType, _ => { });
 
-    public CommandOption Option(string template, string? description, CommandOptionType optionType, Action<CommandOption> configuration)
+    public CommandOption Option(
+        string template,
+        string? description,
+        CommandOptionType optionType,
+        Action<CommandOption> configuration
+    )
     {
         var option = new CommandOption(template, optionType) { Description = description };
         Options.Add(option);
@@ -83,15 +96,21 @@ internal class CommandLineApplication
         return option;
     }
 
-    public CommandArgument Argument(string name, string description, bool multipleValues = false)
-        => Argument(name, description, _ => { }, multipleValues);
+    public CommandArgument Argument(string name, string description, bool multipleValues = false) =>
+        Argument(name, description, _ => { }, multipleValues);
 
-    public CommandArgument Argument(string name, string description, Action<CommandArgument> configuration, bool multipleValues = false)
+    public CommandArgument Argument(
+        string name,
+        string description,
+        Action<CommandArgument> configuration,
+        bool multipleValues = false
+    )
     {
         var lastArg = Arguments.LastOrDefault();
         if (lastArg?.MultipleValues == true)
         {
-            var message = $"The last argument '{lastArg.Name}' accepts multiple values. No more argument can be added.";
+            var message =
+                $"The last argument '{lastArg.Name}' accepts multiple values. No more argument can be added.";
             throw new InvalidOperationException(message);
         }
 
@@ -99,18 +118,16 @@ internal class CommandLineApplication
         {
             Name = name,
             Description = description,
-            MultipleValues = multipleValues
+            MultipleValues = multipleValues,
         };
         Arguments.Add(argument);
         configuration(argument);
         return argument;
     }
 
-    public void OnExecute(Func<string[], int> invoke)
-        => Invoke = invoke;
+    public void OnExecute(Func<string[], int> invoke) => Invoke = invoke;
 
-    public void OnExecute(Func<string[], Task<int>> invoke)
-        => Invoke = args => invoke(args).Result;
+    public void OnExecute(Func<string[], Task<int>> invoke) => Invoke = args => invoke(args).Result;
 
     public int Execute(params string[] args)
     {
@@ -153,7 +170,9 @@ internal class CommandLineApplication
                     }
                     else
                     {
-                        arguments ??= new CommandArgumentEnumerator(command.Arguments.GetEnumerator());
+                        arguments ??= new CommandArgumentEnumerator(
+                            command.Arguments.GetEnumerator()
+                        );
 
                         if (arguments.MoveNext())
                         {
@@ -161,7 +180,12 @@ internal class CommandLineApplication
                         }
                         else
                         {
-                            HandleUnexpectedArg(command, args, index, argTypeName: "command or argument");
+                            HandleUnexpectedArg(
+                                command,
+                                args,
+                                index,
+                                argTypeName: "command or argument"
+                            );
                         }
                     }
                 }
@@ -180,7 +204,8 @@ internal class CommandLineApplication
         CommandLineApplication command,
         string[] args,
         ref int index,
-        out CommandOption? option)
+        out CommandOption? option
+    )
     {
         option = null;
         var result = ParseOptionResult.Succeeded;
@@ -192,22 +217,24 @@ internal class CommandLineApplication
 
         if (isLongOption)
         {
-            option = command.Options.SingleOrDefault(
-                opt => string.Equals(opt.LongName, optionName, StringComparison.Ordinal));
+            option = command.Options.SingleOrDefault(opt =>
+                string.Equals(opt.LongName, optionName, StringComparison.Ordinal)
+            );
         }
         else
         {
-            option = command.Options.SingleOrDefault(
-                    opt => string.Equals(opt.ShortName, optionName, StringComparison.Ordinal))
-                ?? command.Options.SingleOrDefault(
-                    opt => string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal));
+            option =
+                command.Options.SingleOrDefault(opt =>
+                    string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
+                )
+                ?? command.Options.SingleOrDefault(opt =>
+                    string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal)
+                );
         }
 
         if (option == null)
         {
-            if (isLongOption
-                && string.IsNullOrEmpty(optionName)
-                && command.AllowArgumentSeparator)
+            if (isLongOption && string.IsNullOrEmpty(optionName) && command.AllowArgumentSeparator)
             {
                 // a stand-alone "--" is the argument separator, so skip it and
                 // handle the rest of the args as application args
@@ -240,7 +267,8 @@ internal class CommandLineApplication
                     command.ShowHint();
                     throw new CommandParsingException(
                         command,
-                        $"Unexpected value '{optionComponents[1]}' for option '{optionName}'");
+                        $"Unexpected value '{optionComponents[1]}' for option '{optionName}'"
+                    );
                 }
             }
             else
@@ -257,7 +285,10 @@ internal class CommandLineApplication
                     if (!option.TryParse(arg))
                     {
                         command.ShowHint();
-                        throw new CommandParsingException(command, $"Unexpected value '{arg}' for option '{optionName}'");
+                        throw new CommandParsingException(
+                            command,
+                            $"Unexpected value '{arg}' for option '{optionName}'"
+                        );
                     }
                 }
             }
@@ -266,7 +297,10 @@ internal class CommandLineApplication
         return result;
     }
 
-    private static CommandLineApplication? ParseSubCommand(string arg, CommandLineApplication command)
+    private static CommandLineApplication? ParseSubCommand(
+        string arg,
+        CommandLineApplication command
+    )
     {
         foreach (var subcommand in command.Commands)
         {
@@ -292,8 +326,9 @@ internal class CommandLineApplication
     public CommandOption VersionOption(
         string template,
         string shortFormVersion,
-        string? longFormVersion = null)
-        => longFormVersion == null
+        string? longFormVersion = null
+    ) =>
+        longFormVersion == null
             ? VersionOption(template, () => shortFormVersion)
             : VersionOption(template, () => shortFormVersion, () => longFormVersion);
 
@@ -301,7 +336,8 @@ internal class CommandLineApplication
     public CommandOption VersionOption(
         string template,
         Func<string> shortFormVersionGetter,
-        Func<string>? longFormVersionGetter = null)
+        Func<string>? longFormVersionGetter = null
+    )
     {
         // Version option is special because we stop parsing once we see it
         // So we store it separately for further use
@@ -317,7 +353,10 @@ internal class CommandLineApplication
     {
         if (OptionHelp != null)
         {
-            Console.WriteLine("Specify --{0} for a list of available options and commands.", OptionHelp.LongName);
+            Console.WriteLine(
+                "Specify --{0} for a list of available options and commands.",
+                OptionHelp.LongName
+            );
         }
     }
 
@@ -329,8 +368,7 @@ internal class CommandLineApplication
         for (var cmd = this; cmd != null; cmd = cmd.Parent)
         {
             cmd.IsShowingInformation = true;
-            if (cmd != this
-                && cmd.Arguments.Count > 0)
+            if (cmd != this && cmd.Arguments.Count > 0)
             {
                 var args = string.Join(" ", cmd.Arguments.Select(arg => arg.Name));
                 headerBuilder.Insert(usagePrefixLength, $" {cmd.Name} {args}");
@@ -343,14 +381,18 @@ internal class CommandLineApplication
 
         CommandLineApplication? target;
 
-        if (commandName == null
-            || string.Equals(Name, commandName, StringComparison.OrdinalIgnoreCase))
+        if (
+            commandName == null
+            || string.Equals(Name, commandName, StringComparison.OrdinalIgnoreCase)
+        )
         {
             target = this;
         }
         else
         {
-            target = Commands.SingleOrDefault(cmd => string.Equals(cmd.Name, commandName, StringComparison.OrdinalIgnoreCase));
+            target = Commands.SingleOrDefault(cmd =>
+                string.Equals(cmd.Name, commandName, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (target != null)
             {
@@ -398,7 +440,8 @@ internal class CommandLineApplication
                     argumentsBuilder.AppendFormat(
                         outputFormat,
                         arg.Name!.PadRight(maxArgLen + 2),
-                        arg.Description);
+                        arg.Description
+                    );
                     argumentsBuilder.AppendLine();
                 }
             }
@@ -436,13 +479,15 @@ internal class CommandLineApplication
             if (OptionHelp != null)
             {
                 commandsBuilder.AppendLine();
-                commandsBuilder.AppendFormat("Use \"{0} [command] --help\" for more information about a command.", Name);
+                commandsBuilder.AppendFormat(
+                    "Use \"{0} [command] --help\" for more information about a command.",
+                    Name
+                );
                 commandsBuilder.AppendLine();
             }
         }
 
-        if (target.AllowArgumentSeparator
-            || target.HandleRemainingArguments)
+        if (target.AllowArgumentSeparator || target.HandleRemainingArguments)
         {
             headerBuilder.Append(target.AllowArgumentSeparator ? " [[--] <arg>...]]" : " [args]");
 
@@ -462,8 +507,14 @@ internal class CommandLineApplication
         nameAndVersion.AppendLine();
 
         Console.Write(
-            "{0}{1}{2}{3}{4}{5}", nameAndVersion, headerBuilder, argumentsBuilder, optionsBuilder, commandsBuilder,
-            argumentSeparatorBuilder);
+            "{0}{1}{2}{3}{4}{5}",
+            nameAndVersion,
+            headerBuilder,
+            argumentsBuilder,
+            optionsBuilder,
+            commandsBuilder,
+            argumentSeparatorBuilder
+        );
     }
 
     public void ShowVersion()
@@ -477,8 +528,8 @@ internal class CommandLineApplication
         Console.WriteLine(LongVersionGetter!());
     }
 
-    public string? GetFullNameAndVersion()
-        => ShortVersionGetter == null ? FullName : $"{FullName} {ShortVersionGetter()}";
+    public string? GetFullNameAndVersion() =>
+        ShortVersionGetter == null ? FullName : $"{FullName} {ShortVersionGetter()}";
 
     public void ShowRootCommandFullNameAndVersion()
     {
@@ -525,12 +576,20 @@ internal class CommandLineApplication
         return maxLen;
     }
 
-    private static void HandleUnexpectedArg(CommandLineApplication command, string[] args, int index, string argTypeName)
+    private static void HandleUnexpectedArg(
+        CommandLineApplication command,
+        string[] args,
+        int index,
+        string argTypeName
+    )
     {
         if (command._throwOnUnexpectedArg)
         {
             command.ShowHint();
-            throw new CommandParsingException(command, $"Unrecognized {argTypeName} '{args[index]}'");
+            throw new CommandParsingException(
+                command,
+                $"Unrecognized {argTypeName} '{args[index]}'"
+            );
         }
 
         command.RemainingArguments.Add(args[index]);
@@ -593,22 +652,18 @@ internal class CommandLineApplication
             _enumerator = enumerator;
         }
 
-        public CommandArgument Current
-            => _enumerator.Current;
+        public CommandArgument Current => _enumerator.Current;
 
-        object IEnumerator.Current
-            => Current;
+        object IEnumerator.Current => Current;
 
-        public void Dispose()
-            => _enumerator.Dispose();
+        public void Dispose() => _enumerator.Dispose();
 
         public bool MoveNext()
             // If current argument allows multiple values, we don't move forward and
             // all later values will be added to current CommandArgument.Values
-            => Current?.MultipleValues == true
-                || _enumerator.MoveNext();
+            =>
+            Current?.MultipleValues == true || _enumerator.MoveNext();
 
-        public void Reset()
-            => _enumerator.Reset();
+        public void Reset() => _enumerator.Reset();
     }
 }

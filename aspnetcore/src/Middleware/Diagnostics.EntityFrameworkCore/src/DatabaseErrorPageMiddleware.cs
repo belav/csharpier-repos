@@ -19,9 +19,12 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 ///     migrations. When these exceptions occur an HTML response with details of possible actions to resolve the issue is generated.
 /// </summary>
 [RequiresDynamicCode("DbContext migrations operations are not supported with NativeAOT")]
-public class DatabaseErrorPageMiddleware : IObserver<DiagnosticListener>, IObserver<KeyValuePair<string, object?>>
+public class DatabaseErrorPageMiddleware
+    : IObserver<DiagnosticListener>,
+        IObserver<KeyValuePair<string, object?>>
 {
-    private static readonly AsyncLocal<DiagnosticHolder> _localDiagnostic = new AsyncLocal<DiagnosticHolder>();
+    private static readonly AsyncLocal<DiagnosticHolder> _localDiagnostic =
+        new AsyncLocal<DiagnosticHolder>();
 
     private sealed class DiagnosticHolder
     {
@@ -48,11 +51,14 @@ public class DatabaseErrorPageMiddleware : IObserver<DiagnosticListener>, IObser
     ///     consumes them to detect database related exception.
     /// </param>
     /// <param name="options">The options to control what information is displayed on the error page.</param>
-    [Obsolete("This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter."
+    )]
     public DatabaseErrorPageMiddleware(
         RequestDelegate next,
         ILoggerFactory loggerFactory,
-        IOptions<DatabaseErrorPageOptions> options)
+        IOptions<DatabaseErrorPageOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -97,11 +103,19 @@ public class DatabaseErrorPageMiddleware : IObserver<DiagnosticListener>, IObser
                     var contextType = _localDiagnostic.Value!.ContextType;
                     var details = await httpContext.GetContextDetailsAsync(contextType!, _logger);
 
-                    if (details != null && (details.PendingModelChanges || details.PendingMigrations.Any()))
+                    if (
+                        details != null
+                        && (details.PendingModelChanges || details.PendingMigrations.Any())
+                    )
                     {
                         var page = new DatabaseErrorPage
                         {
-                            Model = new DatabaseErrorPageModel(exception, new DatabaseContextDetails[] { details }, _options, httpContext.Request.PathBase)
+                            Model = new DatabaseErrorPageModel(
+                                exception,
+                                new DatabaseContextDetails[] { details },
+                                _options,
+                                httpContext.Request.PathBase
+                            ),
                         };
 
                         await page.ExecuteAsync(httpContext);
@@ -166,33 +180,31 @@ public class DatabaseErrorPageMiddleware : IObserver<DiagnosticListener>, IObser
             // NB: _localDiagnostic.Value can be null when this middleware has been leaked.
 
             case DbContextErrorEventData contextErrorEventData:
-                {
-                    _localDiagnostic.Value?.Hold(contextErrorEventData.Exception, contextErrorEventData.Context!.GetType());
+            {
+                _localDiagnostic.Value?.Hold(
+                    contextErrorEventData.Exception,
+                    contextErrorEventData.Context!.GetType()
+                );
 
-                    break;
-                }
+                break;
+            }
             case DbContextTypeErrorEventData contextTypeErrorEventData:
-                {
-                    _localDiagnostic.Value?.Hold(contextTypeErrorEventData.Exception, contextTypeErrorEventData.ContextType);
+            {
+                _localDiagnostic.Value?.Hold(
+                    contextTypeErrorEventData.Exception,
+                    contextTypeErrorEventData.ContextType
+                );
 
-                    break;
-                }
+                break;
+            }
         }
     }
 
-    void IObserver<DiagnosticListener>.OnCompleted()
-    {
-    }
+    void IObserver<DiagnosticListener>.OnCompleted() { }
 
-    void IObserver<DiagnosticListener>.OnError(Exception error)
-    {
-    }
+    void IObserver<DiagnosticListener>.OnError(Exception error) { }
 
-    void IObserver<KeyValuePair<string, object?>>.OnCompleted()
-    {
-    }
+    void IObserver<KeyValuePair<string, object?>>.OnCompleted() { }
 
-    void IObserver<KeyValuePair<string, object?>>.OnError(Exception error)
-    {
-    }
+    void IObserver<KeyValuePair<string, object?>>.OnError(Exception error) { }
 }

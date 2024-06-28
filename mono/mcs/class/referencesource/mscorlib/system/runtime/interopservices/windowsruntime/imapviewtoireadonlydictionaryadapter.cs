@@ -1,20 +1,20 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -98,7 +98,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 value = _this.Lookup(key);
                 return true;
             }
-            catch (Exception ex)  // Still may hit this case due to a ----, or a potential bug.
+            catch (Exception ex) // Still may hit this case due to a ----, or a potential bug.
             {
                 if (__HResults.E_BOUNDS == ex._HResult)
                 {
@@ -122,7 +122,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             catch (Exception ex)
             {
                 if (__HResults.E_BOUNDS == ex._HResult)
-                    throw new KeyNotFoundException(Environment.GetResourceString("Arg_KeyNotFound"));
+                    throw new KeyNotFoundException(
+                        Environment.GetResourceString("Arg_KeyNotFound")
+                    );
                 throw;
             }
         }
@@ -183,8 +185,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             return new ReadOnlyDictionaryKeyEnumerator<TKey, TValue>(dictionary);
         }
-    }  // public class ReadOnlyDictionaryKeyCollection<TKey, TValue>
-
+    } // public class ReadOnlyDictionaryKeyCollection<TKey, TValue>
 
     [Serializable]
     internal sealed class ReadOnlyDictionaryKeyEnumerator<TKey, TValue> : IEnumerator<TKey>
@@ -211,11 +212,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return enumeration.MoveNext();
         }
 
-        Object IEnumerator.Current {
+        Object IEnumerator.Current
+        {
             get { return ((IEnumerator<TKey>)this).Current; }
         }
 
-        public TKey Current {
+        public TKey Current
+        {
             get { return enumeration.Current.Key; }
         }
 
@@ -223,8 +226,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             enumeration = dictionary.GetEnumerator();
         }
-    }  // class ReadOnlyDictionaryKeyEnumerator<TKey, TValue>
-
+    } // class ReadOnlyDictionaryKeyEnumerator<TKey, TValue>
 
     [Serializable]
     [DebuggerDisplay("Count = {Count}")]
@@ -282,8 +284,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             return new ReadOnlyDictionaryValueEnumerator<TKey, TValue>(dictionary);
         }
-    }  // public class ReadOnlyDictionaryValueCollection<TKey, TValue>
-
+    } // public class ReadOnlyDictionaryValueCollection<TKey, TValue>
 
     [Serializable]
     internal sealed class ReadOnlyDictionaryValueEnumerator<TKey, TValue> : IEnumerator<TValue>
@@ -310,11 +311,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return enumeration.MoveNext();
         }
 
-        Object IEnumerator.Current {
+        Object IEnumerator.Current
+        {
             get { return ((IEnumerator<TValue>)this).Current; }
         }
 
-        public TValue Current {
+        public TValue Current
+        {
             get { return enumeration.Current.Value; }
         }
 
@@ -322,6 +325,5 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             enumeration = dictionary.GetEnumerator();
         }
-    }  // class ReadOnlyDictionaryValueEnumerator<TKey, TValue>
-
+    } // class ReadOnlyDictionaryValueEnumerator<TKey, TValue>
 }

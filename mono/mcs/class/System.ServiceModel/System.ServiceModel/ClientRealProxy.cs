@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,102 +41,131 @@ using System.Threading;
 
 namespace System.ServiceModel
 {
-	class ClientRealProxy : RealProxy, IRemotingTypeInfo
-	{
-		public ClientRealProxy (Type type, IInternalContextChannel channel, bool isDuplex)
-			: base (type)
-		{
-			this.channel = channel;
-			this.isDuplex = isDuplex;
-		}
+    class ClientRealProxy : RealProxy, IRemotingTypeInfo
+    {
+        public ClientRealProxy(Type type, IInternalContextChannel channel, bool isDuplex)
+            : base(type)
+        {
+            this.channel = channel;
+            this.isDuplex = isDuplex;
+        }
 
-		bool isDuplex;
-		IInternalContextChannel channel;
-		Dictionary<object,object[]> saved_params = new Dictionary<object,object[]> ();
+        bool isDuplex;
+        IInternalContextChannel channel;
+        Dictionary<object, object[]> saved_params = new Dictionary<object, object[]>();
 
-		// It is used for such case that EndProcess() gets invoked
-		// before storing params is done after BeginProcess().
-		ManualResetEvent wait = new ManualResetEvent (false);
+        // It is used for such case that EndProcess() gets invoked
+        // before storing params is done after BeginProcess().
+        ManualResetEvent wait = new ManualResetEvent(false);
 
-		#region IRemotingTypeInfo
+        #region IRemotingTypeInfo
 
-		public virtual string TypeName { get; set; }
+        public virtual string TypeName { get; set; }
 
-		static bool CanCastTo<T> (Type type)
-		{
-			return typeof (T) == type || typeof (T).GetInterfaces ().Contains (type);
-		}
+        static bool CanCastTo<T>(Type type)
+        {
+            return typeof(T) == type || typeof(T).GetInterfaces().Contains(type);
+        }
 
-		public virtual bool CanCastTo (Type t, object o)
-		{
-			if (CanCastTo<IClientChannel> (t))
-				return true;
+        public virtual bool CanCastTo(Type t, object o)
+        {
+            if (CanCastTo<IClientChannel>(t))
+                return true;
 #if !MOBILE
-			if (isDuplex && CanCastTo<IDuplexContextChannel> (t))
-				return true;
+            if (isDuplex && CanCastTo<IDuplexContextChannel>(t))
+                return true;
 #endif
-			return false;
-		}
-		
-		#endregion
-		
-		public override IMessage Invoke (IMessage inputMessage)
-		{
-			try {
-				return DoInvoke (inputMessage);
-			} catch (TargetInvocationException ex) {
-				if (ex.InnerException != null)
-					throw ex.InnerException;
-				throw;
-			}
-		}
+            return false;
+        }
 
-		IMessage DoInvoke (IMessage inputMessage)
-		{
-			var inmsg = (IMethodCallMessage) inputMessage;
-			var od = channel.Contract.Operations.FirstOrDefault (o => inmsg.MethodBase.Equals (o.SyncMethod) || inmsg.MethodBase.Equals (o.BeginMethod) || inmsg.MethodBase.Equals (o.EndMethod));
-			if (od == null) {
-				// Then IContextChannel methods.
-				var ret = inmsg.MethodBase.Invoke (channel, inmsg.InArgs);
-				return new ReturnMessage (ret, null, 0, null, inmsg);
-			} else {
-				object [] pl;
-				MethodBase method = null;
-				List<object> outArgs = null;
-				object ret;
-				if (inmsg.MethodBase.Equals (od.SyncMethod)) {
-					// sync invocation
-					pl = new object [inmsg.MethodBase.GetParameters ().Length];
-					Array.Copy (inmsg.Args, pl, inmsg.ArgCount);
-					ret = channel.Process (inmsg.MethodBase, od.Name, pl, OperationContext.Current);
-					method = od.SyncMethod;
-				} else if (inmsg.MethodBase.Equals (od.BeginMethod)) {
-					// async invocation
-					pl = new object [inmsg.ArgCount - 2];
-					Array.Copy (inmsg.Args, 0, pl, 0, pl.Length);
+        #endregion
 
-					ret = channel.BeginProcess (inmsg.MethodBase, od.Name, pl, (AsyncCallback) inmsg.Args [inmsg.ArgCount - 2], inmsg.Args [inmsg.ArgCount - 1]);
-					saved_params [ret] = pl;
+        public override IMessage Invoke(IMessage inputMessage)
+        {
+            try
+            {
+                return DoInvoke(inputMessage);
+            }
+            catch (TargetInvocationException ex)
+            {
+                if (ex.InnerException != null)
+                    throw ex.InnerException;
+                throw;
+            }
+        }
 
-					wait.Set ();
+        IMessage DoInvoke(IMessage inputMessage)
+        {
+            var inmsg = (IMethodCallMessage)inputMessage;
+            var od = channel.Contract.Operations.FirstOrDefault(o =>
+                inmsg.MethodBase.Equals(o.SyncMethod)
+                || inmsg.MethodBase.Equals(o.BeginMethod)
+                || inmsg.MethodBase.Equals(o.EndMethod)
+            );
+            if (od == null)
+            {
+                // Then IContextChannel methods.
+                var ret = inmsg.MethodBase.Invoke(channel, inmsg.InArgs);
+                return new ReturnMessage(ret, null, 0, null, inmsg);
+            }
+            else
+            {
+                object[] pl;
+                MethodBase method = null;
+                List<object> outArgs = null;
+                object ret;
+                if (inmsg.MethodBase.Equals(od.SyncMethod))
+                {
+                    // sync invocation
+                    pl = new object[inmsg.MethodBase.GetParameters().Length];
+                    Array.Copy(inmsg.Args, pl, inmsg.ArgCount);
+                    ret = channel.Process(inmsg.MethodBase, od.Name, pl, OperationContext.Current);
+                    method = od.SyncMethod;
+                }
+                else if (inmsg.MethodBase.Equals(od.BeginMethod))
+                {
+                    // async invocation
+                    pl = new object[inmsg.ArgCount - 2];
+                    Array.Copy(inmsg.Args, 0, pl, 0, pl.Length);
 
-				} else {
-					var result = (IAsyncResult) inmsg.InArgs [0];
+                    ret = channel.BeginProcess(
+                        inmsg.MethodBase,
+                        od.Name,
+                        pl,
+                        (AsyncCallback)inmsg.Args[inmsg.ArgCount - 2],
+                        inmsg.Args[inmsg.ArgCount - 1]
+                    );
+                    saved_params[ret] = pl;
 
-					wait.WaitOne ();
-					pl = saved_params [result];
-					wait.Reset ();
-					saved_params.Remove (result);
-					ret = channel.EndProcess (inmsg.MethodBase, od.Name, pl, result);
-					method = od.BeginMethod;
-				}
-				
-				if (method != null && method.GetParameters ().Any (pi => pi.IsOut || pi.ParameterType.IsByRef))
-					return new ReturnMessage (ret, pl, pl.Length, null, inmsg);
-				else
-					return new ReturnMessage (ret, outArgs != null ? outArgs.ToArray () : null, outArgs != null ? outArgs.Count : 0, null, inmsg);
-			}
-		}
-	}
+                    wait.Set();
+                }
+                else
+                {
+                    var result = (IAsyncResult)inmsg.InArgs[0];
+
+                    wait.WaitOne();
+                    pl = saved_params[result];
+                    wait.Reset();
+                    saved_params.Remove(result);
+                    ret = channel.EndProcess(inmsg.MethodBase, od.Name, pl, result);
+                    method = od.BeginMethod;
+                }
+
+                if (
+                    method != null
+                    && method.GetParameters().Any(pi => pi.IsOut || pi.ParameterType.IsByRef)
+                )
+                    return new ReturnMessage(ret, pl, pl.Length, null, inmsg);
+                else
+                    return new ReturnMessage(
+                        ret,
+                        outArgs != null ? outArgs.ToArray() : null,
+                        outArgs != null ? outArgs.Count : 0,
+                        null,
+                        inmsg
+                    );
+            }
+        }
+    }
 }
 #endif

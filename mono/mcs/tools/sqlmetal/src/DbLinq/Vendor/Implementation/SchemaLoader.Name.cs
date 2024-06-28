@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -79,9 +79,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="schema"></param>
         /// <param name="tableNamedAssociationRenamer"></param>
         /// <param name="columnNamedAssociationRenamer"></param>
-        protected virtual void CheckConstraintsName(Database schema,
-                                      Func<Association, string> tableNamedAssociationRenamer,
-                                      Func<Association, string> columnNamedAssociationRenamer)
+        protected virtual void CheckConstraintsName(
+            Database schema,
+            Func<Association, string> tableNamedAssociationRenamer,
+            Func<Association, string> columnNamedAssociationRenamer
+        )
         {
             foreach (var table in schema.Tables)
             {
@@ -90,7 +92,13 @@ namespace DbLinq.Vendor.Implementation
                     var localAssociation = association;
                     if (association.Member == table.Type.Name)
                         association.Member = tableNamedAssociationRenamer(association);
-                    else if ((from column in table.Type.Columns where column.Member == localAssociation.Member select column).FirstOrDefault() != null)
+                    else if (
+                        (
+                            from column in table.Type.Columns
+                            where column.Member == localAssociation.Member
+                            select column
+                        ).FirstOrDefault() != null
+                    )
                     {
                         association.Member = columnNamedAssociationRenamer(association);
                     }
@@ -104,9 +112,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="schema"></param>
         protected virtual void CheckConstraintsName(Database schema)
         {
-            CheckConstraintsName(schema,
-                       association => association.ThisKey.Replace(',', '_') + association.Member,
-                       association => association.Member + association.Type);
+            CheckConstraintsName(
+                schema,
+                association => association.ThisKey.Replace(',', '_') + association.Member,
+                association => association.Member + association.Type
+            );
         }
 
         /// <summary>
@@ -114,7 +124,10 @@ namespace DbLinq.Vendor.Implementation
         /// </summary>
         /// <param name="schema"></param>
         /// <param name="storageGenerator"></param>
-        protected virtual void GenerateStorageAndMemberFields(Database schema, Func<string, string> storageGenerator)
+        protected virtual void GenerateStorageAndMemberFields(
+            Database schema,
+            Func<string, string> storageGenerator
+        )
         {
             foreach (var table in schema.Tables)
             {
@@ -139,7 +152,8 @@ namespace DbLinq.Vendor.Implementation
                     for (var suffix = 0; ; suffix++)
                     {
                         var name = suffix == 0 ? association.Storage : association.Storage + suffix;
-                        if (storageFields.Contains(name)) continue;
+                        if (storageFields.Contains(name))
+                            continue;
                         association.Storage = name;
                         storageFields.Add(name);
                         break;
@@ -148,7 +162,8 @@ namespace DbLinq.Vendor.Implementation
                     for (var suffix = 0; ; suffix++)
                     {
                         var name = suffix == 0 ? association.Member : association.Member + suffix;
-                        if (memberFields.Contains(name)) continue;
+                        if (memberFields.Contains(name))
+                            continue;
                         association.Member = name;
                         memberFields.Add(name);
                         break;
@@ -163,15 +178,18 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="schema"></param>
         protected virtual void GenerateStorageAndMemberFields(Database schema)
         {
-            GenerateStorageAndMemberFields(schema, delegate(string name)
-                                              {
-                                                  //jgm 2008June: pre-pended underscore to have same storage format as MS
-                                                  // TODO: add an option for this behavior
-                                                  var storage = "_" + NameFormatter.Format(name, Case.camelCase);
-                                                  if (storage == name)
-                                                      storage = "_" + storage;
-                                                  return storage;
-                                              });
+            GenerateStorageAndMemberFields(
+                schema,
+                delegate(string name)
+                {
+                    //jgm 2008June: pre-pended underscore to have same storage format as MS
+                    // TODO: add an option for this behavior
+                    var storage = "_" + NameFormatter.Format(name, Case.camelCase);
+                    if (storage == name)
+                        storage = "_" + storage;
+                    return storage;
+                }
+            );
         }
     }
 }

@@ -6,8 +6,8 @@ namespace System.Workflow.Activities
 {
     using System;
     using System.ComponentModel;
-    using System.Drawing.Design;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing.Design;
     using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel;
@@ -15,75 +15,80 @@ namespace System.Workflow.Activities
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class OperationInfo : OperationInfoBase
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ContractNameProperty =
-            DependencyProperty.Register("ContractName",
-            typeof(string), typeof(OperationInfo),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ContractName",
+                typeof(string),
+                typeof(OperationInfo),
+                new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        internal static readonly DependencyProperty IsOneWayProperty =
-            DependencyProperty.Register("IsOneWay",
-            typeof(bool), typeof(OperationInfo),
-            new PropertyMetadata(false, DependencyPropertyOptions.Metadata));
+        internal static readonly DependencyProperty IsOneWayProperty = DependencyProperty.Register(
+            "IsOneWay",
+            typeof(bool),
+            typeof(OperationInfo),
+            new PropertyMetadata(false, DependencyPropertyOptions.Metadata)
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ParametersProperty =
-            DependencyProperty.Register("Parameters",
-            typeof(OperationParameterInfoCollection), typeof(OperationInfo),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
-            new Attribute[] {
-                new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)
-            }
-            ));
+            DependencyProperty.Register(
+                "Parameters",
+                typeof(OperationParameterInfoCollection),
+                typeof(OperationInfo),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                    new Attribute[]
+                    {
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                    }
+                )
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ProtectionLevelProperty =
-            DependencyProperty.Register("ProtectionLevel",
-            typeof(ProtectionLevel?), typeof(OperationInfo),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ProtectionLevel",
+                typeof(ProtectionLevel?),
+                typeof(OperationInfo),
+                new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+            );
 
         public OperationInfo()
         {
-            this.SetReadOnlyPropertyValue(OperationInfo.ParametersProperty,
-                new OperationParameterInfoCollection(this));
+            this.SetReadOnlyPropertyValue(
+                OperationInfo.ParametersProperty,
+                new OperationParameterInfoCollection(this)
+            );
         }
 
         public string ContractName
         {
-            get
-            {
-                return (string) this.GetValue(OperationInfo.ContractNameProperty);
-            }
-            set
-            {
-                this.SetValue(OperationInfo.ContractNameProperty, value);
-            }
+            get { return (string)this.GetValue(OperationInfo.ContractNameProperty); }
+            set { this.SetValue(OperationInfo.ContractNameProperty, value); }
         }
 
         [DefaultValue(false)]
         public bool HasProtectionLevel
         {
-            get
-            {
-                return (this.ProtectionLevel != null);
-            }
+            get { return (this.ProtectionLevel != null); }
         }
 
         [DefaultValue(false)]
         public bool IsOneWay
         {
-            get
-            {
-                return (bool) this.GetValue(OperationInfo.IsOneWayProperty);
-            }
-            set
-            {
-                this.SetValue(OperationInfo.IsOneWayProperty, value);
-            }
+            get { return (bool)this.GetValue(OperationInfo.IsOneWayProperty); }
+            set { this.SetValue(OperationInfo.IsOneWayProperty, value); }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -91,26 +96,21 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return (OperationParameterInfoCollection) this.GetValue(OperationInfo.ParametersProperty);
+                return (OperationParameterInfoCollection)
+                    this.GetValue(OperationInfo.ParametersProperty);
             }
         }
 
         [DefaultValue(null)]
         public ProtectionLevel? ProtectionLevel
         {
-            get
-            {
-                return (ProtectionLevel?) this.GetValue(OperationInfo.ProtectionLevelProperty);
-            }
-            set
-            {
-                this.SetValue(OperationInfo.ProtectionLevelProperty, value);
-            }
+            get { return (ProtectionLevel?)this.GetValue(OperationInfo.ProtectionLevelProperty); }
+            set { this.SetValue(OperationInfo.ProtectionLevelProperty, value); }
         }
 
         public override OperationInfoBase Clone()
         {
-            OperationInfo clonedOperation = (OperationInfo) base.Clone();
+            OperationInfo clonedOperation = (OperationInfo)base.Clone();
             clonedOperation.ContractName = this.ContractName;
             clonedOperation.IsOneWay = this.IsOneWay;
             if (this.HasProtectionLevel)
@@ -138,7 +138,13 @@ namespace System.Workflow.Activities
             {
                 return false;
             }
-            if (String.Compare(operationInfo.ContractName, this.ContractName, StringComparison.Ordinal) != 0)
+            if (
+                String.Compare(
+                    operationInfo.ContractName,
+                    this.ContractName,
+                    StringComparison.Ordinal
+                ) != 0
+            )
             {
                 return false;
             }
@@ -205,26 +211,34 @@ namespace System.Workflow.Activities
 
         protected internal override Type GetContractType(IServiceProvider provider)
         {
-            Type contractType = DynamicContractTypeBuilder.GetContractType(this, this.ParentDependencyObject as ReceiveActivity);
+            Type contractType = DynamicContractTypeBuilder.GetContractType(
+                this,
+                this.ParentDependencyObject as ReceiveActivity
+            );
             if (contractType == null && !this.IsReadOnly)
             {
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner.RootActivity.RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
+                    owner.RootActivity.RemoveProperty(
+                        DynamicContractTypeBuilder.DynamicContractTypesProperty
+                    );
                 }
 
-                contractType = DynamicContractTypeBuilder.GetContractType(this, this.ParentDependencyObject as ReceiveActivity);
+                contractType = DynamicContractTypeBuilder.GetContractType(
+                    this,
+                    this.ParentDependencyObject as ReceiveActivity
+                );
             }
             return contractType;
         }
 
-        internal protected override bool GetIsOneWay(IServiceProvider provider)
+        protected internal override bool GetIsOneWay(IServiceProvider provider)
         {
             return this.IsOneWay;
         }
 
-        internal protected override MethodInfo GetMethodInfo(IServiceProvider provider)
+        protected internal override MethodInfo GetMethodInfo(IServiceProvider provider)
         {
             if (string.IsNullOrEmpty(this.Name))
             {
@@ -251,7 +265,9 @@ namespace System.Workflow.Activities
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner.RootActivity.RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
+                    owner.RootActivity.RemoveProperty(
+                        DynamicContractTypeBuilder.DynamicContractTypesProperty
+                    );
                 }
                 methodInfo = InternalGetMethodInfo(provider);
             }
@@ -264,7 +280,9 @@ namespace System.Workflow.Activities
             return methodInfo;
         }
 
-        internal protected override OperationParameterInfoCollection GetParameters(IServiceProvider provider)
+        protected internal override OperationParameterInfoCollection GetParameters(
+            IServiceProvider provider
+        )
         {
             return this.Parameters;
         }
@@ -281,20 +299,28 @@ namespace System.Workflow.Activities
             {
                 foreach (MethodInfo methodInfo in type.GetMethods())
                 {
-                    object[] operationContractAttribs =
-                        methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+                    object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                        typeof(OperationContractAttribute),
+                        true
+                    );
 
                     if (operationContractAttribs != null && operationContractAttribs.Length > 0)
                     {
-                        string operationName =
-                            ((OperationContractAttribute) operationContractAttribs[0]).Name;
+                        string operationName = (
+                            (OperationContractAttribute)operationContractAttribs[0]
+                        ).Name;
 
-                        if (string.IsNullOrEmpty(operationName) &&
-                            string.Compare(methodInfo.Name, this.Name, StringComparison.Ordinal) == 0)
+                        if (
+                            string.IsNullOrEmpty(operationName)
+                            && string.Compare(methodInfo.Name, this.Name, StringComparison.Ordinal)
+                                == 0
+                        )
                         {
                             return methodInfo;
                         }
-                        else if (string.Compare(operationName, this.Name, StringComparison.Ordinal) == 0)
+                        else if (
+                            string.Compare(operationName, this.Name, StringComparison.Ordinal) == 0
+                        )
                         {
                             return methodInfo;
                         }

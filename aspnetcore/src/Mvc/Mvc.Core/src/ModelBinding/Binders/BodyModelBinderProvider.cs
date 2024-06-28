@@ -26,10 +26,11 @@ public class BodyModelBinderProvider : IModelBinderProvider
     /// </summary>
     /// <param name="formatters">The list of <see cref="IInputFormatter"/>.</param>
     /// <param name="readerFactory">The <see cref="IHttpRequestStreamReaderFactory"/>.</param>
-    public BodyModelBinderProvider(IList<IInputFormatter> formatters, IHttpRequestStreamReaderFactory readerFactory)
-        : this(formatters, readerFactory, loggerFactory: NullLoggerFactory.Instance)
-    {
-    }
+    public BodyModelBinderProvider(
+        IList<IInputFormatter> formatters,
+        IHttpRequestStreamReaderFactory readerFactory
+    )
+        : this(formatters, readerFactory, loggerFactory: NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinderProvider"/>.
@@ -37,10 +38,12 @@ public class BodyModelBinderProvider : IModelBinderProvider
     /// <param name="formatters">The list of <see cref="IInputFormatter"/>.</param>
     /// <param name="readerFactory">The <see cref="IHttpRequestStreamReaderFactory"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public BodyModelBinderProvider(IList<IInputFormatter> formatters, IHttpRequestStreamReaderFactory readerFactory, ILoggerFactory loggerFactory)
-        : this(formatters, readerFactory, loggerFactory, options: null)
-    {
-    }
+    public BodyModelBinderProvider(
+        IList<IInputFormatter> formatters,
+        IHttpRequestStreamReaderFactory readerFactory,
+        ILoggerFactory loggerFactory
+    )
+        : this(formatters, readerFactory, loggerFactory, options: null) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinderProvider"/>.
@@ -53,7 +56,8 @@ public class BodyModelBinderProvider : IModelBinderProvider
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
         ILoggerFactory loggerFactory,
-        MvcOptions? options)
+        MvcOptions? options
+    )
     {
         ArgumentNullException.ThrowIfNull(formatters);
         ArgumentNullException.ThrowIfNull(readerFactory);
@@ -69,18 +73,26 @@ public class BodyModelBinderProvider : IModelBinderProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.BindingInfo.BindingSource != null &&
-            context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Body))
+        if (
+            context.BindingInfo.BindingSource != null
+            && context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Body)
+        )
         {
             if (_formatters.Count == 0)
             {
-                throw new InvalidOperationException(Resources.FormatInputFormattersAreRequired(
-                    typeof(MvcOptions).FullName,
-                    nameof(MvcOptions.InputFormatters),
-                    typeof(IInputFormatter).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatInputFormattersAreRequired(
+                        typeof(MvcOptions).FullName,
+                        nameof(MvcOptions.InputFormatters),
+                        typeof(IInputFormatter).FullName
+                    )
+                );
             }
 
-            var treatEmptyInputAsDefaultValue = CalculateAllowEmptyBody(context.BindingInfo.EmptyBodyBehavior, _options);
+            var treatEmptyInputAsDefaultValue = CalculateAllowEmptyBody(
+                context.BindingInfo.EmptyBodyBehavior,
+                _options
+            );
 
             return new BodyModelBinder(_formatters, _readerFactory, _loggerFactory, _options)
             {
@@ -91,7 +103,10 @@ public class BodyModelBinderProvider : IModelBinderProvider
         return null;
     }
 
-    internal static bool CalculateAllowEmptyBody(EmptyBodyBehavior emptyBodyBehavior, MvcOptions? options)
+    internal static bool CalculateAllowEmptyBody(
+        EmptyBodyBehavior emptyBodyBehavior,
+        MvcOptions? options
+    )
     {
         if (emptyBodyBehavior == EmptyBodyBehavior.Default)
         {

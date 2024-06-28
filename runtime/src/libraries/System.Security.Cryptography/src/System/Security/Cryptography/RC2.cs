@@ -28,13 +28,16 @@ namespace System.Security.Cryptography
             return new RC2Implementation();
         }
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new RC2? Create(string AlgName)
         {
             return (RC2?)CryptoConfig.CreateFromName(AlgName);
         }
-
 
         public override int KeySize
         {
@@ -77,12 +80,17 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalBlockSizes =
         {
-            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0)
+            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0),
         };
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(minSize: 40, maxSize: 1024, skipSize: 8) // 1024 bits is theoretical max according to the RFC
+            new KeySizes(
+                minSize: 40,
+                maxSize: 1024,
+                skipSize: 8
+            ) // 1024 bits is theoretical max according to the RFC
+            ,
         };
     }
 }

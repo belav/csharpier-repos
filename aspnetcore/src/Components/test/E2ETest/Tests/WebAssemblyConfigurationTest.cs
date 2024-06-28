@@ -10,15 +10,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-public class WebAssemblyConfigurationTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>
+public class WebAssemblyConfigurationTest
+    : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>
 {
     private IWebElement _appElement;
 
     public WebAssemblyConfigurationTest(
-         BrowserFixture browserFixture,
-         BlazorWasmTestAppFixture<BasicTestApp.Program> serverFixture,
-         ITestOutputHelper output) :
-         base(browserFixture, serverFixture, output)
+        BrowserFixture browserFixture,
+        BlazorWasmTestAppFixture<BasicTestApp.Program> serverFixture,
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output)
     {
         _serverFixture.PathBase = "/subdir";
     }

@@ -19,20 +19,36 @@ namespace Microsoft.CodeAnalysis.Highlighting
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class HighlightingService(
-        [ImportMany] IEnumerable<Lazy<IHighlighter, LanguageMetadata>> highlighters) : IHighlightingService
+        [ImportMany] IEnumerable<Lazy<IHighlighter, LanguageMetadata>> highlighters
+    ) : IHighlightingService
     {
-        private readonly List<Lazy<IHighlighter, LanguageMetadata>> _highlighters = highlighters.ToList();
-        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool = new(() => new List<TextSpan>());
+        private readonly List<Lazy<IHighlighter, LanguageMetadata>> _highlighters =
+            highlighters.ToList();
+        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool =
+            new(() => new List<TextSpan>());
 
         public void AddHighlights(
-             SyntaxNode root, int position, List<TextSpan> highlights, CancellationToken cancellationToken)
+            SyntaxNode root,
+            int position,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        )
         {
             using (s_listPool.GetPooledObject(out var tempHighlights))
             {
-                foreach (var highlighter in _highlighters.Where(h => h.Metadata.Language == root.Language))
+                foreach (
+                    var highlighter in _highlighters.Where(h =>
+                        h.Metadata.Language == root.Language
+                    )
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    highlighter.Value.AddHighlights(root, position, tempHighlights, cancellationToken);
+                    highlighter.Value.AddHighlights(
+                        root,
+                        position,
+                        tempHighlights,
+                        cancellationToken
+                    );
                 }
 
                 tempHighlights.Sort();

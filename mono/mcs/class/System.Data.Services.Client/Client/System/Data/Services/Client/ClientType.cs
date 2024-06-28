@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -38,9 +38,15 @@ namespace System.Data.Services.Client
 
         #region static fields
 
-        private static readonly Dictionary<Type, ClientType> types = new Dictionary<Type, ClientType>(EqualityComparer<Type>.Default);
+        private static readonly Dictionary<Type, ClientType> types = new Dictionary<
+            Type,
+            ClientType
+        >(EqualityComparer<Type>.Default);
 
-        private static readonly Dictionary<TypeName, Type> namedTypes = new Dictionary<TypeName, Type>(new TypeNameEqualityComparer());
+        private static readonly Dictionary<TypeName, Type> namedTypes = new Dictionary<
+            TypeName,
+            Type
+        >(new TypeNameEqualityComparer());
         #endregion
 
 #if ASTORIA_OPEN_OBJECT
@@ -53,7 +59,7 @@ namespace System.Data.Services.Client
         private bool mediaLinkEntry;
 
         private EpmSourceTree epmSourceTree;
-        
+
         private EpmTargetTree epmTargetTree;
 
         private ClientType(Type type, string typeName, bool skipSettableCheck)
@@ -71,17 +77,28 @@ namespace System.Data.Services.Client
 #if ASTORIA_OPEN_OBJECT
                 #region OpenObject determined by walking type hierarchy and looking for [OpenObjectAttribute("PropertyName")]
                 Type openObjectDeclared = this.ElementType;
-                for (Type tmp = openObjectDeclared; (null != tmp) && (typeof(object) != tmp); tmp = tmp.BaseType)
+                for (
+                    Type tmp = openObjectDeclared;
+                    (null != tmp) && (typeof(object) != tmp);
+                    tmp = tmp.BaseType
+                )
                 {
-                    object[] attributes = openObjectDeclared.GetCustomAttributes(typeof(OpenObjectAttribute), false);
+                    object[] attributes = openObjectDeclared.GetCustomAttributes(
+                        typeof(OpenObjectAttribute),
+                        false
+                    );
                     if (1 == attributes.Length)
                     {
                         if (null != openObjectPropertyName)
                         {
-                            throw Error.InvalidOperation(Strings.Clienttype_MultipleOpenProperty(this.ElementTypeName));
+                            throw Error.InvalidOperation(
+                                Strings.Clienttype_MultipleOpenProperty(this.ElementTypeName)
+                            );
                         }
 
-                        openObjectPropertyName = ((OpenObjectAttribute)attributes[0]).OpenObjectPropertyName;
+                        openObjectPropertyName = (
+                            (OpenObjectAttribute)attributes[0]
+                        ).OpenObjectPropertyName;
                         openObjectDeclared = tmp;
                     }
                 }
@@ -89,35 +106,46 @@ namespace System.Data.Services.Client
 #endif
 
                 Type keyPropertyDeclaredType = null;
-                bool isEntity = type.GetCustomAttributes(true).OfType<DataServiceEntityAttribute>().Any();
-                DataServiceKeyAttribute dska = type.GetCustomAttributes(true).OfType<DataServiceKeyAttribute>().FirstOrDefault();
-                foreach (PropertyInfo pinfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                bool isEntity = type.GetCustomAttributes(true)
+                    .OfType<DataServiceEntityAttribute>()
+                    .Any();
+                DataServiceKeyAttribute dska = type.GetCustomAttributes(true)
+                    .OfType<DataServiceKeyAttribute>()
+                    .FirstOrDefault();
+                foreach (
+                    PropertyInfo pinfo in type.GetProperties(
+                        BindingFlags.Public | BindingFlags.Instance
+                    )
+                )
                 {
+                    Type ptype = pinfo.PropertyType;
+                    ptype = Nullable.GetUnderlyingType(ptype) ?? ptype;
 
-
-
-
-
-
-                    Type ptype = pinfo.PropertyType;                    ptype = Nullable.GetUnderlyingType(ptype) ?? ptype;
-
-                    if (ptype.IsPointer ||
-                        (ptype.IsArray && (typeof(byte[]) != ptype) && typeof(char[]) != ptype) ||
-                        (typeof(IntPtr) == ptype) ||
-                        (typeof(UIntPtr) == ptype))
+                    if (
+                        ptype.IsPointer
+                        || (ptype.IsArray && (typeof(byte[]) != ptype) && typeof(char[]) != ptype)
+                        || (typeof(IntPtr) == ptype)
+                        || (typeof(UIntPtr) == ptype)
+                    )
                     {
                         continue;
                     }
 
-                    Debug.Assert(!ptype.ContainsGenericParameters, "remove when test case is found that encounters this");
+                    Debug.Assert(
+                        !ptype.ContainsGenericParameters,
+                        "remove when test case is found that encounters this"
+                    );
 
-                    if (pinfo.CanRead &&
-                        (!ptype.IsValueType || pinfo.CanWrite) &&
-                        !ptype.ContainsGenericParameters &&
-                        (0 == pinfo.GetIndexParameters().Length))
+                    if (
+                        pinfo.CanRead
+                        && (!ptype.IsValueType || pinfo.CanWrite)
+                        && !ptype.ContainsGenericParameters
+                        && (0 == pinfo.GetIndexParameters().Length)
+                    )
                     {
                         #region IsKey?
-                        bool keyProperty = dska != null ? dska.KeyNames.Contains(pinfo.Name) : false;
+                        bool keyProperty =
+                            dska != null ? dska.KeyNames.Contains(pinfo.Name) : false;
 
                         if (keyProperty)
                         {
@@ -127,12 +155,18 @@ namespace System.Data.Services.Client
                             }
                             else if (keyPropertyDeclaredType != pinfo.DeclaringType)
                             {
-                                throw Error.InvalidOperation(Strings.ClientType_KeysOnDifferentDeclaredType(this.ElementTypeName));
+                                throw Error.InvalidOperation(
+                                    Strings.ClientType_KeysOnDifferentDeclaredType(
+                                        this.ElementTypeName
+                                    )
+                                );
                             }
 
                             if (!ClientConvert.IsKnownType(ptype))
                             {
-                                throw Error.InvalidOperation(Strings.ClientType_KeysMustBeSimpleTypes(this.ElementTypeName));
+                                throw Error.InvalidOperation(
+                                    Strings.ClientType_KeysMustBeSimpleTypes(this.ElementTypeName)
+                                );
                             }
 
                             this.KeyCount++;
@@ -141,12 +175,21 @@ namespace System.Data.Services.Client
 
 #if ASTORIA_OPEN_OBJECT
                         #region IsOpenObjectProperty?
-                        bool openProperty = (openObjectPropertyName == pinfo.Name) &&
-                                              typeof(IDictionary<string, object>).IsAssignableFrom(ptype);
-                        Debug.Assert(keyProperty != openProperty || (!keyProperty && !openProperty), "key can't be open type");
+                        bool openProperty =
+                            (openObjectPropertyName == pinfo.Name)
+                            && typeof(IDictionary<string, object>).IsAssignableFrom(ptype);
+                        Debug.Assert(
+                            keyProperty != openProperty || (!keyProperty && !openProperty),
+                            "key can't be open type"
+                        );
                         #endregion
 
-                        ClientProperty property = new ClientProperty(pinfo, ptype, keyProperty, openProperty);
+                        ClientProperty property = new ClientProperty(
+                            pinfo,
+                            ptype,
+                            keyProperty,
+                            openProperty
+                        );
 
                         if (!property.OpenObjectProperty)
 #else
@@ -156,8 +199,13 @@ namespace System.Data.Services.Client
                             if (!this.properties.Add(property, ClientProperty.NameEquality))
                             {
                                 int shadow = this.IndexOfProperty(property.PropertyName);
-                                if (!property.DeclaringType.IsAssignableFrom(this.properties[shadow].DeclaringType))
-                                {                                    this.properties.RemoveAt(shadow);
+                                if (
+                                    !property.DeclaringType.IsAssignableFrom(
+                                        this.properties[shadow].DeclaringType
+                                    )
+                                )
+                                {
+                                    this.properties.RemoveAt(shadow);
                                     this.properties.Add(property, null);
                                 }
                             }
@@ -184,17 +232,27 @@ namespace System.Data.Services.Client
                         if (propertyName.EndsWith("ID", StringComparison.Ordinal))
                         {
                             string declaringTypeName = this.properties[i].DeclaringType.Name;
-                            if ((propertyName.Length == (declaringTypeName.Length + 2)) &&
-                                propertyName.StartsWith(declaringTypeName, StringComparison.Ordinal))
+                            if (
+                                (propertyName.Length == (declaringTypeName.Length + 2))
+                                && propertyName.StartsWith(
+                                    declaringTypeName,
+                                    StringComparison.Ordinal
+                                )
+                            )
                             {
-                                if ((null == keyPropertyDeclaredType) ||
-                                    this.properties[i].DeclaringType.IsAssignableFrom(keyPropertyDeclaredType))
+                                if (
+                                    (null == keyPropertyDeclaredType)
+                                    || this.properties[i]
+                                        .DeclaringType.IsAssignableFrom(keyPropertyDeclaredType)
+                                )
                                 {
                                     keyPropertyDeclaredType = this.properties[i].DeclaringType;
                                     key = this.properties[i];
                                 }
                             }
-                            else if ((null == keyPropertyDeclaredType) && (2 == propertyName.Length))
+                            else if (
+                                (null == keyPropertyDeclaredType) && (2 == propertyName.Length)
+                            )
                             {
                                 keyPropertyDeclaredType = this.properties[i].DeclaringType;
                                 key = this.properties[i];
@@ -211,17 +269,28 @@ namespace System.Data.Services.Client
                 }
                 else if (this.KeyCount != dska.KeyNames.Count)
                 {
-                    var m = (from string a in dska.KeyNames
-                             where null == (from b in this.properties
-                                            where b.PropertyName == a
-                                            select b).FirstOrDefault()
-                             select a).First<string>();
-                    throw Error.InvalidOperation(Strings.ClientType_MissingProperty(this.ElementTypeName, m));
+                    var m = (
+                        from string a in dska.KeyNames
+                        where
+                            null
+                            == (
+                                from b in this.properties
+                                where b.PropertyName == a
+                                select b
+                            ).FirstOrDefault()
+                        select a
+                    ).First<string>();
+                    throw Error.InvalidOperation(
+                        Strings.ClientType_MissingProperty(this.ElementTypeName, m)
+                    );
                 }
                 #endregion
 
                 this.IsEntityType = (null != keyPropertyDeclaredType) || isEntity;
-                Debug.Assert(this.KeyCount == this.Properties.Where(k => k.KeyProperty).Count(), "KeyCount mismatch");
+                Debug.Assert(
+                    this.KeyCount == this.Properties.Where(k => k.KeyProperty).Count(),
+                    "KeyCount mismatch"
+                );
 
                 this.WireUpMimeTypeProperties();
                 this.CheckMediaLinkEntry();
@@ -233,7 +302,10 @@ namespace System.Data.Services.Client
 #else
                     if (0 == this.properties.Count)
 #endif
-                    {                        throw Error.InvalidOperation(Strings.ClientType_NoSettableFields(this.ElementTypeName));
+                    {
+                        throw Error.InvalidOperation(
+                            Strings.ClientType_NoSettableFields(this.ElementTypeName)
+                        );
                     }
                 }
             }
@@ -245,10 +317,18 @@ namespace System.Data.Services.Client
             #region Validate OpenObjectAttribute was used
             if ((null != openObjectPropertyName) && (null == this.openProperties))
             {
-                throw Error.InvalidOperation(Strings.ClientType_MissingOpenProperty(this.ElementTypeName, openObjectPropertyName));
+                throw Error.InvalidOperation(
+                    Strings.ClientType_MissingOpenProperty(
+                        this.ElementTypeName,
+                        openObjectPropertyName
+                    )
+                );
             }
 
-            Debug.Assert((null != openObjectPropertyName) == (null != this.openProperties), "OpenProperties mismatch");
+            Debug.Assert(
+                (null != openObjectPropertyName) == (null != this.openProperties),
+                "OpenProperties mismatch"
+            );
             #endregion
 #endif
             this.BuildEpmInfo(type);
@@ -278,7 +358,7 @@ namespace System.Data.Services.Client
                     this.epmTargetTree = new EpmTargetTree();
                     this.epmSourceTree = new EpmSourceTree(this.epmTargetTree);
                 }
-                
+
                 return this.epmSourceTree;
             }
         }
@@ -294,24 +374,19 @@ namespace System.Data.Services.Client
 
         internal bool HasEntityPropertyMappings
         {
-            get
-            {
-                return this.epmSourceTree != null;
-            }
+            get { return this.epmSourceTree != null; }
         }
 
         internal bool EpmIsV1Compatible
         {
-            get
-            {
-                return !this.HasEntityPropertyMappings || this.EpmTargetTree.IsV1Compatible;
-            }
+            get { return !this.HasEntityPropertyMappings || this.EpmTargetTree.IsV1Compatible; }
         }
 
         internal static bool CanAssignNull(Type type)
         {
             Debug.Assert(type != null, "type != null");
-            return !type.IsValueType || (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(Nullable<>)));
+            return !type.IsValueType
+                || (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(Nullable<>)));
         }
 
         internal static bool CheckElementTypeIsEntity(Type t)
@@ -323,7 +398,7 @@ namespace System.Data.Services.Client
 
         internal static ClientType Create(Type type)
         {
-            return Create(type, true );
+            return Create(type, true);
         }
 
         internal static ClientType Create(Type type, bool expectModelType)
@@ -394,7 +469,13 @@ namespace System.Data.Services.Client
 #if !ASTORIA_LIGHT
                     foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 #else
-                    foreach (Assembly assembly in new Assembly[] { userType.Assembly, contextType.Assembly }.Distinct())
+                    foreach (
+                        Assembly assembly in new Assembly[]
+                        {
+                            userType.Assembly,
+                            contextType.Assembly,
+                        }.Distinct()
+                    )
 #endif
                     {
                         Type found = assembly.GetType(wireName, false);
@@ -407,9 +488,7 @@ namespace System.Data.Services.Client
                             {
                                 types = assembly.GetTypes();
                             }
-                            catch (ReflectionTypeLoadException)
-                            {
-                            }
+                            catch (ReflectionTypeLoadException) { }
 
                             if (null != types)
                             {
@@ -434,7 +513,7 @@ namespace System.Data.Services.Client
         internal static Type GetImplementationType(Type propertyType, Type genericTypeDefinition)
         {
             if (IsConstructedGeneric(propertyType, genericTypeDefinition))
-            {   
+            {
                 return propertyType;
             }
             else
@@ -445,12 +524,14 @@ namespace System.Data.Services.Client
                     if (IsConstructedGeneric(interfaceType, genericTypeDefinition))
                     {
                         if (null == implementationType)
-                        {   
+                        {
                             implementationType = interfaceType;
                         }
                         else
-                        {   
-                            throw Error.NotSupported(Strings.ClientType_MultipleImplementationNotSupported);
+                        {
+                            throw Error.NotSupported(
+                                Strings.ClientType_MultipleImplementationNotSupported
+                            );
                         }
                     }
                 }
@@ -469,7 +550,12 @@ namespace System.Data.Services.Client
             return GetCollectionMethod(collectionType, typeof(ICollection<>), "Remove", out type);
         }
 
-        internal static MethodInfo GetCollectionMethod(Type propertyType, Type genericTypeDefinition, string methodName, out Type type)
+        internal static MethodInfo GetCollectionMethod(
+            Type propertyType,
+            Type genericTypeDefinition,
+            string methodName,
+            out Type type
+        )
         {
             Debug.Assert(null != propertyType, "null propertyType");
             Debug.Assert(null != genericTypeDefinition, "null genericTypeDefinition");
@@ -489,10 +575,16 @@ namespace System.Data.Services.Client
                 ParameterInfo[] parameters = methodInfo.GetParameters();
                 if (0 < parameters.Length)
                 {
-                    Debug.Assert(genericArguments.Length == parameters.Length, "genericArguments don't match parameters");
+                    Debug.Assert(
+                        genericArguments.Length == parameters.Length,
+                        "genericArguments don't match parameters"
+                    );
                     for (int i = 0; i < genericArguments.Length; ++i)
                     {
-                        Debug.Assert(genericArguments[i] == parameters[i].ParameterType, "parameter doesn't match generic argument");
+                        Debug.Assert(
+                            genericArguments[i] == parameters[i].ParameterType,
+                            "parameter doesn't match generic argument"
+                        );
                     }
                 }
 #endif
@@ -523,28 +615,47 @@ namespace System.Data.Services.Client
 #endif
             else if (!ignoreMissingProperties)
             {
-                throw Error.InvalidOperation(Strings.ClientType_MissingProperty(this.ElementTypeName, propertyName));
+                throw Error.InvalidOperation(
+                    Strings.ClientType_MissingProperty(this.ElementTypeName, propertyName)
+                );
             }
 
             return null;
         }
 
-       private static bool IsConstructedGeneric(Type type, Type genericTypeDefinition)
+        private static bool IsConstructedGeneric(Type type, Type genericTypeDefinition)
         {
             Debug.Assert(type != null, "type != null");
-            Debug.Assert(!type.ContainsGenericParameters, "remove when test case is found that encounters this");
+            Debug.Assert(
+                !type.ContainsGenericParameters,
+                "remove when test case is found that encounters this"
+            );
             Debug.Assert(genericTypeDefinition != null, "genericTypeDefinition != null");
 
-            return type.IsGenericType && (type.GetGenericTypeDefinition() == genericTypeDefinition) && !type.ContainsGenericParameters;
+            return type.IsGenericType
+                && (type.GetGenericTypeDefinition() == genericTypeDefinition)
+                && !type.ContainsGenericParameters;
         }
 
-        private static void ResolveSubclass(string wireClassName, Type userType, Type type, ref Type existing)
+        private static void ResolveSubclass(
+            string wireClassName,
+            Type userType,
+            Type type,
+            ref Type existing
+        )
         {
-            if ((null != type) && type.IsVisible && (wireClassName == type.Name) && userType.IsAssignableFrom(type))
+            if (
+                (null != type)
+                && type.IsVisible
+                && (wireClassName == type.Name)
+                && userType.IsAssignableFrom(type)
+            )
             {
                 if (null != existing)
                 {
-                    throw Error.InvalidOperation(Strings.ClientType_Ambiguous(wireClassName, userType));
+                    throw Error.InvalidOperation(
+                        Strings.ClientType_Ambiguous(wireClassName, userType)
+                    );
                 }
 
                 existing = type;
@@ -558,7 +669,12 @@ namespace System.Data.Services.Client
                 this.BuildEpmInfo(type.BaseType);
             }
 
-            foreach (EntityPropertyMappingAttribute epmAttr in type.GetCustomAttributes(typeof(EntityPropertyMappingAttribute), false))
+            foreach (
+                EntityPropertyMappingAttribute epmAttr in type.GetCustomAttributes(
+                    typeof(EntityPropertyMappingAttribute),
+                    false
+                )
+            )
             {
                 this.BuildEpmInfo(epmAttr, type);
             }
@@ -570,17 +686,31 @@ namespace System.Data.Services.Client
             ClientProperty rsrcProp = null;
 
             Expression propValReaderExpr = this.BuildPropertyReader(
-                                                        rsrcParam,
-                                                        this,
-                                                        epmAttr.SourcePath.Split('/'),
-                                                        0,
-                                                        ref rsrcProp);
+                rsrcParam,
+                this,
+                epmAttr.SourcePath.Split('/'),
+                0,
+                ref rsrcProp
+            );
 
             Delegate dlgPropValReader = Expression.Lambda(propValReaderExpr, rsrcParam).Compile();
-            this.EpmSourceTree.Add(new EntityPropertyMappingInfo { Attribute = epmAttr, PropValReader = dlgPropValReader, DefiningType = definingType });
+            this.EpmSourceTree.Add(
+                new EntityPropertyMappingInfo
+                {
+                    Attribute = epmAttr,
+                    PropValReader = dlgPropValReader,
+                    DefiningType = definingType,
+                }
+            );
         }
 
-        private Expression BuildPropertyReader(Expression expr, ClientType rsrcType, String[] srcPathSegments, int currentSegment, ref ClientProperty rsrcProp)
+        private Expression BuildPropertyReader(
+            Expression expr,
+            ClientType rsrcType,
+            String[] srcPathSegments,
+            int currentSegment,
+            ref ClientProperty rsrcProp
+        )
         {
             if (currentSegment == srcPathSegments.Length)
             {
@@ -599,48 +729,73 @@ namespace System.Data.Services.Client
             rsrcProp = rsrcType.GetProperty(srcPathPart, true);
             if (rsrcProp == null)
             {
-                throw Error.InvalidOperation(Strings.EpmSourceTree_InaccessiblePropertyOnType(srcPathPart, rsrcType.ElementTypeName));
+                throw Error.InvalidOperation(
+                    Strings.EpmSourceTree_InaccessiblePropertyOnType(
+                        srcPathPart,
+                        rsrcType.ElementTypeName
+                    )
+                );
             }
 
             if (rsrcProp.IsKnownType ^ (currentSegment == srcPathSegments.Length - 1))
             {
-                throw Error.InvalidOperation(!rsrcProp.IsKnownType ? Strings.EpmClientType_PropertyIsComplex(rsrcProp.PropertyName) :
-                                                                     Strings.EpmClientType_PropertyIsPrimitive(rsrcProp.PropertyName));
+                throw Error.InvalidOperation(
+                    !rsrcProp.IsKnownType
+                        ? Strings.EpmClientType_PropertyIsComplex(rsrcProp.PropertyName)
+                        : Strings.EpmClientType_PropertyIsPrimitive(rsrcProp.PropertyName)
+                );
             }
 
             MemberExpression objectDotProp = Expression.Property(expr, srcPathPart);
 
             Expression recursiveExpr = this.BuildPropertyReader(
-                                            objectDotProp,
-                                            rsrcProp.IsKnownType ? null : ClientType.Create(rsrcProp.PropertyType),
-                                            srcPathSegments,
-                                            ++currentSegment,
-                                            ref rsrcProp);
+                objectDotProp,
+                rsrcProp.IsKnownType ? null : ClientType.Create(rsrcProp.PropertyType),
+                srcPathSegments,
+                ++currentSegment,
+                ref rsrcProp
+            );
 
             BinaryExpression objectIsNull = Expression.Equal(expr, Expression.Constant(null));
 
             ConstantExpression nullableNull = Expression.Constant(
-                            null,
-                            Util.GetTypeAllowingNull(rsrcProp.PropertyType));
+                null,
+                Util.GetTypeAllowingNull(rsrcProp.PropertyType)
+            );
 
             return Expression.Condition(objectIsNull, nullableNull, recursiveExpr);
         }
 
         private int IndexOfProperty(string propertyName)
         {
-            return this.properties.IndexOf(propertyName, ClientProperty.GetPropertyName, String.Equals);
+            return this.properties.IndexOf(
+                propertyName,
+                ClientProperty.GetPropertyName,
+                String.Equals
+            );
         }
 
         private void WireUpMimeTypeProperties()
         {
-            MimeTypePropertyAttribute attribute = (MimeTypePropertyAttribute)this.ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true).SingleOrDefault();
+            MimeTypePropertyAttribute attribute = (MimeTypePropertyAttribute)
+                this
+                    .ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
+                    .SingleOrDefault();
             if (null != attribute)
             {
-                int dataIndex, mimeTypeIndex;
-                if ((0 > (dataIndex = this.IndexOfProperty(attribute.DataPropertyName))) ||
-                    (0 > (mimeTypeIndex = this.IndexOfProperty(attribute.MimeTypePropertyName))))
+                int dataIndex,
+                    mimeTypeIndex;
+                if (
+                    (0 > (dataIndex = this.IndexOfProperty(attribute.DataPropertyName)))
+                    || (0 > (mimeTypeIndex = this.IndexOfProperty(attribute.MimeTypePropertyName)))
+                )
                 {
-                    throw Error.InvalidOperation(Strings.ClientType_MissingMimeTypeProperty(attribute.DataPropertyName, attribute.MimeTypePropertyName));
+                    throw Error.InvalidOperation(
+                        Strings.ClientType_MissingMimeTypeProperty(
+                            attribute.DataPropertyName,
+                            attribute.MimeTypePropertyName
+                        )
+                    );
                 }
 
                 Debug.Assert(0 <= dataIndex, "missing data property");
@@ -651,10 +806,16 @@ namespace System.Data.Services.Client
 
         private void CheckMediaLinkEntry()
         {
-            object[] attributes = this.ElementType.GetCustomAttributes(typeof(MediaEntryAttribute), true);
+            object[] attributes = this.ElementType.GetCustomAttributes(
+                typeof(MediaEntryAttribute),
+                true
+            );
             if (attributes != null && attributes.Length > 0)
             {
-                Debug.Assert(attributes.Length == 1, "The AttributeUsage in the attribute definition should be preventing more than 1 per property");
+                Debug.Assert(
+                    attributes.Length == 1,
+                    "The AttributeUsage in the attribute definition should be preventing more than 1 per property"
+                );
 
                 MediaEntryAttribute mediaEntryAttribute = (MediaEntryAttribute)attributes[0];
                 this.mediaLinkEntry = true;
@@ -662,8 +823,11 @@ namespace System.Data.Services.Client
                 int index = this.IndexOfProperty(mediaEntryAttribute.MediaMemberName);
                 if (index < 0)
                 {
-                    throw Error.InvalidOperation(Strings.ClientType_MissingMediaEntryProperty(
-                        mediaEntryAttribute.MediaMemberName));
+                    throw Error.InvalidOperation(
+                        Strings.ClientType_MissingMediaEntryProperty(
+                            mediaEntryAttribute.MediaMemberName
+                        )
+                    );
                 }
 
                 this.mediaDataMember = this.properties[index];
@@ -672,14 +836,17 @@ namespace System.Data.Services.Client
             attributes = this.ElementType.GetCustomAttributes(typeof(HasStreamAttribute), true);
             if (attributes != null && attributes.Length > 0)
             {
-                Debug.Assert(attributes.Length == 1, "The AttributeUsage in the attribute definition should be preventing more than 1 per property");
+                Debug.Assert(
+                    attributes.Length == 1,
+                    "The AttributeUsage in the attribute definition should be preventing more than 1 per property"
+                );
                 this.mediaLinkEntry = true;
             }
         }
 
         private struct TypeName
         {
-             internal Type Type;
+            internal Type Type;
 
             internal string Name;
         }
@@ -713,19 +880,27 @@ namespace System.Data.Services.Client
 
             private readonly MethodInfo containsMethod;
 
-             private bool keyProperty;
+            private bool keyProperty;
 
             private ClientProperty mimeTypeProperty;
 
 #if ASTORIA_OPEN_OBJECT
-           internal ClientProperty(PropertyInfo property, Type propertyType, bool keyProperty, bool openObjectProperty)
+            internal ClientProperty(
+                PropertyInfo property,
+                Type propertyType,
+                bool keyProperty,
+                bool openObjectProperty
+            )
 #else
             internal ClientProperty(PropertyInfo property, Type propertyType, bool keyProperty)
 #endif
             {
                 Debug.Assert(null != property, "null property");
                 Debug.Assert(null != propertyType, "null propertyType");
-                Debug.Assert(null == Nullable.GetUnderlyingType(propertyType), "should already have been denullified");
+                Debug.Assert(
+                    null == Nullable.GetUnderlyingType(propertyType),
+                    "should already have been denullified"
+                );
 
                 this.PropertyName = property.Name;
                 this.NullablePropertyType = property.PropertyType;
@@ -740,16 +915,35 @@ namespace System.Data.Services.Client
                 this.IsKnownType = ClientConvert.IsKnownType(propertyType);
                 if (!this.IsKnownType)
                 {
-                    this.setMethod = GetCollectionMethod(this.PropertyType, typeof(IDictionary<,>), "set_Item", out this.CollectionType);
+                    this.setMethod = GetCollectionMethod(
+                        this.PropertyType,
+                        typeof(IDictionary<,>),
+                        "set_Item",
+                        out this.CollectionType
+                    );
                     if (null == this.setMethod)
                     {
-                        this.containsMethod = GetCollectionMethod(this.PropertyType, typeof(ICollection<>), "Contains", out this.CollectionType);
-                        this.addMethod = GetAddToCollectionMethod(this.PropertyType, out this.CollectionType);
-                        this.removeMethod = GetRemoveFromCollectionMethod(this.PropertyType, out this.CollectionType);
+                        this.containsMethod = GetCollectionMethod(
+                            this.PropertyType,
+                            typeof(ICollection<>),
+                            "Contains",
+                            out this.CollectionType
+                        );
+                        this.addMethod = GetAddToCollectionMethod(
+                            this.PropertyType,
+                            out this.CollectionType
+                        );
+                        this.removeMethod = GetRemoveFromCollectionMethod(
+                            this.PropertyType,
+                            out this.CollectionType
+                        );
                     }
                 }
 
-                Debug.Assert(!this.keyProperty || this.IsKnownType, "can't have an random type as key");
+                Debug.Assert(
+                    !this.keyProperty || this.IsKnownType,
+                    "can't have an random type as key"
+                );
             }
 
             internal Type DeclaringType
@@ -796,15 +990,32 @@ namespace System.Data.Services.Client
                 Debug.Assert(null != instance, "null instance");
                 Debug.Assert(null != this.removeMethod, "missing removeMethod");
 
-                Debug.Assert(this.PropertyType.IsAssignableFrom(instance.GetType()), "unexpected collection instance");
-                Debug.Assert((null == value) || this.CollectionType.IsAssignableFrom(value.GetType()), "unexpected collection value to add");
+                Debug.Assert(
+                    this.PropertyType.IsAssignableFrom(instance.GetType()),
+                    "unexpected collection instance"
+                );
+                Debug.Assert(
+                    (null == value) || this.CollectionType.IsAssignableFrom(value.GetType()),
+                    "unexpected collection value to add"
+                );
                 this.removeMethod.Invoke(instance, new object[] { value });
             }
 
 #if ASTORIA_OPEN_OBJECT
-            internal void SetValue(object instance, object value, string propertyName, ref object openProperties, bool allowAdd)
+            internal void SetValue(
+                object instance,
+                object value,
+                string propertyName,
+                ref object openProperties,
+                bool allowAdd
+            )
 #else
-            internal void SetValue(object instance, object value, string propertyName, bool allowAdd)
+            internal void SetValue(
+                object instance,
+                object value,
+                string propertyName,
+                bool allowAdd
+            )
 #endif
             {
                 Debug.Assert(null != instance, "null instance");
@@ -815,9 +1026,14 @@ namespace System.Data.Services.Client
                     {
                         if (null == openProperties)
                         {
-                            if (null == (openProperties = this.propertyGetter.Invoke(instance, null)))
+                            if (
+                                null
+                                == (openProperties = this.propertyGetter.Invoke(instance, null))
+                            )
                             {
-                                throw Error.NotSupported(Strings.ClientType_NullOpenProperties(this.PropertyName));
+                                throw Error.NotSupported(
+                                    Strings.ClientType_NullOpenProperties(this.PropertyName)
+                                );
                             }
                         }
 
@@ -826,16 +1042,29 @@ namespace System.Data.Services.Client
                     else
 #endif
                     {
-                        Debug.Assert(this.PropertyType.IsAssignableFrom(instance.GetType()), "unexpected dictionary instance");
-                        Debug.Assert((null == value) || this.CollectionType.IsAssignableFrom(value.GetType()), "unexpected dictionary value to set");
+                        Debug.Assert(
+                            this.PropertyType.IsAssignableFrom(instance.GetType()),
+                            "unexpected dictionary instance"
+                        );
+                        Debug.Assert(
+                            (null == value)
+                                || this.CollectionType.IsAssignableFrom(value.GetType()),
+                            "unexpected dictionary value to set"
+                        );
 
                         this.setMethod.Invoke(instance, new object[] { propertyName, value });
                     }
                 }
                 else if (allowAdd && (null != this.addMethod))
                 {
-                    Debug.Assert(this.PropertyType.IsAssignableFrom(instance.GetType()), "unexpected collection instance");
-                    Debug.Assert((null == value) || this.CollectionType.IsAssignableFrom(value.GetType()), "unexpected collection value to add");
+                    Debug.Assert(
+                        this.PropertyType.IsAssignableFrom(instance.GetType()),
+                        "unexpected collection instance"
+                    );
+                    Debug.Assert(
+                        (null == value) || this.CollectionType.IsAssignableFrom(value.GetType()),
+                        "unexpected collection value to add"
+                    );
 
                     if (!(bool)this.containsMethod.Invoke(instance, new object[] { value }))
                     {
@@ -844,20 +1073,25 @@ namespace System.Data.Services.Client
                 }
                 else if (null != this.propertySetter)
                 {
-                    Debug.Assert((null == value) || this.PropertyType.IsAssignableFrom(value.GetType()), "unexpected property value to set");
+                    Debug.Assert(
+                        (null == value) || this.PropertyType.IsAssignableFrom(value.GetType()),
+                        "unexpected property value to set"
+                    );
 
-                   this.propertySetter.Invoke(instance, new object[] { value });
+                    this.propertySetter.Invoke(instance, new object[] { value });
                 }
                 else
                 {
-                    throw Error.InvalidOperation(Strings.ClientType_MissingProperty(value.GetType().ToString(), propertyName));
+                    throw Error.InvalidOperation(
+                        Strings.ClientType_MissingProperty(value.GetType().ToString(), propertyName)
+                    );
                 }
             }
         }
 
         private sealed class TypeNameEqualityComparer : IEqualityComparer<TypeName>
         {
-           public bool Equals(TypeName x, TypeName y)
+            public bool Equals(TypeName x, TypeName y)
             {
                 return (x.Type == y.Type && x.Name == y.Name);
             }

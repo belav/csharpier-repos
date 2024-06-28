@@ -14,12 +14,13 @@ namespace System.ServiceModel.Activities.Configuration
     public sealed class SendMessageChannelCacheElement : BehaviorExtensionElement
     {
         ConfigurationPropertyCollection properties;
-        
-        public SendMessageChannelCacheElement()
-        {
-        }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowUnsafeCaching, DefaultValue = ChannelCacheDefaults.DefaultAllowUnsafeSharing)]
+        public SendMessageChannelCacheElement() { }
+
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowUnsafeCaching,
+            DefaultValue = ChannelCacheDefaults.DefaultAllowUnsafeSharing
+        )]
         public bool AllowUnsafeCaching
         {
             get { return (bool)base[ConfigurationStrings.AllowUnsafeCaching]; }
@@ -38,7 +39,12 @@ namespace System.ServiceModel.Activities.Configuration
             get { return (ChannelSettingsElement)base[ConfigurationStrings.ChannelSettings]; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule", MessageId = "System.ServiceModel.Activities.Configuration.SendMessageChannelCacheElement.BehaviorType", Justification = "Not a configurable property; a property that had to be overridden from abstract parent class")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Configuration",
+            "Configuration102:ConfigurationPropertyAttributeRule",
+            MessageId = "System.ServiceModel.Activities.Configuration.SendMessageChannelCacheElement.BehaviorType",
+            Justification = "Not a configurable property; a property that had to be overridden from abstract parent class"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(SendMessageChannelCacheBehavior); }
@@ -50,10 +56,27 @@ namespace System.ServiceModel.Activities.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.AllowUnsafeCaching, typeof(bool), ChannelCacheDefaults.DefaultAllowUnsafeSharing));
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.FactorySettings, typeof(FactorySettingsElement)));
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.ChannelSettings, typeof(ChannelSettingsElement)));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.AllowUnsafeCaching,
+                            typeof(bool),
+                            ChannelCacheDefaults.DefaultAllowUnsafeSharing
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.FactorySettings,
+                            typeof(FactorySettingsElement)
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.ChannelSettings,
+                            typeof(ChannelSettingsElement)
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -65,15 +88,19 @@ namespace System.ServiceModel.Activities.Configuration
             return new SendMessageChannelCacheBehavior()
             {
                 AllowUnsafeCaching = this.AllowUnsafeCaching,
-                FactorySettings = new ChannelCacheSettings { IdleTimeout = FactorySettings.IdleTimeout, LeaseTimeout = FactorySettings.LeaseTimeout, MaxItemsInCache = FactorySettings.MaxItemsInCache },
-                ChannelSettings = new ChannelCacheSettings { IdleTimeout = ChannelSettings.IdleTimeout, LeaseTimeout = ChannelSettings.LeaseTimeout, MaxItemsInCache = ChannelSettings.MaxItemsInCache }
+                FactorySettings = new ChannelCacheSettings
+                {
+                    IdleTimeout = FactorySettings.IdleTimeout,
+                    LeaseTimeout = FactorySettings.LeaseTimeout,
+                    MaxItemsInCache = FactorySettings.MaxItemsInCache,
+                },
+                ChannelSettings = new ChannelCacheSettings
+                {
+                    IdleTimeout = ChannelSettings.IdleTimeout,
+                    LeaseTimeout = ChannelSettings.LeaseTimeout,
+                    MaxItemsInCache = ChannelSettings.MaxItemsInCache,
+                },
             };
         }
-
-
     }
 }
-
-
-
-

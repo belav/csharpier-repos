@@ -9,40 +9,24 @@ namespace System.Web.Http
     {
         public User EchoUser(string firstName, string lastName)
         {
-            return new User()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-            };
+            return new User() { FirstName = firstName, LastName = lastName };
         }
 
         public Task<User> EchoUserAsync(string firstName, string lastName)
         {
-            return Task.FromResult(new User()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-            });
+            return Task.FromResult(new User() { FirstName = firstName, LastName = lastName });
         }
 
         [Authorize]
         [HttpGet]
         public User AddAdmin(string firstName, string lastName)
         {
-            return new User()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-            };
+            return new User() { FirstName = firstName, LastName = lastName };
         }
 
         public User RetriveUser(int id)
         {
-            return new User()
-            {
-                LastName = "UserLN" + id,
-                FirstName = "UserFN" + id
-            };
+            return new User() { LastName = "UserLN" + id, FirstName = "UserFN" + id };
         }
 
         public User EchoUserObject(User user)
@@ -52,25 +36,17 @@ namespace System.Web.Http
 
         public User Admin()
         {
-            return new User
-            {
-                FirstName = "Yao",
-                LastName = "Huang"
-            };
+            return new User { FirstName = "Yao", LastName = "Huang" };
         }
 
-        public void DeleteAllUsers()
-        {
-        }
+        public void DeleteAllUsers() { }
 
         public Task DeleteAllUsersAsync()
         {
             return TaskHelpers.Completed();
         }
 
-        public void AddUser([FromBody] User user)
-        {
-        }
+        public void AddUser([FromBody] User user) { }
 
         public Task WrappedTaskReturningMethod()
         {

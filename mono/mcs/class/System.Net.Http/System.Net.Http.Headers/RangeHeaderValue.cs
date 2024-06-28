@@ -31,195 +31,201 @@ using System.Text;
 
 namespace System.Net.Http.Headers
 {
-	public class RangeHeaderValue : ICloneable
-	{
-		List<RangeItemHeaderValue> ranges;
-		string unit;
+    public class RangeHeaderValue : ICloneable
+    {
+        List<RangeItemHeaderValue> ranges;
+        string unit;
 
-		public RangeHeaderValue ()
-		{
-			unit = "bytes";
-		}
+        public RangeHeaderValue()
+        {
+            unit = "bytes";
+        }
 
-		public RangeHeaderValue (long? from, long? to)
-			: this ()
-		{
-			Ranges.Add (new RangeItemHeaderValue (from, to));
-		}
+        public RangeHeaderValue(long? from, long? to)
+            : this()
+        {
+            Ranges.Add(new RangeItemHeaderValue(from, to));
+        }
 
-		private RangeHeaderValue (RangeHeaderValue source)
-			: this ()
-		{
-			if (source.ranges != null) {
-				foreach (var item in source.ranges)
-					Ranges.Add (item);
-			}
-		}
+        private RangeHeaderValue(RangeHeaderValue source)
+            : this()
+        {
+            if (source.ranges != null)
+            {
+                foreach (var item in source.ranges)
+                    Ranges.Add(item);
+            }
+        }
 
-		public ICollection<RangeItemHeaderValue> Ranges {
-			get {
-				return ranges ?? (ranges = new List<RangeItemHeaderValue> ());
-			}
-		}
+        public ICollection<RangeItemHeaderValue> Ranges
+        {
+            get { return ranges ?? (ranges = new List<RangeItemHeaderValue>()); }
+        }
 
-		public string Unit {
-			get {
-				return unit;
-			}
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("Unit");
+        public string Unit
+        {
+            get { return unit; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("Unit");
 
-				Parser.Token.Check (value);
+                Parser.Token.Check(value);
 
-				unit = value;
-			}
-		}
+                unit = value;
+            }
+        }
 
-		object ICloneable.Clone ()
-		{
-			return new RangeHeaderValue (this);
-		}
+        object ICloneable.Clone()
+        {
+            return new RangeHeaderValue(this);
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as RangeHeaderValue;
-			if (source == null)
-				return false;
+        public override bool Equals(object obj)
+        {
+            var source = obj as RangeHeaderValue;
+            if (source == null)
+                return false;
 
-			return string.Equals (source.Unit, Unit, StringComparison.OrdinalIgnoreCase) &&
-				source.ranges.SequenceEqual (ranges);
-		}
+            return string.Equals(source.Unit, Unit, StringComparison.OrdinalIgnoreCase)
+                && source.ranges.SequenceEqual(ranges);
+        }
 
-		public override int GetHashCode ()
-		{
-			return Unit.ToLowerInvariant ().GetHashCode () ^ HashCodeCalculator.Calculate (ranges);
-		}
+        public override int GetHashCode()
+        {
+            return Unit.ToLowerInvariant().GetHashCode() ^ HashCodeCalculator.Calculate(ranges);
+        }
 
-		public static RangeHeaderValue Parse (string input)
-		{
-			RangeHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static RangeHeaderValue Parse(string input)
+        {
+            RangeHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
+            throw new FormatException(input);
+        }
 
-		public static bool TryParse (string input, out RangeHeaderValue parsedValue)
-		{
-			parsedValue = null;
+        public static bool TryParse(string input, out RangeHeaderValue parsedValue)
+        {
+            parsedValue = null;
 
-			var lexer = new Lexer (input);
-			var t = lexer.Scan ();
-			if (t != Token.Type.Token)
-				return false;
+            var lexer = new Lexer(input);
+            var t = lexer.Scan();
+            if (t != Token.Type.Token)
+                return false;
 
-			var value = new RangeHeaderValue ();
-			value.unit = lexer.GetStringValue (t);
+            var value = new RangeHeaderValue();
+            value.unit = lexer.GetStringValue(t);
 
-			t = lexer.Scan ();
-			if (t != Token.Type.SeparatorEqual)
-				return false;
+            t = lexer.Scan();
+            if (t != Token.Type.SeparatorEqual)
+                return false;
 
-			bool token_read;
-			do {
-				long? from = null, to = null;
-				long number;
-				token_read = false;
+            bool token_read;
+            do
+            {
+                long? from = null,
+                    to = null;
+                long number;
+                token_read = false;
 
-				t = lexer.Scan (recognizeDash: true);
-				switch (t.Kind) {
-				case Token.Type.SeparatorDash:
-					t = lexer.Scan ();
-					if (!lexer.TryGetNumericValue (t, out number))
-						return false;
+                t = lexer.Scan(recognizeDash: true);
+                switch (t.Kind)
+                {
+                    case Token.Type.SeparatorDash:
+                        t = lexer.Scan();
+                        if (!lexer.TryGetNumericValue(t, out number))
+                            return false;
 
-					to = number;
-					break;
-				case Token.Type.Token:
-					string s = lexer.GetStringValue (t);
-					var values = s.Split (new [] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-					if (!Parser.Long.TryParse (values[0], out number))
-						return false;
+                        to = number;
+                        break;
+                    case Token.Type.Token:
+                        string s = lexer.GetStringValue(t);
+                        var values = s.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (!Parser.Long.TryParse(values[0], out number))
+                            return false;
 
-					switch (values.Length) {
-					case 1:
-						t = lexer.Scan (recognizeDash: true);
-						from = number;
-						switch (t.Kind) {
-						case Token.Type.SeparatorDash:
-							t = lexer.Scan ();
-							if (t != Token.Type.Token) {
-								token_read = true;
-								break;
-							}
+                        switch (values.Length)
+                        {
+                            case 1:
+                                t = lexer.Scan(recognizeDash: true);
+                                from = number;
+                                switch (t.Kind)
+                                {
+                                    case Token.Type.SeparatorDash:
+                                        t = lexer.Scan();
+                                        if (t != Token.Type.Token)
+                                        {
+                                            token_read = true;
+                                            break;
+                                        }
 
-							if (!lexer.TryGetNumericValue (t, out number))
-								return false;
+                                        if (!lexer.TryGetNumericValue(t, out number))
+                                            return false;
 
-							to = number;
-							if (to < from)
-								return false;
+                                        to = number;
+                                        if (to < from)
+                                            return false;
 
-							break;
-						case Token.Type.End:
-							if (s.Length > 0 && s [s.Length - 1] != '-')
-								return false;
+                                        break;
+                                    case Token.Type.End:
+                                        if (s.Length > 0 && s[s.Length - 1] != '-')
+                                            return false;
 
-							token_read = true;
-							break;
-						case Token.Type.SeparatorComma:
-							token_read = true;
-							break;
-						default:
-							return false;
-						}
-						break;
-					case 2:
-						from = number;
+                                        token_read = true;
+                                        break;
+                                    case Token.Type.SeparatorComma:
+                                        token_read = true;
+                                        break;
+                                    default:
+                                        return false;
+                                }
+                                break;
+                            case 2:
+                                from = number;
 
-						if (!Parser.Long.TryParse (values[1], out number))
-							return false;
+                                if (!Parser.Long.TryParse(values[1], out number))
+                                    return false;
 
-						to = number;
-						if (to < from)
-							return false;
+                                to = number;
+                                if (to < from)
+                                    return false;
 
-						break;
-					default:
-						return false;
-					}
+                                break;
+                            default:
+                                return false;
+                        }
 
-					break;
-				default:
-					return false;
-				}
+                        break;
+                    default:
+                        return false;
+                }
 
-				value.Ranges.Add (new RangeItemHeaderValue (from, to));
-				if (!token_read)
-					t = lexer.Scan ();
+                value.Ranges.Add(new RangeItemHeaderValue(from, to));
+                if (!token_read)
+                    t = lexer.Scan();
+            } while (t == Token.Type.SeparatorComma);
 
-			} while (t == Token.Type.SeparatorComma);
+            if (t != Token.Type.End)
+                return false;
 
-			if (t != Token.Type.End)
-				return false;
+            parsedValue = value;
+            return true;
+        }
 
-			parsedValue = value;
-			return true;
-		}
+        public override string ToString()
+        {
+            var sb = new StringBuilder(unit);
+            sb.Append("=");
+            for (int i = 0; i < Ranges.Count; ++i)
+            {
+                if (i > 0)
+                    sb.Append(", ");
 
-		public override string ToString ()
-		{
-			var sb = new StringBuilder (unit);
-			sb.Append ("=");
-			for (int i = 0; i < Ranges.Count; ++i) {
-				if (i > 0)
-					sb.Append (", ");
+                sb.Append(ranges[i]);
+            }
 
-				sb.Append (ranges[i]);
-			}
-
-			return sb.ToString ();
-		}
-	}
+            return sb.ToString();
+        }
+    }
 }

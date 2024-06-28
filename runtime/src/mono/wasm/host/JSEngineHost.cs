@@ -5,12 +5,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System.Threading;
 
 namespace Microsoft.WebAssembly.AppHost;
 
@@ -25,10 +25,12 @@ internal sealed class JSEngineHost
         _logger = logger;
     }
 
-    public static Task<int> InvokeAsync(CommonConfiguration commonArgs,
-                                              ILoggerFactory _,
-                                              ILogger logger,
-                                              CancellationToken _1)
+    public static Task<int> InvokeAsync(
+        CommonConfiguration commonArgs,
+        ILoggerFactory _,
+        ILogger logger,
+        CancellationToken _1
+    )
     {
         var args = new JSEngineArguments(commonArgs);
         args.Validate();
@@ -43,17 +45,25 @@ internal sealed class JSEngineHost
             WasmHost.JavaScriptCore => "jsc",
             WasmHost.SpiderMonkey => "sm",
             WasmHost.NodeJS => "node",
-            _ => throw new CommandLineException($"Unsupported engine {_args.Host}")
+            _ => throw new CommandLineException($"Unsupported engine {_args.Host}"),
         };
 
-        if (!FileUtils.TryFindExecutableInPATH(engineBinary, out string? engineBinaryPath, out string? errorMessage))
+        if (
+            !FileUtils.TryFindExecutableInPATH(
+                engineBinary,
+                out string? engineBinaryPath,
+                out string? errorMessage
+            )
+        )
             throw new CommandLineException($"Cannot find host {engineBinary}: {errorMessage}");
 
         if (_args.CommonConfig.Debugging)
             throw new CommandLineException($"Debugging not supported with {_args.Host}");
 
-        var runArgsJson = new RunArgumentsJson(applicationArguments: Array.Empty<string>(),
-                                               runtimeArguments: _args.CommonConfig.RuntimeArguments);
+        var runArgsJson = new RunArgumentsJson(
+            applicationArguments: Array.Empty<string>(),
+            runtimeArguments: _args.CommonConfig.RuntimeArguments
+        );
         runArgsJson.Save(Path.Combine(_args.CommonConfig.AppPath, "runArgs.json"));
 
         var args = new List<string>();
@@ -76,20 +86,27 @@ internal sealed class JSEngineHost
 
         args.AddRange(_args.AppArgs);
 
-        ProcessStartInfo psi = new()
-        {
-            FileName = engineBinary,
-            WorkingDirectory = _args.CommonConfig.AppPath
-        };
+        ProcessStartInfo psi =
+            new() { FileName = engineBinary, WorkingDirectory = _args.CommonConfig.AppPath };
 
         foreach (string? arg in args)
             psi.ArgumentList.Add(arg!);
 
-        int exitCode = await Utils.TryRunProcess(psi,
-                                    _logger,
-                                    msg => { if (msg != null) _logger.LogInformation(msg); },
-                                    msg => { if (msg != null) _logger.LogInformation(msg); },
-                                    silent: _args.CommonConfig.Silent);
+        int exitCode = await Utils.TryRunProcess(
+            psi,
+            _logger,
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            },
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            },
+            silent: _args.CommonConfig.Silent
+        );
 
         if (!_args.CommonConfig.Silent)
             Console.WriteLine($"{_args.Host} exited with {exitCode}");

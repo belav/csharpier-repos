@@ -20,7 +20,8 @@ namespace System
         public override bool IsSecurityCritical => true;
         public override bool IsSecuritySafeCritical => false;
         public override bool IsSecurityTransparent => false;
-        public override MemberTypes MemberType => (IsPublic || IsNotPublic) ? MemberTypes.TypeInfo : MemberTypes.NestedType;
+        public override MemberTypes MemberType =>
+            (IsPublic || IsNotPublic) ? MemberTypes.TypeInfo : MemberTypes.NestedType;
         public override int MetadataToken => RuntimeTypeHandle.GetToken(this);
         public override Module Module => GetRuntimeModule();
         public override Type? ReflectedType => DeclaringType;
@@ -48,7 +49,8 @@ namespace System
             return RuntimeTypeHandle.GetArrayRank(this);
         }
 
-        protected override TypeAttributes GetAttributeFlagsImpl() => RuntimeTypeHandle.GetAttributes(this);
+        protected override TypeAttributes GetAttributeFlagsImpl() =>
+            RuntimeTypeHandle.GetAttributes(this);
 
         public override object[] GetCustomAttributes(bool inherit)
         {
@@ -74,11 +76,12 @@ namespace System
         // This will return a MemberInfo that has been marked with the [DefaultMemberAttribute]
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicFields
-            | DynamicallyAccessedMemberTypes.PublicMethods
-            | DynamicallyAccessedMemberTypes.PublicEvents
-            | DynamicallyAccessedMemberTypes.PublicProperties
-            | DynamicallyAccessedMemberTypes.PublicConstructors
-            | DynamicallyAccessedMemberTypes.PublicNestedTypes)]
+                | DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.PublicNestedTypes
+        )]
         public override MemberInfo[] GetDefaultMembers()
         {
             // See if we have cached the default member name
@@ -124,7 +127,9 @@ namespace System
             return new ReadOnlySpan<string>(ret).ToArray();
         }
 
-        [RequiresDynamicCode("It might not be possible to create an array of the enum type at runtime. Use Enum.GetValues<T> or the GetEnumValuesAsUnderlyingType method instead.")]
+        [RequiresDynamicCode(
+            "It might not be possible to create an array of the enum type at runtime. Use Enum.GetValues<T> or the GetEnumValuesAsUnderlyingType method instead."
+        )]
         public override Array GetEnumValues()
         {
             if (!IsActualEnum)
@@ -211,7 +216,9 @@ namespace System
             {
                 // The enum type must match this type.
                 if (!valueType.IsEquivalentTo(this))
-                    throw new ArgumentException(SR.Format(SR.Arg_EnumAndObjectMustBeSameType, valueType, this));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumAndObjectMustBeSameType, valueType, this)
+                    );
 
                 valueType = (RuntimeType)valueType.GetEnumUnderlyingType();
             }
@@ -226,7 +233,13 @@ namespace System
 
             RuntimeType underlyingType = Enum.InternalGetUnderlyingType(this);
             if (underlyingType != valueType)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, valueType, underlyingType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                        valueType,
+                        underlyingType
+                    )
+                );
 
             return GetTypeCode(underlyingType) switch
             {
@@ -241,10 +254,11 @@ namespace System
                 TypeCode.Single => Enum.IsDefinedPrimitive(this, (float)value),
                 TypeCode.Double => Enum.IsDefinedPrimitive(this, (double)value),
                 TypeCode.Char => Enum.IsDefinedPrimitive(this, (char)value),
-                _ =>
-                    underlyingType == typeof(nint) ? Enum.IsDefinedPrimitive(this, (nuint)(nint)value) :
-                    underlyingType == typeof(nuint) ? Enum.IsDefinedPrimitive(this, (nuint)value) :
-                    throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType),
+                _
+                    => underlyingType == typeof(nint)
+                        ? Enum.IsDefinedPrimitive(this, (nuint)(nint)value)
+                    : underlyingType == typeof(nuint) ? Enum.IsDefinedPrimitive(this, (nuint)value)
+                    : throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType),
             };
         }
 
@@ -256,10 +270,11 @@ namespace System
 
         protected override bool IsCOMObjectImpl() => RuntimeTypeHandle.IsComObject(this, false);
 
-        public override bool IsInstanceOfType([NotNullWhen(true)] object? o) => RuntimeTypeHandle.IsInstanceOfType(this, o);
+        public override bool IsInstanceOfType([NotNullWhen(true)] object? o) =>
+            RuntimeTypeHandle.IsInstanceOfType(this, o);
 
-        public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo)
-            => typeInfo != null && IsAssignableFrom(typeInfo.AsType());
+        public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo) =>
+            typeInfo != null && IsAssignableFrom(typeInfo.AsType());
 
         public override bool IsAssignableFrom([NotNullWhen(true)] Type? c)
         {
@@ -306,14 +321,23 @@ namespace System
         [DebuggerHidden]
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         public override object? InvokeMember(
-            string name, BindingFlags bindingFlags, Binder? binder, object? target,
-            object?[]? providedArgs, ParameterModifier[]? modifiers, CultureInfo? culture, string[]? namedParams)
+            string name,
+            BindingFlags bindingFlags,
+            Binder? binder,
+            object? target,
+            object?[]? providedArgs,
+            ParameterModifier[]? modifiers,
+            CultureInfo? culture,
+            string[]? namedParams
+        )
         {
             const BindingFlags MemberBindingMask = (BindingFlags)0x000000FF;
             const BindingFlags InvocationMask = (BindingFlags)0x0000FF00;
             const BindingFlags BinderGetSetField = BindingFlags.GetField | BindingFlags.SetField;
-            const BindingFlags BinderGetSetProperty = BindingFlags.GetProperty | BindingFlags.SetProperty;
-            const BindingFlags BinderNonCreateInstance = BindingFlags.InvokeMethod | BinderGetSetField | BinderGetSetProperty;
+            const BindingFlags BinderGetSetProperty =
+                BindingFlags.GetProperty | BindingFlags.SetProperty;
+            const BindingFlags BinderNonCreateInstance =
+                BindingFlags.InvokeMethod | BinderGetSetField | BinderGetSetProperty;
             const BindingFlags BinderNonFieldGetSet = (BindingFlags)0x00FFF300;
 
             if (IsGenericParameter)
@@ -351,25 +375,51 @@ namespace System
             if (target != null && target.GetType().IsCOMObject)
             {
                 const BindingFlags ClassicBindingMask =
-                    BindingFlags.InvokeMethod | BindingFlags.GetProperty | BindingFlags.SetProperty |
-                    BindingFlags.PutDispProperty | BindingFlags.PutRefDispProperty;
+                    BindingFlags.InvokeMethod
+                    | BindingFlags.GetProperty
+                    | BindingFlags.SetProperty
+                    | BindingFlags.PutDispProperty
+                    | BindingFlags.PutRefDispProperty;
 
                 if ((bindingFlags & ClassicBindingMask) == 0)
                     throw new ArgumentException(SR.Arg_COMAccess, nameof(bindingFlags));
 
-                if ((bindingFlags & BindingFlags.GetProperty) != 0 && (bindingFlags & ClassicBindingMask & ~(BindingFlags.GetProperty | BindingFlags.InvokeMethod)) != 0)
+                if (
+                    (bindingFlags & BindingFlags.GetProperty) != 0
+                    && (
+                        bindingFlags
+                        & ClassicBindingMask
+                        & ~(BindingFlags.GetProperty | BindingFlags.InvokeMethod)
+                    ) != 0
+                )
                     throw new ArgumentException(SR.Arg_PropSetGet, nameof(bindingFlags));
 
-                if ((bindingFlags & BindingFlags.InvokeMethod) != 0 && (bindingFlags & ClassicBindingMask & ~(BindingFlags.GetProperty | BindingFlags.InvokeMethod)) != 0)
+                if (
+                    (bindingFlags & BindingFlags.InvokeMethod) != 0
+                    && (
+                        bindingFlags
+                        & ClassicBindingMask
+                        & ~(BindingFlags.GetProperty | BindingFlags.InvokeMethod)
+                    ) != 0
+                )
                     throw new ArgumentException(SR.Arg_PropSetInvoke, nameof(bindingFlags));
 
-                if ((bindingFlags & BindingFlags.SetProperty) != 0 && (bindingFlags & ClassicBindingMask & ~BindingFlags.SetProperty) != 0)
+                if (
+                    (bindingFlags & BindingFlags.SetProperty) != 0
+                    && (bindingFlags & ClassicBindingMask & ~BindingFlags.SetProperty) != 0
+                )
                     throw new ArgumentException(SR.Arg_COMPropSetPut, nameof(bindingFlags));
 
-                if ((bindingFlags & BindingFlags.PutDispProperty) != 0 && (bindingFlags & ClassicBindingMask & ~BindingFlags.PutDispProperty) != 0)
+                if (
+                    (bindingFlags & BindingFlags.PutDispProperty) != 0
+                    && (bindingFlags & ClassicBindingMask & ~BindingFlags.PutDispProperty) != 0
+                )
                     throw new ArgumentException(SR.Arg_COMPropSetPut, nameof(bindingFlags));
 
-                if ((bindingFlags & BindingFlags.PutRefDispProperty) != 0 && (bindingFlags & ClassicBindingMask & ~BindingFlags.PutRefDispProperty) != 0)
+                if (
+                    (bindingFlags & BindingFlags.PutRefDispProperty) != 0
+                    && (bindingFlags & ClassicBindingMask & ~BindingFlags.PutRefDispProperty) != 0
+                )
                     throw new ArgumentException(SR.Arg_COMPropSetPut, nameof(bindingFlags));
 
                 ArgumentNullException.ThrowIfNull(name);
@@ -384,7 +434,15 @@ namespace System
                 bool unwrapExceptions = (bindingFlags & BindingFlags.DoNotWrapExceptions) != 0;
                 try
                 {
-                    return InvokeDispMethod(name, bindingFlags, target, providedArgs, isByRef, lcid, namedParams);
+                    return InvokeDispMethod(
+                        name,
+                        bindingFlags,
+                        target,
+                        providedArgs,
+                        isByRef,
+                        lcid,
+                        namedParams
+                    );
                 }
                 catch (TargetInvocationException e) when (unwrapExceptions)
                 {
@@ -405,7 +463,10 @@ namespace System
             // Delegate to Activator.CreateInstance
             if ((bindingFlags & BindingFlags.CreateInstance) != 0)
             {
-                if ((bindingFlags & BindingFlags.CreateInstance) != 0 && (bindingFlags & BinderNonCreateInstance) != 0)
+                if (
+                    (bindingFlags & BindingFlags.CreateInstance) != 0
+                    && (bindingFlags & BinderNonCreateInstance) != 0
+                )
                     // "Can not specify both CreateInstance and another access type."
                     throw new ArgumentException(SR.Arg_CreatInstAccess, nameof(bindingFlags));
 
@@ -413,7 +474,10 @@ namespace System
             }
 
             // PutDispProperty and\or PutRefDispProperty ==> SetProperty.
-            if ((bindingFlags & (BindingFlags.PutDispProperty | BindingFlags.PutRefDispProperty)) != 0)
+            if (
+                (bindingFlags & (BindingFlags.PutDispProperty | BindingFlags.PutRefDispProperty))
+                != 0
+            )
                 bindingFlags |= BindingFlags.SetProperty;
 
             ArgumentNullException.ThrowIfNull(name);
@@ -462,13 +526,20 @@ namespace System
                 }
                 else if (flds.Length > 0)
                 {
-                    selFld = binder.BindToField(bindingFlags, flds, IsGetField ? Empty.Value : providedArgs![0]!, culture);
+                    selFld = binder.BindToField(
+                        bindingFlags,
+                        flds,
+                        IsGetField ? Empty.Value : providedArgs![0]!,
+                        culture
+                    );
                 }
 
                 if (selFld != null)
                 {
                     // Invocation on a field
-                    if (selFld.FieldType.IsArray || ReferenceEquals(selFld.FieldType, typeof(Array)))
+                    if (
+                        selFld.FieldType.IsArray || ReferenceEquals(selFld.FieldType, typeof(Array))
+                    )
                     {
                         // Invocation of an array Field
                         int idxCnt;
@@ -564,7 +635,9 @@ namespace System
             if ((bindingFlags & BindingFlags.InvokeMethod) != 0)
             {
                 // Lookup Methods
-                MethodInfo[] semiFinalists = (GetMember(name, MemberTypes.Method, bindingFlags) as MethodInfo[])!;
+                MethodInfo[] semiFinalists = (
+                    GetMember(name, MemberTypes.Method, bindingFlags) as MethodInfo[]
+                )!;
                 List<MethodInfo>? results = null;
 
                 for (int i = 0; i < semiFinalists.Length; i++)
@@ -572,7 +645,14 @@ namespace System
                     MethodInfo semiFinalist = semiFinalists[i];
                     Debug.Assert(semiFinalist != null);
 
-                    if (!FilterApplyMethodInfo((RuntimeMethodInfo)semiFinalist, bindingFlags, CallingConventions.Any, new Type[argCnt]))
+                    if (
+                        !FilterApplyMethodInfo(
+                            (RuntimeMethodInfo)semiFinalist,
+                            bindingFlags,
+                            CallingConventions.Any,
+                            new Type[argCnt]
+                        )
+                    )
                         continue;
 
                     if (finalist == null)
@@ -599,7 +679,9 @@ namespace System
             if (finalist == null && isGetProperty || isSetProperty)
             {
                 // Lookup Property
-                PropertyInfo[] semiFinalists = (GetMember(name, MemberTypes.Property, bindingFlags) as PropertyInfo[])!;
+                PropertyInfo[] semiFinalists = (
+                    GetMember(name, MemberTypes.Property, bindingFlags) as PropertyInfo[]
+                )!;
                 List<MethodInfo>? results = null;
 
                 for (int i = 0; i < semiFinalists.Length; i++)
@@ -618,7 +700,14 @@ namespace System
                     if (semiFinalist == null)
                         continue;
 
-                    if (!FilterApplyMethodInfo((RuntimeMethodInfo)semiFinalist, bindingFlags, CallingConventions.Any, new Type[argCnt]))
+                    if (
+                        !FilterApplyMethodInfo(
+                            (RuntimeMethodInfo)semiFinalist,
+                            bindingFlags,
+                            CallingConventions.Any,
+                            new Type[argCnt]
+                        )
+                    )
                         continue;
 
                     if (finalist == null)
@@ -642,10 +731,12 @@ namespace System
             if (finalist != null)
             {
                 // Invoke
-                if (finalists == null &&
-                    argCnt == 0 &&
-                    finalist.GetParametersAsSpan().Length == 0 &&
-                    (bindingFlags & BindingFlags.OptionalParamBinding) == 0)
+                if (
+                    finalists == null
+                    && argCnt == 0
+                    && finalist.GetParametersAsSpan().Length == 0
+                    && (bindingFlags & BindingFlags.OptionalParamBinding) == 0
+                )
                 {
                     return finalist.Invoke(target, bindingFlags, binder, providedArgs, culture);
                 }
@@ -655,13 +746,30 @@ namespace System
                 object? state = null;
                 MethodBase? invokeMethod = null;
 
-                try { invokeMethod = binder.BindToMethod(bindingFlags, finalists, ref providedArgs!, modifiers, culture, namedParams, out state); }
+                try
+                {
+                    invokeMethod = binder.BindToMethod(
+                        bindingFlags,
+                        finalists,
+                        ref providedArgs!,
+                        modifiers,
+                        culture,
+                        namedParams,
+                        out state
+                    );
+                }
                 catch (MissingMethodException) { }
 
                 if (invokeMethod == null)
                     throw new MissingMethodException(FullName, name);
 
-                object? result = ((MethodInfo)invokeMethod).Invoke(target, bindingFlags, binder, providedArgs, culture);
+                object? result = ((MethodInfo)invokeMethod).Invoke(
+                    target,
+                    bindingFlags,
+                    binder,
+                    providedArgs,
+                    culture
+                );
 
                 if (state != null)
                     binder.ReorderArgumentArray(ref providedArgs, state);
@@ -692,10 +800,15 @@ namespace System
 
                     if (constraint.IsGenericParameter)
                     {
-                        GenericParameterAttributes special = constraint.GenericParameterAttributes & GenericParameterAttributes.SpecialConstraintMask;
+                        GenericParameterAttributes special =
+                            constraint.GenericParameterAttributes
+                            & GenericParameterAttributes.SpecialConstraintMask;
 
-                        if ((special & GenericParameterAttributes.ReferenceTypeConstraint) == 0 &&
-                            (special & GenericParameterAttributes.NotNullableValueTypeConstraint) == 0)
+                        if (
+                            (special & GenericParameterAttributes.ReferenceTypeConstraint) == 0
+                            && (special & GenericParameterAttributes.NotNullableValueTypeConstraint)
+                                == 0
+                        )
                             continue;
                     }
 
@@ -704,7 +817,9 @@ namespace System
 
                 if (baseType == ObjectType)
                 {
-                    GenericParameterAttributes special = GenericParameterAttributes & GenericParameterAttributes.SpecialConstraintMask;
+                    GenericParameterAttributes special =
+                        GenericParameterAttributes
+                        & GenericParameterAttributes.SpecialConstraintMask;
                     if ((special & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
                         baseType = ValueType;
                 }
@@ -718,11 +833,13 @@ namespace System
         private static void ThrowIfTypeNeverValidGenericArgument(RuntimeType type)
         {
             if (type.IsPointer || type.IsFunctionPointer || type.IsByRef || type == typeof(void))
-                throw new ArgumentException(
-                    SR.Format(SR.Argument_NeverValidGenericArgument, type));
+                throw new ArgumentException(SR.Format(SR.Argument_NeverValidGenericArgument, type));
         }
 
-        internal static void SanityCheckGenericArguments(RuntimeType[] genericArguments, RuntimeType[] genericParameters)
+        internal static void SanityCheckGenericArguments(
+            RuntimeType[] genericArguments,
+            RuntimeType[] genericParameters
+        )
         {
             ArgumentNullException.ThrowIfNull(genericArguments);
 
@@ -734,7 +851,12 @@ namespace System
 
             if (genericArguments.Length != genericParameters.Length)
                 throw new ArgumentException(
-                    SR.Format(SR.Argument_NotEnoughGenArguments, genericArguments.Length, genericParameters.Length));
+                    SR.Format(
+                        SR.Argument_NotEnoughGenArguments,
+                        genericArguments.Length,
+                        genericParameters.Length
+                    )
+                );
         }
 
         internal static CorElementType GetUnderlyingType(RuntimeType type)
@@ -747,10 +869,12 @@ namespace System
             return RuntimeTypeHandle.GetCorElementType(type);
         }
 
-
         // AggressiveInlining used since on hot path for reflection.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryGetByRefElementType(RuntimeType type, [NotNullWhen(true)] out RuntimeType? elementType)
+        internal static bool TryGetByRefElementType(
+            RuntimeType type,
+            [NotNullWhen(true)] out RuntimeType? elementType
+        )
         {
             CorElementType corElemType = RuntimeTypeHandle.GetCorElementType(type);
             if (corElemType == CorElementType.ELEMENT_TYPE_BYREF)
@@ -767,7 +891,7 @@ namespace System
         {
             Success = 0,
             ArgumentException,
-            NotSupported_ByRefLike
+            NotSupported_ByRefLike,
         }
 
         /// <summary>
@@ -818,7 +942,8 @@ namespace System
             ref object? value,
             Binder? binder,
             CultureInfo? culture,
-            BindingFlags invokeAttr)
+            BindingFlags invokeAttr
+        )
         {
             Debug.Assert(!IsGenericParameter);
 
@@ -842,7 +967,10 @@ namespace System
                 return copyBack;
             }
 
-            if (result == CheckValueStatus.ArgumentException && (invokeAttr & BindingFlags.ExactBinding) == 0)
+            if (
+                result == CheckValueStatus.ArgumentException
+                && (invokeAttr & BindingFlags.ExactBinding) == 0
+            )
             {
                 Debug.Assert(value != null);
 

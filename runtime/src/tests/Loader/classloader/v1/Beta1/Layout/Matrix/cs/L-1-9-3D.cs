@@ -3,10 +3,9 @@
 
 using System;
 
-public interface A{
-
-  //////////////////////////////
-  // Instance Methods
-int MethPubInst();
+public interface A
+{
+    //////////////////////////////
+    // Instance Methods
+    int MethPubInst();
 }
-

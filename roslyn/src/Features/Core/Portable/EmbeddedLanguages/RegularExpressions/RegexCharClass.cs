@@ -4,7 +4,7 @@
 
 #nullable disable
 
-// LICENSING NOTE: The license for this file is from the originating 
+// LICENSING NOTE: The license for this file is from the originating
 // source and not the general https://github.com/dotnet/roslyn license.
 // See https://github.com/dotnet/runtime/blob/5b5bd46c03c86f8545f2c4c8628ac25d875210fe/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
 
@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// </summary>
     internal static class RegexCharClass
     {
-        public static readonly Dictionary<string, (string shortDescription, string longDescription)> EscapeCategories =
+        public static readonly Dictionary<
+            string,
+            (string shortDescription, string longDescription)
+        > EscapeCategories =
             new()
             {
                 // Others
@@ -59,7 +62,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "Ps", (Regex_punctuation_open, "") },
                 { "Pf", (Regex_punctuation_final_quote, "") },
                 { "Pi", (Regex_punctuation_initial_quote, "") },
-                { "P", (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long) },
+                {
+                    "P",
+                    (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long)
+                },
                 // Symbols
                 { "Sc", (Regex_symbol_currency, "") },
                 { "Sk", (Regex_symbol_modifier, "") },
@@ -70,8 +76,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "Zl", (Regex_separator_line, "") },
                 { "Zp", (Regex_separator_paragraph, "") },
                 { "Zs", (Regex_separator_space, "") },
-                { "Z", (Regex_all_separator_characters_short, Regex_all_separator_characters_long) },
-
+                {
+                    "Z",
+                    (Regex_all_separator_characters_short, Regex_all_separator_characters_long)
+                },
                 { "IsAlphabeticPresentationForms", ("", "") },
                 { "IsArabic", ("", "") },
                 { "IsArabicPresentationForms-A", ("", "") },
@@ -186,12 +194,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "_xmlW", ("", "") },
             };
 
-        public static bool IsEscapeCategory(string value)
-            => EscapeCategories.ContainsKey(value);
+        public static bool IsEscapeCategory(string value) => EscapeCategories.ContainsKey(value);
 
         public static bool IsBoundaryWordChar(VirtualChar r)
         {
-            // unicode characters that do not fit in 16bits are not supported by 
+            // unicode characters that do not fit in 16bits are not supported by
             // .net regex system.
             if (r.Value > char.MaxValue)
                 return false;
@@ -207,8 +214,22 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             // behavior as if we fell through to the switch below (which was actually used to produce the lookup table).
             ReadOnlySpan<byte> asciiLookup = new byte[]
             {
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x03,
-                0xFE, 0xFF, 0xFF, 0x87, 0xFE, 0xFF, 0xFF, 0x07
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0xFF,
+                0x03,
+                0xFE,
+                0xFF,
+                0xFF,
+                0x87,
+                0xFE,
+                0xFF,
+                0xFF,
+                0x07,
             };
             var chDiv8 = ch >> 3;
             if ((uint)chDiv8 < (uint)asciiLookup.Length)
@@ -230,7 +251,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     return true;
 
                 default:
-                    const char ZeroWidthNonJoiner = '\u200C', ZeroWidthJoiner = '\u200D';
+                    const char ZeroWidthNonJoiner = '\u200C',
+                        ZeroWidthJoiner = '\u200D';
                     return ch == ZeroWidthJoiner | ch == ZeroWidthNonJoiner;
             }
         }

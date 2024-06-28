@@ -26,7 +26,13 @@ namespace System.Threading
         /// -or-
         /// An <see cref="EventWaitHandle" /> with system-wide name <paramref name="name" /> cannot be created. An <see cref="EventWaitHandle" /> of a different type might have the same name.</exception>
         /// <remarks>If a `name` is passed and the system event already exists, the existing event is returned. If `name` is `null` or <see cref="string.Empty" />, a new local event is always created.</remarks>
-        public static unsafe EventWaitHandle Create(bool initialState, EventResetMode mode, string? name, out bool createdNew, EventWaitHandleSecurity? eventSecurity)
+        public static unsafe EventWaitHandle Create(
+            bool initialState,
+            EventResetMode mode,
+            string? name,
+            out bool createdNew,
+            EventWaitHandleSecurity? eventSecurity
+        )
         {
             if (eventSecurity == null)
             {
@@ -49,14 +55,15 @@ namespace System.Threading
                 var secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    lpSecurityDescriptor = pSecurityDescriptor
+                    lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
                 SafeWaitHandle handle = Interop.Kernel32.CreateEventEx(
                     (IntPtr)(&secAttrs),
                     name,
                     eventFlags,
-                    (uint)EventWaitHandleRights.FullControl);
+                    (uint)EventWaitHandleRights.FullControl
+                );
 
                 int errorCode = Marshal.GetLastPInvokeError();
 
@@ -64,9 +71,14 @@ namespace System.Threading
                 {
                     handle.SetHandleAsInvalid();
 
-                    if (!string.IsNullOrEmpty(name) && errorCode == Interop.Errors.ERROR_INVALID_HANDLE)
+                    if (
+                        !string.IsNullOrEmpty(name)
+                        && errorCode == Interop.Errors.ERROR_INVALID_HANDLE
+                    )
                     {
-                        throw new WaitHandleCannotBeOpenedException(SR.Format(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                        throw new WaitHandleCannotBeOpenedException(
+                            SR.Format(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name)
+                        );
                     }
 
                     throw Win32Marshal.GetExceptionForWin32Error(errorCode, name);
@@ -98,7 +110,12 @@ namespace System.Threading
                     throw new WaitHandleCannotBeOpenedException();
 
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
 
                 case OpenExistingResult.PathNotFound:
                     throw new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, name));
@@ -121,10 +138,17 @@ namespace System.Threading
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
         /// <exception cref="UnauthorizedAccessException">The named event wait handle exists, but the user does not have the security access required to use it.</exception>
-        public static bool TryOpenExisting(string name, EventWaitHandleRights rights, [NotNullWhen(returnValue: true)] out EventWaitHandle? result) =>
-            OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
+        public static bool TryOpenExisting(
+            string name,
+            EventWaitHandleRights rights,
+            [NotNullWhen(returnValue: true)] out EventWaitHandle? result
+        ) => OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
 
-        private static OpenExistingResult OpenExistingWorker(string name, EventWaitHandleRights rights, out EventWaitHandle? result)
+        private static OpenExistingResult OpenExistingWorker(
+            string name,
+            EventWaitHandleRights rights,
+            out EventWaitHandle? result
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -142,10 +166,12 @@ namespace System.Threading
                 existingHandle.Dispose();
                 return errorCode switch
                 {
-                    Interop.Errors.ERROR_FILE_NOT_FOUND or Interop.Errors.ERROR_INVALID_NAME => OpenExistingResult.NameNotFound,
+                    Interop.Errors.ERROR_FILE_NOT_FOUND
+                    or Interop.Errors.ERROR_INVALID_NAME
+                        => OpenExistingResult.NameNotFound,
                     Interop.Errors.ERROR_PATH_NOT_FOUND => OpenExistingResult.PathNotFound,
                     Interop.Errors.ERROR_INVALID_HANDLE => OpenExistingResult.NameInvalid,
-                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, name)
+                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, name),
                 };
             }
 
@@ -159,7 +185,10 @@ namespace System.Threading
             // The values of initialState and mode should not matter since we are replacing the
             // handle with one from an existing EventWaitHandle, and disposing the old one
             // We should only make sure that they are valid values
-            EventWaitHandle eventWaitHandle = new EventWaitHandle(initialState: default, mode: default);
+            EventWaitHandle eventWaitHandle = new EventWaitHandle(
+                initialState: default,
+                mode: default
+            );
 
             SafeWaitHandle old = eventWaitHandle.SafeWaitHandle;
             eventWaitHandle.SafeWaitHandle = replacementHandle;

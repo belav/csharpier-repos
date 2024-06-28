@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.FileProviders;
 public class EmbeddedFileProvider : IFileProvider
 {
     private static readonly char[] _invalidFileNameChars = Path.GetInvalidFileNameChars()
-        .Where(c => c != '/' && c != '\\').ToArray();
+        .Where(c => c != '/' && c != '\\')
+        .ToArray();
 
     private readonly Assembly _assembly;
     private readonly string _baseNamespace;
@@ -34,9 +35,7 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     /// <param name="assembly">The assembly that contains the embedded resources.</param>
     public EmbeddedFileProvider(Assembly assembly)
-        : this(assembly, assembly?.GetName()?.Name)
-    {
-    }
+        : this(assembly, assembly?.GetName()?.Name) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EmbeddedFileProvider" /> class using the specified
@@ -44,8 +43,11 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     /// <param name="assembly">The assembly that contains the embedded resources.</param>
     /// <param name="baseNamespace">The base namespace that contains the embedded resources.</param>
-    [UnconditionalSuppressMessage("SingleFile", "IL3000:Assembly.Location",
-        Justification = "The code handles if the Assembly.Location is empty. Workaround https://github.com/dotnet/runtime/issues/83607")]
+    [UnconditionalSuppressMessage(
+        "SingleFile",
+        "IL3000:Assembly.Location",
+        Justification = "The code handles if the Assembly.Location is empty. Workaround https://github.com/dotnet/runtime/issues/83607"
+    )]
     public EmbeddedFileProvider(Assembly assembly, string? baseNamespace)
     {
         ArgumentNullThrowHelper.ThrowIfNull(assembly);
@@ -62,12 +64,8 @@ public class EmbeddedFileProvider : IFileProvider
             {
                 _lastModified = File.GetLastWriteTimeUtc(assemblyLocation);
             }
-            catch (PathTooLongException)
-            {
-            }
-            catch (UnauthorizedAccessException)
-            {
-            }
+            catch (PathTooLongException) { }
+            catch (UnauthorizedAccessException) { }
         }
     }
 
@@ -157,11 +155,14 @@ public class EmbeddedFileProvider : IFileProvider
             var resourceName = resources[i];
             if (resourceName.StartsWith(_baseNamespace, StringComparison.Ordinal))
             {
-                entries.Add(new EmbeddedResourceFileInfo(
-                    _assembly,
-                    resourceName,
-                    resourceName.Substring(_baseNamespace.Length),
-                    _lastModified));
+                entries.Add(
+                    new EmbeddedResourceFileInfo(
+                        _assembly,
+                        resourceName,
+                        resourceName.Substring(_baseNamespace.Length),
+                        _lastModified
+                    )
+                );
             }
         }
 
@@ -190,9 +191,8 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     private static bool IsValidEverettIdFirstChar(char c)
     {
-        return
-            char.IsLetter(c) ||
-            CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.ConnectorPunctuation;
+        return char.IsLetter(c)
+            || CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.ConnectorPunctuation;
     }
 
     /// <summary>
@@ -202,20 +202,22 @@ public class EmbeddedFileProvider : IFileProvider
     {
         var cat = CharUnicodeInfo.GetUnicodeCategory(c);
 
-        return
-            char.IsLetterOrDigit(c) ||
-            cat == UnicodeCategory.ConnectorPunctuation ||
-            cat == UnicodeCategory.NonSpacingMark ||
-            cat == UnicodeCategory.SpacingCombiningMark ||
-            cat == UnicodeCategory.EnclosingMark;
+        return char.IsLetterOrDigit(c)
+            || cat == UnicodeCategory.ConnectorPunctuation
+            || cat == UnicodeCategory.NonSpacingMark
+            || cat == UnicodeCategory.SpacingCombiningMark
+            || cat == UnicodeCategory.EnclosingMark;
     }
 
     /// <summary>
-    /// Make a folder subname into an Everett-compatible identifier 
+    /// Make a folder subname into an Everett-compatible identifier
     /// </summary>
     private static void MakeValidEverettSubFolderIdentifier(StringBuilder builder, string subName)
     {
-        if (string.IsNullOrEmpty(subName)) { return; }
+        if (string.IsNullOrEmpty(subName))
+        {
+            return;
+        }
 
         // the first character has stronger restrictions than the rest
         if (IsValidEverettIdFirstChar(subName[0]))
@@ -251,7 +253,10 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     internal static void MakeValidEverettFolderIdentifier(StringBuilder builder, string name)
     {
-        if (string.IsNullOrEmpty(name)) { return; }
+        if (string.IsNullOrEmpty(name))
+        {
+            return;
+        }
 
         // store the original length for use later
         var length = builder.Length;
@@ -281,7 +286,10 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     private static string? MakeValidEverettIdentifier(string? name)
     {
-        if (string.IsNullOrEmpty(name)) { return name; }
+        if (string.IsNullOrEmpty(name))
+        {
+            return name;
+        }
 
         var everettId = new StringBuilder(name.Length);
 

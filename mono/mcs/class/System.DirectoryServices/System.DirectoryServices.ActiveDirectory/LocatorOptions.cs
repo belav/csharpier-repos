@@ -23,13 +23,13 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	[Flags]
-	public enum LocatorOptions : long
-	{
-		ForceRediscovery   =     1L,
-		KdcRequired        =  1024L,
-		TimeServerRequired =  2048L,
-		WriteableRequired  =  4096L,
-		AvoidSelf          = 16384L
-	}
+    [Flags]
+    public enum LocatorOptions : long
+    {
+        ForceRediscovery = 1L,
+        KdcRequired = 1024L,
+        TimeServerRequired = 2048L,
+        WriteableRequired = 4096L,
+        AvoidSelf = 16384L,
+    }
 }

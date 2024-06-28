@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodePropertyReferenceExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a reference to a property.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodePropertyReferenceExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodePropertyReferenceExpression : CodeExpression
+    {
         private CodeExpression targetObject;
         private string propertyName;
 #if !MONO
@@ -36,8 +33,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodePropertyReferenceExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodePropertyReferenceExpression() {
-        }
+        public CodePropertyReferenceExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -45,7 +41,8 @@ namespace System.CodeDom {
         ///       name.
         ///    </para>
         /// </devdoc>
-        public CodePropertyReferenceExpression(CodeExpression targetObject, string propertyName) {
+        public CodePropertyReferenceExpression(CodeExpression targetObject, string propertyName)
+        {
             TargetObject = targetObject;
             PropertyName = propertyName;
         }
@@ -55,13 +52,10 @@ namespace System.CodeDom {
         ///       The target object containing the property this <see cref='System.CodeDom.CodePropertyReferenceExpression'/> references.
         ///    </para>
         /// </devdoc>
-        public CodeExpression TargetObject {
-            get {
-                return targetObject;
-            }
-            set {
-                targetObject = value;
-            }
+        public CodeExpression TargetObject
+        {
+            get { return targetObject; }
+            set { targetObject = value; }
         }
 
         /// <devdoc>
@@ -69,13 +63,10 @@ namespace System.CodeDom {
         ///       The name of the property to reference.
         ///    </para>
         /// </devdoc>
-        public string PropertyName {
-            get {
-                return (propertyName == null) ? string.Empty : propertyName;
-            }
-            set {
-                propertyName = value;
-            }
+        public string PropertyName
+        {
+            get { return (propertyName == null) ? string.Empty : propertyName; }
+            set { propertyName = value; }
         }
     }
 }

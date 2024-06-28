@@ -121,7 +121,9 @@ public class CandidateSetTest
         var candidateSet = new CandidateSet(candidates);
 
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>))).Returns(new[] { new TestMetadataMatcherPolicy(), });
+        services
+            .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         // Act
@@ -158,13 +160,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-                CreateEndpoint($"new /A", metadata: new object[]{ new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[]{ }),
-                CreateEndpoint($"new /C", metadata: new object[]{ new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
+            CreateEndpoint($"new /B", metadata: new object[] { }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>))).Returns(new[] { new TestMetadataMatcherPolicy(), });
+        services
+            .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(0, false); // Has no effect. We always count new stuff as valid by default.
@@ -208,13 +212,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-                CreateEndpoint($"new /A", metadata: new object[]{ new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[]{ }),
-                CreateEndpoint($"new /C", metadata: new object[]{ new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
+            CreateEndpoint($"new /B", metadata: new object[] { }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>))).Returns(new[] { new TestMetadataMatcherPolicy(), });
+        services
+            .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(5, false); // Has no effect. We always count new stuff as valid by default.
@@ -265,13 +271,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-                CreateEndpoint($"new /A", metadata: new object[]{ new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[]{ }),
-                CreateEndpoint($"new /C", metadata: new object[]{ new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
+            CreateEndpoint($"new /B", metadata: new object[] { }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>))).Returns(new[] { new TestMetadataMatcherPolicy(), });
+        services
+            .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(9, false); // Has no effect. We always count new stuff as valid by default.
@@ -314,19 +322,25 @@ public class CandidateSetTest
         var candidateSet = new CandidateSet(candidates);
 
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>))).Returns(new[] { new TestMetadataMatcherPolicy(), });
+        services
+            .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer)
+        );
 
         // Assert
-        Assert.Equal(@"Using ExpandEndpoint requires that the replaced endpoint have a unique priority. The following endpoints were found with the same priority:" +
-            Environment.NewLine +
-            "test: /0" +
-            Environment.NewLine +
-            "test: /1"
-            .TrimStart(), ex.Message);
+        Assert.Equal(
+            @"Using ExpandEndpoint requires that the replaced endpoint have a unique priority. The following endpoints were found with the same priority:"
+                + Environment.NewLine
+                + "test: /0"
+                + Environment.NewLine
+                + "test: /1".TrimStart(),
+            ex.Message
+        );
     }
 
     [Fact]
@@ -343,14 +357,15 @@ public class CandidateSetTest
         var values = new RouteValueDictionary[count];
         for (var i = 0; i < endpoints.Length; i++)
         {
-            values[i] = new RouteValueDictionary()
-                {
-                    { "i", i }
-                };
+            values[i] = new RouteValueDictionary() { { "i", i } };
         }
 
         // Act
-        var candidateSet = new CandidateSet(endpoints, values, Enumerable.Range(0, count).ToArray());
+        var candidateSet = new CandidateSet(
+            endpoints,
+            values,
+            Enumerable.Range(0, count).ToArray()
+        );
 
         // Assert
         for (var i = 0; i < candidateSet.Count; i++)
@@ -369,7 +384,11 @@ public class CandidateSetTest
 
     private RouteEndpoint CreateEndpoint(string template, int order = 0, params object[] metadata)
     {
-        var builder = new RouteEndpointBuilder(TestConstants.EmptyRequestDelegate, RoutePatternFactory.Parse(template), order);
+        var builder = new RouteEndpointBuilder(
+            TestConstants.EmptyRequestDelegate,
+            RoutePatternFactory.Parse(template),
+            order
+        );
         for (var i = 0; i < metadata.Length; i++)
         {
             builder.Metadata.Add(metadata[i]);
@@ -386,12 +405,11 @@ public class CandidateSetTest
             NullLoggerFactory.Instance,
             Mock.Of<ParameterPolicyFactory>(),
             Mock.Of<EndpointSelector>(),
-            policies);
+            policies
+        );
     }
 
-    private class TestMetadata
-    {
-    }
+    private class TestMetadata { }
 
     private class TestMetadataMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy
     {

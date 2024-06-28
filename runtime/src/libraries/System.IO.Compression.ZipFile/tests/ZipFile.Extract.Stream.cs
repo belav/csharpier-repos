@@ -11,7 +11,10 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     [Fact]
     public void ExtractToDirectory_NullStream_Throws()
     {
-        Assert.Throws<ArgumentNullException>("source", () => ZipFile.ExtractToDirectory(source: null, GetTestFilePath()));
+        Assert.Throws<ArgumentNullException>(
+            "source",
+            () => ZipFile.ExtractToDirectory(source: null, GetTestFilePath())
+        );
     }
 
     [Fact]
@@ -19,7 +22,10 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     {
         using MemoryStream ms = new();
         using WrappedStream source = new(ms, canRead: false, canWrite: true, canSeek: true);
-        Assert.Throws<ArgumentException>("source", () => ZipFile.ExtractToDirectory(source, GetTestFilePath()));
+        Assert.Throws<ArgumentException>(
+            "source",
+            () => ZipFile.ExtractToDirectory(source, GetTestFilePath())
+        );
     }
 
     [Theory]
@@ -58,7 +64,10 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     }
 
     [Fact]
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/72951", TestPlatforms.iOS | TestPlatforms.tvOS)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/72951",
+        TestPlatforms.iOS | TestPlatforms.tvOS
+    )]
     public void ExtractToDirectoryUnicode()
     {
         using Stream source = File.OpenRead(zfile("unicode.zip"));
@@ -79,7 +88,9 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
             ZipArchiveEntry entry = archive.CreateEntry(entryName);
         }
 
-        DirectoryInfo destination = Directory.CreateDirectory(Path.Combine(GetTestFilePath(), "Bar"));
+        DirectoryInfo destination = Directory.CreateDirectory(
+            Path.Combine(GetTestFilePath(), "Bar")
+        );
         source.Position = 0;
         Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(source, destination.FullName));
     }
@@ -91,7 +102,7 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     [Theory]
     [InlineData("NullCharFileName_FromWindows")]
     [InlineData("NullCharFileName_FromUnix")]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Checks Unix-specific invalid file path
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
     public void Unix_ZipWithInvalidFileNames(string zipName)
     {
         string testDirectory = GetTestFilePath();
@@ -106,7 +117,7 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     [InlineData("backslashes_FromWindows", "aa\\bb\\cc\\dd")]
     [InlineData("WindowsInvalid_FromUnix", "aa<b>d")]
     [InlineData("WindowsInvalid_FromWindows", "aa<b>d")]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Checks Unix-specific invalid file path
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
     public void Unix_ZipWithOSSpecificFileNames(string zipName, string fileName)
     {
         string tempDir = GetTestFilePath();
@@ -119,7 +130,7 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
 
     /// <summary>
     /// This test checks whether or not ZipFile.ExtractToDirectory() is capable of handling filenames
-		/// which contain invalid path characters in Windows.
+    /// which contain invalid path characters in Windows.
     ///  Archive:  InvalidWindowsFileNameChars.zip
     ///  Test/
     ///  Test/normalText.txt
@@ -130,11 +141,19 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     /// </summary>
     [Theory]
     [PlatformSpecific(TestPlatforms.Windows)]
-    [InlineData("InvalidWindowsFileNameChars.zip",  new string[] { "TestText______________________________________.txt" , "Test______________________________________/TestText1______________________________________.txt" , "Test/normalText.txt" })]
+    [InlineData(
+        "InvalidWindowsFileNameChars.zip",
+        new string[]
+        {
+            "TestText______________________________________.txt",
+            "Test______________________________________/TestText1______________________________________.txt",
+            "Test/normalText.txt",
+        }
+    )]
     [InlineData("NullCharFileName_FromWindows.zip", new string[] { "a_6b6d" })]
-    [InlineData("NullCharFileName_FromUnix.zip",    new string[] { "a_6b6d" })]
-    [InlineData("WindowsInvalid_FromUnix.zip",      new string[] { "aa_b_d" })]
-    [InlineData("WindowsInvalid_FromWindows.zip",   new string[] { "aa_b_d" })]
+    [InlineData("NullCharFileName_FromUnix.zip", new string[] { "a_6b6d" })]
+    [InlineData("WindowsInvalid_FromUnix.zip", new string[] { "aa_b_d" })]
+    [InlineData("WindowsInvalid_FromWindows.zip", new string[] { "aa_b_d" })]
     public void Windows_ZipWithInvalidFileNames(string zipFileName, string[] expectedFiles)
     {
         string testDirectory = GetTestFilePath();
@@ -152,7 +171,7 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     [Theory]
     [InlineData("backslashes_FromUnix", "dd")]
     [InlineData("backslashes_FromWindows", "dd")]
-    [PlatformSpecific(TestPlatforms.Windows)]  // Checks Windows-specific invalid file path
+    [PlatformSpecific(TestPlatforms.Windows)] // Checks Windows-specific invalid file path
     public void Windows_ZipWithOSSpecificFileNames(string zipName, string fileName)
     {
         string tempDir = GetTestFilePath();
@@ -172,9 +191,17 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using Stream source = File.OpenRead(zfile("normal.zip"));
         ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false);
         source.Position = 0;
-        Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(source, tempFolder.Path /* default false */));
+        Assert.Throws<IOException>(
+            () =>
+                ZipFile.ExtractToDirectory(
+                    source,
+                    tempFolder.Path /* default false */
+                )
+        );
         source.Position = 0;
-        Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false));
+        Assert.Throws<IOException>(
+            () => ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false)
+        );
         source.Position = 0;
         ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: true);
 
@@ -190,9 +217,24 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using Stream source = File.OpenRead(zfile("normal.zip"));
         ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8, overwriteFiles: false);
         source.Position = 0;
-        Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8 /* default false */));
+        Assert.Throws<IOException>(
+            () =>
+                ZipFile.ExtractToDirectory(
+                    source,
+                    tempFolder.Path,
+                    Encoding.UTF8 /* default false */
+                )
+        );
         source.Position = 0;
-        Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8, overwriteFiles: false));
+        Assert.Throws<IOException>(
+            () =>
+                ZipFile.ExtractToDirectory(
+                    source,
+                    tempFolder.Path,
+                    Encoding.UTF8,
+                    overwriteFiles: false
+                )
+        );
         source.Position = 0;
         ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8, overwriteFiles: true);
 
@@ -205,7 +247,14 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using MemoryStream source = new();
         using (ZipArchive archive = new(source, ZipArchiveMode.Create, leaveOpen: true))
         {
-            using (StreamWriter writer = new(archive.CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer =
+                    new(
+                        archive
+                            .CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal)
+                            .Open()
+                    )
+            )
             {
                 writer.Write("This is a test.");
             }
@@ -220,7 +269,17 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using MemoryStream source = new();
         using (ZipArchive archive = new(source, ZipArchiveMode.Create, leaveOpen: true))
         {
-            using (StreamWriter writer = new(archive.CreateEntry("testdir" + Path.DirectorySeparatorChar, CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer =
+                    new(
+                        archive
+                            .CreateEntry(
+                                "testdir" + Path.DirectorySeparatorChar,
+                                CompressionLevel.Optimal
+                            )
+                            .Open()
+                    )
+            )
             {
                 writer.Write("This is a test.");
             }

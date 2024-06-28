@@ -3,8 +3,8 @@
 //
 
 using System;
-using System.Numerics;
 using System.IO;
+using System.Numerics;
 
 public partial class VectorTest
 {
@@ -13,11 +13,14 @@ public partial class VectorTest
         bool returnVal;
         if (typeof(T) == typeof(float))
         {
-            returnVal = Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
+            returnVal =
+                Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
         }
         if (typeof(T) == typeof(double))
         {
-            returnVal = Math.Abs(((double)(object)value) - ((double)(object)expectedValue)) <= Double.Epsilon;
+            returnVal =
+                Math.Abs(((double)(object)value) - ((double)(object)expectedValue))
+                <= Double.Epsilon;
         }
         else
         {
@@ -27,17 +30,30 @@ public partial class VectorTest
         {
             if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
             {
-                Console.WriteLine("CheckValue failed for type " + typeof(T).ToString() + ". Expected: {0} , Got: {1}", expectedValue, value);
+                Console.WriteLine(
+                    "CheckValue failed for type "
+                        + typeof(T).ToString()
+                        + ". Expected: {0} , Got: {1}",
+                    expectedValue,
+                    value
+                );
             }
             else
             {
-                Console.WriteLine("CheckValue failed for type " + typeof(T).ToString() + ". Expected: {0} (0x{0:X}), Got: {1} (0x{1:X})", expectedValue, value);
+                Console.WriteLine(
+                    "CheckValue failed for type "
+                        + typeof(T).ToString()
+                        + ". Expected: {0} (0x{0:X}), Got: {1} (0x{1:X})",
+                    expectedValue,
+                    value
+                );
             }
         }
         return returnVal;
     }
 
-    private static bool CheckVector<T>(Vector<T> V, T value) where T : struct, IComparable<T>, IEquatable<T>
+    private static bool CheckVector<T>(Vector<T> V, T value)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         for (int i = 0; i < Vector<T>.Count; i++)
         {
@@ -112,18 +128,21 @@ public partial class VectorTest
         }
     }
 
-    private static void VectorPrint<T>(string mesg, Vector<T> v) where T : struct, IComparable<T>, IEquatable<T>
+    private static void VectorPrint<T>(string mesg, Vector<T> v)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         Console.Write(mesg + "[");
         for (int i = 0; i < Vector<T>.Count; i++)
         {
             Console.Write(" " + v[i]);
-            if (i < (Vector<T>.Count - 1)) Console.Write(",");
+            if (i < (Vector<T>.Count - 1))
+                Console.Write(",");
         }
         Console.WriteLine(" ]");
     }
 
-    private static T Add<T>(T left, T right) where T : struct, IComparable<T>, IEquatable<T>
+    private static T Add<T>(T left, T right)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         if (typeof(T) == typeof(float))
         {
@@ -178,7 +197,9 @@ public partial class VectorTest
             throw new ArgumentException();
         }
     }
-    private static T Multiply<T>(T left, T right) where T : struct, IComparable<T>, IEquatable<T>
+
+    private static T Multiply<T>(T left, T right)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         if (typeof(T) == typeof(float))
         {
@@ -245,13 +266,12 @@ public partial class VectorTest
         }
         return result;
     }
-
 }
 
 class JitLog : IDisposable
 {
-    FileStream      fileStream;
-    bool            simdIntrinsicsSupported;
+    FileStream fileStream;
+    bool simdIntrinsicsSupported;
 
     private static String GetLogFileName()
     {
@@ -285,6 +305,7 @@ class JitLog : IDisposable
             fileStream.Dispose();
         }
     }
+
     public bool IsEnabled()
     {
         return (fileStream != null);
@@ -379,7 +400,8 @@ class JitLog : IDisposable
     //
     public bool Check(String method, String elementType)
     {
-        String checkString = "System.Numerics.Vector`1[" + elementType + "][System." + elementType + "]:" + method;
+        String checkString =
+            "System.Numerics.Vector`1[" + elementType + "][System." + elementType + "]:" + method;
         return Check(checkString);
     }
 }

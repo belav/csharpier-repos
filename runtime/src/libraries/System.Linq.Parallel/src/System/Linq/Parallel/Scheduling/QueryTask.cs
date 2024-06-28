@@ -51,7 +51,8 @@ namespace System.Linq.Parallel
         // A static delegate used by RunSynchronously
         //
 
-        private static readonly Action<object?> s_runTaskSynchronouslyDelegate = RunTaskSynchronously;
+        private static readonly Action<object?> s_runTaskSynchronouslyDelegate =
+            RunTaskSynchronously;
 
         //-----------------------------------------------------------------------------------
         // Executes the task synchronously (on the current thread).
@@ -59,9 +60,20 @@ namespace System.Linq.Parallel
 
         internal Task RunSynchronously(TaskScheduler taskScheduler)
         {
-            Debug.Assert(taskScheduler == TaskScheduler.Default, "PLINQ queries can currently execute only on the default scheduler.");
-            TraceHelpers.TraceInfo("[timing]: {0}: Running work synchronously", DateTime.Now.Ticks, _taskIndex);
-            Task task = new Task(s_runTaskSynchronouslyDelegate, this, TaskCreationOptions.AttachedToParent);
+            Debug.Assert(
+                taskScheduler == TaskScheduler.Default,
+                "PLINQ queries can currently execute only on the default scheduler."
+            );
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: Running work synchronously",
+                DateTime.Now.Ticks,
+                _taskIndex
+            );
+            Task task = new Task(
+                s_runTaskSynchronouslyDelegate,
+                this,
+                TaskCreationOptions.AttachedToParent
+            );
             task.RunSynchronously(taskScheduler);
             return task;
         }
@@ -70,7 +82,7 @@ namespace System.Linq.Parallel
         // Executes the task asynchronously (elsewhere, unspecified).
         //
 
-        private static readonly Action<object?> s_baseWorkDelegate = delegate (object? o)
+        private static readonly Action<object?> s_baseWorkDelegate = delegate(object? o)
         {
             Debug.Assert(o != null);
             ((QueryTask)o).BaseWork(null);
@@ -78,10 +90,23 @@ namespace System.Linq.Parallel
 
         internal Task RunAsynchronously(TaskScheduler taskScheduler)
         {
-            Debug.Assert(taskScheduler == TaskScheduler.Default, "PLINQ queries can currently execute only on the default scheduler.");
+            Debug.Assert(
+                taskScheduler == TaskScheduler.Default,
+                "PLINQ queries can currently execute only on the default scheduler."
+            );
 
-            TraceHelpers.TraceInfo("[timing]: {0}: Queue work {1} to occur asynchronously", DateTime.Now.Ticks, _taskIndex);
-            return Task.Factory.StartNew(s_baseWorkDelegate, this, CancellationToken.None, TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness, taskScheduler);
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: Queue work {1} to occur asynchronously",
+                DateTime.Now.Ticks,
+                _taskIndex
+            );
+            return Task.Factory.StartNew(
+                s_baseWorkDelegate,
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness,
+                taskScheduler
+            );
         }
 
         //-----------------------------------------------------------------------------------

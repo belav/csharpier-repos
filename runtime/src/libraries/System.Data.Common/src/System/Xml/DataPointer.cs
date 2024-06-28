@@ -74,8 +74,7 @@ namespace System.Xml
         }
 
         private static bool IsFoliated(XmlNode node) =>
-            node != null && node is XmlBoundElement ?
-                ((XmlBoundElement)node).IsFoliated : true;
+            node != null && node is XmlBoundElement ? ((XmlBoundElement)node).IsFoliated : true;
 
         internal void MoveTo(DataPointer pointer)
         {
@@ -90,6 +89,7 @@ namespace System.Xml
             _fOnValue = pointer._fOnValue;
             AssertValid();
         }
+
         private void MoveTo(XmlNode node)
         {
             // You should not move outside of this document
@@ -123,12 +123,19 @@ namespace System.Xml
             DataColumnCollection columns = table.Columns;
             int iColumn = (col != null) ? col.Ordinal + 1 : 0;
             int cColumns = columns.Count;
-            DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+            DataRowVersion rowVersion =
+                (row.RowState == DataRowState.Detached)
+                    ? DataRowVersion.Proposed
+                    : DataRowVersion.Current;
 
             for (; iColumn < cColumns; iColumn++)
             {
                 DataColumn c = columns[iColumn];
-                if (!_doc.IsNotMapped(c) && (c.ColumnMapping == MappingType.Attribute) == fAttribute && (fNulls || !Convert.IsDBNull(row[c, rowVersion])))
+                if (
+                    !_doc.IsNotMapped(c)
+                    && (c.ColumnMapping == MappingType.Attribute) == fAttribute
+                    && (fNulls || !Convert.IsDBNull(row[c, rowVersion]))
+                )
                 {
                     return c;
                 }
@@ -286,7 +293,11 @@ namespace System.Xml
             {
                 if (_column != null)
                 {
-                    if (_fOnValue || _doc.IsTextOnly(_column) || _column.ColumnMapping != MappingType.Attribute)
+                    if (
+                        _fOnValue
+                        || _doc.IsTextOnly(_column)
+                        || _column.ColumnMapping != MappingType.Attribute
+                    )
                     {
                         return false;
                     }
@@ -307,7 +318,6 @@ namespace System.Xml
 
             return false;
         }
-
 
         internal int AttributeCount
         {
@@ -344,7 +354,10 @@ namespace System.Xml
 
             if (_node != null)
             {
-                if ((_column == null || _column.ColumnMapping == MappingType.Attribute) && _node.NodeType == XmlNodeType.Element)
+                if (
+                    (_column == null || _column.ColumnMapping == MappingType.Attribute)
+                    && _node.NodeType == XmlNodeType.Element
+                )
                 {
                     if (!IsFoliated(_node))
                     {
@@ -567,7 +580,10 @@ namespace System.Xml
                 else if (_column.ColumnMapping == MappingType.Attribute || _fOnValue)
                 {
                     DataRow row = Row!;
-                    DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                    DataRowVersion rowVersion =
+                        (row.RowState == DataRowState.Detached)
+                            ? DataRowVersion.Proposed
+                            : DataRowVersion.Current;
                     object value = row[_column, rowVersion];
                     if (!Convert.IsDBNull(value))
                     {
@@ -660,13 +676,19 @@ namespace System.Xml
             {
                 if (_column!.ColumnMapping == MappingType.Attribute)
                 {
-                    n = _node.Attributes!.GetNamedItem(_column.EncodedColumnName, _column.Namespace);
+                    n = _node.Attributes!.GetNamedItem(
+                        _column.EncodedColumnName,
+                        _column.Namespace
+                    );
                 }
                 else
                 {
                     for (n = _node.FirstChild; n != null; n = n.NextSibling)
                     {
-                        if (n.LocalName == _column.EncodedColumnName && n.NamespaceURI == _column.Namespace)
+                        if (
+                            n.LocalName == _column.EncodedColumnName
+                            && n.NamespaceURI == _column.Namespace
+                        )
                             break;
                     }
                 }
@@ -700,20 +722,20 @@ namespace System.Xml
                 switch (nt)
                 {
                     case XmlNodeType.DocumentType:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlDocumentType)(_node)).PublicId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlDocumentType)(_node)).PublicId;
+                    }
                     case XmlNodeType.Entity:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlEntity)(_node)).PublicId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlEntity)(_node)).PublicId;
+                    }
                     case XmlNodeType.Notation:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlNotation)(_node)).PublicId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlNotation)(_node)).PublicId;
+                    }
                 }
                 return null;
             }
@@ -727,20 +749,20 @@ namespace System.Xml
                 switch (nt)
                 {
                     case XmlNodeType.DocumentType:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlDocumentType)(_node)).SystemId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlDocumentType)(_node)).SystemId;
+                    }
                     case XmlNodeType.Entity:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlEntity)(_node)).SystemId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlEntity)(_node)).SystemId;
+                    }
                     case XmlNodeType.Notation:
-                        {
-                            Debug.Assert(_column == null);
-                            return ((XmlNotation)(_node)).SystemId;
-                        }
+                    {
+                        Debug.Assert(_column == null);
+                        return ((XmlNotation)(_node)).SystemId;
+                    }
                 }
                 return null;
             }
@@ -845,14 +867,22 @@ namespace System.Xml
                 Debug.Assert(row != null);
 
                 ElementState state = rowElem.ElementState;
-                Debug.Assert(state == ElementState.Defoliated, "Region is accessed using column, but it's state is FOLIATED");
+                Debug.Assert(
+                    state == ElementState.Defoliated,
+                    "Region is accessed using column, but it's state is FOLIATED"
+                );
 
                 // We cannot be on a column for which the value is DBNull
-                DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                DataRowVersion rowVersion =
+                    (row.RowState == DataRowState.Detached)
+                        ? DataRowVersion.Proposed
+                        : DataRowVersion.Current;
                 Debug.Assert(!Convert.IsDBNull(row[_column, rowVersion]));
 
                 // If we are on the Text column, we should always have fOnValue == true
-                Debug.Assert((_column.ColumnMapping == MappingType.SimpleContent) ? _fOnValue : true);
+                Debug.Assert(
+                    (_column.ColumnMapping == MappingType.SimpleContent) ? _fOnValue : true
+                );
             }
         }
 

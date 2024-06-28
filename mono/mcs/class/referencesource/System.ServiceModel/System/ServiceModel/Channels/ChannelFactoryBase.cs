@@ -14,9 +14,7 @@ namespace System.ServiceModel.Channels
         TimeSpan receiveTimeout = ServiceDefaults.ReceiveTimeout;
         TimeSpan sendTimeout = ServiceDefaults.SendTimeout;
 
-        protected ChannelFactoryBase()
-        {
-        }
+        protected ChannelFactoryBase() { }
 
         protected ChannelFactoryBase(IDefaultCommunicationTimeouts timeouts)
         {
@@ -54,18 +52,18 @@ namespace System.ServiceModel.Channels
             return default(T);
         }
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnEndClose(IAsyncResult result)
         {
@@ -84,14 +82,14 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    public abstract class ChannelFactoryBase<TChannel> : ChannelFactoryBase, IChannelFactory<TChannel>
+    public abstract class ChannelFactoryBase<TChannel>
+        : ChannelFactoryBase,
+            IChannelFactory<TChannel>
     {
         CommunicationObjectManager<IChannel> channels;
 
         protected ChannelFactoryBase()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected ChannelFactoryBase(IDefaultCommunicationTimeouts timeouts)
             : base(timeouts)
@@ -146,7 +144,14 @@ namespace System.ServiceModel.Channels
             ThrowIfDisposed();
             if (this.State != CommunicationState.Opened)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ChannelFactoryCannotBeUsedToCreateChannels, this.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ChannelFactoryCannotBeUsedToCreateChannels,
+                            this.GetType().ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -169,11 +174,20 @@ namespace System.ServiceModel.Channels
             this.channels.Close(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state,
-                this.channels.BeginClose, this.channels.EndClose,
-                this.channels.ToArray());
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.channels.BeginClose,
+                this.channels.EndClose,
+                this.channels.ToArray()
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
